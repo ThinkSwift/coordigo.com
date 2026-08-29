@@ -74,7 +74,7 @@
         svg.appendChild(el);
       } else if (sh.t === 'dot' && pts.length) {
         const c = document.createElementNS(ns,'circle');
-        c.setAttribute('cx', pts[0][0]); c.setAttribute('cy', pts[0][1]);
+        c.setAttribute('cx', pts[0]); c.setAttribute('cy', pts[1]);
         c.setAttribute('r','0.2'); c.setAttribute('fill','#111');
         svg.appendChild(c);
       }
