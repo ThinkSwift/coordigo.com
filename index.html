@@ -4,80 +4,128 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Coordigo — Read a coordinate. Get a picture.</title>
-<meta name="description" content="Plot ordered pairs on a 15×15 grid and watch a picture appear. Draw your own, make animated GIFs, print coordinate graphing worksheets, and share puzzles with friends. iPhone, iPad, and Mac." />
-<meta name="theme-color" content="#f2f2f7" />
+<meta name="description" content="Tap ordered pairs on a grid and a picture appears. Draw your own, animate it, share it as a link, or print coordinate graphing worksheets. Free on iPhone, iPad, and Mac." />
+<meta name="theme-color" content="#f4f4f7" />
 <link rel="canonical" href="https://coordigo.com/" />
 
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="Coordigo" />
 <meta property="og:title" content="Coordigo — Read a coordinate. Get a picture." />
-<meta property="og:description" content="Plot ordered pairs and watch a picture appear. Draw your own, print worksheets, share puzzles." />
+<meta property="og:description" content="Tap ordered pairs and a picture appears. Draw your own, make it move, share it as a link, print worksheets." />
 <meta property="og:url" content="https://coordigo.com/" />
 <meta property="og:image" content="https://coordigo.com/og.png" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="Coordigo — Read a coordinate. Get a picture." />
-<meta name="twitter:description" content="Plot ordered pairs and watch a picture appear." />
+<meta name="twitter:description" content="Tap ordered pairs and a picture appears." />
 <meta name="twitter:image" content="https://coordigo.com/og.png" />
 
 <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 <link rel="icon" href="/favicon-32.png" sizes="32x32" />
 <style>
  :root{
-   --ink:#111; --muted:#6b6b76; --accent:#5b4ae0; --accent-soft:#ece9fb;
-   --paper:#fff; --bg:#f2f2f7; --line:#0000000f;
+   --ink:#14141a; --muted:#63636f; --accent:#5b4ae0; --accent-soft:#ece9fb;
+   --paper:#fff; --bg:#f4f4f7; --rule:#00000010; --edge:#00000012; --on-accent:#fff;
  }
+ @media (prefers-color-scheme: dark){
+   :root:not([data-theme="light"]){
+     --ink:#f1f1f5; --muted:#9c9cab; --accent:#9c8dff; --accent-soft:#241f42;
+     --paper:#17171f; --bg:#0e0e13; --rule:#ffffff0d; --edge:#ffffff14; --on-accent:#14141a;
+   }
+ }
+ :root[data-theme="dark"]{
+   --ink:#f1f1f5; --muted:#9c9cab; --accent:#9c8dff; --accent-soft:#241f42;
+   --paper:#17171f; --bg:#0e0e13; --rule:#ffffff0d; --edge:#ffffff14; --on-accent:#14141a;
+ }
+
  *{box-sizing:border-box}
  html{scroll-behavior:smooth}
  body{
    margin:0; color:var(--ink); background:var(--bg);
    font:17px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-   background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
-   background-size:24px 24px;
+   background-image:linear-gradient(var(--rule) 1px,transparent 1px),
+                    linear-gradient(90deg,var(--rule) 1px,transparent 1px);
+   background-size:26px 26px;
    -webkit-font-smoothing:antialiased;
  }
- .wrap{max-width:940px;margin:0 auto;padding:0 20px}
- header{padding:26px 0 0}
- nav{display:flex;align-items:center;justify-content:space-between}
+ img{max-width:100%;height:auto;display:block}
+ a{color:var(--accent)}
+ .wrap{max-width:980px;margin:0 auto;padding:0 20px}
+
+ header{padding:24px 0 0}
+ nav{display:flex;align-items:center;justify-content:space-between;gap:16px}
  .brand{font-weight:800;font-size:19px;letter-spacing:-.2px;text-decoration:none;color:var(--ink)}
- nav a.link{color:var(--muted);text-decoration:none;font-size:15px;margin-left:18px}
- nav a.link:hover{color:var(--accent)}
+ nav .links a{color:var(--muted);text-decoration:none;font-size:15px;margin-left:18px}
+ nav .links a:hover{color:var(--accent)}
+ @media(max-width:520px){nav .links a:first-child{display:none}}
 
- .hero{text-align:center;padding:56px 0 8px}
- h1{font-size:46px;line-height:1.12;letter-spacing:-1px;margin:0 0 14px;font-weight:800}
- .lede{font-size:19px;color:var(--muted);max-width:560px;margin:0 auto 28px}
- .cta{display:inline-block;background:var(--accent);color:#fff;text-decoration:none;
-   font-weight:650;padding:15px 30px;border-radius:16px;font-size:17px}
- .cta:hover{filter:brightness(1.08)}
- .sub{font-size:13px;color:var(--muted);margin-top:12px}
+ .hero{padding:52px 0 0;display:grid;grid-template-columns:1fr 380px;gap:44px;align-items:center}
+ @media(max-width:840px){.hero{grid-template-columns:1fr;gap:30px;padding-top:36px;text-align:center}}
+ h1{font-size:47px;line-height:1.08;letter-spacing:-1.2px;margin:0 0 16px;font-weight:800}
+ @media(max-width:840px){h1{font-size:36px}}
+ .lede{font-size:19px;color:var(--muted);margin:0 0 26px;max-width:30em}
+ @media(max-width:840px){.lede{margin-left:auto;margin-right:auto}}
+ /* 버튼 글자색은 강조색을 따라간다 — 다크에서 강조색이 밝아지므로 흰 글자는 안 읽힌다. */
+ .cta{display:inline-block;background:var(--accent);color:var(--on-accent);text-decoration:none;
+   font-weight:650;padding:15px 30px;border-radius:15px;font-size:17px}
+ .cta:hover{filter:brightness(1.09)}
+ .sub{font-size:13.5px;color:var(--muted);margin-top:12px}
 
- .strip{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:44px 0 8px}
- .strip img{width:100%;border-radius:18px;display:block;border:1px solid #00000012;background:#fff}
- @media(max-width:620px){.strip{grid-template-columns:repeat(2,1fr)}h1{font-size:34px}}
+ /* 데모 — 좌표를 찍으면 그림이 되는 그 일을 그대로 보여준다. 말로 설명할 필요가 없다. */
+ .demo{background:var(--paper);border:1px solid var(--edge);border-radius:22px;padding:16px 16px 12px}
+ .stage{position:relative;aspect-ratio:1}
+ .stage svg,.stage img{position:absolute;inset:0;width:100%;height:100%;border-radius:12px}
+ .stage img{opacity:0;transition:opacity .5s ease}
+ .stage img.on{opacity:1}
+ .readout{display:flex;align-items:center;justify-content:space-between;gap:10px;
+   margin-top:12px;font:13px/1 ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--muted)}
+ .readout b{color:var(--accent);font-weight:700;font-size:15px;letter-spacing:.3px}
 
- section{padding:52px 0}
- h2{font-size:27px;letter-spacing:-.4px;margin:0 0 8px;font-weight:750}
- .section-lede{color:var(--muted);margin:0 0 26px}
- .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
- .step{background:var(--paper);border-radius:18px;padding:22px}
- .step .n{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;
-   border-radius:9px;background:var(--accent-soft);color:var(--accent);font-weight:800;font-size:14px;margin-bottom:10px}
- .step h3{margin:0 0 6px;font-size:17px}
- .step p{margin:0;color:var(--muted);font-size:15px}
+ section{padding:64px 0 0}
+ h2{font-size:29px;letter-spacing:-.5px;margin:0 0 8px;font-weight:750}
+ .section-lede{color:var(--muted);margin:0 0 28px;max-width:34em}
+
+ .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:30px}
+ .step{background:var(--paper);border:1px solid var(--edge);border-radius:16px;padding:18px 20px}
+ .step .n{display:inline-flex;align-items:center;justify-content:center;width:25px;height:25px;
+   border-radius:8px;background:var(--accent-soft);color:var(--accent);font-weight:800;font-size:13px;margin-bottom:9px}
+ .step h3{margin:0 0 4px;font-size:16px}
+ .step p{margin:0;color:var(--muted);font-size:14.5px;line-height:1.5}
  @media(max-width:720px){.steps{grid-template-columns:1fr}}
 
+ /* 그림은 정사각이 원본이다 — 잘라내면 내용이 사라진다. 가로 카드로 두면
+    정사각을 지키면서 페이지도 짧아진다. */
  .features{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
- .feat{background:var(--paper);border-radius:18px;padding:22px}
- .feat h3{margin:0 0 6px;font-size:17px}
- .feat p{margin:0;color:var(--muted);font-size:15px}
+ .feat{background:var(--paper);border:1px solid var(--edge);border-radius:18px;
+   padding:16px;display:flex;gap:16px;align-items:flex-start}
+ /* 배경이 흰 그림(penguin)은 흰 카드에 묻힌다 — 실선 하나로 그림임을 알린다. */
+ .feat .art{flex:0 0 118px;width:118px;aspect-ratio:1;position:relative;
+   border-radius:12px;overflow:hidden;background:var(--bg);border:1px solid var(--edge)}
+ .feat .art img{width:100%;height:100%}
+ .feat h3{margin:0 0 5px;font-size:17px}
+ .feat p{margin:0;color:var(--muted);font-size:14.5px;line-height:1.52}
  @media(max-width:720px){.features{grid-template-columns:1fr}}
+ @media(max-width:400px){.feat .art{flex-basis:88px;width:88px}}
 
- .band{background:var(--paper);border-radius:22px;padding:36px 28px;text-align:center;margin:8px 0}
+ /* 날갯짓 — 프레임 애니메이션이 무엇인지 한 줄도 안 쓰고 전한다. */
+ .flap{position:relative}
+ .flap img{position:absolute;inset:0}
+ .flap img:last-child{animation:flap 1.1s steps(1,end) infinite}
+ @keyframes flap{0%,50%{opacity:0}50.01%,100%{opacity:1}}
+
+ .band{background:var(--paper);border:1px solid var(--edge);border-radius:22px;
+   padding:38px 30px;text-align:center;margin-top:64px}
  .band h2{margin-bottom:10px}
- .band p{color:var(--muted);max-width:520px;margin:0 auto 22px}
+ .band p{color:var(--muted);max-width:34em;margin:0 auto 24px}
 
- footer{padding:40px 0 56px;color:var(--muted);font-size:14px;text-align:center}
+ footer{padding:52px 0 60px;color:var(--muted);font-size:14px;text-align:center}
  footer a{color:var(--muted);text-decoration:none;margin:0 9px}
  footer a:hover{color:var(--accent)}
+ footer p{margin:14px 0 0}
+
+ @media (prefers-reduced-motion: reduce){
+   .flap img:last-child{animation:none}
+   html{scroll-behavior:auto}
+ }
 </style>
 </head>
 <body>
@@ -86,72 +134,97 @@
   <header>
     <nav>
       <a class="brand" href="/">Coordigo</a>
-      <div>
-        <a class="link" href="#how">How it works</a>
-        <a class="link" href="#features">Features</a>
-        <a class="link" href="/privacy/">Privacy</a>
+      <div class="links">
+        <a href="#make">What you can make</a>
+        <a href="/support/">Support</a>
+        <a href="https://apps.apple.com/app/id1486330879">App&nbsp;Store</a>
       </div>
     </nav>
   </header>
 
   <div class="hero">
-    <h1>Read a coordinate.<br />Get a picture.</h1>
-    <p class="lede">
-      Tap (8, 3), then the next pair. Points become lines, lines close, and color pours in —
-      you watch the picture grow while you plot, not only at the end.
-    </p>
-    <a class="cta" href="https://apps.apple.com/app/id1486330879">Download on the App&nbsp;Store</a>
-    <div class="sub">Free to play · iPhone, iPad, and Mac</div>
+    <div>
+      <h1>Read a coordinate.<br />Get a picture.</h1>
+      <p class="lede">
+        Coordigo gives you a list of ordered pairs and an empty grid. Tap them in order and
+        the picture draws itself under your finger — you never see the colors until you plot it.
+      </p>
+      <a class="cta" href="https://apps.apple.com/app/id1486330879">Download on the App&nbsp;Store</a>
+      <div class="sub">Free · iPhone, iPad, and Mac</div>
+    </div>
 
-    <div class="strip">
-      <img src="/fox.png" alt="A fox drawn from coordinates" width="480" height="480" />
-      <img src="/butterfly.png" alt="A butterfly drawn from coordinates" width="480" height="480" />
-      <img src="/rocket.png" alt="A rocket drawn from coordinates" width="480" height="480" />
-      <img src="/sailboat.png" alt="A sailboat drawn from coordinates" width="480" height="480" />
+    <div class="demo">
+      <div class="stage">
+        <svg id="plot" viewBox="0 0 15 15" aria-label="Coordinates being plotted into a picture of a fox"></svg>
+        <img id="reveal" src="/fox.png" alt="The finished fox, in color" width="480" height="480" />
+      </div>
+      <div class="readout"><span id="tap">Plotting…</span><b id="pair">(2, 7)</b></div>
     </div>
   </div>
 
-  <section id="how">
-    <h2>How it works</h2>
-    <p class="section-lede">Three rules, and that is the whole game.</p>
-    <div class="steps">
-      <div class="step">
-        <div class="n">1</div>
-        <h3>Plot the pairs</h3>
-        <p>Each picture is a list of ordered pairs. Tap them in order on a 15×15 grid.</p>
-      </div>
-      <div class="step">
-        <div class="n">2</div>
-        <h3>Lines close</h3>
-        <p>Your points join into lines. When a shape closes, it becomes an area.</p>
-      </div>
-      <div class="step">
-        <div class="n">3</div>
-        <h3>Color pours in</h3>
-        <p>Closed areas fill as you go. The picture appears under your finger.</p>
-      </div>
+  <div class="steps">
+    <div class="step">
+      <div class="n">1</div>
+      <h3>Plot the pairs</h3>
+      <p>Tap each coordinate in order on a 15×15 grid.</p>
     </div>
-  </section>
+    <div class="step">
+      <div class="n">2</div>
+      <h3>Lines close</h3>
+      <p>Points join into lines. A closed line becomes an area.</p>
+    </div>
+    <div class="step">
+      <div class="n">3</div>
+      <h3>Color pours in</h3>
+      <p>Each area fills as you finish it, so the picture grows as you work.</p>
+    </div>
+  </div>
 
-  <section id="features">
-    <h2>More than a puzzle</h2>
-    <p class="section-lede">Play it, draw it, print it, send it.</p>
+  <section id="make">
+    <h2>Then make your own</h2>
+    <p class="section-lede">
+      The puzzles are the doorway. What keeps people here is that everything they make
+      leaves the app in a form someone else can use.
+    </p>
+
     <div class="features">
       <div class="feat">
-        <h3>Draw your own</h3>
-        <p>A grid editor with lines, fills, dots, and frame-by-frame animation. Make a picture, then make it move.</p>
+        <div class="art"><img src="/penghy.png" alt="A penguin drawn on the coordinate grid" width="480" height="480" /></div>
+        <div>
+          <h3>Draw it</h3>
+          <p>A grid editor with lines, fills, and dots. Tap point by point or drag to sketch,
+             then pour color into any closed shape.</p>
+        </div>
       </div>
+
       <div class="feat">
-        <h3>Printable worksheets</h3>
-        <p>Export coordinate graphing worksheets as PDF — puzzle page plus answer key, sized for Letter or A4, tuned for kids, adults, or a classroom.</p>
+        <div class="art flap">
+          <img src="/wings-up.png" alt="" width="480" height="480" />
+          <img src="/wings-down.png" alt="A butterfly animating between two frames" width="480" height="480" />
+        </div>
+        <div>
+          <h3>Make it move</h3>
+          <p>Add frames and the picture animates. Export a GIF and you have a short worth
+             posting — the kind of clip that explains itself in two seconds.</p>
+        </div>
       </div>
+
       <div class="feat">
-        <h3>Share as a puzzle</h3>
-        <p>Send a link and the picture travels with it. Your friend plots it to reveal the colors — no account, no upload.</p>
+        <div class="art"><img src="/dorothy.png" alt="A character from a storybook scene, drawn on the coordinate grid" width="480" height="480" /></div>
+        <div>
+          <h3>Tell a story with it</h3>
+          <p>Arrange your pictures into scenes and write your own words around them. Read it
+             back as a picture book, or export it as a page you can post.</p>
+        </div>
       </div>
+
       <div class="feat">
-        <h3>Storybooks that move</h3>
-        <p>Arrange your pictures into scenes with text, then read it as a picture book, a novel, or a blog post.</p>
+        <div class="art"><img src="/sailboat.png" alt="A sailboat drawn on the coordinate grid" width="480" height="480" /></div>
+        <div>
+          <h3>Send it as a puzzle</h3>
+          <p>Share a link and the drawing travels inside it. Your friend sees the outline and
+             plots it to reveal the colors. No account, no upload, nothing stored.</p>
+        </div>
       </div>
     </div>
   </section>
@@ -160,8 +233,9 @@
     <div class="band">
       <h2>For teachers</h2>
       <p>
-        Coordinate graphing practice that students actually finish, because the reward is a picture
-        they made. Print a worksheet, hand it out, and the QR code brings it back to the app.
+        Print a coordinate graphing worksheet — puzzle page and answer key, Letter or A4,
+        sized for kids, adults, or a classroom. Every sheet carries a QR code, so the
+        student who finishes it on paper can carry the picture back into the app.
       </p>
       <a class="cta" href="https://apps.apple.com/app/id1486330879">Get Coordigo — free</a>
     </div>
@@ -176,6 +250,101 @@
     <p>© 2026 Coordigo</p>
   </footer>
 </div>
+
+<script>
+// 히어로 데모 — fox.json의 실제 좌표다. 설명 문장 열 줄보다 이 15초가 낫다.
+(function () {
+  const FOX=[{"p":[[2,7],[13,7],[13,10],[11,13],[9,14],[6,14],[4,13],[2,10]],"c":true},{"p":[[2,7],[4,2],[7,7]],"c":true},{"p":[[13,7],[11,2],[8,7]],"c":true},{"p":[[4,6],[4,4],[6,6]],"c":true},{"p":[[11,6],[11,4],[9,6]],"c":true},{"p":[[6,9],[5,10],[6,11],[7,10]],"c":true},{"p":[[9,9],[8,10],[9,11],[10,10]],"c":true},{"p":[[7,12],[6,13],[7,14],[8,14],[9,13],[8,12]],"c":true},{"p":[[0,4],[0,0],[3,0]],"c":true},{"p":[[0,11],[3,8],[6,11]],"c":true},{"p":[[9,11],[12,8],[15,11]],"c":true},{"p":[[0,14],[4,11],[8,14]],"c":true},{"p":[[7,14],[11,11],[15,14]],"c":true}];
+
+  const svg = document.getElementById('plot');
+  const reveal = document.getElementById('reveal');
+  const pairEl = document.getElementById('pair');
+  const tapEl = document.getElementById('tap');
+  const NS = 'http://www.w3.org/2000/svg';
+  if (!svg) return;
+
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduced) { reveal.classList.add('on'); tapEl.textContent = '49 points'; return; }
+
+  // 이 앱의 y는 화면처럼 아래로 자란다 — 워크시트(Exporters.point)도 공유 페이지도
+  // 같은 규칙이라 SVG 좌표를 그대로 쓴다. 뒤집으면 그림이 거꾸로 선다.
+
+  function grid() {
+    svg.innerHTML = '';
+    const bg = document.createElementNS(NS, 'rect');
+    bg.setAttribute('width', 15); bg.setAttribute('height', 15);
+    bg.setAttribute('fill', 'var(--paper)');
+    svg.appendChild(bg);
+    for (let i = 0; i <= 15; i++) {
+      for (const [x1, y1, x2, y2] of [[i, 0, i, 15], [0, i, 15, i]]) {
+        const l = document.createElementNS(NS, 'line');
+        l.setAttribute('x1', x1); l.setAttribute('y1', y1);
+        l.setAttribute('x2', x2); l.setAttribute('y2', y2);
+        l.setAttribute('stroke', 'currentColor');
+        l.setAttribute('stroke-width', 0.03);
+        l.setAttribute('opacity', i % 5 ? 0.16 : 0.34);
+        svg.appendChild(l);
+      }
+    }
+  }
+
+  let timer = null;
+  function run() {
+    grid();
+    reveal.classList.remove('on');
+    let s = 0, i = 0, poly = null, count = 0;
+
+    const step = () => {
+      if (s >= FOX.length) {                       // 다 찍었다 — 색이 드러난다
+        reveal.classList.add('on');
+        tapEl.textContent = count + ' points';
+        pairEl.textContent = 'done';
+        timer = setTimeout(run, 2600);
+        return;
+      }
+      const stroke = FOX[s];
+      if (i === 0) {
+        poly = document.createElementNS(NS, 'polyline');
+        poly.setAttribute('fill', 'none');
+        poly.setAttribute('stroke', 'var(--ink)');
+        poly.setAttribute('stroke-width', 0.17);
+        poly.setAttribute('stroke-linecap', 'round');
+        poly.setAttribute('stroke-linejoin', 'round');
+        svg.appendChild(poly);
+      }
+      const pts = stroke.p.slice(0, i + 1);
+      const all = (i + 1 === stroke.p.length && stroke.c) ? pts.concat([stroke.p[0]]) : pts;
+      poly.setAttribute('points', all.map(p => p[0] + ',' + p[1]).join(' '));
+
+      const [px, py] = stroke.p[i];
+      pairEl.textContent = '(' + px + ', ' + py + ')';
+      count++;
+      tapEl.textContent = count + ' points';
+
+      const dot = document.createElementNS(NS, 'circle');
+      dot.setAttribute('cx', px); dot.setAttribute('cy', py);
+      dot.setAttribute('r', 0.34); dot.setAttribute('fill', 'var(--accent)');
+      dot.setAttribute('opacity', 0.9);
+      svg.appendChild(dot);
+      setTimeout(() => dot.remove(), 260);
+
+      i++;
+      if (i >= stroke.p.length) { s++; i = 0; }
+      timer = setTimeout(step, 105);
+    };
+    timer = setTimeout(step, 320);
+  }
+
+  // 화면에 없을 때는 돌리지 않는다.
+  const io = new IntersectionObserver(es => {
+    for (const e of es) {
+      if (e.isIntersecting) { if (!timer) run(); }
+      else { clearTimeout(timer); timer = null; }
+    }
+  }, { threshold: 0.15 });
+  io.observe(svg);
+})();
+</script>
 
 </body>
 </html>
