@@ -1,0 +1,86 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Coordigo — a picture for you</title>
+<!-- 미리보기 카드. 그림은 프래그먼트(#)에 있어 서버가 볼 수 없으므로 **고정 카드**를 쓴다 —
+     받는 사람에게 필요한 신호는 "그림이 왔다"이지 어떤 그림인지가 아니고, 실물은 열면 나온다.
+     그림별 카드를 만들려면 데이터를 서버에 보내야 하는데, 그건 프라이버시를 파는 거래다. -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Coordigo">
+<meta property="og:url" content="https://coordigo.com/plot">
+<meta property="og:title" content="Someone sent you a picture">
+<meta property="og:description" content="Plot the coordinates to reveal the colors. Free on iPhone, iPad, and Mac.">
+<meta property="og:image" content="https://coordigo.com/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Someone sent you a picture">
+<meta name="twitter:description" content="Plot the coordinates to reveal the colors.">
+<meta name="twitter:image" content="https://coordigo.com/og.png">
+<meta name="robots" content="noindex">
+<style>
+ :root{--ink:#111;--accent:#5b4ae0;--paper:#fff;--bg:#f2f2f7}
+ *{box-sizing:border-box}
+ body{margin:0;background:var(--bg);color:var(--ink);
+   font:16px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+   background-image:linear-gradient(#0000000a 1px,transparent 1px),linear-gradient(90deg,#0000000a 1px,transparent 1px);
+   background-size:22px 22px}
+ main{max-width:520px;margin:0 auto;padding:28px 20px 40px;text-align:center}
+ h1{font-size:22px;margin:22px 0 6px}
+ p{color:#666;margin:0 0 22px;font-size:14px}
+ .card{background:var(--paper);border-radius:18px;padding:10px;
+   box-shadow:0 1px 3px #0000001a}
+ svg{width:100%;height:auto;display:block}
+ a.btn{display:block;text-decoration:none;font-weight:600;border-radius:16px;
+   padding:15px;margin-top:10px}
+ .primary{background:var(--accent);color:#fff}
+ .secondary{background:#fff;color:var(--accent)}
+ .note{font-size:12px;color:#888;margin-top:18px}
+</style></head><body><main>
+<div class="card"><svg id="art" viewBox="0 0 15 15" aria-label="Coordigo picture"></svg></div>
+<h1 id="title">A picture for you</h1>
+<p id="sub">Plot the coordinates to reveal the colors.</p>
+<a class="btn primary" id="open" href="#">Open in Coordigo</a>
+<a class="btn secondary" href="https://apps.apple.com/app/id1486330879">Get Coordigo — free</a>
+<p class="note">Read a coordinate, tap it, watch the picture appear.</p>
+</main><script>
+(async () => {
+  const payload = location.hash.slice(1);
+  const openBtn = document.getElementById('open');
+  openBtn.href = 'coordigo://plot#' + payload;
+  if (!payload) return;
+  try {
+    // base64url → bytes
+    const b64 = payload.replace(/-/g,'+').replace(/_/g,'/').padEnd(Math.ceil(payload.length/4)*4,'=');
+    const bin = atob(b64);
+    const bytes = Uint8Array.from(bin, c => c.charCodeAt(0));
+    // raw deflate (앱의 COMPRESSION_ZLIB과 같은 형식)
+    const ds = new DecompressionStream('deflate-raw');
+    const buf = await new Response(new Blob([bytes]).stream().pipeThrough(ds)).arrayBuffer();
+    const d = JSON.parse(new TextDecoder().decode(buf));
+    if (d.title) document.getElementById('title').textContent = d.title;
+    // 선만 그린다 — 칠은 앱에서 찍어야 나타난다
+    const svg = document.getElementById('art');
+    const ns = 'http://www.w3.org/2000/svg';
+    const bgRect = document.createElementNS(ns,'rect');
+    bgRect.setAttribute('width','15'); bgRect.setAttribute('height','15');
+    bgRect.setAttribute('fill','#fff'); svg.appendChild(bgRect);
+    for (const sh of (d.shapes || [])) {
+      const pts = sh.p || [];
+      if (sh.t === 'poly' || sh.t === 'stroke') {
+        if (pts.length < 2) continue;
+        const el = document.createElementNS(ns, sh.t === 'poly' ? 'polygon' : 'polyline');
+        el.setAttribute('points', pts.map(q => q[0] + ',' + q[1]).join(' '));
+        el.setAttribute('fill','none'); el.setAttribute('stroke','#111');
+        el.setAttribute('stroke-width','0.16');
+        el.setAttribute('stroke-linecap','round'); el.setAttribute('stroke-linejoin','round');
+        svg.appendChild(el);
+      } else if (sh.t === 'dot' && pts.length) {
+        const c = document.createElementNS(ns,'circle');
+        c.setAttribute('cx', pts[0][0]); c.setAttribute('cy', pts[0][1]);
+        c.setAttribute('r','0.2'); c.setAttribute('fill','#111');
+        svg.appendChild(c);
+      }
+    }
+  } catch (e) {
+    document.getElementById('sub').textContent = 'Open this link in Coordigo to see the picture.';
+  }
+})();
+</script></body></html>
