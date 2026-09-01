@@ -1,363 +1,149 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Coordigo — Read a coordinate. Get a picture.</title>
-<meta name="description" content="Tap ordered pairs on a grid and a picture appears. Draw your own, animate it, share it as a link, or print coordinate graphing worksheets. Free on iPhone, iPad, and Mac." />
-<meta name="theme-color" content="#f4f4f7" />
-<link rel="canonical" href="https://coordigo.com/" />
-
-<meta property="og:type" content="website" />
-<meta property="og:site_name" content="Coordigo" />
-<meta property="og:title" content="Coordigo — Read a coordinate. Get a picture." />
-<meta property="og:description" content="Tap ordered pairs and a picture appears. Draw your own, make it move, share it as a link, print worksheets." />
-<meta property="og:url" content="https://coordigo.com/" />
-<meta property="og:image" content="https://coordigo.com/og.png" />
-<meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="Coordigo — Read a coordinate. Get a picture." />
-<meta name="twitter:description" content="Tap ordered pairs and a picture appears." />
-<meta name="twitter:image" content="https://coordigo.com/og.png" />
-
-<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-<link rel="icon" href="/favicon-32.png" sizes="32x32" />
-<style>
- :root{
-   --ink:#14141a; --muted:#63636f; --accent:#5b4ae0; --accent-soft:#ece9fb;
-   --paper:#fff; --bg:#f4f4f7; --rule:#00000010; --edge:#00000012; --on-accent:#fff;
- }
- @media (prefers-color-scheme: dark){
-   :root:not([data-theme="light"]){
-     --ink:#f1f1f5; --muted:#9c9cab; --accent:#9c8dff; --accent-soft:#241f42;
-     --paper:#17171f; --bg:#0e0e13; --rule:#ffffff0d; --edge:#ffffff14; --on-accent:#14141a;
-   }
- }
- :root[data-theme="dark"]{
-   --ink:#f1f1f5; --muted:#9c9cab; --accent:#9c8dff; --accent-soft:#241f42;
-   --paper:#17171f; --bg:#0e0e13; --rule:#ffffff0d; --edge:#ffffff14; --on-accent:#14141a;
- }
-
- *{box-sizing:border-box}
- html{scroll-behavior:smooth}
- body{
-   margin:0; color:var(--ink); background:var(--bg);
-   font:17px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-   background-image:linear-gradient(var(--rule) 1px,transparent 1px),
-                    linear-gradient(90deg,var(--rule) 1px,transparent 1px);
-   background-size:26px 26px;
-   -webkit-font-smoothing:antialiased;
- }
- img{max-width:100%;height:auto;display:block}
- a{color:var(--accent)}
- .wrap{max-width:980px;margin:0 auto;padding:0 20px}
-
- header{padding:24px 0 0}
- nav{display:flex;align-items:center;justify-content:space-between;gap:16px}
- .brand{font-weight:800;font-size:19px;letter-spacing:-.2px;text-decoration:none;color:var(--ink)}
- nav .links a{color:var(--muted);text-decoration:none;font-size:15px;margin-left:18px}
- nav .links a:hover{color:var(--accent)}
- @media(max-width:520px){nav .links a:first-child{display:none}}
-
- .hero{padding:52px 0 0;display:grid;grid-template-columns:1fr 380px;gap:44px;align-items:center}
- @media(max-width:840px){.hero{grid-template-columns:1fr;gap:30px;padding-top:36px;text-align:center}}
- h1{font-size:47px;line-height:1.08;letter-spacing:-1.2px;margin:0 0 16px;font-weight:800}
- @media(max-width:840px){h1{font-size:36px}}
- .lede{font-size:19px;color:var(--muted);margin:0 0 26px;max-width:30em}
- @media(max-width:840px){.lede{margin-left:auto;margin-right:auto}}
- /* 버튼 글자색은 강조색을 따라간다 — 다크에서 강조색이 밝아지므로 흰 글자는 안 읽힌다. */
- .cta{display:inline-block;background:var(--accent);color:var(--on-accent);text-decoration:none;
-   font-weight:650;padding:15px 30px;border-radius:15px;font-size:17px}
- .cta:hover{filter:brightness(1.09)}
- .sub{font-size:13.5px;color:var(--muted);margin-top:12px}
-
- /* 데모 — 좌표를 찍으면 그림이 되는 그 일을 그대로 보여준다. 말로 설명할 필요가 없다. */
- .demo{background:var(--paper);border:1px solid var(--edge);border-radius:22px;padding:16px 16px 12px}
- .stage{position:relative;aspect-ratio:1}
- .stage svg,.stage img{position:absolute;inset:0;width:100%;height:100%;border-radius:12px}
- .stage img{opacity:0;transition:opacity .5s ease}
- .stage img.on{opacity:1}
- .readout{display:flex;align-items:center;justify-content:space-between;gap:10px;
-   margin-top:12px;font:13px/1 ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--muted)}
- .readout b{color:var(--accent);font-weight:700;font-size:15px;letter-spacing:.3px}
-
- section{padding:64px 0 0}
- h2{font-size:29px;letter-spacing:-.5px;margin:0 0 8px;font-weight:750}
- .section-lede{color:var(--muted);margin:0 0 28px;max-width:34em}
-
- .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:30px}
- .step{background:var(--paper);border:1px solid var(--edge);border-radius:16px;padding:18px 20px}
- .step .n{display:inline-flex;align-items:center;justify-content:center;width:25px;height:25px;
-   border-radius:8px;background:var(--accent-soft);color:var(--accent);font-weight:800;font-size:13px;margin-bottom:9px}
- .step h3{margin:0 0 4px;font-size:16px}
- .step p{margin:0;color:var(--muted);font-size:14.5px;line-height:1.5}
- @media(max-width:720px){.steps{grid-template-columns:1fr}}
-
- /* 그림은 정사각이 원본이다 — 잘라내면 내용이 사라진다. 가로 카드로 두면
-    정사각을 지키면서 페이지도 짧아진다. */
- .features{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
- .feat{background:var(--paper);border:1px solid var(--edge);border-radius:18px;
-   padding:16px;display:flex;gap:16px;align-items:flex-start}
- /* 배경이 흰 그림(penguin)은 흰 카드에 묻힌다 — 실선 하나로 그림임을 알린다. */
- .feat .art{flex:0 0 118px;width:118px;aspect-ratio:1;position:relative;
-   border-radius:12px;overflow:hidden;background:var(--bg);border:1px solid var(--edge)}
- .feat .art img{width:100%;height:100%}
- .feat h3{margin:0 0 5px;font-size:17px}
- .feat p{margin:0;color:var(--muted);font-size:14.5px;line-height:1.52}
- @media(max-width:720px){.features{grid-template-columns:1fr}}
- @media(max-width:400px){.feat .art{flex-basis:88px;width:88px}}
-
- /* 날갯짓 — 프레임 애니메이션이 무엇인지 한 줄도 안 쓰고 전한다. */
- .flap{position:relative}
- .flap img{position:absolute;inset:0}
- .flap img:last-child{animation:flap 1.1s steps(1,end) infinite}
- @keyframes flap{0%,50%{opacity:0}50.01%,100%{opacity:1}}
-
- .band{background:var(--paper);border:1px solid var(--edge);border-radius:22px;
-   padding:38px 30px;text-align:center;margin-top:64px}
- .band h2{margin-bottom:10px}
- .band p{color:var(--muted);max-width:34em;margin:0 auto 24px}
-
- footer{padding:52px 0 60px;color:var(--muted);font-size:14px;text-align:center}
- footer a{color:var(--muted);text-decoration:none;margin:0 9px}
- footer a:hover{color:var(--accent)}
- footer p{margin:14px 0 0}
-
- @media (prefers-reduced-motion: reduce){
-   .flap img:last-child{animation:none}
-   html{scroll-behavior:auto}
- }
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Coordigo — Coordinate Postcards</title>
+  <meta name="description" content="Coordinate Postcards — a weekly puzzle blog from the Coordigo studio. Read the pairs, guess the picture.">
+  <meta name="theme-color" content="#0b0f1a">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Coordigo — Coordinate Postcards">
+  <meta property="og:description" content="Coordinate Postcards — a weekly puzzle blog from the Coordigo studio. Read the pairs, guess the picture.">
+  <meta property="og:url" content="https://coordigo.com/">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root{--bg:#0b0f1a;--bg-2:#0e1422;--ink:#eef2ff;--muted:#9aa6c4;--line:rgba(255,255,255,.10);--ac:#f472b6;--ac-soft:rgba(244,114,182,.4)}
+    *{box-sizing:border-box} html,body{margin:0}
+    body{font-family:"Inter",-apple-system,system-ui,sans-serif;color:var(--ink);
+      background:radial-gradient(1100px 660px at 82% -12%, rgba(244,114,182,.13), transparent 60%),
+                 radial-gradient(900px 600px at 0% 8%, rgba(129,140,248,.10), transparent 55%),
+                 linear-gradient(180deg,var(--bg-2),var(--bg));
+      min-height:100vh;-webkit-font-smoothing:antialiased}
+    .wrap{position:relative;z-index:1;width:100%;max-width:760px;margin:0 auto;padding:0 22px}
+    nav{display:flex;align-items:center;gap:11px;padding:26px 0 8px}
+    nav img{width:32px;height:32px;border-radius:8px;display:block}
+    nav .name{font-family:"Space Grotesk";font-weight:700;font-size:18px;flex:1}
+    .lang-toggle{font-size:13px;font-weight:600;color:var(--muted);border:1px solid var(--line);background:none;
+      border-radius:999px;padding:7px 14px;cursor:pointer;font-family:inherit;transition:color .14s,border-color .14s}
+    .lang-toggle:hover{color:var(--ac);border-color:var(--ac-soft)}
+    .lang-toggle.hide{display:none}
+    .kicker{font-family:"Space Grotesk";font-weight:600;font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:34px 0 10px}
+    h1{font-family:"Space Grotesk";font-weight:700;font-size:clamp(30px,5.8vw,46px);line-height:1.06;margin:0;letter-spacing:-1px;
+      background:linear-gradient(100deg,#fff 30%,var(--ac) 80%);-webkit-background-clip:text;background-clip:text;color:transparent}
+    .intro{color:var(--muted);font-size:clamp(15px,2.3vw,16.5px);line-height:1.65;margin:14px 0 0;max-width:560px}
+    .stage{margin:26px 0 0;border:1px solid var(--line);border-radius:20px;overflow:hidden;background:#000}
+    .stage video{display:block;width:100%;max-height:min(62vh,520px);object-fit:contain;background:#000}
+    .blog{margin:34px 0 0}
+    .blog h2{font-family:"Space Grotesk";font-weight:600;font-size:13px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);margin:0 0 12px}
+    .post{border:1px dashed var(--line);border-radius:16px;padding:18px 20px;color:var(--muted)}
+    .post .p-ep{font-size:11.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--ac);opacity:.9}
+    .post .p-title{font-family:"Space Grotesk";font-weight:600;font-size:16.5px;color:var(--ink);margin-top:5px}
+    .post .p-note{font-size:13.5px;margin-top:6px;line-height:1.55}
+    .store{display:flex;align-items:center;gap:12px;margin:30px 0 0}
+    .store a{display:block;line-height:0}
+    .store img{width:44px;height:44px;border-radius:11px;border:1px solid rgba(255,255,255,.10);box-shadow:0 4px 12px rgba(0,0,0,.35);transition:transform .13s}
+    .store a:hover img{transform:translateY(-2px)}
+    .store .cap{font-size:10.5px;font-weight:600;letter-spacing:.06em;color:var(--muted);text-transform:uppercase;margin-top:5px;text-align:center}
+    .store .soon{font-size:12px;color:var(--muted);border:1px dashed var(--line);border-radius:999px;padding:6px 13px}
+    .more{margin:46px 0 0;padding-top:22px;border-top:1px solid var(--line)}
+    .more h2{font-family:"Space Grotesk";font-weight:600;font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:0 0 10px}
+    .site-row{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;padding:6px 0;font-size:14px}
+    .site-row a{color:var(--ac);text-decoration:none;font-weight:600;font-family:"Space Grotesk"}
+    .site-row a:hover{text-decoration:underline;text-underline-offset:3px}
+    .site-row .d{color:var(--muted)}
+    footer{position:relative;z-index:1;text-align:center;font-size:13px;padding:42px 22px 32px;color:var(--muted)}
+    footer a{color:var(--ac);text-decoration:none}
+    footer a:hover{text-decoration:underline;text-underline-offset:3px}
+    footer a.mail{display:inline-flex;vertical-align:-3px}
+    footer a.mail svg{width:15px;height:15px}
+    footer .sep{opacity:.35;margin:0 8px}
+  </style>
 </head>
 <body>
-
-<div class="wrap">
-  <header>
+  <div class="wrap">
     <nav>
-      <a class="brand" href="/">Coordigo</a>
-      <div class="links">
-        <a href="#make">What you can make</a>
-        <a href="/support/">Support</a>
-        <a href="https://apps.apple.com/app/id1486330879?ct=web-coordigo">App&nbsp;Store</a>
-      </div>
+      <div style="width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:'Space Grotesk';font-weight:700;font-size:14px;color:#fff;background:linear-gradient(135deg,#d02670,#a3195b)">Co</div>
+      <span class="name">Coordigo</span>
+      <button class="lang-toggle hide" id="langToggle" type="button"></button>
     </nav>
-  </header>
 
-  <div class="hero">
-    <div>
-      <h1>Read a coordinate.<br />Get a picture.</h1>
-      <p class="lede">
-        Coordigo gives you a list of ordered pairs and an empty grid. Tap them in order and
-        the picture draws itself under your finger — you never see the colors until you plot it.
-      </p>
-      <a class="cta" href="https://apps.apple.com/app/id1486330879?ct=web-coordigo">Download on the App&nbsp;Store</a>
-      <div class="sub">Free · iPhone, iPad, and Mac</div>
-    </div>
+    <p class="kicker" data-t="kicker">A blog from the Coordigo studio</p>
+    <h1>Coordinate Postcards</h1>
+    <p class="intro" data-t="intro">Every postcard starts as a list of ordered pairs. Read them, guess the picture, then scroll to see it drawn — and watch it move.</p>
 
-    <div class="demo">
-      <div class="stage">
-        <svg id="plot" viewBox="0 0 15 15" aria-label="Coordinates being plotted into a picture of a fox"></svg>
-        <img id="reveal" src="/fox.png" alt="The finished fox, in color" width="480" height="480" />
+    <div class="stage"><video src="/media-preview.mp4" autoplay muted loop playsinline preload="metadata"></video></div>
+
+    <section class="blog">
+      <h2>Vol. 1</h2>
+      <div class="post">
+        <div class="p-ep">E1</div>
+        <div class="p-title" data-t="ep1t">The first postcard</div>
+        <div class="p-note" data-t="ep1n">Postcard No. 1 is being plotted right now, pair by pair. It will arrive here soon.</div>
       </div>
-      <div class="readout"><span id="tap">Plotting…</span><b id="pair">(2, 7)</b></div>
-    </div>
+    </section>
+
+    <div class="store"><span class="soon">App Store &mdash; coming soon</span></div>
+
+    <section class="more">
+      <h2 data-t="moreTitle">More from us</h2>
+      <div class="site-row"><a href="https://swiftian.com">swiftian.com</a> <span class="d" data-t="swDesc">chillfriends comics, read aloud</span></div>
+      <div class="site-row"><a href="https://iflipbook.com">iflipbook.com</a> <span class="d" data-t="ifDesc">otto's flipbook diary</span></div>
+      <div class="site-row"><a href="https://pythoneer.io">pythoneer.io</a> <span class="d" data-t="pyDesc">one tile at a time</span></div>
+    </section>
   </div>
-
-  <div class="steps">
-    <div class="step">
-      <div class="n">1</div>
-      <h3>Plot the pairs</h3>
-      <p>Tap each coordinate in order on a 15×15 grid.</p>
-    </div>
-    <div class="step">
-      <div class="n">2</div>
-      <h3>Lines close</h3>
-      <p>Points join into lines. A closed line becomes an area.</p>
-    </div>
-    <div class="step">
-      <div class="n">3</div>
-      <h3>Color pours in</h3>
-      <p>Each area fills as you finish it, so the picture grows as you work.</p>
-    </div>
-  </div>
-
-  <section id="make">
-    <h2>Then make your own</h2>
-    <p class="section-lede">
-      The puzzles are the doorway. What keeps people here is that everything they make
-      leaves the app in a form someone else can use.
-    </p>
-
-    <div class="features">
-      <div class="feat">
-        <div class="art"><video src="/media-preview.mp4" autoplay muted loop playsinline preload="metadata" style="display:block;width:100%;border-radius:inherit"></video></div>
-        <div>
-          <h3>See it in motion</h3>
-          <p>Thirty seconds of Coordigo doing its thing — plot a few pairs, watch the
-             picture arrive, then make it move.</p>
-        </div>
-      </div>
-      <div class="feat">
-        <div class="art"><img src="/penghy.png" alt="A penguin drawn on the coordinate grid" width="480" height="480" /></div>
-        <div>
-          <h3>Draw it</h3>
-          <p>A grid editor with lines, fills, and dots. Tap point by point or drag to sketch,
-             then pour color into any closed shape.</p>
-        </div>
-      </div>
-
-      <div class="feat">
-        <div class="art flap">
-          <img src="/wings-up.png" alt="" width="480" height="480" />
-          <img src="/wings-down.png" alt="A butterfly animating between two frames" width="480" height="480" />
-        </div>
-        <div>
-          <h3>Make it move</h3>
-          <p>Add frames and the picture animates. Export a GIF and you have a short worth
-             posting — the kind of clip that explains itself in two seconds.</p>
-        </div>
-      </div>
-
-      <div class="feat">
-        <div class="art"><img src="/dorothy.png" alt="A character from a storybook scene, drawn on the coordinate grid" width="480" height="480" /></div>
-        <div>
-          <h3>Tell a story with it</h3>
-          <p>Arrange your pictures into scenes and write your own words around them. Read it
-             back as a picture book, or export it as a page you can post.</p>
-        </div>
-      </div>
-
-      <div class="feat">
-        <div class="art"><img src="/sailboat.png" alt="A sailboat drawn on the coordinate grid" width="480" height="480" /></div>
-        <div>
-          <h3>Send it as a puzzle</h3>
-          <p>Share a link and the drawing travels inside it. Your friend sees the outline and
-             plots it to reveal the colors. No account, no upload, nothing stored.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section>
-    <div class="band">
-      <h2>For teachers</h2>
-      <p>
-        Print a coordinate graphing worksheet — puzzle page and answer key, Letter or A4,
-        sized for beginners, experts, or a classroom. Every sheet carries a QR code, so the
-        student who finishes it on paper can carry the picture back into the app.
-      </p>
-      <a class="cta" href="https://apps.apple.com/app/id1486330879?ct=web-coordigo">Get Coordigo — free</a>
-    </div>
-  </section>
 
   <footer>
-    <div>
-      <a href="/privacy/">Privacy</a>·
-      <a href="/support/">Support</a>·
-      <a href="https://apps.apple.com/app/id1486330879?ct=web-coordigo">App&nbsp;Store</a>
-    </div>
-    <p>blog — coming soon</p>
-    <p>© 2026 Coordigo · A <a href="https://swiftian.com">Swiftian</a> app · <a href="https://iflipbook.com">iFlipbook</a> · <a href="https://pythoneer.io">Pythoneer</a></p>
+    <span>&copy; 2026 Coordigo &middot; <a href='https://swiftian.com'>Swiftian Inc.</a></span>
+    <span class="sep">&middot;</span><a href="/support/">Support</a><span class="sep">&middot;</span><a href="/privacy/" data-t="privacy">Privacy</a>
+    <span class="sep">&middot;</span>
+    <a class="mail email" data-u="hello" data-d="swiftian.com" href="#" aria-label="Email us" title="Email us">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="m4 7 8 6 8-6"/></svg>
+    </a>
   </footer>
-</div>
 
-<script>
-// 히어로 데모 — fox.json의 실제 좌표다. 설명 문장 열 줄보다 이 15초가 낫다.
-(function () {
-  const FOX=[{"p":[[2,7],[13,7],[13,10],[11,13],[9,14],[6,14],[4,13],[2,10]],"c":true},{"p":[[2,7],[4,2],[7,7]],"c":true},{"p":[[13,7],[11,2],[8,7]],"c":true},{"p":[[4,6],[4,4],[6,6]],"c":true},{"p":[[11,6],[11,4],[9,6]],"c":true},{"p":[[6,9],[5,10],[6,11],[7,10]],"c":true},{"p":[[9,9],[8,10],[9,11],[10,10]],"c":true},{"p":[[7,12],[6,13],[7,14],[8,14],[9,13],[8,12]],"c":true},{"p":[[0,4],[0,0],[3,0]],"c":true},{"p":[[0,11],[3,8],[6,11]],"c":true},{"p":[[9,11],[12,8],[15,11]],"c":true},{"p":[[0,14],[4,11],[8,14]],"c":true},{"p":[[7,14],[11,11],[15,14]],"c":true}];
-
-  const svg = document.getElementById('plot');
-  const reveal = document.getElementById('reveal');
-  const pairEl = document.getElementById('pair');
-  const tapEl = document.getElementById('tap');
-  const NS = 'http://www.w3.org/2000/svg';
-  if (!svg) return;
-
-  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (reduced) { reveal.classList.add('on'); tapEl.textContent = '49 points'; return; }
-
-  // 이 앱의 y는 화면처럼 아래로 자란다 — 워크시트(Exporters.point)도 공유 페이지도
-  // 같은 규칙이라 SVG 좌표를 그대로 쓴다. 뒤집으면 그림이 거꾸로 선다.
-
-  function grid() {
-    svg.innerHTML = '';
-    const bg = document.createElementNS(NS, 'rect');
-    bg.setAttribute('width', 15); bg.setAttribute('height', 15);
-    bg.setAttribute('fill', 'var(--paper)');
-    svg.appendChild(bg);
-    for (let i = 0; i <= 15; i++) {
-      for (const [x1, y1, x2, y2] of [[i, 0, i, 15], [0, i, 15, i]]) {
-        const l = document.createElementNS(NS, 'line');
-        l.setAttribute('x1', x1); l.setAttribute('y1', y1);
-        l.setAttribute('x2', x2); l.setAttribute('y2', y2);
-        l.setAttribute('stroke', 'currentColor');
-        l.setAttribute('stroke-width', 0.03);
-        l.setAttribute('opacity', i % 5 ? 0.16 : 0.34);
-        svg.appendChild(l);
-      }
+  <script>
+  var I18N = {"ko": {"name": "한국어", "kicker": "Coordigo 스튜디오의 블로그", "intro": "모든 엽서는 좌표 목록으로 시작합니다. 좌표를 읽고 그림을 맞혀 보세요 — 스크롤하면 완성된 그림이, 그리고 움직이는 모습이 나타납니다.", "ep1t": "첫 번째 엽서", "ep1n": "1호 엽서를 지금 한 점 한 점 찍는 중입니다. 곧 도착합니다.", "moreTitle": "우리가 만드는 것들", "privacy": "개인정보 처리방침", "swDesc": "칠프렌즈 코믹스, 낭독 연재", "ifDesc": "오토의 플립북 일기", "pyDesc": "한 번에 타일 하나"}, "ja": {"name": "日本語", "kicker": "Coordigo スタジオのブログ", "intro": "どのポストカードも座標のリストから始まります。読んで、絵を当ててみて — スクロールすると完成した絵が現れ、動き出します。", "ep1t": "いちばん最初のポストカード", "ep1n": "1号はいま、一点ずつプロット中。まもなく届きます。", "moreTitle": "私たちの作品", "privacy": "プライバシー", "swDesc": "チルフレンズ・コミックス朗読連載", "ifDesc": "オットーのパラパラ日記", "pyDesc": "タイルひとつずつ"}, "zh-Hans": {"name": "简体中文", "kicker": "来自 Coordigo 工作室的博客", "intro": "每张明信片都从一串坐标开始。读一读，猜猜是什么图——往下滚动，看它被画出来，再看它动起来。", "ep1t": "第一张明信片", "ep1n": "1 号明信片正在一点一点地描绘。很快就会寄到这里。", "moreTitle": "我们的作品", "privacy": "隐私政策", "swDesc": "Chillfriends 漫画朗读连载", "ifDesc": "Otto 的翻页日记", "pyDesc": "一次一块瓷砖"}, "zh-Hant": {"name": "繁體中文", "kicker": "來自 Coordigo 工作室的部落格", "intro": "每張明信片都從一串座標開始。讀一讀,猜猜是什麼圖——往下捲動,看它被畫出來,再看它動起來。", "ep1t": "第一張明信片", "ep1n": "1 號明信片正在一點一點地描繪。很快就會寄到這裡。", "moreTitle": "我們的作品", "privacy": "隱私權政策", "swDesc": "Chillfriends 漫畫朗讀連載", "ifDesc": "Otto 的翻頁日記", "pyDesc": "一次一塊瓷磚"}, "es": {"name": "Español", "kicker": "Un blog del estudio Coordigo", "intro": "Cada postal empieza como una lista de pares ordenados. Léelos, adivina el dibujo y desplázate para verlo trazado — y en movimiento.", "ep1t": "La primera postal", "ep1n": "La postal n.º 1 se está trazando ahora mismo, par a par. Llegará pronto.", "moreTitle": "Más de nosotros", "privacy": "Privacidad", "swDesc": "cómics de Chillfriends, leídos en voz alta", "ifDesc": "el diario de flipbook de Otto", "pyDesc": "una casilla a la vez"}, "fr": {"name": "Français", "kicker": "Un blog du studio Coordigo", "intro": "Chaque carte postale commence par une liste de coordonnées. Lisez-les, devinez l'image, puis faites défiler pour la voir tracée — et s'animer.", "ep1t": "La toute première carte", "ep1n": "La carte n°1 est en train d'être tracée, point par point. Elle arrive bientôt.", "moreTitle": "Nos créations", "privacy": "Confidentialité", "swDesc": "les BD Chillfriends, lues à voix haute", "ifDesc": "le journal flipbook d'Otto", "pyDesc": "une tuile à la fois"}, "de": {"name": "Deutsch", "kicker": "Ein Blog aus dem Coordigo-Studio", "intro": "Jede Postkarte beginnt als Liste von Koordinatenpaaren. Lies sie, rate das Bild — und scroll weiter, um es gezeichnet und in Bewegung zu sehen.", "ep1t": "Die erste Postkarte", "ep1n": "Postkarte Nr. 1 wird gerade Punkt für Punkt gezeichnet. Sie kommt bald an.", "moreTitle": "Mehr von uns", "privacy": "Datenschutz", "swDesc": "Chillfriends-Comics, vorgelesen", "ifDesc": "Ottos Daumenkino-Tagebuch", "pyDesc": "Stein für Stein"}, "pt": {"name": "Português", "kicker": "Um blog do estúdio Coordigo", "intro": "Todo cartão-postal começa como uma lista de pares ordenados. Leia, adivinhe o desenho e role para vê-lo traçado — e em movimento.", "ep1t": "O primeiro cartão-postal", "ep1n": "O cartão nº 1 está sendo traçado agora, par por par. Chega em breve.", "moreTitle": "Mais do estúdio", "privacy": "Privacidade", "swDesc": "quadrinhos Chillfriends, lidos em voz alta", "ifDesc": "o diário de flipbook do Otto", "pyDesc": "um bloco de cada vez"}, "ru": {"name": "Русский", "kicker": "Блог студии Coordigo", "intro": "Каждая открытка начинается со списка координат. Прочитайте их, угадайте картинку, а потом прокрутите — и посмотрите, как она рисуется и оживает.", "ep1t": "Самая первая открытка", "ep1n": "Открытка №1 сейчас вычерчивается, пара за парой. Скоро прибудет.", "moreTitle": "Ещё от нас", "privacy": "Конфиденциальность", "swDesc": "комиксы Chillfriends, озвученные вслух", "ifDesc": "флипбук-дневник Отто", "pyDesc": "по плитке за раз"}};
+  var EN = {"kicker": "A blog from the Coordigo studio", "intro": "Every postcard starts as a list of ordered pairs. Read them, guess the picture, then scroll to see it drawn — and watch it move.", "ep1t": "The first postcard", "ep1n": "Postcard No. 1 is being plotted right now, pair by pair. It will arrive here soon.", "moreTitle": "More from us", "privacy": "Privacy", "swDesc": "chillfriends comics, read aloud", "ifDesc": "otto's flipbook diary", "pyDesc": "one tile at a time"};
+  function detect(){
+    var langs = navigator.languages || [navigator.language || "en"];
+    for (var i=0;i<langs.length;i++){
+      var l = langs[i], two = l.slice(0,2).toLowerCase();
+      if (two === "en") return "en";
+      if (/^zh\b/.test(l)) return /tw|hk|mo|hant/i.test(l) ? "zh-Hant" : "zh-Hans";
+      if (I18N[two]) return two;
+    }
+    return "en";
+  }
+  var local = detect(), cur;
+  try { cur = localStorage.getItem("site_lang"); } catch(_){}
+  if (cur !== "en" && cur !== local) cur = local;
+  function apply(lang){
+    cur = lang;
+    try { localStorage.setItem("site_lang", lang); } catch(_){}
+    var d = (lang === "en" || !I18N[lang]) ? EN : I18N[lang];
+    document.querySelectorAll("[data-t]").forEach(function(el){
+      var k = el.getAttribute("data-t");
+      if (d[k]) el.textContent = d[k];
+    });
+    document.documentElement.lang = lang;
+    var btn = document.getElementById("langToggle");
+    if (local === "en"){ btn.classList.add("hide"); }
+    else {
+      btn.classList.remove("hide");
+      btn.textContent = (lang === "en") ? I18N[local].name : "English";
     }
   }
-
-  let timer = null;
-  function run() {
-    grid();
-    reveal.classList.remove('on');
-    let s = 0, i = 0, poly = null, count = 0;
-
-    const step = () => {
-      if (s >= FOX.length) {                       // 다 찍었다 — 색이 드러난다
-        reveal.classList.add('on');
-        tapEl.textContent = count + ' points';
-        pairEl.textContent = 'done';
-        timer = setTimeout(run, 2600);
-        return;
-      }
-      const stroke = FOX[s];
-      if (i === 0) {
-        poly = document.createElementNS(NS, 'polyline');
-        poly.setAttribute('fill', 'none');
-        poly.setAttribute('stroke', 'var(--ink)');
-        poly.setAttribute('stroke-width', 0.17);
-        poly.setAttribute('stroke-linecap', 'round');
-        poly.setAttribute('stroke-linejoin', 'round');
-        svg.appendChild(poly);
-      }
-      const pts = stroke.p.slice(0, i + 1);
-      const all = (i + 1 === stroke.p.length && stroke.c) ? pts.concat([stroke.p[0]]) : pts;
-      poly.setAttribute('points', all.map(p => p[0] + ',' + p[1]).join(' '));
-
-      const [px, py] = stroke.p[i];
-      pairEl.textContent = '(' + px + ', ' + py + ')';
-      count++;
-      tapEl.textContent = count + ' points';
-
-      const dot = document.createElementNS(NS, 'circle');
-      dot.setAttribute('cx', px); dot.setAttribute('cy', py);
-      dot.setAttribute('r', 0.34); dot.setAttribute('fill', 'var(--accent)');
-      dot.setAttribute('opacity', 0.9);
-      svg.appendChild(dot);
-      setTimeout(() => dot.remove(), 260);
-
-      i++;
-      if (i >= stroke.p.length) { s++; i = 0; }
-      timer = setTimeout(step, 105);
-    };
-    timer = setTimeout(step, 320);
-  }
-
-  // 화면에 없을 때는 돌리지 않는다.
-  const io = new IntersectionObserver(es => {
-    for (const e of es) {
-      if (e.isIntersecting) { if (!timer) run(); }
-      else { clearTimeout(timer); timer = null; }
-    }
-  }, { threshold: 0.15 });
-  io.observe(svg);
-})();
-</script>
-
-<!-- Cloudflare Web Analytics — 프록시(주황) 없이 도는 비콘. 쿠키도, 개인 식별도 없다. --><script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "644eea6fa19b4175b7160496dfbd77a8"}'></script>
-<!-- 앱스토어 클릭 계측 — ct= 는 설치를 가르지만 클릭은 못 센다. 둘을 같이 봐야 이탈이 보인다.
-     식별자는 세션마다 새로 만드는 난수다. 쿠키도, IP 저장도, 개인 식별도 없다. -->
+  document.getElementById("langToggle").addEventListener("click", function(){ apply(cur === "en" ? local : "en"); });
+  apply(cur);
+  document.querySelectorAll('a.email').forEach(function(a){
+    a.href = 'mailto:' + a.dataset.u + String.fromCharCode(64) + a.dataset.d;
+  });
+  </script>
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "644eea6fa19b4175b7160496dfbd77a8"}'></script>
 <script>
 (function () {
   var SITE = "coordigo.com";
@@ -374,16 +160,12 @@
     var m = a.href.match(/id(\d+)/);
     try {
       fetch("https://claude-proxy-web.ilbulyori.workers.dev/events", {
-        method: "POST",
-        keepalive: true,
+        method: "POST", keepalive: true,
         headers: { "content-type": "application/json", "x-device-id": sid() },
         body: JSON.stringify({
           meta: { app: SITE, build: "web", os: "web", locale: (navigator.language || "").slice(0, 8) },
-          events: [{
-            name: "appstore_click",
-            ts: Date.now() / 1000,
-            props: { site: SITE, app: m ? m[1] : "", path: location.pathname.slice(0, 64) }
-          }]
+          events: [{ name: "appstore_click", ts: Date.now() / 1000,
+            props: { site: SITE, app: m ? m[1] : "", path: location.pathname.slice(0, 64) } }]
         })
       }).catch(function () {});
     } catch (_) {}
