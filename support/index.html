@@ -1,134 +1,101 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Support — Coordigo</title>
-<meta name="description" content="Help with Coordigo: plotting, drawing, worksheets, sharing, purchases, and how to reach the maker." />
-<link rel="canonical" href="https://coordigo.com/support/" />
-<meta property="og:title" content="Support — Coordigo" />
-<meta property="og:description" content="Help with plotting, drawing, worksheets, sharing, and purchases." />
-<meta property="og:url" content="https://coordigo.com/support/" />
-<meta property="og:image" content="https://coordigo.com/og.png" />
-<link rel="icon" href="/favicon-32.png" sizes="32x32" />
-<style>
- :root{--ink:#111;--muted:#6b6b76;--accent:#5b4ae0;--paper:#fff;--bg:#f2f2f7;--line:#0000000f}
- *{box-sizing:border-box}
- body{margin:0;color:var(--ink);background:var(--bg);
-  font:17px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-  background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
-  background-size:24px 24px;-webkit-font-smoothing:antialiased}
- .wrap{max-width:720px;margin:0 auto;padding:26px 20px 60px}
- a{color:var(--accent)}
- .brand{font-weight:800;font-size:19px;text-decoration:none;color:var(--ink)}
- h1{font-size:34px;letter-spacing:-.6px;margin:34px 0 18px}
- .card{background:var(--paper);border-radius:18px;padding:20px 24px;margin:14px 0}
- .card h2{margin:0 0 6px;font-size:18px}
- .card p{margin:0;color:#2a2a30;font-size:16px}
- .lead{color:var(--muted);margin:0 0 26px}
- footer{margin-top:44px;color:var(--muted);font-size:14px;text-align:center}
- footer a{color:var(--muted);text-decoration:none;margin:0 9px}
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Support — Coordigo</title>
+  <meta name="description" content="How Coordigo works, what credits are, and how to reach us.">
+  <link rel="canonical" href="https://coordigo.com/support/">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+  <meta name="theme-color" content="#f7f4ec" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#15161c" media="(prefers-color-scheme: dark)">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+  <style>
+    :root{--paper:#f7f4ec;--ink:#1b1917;--muted:#6d6557;--hair:rgba(27,25,23,.12);--gold:#a8761a;--grid:rgba(27,25,23,.055);--mark:#d02670}
+    @media (prefers-color-scheme: dark){
+      :root{--paper:#15161c;--ink:#eae5da;--muted:#9b9486;--hair:rgba(234,229,218,.14);--gold:#dcac48;--grid:rgba(234,229,218,.05);--mark:#ef5fa0}
+    }
+    *{box-sizing:border-box} html,body{margin:0}
+    body{background:var(--paper);color:var(--ink);font-family:"Source Serif 4",Georgia,serif;font-size:17px;line-height:1.65;
+      -webkit-font-smoothing:antialiased;
+      background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+      background-size:23px 23px}
+    .wrap{max-width:660px;margin:0 auto;padding:0 22px 60px}
+    nav{display:flex;align-items:center;gap:11px;padding:24px 0 6px}
+    nav a{display:flex;align-items:center;gap:11px;text-decoration:none;color:inherit}
+    .mark{width:30px;height:30px;display:flex;align-items:center;justify-content:center;color:#fff;background:var(--mark);font-weight:600;font-size:13px}
+    nav .name{font-weight:600;font-size:19px}
+    h1{font-weight:600;font-size:clamp(28px,5vw,38px);letter-spacing:-.02em;margin:42px 0 0}
+    .lead{font-size:19px;margin-top:16px;color:var(--muted)}
+    h2{font-weight:600;font-size:18px;margin:32px 0 0}
+    p{margin:8px 0 0}
+    p.a{color:var(--muted)}
+    ul{margin:8px 0 0;padding-left:20px;color:var(--muted)}
+    li{margin:4px 0}
+    .prices{font-family:ui-monospace,Menlo,monospace;font-size:13.5px;color:var(--muted);margin-top:10px}
+    a{color:var(--gold)}
+    footer{border-top:1px solid var(--hair);margin-top:48px;padding-top:18px;font-size:13.5px;color:var(--muted)}
+    footer a{text-decoration:none}
+    footer a:hover{text-decoration:underline;text-underline-offset:3px}
+    footer .sep{opacity:.4;margin:0 7px}
+  </style>
 </head>
 <body>
-<div class="wrap">
-  <a class="brand" href="/">Coordigo</a>
+  <div class="wrap">
+    <nav><a href="/"><div class="mark">Co</div><span class="name">Coordigo</span></a></nav>
 
-  <h1>Support</h1>
-  <p class="lead">
-    The fastest way to reach us is inside the app: <strong>Me → Write to the maker</strong>.
-    Replies appear in that same screen.
-  </p>
+    <h1>Support</h1>
+    <p class="lead">Write to <a class="email" data-u="hello" data-d="swiftian.com" href="#">us</a> any time. One person reads everything, usually within a day or two.</p>
 
-  <div class="card">
-    <h2>How do I play?</h2>
-    <p>Open a picture and tap the coordinate pairs in order. Lines form as you go, and closed
-       areas fill with color. You only see the finished colors once you have plotted it.</p>
+    <h2>How do I start?</h2>
+    <p class="a">Open the app and tap Start. A picture appears as an empty grid with one small gold mark on it. Something is hidden under that mark — pick any tile beside it, and that tile fills the screen.</p>
+
+    <h2>Nothing happens when I drag</h2>
+    <p class="a">You are probably on empty ground. Lines only exist where the hidden drawing has them; run your finger slowly across a boundary between two faint colours and it will light. There is no wrong move and nothing to undo.</p>
+
+    <h2>When does the colour come in?</h2>
+    <p class="a">A shape grows stronger with every line you clear along its edge, and turns full when its outline is complete. After the shapes come the details — single lines and dots that belong to no shape. When those are done the tile is finished and the view slides to the next one.</p>
+
+    <h2>The music doesn’t play</h2>
+    <p class="a">Songs stream from our server the first time, so the first play needs a connection; after that they are cached on the device. Check Settings (the gear beside “Today”) → Music. If you were already playing your own music, Coordigo will not interrupt it — turn its own music off and yours keeps going.</p>
+
+    <h2>What are credits?</h2>
+    <p class="a">Three pictures are free, and you start with ten credits on top of them. Opening any other picture costs credits according to its size.</p>
+    <ul>
+      <li>4 × 3 (12 tiles) — 5 credits</li>
+      <li>8 × 6 (48 tiles) — 10 credits</li>
+      <li>16 × 12 (192 tiles) — 20 credits</li>
+      <li>32 × 24 (768 tiles) — 40 credits</li>
+    </ul>
+    <p class="prices">Sketchbook 50 · Studio 200 · Patron 1,000</p>
+    <p class="a">Songs are free; credits only open pictures. A picture you have opened stays open for good.</p>
+
+    <h2>I bought credits and they’re missing</h2>
+    <p class="a">Settings → Credits → Restore purchases. Purchases are tied to your Apple Account, so they follow you to a new device. If they still don’t arrive, write to us with the date of the purchase and we’ll sort it out.</p>
+
+    <h2>Will I lose my progress on a new phone?</h2>
+    <p class="a">Credits and the pictures you have opened travel with your Apple Account through iCloud. How far you have traced each picture is kept on the device itself — it does not move to a new phone.</p>
+
+    <h2>What is the blank sheet?</h2>
+    <p class="a">A sheet of graph paper with nothing hidden in it, for drawing your own lines and dots. A sheet you leave empty is thrown away when you leave it; anything you draw is kept under Pictures.</p>
+
+    <h2>Does it work on iPad?</h2>
+    <p class="a">Yes, and Apple Pencil is the nicest way to trace. The layout gives the picture more room on a big screen.</p>
+
+    <h2>Anything else</h2>
+    <p class="a">Write to <a class="email" data-u="hello" data-d="swiftian.com" href="#">us</a>. See also the <a href="/privacy/">privacy policy</a> — the short version is that the app collects nothing.</p>
+
+    <footer>
+      &copy; 2026 Coordigo &middot; <a href="https://swiftian.com">Swiftian Inc.</a>
+      <span class="sep">&middot;</span><a href="/">Home</a><span class="sep">&middot;</span><a href="/privacy/">Privacy</a>
+    </footer>
   </div>
-
-  <div class="card">
-    <h2>How do I draw my own?</h2>
-    <p>Studio → the plus button. Draw lines by tapping points or dragging, pour color inside a
-       closed shape, and use the frame strip to animate. Pinch to zoom for precise work.</p>
-  </div>
-
-  <div class="card">
-    <h2>How do I print a worksheet?</h2>
-    <p>Open a picture → share → File exports → Worksheet PDF. You get the puzzle page and an
-       answer key. Set audience, paper size, hint dots, and answer key in Me → Worksheet.</p>
-  </div>
-
-  <div class="card">
-    <h2>Someone sent me a link. What do I do?</h2>
-    <p>Open it. If you have Coordigo, the picture appears ready to plot. If you do not, the
-       page shows the outline and a link to install the app.</p>
-  </div>
-
-  <div class="card">
-    <h2>What does Coordigo Studio unlock?</h2>
-    <p>Unlimited worksheet PDFs, GIF and SVG export, storybook and web exports, removal of the
-       small Coordigo mark on shared pictures, and bonus Dream credits. It is a one-time
-       purchase — not a subscription.</p>
-  </div>
-
-  <div class="card">
-    <h2>I bought Studio but it is locked</h2>
-    <p>Me → Restore Purchases, while signed in with the Apple Account used for the purchase.
-       If it still does not unlock, write to the maker and we will sort it out.</p>
-  </div>
-
-  <div class="card">
-    <h2>How do I remove something I posted?</h2>
-    <p>Me → Board → tap Delete next to the post, or use "Delete all my posts".</p>
-  </div>
-
-  <div class="card">
-    <h2>I saw something inappropriate on the board</h2>
-    <p>Use the ⋯ menu on that post to report it or block its author. Reports are reviewed and
-       posts are checked automatically before they appear.</p>
-  </div>
-
-  <footer>
-    <a href="/">Home</a>·
-    <a href="/privacy/">Privacy</a>·
-    <span>New version &mdash; coming soon</span>
-    <p>© 2026 Coordigo</p>
-  </footer>
-</div>
-<!-- Cloudflare Web Analytics — 프록시(주황) 없이 도는 비콘. 쿠키도, 개인 식별도 없다. --><script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "644eea6fa19b4175b7160496dfbd77a8"}'></script>
-<!-- 앱스토어 클릭 계측 — ct= 는 설치를 가르지만 클릭은 못 센다. 둘을 같이 봐야 이탈이 보인다.
-     식별자는 세션마다 새로 만드는 난수다. 쿠키도, IP 저장도, 개인 식별도 없다. -->
-<script>
-(function () {
-  var SITE = "coordigo.com";
-  function sid() {
-    try {
-      var k = "sw_sid", v = sessionStorage.getItem(k);
-      if (!v) { v = (crypto.randomUUID ? crypto.randomUUID() : String(Math.random()).slice(2)); sessionStorage.setItem(k, v); }
-      return v;
-    } catch (_) { return "anon"; }
-  }
-  document.addEventListener("click", function (e) {
-    var a = e.target && e.target.closest && e.target.closest('a[href*="apps.apple.com"]');
-    if (!a) return;
-    var m = a.href.match(/id(\d+)/);
-    try {
-      fetch("https://claude-proxy-web.ilbulyori.workers.dev/events", {
-        method: "POST",
-        keepalive: true,
-        headers: { "content-type": "application/json", "x-device-id": sid() },
-        body: JSON.stringify({
-          meta: { app: SITE, build: "web", os: "web", locale: (navigator.language || "").slice(0, 8) },
-          events: [{
-            name: "appstore_click",
-            ts: Date.now() / 1000,
-            props: { site: SITE, app: m ? m[1] : "", path: location.pathname.slice(0, 64) }
-          }]
-        })
-      }).catch(function () {});
-    } catch (_) {}
-  }, true);
-})();
-</script>
+  <script>
+  document.querySelectorAll("a.email").forEach(function(a){
+    a.href = "mailto:" + a.dataset.u + String.fromCharCode(64) + a.dataset.d;
+  });
+  </script>
 </body>
 </html>

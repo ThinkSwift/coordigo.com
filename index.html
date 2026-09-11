@@ -3,122 +3,497 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Coordigo — Coordinate Postcards</title>
-  <meta name="description" content="Coordinate Postcards — a weekly puzzle blog from the Coordigo studio. Read the pairs, guess the picture.">
-  <meta name="theme-color" content="#0b0f1a">
+  <title>Coordigo — Trace line art. Unwind to music.</title>
+  <meta name="description" content="A landscape waits under the grid. Run your finger along its faint lines and the colour comes up — ten hand-built pictures, from one evening to a whole season, with music of our own.">
+  <meta name="theme-color" content="#f7f4ec" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#15161c" media="(prefers-color-scheme: dark)">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Coordigo — Coordinate Postcards">
-  <meta property="og:description" content="Coordinate Postcards — a weekly puzzle blog from the Coordigo studio. Read the pairs, guess the picture.">
+  <meta property="og:title" content="Coordigo — Trace line art. Unwind to music.">
+  <meta property="og:description" content="A landscape waits under the grid. Run your finger along its faint lines and the colour comes up.">
   <link rel="canonical" href="https://coordigo.com/">
   <meta property="og:url" content="https://coordigo.com/">
   <meta property="og:image" content="https://coordigo.com/og.png">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
   <style>
-    :root{--bg:#0b0f1a;--bg-2:#0e1422;--ink:#eef2ff;--muted:#9aa6c4;--line:rgba(255,255,255,.10);--ac:#f472b6;--ac-soft:rgba(244,114,182,.4)}
+    :root{
+      --paper:#f7f4ec; --mat:#fffdf8; --ink:#1b1917; --muted:#6d6557;
+      --line:rgba(27,25,23,.14); --hair:rgba(27,25,23,.09);
+      --gold:#a8761a; --grid:rgba(27,25,23,.055); --mark:#d02670;
+      --shadow:0 1px 2px rgba(27,25,23,.07), 0 10px 26px rgba(27,25,23,.08);
+    }
+    @media (prefers-color-scheme: dark){
+      :root{
+        --paper:#15161c; --mat:#1d1f27; --ink:#eae5da; --muted:#9b9486;
+        --line:rgba(234,229,218,.16); --hair:rgba(234,229,218,.10);
+        --gold:#dcac48; --grid:rgba(234,229,218,.05); --mark:#ef5fa0;
+        --shadow:0 1px 2px rgba(0,0,0,.5), 0 12px 30px rgba(0,0,0,.45);
+      }
+    }
     *{box-sizing:border-box} html,body{margin:0}
-    body{font-family:"Inter",-apple-system,system-ui,sans-serif;color:var(--ink);
-      background:radial-gradient(1100px 660px at 82% -12%, rgba(244,114,182,.13), transparent 60%),
-                 radial-gradient(900px 600px at 0% 8%, rgba(129,140,248,.10), transparent 55%),
-                 linear-gradient(180deg,var(--bg-2),var(--bg));
-      min-height:100vh;-webkit-font-smoothing:antialiased}
-    .wrap{position:relative;z-index:1;width:100%;max-width:760px;margin:0 auto;padding:0 22px}
-    nav{display:flex;align-items:center;gap:11px;padding:26px 0 8px}
-    nav img{width:32px;height:32px;border-radius:8px;display:block}
-    nav .name{font-family:"Space Grotesk";font-weight:700;font-size:18px;flex:1}
-    .lang-toggle{font-size:13px;font-weight:600;color:var(--muted);border:1px solid var(--line);background:none;
-      border-radius:999px;padding:7px 14px;cursor:pointer;font-family:inherit;transition:color .14s,border-color .14s}
-    .lang-toggle:hover{color:var(--ac);border-color:var(--ac-soft)}
-    .lang-toggle.hide{display:none}
-    .kicker{font-family:"Space Grotesk";font-weight:600;font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:34px 0 10px}
-    h1{font-family:"Space Grotesk";font-weight:700;font-size:clamp(30px,5.8vw,46px);line-height:1.06;margin:0;letter-spacing:-1px;
-      background:linear-gradient(100deg,#fff 30%,var(--ac) 80%);-webkit-background-clip:text;background-clip:text;color:transparent}
-    .intro{color:var(--muted);font-size:clamp(15px,2.3vw,16.5px);line-height:1.65;margin:14px 0 0;max-width:560px}
-    .stage{margin:26px 0 0;border:1px solid var(--line);border-radius:20px;overflow:hidden;background:#000}
-    .stage video{display:block;width:100%;max-height:min(62vh,520px);object-fit:contain;background:#000}
-    .blog{margin:34px 0 0}
-    .blog h2{font-family:"Space Grotesk";font-weight:600;font-size:13px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);margin:0 0 12px}
-    .post{border:1px dashed var(--line);border-radius:16px;padding:18px 20px;color:var(--muted)}
-    .post .p-ep{font-size:11.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--ac);opacity:.9}
-    .post .p-title{font-family:"Space Grotesk";font-weight:600;font-size:16.5px;color:var(--ink);margin-top:5px}
-    .post .p-note{font-size:13.5px;margin-top:6px;line-height:1.55}
-    .store{display:flex;align-items:center;gap:12px;margin:30px 0 0}
-    .store a{display:block;line-height:0}
-    .store img{width:44px;height:44px;border-radius:11px;border:1px solid rgba(255,255,255,.10);box-shadow:0 4px 12px rgba(0,0,0,.35);transition:transform .13s}
-    .store a:hover img{transform:translateY(-2px)}
-    .store .cap{font-size:10.5px;font-weight:600;letter-spacing:.06em;color:var(--muted);text-transform:uppercase;margin-top:5px;text-align:center}
-    .store .soon{font-size:12px;color:var(--muted);border:1px dashed var(--line);border-radius:999px;padding:6px 13px}
-    .status{margin:30px 0 0;padding:18px 20px;border:1px solid var(--line);border-radius:16px;background:linear-gradient(180deg,rgba(255,255,255,.045),rgba(255,255,255,.015))}
-    .status .s-tag{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ac);border:1px solid var(--ac-soft);border-radius:999px;padding:4px 9px}
-    .status .s-body{margin:12px 0 0;font-size:14px;line-height:1.65;color:var(--ink)}
-    .status .s-note{margin:10px 0 0;font-size:12.5px;line-height:1.55;color:var(--muted)}
-    .more{margin:46px 0 0;padding-top:22px;border-top:1px solid var(--line)}
-    .more h2{font-family:"Space Grotesk";font-weight:600;font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:0 0 10px}
-    .site-row{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;padding:6px 0;font-size:14px}
-    .site-row a{color:var(--ac);text-decoration:none;font-weight:600;font-family:"Space Grotesk"}
+    body{
+      background:var(--paper); color:var(--ink);
+      font-family:"Source Serif 4",Georgia,"Times New Roman",serif;
+      font-size:17px; line-height:1.62; -webkit-font-smoothing:antialiased;
+      background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+      background-size:23px 23px;
+    }
+    .mono{font-family:ui-monospace,SFMono-Regular,"SF Mono",Menlo,monospace;font-variant-numeric:tabular-nums}
+    .wrap{width:100%;max-width:980px;margin:0 auto;padding:0 22px}
+    a{color:inherit}
+
+    nav{display:flex;align-items:center;gap:11px;padding:24px 0 6px}
+    .mark{width:30px;height:30px;display:flex;align-items:center;justify-content:center;color:#fff;
+      background:var(--mark);font-weight:600;font-size:13px;letter-spacing:.02em}
+    nav .name{font-weight:600;font-size:19px;flex:1;letter-spacing:-.01em}
+    .lang{font:inherit;font-size:14px;color:var(--muted);border:1px solid var(--line);background:none;
+      padding:5px 13px;cursor:pointer;border-radius:999px}
+    .lang:hover{color:var(--gold);border-color:var(--gold)}
+    .lang.hide{display:none}
+
+    .kicker{font-size:12.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);
+      font-family:ui-monospace,SFMono-Regular,Menlo,monospace;margin:52px 0 14px}
+    h1{font-weight:600;font-size:clamp(31px,5.4vw,50px);line-height:1.1;letter-spacing:-.02em;margin:0;max-width:16em}
+    .lede{color:var(--muted);font-size:clamp(16.5px,2.2vw,19px);line-height:1.66;margin:18px 0 0;max-width:34em}
+
+    figure{margin:0}
+    .frame{background:var(--mat);border:1px solid var(--hair);box-shadow:var(--shadow);padding:10px}
+    .frame img{display:block;width:100%;height:auto}
+    .hero{margin:34px 0 0;position:relative}
+    .hero .stack{position:relative;line-height:0}
+    .hero .stack img{display:block;width:100%;height:auto}
+    .hero .stack img.colour{position:absolute;inset:0;clip-path:inset(0 100% 0 0)}
+    .hero .stack img.colour.on{clip-path:inset(0 0 0 0);transition:clip-path 2.6s cubic-bezier(.4,0,.2,1)}
+    @media (prefers-reduced-motion: reduce){.hero .stack img.colour{clip-path:inset(0 0 0 0)!important;transition:none}}
+    figcaption{margin:12px 2px 0;font-size:13.5px;color:var(--muted);font-style:italic}
+
+    section{margin:72px 0 0}
+    h2{font-weight:600;font-size:clamp(23px,3.4vw,30px);line-height:1.2;letter-spacing:-.015em;margin:0}
+    .body{color:var(--muted);margin:12px 0 0;max-width:33em}
+    .note{font-size:13.5px;color:var(--muted);margin:14px 0 0;font-style:italic}
+
+    /* demo */
+    .demo{margin:24px 0 0;display:flex;flex-direction:column;align-items:center;gap:12px}
+    .demo .frame{width:min(100%,460px);padding:8px;touch-action:none}
+    #demo{display:block;width:100%;height:auto;background:var(--mat);cursor:crosshair}
+    .demo .bar{display:flex;align-items:center;gap:14px;width:min(100%,460px);font-size:12.5px;color:var(--muted)}
+    .demo .bar .sp{flex:1}
+    .demo button{font:inherit;font-size:12.5px;color:var(--muted);background:none;border:1px solid var(--line);
+      padding:4px 12px;cursor:pointer;border-radius:999px;font-family:ui-monospace,Menlo,monospace}
+    .demo button:hover{color:var(--gold);border-color:var(--gold)}
+
+    /* pictures */
+    .tier{margin:34px 0 0}
+    .tier h3{margin:0;font-weight:600;font-size:17px;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+    .tier h3 .cap{font-size:12px;color:var(--muted);letter-spacing:.04em;
+      font-family:ui-monospace,SFMono-Regular,Menlo,monospace;text-transform:none}
+    .rail{display:flex;gap:16px;overflow-x:auto;padding:14px 2px 6px;scroll-snap-type:x mandatory;
+      scrollbar-width:thin}
+    .rail::-webkit-scrollbar{height:7px}
+    .rail::-webkit-scrollbar-thumb{background:var(--line);border-radius:99px}
+    .card{flex:0 0 auto;width:min(78vw,330px);scroll-snap-align:start;cursor:zoom-in;
+      background:none;border:0;padding:0;font:inherit;color:inherit;text-align:left}
+    .card .frame{padding:8px}
+    .card .t{margin:10px 2px 0;font-weight:600;font-size:16px}
+    .card .m{margin:1px 2px 0;font-size:11.5px;color:var(--muted);letter-spacing:.03em;
+      font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+    .card:hover .frame{transform:translateY(-2px)}
+    .card .frame{transition:transform .16s ease}
+    .free{color:var(--gold)}
+
+    /* landmarks */
+    .marks{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:14px;margin:26px 0 0}
+    .marks figure .frame{padding:6px}
+    .marks figcaption{font-style:normal;font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;
+      font-family:ui-monospace,SFMono-Regular,Menlo,monospace;margin-top:8px}
+
+    /* songs */
+    .songs{margin:20px 0 0;columns:2;column-gap:28px;font-size:14px;color:var(--muted);max-width:40em}
+    .songs div{break-inside:avoid;padding:3px 0}
+    .songs .n{font-family:ui-monospace,Menlo,monospace;font-size:11.5px;color:var(--gold);margin-right:8px}
+    @media (max-width:560px){.songs{columns:1}}
+
+    /* store */
+    .store{display:flex;align-items:center;gap:16px;margin:30px 0 0}
+    .store .ic{width:62px;height:62px;display:block;box-shadow:var(--shadow);border:1px solid var(--hair);border-radius:14px}
+    .store .cap{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);
+      font-family:ui-monospace,Menlo,monospace;margin-top:6px}
+    .store .soon{font-size:13px;color:var(--gold);border:1px solid var(--gold);border-radius:999px;padding:5px 13px}
+
+    .more{margin:74px 0 0;padding-top:22px;border-top:1px solid var(--hair)}
+    .more h2{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+      font-family:ui-monospace,Menlo,monospace;font-weight:400;margin:0 0 8px}
+    .site-row{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;padding:5px 0;font-size:15px}
+    .site-row a{color:var(--gold);text-decoration:none;font-weight:600}
     .site-row a:hover{text-decoration:underline;text-underline-offset:3px}
-    .site-row .d{color:var(--muted)}
-    footer{position:relative;z-index:1;text-align:center;font-size:13px;padding:42px 22px 32px;color:var(--muted)}
-    footer a{color:var(--ac);text-decoration:none}
+    .site-row .d{color:var(--muted);font-size:14px}
+
+    footer{text-align:center;font-size:13.5px;padding:46px 22px 38px;color:var(--muted)}
+    footer a{color:var(--gold);text-decoration:none}
     footer a:hover{text-decoration:underline;text-underline-offset:3px}
     footer a.mail{display:inline-flex;vertical-align:-3px}
     footer a.mail svg{width:15px;height:15px}
-    footer .sep{opacity:.35;margin:0 8px}
+    footer .sep{opacity:.4;margin:0 7px}
+
+    /* lightbox */
+    .box{position:fixed;inset:0;background:rgba(12,11,10,.86);display:none;align-items:center;justify-content:center;
+      padding:26px;z-index:20}
+    .box.on{display:flex}
+    .box .inner{max-width:1100px;width:100%}
+    .box img{display:block;width:100%;height:auto;max-height:78vh;object-fit:contain;background:var(--mat);
+      border:8px solid var(--mat);box-shadow:0 20px 60px rgba(0,0,0,.5)}
+    .box .cap{color:#e9e4d9;margin-top:12px;display:flex;gap:12px;align-items:baseline;flex-wrap:wrap}
+    .box .cap b{font-weight:600;font-size:17px}
+    .box .cap span{font-size:12px;letter-spacing:.04em;color:#a9a294;font-family:ui-monospace,Menlo,monospace}
+    .box .x{position:absolute;top:18px;right:22px;color:#e9e4d9;background:none;border:0;font-size:26px;cursor:pointer;line-height:1}
   </style>
 </head>
 <body>
   <div class="wrap">
     <nav>
-      <div style="width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:'Space Grotesk';font-weight:700;font-size:14px;color:#fff;background:linear-gradient(135deg,#d02670,#a3195b)">Co</div>
+      <div class="mark">Co</div>
       <span class="name">Coordigo</span>
-      <button class="lang-toggle hide" id="langToggle" type="button"></button>
+      <button class="lang hide" id="langToggle" type="button"></button>
     </nav>
 
-    <p class="kicker" data-t="kicker">A blog from the Coordigo studio</p>
-    <h1>Coordinate Postcards</h1>
-    <p class="intro" data-t="intro">Every postcard starts as a list of ordered pairs. Read them, guess the picture, then scroll to see it drawn — and watch it move.</p>
+    <p class="kicker" data-t="kicker">New version — in final testing</p>
+    <h1 data-t="h1">A landscape is waiting under the grid.</h1>
+    <p class="lede" data-t="lede">Put your finger on the faint shapes. Every line you clear stays lit, and when a shape’s outline is finished its colour comes in. No tools, no levels, no timer — lines, colour and music, until you feel like stopping.</p>
 
-    <div class="stage"><video src="/media-preview.mp4" autoplay muted loop playsinline preload="metadata"></video></div>
+    <figure class="hero">
+      <div class="frame"><div class="stack">
+        <img src="/art/hero-faint.webp" width="1600" height="1200" alt="A large landscape, still faint under the grid">
+        <img class="colour" id="heroColour" src="/art/hero.webp" width="1600" height="1200" alt="The same landscape, uncovered: villages, rivers, forests, a cathedral, a snow country" loading="eager">
+      </div></div>
+      <figcaption data-t="heroCap">The Long Country — 32 × 24 tiles, one picture for a whole season.</figcaption>
+    </figure>
 
-    <section class="blog">
-      <h2>Vol. 1</h2>
-      <div class="post">
-        <div class="p-ep">E1</div>
-        <div class="p-title" data-t="ep1t">The first postcard</div>
-        <div class="p-note" data-t="ep1n">Postcard No. 1 is being plotted right now, pair by pair. It will arrive here soon.</div>
+    <section>
+      <h2 data-t="demoT">Try one tile</h2>
+      <p class="body" data-t="demoP">Drag across it. Nothing can go wrong here: where there is no line nothing happens, and where there is one it lights.</p>
+      <div class="demo">
+        <div class="frame"><canvas id="demo" width="920" height="920"></canvas></div>
+        <div class="bar">
+          <span class="mono" id="demoProg">0 / 0</span>
+          <span class="sp"></span>
+          <button type="button" id="demoClear" data-t="demoClear">Clear</button>
+        </div>
       </div>
+      <p class="note" data-t="demoNote">One tile of twelve from “Bell at Night”. In the app the smallest picture is 12 tiles; the largest is 768.</p>
     </section>
 
-    <section class="status">
-      <span class="s-tag" data-t="stTag">Between versions</span>
-      <p class="s-body" data-t="stBody">The earlier Coordigo has left the App Store while we rebuild it from the ground up. The new one is in final testing and arrives soon: read a two-character code, 00 to FF, and a picture appears — 38 pictures in 11 collections, a Studio to draw your own, a Board to share them, and Story to turn them into a picture book.</p>
-      <p class="s-note" data-t="stNote">Want a note when it lands? Write to us — the address is at the bottom of the page.</p>
+    <section>
+      <h2 data-t="picT">Ten pictures, four sizes</h2>
+      <p class="body" data-t="picP">Every picture is drawn by an engine of our own on the same grid the app traces — houses, trees, roads, rivers, and landmarks hidden among them. Three are free to begin with.</p>
+      <div id="tiers"></div>
+    </section>
+
+    <section>
+      <h2 data-t="landT">Something is hidden by the mark</h2>
+      <p class="body" data-t="landP">On the map a small gold ring is all you are given. What it marks — a cathedral, a chapel, a pagoda, a tower of glass, a white tomb, a sawtooth roof — you learn only by uncovering it.</p>
+      <div class="marks" id="marks"></div>
+    </section>
+
+    <section>
+      <h2 data-t="musT">Every song is ours</h2>
+      <p class="body" data-t="musP">Twenty-four songs in three volumes, written for this app. One plays while you trace; when it ends the camera takes a breath and steps back, so you see how far you have come. Turn the music off and your own keeps playing — the app will not interrupt it.</p>
+      <p class="note mono" data-t="musVol" style="font-style:normal;letter-spacing:.04em">Vol. 1 — Quiet Things We Share</p>
+      <div class="songs">
+        <div><span class="n">01</span>Slow Replies, Heavy Days</div>
+        <div><span class="n">02</span>The Day That Wouldn’t End</div>
+        <div><span class="n">03</span>Reliable Until It Hurts</div>
+        <div><span class="n">04</span>Almost Saying It</div>
+        <div><span class="n">05</span>What We Outgrow, What We Keep</div>
+        <div><span class="n">06</span>Apologies We Forget to Say</div>
+        <div><span class="n">07</span>Different Mornings</div>
+        <div><span class="n">08</span>The Last Slice of Quiet</div>
+      </div>
+
+      <div class="store">
+        <div>
+          <img class="ic" src="/art/icon-512.png" width="62" height="62" alt="Coordigo app icon">
+          <div class="cap" data-t="storeCap">App Store</div>
+        </div>
+        <span class="soon" data-t="storeSoon">Coming soon</span>
+      </div>
     </section>
 
     <section class="more">
       <h2 data-t="moreTitle">More from us</h2>
       <div class="site-row"><a href="https://swiftian.com">swiftian.com</a> <span class="d" data-t="swDesc">chillfriends comics, read aloud</span></div>
-      <div class="site-row"><a href="https://iflipbook.com">iflipbook.com</a> <span class="d" data-t="ifDesc">otto's flipbook diary</span></div>
+      <div class="site-row"><a href="https://iflipbook.com">iflipbook.com</a> <span class="d" data-t="ifDesc">otto’s flipbook diary</span></div>
       <div class="site-row"><a href="https://pythoneer.io">pythoneer.io</a> <span class="d" data-t="pyDesc">one tile at a time</span></div>
     </section>
   </div>
 
   <footer>
-    <span>&copy; 2026 Coordigo &middot; <a href='https://swiftian.com'>Swiftian Inc.</a></span>
-    <span class="sep">&middot;</span><a href="/support/">Support</a><span class="sep">&middot;</span><a href="/privacy/" data-t="privacy">Privacy</a>
+    <span>&copy; 2026 Coordigo &middot; <a href="https://swiftian.com">Swiftian Inc.</a></span>
+    <span class="sep">&middot;</span><a href="/support/" data-t="support">Support</a><span class="sep">&middot;</span><a href="/privacy/" data-t="privacy">Privacy</a>
     <span class="sep">&middot;</span>
     <a class="mail email" data-u="hello" data-d="swiftian.com" href="#" aria-label="Email us" title="Email us">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="m4 7 8 6 8-6"/></svg>
     </a>
   </footer>
 
+  <div class="box" id="box"><button class="x" id="boxX" aria-label="Close">&times;</button>
+    <div class="inner"><img id="boxImg" src="" alt=""><div class="cap"><b id="boxT"></b><span id="boxM"></span></div></div>
+  </div>
+
   <script>
-  var I18N = {"ko": {"name": "한국어", "kicker": "Coordigo 스튜디오의 블로그", "intro": "모든 엽서는 좌표 목록으로 시작합니다. 좌표를 읽고 그림을 맞혀 보세요 — 스크롤하면 완성된 그림이, 그리고 움직이는 모습이 나타납니다.", "ep1t": "첫 번째 엽서", "ep1n": "1호 엽서를 지금 한 점 한 점 찍는 중입니다. 곧 도착합니다.", "moreTitle": "우리가 만드는 것들", "privacy": "개인정보 처리방침", "swDesc": "칠프렌즈 코믹스, 낭독 연재", "ifDesc": "오토의 플립북 일기", "pyDesc": "한 번에 타일 하나", "stTag": "버전 교체 중", "stBody": "이전 Coordigo는 App Store에서 내렸고, 처음부터 다시 만들고 있습니다. 새 버전은 마지막 테스트 중이며 곧 나옵니다: 두 글자 코드 00~FF를 읽으면 그림이 나타납니다 — 11개 컬렉션 38장의 그림, 직접 그리는 Studio, 나누는 Board, 그림책으로 엮는 Story.", "stNote": "출시 소식을 받고 싶으시면 페이지 맨 아래 주소로 메일을 보내 주세요."}, "ja": {"name": "日本語", "kicker": "Coordigo スタジオのブログ", "intro": "どのポストカードも座標のリストから始まります。読んで、絵を当ててみて — スクロールすると完成した絵が現れ、動き出します。", "ep1t": "いちばん最初のポストカード", "ep1n": "1号はいま、一点ずつプロット中。まもなく届きます。", "moreTitle": "私たちの作品", "privacy": "プライバシー", "swDesc": "チルフレンズ・コミックス朗読連載", "ifDesc": "オットーのパラパラ日記", "pyDesc": "タイルひとつずつ", "stTag": "バージョン切り替え中", "stBody": "以前のCoordigoはApp Storeから下げ、ゼロから作り直しています。新バージョンは最終テスト中で、まもなく登場します：2文字のコード00〜FFを読むと絵が現れます — 11のコレクションに38枚の絵、自分で描くStudio、共有するBoard、絵本にするStory。", "stNote": "公開のお知らせが欲しい方は、ページ下部のアドレスまでメールをください。"}, "zh-Hans": {"name": "简体中文", "kicker": "来自 Coordigo 工作室的博客", "intro": "每张明信片都从一串坐标开始。读一读，猜猜是什么图——往下滚动，看它被画出来，再看它动起来。", "ep1t": "第一张明信片", "ep1n": "1 号明信片正在一点一点地描绘。很快就会寄到这里。", "moreTitle": "我们的作品", "privacy": "隐私政策", "swDesc": "Chillfriends 漫画朗读连载", "ifDesc": "Otto 的翻页日记", "pyDesc": "一次一块瓷砖", "stTag": "版本更替中", "stBody": "旧版 Coordigo 已从 App Store 下架，我们正在从头重做。新版正在最后测试，很快推出：读一个两位代码 00 到 FF，图画就会出现——11 个合集 38 幅图，自己画的 Studio，分享的 Board，把图画编成绘本的 Story。", "stNote": "想在上线时收到通知？写信给我们——地址在页面底部。"}, "zh-Hant": {"name": "繁體中文", "kicker": "來自 Coordigo 工作室的部落格", "intro": "每張明信片都從一串座標開始。讀一讀,猜猜是什麼圖——往下捲動,看它被畫出來,再看它動起來。", "ep1t": "第一張明信片", "ep1n": "1 號明信片正在一點一點地描繪。很快就會寄到這裡。", "moreTitle": "我們的作品", "privacy": "隱私權政策", "swDesc": "Chillfriends 漫畫朗讀連載", "ifDesc": "Otto 的翻頁日記", "pyDesc": "一次一塊瓷磚", "stTag": "版本更替中", "stBody": "舊版 Coordigo 已從 App Store 下架，我們正在從頭重做。新版正在最後測試，很快推出：讀一個兩位代碼 00 到 FF，圖畫就會出現——11 個合集 38 幅圖，自己畫的 Studio，分享的 Board，把圖畫編成繪本的 Story。", "stNote": "想在上線時收到通知？寫信給我們——地址在頁面底部。"}, "es": {"name": "Español", "kicker": "Un blog del estudio Coordigo", "intro": "Cada postal empieza como una lista de pares ordenados. Léelos, adivina el dibujo y desplázate para verlo trazado — y en movimiento.", "ep1t": "La primera postal", "ep1n": "La postal n.º 1 se está trazando ahora mismo, par a par. Llegará pronto.", "moreTitle": "Más de nosotros", "privacy": "Privacidad", "swDesc": "cómics de Chillfriends, leídos en voz alta", "ifDesc": "el diario de flipbook de Otto", "pyDesc": "una casilla a la vez", "stTag": "Entre versiones", "stBody": "El Coordigo anterior ha salido del App Store mientras lo reconstruimos desde cero. El nuevo está en pruebas finales y llega pronto: lee un código de dos caracteres, de 00 a FF, y aparece un dibujo — 38 dibujos en 11 colecciones, un Studio para dibujar los tuyos, un Board para compartirlos y Story para convertirlos en un libro ilustrado.", "stNote": "¿Quieres un aviso cuando llegue? Escríbenos: la dirección está al final de la página."}, "fr": {"name": "Français", "kicker": "Un blog du studio Coordigo", "intro": "Chaque carte postale commence par une liste de coordonnées. Lisez-les, devinez l'image, puis faites défiler pour la voir tracée — et s'animer.", "ep1t": "La toute première carte", "ep1n": "La carte n°1 est en train d'être tracée, point par point. Elle arrive bientôt.", "moreTitle": "Nos créations", "privacy": "Confidentialité", "swDesc": "les BD Chillfriends, lues à voix haute", "ifDesc": "le journal flipbook d'Otto", "pyDesc": "une tuile à la fois", "stTag": "Entre deux versions", "stBody": "L'ancien Coordigo a quitté l'App Store pendant que nous le reconstruisons de zéro. Le nouveau est en tests finaux et arrive bientôt : lisez un code à deux caractères, de 00 à FF, et une image apparaît — 38 images en 11 collections, un Studio pour dessiner les vôtres, un Board pour les partager, et Story pour en faire un livre d'images.", "stNote": "Envie d'être prévenu à la sortie ? Écrivez-nous : l'adresse est en bas de page."}, "de": {"name": "Deutsch", "kicker": "Ein Blog aus dem Coordigo-Studio", "intro": "Jede Postkarte beginnt als Liste von Koordinatenpaaren. Lies sie, rate das Bild — und scroll weiter, um es gezeichnet und in Bewegung zu sehen.", "ep1t": "Die erste Postkarte", "ep1n": "Postkarte Nr. 1 wird gerade Punkt für Punkt gezeichnet. Sie kommt bald an.", "moreTitle": "Mehr von uns", "privacy": "Datenschutz", "swDesc": "Chillfriends-Comics, vorgelesen", "ifDesc": "Ottos Daumenkino-Tagebuch", "pyDesc": "Stein für Stein", "stTag": "Zwischen zwei Versionen", "stBody": "Das bisherige Coordigo ist aus dem App Store genommen, während wir es von Grund auf neu bauen. Das neue ist im letzten Test und kommt bald: Lies einen zweistelligen Code von 00 bis FF, und ein Bild erscheint — 38 Bilder in 11 Sammlungen, ein Studio zum Selberzeichnen, ein Board zum Teilen und Story, das daraus ein Bilderbuch macht.", "stNote": "Bescheid, wenn es da ist? Schreib uns — die Adresse steht unten auf der Seite."}, "pt": {"name": "Português", "kicker": "Um blog do estúdio Coordigo", "intro": "Todo cartão-postal começa como uma lista de pares ordenados. Leia, adivinhe o desenho e role para vê-lo traçado — e em movimento.", "ep1t": "O primeiro cartão-postal", "ep1n": "O cartão nº 1 está sendo traçado agora, par por par. Chega em breve.", "moreTitle": "Mais do estúdio", "privacy": "Privacidade", "swDesc": "quadrinhos Chillfriends, lidos em voz alta", "ifDesc": "o diário de flipbook do Otto", "pyDesc": "um bloco de cada vez", "stTag": "Entre versões", "stBody": "O Coordigo anterior saiu da App Store enquanto o reconstruímos do zero. O novo está em testes finais e chega em breve: leia um código de dois caracteres, de 00 a FF, e um desenho aparece — 38 desenhos em 11 coleções, um Studio para desenhar os seus, um Board para compartilhar e o Story para transformá-los num livro ilustrado.", "stNote": "Quer um aviso quando sair? Escreva para nós — o endereço está no fim da página."}, "ru": {"name": "Русский", "kicker": "Блог студии Coordigo", "intro": "Каждая открытка начинается со списка координат. Прочитайте их, угадайте картинку, а потом прокрутите — и посмотрите, как она рисуется и оживает.", "ep1t": "Самая первая открытка", "ep1n": "Открытка №1 сейчас вычерчивается, пара за парой. Скоро прибудет.", "moreTitle": "Ещё от нас", "privacy": "Конфиденциальность", "swDesc": "комиксы Chillfriends, озвученные вслух", "ifDesc": "флипбук-дневник Отто", "pyDesc": "по плитке за раз", "stTag": "Между версиями", "stBody": "Прежний Coordigo снят с App Store, пока мы переделываем его с нуля. Новый проходит финальное тестирование и скоро выйдет: прочитайте двухсимвольный код от 00 до FF — и появится картинка. 38 картинок в 11 коллекциях, Studio, чтобы рисовать свои, Board, чтобы делиться, и Story, собирающая их в книжку с картинками.", "stNote": "Хотите знать, когда выйдет? Напишите нам — адрес внизу страницы."}};
-  var EN = {"kicker": "A blog from the Coordigo studio", "intro": "Every postcard starts as a list of ordered pairs. Read them, guess the picture, then scroll to see it drawn — and watch it move.", "ep1t": "The first postcard", "ep1n": "Postcard No. 1 is being plotted right now, pair by pair. It will arrive here soon.", "moreTitle": "More from us", "privacy": "Privacy", "swDesc": "chillfriends comics, read aloud", "ifDesc": "otto's flipbook diary", "pyDesc": "one tile at a time", "stTag": "Between versions", "stBody": "The earlier Coordigo has left the App Store while we rebuild it from the ground up. The new one is in final testing and arrives soon: read a two-character code, 00 to FF, and a picture appears — 38 pictures in 11 collections, a Studio to draw your own, a Board to share them, and Story to turn them into a picture book.", "stNote": "Want a note when it lands? Write to us — the address is at the bottom of the page."};
+  /* ── 그림 목록 ─────────────────────────────────────────────── */
+  var PICTURES = [
+    {id:"intro-10001",  t:"Bell at Night",   c:4,  r:3,  look:"night",  lm:1,  tier:0, free:1},
+    {id:"intro-10010",  t:"Dry Wind",        c:4,  r:3,  look:"desert", lm:1,  tier:0, free:1},
+    {id:"medium-20003", t:"Noon Road",       c:8,  r:6,  look:"day",    lm:2,  tier:1, free:1},
+    {id:"medium-20005", t:"Red Leaves",      c:8,  r:6,  look:"autumn", lm:2,  tier:1},
+    {id:"medium-20007", t:"Late Shift",      c:8,  r:6,  look:"sunset", lm:1,  tier:1},
+    {id:"medium-20008", t:"First Snow",      c:8,  r:6,  look:"snow",   lm:2,  tier:1},
+    {id:"large-30004",  t:"Lamplight",       c:16, r:12, look:"night",  lm:7,  tier:2},
+    {id:"large-30009",  t:"Harvest Light",   c:16, r:12, look:"autumn", lm:8,  tier:2},
+    {id:"large-30010",  t:"White Morning",   c:16, r:12, look:"snow",   lm:8,  tier:2},
+    {id:"grand-40001",  t:"The Long Country",c:32, r:24, look:"mixed",  lm:18, tier:3}
+  ];
+  var MARKS = ["cathedral","chapel","pagoda","nyc","taj","factory"];
+
+  /* ── 언어 ──────────────────────────────────────────────────── */
+  var EN = {
+    kicker:"New version — in final testing",
+    h1:"A landscape is waiting under the grid.",
+    lede:"Put your finger on the faint shapes. Every line you clear stays lit, and when a shape’s outline is finished its colour comes in. No tools, no levels, no timer — lines, colour and music, until you feel like stopping.",
+    heroCap:"The Long Country — 32 × 24 tiles, one picture for a whole season.",
+    demoT:"Try one tile",
+    demoP:"Drag across it. Nothing can go wrong here: where there is no line nothing happens, and where there is one it lights.",
+    demoNote:"One tile of twelve from “Bell at Night”. In the app the smallest picture is 12 tiles; the largest is 768.",
+    demoClear:"Clear",
+    picT:"Ten pictures, four sizes",
+    picP:"Every picture is drawn by an engine of our own on the same grid the app traces — houses, trees, roads, rivers, and landmarks hidden among them. Three are free to begin with.",
+    t0:"One evening", t1:"A few evenings", t2:"Many days", t3:"A season",
+    landT:"Something is hidden by the mark",
+    landP:"On the map a small gold ring is all you are given. What it marks — a cathedral, a chapel, a pagoda, a tower of glass, a white tomb, a sawtooth roof — you learn only by uncovering it.",
+    musT:"Every song is ours",
+    musP:"Twenty-four songs in three volumes, written for this app. One plays while you trace; when it ends the camera takes a breath and steps back, so you see how far you have come. Turn the music off and your own keeps playing — the app will not interrupt it.",
+    musVol:"Vol. 1 — Quiet Things We Share",
+    storeCap:"App Store", storeSoon:"Coming soon",
+    moreTitle:"More from us", support:"Support", privacy:"Privacy",
+    swDesc:"chillfriends comics, read aloud", ifDesc:"otto’s flipbook diary", pyDesc:"one tile at a time",
+    wTiles:"tiles", wTiles1:"tile", wMarks:"landmarks", wMarks1:"landmark", wFree:"free", wLines:"lines", wShapes:"shapes",
+    day:"day", night:"night", sunset:"sunset", snow:"snow", desert:"desert", autumn:"autumn", mixed:"four seasons",
+    cathedral:"Cathedral", chapel:"Chapel", pagoda:"Pagoda", nyc:"Tower", taj:"White tomb", factory:"Factory"
+  };
+  var I18N = {
+   "ko":{name:"한국어",
+    kicker:"새 버전 — 마지막 시험 중",
+    h1:"모눈 아래에 풍경이 기다리고 있습니다.",
+    lede:"흐린 형태 위에 손가락을 올려 보세요. 지나간 선은 그대로 밝아지고, 한 면의 테두리가 끝나면 그 색이 차오릅니다. 도구도, 단계도, 시간 제한도 없습니다 — 선과 색과 노래뿐, 그만두고 싶을 때까지.",
+    heroCap:"The Long Country — 32 × 24 칸, 한 계절짜리 그림 한 장.",
+    demoT:"한 칸만 해 보세요",
+    demoP:"화면 위를 끌어 보세요. 여기서는 틀릴 수가 없습니다. 선이 없는 곳에서는 아무 일도 일어나지 않고, 있는 곳에서는 반드시 밝아집니다.",
+    demoNote:"「Bell at Night」 열두 칸 중 한 칸입니다. 앱에서 가장 작은 그림이 12칸, 가장 큰 그림이 768칸입니다.",
+    demoClear:"지우기",
+    picT:"그림 열 장, 크기 네 등급",
+    picP:"모든 그림은 앱이 따라 긋는 바로 그 모눈 위에서 우리가 만든 엔진이 그립니다 — 집과 나무, 길과 강, 그 사이에 숨은 랜드마크까지. 세 장은 무료로 시작합니다.",
+    t0:"하룻저녁", t1:"며칠 저녁", t2:"여러 날", t3:"한 계절",
+    landT:"표시 아래 무언가 숨어 있습니다",
+    landP:"지도에는 작은 금색 고리 하나뿐입니다. 그것이 성당인지 예배당인지 탑인지 흰 무덤인지 톱니 지붕인지는, 직접 파내야 알 수 있습니다.",
+    musT:"노래도 우리가 만듭니다",
+    musP:"세 권에 스물네 곡, 이 앱을 위해 만든 노래입니다. 그리는 동안 한 곡이 흐르고, 곡이 끝나면 화면이 한 호흡 물러나 지금까지 그린 만큼을 보여 줍니다. 노래를 꺼도 좋습니다 — 듣고 있던 음악을 앱이 끊지 않습니다.",
+    musVol:"Vol. 1 — Quiet Things We Share",
+    storeCap:"App Store", storeSoon:"출시 예정",
+    moreTitle:"우리가 만드는 것들", support:"고객지원", privacy:"개인정보 처리방침",
+    swDesc:"칠프렌즈 코믹스, 낭독 연재", ifDesc:"오토의 플립북 일기", pyDesc:"한 번에 타일 하나",
+    fmtMarks:"랜드마크 {n}곳", wTiles:"칸", wMarks:"랜드마크", wFree:"무료", wLines:"선", wShapes:"면",
+    day:"낮", night:"밤", sunset:"노을", snow:"눈", desert:"사막", autumn:"가을", mixed:"네 계절",
+    cathedral:"성당", chapel:"예배당", pagoda:"탑", nyc:"고층 건물", taj:"흰 무덤", factory:"공장"},
+   "ja":{name:"日本語",
+    kicker:"新バージョン — 最終テスト中",
+    h1:"方眼の下に、風景が待っています。",
+    lede:"かすかな形の上に指を置いてください。なぞった線はそのまま灯り、ひとつの面の輪郭が終わると、その色が満ちていきます。道具もレベルも時間制限もありません — 線と色と音楽だけ、やめたくなるまで。",
+    heroCap:"The Long Country — 32 × 24 マス、ひと季節ぶんの一枚。",
+    demoT:"ひとマスだけ、どうぞ",
+    demoP:"指でなぞってみてください。ここで失敗はありません。線のないところでは何も起きず、あるところでは必ず灯ります。",
+    demoNote:"「Bell at Night」全12マスのうちの1マスです。アプリでいちばん小さい絵が12マス、いちばん大きい絵が768マス。",
+    demoClear:"消す",
+    picT:"絵は十枚、大きさは四段階",
+    picP:"どの絵も、アプリがなぞるのと同じ方眼の上で、自分たちのエンジンが描いています — 家と木、道と川、その間に隠れたランドマークまで。三枚は無料で始められます。",
+    t0:"ひと晩", t1:"幾晩か", t2:"幾日も", t3:"ひと季節",
+    landT:"印の下に、何かが隠れています",
+    landP:"地図にあるのは小さな金の輪だけ。それが大聖堂なのか、礼拝堂なのか、塔なのか、白い廟なのか、のこぎり屋根なのかは、掘り出して初めてわかります。",
+    musT:"曲も自分たちのものです",
+    musP:"三巻に二十四曲、このアプリのために作りました。なぞっている間は一曲が流れ、終わるとカメラがひと呼吸ぶん引いて、ここまで描いた分を見せてくれます。音楽を切れば、あなたの音楽がそのまま続きます — アプリは邪魔しません。",
+    musVol:"Vol. 1 — Quiet Things We Share",
+    storeCap:"App Store", storeSoon:"近日公開",
+    moreTitle:"私たちの作品", support:"サポート", privacy:"プライバシー",
+    swDesc:"チルフレンズ・コミックス朗読連載", ifDesc:"オットーのパラパラ日記", pyDesc:"タイルひとつずつ",
+    fmtMarks:"ランドマーク{n}", wTiles:"マス", wMarks:"ランドマーク", wFree:"無料", wLines:"線", wShapes:"面",
+    day:"昼", night:"夜", sunset:"夕景", snow:"雪", desert:"砂漠", autumn:"秋", mixed:"四季",
+    cathedral:"大聖堂", chapel:"礼拝堂", pagoda:"塔", nyc:"高層ビル", taj:"白い廟", factory:"工場"},
+   "zh-Hans":{name:"简体中文",
+    kicker:"新版本 — 最后测试中",
+    h1:"方格之下，有一片风景在等着。",
+    lede:"把手指放在淡淡的形状上。划过的线会亮起来，一个面的轮廓描完，它的颜色就浮上来。没有工具、没有关卡、没有计时 — 只有线条、颜色和音乐，直到你想停下。",
+    heroCap:"The Long Country — 32 × 24 格，一整季才画得完的一张。",
+    demoT:"先试一格",
+    demoP:"用手指划过去。在这里不会出错：没有线的地方什么也不会发生，有线的地方一定会亮。",
+    demoNote:"这是《Bell at Night》十二格中的一格。应用里最小的画是 12 格，最大的是 768 格。",
+    demoClear:"清除",
+    picT:"十张画，四种大小",
+    picP:"每一张都由我们自己的引擎，在应用描线用的同一张方格纸上画成 — 房屋、树木、道路、河流，以及藏在其间的地标。三张免费开始。",
+    t0:"一个晚上", t1:"几个晚上", t2:"许多天", t3:"一整季",
+    landT:"记号底下藏着什么",
+    landP:"地图上只有一个小小的金色圆环。它标的是大教堂、小礼拜堂、宝塔、玻璃高楼、白色陵墓还是锯齿屋顶，只有挖出来才知道。",
+    musT:"每一首歌都是我们自己的",
+    musP:"三卷二十四首，为这个应用而写。你描线时有一首在放；一首放完，镜头会退开一口气，让你看见已经画出多少。把音乐关掉，你自己的歌照旧播放 — 应用不会打断它。",
+    musVol:"Vol. 1 — Quiet Things We Share",
+    storeCap:"App Store", storeSoon:"即将上线",
+    moreTitle:"我们的作品", support:"支持", privacy:"隐私政策",
+    swDesc:"Chillfriends 漫画朗读连载", ifDesc:"Otto 的翻页日记", pyDesc:"一次一块瓷砖",
+    fmtMarks:"{n} 处地标", wTiles:"格", wMarks:"地标", wFree:"免费", wLines:"线", wShapes:"面",
+    day:"白天", night:"夜", sunset:"黄昏", snow:"雪", desert:"沙漠", autumn:"秋", mixed:"四季",
+    cathedral:"大教堂", chapel:"礼拜堂", pagoda:"宝塔", nyc:"高楼", taj:"白色陵墓", factory:"工厂"},
+   "zh-Hant":{name:"繁體中文",
+    kicker:"新版本 — 最後測試中",
+    h1:"方格之下，有一片風景在等著。",
+    lede:"把手指放在淡淡的形狀上。劃過的線會亮起來，一個面的輪廓描完，它的顏色就浮上來。沒有工具、沒有關卡、沒有計時 — 只有線條、顏色和音樂，直到你想停下。",
+    heroCap:"The Long Country — 32 × 24 格，一整季才畫得完的一張。",
+    demoT:"先試一格",
+    demoP:"用手指劃過去。在這裡不會出錯：沒有線的地方什麼也不會發生，有線的地方一定會亮。",
+    demoNote:"這是《Bell at Night》十二格中的一格。應用裡最小的畫是 12 格，最大的是 768 格。",
+    demoClear:"清除",
+    picT:"十張畫，四種大小",
+    picP:"每一張都由我們自己的引擎，在應用描線用的同一張方格紙上畫成 — 房屋、樹木、道路、河流，以及藏在其間的地標。三張免費開始。",
+    t0:"一個晚上", t1:"幾個晚上", t2:"許多天", t3:"一整季",
+    landT:"記號底下藏著什麼",
+    landP:"地圖上只有一個小小的金色圓環。它標的是大教堂、小禮拜堂、寶塔、玻璃高樓、白色陵墓還是鋸齒屋頂，只有挖出來才知道。",
+    musT:"每一首歌都是我們自己的",
+    musP:"三卷二十四首，為這個應用而寫。你描線時有一首在放；一首放完，鏡頭會退開一口氣，讓你看見已經畫出多少。把音樂關掉，你自己的歌照舊播放 — 應用不會打斷它。",
+    musVol:"Vol. 1 — Quiet Things We Share",
+    storeCap:"App Store", storeSoon:"即將上線",
+    moreTitle:"我們的作品", support:"支援", privacy:"隱私權政策",
+    swDesc:"Chillfriends 漫畫朗讀連載", ifDesc:"Otto 的翻頁日記", pyDesc:"一次一塊瓷磚",
+    fmtMarks:"{n} 處地標", wTiles:"格", wMarks:"地標", wFree:"免費", wLines:"線", wShapes:"面",
+    day:"白天", night:"夜", sunset:"黃昏", snow:"雪", desert:"沙漠", autumn:"秋", mixed:"四季",
+    cathedral:"大教堂", chapel:"禮拜堂", pagoda:"寶塔", nyc:"高樓", taj:"白色陵墓", factory:"工廠"},
+   "es":{name:"Español",
+    kicker:"Versión nueva — en pruebas finales",
+    h1:"Bajo la cuadrícula espera un paisaje.",
+    lede:"Pon el dedo sobre las formas tenues. Cada línea que recorres queda encendida, y cuando el contorno de una forma se completa, entra su color. Sin herramientas, sin niveles, sin reloj: líneas, color y música, hasta que quieras parar.",
+    heroCap:"The Long Country — 32 × 24 casillas, un cuadro para toda una estación.",
+    demoT:"Prueba una casilla",
+    demoP:"Arrastra por encima. Aquí no se puede fallar: donde no hay línea no pasa nada, y donde la hay, se enciende.",
+    demoNote:"Una de las doce casillas de «Bell at Night». En la app el cuadro más pequeño tiene 12 casillas; el mayor, 768.",
+    demoClear:"Borrar",
+    picT:"Diez cuadros, cuatro tamaños",
+    picP:"Cada cuadro lo dibuja un motor nuestro sobre la misma cuadrícula que recorre la app: casas, árboles, caminos, ríos y monumentos escondidos entre ellos. Tres son gratuitos para empezar.",
+    t0:"Una tarde", t1:"Unas cuantas tardes", t2:"Muchos días", t3:"Una estación",
+    landT:"Algo se esconde bajo la marca",
+    landP:"En el mapa solo hay un pequeño anillo dorado. Si marca una catedral, una capilla, una pagoda, una torre de vidrio, una tumba blanca o un techo de sierra, solo lo sabrás al descubrirlo.",
+    musT:"Las canciones también son nuestras",
+    musP:"Veinticuatro canciones en tres volúmenes, escritas para esta app. Una suena mientras dibujas; cuando termina, la cámara toma aire y se aleja para que veas lo que llevas hecho. Apaga la música y la tuya sigue sonando: la app no la interrumpe.",
+    musVol:"Vol. 1 — Quiet Things We Share",
+    storeCap:"App Store", storeSoon:"Muy pronto",
+    moreTitle:"Más de nosotros", support:"Soporte", privacy:"Privacidad",
+    swDesc:"cómics de Chillfriends, leídos en voz alta", ifDesc:"el diario de flipbook de Otto", pyDesc:"una casilla a la vez",
+    wTiles:"casillas", wTiles1:"casilla", wMarks:"monumentos", wMarks1:"monumento", wFree:"gratis", wLines:"líneas", wShapes:"formas",
+    day:"día", night:"noche", sunset:"atardecer", snow:"nieve", desert:"desierto", autumn:"otoño", mixed:"cuatro estaciones",
+    cathedral:"Catedral", chapel:"Capilla", pagoda:"Pagoda", nyc:"Torre", taj:"Tumba blanca", factory:"Fábrica"},
+   "fr":{name:"Français",
+    kicker:"Nouvelle version — derniers tests",
+    h1:"Sous le quadrillage, un paysage attend.",
+    lede:"Posez le doigt sur les formes pâles. Chaque ligne parcourue reste allumée, et quand le contour d’une forme est terminé, sa couleur monte. Pas d’outils, pas de niveaux, pas de chrono — des lignes, de la couleur et de la musique, jusqu’à ce que vous ayez envie de vous arrêter.",
+    heroCap:"The Long Country — 32 × 24 cases, une image pour toute une saison.",
+    demoT:"Essayez une case",
+    demoP:"Faites glisser le doigt. Ici, rien ne peut rater : là où il n’y a pas de ligne, rien ne se passe ; là où il y en a une, elle s’allume.",
+    demoNote:"Une case sur douze de « Bell at Night ». Dans l’app, la plus petite image fait 12 cases, la plus grande 768.",
+    demoClear:"Effacer",
+    picT:"Dix images, quatre tailles",
+    picP:"Chaque image est dessinée par notre propre moteur, sur le quadrillage même que l’app fait parcourir : maisons, arbres, routes, rivières, et des monuments cachés parmi eux. Trois sont gratuites pour commencer.",
+    t0:"Une soirée", t1:"Quelques soirées", t2:"Plusieurs jours", t3:"Une saison",
+    landT:"Quelque chose se cache sous la marque",
+    landP:"Sur la carte, il n’y a qu’un petit anneau doré. Cathédrale, chapelle, pagode, tour de verre, tombeau blanc ou toit en dents de scie : vous ne le saurez qu’en le dégageant.",
+    musT:"Les chansons aussi sont de nous",
+    musP:"Vingt-quatre chansons en trois volumes, écrites pour cette app. L’une joue pendant que vous tracez ; à la fin, la caméra prend une respiration et recule, pour vous montrer le chemin parcouru. Coupez la musique et la vôtre continue — l’app ne l’interrompt pas.",
+    musVol:"Vol. 1 — Quiet Things We Share",
+    storeCap:"App Store", storeSoon:"Bientôt",
+    moreTitle:"Nos créations", support:"Assistance", privacy:"Confidentialité",
+    swDesc:"les BD Chillfriends, lues à voix haute", ifDesc:"le journal flipbook d’Otto", pyDesc:"une tuile à la fois",
+    wTiles:"cases", wTiles1:"case", wMarks:"monuments", wMarks1:"monument", wFree:"gratuit", wLines:"lignes", wShapes:"formes",
+    day:"jour", night:"nuit", sunset:"couchant", snow:"neige", desert:"désert", autumn:"automne", mixed:"quatre saisons",
+    cathedral:"Cathédrale", chapel:"Chapelle", pagoda:"Pagode", nyc:"Tour", taj:"Tombeau blanc", factory:"Usine"},
+   "de":{name:"Deutsch",
+    kicker:"Neue Version — im letzten Test",
+    h1:"Unter dem Raster wartet eine Landschaft.",
+    lede:"Leg den Finger auf die blassen Formen. Jede Linie, die du entlangfährst, bleibt hell, und ist der Umriss einer Fläche fertig, steigt ihre Farbe auf. Keine Werkzeuge, keine Level, keine Uhr — nur Linien, Farbe und Musik, bis du aufhören magst.",
+    heroCap:"The Long Country — 32 × 24 Felder, ein Bild für eine ganze Jahreszeit.",
+    demoT:"Probier ein Feld",
+    demoP:"Zieh einfach darüber. Hier kann nichts schiefgehen: Wo keine Linie ist, passiert nichts; wo eine ist, leuchtet sie auf.",
+    demoNote:"Eines von zwölf Feldern aus „Bell at Night“. In der App hat das kleinste Bild 12 Felder, das größte 768.",
+    demoClear:"Löschen",
+    picT:"Zehn Bilder, vier Größen",
+    picP:"Jedes Bild zeichnet eine eigene Engine auf demselben Raster, das die App nachfahren lässt — Häuser, Bäume, Wege, Flüsse und dazwischen versteckte Wahrzeichen. Drei sind zum Anfangen kostenlos.",
+    t0:"Ein Abend", t1:"Ein paar Abende", t2:"Viele Tage", t3:"Eine Jahreszeit",
+    landT:"Unter der Markierung ist etwas versteckt",
+    landP:"Auf der Karte gibt es nur einen kleinen goldenen Ring. Ob er eine Kathedrale meint, eine Kapelle, eine Pagode, einen Glasturm, ein weißes Grabmal oder ein Sheddach — das erfährst du erst beim Freilegen.",
+    musT:"Auch die Lieder sind unsere",
+    musP:"Vierundzwanzig Lieder in drei Bänden, für diese App geschrieben. Eines läuft, während du ziehst; ist es zu Ende, holt die Kamera Luft und tritt zurück, damit du siehst, wie weit du gekommen bist. Schalte die Musik aus, und deine eigene läuft weiter — die App unterbricht sie nicht.",
+    musVol:"Vol. 1 — Quiet Things We Share",
+    storeCap:"App Store", storeSoon:"Bald",
+    moreTitle:"Mehr von uns", support:"Support", privacy:"Datenschutz",
+    swDesc:"Chillfriends-Comics, vorgelesen", ifDesc:"Ottos Daumenkino-Tagebuch", pyDesc:"Stein für Stein",
+    wTiles:"Felder", wTiles1:"Feld", wMarks:"Wahrzeichen", wMarks1:"Wahrzeichen", wFree:"gratis", wLines:"Linien", wShapes:"Flächen",
+    day:"Tag", night:"Nacht", sunset:"Abendrot", snow:"Schnee", desert:"Wüste", autumn:"Herbst", mixed:"vier Jahreszeiten",
+    cathedral:"Kathedrale", chapel:"Kapelle", pagoda:"Pagode", nyc:"Turm", taj:"Weißes Grabmal", factory:"Fabrik"},
+   "pt":{name:"Português",
+    kicker:"Versão nova — em testes finais",
+    h1:"Debaixo da grade, uma paisagem espera.",
+    lede:"Ponha o dedo sobre as formas apagadas. Cada linha que você percorre fica acesa e, quando o contorno de uma forma termina, a cor dela sobe. Sem ferramentas, sem fases, sem relógio — linhas, cor e música, até você querer parar.",
+    heroCap:"The Long Country — 32 × 24 quadros, um desenho para uma estação inteira.",
+    demoT:"Experimente um quadro",
+    demoP:"Arraste por cima. Aqui não dá para errar: onde não há linha, nada acontece; onde há, ela acende.",
+    demoNote:"Um dos doze quadros de “Bell at Night”. No app o menor desenho tem 12 quadros; o maior, 768.",
+    demoClear:"Limpar",
+    picT:"Dez desenhos, quatro tamanhos",
+    picP:"Cada desenho é feito por um motor nosso, na mesma grade que o app percorre — casas, árvores, estradas, rios e marcos escondidos entre eles. Três são gratuitos para começar.",
+    t0:"Uma noite", t1:"Algumas noites", t2:"Muitos dias", t3:"Uma estação",
+    landT:"Há algo escondido sob a marca",
+    landP:"No mapa há apenas um pequeno anel dourado. Se ele marca uma catedral, uma capela, um pagode, uma torre de vidro, um túmulo branco ou um telhado dentado, você só descobre revelando.",
+    musT:"As canções também são nossas",
+    musP:"Vinte e quatro canções em três volumes, escritas para este app. Uma toca enquanto você desenha; quando acaba, a câmera respira e se afasta, para você ver o quanto já fez. Desligue a música e a sua continua — o app não interrompe.",
+    musVol:"Vol. 1 — Quiet Things We Share",
+    storeCap:"App Store", storeSoon:"Em breve",
+    moreTitle:"Mais do estúdio", support:"Suporte", privacy:"Privacidade",
+    swDesc:"quadrinhos Chillfriends, lidos em voz alta", ifDesc:"o diário de flipbook do Otto", pyDesc:"um bloco de cada vez",
+    wTiles:"quadros", wTiles1:"quadro", wMarks:"marcos", wMarks1:"marco", wFree:"grátis", wLines:"linhas", wShapes:"formas",
+    day:"dia", night:"noite", sunset:"pôr do sol", snow:"neve", desert:"deserto", autumn:"outono", mixed:"quatro estações",
+    cathedral:"Catedral", chapel:"Capela", pagoda:"Pagode", nyc:"Torre", taj:"Túmulo branco", factory:"Fábrica"},
+   "ru":{name:"Русский",
+    kicker:"Новая версия — последние испытания",
+    h1:"Под клеткой ждёт пейзаж.",
+    lede:"Положите палец на бледные формы. Каждая линия, по которой вы провели, остаётся зажжённой, а когда контур фигуры замкнут, поднимается её цвет. Ни инструментов, ни уровней, ни таймера — только линии, цвет и музыка, пока не захочется остановиться.",
+    heroCap:"The Long Country — 32 × 24 клетки, картина на целый сезон.",
+    demoT:"Попробуйте одну клетку",
+    demoP:"Просто проведите. Здесь нельзя ошибиться: где линии нет, ничего не произойдёт, а где есть — она загорится.",
+    demoNote:"Одна из двенадцати клеток картины «Bell at Night». В приложении самая маленькая картина — 12 клеток, самая большая — 768.",
+    demoClear:"Стереть",
+    picT:"Десять картин, четыре размера",
+    picP:"Каждую картину рисует наш собственный движок на той же клетчатой бумаге, по которой вы ведёте пальцем: дома, деревья, дороги, реки и спрятанные среди них достопримечательности. Три — бесплатно для начала.",
+    t0:"Один вечер", t1:"Несколько вечеров", t2:"Много дней", t3:"Целый сезон",
+    landT:"Под меткой что-то спрятано",
+    landP:"На карте — лишь маленькое золотое кольцо. Собор это, часовня, пагода, стеклянная башня, белая гробница или пилообразная крыша, вы узнаете, только раскрыв её.",
+    musT:"И песни тоже наши",
+    musP:"Двадцать четыре песни в трёх альбомах, написанные для этого приложения. Одна играет, пока вы ведёте; когда она заканчивается, камера переводит дух и отступает, чтобы показать, сколько уже пройдено. Выключите музыку — ваша продолжит играть, приложение её не прервёт.",
+    musVol:"Vol. 1 — Quiet Things We Share",
+    storeCap:"App Store", storeSoon:"Скоро",
+    moreTitle:"Ещё от нас", support:"Поддержка", privacy:"Конфиденциальность",
+    swDesc:"комиксы Chillfriends, озвученные вслух", ifDesc:"флипбук-дневник Отто", pyDesc:"по плитке за раз",
+    wTiles:"клеток", wTiles1:"клетка", wTiles2:"клетки", wMarks:"достопримечательностей", wMarks1:"достопримечательность", wMarks2:"достопримечательности", wFree:"бесплатно", wLines:"линий", wShapes:"фигур",
+    day:"день", night:"ночь", sunset:"закат", snow:"снег", desert:"пустыня", autumn:"осень", mixed:"четыре сезона",
+    cathedral:"Собор", chapel:"Часовня", pagoda:"Пагода", nyc:"Башня", taj:"Белая гробница", factory:"Завод"}
+  };
+
   function detect(){
     var langs = navigator.languages || [navigator.language || "en"];
     for (var i=0;i<langs.length;i++){
@@ -129,8 +504,7 @@
     }
     return "en";
   }
-  // ── 언어 상태는 단 두 값: cur(지금 보는 언어)와 alt(이 방문자의 '자기 언어', 항상 en 이 아님) ──
-  // alt 는 ①?lang= 전달 ②과거 선택(저장) ③브라우저 감지 순으로 정해지고, 토글은 en ⇄ alt 만 오간다.
+  // 언어 상태는 두 값: cur(지금 보는 언어)와 alt(방문자의 '자기 언어', 절대 en 이 아니다)
   var alt = null, cur = "en", saved = null, savedAlt = null;
   try { saved = localStorage.getItem("site_lang"); savedAlt = localStorage.getItem("site_lang_alt"); } catch(_){}
   if (I18N[savedAlt]) alt = savedAlt;
@@ -142,7 +516,7 @@
     if (q === "en") cur = "en";
     else if (I18N[q]) { alt = q; cur = q; }
   } catch(_){}
-  if (cur !== "en" && cur !== alt) alt = cur;   // 불변식: cur 은 en 아니면 alt 다
+  if (cur !== "en" && cur !== alt) alt = cur;
 
   var FAMILY = /^(swiftian\.com|iflipbook\.com|pythoneer\.io|coordigo\.com)$/;
   function carryLang(){
@@ -150,39 +524,323 @@
       if (!FAMILY.test(a.hostname)) return;
       try {
         var u = new URL(a.href);
-        if (cur === "en" && !alt) u.searchParams.delete("lang");
-        else u.searchParams.set("lang", cur);
+        if (cur === "en" && !alt) u.searchParams.delete("lang"); else u.searchParams.set("lang", cur);
         a.href = u.toString();
       } catch(_){}
     });
   }
+  function dict(){ return (cur === "en") ? EN : I18N[cur]; }
+  window.dictFor = dict;
+
+  // 수 세기 — 영어·라틴계는 단수형, 러시아어는 1 / 2~4 / 그 밖 세 형태
+  function plural(d, n, base){
+    var one = d[base + "1"], few = d[base + "2"], many = d[base];
+    if (!one) return many;
+    if (few){
+      var a = n % 10, b = n % 100;
+      if (a === 1 && b !== 11) return one;
+      if (a >= 2 && a <= 4 && (b < 12 || b > 14)) return few;
+      return many;
+    }
+    return n === 1 ? one : many;
+  }
+
+  function buildTiers(){
+    var d = dict(), host = document.getElementById("tiers"), out = "";
+    var caps = [12, 48, 192, 768].map(function(n, k){
+      return ["4 × 3", "8 × 6", "16 × 12", "32 × 24"][k] + " · " + n + " " + plural(d, n, "wTiles");
+    });
+    for (var t = 0; t < 4; t++){
+      var list = PICTURES.filter(function(p){ return p.tier === t; });
+      out += '<div class="tier"><h3>' + d["t" + t] + ' <span class="cap">' + caps[t] + '</span></h3><div class="rail">';
+      list.forEach(function(p){
+        var mk = (d.fmtMarks || "{n} {w}").replace("{n}", p.lm).replace("{w}", plural(d, p.lm, "wMarks"));
+        var meta = (d[p.look] || p.look) + " · " + mk + (p.free ? ' · <span class="free">' + d.wFree + "</span>" : "");
+        out += '<button class="card" type="button" data-id="' + p.id + '" data-title="' + p.t + '" data-meta="' + meta.replace(/<[^>]+>/g, "") + '">' +
+               '<div class="frame"><img src="/art/card-' + p.id + '.webp" loading="lazy" decoding="async" alt="' + p.t + '"></div>' +
+               '<div class="t">' + p.t + '</div><div class="m">' + meta + "</div></button>";
+      });
+      out += "</div></div>";
+    }
+    host.innerHTML = out;
+    host.querySelectorAll(".card").forEach(function(b){
+      b.addEventListener("click", function(){
+        document.getElementById("boxImg").src = "/art/full-" + b.dataset.id + ".webp";
+        document.getElementById("boxImg").alt = b.dataset.title;
+        document.getElementById("boxT").textContent = b.dataset.title;
+        document.getElementById("boxM").textContent = b.dataset.meta;
+        document.getElementById("box").classList.add("on");
+      });
+    });
+  }
+  function buildMarks(){
+    var d = dict();
+    document.getElementById("marks").innerHTML = MARKS.map(function(k){
+      return '<figure><div class="frame"><img src="/art/lm-' + k + '.webp" loading="lazy" decoding="async" alt="' + (d[k]||k) + '"></div>' +
+             "<figcaption>" + (d[k] || k) + "</figcaption></figure>";
+    }).join("");
+  }
   function apply(lang){
     cur = (lang === "en" || !I18N[lang]) ? "en" : lang;
     if (cur !== "en") alt = cur;
-    try {
-      localStorage.setItem("site_lang", cur);
-      if (alt) localStorage.setItem("site_lang_alt", alt);
-    } catch(_){}
-    var d = (cur === "en") ? EN : I18N[cur];
+    try { localStorage.setItem("site_lang", cur); if (alt) localStorage.setItem("site_lang_alt", alt); } catch(_){}
+    var d = dict();
     document.querySelectorAll("[data-t]").forEach(function(el){
-      var k = el.getAttribute("data-t");
-      if (d[k]) el.textContent = d[k];
+      var k = el.getAttribute("data-t"); if (d[k]) el.textContent = d[k];
     });
     document.documentElement.lang = cur;
     var btn = document.getElementById("langToggle");
-    if (!alt){ btn.classList.add("hide"); }
-    else {
-      btn.classList.remove("hide");
-      btn.textContent = (cur === "en") ? I18N[alt].name : "English";
-    }
-    carryLang();
+    if (!alt) btn.classList.add("hide");
+    else { btn.classList.remove("hide"); btn.textContent = (cur === "en") ? I18N[alt].name : "English"; }
+    buildTiers(); buildMarks(); carryLang();
+    if (window.demoProgress) window.demoProgress();
   }
   document.getElementById("langToggle").addEventListener("click", function(){ apply(cur === "en" ? alt : "en"); });
   apply(cur);
-  document.querySelectorAll('a.email').forEach(function(a){
-    a.href = 'mailto:' + a.dataset.u + String.fromCharCode(64) + a.dataset.d;
+
+  document.querySelectorAll("a.email").forEach(function(a){
+    a.href = "mailto:" + a.dataset.u + String.fromCharCode(64) + a.dataset.d;
   });
+
+  // 히어로 — 보이면 한 번 색이 번진다
+  (function(){
+    var img = document.getElementById("heroColour"), fig = document.querySelector(".hero");
+    if (!("IntersectionObserver" in window)) { img.classList.add("on"); return; }
+    // 관찰 대상은 그림이 아니라 액자다 — clip-path 로 잘린 요소는 교차 사각형이 비어 관찰되지 않는다
+    var io = new IntersectionObserver(function(es){
+      es.forEach(function(e){ if (e.isIntersecting) { setTimeout(function(){ img.classList.add("on"); }, 350); io.disconnect(); } });
+    }, {threshold:.2});
+    io.observe(fig);
+  })();
+
+  // 라이트박스
+  (function(){
+    var box = document.getElementById("box");
+    function close(){ box.classList.remove("on"); }
+    box.addEventListener("click", function(e){ if (e.target === box || e.target.id === "boxX") close(); });
+    document.addEventListener("keydown", function(e){ if (e.key === "Escape") close(); });
+  })();
   </script>
+
+  <script>
+  /* ── 한 칸 따라 그리기 — 앱과 같은 규칙(벽=선, 칠=구역, 경계를 다 그으면 색이 선다) ── */
+  (function(){
+    var D = {"palette":[[89,45,43],[97,45,20],[46,44,155],[255,214,10]],"shapes":[{"t":"s","p":[[1,0],[2,0],[3,0],[4,0],[5,0],[6,0],[7,0],[8,0],[9,0]]},{"t":"s","p":[[0,8],[1,8],[2,8],[3,8],[4,8],[5,8],[6,8],[7,8],[8,8],[9,8]]},{"t":"s","p":[[1,0],[1,1],[1,2],[1,3],[1,4]]},{"t":"s","p":[[13,0],[13,1],[13,2],[13,3],[13,4],[13,5],[13,6],[13,7],[13,8],[13,9],[13,10],[13,11],[13,12],[13,13],[13,14],[13,15]]},{"t":"s","p":[[9,0],[9,1],[9,2],[9,3],[9,4],[9,5],[9,6],[9,7],[9,8],[9,9],[9,10],[9,11],[9,12],[9,13],[9,14],[9,15]]},{"t":"s","p":[[11,14],[12,15]]},{"t":"s","p":[[10,15],[11,14]]},{"t":"s","p":[[10,6],[11,6],[12,6]]},{"t":"s","p":[[12,2],[12,3],[12,4],[12,5],[12,6]]},{"t":"s","p":[[11,1],[12,2]]},{"t":"s","p":[[10,2],[11,1]]},{"t":"s","p":[[10,2],[10,3],[10,4],[10,5],[10,6]]},{"t":"s","p":[[5,10],[6,11],[7,12]]},{"t":"s","p":[[3,12],[4,11],[5,10]]},{"t":"s","p":[[3,12],[4,13],[5,14]]},{"t":"s","p":[[5,14],[6,13],[7,12]]},{"t":"s","p":[[0,6],[1,4]]},{"t":"f","p":[0.5,0.5],"c":1},{"t":"f","p":[11.0,8.0],"c":0},{"t":"f","p":[13.9375,0.9375],"c":1},{"t":"f","p":[5.0,4.0],"c":2},{"t":"f","p":[11.0,2.0625],"c":3},{"t":"f","p":[2.3125,10.3125],"c":0},{"t":"f","p":[4.9375,12.0],"c":3},{"t":"f","p":[10.9375,14.5],"c":3}]};
+    var cv = document.getElementById("demo"); if (!cv || !D) return;
+    var RES = 240, SC = 16, TILE = 15, ctx = cv.getContext("2d");
+
+    var wall = new Uint8Array(RES*RES);
+    function seg(a, b){
+      var ax=a[0]*SC, ay=a[1]*SC, bx=b[0]*SC, by=b[1]*SC;
+      var steps = Math.max(Math.round(Math.max(Math.abs(bx-ax), Math.abs(by-ay))) * 4, 1);
+      function cl(v){ return Math.min(Math.max(Math.round(v), 0), RES-1); }
+      var px = cl(ax), py = cl(ay); wall[py*RES+px] = 1;
+      for (var i=1;i<=steps;i++){
+        var t=i/steps, nx=cl(ax+t*(bx-ax)), ny=cl(ay+t*(by-ay));
+        if (nx!==px && ny!==py) wall[ny*RES+px] = 1;
+        px=nx; py=ny; wall[py*RES+px] = 1;
+      }
+    }
+    D.shapes.forEach(function(s){ if (s.t==="s") for (var i=0;i<s.p.length-1;i++) seg(s.p[i], s.p[i+1]); });
+
+    var region = new Int16Array(RES*RES).fill(-1), regions = [];
+    D.shapes.forEach(function(s){
+      if (s.t !== "f") return;
+      var sx = Math.round(s.p[0]*SC), sy = Math.round(s.p[1]*SC);
+      if (sx<0 || sx>=RES || sy<0 || sy>=RES) return;
+      var k0 = sy*RES+sx; if (wall[k0] || region[k0] >= 0) return;
+      var id = regions.length, px = [], q = [k0]; region[k0] = id;
+      while (q.length){
+        var k = q.pop(); px.push(k);
+        var cx = k % RES, cy = (k / RES) | 0;
+        var nb = [[cx+1,cy],[cx-1,cy],[cx,cy+1],[cx,cy-1]];
+        for (var n=0;n<4;n++){
+          var nx=nb[n][0], ny=nb[n][1];
+          if (nx<0||nx>=RES||ny<0||ny>=RES) continue;
+          var kk = ny*RES+nx;
+          if (!wall[kk] && region[kk] < 0){ region[kk] = id; q.push(kk); }
+        }
+      }
+      regions.push({c:D.palette[s.c], px:Int32Array.from(px), atoms:[], lit:0});
+    });
+
+    function gcd(a,b){ return b ? gcd(b, a % b) : a; }
+    var atoms = [], seen = {};
+    D.shapes.forEach(function(s){
+      if (s.t !== "s") return;
+      for (var i=0;i<s.p.length-1;i++){
+        var x1=s.p[i][0], y1=s.p[i][1], x2=s.p[i+1][0], y2=s.p[i+1][1];
+        var dx=x2-x1, dy=y2-y1, g = gcd(Math.abs(dx), Math.abs(dy)) || 1, ux=dx/g, uy=dy/g;
+        for (var k=0;k<g;k++){
+          var ax=x1+ux*k, ay=y1+uy*k, bx=x1+ux*(k+1), by=y1+uy*(k+1);
+          var key = (ax<bx || (ax===bx && ay<by)) ? ax+","+ay+","+bx+","+by : bx+","+by+","+ax+","+ay;
+          if (seen[key]) continue;
+          seen[key] = 1;
+          atoms.push({x1:ax, y1:ay, x2:bx, y2:by, lit:0, t:0, r:[]});
+        }
+      }
+    });
+    atoms.forEach(function(a, ai){
+      var mx = (a.x1+a.x2)/2*SC, my = (a.y1+a.y2)/2*SC;
+      var dx = a.x2-a.x1, dy = a.y2-a.y1, L = Math.hypot(dx, dy) || 1;
+      var nx = -dy/L*3.4, ny = dx/L*3.4, set = {};
+      [[mx+nx,my+ny],[mx-nx,my-ny]].forEach(function(p){
+        var xi = Math.round(p[0]), yi = Math.round(p[1]);
+        if (xi>=0 && xi<RES && yi>=0 && yi<RES){ var r = region[yi*RES+xi]; if (r >= 0) set[r] = 1; }
+      });
+      a.r = Object.keys(set).map(Number);
+      a.r.forEach(function(r){ regions[r].atoms.push(ai); });
+    });
+
+    var off = document.createElement("canvas"); off.width = off.height = RES;
+    var octx = off.getContext("2d"), img = octx.createImageData(RES, RES);
+    var paper = [255,253,248], inkRGB = [27,25,23], goldRGB = [168,118,26];
+    function hexToRgb(h){
+      h = h.trim();
+      if (h[0] === "#"){
+        if (h.length === 4) return [parseInt(h[1]+h[1],16), parseInt(h[2]+h[2],16), parseInt(h[3]+h[3],16)];
+        return [parseInt(h.slice(1,3),16), parseInt(h.slice(3,5),16), parseInt(h.slice(5,7),16)];
+      }
+      var m = h.match(/(\d+)/g); return m ? [+m[0], +m[1], +m[2]] : [255,253,248];
+    }
+    function theme(){
+      var cs = getComputedStyle(document.documentElement);
+      paper = hexToRgb(cs.getPropertyValue("--mat"));
+      inkRGB = hexToRgb(cs.getPropertyValue("--ink"));
+      goldRGB = hexToRgb(cs.getPropertyValue("--gold"));
+    }
+    theme();
+    if (window.matchMedia) {
+      var mq = window.matchMedia("(prefers-color-scheme: dark)");
+      (mq.addEventListener ? mq.addEventListener.bind(mq,"change") : mq.addListener.bind(mq))(function(){ theme(); });
+    }
+
+    var litLines = 0;
+    function progress(){
+      var d = (window.dictFor ? window.dictFor() : null);
+      var done = regions.filter(function(r){ return r.atoms.length && r.lit >= r.atoms.length; }).length;
+      var el = document.getElementById("demoProg");
+      var L = (d && d.wLines) || "lines", S = (d && d.wShapes) || "shapes";
+      el.textContent = litLines + "/" + atoms.length + " " + L + " · " + done + "/" + regions.length + " " + S;
+    }
+    window.demoProgress = progress;
+
+    function paint(){
+      var data = img.data;
+      for (var i=0;i<RES*RES;i++){
+        var o = i*4;
+        data[o] = paper[0]; data[o+1] = paper[1]; data[o+2] = paper[2]; data[o+3] = 255;
+      }
+      regions.forEach(function(r){
+        var frac = r.atoms.length ? r.lit / r.atoms.length : 1;
+        var a = (frac >= 1) ? 1 : 0.16 + 0.46 * frac;
+        var cr = r.c[0]*a + paper[0]*(1-a), cg = r.c[1]*a + paper[1]*(1-a), cb = r.c[2]*a + paper[2]*(1-a);
+        for (var i=0;i<r.px.length;i++){
+          var o = r.px[i]*4;
+          data[o] = cr; data[o+1] = cg; data[o+2] = cb;
+        }
+      });
+      octx.putImageData(img, 0, 0);
+    }
+
+    function frame(now){
+      var W = cv.width, S = W / TILE;
+      paint();
+      ctx.imageSmoothingEnabled = false;
+      ctx.clearRect(0, 0, W, W);
+      ctx.drawImage(off, 0, 0, W, W);
+      // 모눈 점
+      ctx.fillStyle = "rgba(" + inkRGB.join(",") + ",.22)";
+      for (var gx=0; gx<=TILE; gx++) for (var gy=0; gy<=TILE; gy++){
+        ctx.fillRect(gx*S - S*0.035, gy*S - S*0.035, S*0.07, S*0.07);
+      }
+      // 선
+      var glow = false;
+      ctx.lineCap = "round"; ctx.lineJoin = "round";
+      // 빛을 먼저 다 깔고 선을 나중에 — 뒤 원자의 넓은 금색이 앞 원자의 검은 선을 덮지 않게
+      atoms.forEach(function(a){
+        if (!a.lit) return;
+        var age = (now - a.t) / 700;
+        if (age >= 1) return;
+        glow = true;
+        ctx.strokeStyle = "rgba(" + goldRGB.join(",") + "," + (0.85 * (1 - age)) + ")";
+        ctx.lineWidth = S * 0.52;
+        ctx.beginPath(); ctx.moveTo(a.x1*S, a.y1*S); ctx.lineTo(a.x2*S, a.y2*S); ctx.stroke();
+      });
+      ctx.strokeStyle = "#000"; ctx.lineWidth = Math.max(2, S * 0.16);
+      ctx.beginPath();
+      atoms.forEach(function(a){
+        if (!a.lit) return;
+        ctx.moveTo(a.x1*S, a.y1*S); ctx.lineTo(a.x2*S, a.y2*S);
+      });
+      ctx.stroke();
+      running = glow || pending;
+      pending = false;
+      if (running) requestAnimationFrame(frame);
+    }
+    var running = false, pending = false;
+    function redraw(){
+      pending = true;
+      if (!running){ running = true; requestAnimationFrame(frame); }
+    }
+
+    function distToAtom(a, x, y){
+      var dx = a.x2-a.x1, dy = a.y2-a.y1, L2 = dx*dx + dy*dy;
+      var t = L2 ? Math.max(0, Math.min(1, ((x-a.x1)*dx + (y-a.y1)*dy) / L2)) : 0;
+      return Math.hypot(x - (a.x1 + t*dx), y - (a.y1 + t*dy));
+    }
+    function touch(x, y, now){
+      var hit = false;
+      atoms.forEach(function(a){
+        if (a.lit) return;
+        if (distToAtom(a, x, y) <= 0.62){
+          a.lit = 1; a.t = now; litLines++; hit = true;
+          a.r.forEach(function(r){ regions[r].lit++; });
+        }
+      });
+      if (hit){ progress(); redraw(); }
+    }
+
+    var down = false, last = null;
+    function pos(e){
+      var r = cv.getBoundingClientRect();
+      return [ (e.clientX - r.left) / r.width * TILE, (e.clientY - r.top) / r.height * TILE ];
+    }
+    function move(e){
+      if (!down) return;
+      e.preventDefault();
+      var p = pos(e), now = performance.now();
+      if (last){
+        var steps = Math.ceil(Math.hypot(p[0]-last[0], p[1]-last[1]) / 0.25);
+        for (var i=1;i<=steps;i++){
+          var t = i/steps;
+          touch(last[0] + (p[0]-last[0])*t, last[1] + (p[1]-last[1])*t, now);
+        }
+      } else touch(p[0], p[1], now);
+      last = p;
+    }
+    cv.addEventListener("pointerdown", function(e){ down = true; last = null; cv.setPointerCapture(e.pointerId); move(e); });
+    cv.addEventListener("pointermove", move);
+    window.addEventListener("pointerup", function(){ down = false; last = null; });
+    document.getElementById("demoClear").addEventListener("click", function(){
+      atoms.forEach(function(a){ a.lit = 0; });
+      regions.forEach(function(r){ r.lit = 0; });
+      litLines = 0; progress(); redraw();
+    });
+
+    // 표시 해상도 (레티나)
+    function size(){
+      var w = Math.round(cv.getBoundingClientRect().width) || cv.parentElement.clientWidth;
+      var dpr = Math.min(window.devicePixelRatio || 1, 2);
+      cv.width = cv.height = Math.round(w * dpr);
+      cv.style.height = w + "px";
+      redraw();
+    }
+    window.addEventListener("resize", size);
+    size(); progress();
+  })();
+  </script>
+
 <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "644eea6fa19b4175b7160496dfbd77a8"}'></script>
 <script>
 (function () {
