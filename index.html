@@ -16,6 +16,7 @@
   <meta property="og:url" content="https://coordigo.com/">
   <meta property="og:image" content="https://coordigo.com/og.png">
   <meta name="twitter:card" content="summary_large_image">
+  <meta name="apple-itunes-app" content="app-id=1486330879">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
@@ -119,7 +120,9 @@
 
     /* store */
     .store{display:flex;align-items:center;gap:16px;margin:30px 0 0}
-    .store .ic{width:62px;height:62px;display:block;box-shadow:var(--shadow);border:1px solid var(--hair);border-radius:14px}
+    .store .ic{width:62px;height:62px;display:block;box-shadow:var(--shadow);border:1px solid var(--hair);border-radius:14px;transition:transform .14s ease}
+    .store .ic-link{text-decoration:none;color:inherit;display:block}
+    .store .ic-link:hover .ic{transform:translateY(-2px)}
     .store .cap{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);
       font-family:ui-monospace,Menlo,monospace;margin-top:6px}
     .store .soon{font-size:13px;color:var(--gold);border:1px solid var(--gold);border-radius:999px;padding:5px 13px}
@@ -214,10 +217,10 @@
       </div>
 
       <div class="store">
-        <div>
-          <img class="ic" src="/art/icon-512.png" width="62" height="62" alt="Coordigo app icon">
+        <a href="https://apps.apple.com/app/id1486330879" class="ic-link">
+          <img class="ic" src="/art/icon-512.png" width="62" height="62" alt="Coordigo on the App Store">
           <div class="cap" data-t="storeCap">App Store</div>
-        </div>
+        </a>
         <span class="soon" data-t="storeSoon">Coming soon</span>
       </div>
     </section>
