@@ -118,6 +118,9 @@
       text-transform:uppercase;color:var(--gold);padding-bottom:6px;border-bottom:1px solid var(--hair);margin-bottom:6px}
     .songs .s{font-size:14px;color:var(--muted);padding:2.5px 0}
     .songs .n{font-family:ui-monospace,Menlo,monospace;font-size:11px;color:var(--gold);opacity:.75;margin-right:9px}
+    .crossline{font-style:normal;max-width:34em}
+    .crossline a{color:var(--gold);text-decoration:none;font-weight:600;white-space:nowrap}
+    .crossline a:hover{text-decoration:underline;text-underline-offset:3px}
 
     /* store */
     .store{display:flex;align-items:center;gap:16px;margin:30px 0 0}
@@ -205,6 +208,8 @@
       <h2 data-t="musT">Music to leave on</h2>
       <p class="body" data-t="musP">Twenty-four songs in three volumes. One plays, the next follows — there is nothing to choose. When a song ends the view steps back for a breath, so you can see how far you have come. Leave it off and your own music keeps playing; the app will not interrupt it.</p>
       <div class="songs" id="songs"></div>
+      <p class="note crossline"><span data-t="musLink">These twenty-four are the Chillfriends episodes. Watch or listen to them all at</span>
+        <a href="https://swiftian.com/?ct=web-co-sw">swiftian.com &rarr;</a></p>
 
       <div class="store">
         <a href="https://apps.apple.com/app/id1486330879" class="ic-link">
@@ -271,11 +276,12 @@
     t0:"One evening", t1:"A few evenings", t2:"Many days", t3:"A season",
     landT:"Something is hidden by the mark",
     landP:"On the map a small gold ring is all you are given. What it marks — a cathedral, a chapel, a pagoda, a tower of glass, a white tomb, a sawtooth roof — you learn only by uncovering it.",
+    musLink:"These twenty-four are the Chillfriends episodes. Watch or listen to them all at",
     musT:"Music to leave on",
     musP:"Twenty-four songs in three volumes. One plays, the next follows — there is nothing to choose. When a song ends the view steps back for a breath, so you can see how far you have come. Leave it off and your own music keeps playing; the app will not interrupt it.",
     storeCap:"App Store",
     moreTitle:"More from us", support:"Support", privacy:"Privacy",
-    swDesc:"chillfriends comics, read aloud", ifDesc:"otto’s flipbook diary", pyDesc:"one tile at a time",
+    swDesc:"the comics — watch or listen", ifDesc:"otto’s flipbook diary", pyDesc:"one tile at a time",
     wTiles:"tiles", wTiles1:"tile", wMarks:"landmarks", wMarks1:"landmark", wFree:"free", wLines:"lines", wShapes:"shapes",
     day:"day", night:"night", sunset:"sunset", snow:"snow", desert:"desert", autumn:"autumn", mixed:"four seasons",
     cathedral:"Cathedral", chapel:"Chapel", pagoda:"Pagoda", nyc:"Tower", taj:"White tomb", factory:"Factory"
@@ -295,11 +301,12 @@
     t0:"하룻저녁", t1:"며칠 저녁", t2:"여러 날", t3:"한 계절",
     landT:"표시 아래 무언가 숨어 있습니다",
     landP:"지도에는 작은 금색 고리 하나뿐입니다. 그것이 성당인지 예배당인지 탑인지 흰 무덤인지 톱니 지붕인지는, 직접 파내야 알 수 있습니다.",
+    musLink:"이 스물네 곡은 칠프렌즈 에피소드입니다. 스물네 편을 보거나 듣는 곳은",
     musT:"그냥 틀어 두는 음악",
     musP:"세 권에 스물네 곡. 한 곡이 끝나면 다음 곡이 이어집니다 — 고를 것이 없습니다. 곡이 끝날 때 화면이 한 호흡 물러나, 지금까지 그린 만큼이 한눈에 보입니다. 꺼 두어도 됩니다 — 듣고 있던 음악을 앱이 끊지 않습니다.",
     storeCap:"App Store",
     moreTitle:"우리가 만드는 것들", support:"고객지원", privacy:"개인정보 처리방침",
-    swDesc:"칠프렌즈 코믹스, 낭독 연재", ifDesc:"오토의 플립북 일기", pyDesc:"한 번에 타일 하나",
+    swDesc:"칠프렌즈 코믹스, 보거나 듣거나", ifDesc:"오토의 플립북 일기", pyDesc:"한 번에 타일 하나",
     fmtMarks:"랜드마크 {n}곳", wTiles:"칸", wMarks:"랜드마크", wFree:"무료", wLines:"선", wShapes:"면",
     day:"낮", night:"밤", sunset:"노을", snow:"눈", desert:"사막", autumn:"가을", mixed:"네 계절",
     cathedral:"성당", chapel:"예배당", pagoda:"탑", nyc:"고층 건물", taj:"흰 무덤", factory:"공장"},
@@ -317,11 +324,12 @@
     t0:"ひと晩", t1:"幾晩か", t2:"幾日も", t3:"ひと季節",
     landT:"印の下に、何かが隠れています",
     landP:"地図にあるのは小さな金の輪だけ。それが大聖堂なのか、礼拝堂なのか、塔なのか、白い廟なのか、のこぎり屋根なのかは、掘り出して初めてわかります。",
+    musLink:"この二十四曲はチルフレンズのエピソードです。全部を見る・聴くなら",
     musT:"そのまま流しておく音楽",
     musP:"三巻に二十四曲。一曲終わると次が続きます — 選ぶものはありません。曲の終わりに画面がひと呼吸ぶん引いて、ここまで描いた分が見えます。切っておいても大丈夫です — あなたの音楽をアプリは邪魔しません。",
     storeCap:"App Store",
     moreTitle:"私たちの作品", support:"サポート", privacy:"プライバシー",
-    swDesc:"チルフレンズ・コミックス朗読連載", ifDesc:"オットーのパラパラ日記", pyDesc:"タイルひとつずつ",
+    swDesc:"チルフレンズ・コミックス、見るか聴くか", ifDesc:"オットーのパラパラ日記", pyDesc:"タイルひとつずつ",
     fmtMarks:"ランドマーク{n}", wTiles:"マス", wMarks:"ランドマーク", wFree:"無料", wLines:"線", wShapes:"面",
     day:"昼", night:"夜", sunset:"夕景", snow:"雪", desert:"砂漠", autumn:"秋", mixed:"四季",
     cathedral:"大聖堂", chapel:"礼拝堂", pagoda:"塔", nyc:"高層ビル", taj:"白い廟", factory:"工場"},
@@ -339,11 +347,12 @@
     t0:"一个晚上", t1:"几个晚上", t2:"许多天", t3:"一整季",
     landT:"记号底下藏着什么",
     landP:"地图上只有一个小小的金色圆环。它标的是大教堂、小礼拜堂、宝塔、玻璃高楼、白色陵墓还是锯齿屋顶，只有挖出来才知道。",
+    musLink:"这二十四首就是 Chillfriends 的各集。要看或听完整二十四集，去",
     musT:"放着就好的音乐",
     musP:"三卷二十四首。一首放完，下一首接上——没有什么要选。一首结束时，画面会退开一口气，让你看见已经画出多少。不开也行——你自己的音乐会继续播放，应用不会打断。",
     storeCap:"App Store",
     moreTitle:"我们的作品", support:"支持", privacy:"隐私政策",
-    swDesc:"Chillfriends 漫画朗读连载", ifDesc:"Otto 的翻页日记", pyDesc:"一次一块瓷砖",
+    swDesc:"Chillfriends 漫画，可看可听", ifDesc:"Otto 的翻页日记", pyDesc:"一次一块瓷砖",
     fmtMarks:"{n} 处地标", wTiles:"格", wMarks:"地标", wFree:"免费", wLines:"线", wShapes:"面",
     day:"白天", night:"夜", sunset:"黄昏", snow:"雪", desert:"沙漠", autumn:"秋", mixed:"四季",
     cathedral:"大教堂", chapel:"礼拜堂", pagoda:"宝塔", nyc:"高楼", taj:"白色陵墓", factory:"工厂"},
@@ -361,11 +370,12 @@
     t0:"一個晚上", t1:"幾個晚上", t2:"許多天", t3:"一整季",
     landT:"記號底下藏著什麼",
     landP:"地圖上只有一個小小的金色圓環。它標的是大教堂、小禮拜堂、寶塔、玻璃高樓、白色陵墓還是鋸齒屋頂，只有挖出來才知道。",
+    musLink:"這二十四首就是 Chillfriends 的各集。要看或聽完整二十四集，去",
     musT:"放著就好的音樂",
     musP:"三卷二十四首。一首放完，下一首接上——沒有什麼要選。一首結束時，畫面會退開一口氣，讓你看見已經畫出多少。不開也行——你自己的音樂會繼續播放，應用不會打斷。",
     storeCap:"App Store",
     moreTitle:"我們的作品", support:"支援", privacy:"隱私權政策",
-    swDesc:"Chillfriends 漫畫朗讀連載", ifDesc:"Otto 的翻頁日記", pyDesc:"一次一塊瓷磚",
+    swDesc:"Chillfriends 漫畫，可看可聽", ifDesc:"Otto 的翻頁日記", pyDesc:"一次一塊瓷磚",
     fmtMarks:"{n} 處地標", wTiles:"格", wMarks:"地標", wFree:"免費", wLines:"線", wShapes:"面",
     day:"白天", night:"夜", sunset:"黃昏", snow:"雪", desert:"沙漠", autumn:"秋", mixed:"四季",
     cathedral:"大教堂", chapel:"禮拜堂", pagoda:"寶塔", nyc:"高樓", taj:"白色陵墓", factory:"工廠"},
@@ -383,11 +393,12 @@
     t0:"Una tarde", t1:"Unas cuantas tardes", t2:"Muchos días", t3:"Una estación",
     landT:"Algo se esconde bajo la marca",
     landP:"En el mapa solo hay un pequeño anillo dorado. Si marca una catedral, una capilla, una pagoda, una torre de vidrio, una tumba blanca o un techo de sierra, solo lo sabrás al descubrirlo.",
+    musLink:"Estas veinticuatro son los episodios de Chillfriends. Puedes verlos o escucharlos todos en",
     musT:"Música para dejar puesta",
     musP:"Veinticuatro canciones en tres volúmenes. Suena una y sigue la siguiente: no hay nada que elegir. Cuando una termina, la vista se aleja un momento y ves lo que llevas hecho. Déjala apagada y tu propia música sigue sonando; la app no la interrumpe.",
     storeCap:"App Store",
     moreTitle:"Más de nosotros", support:"Soporte", privacy:"Privacidad",
-    swDesc:"cómics de Chillfriends, leídos en voz alta", ifDesc:"el diario de flipbook de Otto", pyDesc:"una casilla a la vez",
+    swDesc:"los cómics: verlos o escucharlos", ifDesc:"el diario de flipbook de Otto", pyDesc:"una casilla a la vez",
     wTiles:"casillas", wTiles1:"casilla", wMarks:"monumentos", wMarks1:"monumento", wFree:"gratis", wLines:"líneas", wShapes:"formas",
     day:"día", night:"noche", sunset:"atardecer", snow:"nieve", desert:"desierto", autumn:"otoño", mixed:"cuatro estaciones",
     cathedral:"Catedral", chapel:"Capilla", pagoda:"Pagoda", nyc:"Torre", taj:"Tumba blanca", factory:"Fábrica"},
@@ -405,11 +416,12 @@
     t0:"Une soirée", t1:"Quelques soirées", t2:"Plusieurs jours", t3:"Une saison",
     landT:"Quelque chose se cache sous la marque",
     landP:"Sur la carte, il n’y a qu’un petit anneau doré. Cathédrale, chapelle, pagode, tour de verre, tombeau blanc ou toit en dents de scie : vous ne le saurez qu’en le dégageant.",
+    musLink:"Ces vingt-quatre morceaux sont les épisodes de Chillfriends. À voir ou à écouter en entier sur",
     musT:"Une musique qu’on laisse tourner",
     musP:"Vingt-quatre chansons en trois volumes. L’une joue, la suivante enchaîne — rien à choisir. À la fin d’un morceau, la vue prend du recul le temps d’une respiration et vous voyez le chemin parcouru. Laissez-la éteinte et votre musique continue : l’app ne l’interrompt pas.",
     storeCap:"App Store",
     moreTitle:"Nos créations", support:"Assistance", privacy:"Confidentialité",
-    swDesc:"les BD Chillfriends, lues à voix haute", ifDesc:"le journal flipbook d’Otto", pyDesc:"une tuile à la fois",
+    swDesc:"les BD : à voir ou à écouter", ifDesc:"le journal flipbook d’Otto", pyDesc:"une tuile à la fois",
     wTiles:"cases", wTiles1:"case", wMarks:"monuments", wMarks1:"monument", wFree:"gratuit", wLines:"lignes", wShapes:"formes",
     day:"jour", night:"nuit", sunset:"couchant", snow:"neige", desert:"désert", autumn:"automne", mixed:"quatre saisons",
     cathedral:"Cathédrale", chapel:"Chapelle", pagoda:"Pagode", nyc:"Tour", taj:"Tombeau blanc", factory:"Usine"},
@@ -427,11 +439,12 @@
     t0:"Ein Abend", t1:"Ein paar Abende", t2:"Viele Tage", t3:"Eine Jahreszeit",
     landT:"Unter der Markierung ist etwas versteckt",
     landP:"Auf der Karte gibt es nur einen kleinen goldenen Ring. Ob er eine Kathedrale meint, eine Kapelle, eine Pagode, einen Glasturm, ein weißes Grabmal oder ein Sheddach — das erfährst du erst beim Freilegen.",
+    musLink:"Diese vierundzwanzig sind die Chillfriends-Folgen. Ansehen oder anhören kann man sie alle auf",
     musT:"Musik, die einfach läuft",
     musP:"Vierundzwanzig Lieder in drei Bänden. Eines läuft, das nächste folgt — nichts auszuwählen. Am Ende eines Liedes tritt die Ansicht einen Atemzug zurück, und du siehst, wie weit du gekommen bist. Lass sie aus, und deine eigene Musik läuft weiter; die App unterbricht sie nicht.",
     storeCap:"App Store",
     moreTitle:"Mehr von uns", support:"Support", privacy:"Datenschutz",
-    swDesc:"Chillfriends-Comics, vorgelesen", ifDesc:"Ottos Daumenkino-Tagebuch", pyDesc:"Stein für Stein",
+    swDesc:"die Comics — ansehen oder anhören", ifDesc:"Ottos Daumenkino-Tagebuch", pyDesc:"Stein für Stein",
     wTiles:"Felder", wTiles1:"Feld", wMarks:"Wahrzeichen", wMarks1:"Wahrzeichen", wFree:"gratis", wLines:"Linien", wShapes:"Flächen",
     day:"Tag", night:"Nacht", sunset:"Abendrot", snow:"Schnee", desert:"Wüste", autumn:"Herbst", mixed:"vier Jahreszeiten",
     cathedral:"Kathedrale", chapel:"Kapelle", pagoda:"Pagode", nyc:"Turm", taj:"Weißes Grabmal", factory:"Fabrik"},
@@ -449,11 +462,12 @@
     t0:"Uma noite", t1:"Algumas noites", t2:"Muitos dias", t3:"Uma estação",
     landT:"Há algo escondido sob a marca",
     landP:"No mapa há apenas um pequeno anel dourado. Se ele marca uma catedral, uma capela, um pagode, uma torre de vidro, um túmulo branco ou um telhado dentado, você só descobre revelando.",
+    musLink:"Estas vinte e quatro são os episódios de Chillfriends. Dá para ver ou ouvir todos em",
     musT:"Música para deixar tocando",
     musP:"Vinte e quatro canções em três volumes. Uma toca e a seguinte entra — não há nada para escolher. Quando uma acaba, a vista se afasta por um instante e você vê o quanto já fez. Deixe desligada e a sua música continua; o app não interrompe.",
     storeCap:"App Store",
     moreTitle:"Mais do estúdio", support:"Suporte", privacy:"Privacidade",
-    swDesc:"quadrinhos Chillfriends, lidos em voz alta", ifDesc:"o diário de flipbook do Otto", pyDesc:"um bloco de cada vez",
+    swDesc:"os quadrinhos — ver ou ouvir", ifDesc:"o diário de flipbook do Otto", pyDesc:"um bloco de cada vez",
     wTiles:"quadros", wTiles1:"quadro", wMarks:"marcos", wMarks1:"marco", wFree:"grátis", wLines:"linhas", wShapes:"formas",
     day:"dia", night:"noite", sunset:"pôr do sol", snow:"neve", desert:"deserto", autumn:"outono", mixed:"quatro estações",
     cathedral:"Catedral", chapel:"Capela", pagoda:"Pagode", nyc:"Torre", taj:"Túmulo branco", factory:"Fábrica"},
@@ -471,11 +485,12 @@
     t0:"Один вечер", t1:"Несколько вечеров", t2:"Много дней", t3:"Целый сезон",
     landT:"Под меткой что-то спрятано",
     landP:"На карте — лишь маленькое золотое кольцо. Собор это, часовня, пагода, стеклянная башня, белая гробница или пилообразная крыша, вы узнаете, только раскрыв её.",
+    musLink:"Эти двадцать четыре — эпизоды Chillfriends. Смотреть или слушать их целиком можно на",
     musT:"Музыка, которая просто играет",
     musP:"Двадцать четыре песни в трёх альбомах. Одна играет, следующая продолжает — выбирать ничего не нужно. Когда песня кончается, вид на мгновение отступает, и видно, сколько уже пройдено. Оставьте её выключенной — ваша музыка продолжит играть, приложение её не прервёт.",
     storeCap:"App Store",
     moreTitle:"Ещё от нас", support:"Поддержка", privacy:"Конфиденциальность",
-    swDesc:"комиксы Chillfriends, озвученные вслух", ifDesc:"флипбук-дневник Отто", pyDesc:"по плитке за раз",
+    swDesc:"комиксы — смотреть или слушать", ifDesc:"флипбук-дневник Отто", pyDesc:"по плитке за раз",
     wTiles:"клеток", wTiles1:"клетка", wTiles2:"клетки", wMarks:"достопримечательностей", wMarks1:"достопримечательность", wMarks2:"достопримечательности", wFree:"бесплатно", wLines:"линий", wShapes:"фигур",
     day:"день", night:"ночь", sunset:"закат", snow:"снег", desert:"пустыня", autumn:"осень", mixed:"четыре сезона",
     cathedral:"Собор", chapel:"Часовня", pagoda:"Пагода", nyc:"Башня", taj:"Белая гробница", factory:"Завод"}
