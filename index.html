@@ -113,10 +113,11 @@
       font-family:ui-monospace,SFMono-Regular,Menlo,monospace;margin-top:8px}
 
     /* songs */
-    .songs{margin:20px 0 0;columns:2;column-gap:28px;font-size:14px;color:var(--muted);max-width:40em}
-    .songs div{break-inside:avoid;padding:3px 0}
-    .songs .n{font-family:ui-monospace,Menlo,monospace;font-size:11.5px;color:var(--gold);margin-right:8px}
-    @media (max-width:560px){.songs{columns:1}}
+    .songs{margin:24px 0 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:10px 30px}
+    .songs .vt{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11.5px;letter-spacing:.08em;
+      text-transform:uppercase;color:var(--gold);padding-bottom:6px;border-bottom:1px solid var(--hair);margin-bottom:6px}
+    .songs .s{font-size:14px;color:var(--muted);padding:2.5px 0}
+    .songs .n{font-family:ui-monospace,Menlo,monospace;font-size:11px;color:var(--gold);opacity:.75;margin-right:9px}
 
     /* store */
     .store{display:flex;align-items:center;gap:16px;margin:30px 0 0}
@@ -125,7 +126,6 @@
     .store .ic-link:hover .ic{transform:translateY(-2px)}
     .store .cap{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);
       font-family:ui-monospace,Menlo,monospace;margin-top:6px}
-    .store .soon{font-size:13px;color:var(--gold);border:1px solid var(--gold);border-radius:999px;padding:5px 13px}
 
     .more{margin:74px 0 0;padding-top:22px;border-top:1px solid var(--hair)}
     .more h2{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
@@ -163,7 +163,7 @@
       <button class="lang hide" id="langToggle" type="button"></button>
     </nav>
 
-    <p class="kicker" data-t="kicker">New version — in final testing</p>
+    <p class="kicker" data-t="kicker">For iPhone and iPad</p>
     <h1 data-t="h1">A landscape is waiting under the grid.</h1>
     <p class="lede" data-t="lede">Put your finger on the faint shapes. Every line you clear stays lit, and when a shape’s outline is finished its colour comes in. No tools, no levels, no timer — lines, colour and music, until you feel like stopping.</p>
 
@@ -202,26 +202,15 @@
     </section>
 
     <section>
-      <h2 data-t="musT">Every song is ours</h2>
-      <p class="body" data-t="musP">Twenty-four songs in three volumes, written for this app. One plays while you trace; when it ends the camera takes a breath and steps back, so you see how far you have come. Turn the music off and your own keeps playing — the app will not interrupt it.</p>
-      <p class="note mono" data-t="musVol" style="font-style:normal;letter-spacing:.04em">Vol. 1 — Quiet Things We Share</p>
-      <div class="songs">
-        <div><span class="n">01</span>Slow Replies, Heavy Days</div>
-        <div><span class="n">02</span>The Day That Wouldn’t End</div>
-        <div><span class="n">03</span>Reliable Until It Hurts</div>
-        <div><span class="n">04</span>Almost Saying It</div>
-        <div><span class="n">05</span>What We Outgrow, What We Keep</div>
-        <div><span class="n">06</span>Apologies We Forget to Say</div>
-        <div><span class="n">07</span>Different Mornings</div>
-        <div><span class="n">08</span>The Last Slice of Quiet</div>
-      </div>
+      <h2 data-t="musT">Music to leave on</h2>
+      <p class="body" data-t="musP">Twenty-four songs in three volumes. One plays, the next follows — there is nothing to choose. When a song ends the view steps back for a breath, so you can see how far you have come. Leave it off and your own music keeps playing; the app will not interrupt it.</p>
+      <div class="songs" id="songs"></div>
 
       <div class="store">
         <a href="https://apps.apple.com/app/id1486330879" class="ic-link">
           <img class="ic" src="/art/icon-512.png" width="62" height="62" alt="Coordigo on the App Store">
           <div class="cap" data-t="storeCap">App Store</div>
         </a>
-        <span class="soon" data-t="storeSoon">Coming soon</span>
       </div>
     </section>
 
@@ -261,10 +250,15 @@
     {id:"grand-40001",  t:"The Long Country",c:32, r:24, look:"mixed",  lm:18, tier:3}
   ];
   var MARKS = ["cathedral","chapel","pagoda","nyc","taj","factory"];
+  var ALBUMS = [
+    {v:1, t:"Quiet Things We Share", s:["Slow Replies, Heavy Days","The Day That Wouldn’t End","Reliable Until It Hurts","Almost Saying It","What We Outgrow, What We Keep","Apologies We Forget to Say","Different Mornings","The Last Slice of Quiet"]},
+    {v:2, t:"Things We Never Had to Explain", s:["Small Places, Big Opinions","Sleep Is a Fact-Checker","Menus We Pretend to Read","Hope Has Bad UX","Carry-On Personality","Calendar Noise","Care First, Analysis Later","No Performance Required"]},
+    {v:3, t:"Soft Launch Season", s:["Soft Launch","Track Three","Three Percent Honest","Borrowed Weather","VIP Anxiety","Parking Lot Cinema","Designer Cup","No Label Yet"]}
+  ];
 
   /* ── 언어 ──────────────────────────────────────────────────── */
   var EN = {
-    kicker:"New version — in final testing",
+    kicker:"For iPhone and iPad",
     h1:"A landscape is waiting under the grid.",
     lede:"Put your finger on the faint shapes. Every line you clear stays lit, and when a shape’s outline is finished its colour comes in. No tools, no levels, no timer — lines, colour and music, until you feel like stopping.",
     heroCap:"The Long Country — 32 × 24 tiles, one picture for a whole season.",
@@ -277,10 +271,9 @@
     t0:"One evening", t1:"A few evenings", t2:"Many days", t3:"A season",
     landT:"Something is hidden by the mark",
     landP:"On the map a small gold ring is all you are given. What it marks — a cathedral, a chapel, a pagoda, a tower of glass, a white tomb, a sawtooth roof — you learn only by uncovering it.",
-    musT:"Every song is ours",
-    musP:"Twenty-four songs in three volumes, written for this app. One plays while you trace; when it ends the camera takes a breath and steps back, so you see how far you have come. Turn the music off and your own keeps playing — the app will not interrupt it.",
-    musVol:"Vol. 1 — Quiet Things We Share",
-    storeCap:"App Store", storeSoon:"Coming soon",
+    musT:"Music to leave on",
+    musP:"Twenty-four songs in three volumes. One plays, the next follows — there is nothing to choose. When a song ends the view steps back for a breath, so you can see how far you have come. Leave it off and your own music keeps playing; the app will not interrupt it.",
+    storeCap:"App Store",
     moreTitle:"More from us", support:"Support", privacy:"Privacy",
     swDesc:"chillfriends comics, read aloud", ifDesc:"otto’s flipbook diary", pyDesc:"one tile at a time",
     wTiles:"tiles", wTiles1:"tile", wMarks:"landmarks", wMarks1:"landmark", wFree:"free", wLines:"lines", wShapes:"shapes",
@@ -289,7 +282,7 @@
   };
   var I18N = {
    "ko":{name:"한국어",
-    kicker:"새 버전 — 마지막 시험 중",
+    kicker:"아이폰과 아이패드에서",
     h1:"모눈 아래에 풍경이 기다리고 있습니다.",
     lede:"흐린 형태 위에 손가락을 올려 보세요. 지나간 선은 그대로 밝아지고, 한 면의 테두리가 끝나면 그 색이 차오릅니다. 도구도, 단계도, 시간 제한도 없습니다 — 선과 색과 노래뿐, 그만두고 싶을 때까지.",
     heroCap:"The Long Country — 32 × 24 칸, 한 계절짜리 그림 한 장.",
@@ -302,17 +295,16 @@
     t0:"하룻저녁", t1:"며칠 저녁", t2:"여러 날", t3:"한 계절",
     landT:"표시 아래 무언가 숨어 있습니다",
     landP:"지도에는 작은 금색 고리 하나뿐입니다. 그것이 성당인지 예배당인지 탑인지 흰 무덤인지 톱니 지붕인지는, 직접 파내야 알 수 있습니다.",
-    musT:"노래도 우리가 만듭니다",
-    musP:"세 권에 스물네 곡, 이 앱을 위해 만든 노래입니다. 그리는 동안 한 곡이 흐르고, 곡이 끝나면 화면이 한 호흡 물러나 지금까지 그린 만큼을 보여 줍니다. 노래를 꺼도 좋습니다 — 듣고 있던 음악을 앱이 끊지 않습니다.",
-    musVol:"Vol. 1 — Quiet Things We Share",
-    storeCap:"App Store", storeSoon:"출시 예정",
+    musT:"그냥 틀어 두는 음악",
+    musP:"세 권에 스물네 곡. 한 곡이 끝나면 다음 곡이 이어집니다 — 고를 것이 없습니다. 곡이 끝날 때 화면이 한 호흡 물러나, 지금까지 그린 만큼이 한눈에 보입니다. 꺼 두어도 됩니다 — 듣고 있던 음악을 앱이 끊지 않습니다.",
+    storeCap:"App Store",
     moreTitle:"우리가 만드는 것들", support:"고객지원", privacy:"개인정보 처리방침",
     swDesc:"칠프렌즈 코믹스, 낭독 연재", ifDesc:"오토의 플립북 일기", pyDesc:"한 번에 타일 하나",
     fmtMarks:"랜드마크 {n}곳", wTiles:"칸", wMarks:"랜드마크", wFree:"무료", wLines:"선", wShapes:"면",
     day:"낮", night:"밤", sunset:"노을", snow:"눈", desert:"사막", autumn:"가을", mixed:"네 계절",
     cathedral:"성당", chapel:"예배당", pagoda:"탑", nyc:"고층 건물", taj:"흰 무덤", factory:"공장"},
    "ja":{name:"日本語",
-    kicker:"新バージョン — 最終テスト中",
+    kicker:"iPhone と iPad で",
     h1:"方眼の下に、風景が待っています。",
     lede:"かすかな形の上に指を置いてください。なぞった線はそのまま灯り、ひとつの面の輪郭が終わると、その色が満ちていきます。道具もレベルも時間制限もありません — 線と色と音楽だけ、やめたくなるまで。",
     heroCap:"The Long Country — 32 × 24 マス、ひと季節ぶんの一枚。",
@@ -325,17 +317,16 @@
     t0:"ひと晩", t1:"幾晩か", t2:"幾日も", t3:"ひと季節",
     landT:"印の下に、何かが隠れています",
     landP:"地図にあるのは小さな金の輪だけ。それが大聖堂なのか、礼拝堂なのか、塔なのか、白い廟なのか、のこぎり屋根なのかは、掘り出して初めてわかります。",
-    musT:"曲も自分たちのものです",
-    musP:"三巻に二十四曲、このアプリのために作りました。なぞっている間は一曲が流れ、終わるとカメラがひと呼吸ぶん引いて、ここまで描いた分を見せてくれます。音楽を切れば、あなたの音楽がそのまま続きます — アプリは邪魔しません。",
-    musVol:"Vol. 1 — Quiet Things We Share",
-    storeCap:"App Store", storeSoon:"近日公開",
+    musT:"そのまま流しておく音楽",
+    musP:"三巻に二十四曲。一曲終わると次が続きます — 選ぶものはありません。曲の終わりに画面がひと呼吸ぶん引いて、ここまで描いた分が見えます。切っておいても大丈夫です — あなたの音楽をアプリは邪魔しません。",
+    storeCap:"App Store",
     moreTitle:"私たちの作品", support:"サポート", privacy:"プライバシー",
     swDesc:"チルフレンズ・コミックス朗読連載", ifDesc:"オットーのパラパラ日記", pyDesc:"タイルひとつずつ",
     fmtMarks:"ランドマーク{n}", wTiles:"マス", wMarks:"ランドマーク", wFree:"無料", wLines:"線", wShapes:"面",
     day:"昼", night:"夜", sunset:"夕景", snow:"雪", desert:"砂漠", autumn:"秋", mixed:"四季",
     cathedral:"大聖堂", chapel:"礼拝堂", pagoda:"塔", nyc:"高層ビル", taj:"白い廟", factory:"工場"},
    "zh-Hans":{name:"简体中文",
-    kicker:"新版本 — 最后测试中",
+    kicker:"iPhone 与 iPad",
     h1:"方格之下，有一片风景在等着。",
     lede:"把手指放在淡淡的形状上。划过的线会亮起来，一个面的轮廓描完，它的颜色就浮上来。没有工具、没有关卡、没有计时 — 只有线条、颜色和音乐，直到你想停下。",
     heroCap:"The Long Country — 32 × 24 格，一整季才画得完的一张。",
@@ -348,17 +339,16 @@
     t0:"一个晚上", t1:"几个晚上", t2:"许多天", t3:"一整季",
     landT:"记号底下藏着什么",
     landP:"地图上只有一个小小的金色圆环。它标的是大教堂、小礼拜堂、宝塔、玻璃高楼、白色陵墓还是锯齿屋顶，只有挖出来才知道。",
-    musT:"每一首歌都是我们自己的",
-    musP:"三卷二十四首，为这个应用而写。你描线时有一首在放；一首放完，镜头会退开一口气，让你看见已经画出多少。把音乐关掉，你自己的歌照旧播放 — 应用不会打断它。",
-    musVol:"Vol. 1 — Quiet Things We Share",
-    storeCap:"App Store", storeSoon:"即将上线",
+    musT:"放着就好的音乐",
+    musP:"三卷二十四首。一首放完，下一首接上——没有什么要选。一首结束时，画面会退开一口气，让你看见已经画出多少。不开也行——你自己的音乐会继续播放，应用不会打断。",
+    storeCap:"App Store",
     moreTitle:"我们的作品", support:"支持", privacy:"隐私政策",
     swDesc:"Chillfriends 漫画朗读连载", ifDesc:"Otto 的翻页日记", pyDesc:"一次一块瓷砖",
     fmtMarks:"{n} 处地标", wTiles:"格", wMarks:"地标", wFree:"免费", wLines:"线", wShapes:"面",
     day:"白天", night:"夜", sunset:"黄昏", snow:"雪", desert:"沙漠", autumn:"秋", mixed:"四季",
     cathedral:"大教堂", chapel:"礼拜堂", pagoda:"宝塔", nyc:"高楼", taj:"白色陵墓", factory:"工厂"},
    "zh-Hant":{name:"繁體中文",
-    kicker:"新版本 — 最後測試中",
+    kicker:"iPhone 與 iPad",
     h1:"方格之下，有一片風景在等著。",
     lede:"把手指放在淡淡的形狀上。劃過的線會亮起來，一個面的輪廓描完，它的顏色就浮上來。沒有工具、沒有關卡、沒有計時 — 只有線條、顏色和音樂，直到你想停下。",
     heroCap:"The Long Country — 32 × 24 格，一整季才畫得完的一張。",
@@ -371,17 +361,16 @@
     t0:"一個晚上", t1:"幾個晚上", t2:"許多天", t3:"一整季",
     landT:"記號底下藏著什麼",
     landP:"地圖上只有一個小小的金色圓環。它標的是大教堂、小禮拜堂、寶塔、玻璃高樓、白色陵墓還是鋸齒屋頂，只有挖出來才知道。",
-    musT:"每一首歌都是我們自己的",
-    musP:"三卷二十四首，為這個應用而寫。你描線時有一首在放；一首放完，鏡頭會退開一口氣，讓你看見已經畫出多少。把音樂關掉，你自己的歌照舊播放 — 應用不會打斷它。",
-    musVol:"Vol. 1 — Quiet Things We Share",
-    storeCap:"App Store", storeSoon:"即將上線",
+    musT:"放著就好的音樂",
+    musP:"三卷二十四首。一首放完，下一首接上——沒有什麼要選。一首結束時，畫面會退開一口氣，讓你看見已經畫出多少。不開也行——你自己的音樂會繼續播放，應用不會打斷。",
+    storeCap:"App Store",
     moreTitle:"我們的作品", support:"支援", privacy:"隱私權政策",
     swDesc:"Chillfriends 漫畫朗讀連載", ifDesc:"Otto 的翻頁日記", pyDesc:"一次一塊瓷磚",
     fmtMarks:"{n} 處地標", wTiles:"格", wMarks:"地標", wFree:"免費", wLines:"線", wShapes:"面",
     day:"白天", night:"夜", sunset:"黃昏", snow:"雪", desert:"沙漠", autumn:"秋", mixed:"四季",
     cathedral:"大教堂", chapel:"禮拜堂", pagoda:"寶塔", nyc:"高樓", taj:"白色陵墓", factory:"工廠"},
    "es":{name:"Español",
-    kicker:"Versión nueva — en pruebas finales",
+    kicker:"Para iPhone y iPad",
     h1:"Bajo la cuadrícula espera un paisaje.",
     lede:"Pon el dedo sobre las formas tenues. Cada línea que recorres queda encendida, y cuando el contorno de una forma se completa, entra su color. Sin herramientas, sin niveles, sin reloj: líneas, color y música, hasta que quieras parar.",
     heroCap:"The Long Country — 32 × 24 casillas, un cuadro para toda una estación.",
@@ -394,17 +383,16 @@
     t0:"Una tarde", t1:"Unas cuantas tardes", t2:"Muchos días", t3:"Una estación",
     landT:"Algo se esconde bajo la marca",
     landP:"En el mapa solo hay un pequeño anillo dorado. Si marca una catedral, una capilla, una pagoda, una torre de vidrio, una tumba blanca o un techo de sierra, solo lo sabrás al descubrirlo.",
-    musT:"Las canciones también son nuestras",
-    musP:"Veinticuatro canciones en tres volúmenes, escritas para esta app. Una suena mientras dibujas; cuando termina, la cámara toma aire y se aleja para que veas lo que llevas hecho. Apaga la música y la tuya sigue sonando: la app no la interrumpe.",
-    musVol:"Vol. 1 — Quiet Things We Share",
-    storeCap:"App Store", storeSoon:"Muy pronto",
+    musT:"Música para dejar puesta",
+    musP:"Veinticuatro canciones en tres volúmenes. Suena una y sigue la siguiente: no hay nada que elegir. Cuando una termina, la vista se aleja un momento y ves lo que llevas hecho. Déjala apagada y tu propia música sigue sonando; la app no la interrumpe.",
+    storeCap:"App Store",
     moreTitle:"Más de nosotros", support:"Soporte", privacy:"Privacidad",
     swDesc:"cómics de Chillfriends, leídos en voz alta", ifDesc:"el diario de flipbook de Otto", pyDesc:"una casilla a la vez",
     wTiles:"casillas", wTiles1:"casilla", wMarks:"monumentos", wMarks1:"monumento", wFree:"gratis", wLines:"líneas", wShapes:"formas",
     day:"día", night:"noche", sunset:"atardecer", snow:"nieve", desert:"desierto", autumn:"otoño", mixed:"cuatro estaciones",
     cathedral:"Catedral", chapel:"Capilla", pagoda:"Pagoda", nyc:"Torre", taj:"Tumba blanca", factory:"Fábrica"},
    "fr":{name:"Français",
-    kicker:"Nouvelle version — derniers tests",
+    kicker:"Pour iPhone et iPad",
     h1:"Sous le quadrillage, un paysage attend.",
     lede:"Posez le doigt sur les formes pâles. Chaque ligne parcourue reste allumée, et quand le contour d’une forme est terminé, sa couleur monte. Pas d’outils, pas de niveaux, pas de chrono — des lignes, de la couleur et de la musique, jusqu’à ce que vous ayez envie de vous arrêter.",
     heroCap:"The Long Country — 32 × 24 cases, une image pour toute une saison.",
@@ -417,17 +405,16 @@
     t0:"Une soirée", t1:"Quelques soirées", t2:"Plusieurs jours", t3:"Une saison",
     landT:"Quelque chose se cache sous la marque",
     landP:"Sur la carte, il n’y a qu’un petit anneau doré. Cathédrale, chapelle, pagode, tour de verre, tombeau blanc ou toit en dents de scie : vous ne le saurez qu’en le dégageant.",
-    musT:"Les chansons aussi sont de nous",
-    musP:"Vingt-quatre chansons en trois volumes, écrites pour cette app. L’une joue pendant que vous tracez ; à la fin, la caméra prend une respiration et recule, pour vous montrer le chemin parcouru. Coupez la musique et la vôtre continue — l’app ne l’interrompt pas.",
-    musVol:"Vol. 1 — Quiet Things We Share",
-    storeCap:"App Store", storeSoon:"Bientôt",
+    musT:"Une musique qu’on laisse tourner",
+    musP:"Vingt-quatre chansons en trois volumes. L’une joue, la suivante enchaîne — rien à choisir. À la fin d’un morceau, la vue prend du recul le temps d’une respiration et vous voyez le chemin parcouru. Laissez-la éteinte et votre musique continue : l’app ne l’interrompt pas.",
+    storeCap:"App Store",
     moreTitle:"Nos créations", support:"Assistance", privacy:"Confidentialité",
     swDesc:"les BD Chillfriends, lues à voix haute", ifDesc:"le journal flipbook d’Otto", pyDesc:"une tuile à la fois",
     wTiles:"cases", wTiles1:"case", wMarks:"monuments", wMarks1:"monument", wFree:"gratuit", wLines:"lignes", wShapes:"formes",
     day:"jour", night:"nuit", sunset:"couchant", snow:"neige", desert:"désert", autumn:"automne", mixed:"quatre saisons",
     cathedral:"Cathédrale", chapel:"Chapelle", pagoda:"Pagode", nyc:"Tour", taj:"Tombeau blanc", factory:"Usine"},
    "de":{name:"Deutsch",
-    kicker:"Neue Version — im letzten Test",
+    kicker:"Für iPhone und iPad",
     h1:"Unter dem Raster wartet eine Landschaft.",
     lede:"Leg den Finger auf die blassen Formen. Jede Linie, die du entlangfährst, bleibt hell, und ist der Umriss einer Fläche fertig, steigt ihre Farbe auf. Keine Werkzeuge, keine Level, keine Uhr — nur Linien, Farbe und Musik, bis du aufhören magst.",
     heroCap:"The Long Country — 32 × 24 Felder, ein Bild für eine ganze Jahreszeit.",
@@ -440,17 +427,16 @@
     t0:"Ein Abend", t1:"Ein paar Abende", t2:"Viele Tage", t3:"Eine Jahreszeit",
     landT:"Unter der Markierung ist etwas versteckt",
     landP:"Auf der Karte gibt es nur einen kleinen goldenen Ring. Ob er eine Kathedrale meint, eine Kapelle, eine Pagode, einen Glasturm, ein weißes Grabmal oder ein Sheddach — das erfährst du erst beim Freilegen.",
-    musT:"Auch die Lieder sind unsere",
-    musP:"Vierundzwanzig Lieder in drei Bänden, für diese App geschrieben. Eines läuft, während du ziehst; ist es zu Ende, holt die Kamera Luft und tritt zurück, damit du siehst, wie weit du gekommen bist. Schalte die Musik aus, und deine eigene läuft weiter — die App unterbricht sie nicht.",
-    musVol:"Vol. 1 — Quiet Things We Share",
-    storeCap:"App Store", storeSoon:"Bald",
+    musT:"Musik, die einfach läuft",
+    musP:"Vierundzwanzig Lieder in drei Bänden. Eines läuft, das nächste folgt — nichts auszuwählen. Am Ende eines Liedes tritt die Ansicht einen Atemzug zurück, und du siehst, wie weit du gekommen bist. Lass sie aus, und deine eigene Musik läuft weiter; die App unterbricht sie nicht.",
+    storeCap:"App Store",
     moreTitle:"Mehr von uns", support:"Support", privacy:"Datenschutz",
     swDesc:"Chillfriends-Comics, vorgelesen", ifDesc:"Ottos Daumenkino-Tagebuch", pyDesc:"Stein für Stein",
     wTiles:"Felder", wTiles1:"Feld", wMarks:"Wahrzeichen", wMarks1:"Wahrzeichen", wFree:"gratis", wLines:"Linien", wShapes:"Flächen",
     day:"Tag", night:"Nacht", sunset:"Abendrot", snow:"Schnee", desert:"Wüste", autumn:"Herbst", mixed:"vier Jahreszeiten",
     cathedral:"Kathedrale", chapel:"Kapelle", pagoda:"Pagode", nyc:"Turm", taj:"Weißes Grabmal", factory:"Fabrik"},
    "pt":{name:"Português",
-    kicker:"Versão nova — em testes finais",
+    kicker:"Para iPhone e iPad",
     h1:"Debaixo da grade, uma paisagem espera.",
     lede:"Ponha o dedo sobre as formas apagadas. Cada linha que você percorre fica acesa e, quando o contorno de uma forma termina, a cor dela sobe. Sem ferramentas, sem fases, sem relógio — linhas, cor e música, até você querer parar.",
     heroCap:"The Long Country — 32 × 24 quadros, um desenho para uma estação inteira.",
@@ -463,17 +449,16 @@
     t0:"Uma noite", t1:"Algumas noites", t2:"Muitos dias", t3:"Uma estação",
     landT:"Há algo escondido sob a marca",
     landP:"No mapa há apenas um pequeno anel dourado. Se ele marca uma catedral, uma capela, um pagode, uma torre de vidro, um túmulo branco ou um telhado dentado, você só descobre revelando.",
-    musT:"As canções também são nossas",
-    musP:"Vinte e quatro canções em três volumes, escritas para este app. Uma toca enquanto você desenha; quando acaba, a câmera respira e se afasta, para você ver o quanto já fez. Desligue a música e a sua continua — o app não interrompe.",
-    musVol:"Vol. 1 — Quiet Things We Share",
-    storeCap:"App Store", storeSoon:"Em breve",
+    musT:"Música para deixar tocando",
+    musP:"Vinte e quatro canções em três volumes. Uma toca e a seguinte entra — não há nada para escolher. Quando uma acaba, a vista se afasta por um instante e você vê o quanto já fez. Deixe desligada e a sua música continua; o app não interrompe.",
+    storeCap:"App Store",
     moreTitle:"Mais do estúdio", support:"Suporte", privacy:"Privacidade",
     swDesc:"quadrinhos Chillfriends, lidos em voz alta", ifDesc:"o diário de flipbook do Otto", pyDesc:"um bloco de cada vez",
     wTiles:"quadros", wTiles1:"quadro", wMarks:"marcos", wMarks1:"marco", wFree:"grátis", wLines:"linhas", wShapes:"formas",
     day:"dia", night:"noite", sunset:"pôr do sol", snow:"neve", desert:"deserto", autumn:"outono", mixed:"quatro estações",
     cathedral:"Catedral", chapel:"Capela", pagoda:"Pagode", nyc:"Torre", taj:"Túmulo branco", factory:"Fábrica"},
    "ru":{name:"Русский",
-    kicker:"Новая версия — последние испытания",
+    kicker:"Для iPhone и iPad",
     h1:"Под клеткой ждёт пейзаж.",
     lede:"Положите палец на бледные формы. Каждая линия, по которой вы провели, остаётся зажжённой, а когда контур фигуры замкнут, поднимается её цвет. Ни инструментов, ни уровней, ни таймера — только линии, цвет и музыка, пока не захочется остановиться.",
     heroCap:"The Long Country — 32 × 24 клетки, картина на целый сезон.",
@@ -486,10 +471,9 @@
     t0:"Один вечер", t1:"Несколько вечеров", t2:"Много дней", t3:"Целый сезон",
     landT:"Под меткой что-то спрятано",
     landP:"На карте — лишь маленькое золотое кольцо. Собор это, часовня, пагода, стеклянная башня, белая гробница или пилообразная крыша, вы узнаете, только раскрыв её.",
-    musT:"И песни тоже наши",
-    musP:"Двадцать четыре песни в трёх альбомах, написанные для этого приложения. Одна играет, пока вы ведёте; когда она заканчивается, камера переводит дух и отступает, чтобы показать, сколько уже пройдено. Выключите музыку — ваша продолжит играть, приложение её не прервёт.",
-    musVol:"Vol. 1 — Quiet Things We Share",
-    storeCap:"App Store", storeSoon:"Скоро",
+    musT:"Музыка, которая просто играет",
+    musP:"Двадцать четыре песни в трёх альбомах. Одна играет, следующая продолжает — выбирать ничего не нужно. Когда песня кончается, вид на мгновение отступает, и видно, сколько уже пройдено. Оставьте её выключенной — ваша музыка продолжит играть, приложение её не прервёт.",
+    storeCap:"App Store",
     moreTitle:"Ещё от нас", support:"Поддержка", privacy:"Конфиденциальность",
     swDesc:"комиксы Chillfriends, озвученные вслух", ifDesc:"флипбук-дневник Отто", pyDesc:"по плитке за раз",
     wTiles:"клеток", wTiles1:"клетка", wTiles2:"клетки", wMarks:"достопримечательностей", wMarks1:"достопримечательность", wMarks2:"достопримечательности", wFree:"бесплатно", wLines:"линий", wShapes:"фигур",
@@ -576,6 +560,14 @@
       });
     });
   }
+  function buildSongs(){
+    var n = 0;
+    document.getElementById("songs").innerHTML = ALBUMS.map(function(a){
+      return '<div class="vol"><div class="vt">Vol. ' + a.v + ' &middot; ' + a.t + "</div>" +
+        a.s.map(function(t){ n++; return '<div class="s"><span class="n">' + (n < 10 ? "0" + n : n) + "</span>" + t + "</div>"; }).join("") +
+        "</div>";
+    }).join("");
+  }
   function buildMarks(){
     var d = dict();
     document.getElementById("marks").innerHTML = MARKS.map(function(k){
@@ -595,7 +587,7 @@
     var btn = document.getElementById("langToggle");
     if (!alt) btn.classList.add("hide");
     else { btn.classList.remove("hide"); btn.textContent = (cur === "en") ? I18N[alt].name : "English"; }
-    buildTiers(); buildMarks(); carryLang();
+    buildTiers(); buildMarks(); buildSongs(); carryLang();
     if (window.demoProgress) window.demoProgress();
   }
   document.getElementById("langToggle").addEventListener("click", function(){ apply(cur === "en" ? alt : "en"); });
