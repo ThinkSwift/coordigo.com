@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Someone walks through — Coordigo</title>
+  <meta name="description" content="Six short films shot inside Coordigo landscapes. The picture you uncover, with someone passing through it.">
+  <meta name="theme-color" content="#f7f4ec">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="canonical" href="https://coordigo.com/postcards/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Someone walks through — Coordigo">
+  <meta property="og:description" content="The picture you uncover, with someone passing through it.">
+  <meta property="og:url" content="https://coordigo.com/postcards/">
+  <meta property="og:image" content="https://media.coordigo.com/postcards/v1/01-medium-20009.jpg">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --paper:#f7f4ec; --mat:#fffdf8; --ink:#1b1917; --muted:#6d6557;
+      --line:rgba(27,25,23,.14); --hair:rgba(27,25,23,.09);
+      --gold:#a8761a; --grid:rgba(27,25,23,.055); --mark:#d02670;
+      --shadow:0 1px 2px rgba(27,25,23,.07), 0 10px 26px rgba(27,25,23,.08);
+    }
+    @media (prefers-color-scheme: dark){
+      :root{
+        --paper:#15161c; --mat:#1d1f27; --ink:#eae5da; --muted:#9b9486;
+        --line:rgba(234,229,218,.16); --hair:rgba(234,229,218,.10);
+        --gold:#dcac48; --grid:rgba(234,229,218,.05); --mark:#ef5fa0;
+        --shadow:0 1px 2px rgba(0,0,0,.5), 0 12px 30px rgba(0,0,0,.45);
+      }
+    }
+    *{box-sizing:border-box} html,body{margin:0}
+    body{
+      background:var(--paper); color:var(--ink);
+      font-family:"Source Serif 4",Georgia,"Times New Roman",serif;
+      font-size:17px; line-height:1.62; -webkit-font-smoothing:antialiased;
+      background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+      background-size:23px 23px;
+    }
+    .wrap{width:100%;max-width:820px;margin:0 auto;padding:0 22px 40px}
+    a{color:inherit}
+    nav{display:flex;align-items:center;gap:11px;padding:24px 0 6px}
+    nav a.home{display:flex;align-items:center;gap:11px;text-decoration:none}
+    .mark{width:30px;height:30px;display:flex;align-items:center;justify-content:center;color:#fff;
+      background:var(--mark);font-weight:600;font-size:13px;letter-spacing:.02em}
+    nav .name{font-weight:600;font-size:19px;letter-spacing:-.01em}
+    nav .here{margin-left:auto;font-size:14px;color:var(--muted)}
+
+    .kicker{font-size:12.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);
+      font-family:ui-monospace,SFMono-Regular,Menlo,monospace;margin:52px 0 14px}
+    h1{font-weight:600;font-size:clamp(31px,5.4vw,50px);line-height:1.1;letter-spacing:-.02em;margin:0;max-width:16em}
+    .lede{color:var(--muted);font-size:clamp(16.5px,2.2vw,19px);line-height:1.66;margin:18px 0 0;max-width:34em}
+    .note{font-size:13.5px;color:var(--muted);margin:20px 0 0;font-style:italic;max-width:34em}
+
+    section{margin:64px 0 0}
+    .no{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12.5px;letter-spacing:.14em;
+      color:var(--gold);text-transform:uppercase}
+    h2{font-weight:600;font-size:clamp(22px,3.2vw,29px);line-height:1.2;letter-spacing:-.015em;margin:6px 0 16px}
+    .frame{background:var(--mat);border:1px solid var(--hair);box-shadow:var(--shadow);padding:10px}
+    .frame video{display:block;width:100%;aspect-ratio:16/9;background:var(--mat)}
+    .verse{font-style:italic;white-space:pre-line;margin:18px 0 0;max-width:30em;font-size:clamp(17px,2.2vw,20px);line-height:1.45}
+    .facts{display:flex;gap:6px 24px;flex-wrap:wrap;margin:14px 0 0;font-size:14px;color:var(--muted)}
+    .facts b{color:var(--ink);font-weight:600}
+    .facts .k{display:block;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:10.5px;
+      letter-spacing:.13em;text-transform:uppercase;color:var(--gold)}
+    .store{display:flex;align-items:center;gap:16px;margin:54px 0 0}
+    .store .ic{width:62px;height:62px;display:block;box-shadow:var(--shadow);border:1px solid var(--hair);border-radius:14px;transition:transform .14s ease}
+    .store .ic-link{text-decoration:none;color:inherit;display:block}
+    .store .ic-link:hover .ic{transform:translateY(-2px)}
+    .store .cap{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:6px;text-align:center}
+    .more{margin:56px 0 0;padding-top:22px;border-top:1px solid var(--line)}
+    .more h2{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:0 0 10px;font-weight:600}
+    .site-row{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;padding:5px 0;font-size:15px}
+    .site-row a{color:var(--gold);text-decoration:none;font-weight:600}
+    .site-row a:hover{text-decoration:underline;text-underline-offset:3px}
+    .site-row .d{color:var(--muted)}
+    footer{text-align:center;font-size:13.5px;color:var(--muted);padding:40px 22px 34px}
+    footer a{color:var(--gold);text-decoration:none}
+    footer .sep{opacity:.4;margin:0 8px}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <nav>
+      <a class="home" href="/"><span class="mark">Co</span><span class="name">Coordigo</span></a>
+      <span class="here">Postcards</span>
+    </nav>
+
+    <p class="kicker">Postcards &middot; Volume One</p>
+    <h1>Someone walks through the picture you uncover.</h1>
+    <p class="lede">
+      These six are shot inside Coordigo landscapes — the same ones waiting under the grid in the app.
+      A figure comes along the road, stops for a moment, and goes on. He passes behind the houses,
+      because in these pictures every house and tree knows how far away it is.
+    </p>
+    <p class="note">
+      He isn&rsquo;t in the app. Nothing here is a feature — it is simply what these landscapes look like
+      when someone is walking in them. The figure is hand-drawn in iFlipbook, our animation app,
+      one frame at a time.
+    </p>
+
+    <main id="films"></main>
+
+    <div class="store">
+      <a href="https://apps.apple.com/app/id1486330879?ct=web-co-postcards" class="ic-link">
+        <img class="ic" src="/art/icon-512.png" width="62" height="62" alt="Coordigo on the App Store">
+        <div class="cap">App Store</div>
+      </a>
+    </div>
+
+    <section class="more">
+      <h2>More from us</h2>
+      <div class="site-row"><a href="https://iflipbook.com">iflipbook.com</a> <span class="d">the figure is drawn here</span></div>
+      <div class="site-row"><a href="https://swiftian.com">swiftian.com</a> <span class="d">the studio</span></div>
+    </section>
+  </div>
+
+  <footer>
+    &copy; 2026 Swiftian Inc.
+    <span class="sep">&middot;</span><a href="/privacy/">Privacy</a>
+    <span class="sep">&middot;</span><a href="/">Coordigo</a>
+  </footer>
+
+  <script src="book.js"></script>
+  <script>
+    (function () {
+      "use strict";
+      var MEDIA = "https://media.coordigo.com/postcards/v1/";
+      var LOOK = { night: "Night", snow: "First snow", day: "Noon", sunset: "Late light",
+                   desert: "Dry wind", autumn: "Red leaves" };
+      var KIND = { cathedral: "cathedral", castle: "castle", pagoda: "pagoda", tower: "tower",
+                   chapel: "chapel", taj: "white tomb", nyc: "tower of glass", factory: "sawtooth roof" };
+      var host = document.getElementById("films");
+      if (typeof BOOK === "undefined") return;
+
+      BOOK.forEach(function (ep) {
+        var s = document.createElement("section");
+        s.id = ep.title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+
+        var no = document.createElement("div");
+        no.className = "no";
+        no.textContent = String(ep.n).padStart(2, "0");
+        var h2 = document.createElement("h2");
+        h2.textContent = ep.title;
+        s.appendChild(no); s.appendChild(h2);
+
+        var fig = document.createElement("div");
+        fig.className = "frame";
+        var v = document.createElement("video");
+        v.src = MEDIA + ep.file;
+        v.poster = MEDIA + ep.file.replace(".mp4", ".jpg");
+        v.controls = true; v.preload = "none"; v.playsInline = true;
+        v.setAttribute("aria-label", ep.title);
+        fig.appendChild(v);
+        s.appendChild(fig);
+
+        if (ep.verse) {
+          var p = document.createElement("p");
+          p.className = "verse";
+          p.textContent = ep.verse;
+          s.appendChild(p);
+        }
+
+        var f = document.createElement("div");
+        f.className = "facts";
+        f.innerHTML =
+          '<div><span class="k">Light</span><b>' + (LOOK[ep.look] || ep.look) + '</b></div>' +
+          '<div><span class="k">Hidden here</span><b>' +
+            ep.landmarks.map(function (k) { return KIND[k] || k; }).join(" · ") + '</b></div>' +
+          '<div><span class="k">Playing</span><b>' + ep.song.title + '</b> · Vol.' + ep.song.volume + '</div>';
+        s.appendChild(f);
+
+        host.appendChild(s);
+      });
+
+      var vids = host.querySelectorAll("video");
+      vids.forEach(function (v) {
+        v.addEventListener("play", function () {
+          vids.forEach(function (o) { if (o !== v) o.pause(); });
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
