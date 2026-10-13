@@ -3,4 +3,13 @@
   <url><loc>https://coordigo.com/</loc><priority>1.0</priority></url>
   <url><loc>https://coordigo.com/privacy/</loc><priority>0.3</priority></url>
   <url><loc>https://coordigo.com/support/</loc><priority>0.3</priority></url>
+  <url><loc>https://coordigo.com/ko/</loc></url>
+  <url><loc>https://coordigo.com/ja/</loc></url>
+  <url><loc>https://coordigo.com/zh-hans/</loc></url>
+  <url><loc>https://coordigo.com/zh-hant/</loc></url>
+  <url><loc>https://coordigo.com/es/</loc></url>
+  <url><loc>https://coordigo.com/fr/</loc></url>
+  <url><loc>https://coordigo.com/de/</loc></url>
+  <url><loc>https://coordigo.com/pt-br/</loc></url>
+  <url><loc>https://coordigo.com/ru/</loc></url>
 </urlset>
