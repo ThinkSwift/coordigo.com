@@ -1,0 +1,59 @@
+/* The Thirteenth Bell — on top of /trace/trace.css (paper, grid, tokens) */
+.meters{position:static;z-index:5;margin:22px -16px 0;padding:10px 16px 10px;
+  background:color-mix(in srgb,var(--paper) 92%,transparent);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+  border-bottom:1px solid var(--hair)}
+@media (min-width:600px){.meters{margin:22px -22px 0;padding:10px 22px}}
+.mrow{display:flex;align-items:center;gap:10px;flex-wrap:wrap;min-width:0}
+.mrow + .mrow{margin-top:6px}
+.mlabel{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);flex:0 0 auto}
+#bells{display:flex;gap:3px;flex-wrap:wrap}
+.bell svg{display:block;width:16px;height:18px;fill:none;stroke:var(--muted);stroke-width:1.4;opacity:.5}
+.bell.on svg{fill:var(--gold);stroke:var(--gold);opacity:1}
+.bell.ring svg{animation:ring .9s ease-in-out 2;transform-origin:50% 10%}
+@keyframes ring{0%,100%{transform:rotate(0)}20%{transform:rotate(18deg)}45%{transform:rotate(-15deg)}70%{transform:rotate(9deg)}}
+#bellText{font-size:13px;color:var(--ink)}
+#lanterns{display:flex;gap:4px;flex-wrap:wrap}
+.lamp{display:block;width:11px;height:14px;border-radius:4px 4px 2px 2px;border:1.4px solid var(--line);text-decoration:none}
+.lamp.lit{background:var(--gold);border-color:var(--gold);box-shadow:0 0 6px color-mix(in srgb,var(--gold) 60%,transparent)}
+.lamp.here{outline:1.5px solid var(--ink);outline-offset:1.5px}
+#missing{display:flex;gap:6px;flex-wrap:wrap;font-size:13px}
+.gone{border:1px dashed var(--line);border-radius:999px;padding:0 9px;color:var(--ink)}
+.gone.back{text-decoration:line-through;color:var(--muted);border-style:solid}
+#missing .none{color:var(--muted);font-style:italic}
+
+.chap{margin:6px 0 0}
+.chap h2{font-weight:600;font-size:clamp(26px,4.4vw,38px);line-height:1.15;letter-spacing:-.015em;margin:0}
+.chap .kicker{margin:28px 0 8px}
+.picframe{margin:18px 0 0}
+#pic{width:100%;height:auto}
+.sketch{margin:18px 0 0;min-height:170px;display:flex;align-items:center;justify-content:center;text-align:center;
+  border:1.5px dashed var(--line);color:var(--muted);font-style:italic;font-size:15px;padding:24px;
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:15px 15px}
+.tracebox{margin:18px auto 0;width:min(100%,460px)}
+.find{text-align:center;font-size:15px;color:var(--muted);font-style:italic;margin:0 0 10px}
+.tracebox .tileframe{padding:6px;touch-action:none;-webkit-user-select:none;user-select:none}
+#tile{width:100%;height:auto;aspect-ratio:1/1;cursor:crosshair;touch-action:none}
+.tracebar{display:flex;align-items:center;gap:12px;margin-top:10px;font-size:12.5px;color:var(--muted)}
+.tracebar .sp{flex:1}
+.after{margin:22px 0 0}
+.after .line{font-size:clamp(20px,3vw,25px);line-height:1.45;margin:0;max-width:30em}
+.after .rang{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12.5px;color:var(--gold);margin:10px 0 0;min-height:1em}
+.after.rise{animation:rise .7s ease both}
+@keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.pn{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:26px 0 0;flex-wrap:wrap}
+.pn a{font-size:15px}
+.pn a.go{font-weight:600;color:var(--gold);text-decoration:none;font-size:16.5px}
+.endnote{margin:30px 0 0}
+.endnote p{max-width:32em}
+.endnote .ctas{display:flex;gap:18px;flex-wrap:wrap;margin-top:18px}
+.endnote .ctas a{font-weight:600;color:var(--gold);text-decoration:none}
+@media (prefers-reduced-motion: reduce){.bell.ring svg,.after.rise{animation:none}}
+/* wide screens: the square to trace beside the picture, so both stay in view */
+@media (min-width:860px){
+  .stagebox:has(#trace:not([hidden])){display:grid;grid-template-columns:minmax(0,1fr) 330px;gap:26px;align-items:start;margin-top:18px}
+  .stagebox:has(#trace:not([hidden])) .picframe,.stagebox:has(#trace:not([hidden])) .tracebox{margin:0}
+  .stagebox:has(#trace:not([hidden])) .tracebox{width:auto;position:sticky;top:110px}
+}
+/* the meters stay in view only where there is room for them */
+@media (min-width:860px){.meters{position:sticky;top:0}}
+@media (max-width:599px){.mlabel{font-size:10.5px} .bell svg{width:14px;height:16px} .lamp{width:10px;height:13px}}

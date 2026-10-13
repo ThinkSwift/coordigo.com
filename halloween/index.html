@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The Thirteenth Bell — a Halloween story to trace · Coordigo</title>
+  <meta name="description" content="On Halloween night the bell tower rings by itself, and each time it rings something in town disappears. Twenty chapters, thirteen bells — trace each picture to find what went missing.">
+  <meta name="robots" content="noindex">
+  <link rel="canonical" href="https://coordigo.com/halloween/">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <meta name="apple-itunes-app" content="app-id=1486330879">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="The Thirteenth Bell · Coordigo">
+  <meta property="og:description" content="On Halloween night the bell tower rings by itself, and each time it rings something in town disappears. Twenty chapters, thirteen bells — trace each picture to find what went missing.">
+  <meta property="og:url" content="https://coordigo.com/halloween/">
+  <meta property="og:image" content="https://coordigo.com/halloween/og.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/trace/trace.css">
+  <link rel="stylesheet" href="/halloween/story.css">
+  <link rel="modulepreload" href="/trace/core.js">
+</head>
+<body>
+  <div class="wrap">
+    <nav>
+      <a class="home" href="/"><span class="mark">Co</span><span class="name">Coordigo</span></a>
+      <span class="here">Halloween</span>
+    </nav>
+
+    <p class="kicker">Coordigo · a Halloween story to trace</p>
+    <h1>The Thirteenth Bell</h1>
+    <p class="lede">On Halloween night the bell tower rings by itself, and each time it rings something in town disappears. Trace each picture to find what went missing.</p>
+
+    <div class="meters" id="story-top">
+      <div class="mrow"><span class="mlabel">Bells</span><span id="bells"></span><span class="mono" id="bellText"></span></div>
+      <div class="mrow"><span class="mlabel">Lanterns</span><span id="lanterns"></span></div>
+      <div class="mrow"><span class="mlabel">Missing</span><span id="missing"></span></div>
+    </div>
+
+    <section class="chap" id="chapter">
+      <p class="kicker" id="act"></p>
+      <h2 id="title"></h2>
+      <div class="stagebox">
+      <div class="frame picframe" id="picFrame" hidden><canvas id="pic" width="960" height="720" aria-label="The chapter's picture"></canvas></div>
+      <div class="sketch" id="sketch" hidden>This picture is still being drawn.</div>
+      <div class="tracebox" id="trace" hidden>
+        <p class="find" id="find"></p>
+        <div class="frame tileframe"><canvas id="tile" width="900" height="900" aria-label="The missing square. Drag along the lines."></canvas></div>
+        <div class="tracebar"><span class="mono" id="tileNote"></span><span class="sp"></span><button type="button" class="chip" id="skip">Just tell me</button></div>
+      </div>
+      </div>
+      <div class="after" id="after" hidden>
+        <p class="line" id="line"></p>
+        <p class="rang" id="rang"></p>
+      </div>
+      <div class="pn"><a id="prev" href="#">&larr; Back</a><a class="go" id="next" href="#">Next &rarr;</a></div>
+    </section>
+
+    <section class="endnote" id="end" hidden>
+      <p class="kicker">The end</p>
+      <h2>Thirteen bells, one more cup.</h2>
+      <p class="lede">Every picture in the story is drawn on the grid Coordigo traces — line by line, until the colour comes up.</p>
+      <div class="ctas"><a href="/trace/">Trace a whole picture &rarr;</a><a href="https://apps.apple.com/app/id1486330879?ct=web-co-story" target="_blank" rel="noopener">Coordigo on the App Store &rarr;</a></div>
+      <p><button type="button" class="chip" id="restart">Read it again</button></p>
+    </section>
+  </div>
+
+  <footer>
+    <span>&copy; 2026 Coordigo &middot; <a href="https://swiftian.com">Swiftian Inc.</a></span>
+    <span class="sep">&middot;</span><a href="/pictures/">All pictures</a>
+    <span class="sep">&middot;</span><a href="/support/">Support</a><span class="sep">&middot;</span><a href="/privacy/">Privacy</a>
+  </footer>
+
+  <noscript><p class="wrap note">The story needs JavaScript to trace.</p></noscript>
+  <script type="application/json" id="story">{"title":"The Thirteenth Bell","acts":["Dusk","Night","Midnight"],"chapters":[{"n":1,"act":0,"title":"Harvest Noon","pic":"day-farm-81000","hide":[33],"bell":1,"missing":["a pumpkin"],"found":null,"find":"where the pumpkin was","line":"Thirteen pumpkins this morning. Twelve by noon."},{"n":2,"act":0,"title":"The Scarecrow","pic":null,"hide":[],"bell":2,"missing":["the scarecrow's hat"],"found":null,"find":"the hat","line":"The scarecrow has lost his hat. Momo is staring at the sky, at nothing at all."},{"n":3,"act":0,"title":"The Bakery Window","pic":null,"hide":[],"bell":3,"missing":["the baker's pie"],"found":null,"find":"the crumbs","line":"The baker swears the pie was cooling right here."},{"n":4,"act":0,"title":"The Bell Tower","pic":"day-shops-82002","hide":[8],"bell":null,"missing":[],"found":null,"find":"the bell","line":"The bell rang again. Nobody was at the rope."},{"n":5,"act":0,"title":"Lantern Hour","pic":"halloween-50000","hide":[18],"bell":4,"missing":["Momo"],"found":null,"find":"the lamp that is already lit","line":"The lamps come on. Momo doesn't come home. One lamp down the street is lit already."},{"n":6,"act":1,"title":"Lantern Wall","pic":"mural-outline-60000","hide":[27],"bell":5,"missing":[],"found":null,"find":"the eyes","line":"Somebody lit the pumpkin's eyes. Somebody small walked past it."},{"n":7,"act":1,"title":"The Well","pic":null,"hide":[],"bell":6,"missing":["the bucket rope"],"found":null,"find":"the rope","line":"Otto calls down the well. His own name comes back up, a little wrong."},{"n":8,"act":1,"title":"The Iron Gate","pic":null,"hide":[],"bell":7,"missing":["the iron bat"],"found":null,"find":"where the iron bat was","line":"The gate to the hill is open. The iron bat on it has flown."},{"n":9,"act":1,"title":"The House on the Hill","pic":"hw-house","hide":[21],"bell":null,"missing":[],"found":null,"find":"the round window","line":"The house was boarded up on Monday. Someone is still watching from the round window."},{"n":10,"act":1,"title":"The Empty Parlour","pic":null,"hide":[],"bell":8,"missing":["an armchair","a face from a portrait"],"found":null,"find":"where the armchair stood","line":"The armchair is gone. So is the face in the portrait."},{"n":11,"act":1,"title":"The Bookshelf","pic":null,"hide":[],"bell":9,"missing":["a book"],"found":null,"find":"the gap","line":"One book missing: How to Move House."},{"n":12,"act":1,"title":"Below the Stairs","pic":"hw-cellar","hide":[42],"bell":10,"missing":[],"found":null,"find":"the coffin lid","line":"Momo's bell, on the coffin lid. The coffin is empty, and still warm."},{"n":13,"act":1,"title":"The Open Grave","pic":"hw-graveyard","hide":[35],"bell":null,"missing":[],"found":null,"find":"the stone","line":"“Lived here 1890 – until Monday.”"},{"n":14,"act":2,"title":"Inside the Bell Tower","pic":null,"hide":[],"bell":11,"missing":[],"found":null,"find":"the footprints","line":"Eleven. Two more and it's midnight."},{"n":15,"act":2,"title":"Otto's Street","pic":null,"hide":[],"bell":12,"missing":[],"found":null,"find":"what is floating by","line":"Every lost thing in town is floating down Otto's street."},{"n":16,"act":2,"title":"Otto's Door","pic":null,"hide":[],"bell":null,"missing":[],"found":null,"find":"the gap in the door","line":"Otto's own door is open. Someone has lit the fire."},{"n":17,"act":2,"title":"By the Fire","pic":null,"hide":[],"bell":null,"missing":null,"found":["an armchair","the scarecrow's hat","a face from a portrait","the iron bat","a book"],"find":"the room","line":"A room made of everything the town lost tonight."},{"n":18,"act":2,"title":"The Armchair","pic":null,"hide":[],"bell":null,"missing":null,"found":["Momo"],"find":"who is sitting there","line":"In the armchair, a ghost. On its lap, Momo, asleep."},{"n":19,"act":2,"title":"The Second Cup","pic":null,"hide":[],"bell":13,"missing":[],"found":null,"find":"the second cup","line":"Midnight. Otto sets out a second cup."},{"n":20,"act":2,"title":"Morning","pic":null,"hide":[],"bell":null,"missing":null,"found":["a pumpkin","the bucket rope"],"find":"the pie tin","line":"By morning everything is back where it belongs. Except the pie."}]}</script>
+  <script type="module" src="/halloween/story.js"></script>
+  <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "644eea6fa19b4175b7160496dfbd77a8"}'></script>
+</body>
+</html>
