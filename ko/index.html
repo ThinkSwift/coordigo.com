@@ -964,5 +964,30 @@
   }, true);
 })();
 </script>
+<!-- events:start -->
+<script>
+(function () {
+  var SITE = "coordigo.com";
+  function ev(name, props) {
+    try {
+      var sid = "anon"; try { sid = sessionStorage.getItem("sw_sid") || (sessionStorage.setItem("sw_sid", String(Math.random()).slice(2)), sessionStorage.getItem("sw_sid")); } catch (_) {}
+      fetch("https://claude-proxy-web.ilbulyori.workers.dev/events", { method: "POST", keepalive: true,
+        headers: { "content-type": "application/json", "x-device-id": sid },
+        body: JSON.stringify({ meta: { app: SITE, build: "web", os: "web", locale: (navigator.language || "").slice(0, 8) },
+          events: [{ name: name, ts: Date.now() / 1000, props: Object.assign({ site: SITE, path: location.pathname.slice(0, 64) }, props || {}) }] }) }).catch(function () {});
+    } catch (_) {}
+  }
+  var once = {}; function first(k, f) { if (!once[k]) { once[k] = 1; f(); } }
+  // the one-tile demo: watch its progress line ("12/40 lines · 3/9 shapes") — the first cleared line and the finished tile
+  var el = document.getElementById("demoProg");
+  if (el && window.MutationObserver) new MutationObserver(function () {
+    var m = (el.textContent || "").match(/(\d+)\/(\d+)\D+(\d+)\/(\d+)/);
+    if (!m) return;
+    if (+m[1] > 0) first("start", function () { ev("demo_start"); });
+    if (+m[3] > 0 && m[3] === m[4]) first("done", function () { ev("demo_done"); });
+  }).observe(el, { childList: true, characterData: true, subtree: true });
+})();
+</script>
+<!-- events:end -->
 </body>
 </html>
