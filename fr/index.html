@@ -113,11 +113,7 @@
       font-family:ui-monospace,SFMono-Regular,Menlo,monospace;margin-top:8px}
 
     /* songs */
-    .songs{margin:24px 0 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:10px 30px}
-    .songs .vt{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11.5px;letter-spacing:.08em;
       text-transform:uppercase;color:var(--gold);padding-bottom:6px;border-bottom:1px solid var(--hair);margin-bottom:6px}
-    .songs .s{font-size:14px;color:var(--muted);padding:2.5px 0}
-    .songs .n{font-family:ui-monospace,Menlo,monospace;font-size:11px;color:var(--gold);opacity:.75;margin-right:9px}
     .crossline{font-style:normal;max-width:34em}
     .crossline a{color:var(--gold);text-decoration:none;font-weight:600;white-space:nowrap}
     .crossline a:hover{text-decoration:underline;text-underline-offset:3px}
@@ -177,7 +173,6 @@
 <body>
   <div class="wrap">
     <nav>
-      <div class="mark">Co</div>
       <span class="name">Coordigo</span>
       <button class="lang hide" id="langToggle" type="button"></button>
     </nav>
@@ -236,7 +231,6 @@
     <section>
       <h2 data-t="musT">Une musique qu’on laisse tourner</h2>
       <p class="body" data-t="musP">Vingt-quatre chansons en trois volumes. L’une joue, la suivante enchaîne — rien à choisir. À la fin d’un morceau, la vue prend du recul le temps d’une respiration et vous voyez le chemin parcouru. Laissez-la éteinte et votre musique continue : l’app ne l’interrompt pas.</p>
-      <div class="songs" id="songs"></div>
 
       <div class="store">
         <a href="https://apps.apple.com/app/id1486330879?ct=web-coordigo" class="ic-link">
@@ -599,14 +593,6 @@
       });
     });
   }
-  function buildSongs(){
-    var n = 0;
-    document.getElementById("songs").innerHTML = ALBUMS.map(function(a){
-      return '<div class="vol"><div class="vt">Vol. ' + a.v + ' &middot; ' + a.t + "</div>" +
-        a.s.map(function(t){ n++; return '<div class="s"><span class="n">' + (n < 10 ? "0" + n : n) + "</span>" + t + "</div>"; }).join("") +
-        "</div>";
-    }).join("");
-  }
   function buildMarks(){
     var d = dict();
     document.getElementById("marks").innerHTML = MARKS.map(function(k){
@@ -626,7 +612,7 @@
     var btn = document.getElementById("langToggle");
     if (!alt) btn.classList.add("hide");
     else { btn.classList.remove("hide"); btn.textContent = (cur === "en") ? I18N[alt].name : "English"; }
-    buildTiers(); buildMarks(); buildSongs(); carryLang();
+    buildTiers(); buildMarks(); carryLang();
     if (window.demoProgress) window.demoProgress();
   }
   document.getElementById("langToggle").addEventListener("click", function(){ apply(cur === "en" ? alt : "en"); });
