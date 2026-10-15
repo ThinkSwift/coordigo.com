@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Privacy — Coordigo</title>
-  <meta name="description" content="Coordigo collects nothing. What the app keeps, it keeps on your device.">
+  <meta name="description" content="Coordigo works without an account. What you draw stays on your device and in your own iCloud.">
   <meta name="robots" content="noindex">
   <link rel="canonical" href="https://coordigo.com/privacy/">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
@@ -35,6 +35,7 @@
     p.q{color:var(--muted)}
     ul{margin:10px 0 0;padding-left:20px;color:var(--muted)}
     li{margin:4px 0}
+    strong{color:var(--ink);font-weight:600}
     .lead{font-size:19px;margin-top:18px}
     a{color:var(--gold)}
     footer{border-top:1px solid var(--hair);margin-top:48px;padding-top:18px;font-size:13.5px;color:var(--muted)}
@@ -48,39 +49,65 @@
     <nav><a href="/"><span class="name">Coordigo</span></a></nav>
 
     <h1>Privacy</h1>
-    <div class="date">Last updated: 11 September 2026</div>
+    <div class="date">Effective October 2026 · Coordigo 7.0</div>
 
-    <p class="lead">Coordigo collects nothing. There is no account, no sign-in, no advertising, no tracking and no analytics in the app. What it remembers, it remembers on your device.</p>
+    <p class="lead">Coordigo works without an account. What you draw stays yours: on your device, and in your own iCloud if you use it. Three small things leave the device — a note you choose to send us, anonymous usage counts you can switch off, and crash reports if you share them with developers. No ads, no tracking, nothing sold.</p>
 
-    <h2>What never leaves your device</h2>
+    <h2>What stays with you</h2>
     <ul>
       <li>Which pictures you have opened and how far you have got in each one</li>
-      <li>Your settings, including whether music is on</li>
-      <li>The small counts the app keeps for itself — minutes traced, tiles finished, songs played or skipped — used only to choose what to offer you next</li>
-      <li>Anything you draw on a blank sheet</li>
+      <li>Your finished pictures and anything you draw on a blank sheet</li>
+      <li>Your settings, including whether music is on, and the songs you have played</li>
+      <li>The small counts the app keeps for itself — minutes traced, tiles finished, songs played or skipped — used only to choose what to offer you next. These never leave the device.</li>
     </ul>
-    <p class="q">None of it is sent anywhere. Deleting the app deletes all of it.</p>
+    <p class="q">We have no copy of any of it. Deleting the app deletes what is on the device.</p>
 
     <h2>iCloud</h2>
-    <p>Your credit balance and the list of pictures you have opened are kept in Apple’s iCloud key-value storage, under your own Apple Account, so a second device of yours stays in step. That storage belongs to you; we cannot read it. Turning off iCloud for Coordigo keeps everything local.</p>
+    <p>If you are signed in to iCloud, your progress, finished pictures and blank sheets are copied to your own iCloud, so every iPhone, iPad and Mac you sign in to has the same pictures. Your credit balance and the pictures you have opened are kept in your iCloud key-value storage in the same way. That storage belongs to you; we cannot read it. Turning off iCloud for Coordigo keeps everything on the device.</p>
 
-    <h2>Purchases</h2>
-    <p>Credit packs are sold and processed by Apple. We never see your payment details. The app asks Apple only whether a purchase went through, so it can add the credits.</p>
+    <h2>What leaves your device</h2>
+    <ul>
+      <li><strong>A note to us.</strong> Settings › Send feedback sends what you write, an anonymous install ID, and the app version, build, system version and language to our small server. The app asks the server, with the same ID, whether we have replied. If you allow notifications, it checks in the background only while a note is waiting, for at most 14 days.</li>
+      <li><strong>Anonymous usage.</strong> The same ID with what happens in the app and when — "opened a picture", "finished a tile", how long a session lasted — plus app version, build, system version and language. Never what you draw. Switch it off in Settings › Share anonymous usage; from that moment nothing more is sent and anything waiting is dropped.</li>
+      <li><strong>Crash reports.</strong> Apple's MetricKit report when the app crashes, freezes or runs slowly — where in the app it happened, device model, system and app version — only if you share analytics with app developers in your device's settings.</li>
+    </ul>
+    <p><strong>About the anonymous ID.</strong> On first launch the app makes a random identifier and keeps it in the device's keychain. It is not your Apple Account, your name or your advertising identifier, it does not sync between your devices, and it is not linked to you. It exists so our replies reach you and usage is not counted twice. We do not use it to follow you across other apps or websites.</p>
 
     <h2>Songs and pictures</h2>
     <p>Songs — and any picture added after an update — are downloaded from our media server (media.coordigo.com, hosted on Cloudflare). Like any request on the web, that carries your IP address to the server; our host keeps short-term, standard delivery logs. We do not use them to identify anyone and do not join them with anything else. Once a file is downloaded it is cached on the device and not fetched again.</p>
 
-    <h2>No profiles, of anyone</h2>
-    <p>Because the app collects no personal information, there is nothing to profile, sell or share — for any user, of any age. We have no data to hand over and none to lose.</p>
+    <h2>Purchases</h2>
+    <p>Credit packs are sold and processed by Apple. We never see your payment details. The app asks Apple only whether a purchase went through, so it can add the credits.</p>
+
+    <h2>What we never collect</h2>
+    <ul>
+      <li>No account, name, email address, phone number or date of birth</li>
+      <li>No location, contacts or photo library</li>
+      <li>No advertising identifier, and no third-party advertising or analytics code</li>
+      <li>No tracking of you across other companies' apps or websites</li>
+    </ul>
+
+    <h2>Who handles it for us</h2>
+    <p>Cloudflare runs the small server that notes, usage events and crash reports pass through, and stores them. Apple handles purchases and your iCloud. We do not sell or rent data to anyone.</p>
+
+    <h2>How long things are kept</h2>
+    <ul>
+      <li>Notes to us — while the conversation is useful, then removed.</li>
+      <li>Usage events — about three months.</li>
+      <li>Crash reports — until the problem is fixed.</li>
+    </ul>
 
     <h2>Removing your data</h2>
-    <p>Delete the app: everything on the device goes with it. Credits and opened pictures live in your own iCloud storage and are removed with the app’s iCloud data in Settings. If you want anything else cleared, write to us.</p>
+    <p>Delete the app: what it keeps on the device goes with it. What is in your iCloud is removed with the app's iCloud data in your device's Settings. To have your notes to us, or anything tied to your anonymous ID, erased, write to us.</p>
+
+    <h2>Everyone</h2>
+    <p>Coordigo is made for a general audience and is not directed at children under 13. We do not knowingly collect personal information from children; if you believe a child has written to us through the app, tell us and we will remove it.</p>
 
     <h2>Terms of use</h2>
     <p>Coordigo is covered by Apple’s <a href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/">standard licence agreement for apps</a>.</p>
 
     <h2>Contact</h2>
-    <p>Write to <a class="email" data-u="hello" data-d="swiftian.com" href="#">our address</a>, or through <a href="/support/">the support page</a>. Changes to this policy appear here with a new date.</p>
+    <p>Write to <a class="email" data-u="hello" data-d="swiftian.com" href="#">our address</a>, or through <a href="/support/">the support page</a>. If this policy changes what we collect, this page gets a new date and the app's release notes say so.</p>
 
     <footer>
       &copy; 2026 Coordigo &middot; <a href="https://swiftian.com">Swiftian Inc.</a>
