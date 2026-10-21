@@ -1,0 +1,13 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": ["39P72BL7K9.Coordigo"],
+        "components": [
+          { "/": "/mystery", "comment": "Mystery Pictures: the picture is in the #fragment; the app opens it into the Inbox" },
+          { "/": "/mystery/*" }
+        ]
+      }
+    ]
+  }
+}
