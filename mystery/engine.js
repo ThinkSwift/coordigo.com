@@ -1,7 +1,7 @@
 // Coordigo Mystery Pictures — the protocol and the solving rules, for the web player.
 // A line-by-line port of the app (Coordigo: CoordigoKit/Mystery, SheetRaster in Paper.swift, Atomizer in Atoms.swift),
 // so a region colors on the web at the same point it colors in the app. Docs: Coordigo/Docs/PROTOCOL-MYSTERY-v2.md.
-// Checked against the app's own output by Coordigo/Scripts/web-engine-check.sh (run it after changing either side).
+// Checked against the app's own output by Coordigo/scripts/web-engine-check.sh (run it after changing either side).
 (function (root) {
   'use strict';
 
