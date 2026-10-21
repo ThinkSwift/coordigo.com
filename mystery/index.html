@@ -1,0 +1,406 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>A mystery picture — Coordigo</title>
+<!-- The picture travels in the fragment (#…), which never reaches a server: the preview card is fixed, and the page
+     reads the picture on the device. No tracking, no cookies. -->
+<meta name="description" content="Someone drew you a picture as a code. Connect the dots to see what it is.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#f7f4ec" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#15161c" media="(prefers-color-scheme: dark)">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Coordigo">
+<meta property="og:url" content="https://coordigo.com/mystery">
+<meta property="og:title" content="Someone drew you a mystery picture">
+<meta property="og:description" content="Connect the dots to see what it is.">
+<meta property="og:image" content="https://coordigo.com/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="apple-itunes-app" content="app-id=1486330879">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#f7f4ec; --mat:#fffdf8; --ink:#1b1917; --muted:#6d6557;
+    --line:rgba(27,25,23,.14); --hair:rgba(27,25,23,.09);
+    --gold:#a8761a; --grid:rgba(27,25,23,.055); --mark:#d02670; --heart:#e3404d; --wrong:#c7333f;
+    --shadow:0 1px 2px rgba(27,25,23,.07), 0 10px 26px rgba(27,25,23,.08);
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --paper:#15161c; --mat:#1d1f27; --ink:#eae5da; --muted:#9b9486;
+      --line:rgba(234,229,218,.16); --hair:rgba(234,229,218,.10);
+      --gold:#dcac48; --grid:rgba(234,229,218,.05); --mark:#ef5fa0;
+      --shadow:0 1px 2px rgba(0,0,0,.5), 0 12px 30px rgba(0,0,0,.45);
+    }
+  }
+  *{box-sizing:border-box} html,body{margin:0}
+  body{
+    background:var(--paper); color:var(--ink);
+    font-family:"Source Serif 4",Georgia,"Times New Roman",serif;
+    font-size:17px; line-height:1.55; -webkit-font-smoothing:antialiased;
+    background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+    background-size:23px 23px; min-height:100vh;
+  }
+  .mono{font-family:ui-monospace,SFMono-Regular,"SF Mono",Menlo,monospace;font-variant-numeric:tabular-nums}
+  main{max-width:560px;margin:0 auto;padding:0 16px 40px}
+  nav{display:flex;align-items:center;gap:10px;padding:18px 0 10px}
+  nav a{display:flex;align-items:center;gap:10px;text-decoration:none;color:inherit}
+  .mark{width:26px;height:26px;display:flex;align-items:center;justify-content:center;color:#fff;
+    background:var(--mark);font-weight:600;font-size:12px}
+  nav .name{font-weight:600;font-size:17px}
+  nav .hearts{margin-left:auto;font-size:20px;letter-spacing:2px;color:var(--heart)}
+  nav .hearts .gone{color:var(--line)}
+  .caps{font:12px/1.4 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
+  h1{font-weight:600;font-size:28px;line-height:1.2;margin:6px 0 2px}
+  .from{font-style:italic;font-size:18px;color:var(--muted)}
+  .card{background:var(--mat);border:1px solid var(--hair);border-radius:14px;padding:14px 16px;box-shadow:var(--shadow)}
+  .center{text-align:center}
+  .rules{text-align:left;margin:18px 0;font-size:15px}
+  .rules p{margin:4px 0}
+  .btn{display:block;width:100%;text-align:center;text-decoration:none;font:600 16px/1.2 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    border-radius:14px;padding:15px;margin-top:10px;cursor:pointer;border:1px solid var(--ink)}
+  .ink{background:var(--ink);color:var(--paper)}
+  .line{background:transparent;color:var(--ink)}
+  .quiet{border:none;background:none;color:var(--muted);font-weight:500;font-size:14px;padding:10px}
+  .env-grid{width:170px;margin:26px auto 16px;position:relative}
+  .env-grid span{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:84px;color:#1b1917bf}
+  /* The board is paper in both themes: the colors were chosen on white. */
+  .board{background:#fffdf8;border-radius:12px;box-shadow:var(--shadow);padding:6px;touch-action:none;user-select:none;-webkit-user-select:none}
+  .board svg{display:block;width:100%;height:auto;cursor:crosshair}
+  .notice{min-height:26px;margin:12px 2px 6px;font-size:17px}
+  .notice.wrong{color:var(--wrong);font-family:inherit;font-size:15px}
+  /* Lines break between pairs only — never inside one — and a gap marks lifting the pen. */
+  .code{font-size:18px;line-height:1.75;max-height:132px;overflow:auto;word-break:normal;overflow-wrap:normal;word-spacing:.45em}
+  .code .done{opacity:.28}
+  .code .now{background:rgba(168,118,26,.35);font-weight:700;border-radius:3px}
+  .hint{font-size:13px;color:var(--muted);margin-top:8px}
+  .reveal h2{font-weight:600;font-size:26px;margin:0}
+  .reveal .msg{font-style:italic;font-size:19px;margin:10px 0 4px}
+  .badge{font:600 12px -apple-system,sans-serif;color:var(--gold)}
+  .burn{color:#c74d26;font-size:15px;margin:8px 0}
+  .small{font-size:13px;color:var(--muted);margin-top:14px}
+  [hidden]{display:none!important}
+</style>
+</head>
+<body>
+<main>
+  <nav>
+    <a href="/" aria-label="Coordigo"><span class="mark">Co</span><span class="name">Coordigo</span></a>
+    <span class="hearts" id="hearts" hidden aria-live="polite"></span>
+  </nav>
+
+  <!-- No picture, or one that can't be read -->
+  <section id="intro" hidden>
+    <div class="card center">
+      <h1 data-t="title"></h1>
+      <p id="introText"></p>
+      <a class="btn ink" data-t="get" data-store="web-mystery"></a>
+    </div>
+  </section>
+
+  <!-- The envelope -->
+  <section id="envelope" hidden class="center">
+    <div class="env-grid"><svg id="envGrid" viewBox="-0.2 -0.2 15.4 15.4"></svg><span>?</span></div>
+    <h1 data-t="title"></h1>
+    <div class="from" id="envFrom"></div>
+    <div class="caps" id="envLength" style="margin-top:6px"></div>
+    <div class="card rules">
+      <p>♥ <span data-t="hearts"></span></p>
+      <p id="hexLine"># <span data-t="hex"></span></p>
+    </div>
+    <button class="btn ink" id="start" data-t="start"></button>
+    <a class="btn line" id="openApp1" data-t="open" hidden></a>
+    <a class="btn quiet" data-t="get" data-store="web-mystery-envelope"></a>
+  </section>
+
+  <!-- Solving -->
+  <section id="play" hidden>
+    <div class="board" id="board"><svg id="svg" viewBox="-1.25 -1.25 16.75 16.75" aria-label="Mystery picture grid"></svg></div>
+    <div id="panel" class="card" style="margin-top:12px">
+      <div class="notice mono" id="notice" aria-live="polite"></div>
+      <div class="code mono" id="code"></div>
+      <div class="hint" id="hint" data-t="typeHint"></div>
+    </div>
+    <div id="reveal" class="card reveal" style="margin-top:12px" hidden>
+      <div style="display:flex;align-items:baseline;gap:10px;justify-content:space-between">
+        <h2 id="revealTitle"></h2><span class="badge" id="perfect" data-t="perfect" hidden></span>
+      </div>
+      <div class="burn" id="burnLine" data-t="burned" hidden></div>
+      <div class="msg" id="revealMsg" hidden></div>
+      <div class="from" id="revealFrom" style="font-size:14px"></div>
+      <a class="btn ink" data-store="web-mystery-reply"><span data-t="sendBack"></span></a>
+      <p class="small" data-t="sendBackSub"></p>
+      <a class="btn line" id="openApp2" data-t="open" hidden></a>
+    </div>
+  </section>
+</main>
+<script src="strings.js"></script>
+<script src="engine.js"></script>
+<script>
+(() => {
+  'use strict';
+  const M = window.Mystery, $ = id => document.getElementById(id);
+  const NS = 'http://www.w3.org/2000/svg';
+  const STORE = 'https://apps.apple.com/app/id1486330879';
+
+  // MARK: Words — the reader's language, else English.
+  const table = window.MYSTERY_STRINGS;
+  const lang = (() => {
+    for (const raw of navigator.languages || [navigator.language || 'en']) {
+      const l = raw.toLowerCase();
+      if (l.startsWith('zh')) return /hant|tw|hk|mo/.test(l) ? 'zh-Hant' : 'zh-Hans';
+      if (l.startsWith('pt')) return 'pt-BR';
+      const p = l.split('-')[0];
+      if (table[p]) return p;
+    }
+    return 'en';
+  })();
+  document.documentElement.lang = lang;
+  if (lang === 'ar') document.documentElement.dir = 'rtl';
+  const t = (key, ...args) => {
+    let s = (table[lang] && table[lang][key]) || table.en[key] || key, i = 0;
+    return s.replace(/%(?:(\d)\$)?(@|lld|d)/g, (_, n) => String(args[n ? +n - 1 : i++]));
+  };
+  for (const el of document.querySelectorAll('[data-t]')) el.textContent = t(el.dataset.t);
+  for (const el of document.querySelectorAll('[data-store]')) el.href = STORE + '?ct=' + el.dataset.store;
+
+  // MARK: The picture in the link
+
+  const payload = location.hash.slice(1);
+  window.addEventListener('hashchange', () => location.reload());
+  // The app opens the same link (coordigo://…); shown where the app can run.
+  const appleDevice = /iPhone|iPad|Macintosh/.test(navigator.userAgent);
+  for (const id of ['openApp1', 'openApp2']) { $(id).href = 'coordigo://mystery#' + payload; $(id).hidden = !appleDevice || !payload; }
+
+  const store = {
+    get(k) { try { return JSON.parse(localStorage.getItem(k)); } catch (e) { return null; } },
+    set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} },
+  };
+  const keyOf = s => { let h = 0x811c9dc5; for (let i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 0x01000193) >>> 0; } return 'coordigo.mystery.' + h.toString(16); };
+
+  function showIntro(textKey) {
+    $('introText').textContent = t(textKey);
+    $('intro').hidden = false;
+  }
+
+  if (!payload) { showIntro('intro'); return; }
+
+  M.readPayload(payload).then(start, e => showIntro(e && e.kind === 'newer' ? 'newer' : 'broken'));
+
+  function start(picture) {
+    const saveKey = keyOf(payload);
+    let layers;                                   // the board's SVG layers, made when play starts
+    const solve = new M.Solve(picture);
+    const saved = store.get(saveKey);
+    if (saved) solve.resume(saved);
+
+    // MARK: Envelope
+
+    const envGrid = $('envGrid');
+    gridInto(envGrid, false);
+    $('envFrom').textContent = picture.from ? t('from', picture.from) : '';
+    $('envLength').textContent = t(M.length(solve.pointCount));
+    $('hexLine').hidden = !!store.get('coordigo.mystery.hexExplained');
+    $('start').onclick = () => { store.set('coordigo.mystery.hexExplained', true); $('envelope').hidden = true; play(); };
+    if (saved && (saved.segment || saved.point || saved.wrongTotal)) play(); else $('envelope').hidden = false;
+
+    // MARK: Board
+
+    function play() {
+      $('play').hidden = false;
+      $('hearts').hidden = false;
+      const svg = $('svg');
+      gridInto(svg, true);
+      layers = {
+        fill: el('image', { x: 0, y: 0, width: 15, height: 15, preserveAspectRatio: 'none', style: 'image-rendering:pixelated' }, svg),
+        lines: el('g', { stroke: '#1b1917', 'stroke-width': 0.16, 'stroke-linecap': 'round', fill: 'none' }, svg),
+        dots: el('g', { fill: '#1b1917' }, svg),
+        pen: el('circle', { r: 0.28, fill: 'none', stroke: '#a8761a', 'stroke-width': 0.12, visibility: 'hidden' }, svg),
+        ring: el('circle', { r: 0.42, fill: 'rgba(168,118,26,.12)', stroke: 'rgba(168,118,26,.7)', 'stroke-width': 0.06, visibility: 'hidden' }, svg),
+        wrong: el('g', { stroke: '#c7333f', 'stroke-width': 0.14, 'stroke-linecap': 'round', visibility: 'hidden' }, svg),
+      };
+      el('line', { x1: -0.3, y1: -0.3, x2: 0.3, y2: 0.3 }, layers.wrong);
+      el('line', { x1: -0.3, y1: 0.3, x2: 0.3, y2: -0.3 }, layers.wrong);
+      // Lines and dots already found (a picture picked up again).
+      redrawAll();
+      input(svg);
+      render();
+    }
+
+    function redrawAll() {
+      layers.lines.replaceChildren(); layers.dots.replaceChildren();
+      const segs = picture.segments;
+      for (let i = 0; i <= Math.min(solve.segment, segs.length - 1); i++) {
+        const s = segs[i], upto = i < solve.segment ? s.length : solve.point;
+        if (s.length === 1 && upto === 1) dot(s[0]);
+        for (let j = 1; j < upto; j++) line(s[j - 1], s[j]);
+      }
+      paintFills();
+    }
+    const line = (a, b) => el('line', { x1: a.x, y1: a.y, x2: b.x, y2: b.y }, layers.lines);
+    const dot = p => el('circle', { cx: p.x, cy: p.y, r: 0.2 }, layers.dots);
+
+    function paintFills() {
+      const hide = solve.burned && solve.burnsColors;
+      const px = hide ? null : M.pixels(solve.regions, solve.colored);
+      if (!px) { layers.fill.removeAttribute('href'); return; }
+      const c = document.createElement('canvas');
+      c.width = M.W; c.height = M.H;
+      c.getContext('2d').putImageData(new ImageData(px, M.W, M.H), 0, 0);
+      layers.fill.setAttribute('href', c.toDataURL());
+    }
+
+    // MARK: Taps — press, slide to adjust, release to commit (as in the app); or type a pair.
+
+    function input(svg) {
+      const at = e => {
+        const pt = svg.createSVGPoint(); pt.x = e.clientX; pt.y = e.clientY;
+        const p = pt.matrixTransform(svg.getScreenCTM().inverse());
+        const x = Math.round(p.x), y = Math.round(p.y);
+        return x >= 0 && x <= 15 && y >= 0 && y <= 15 && Math.hypot(p.x - x, p.y - y) < 0.75 ? { x, y } : null;
+      };
+      let pressed = false;
+      svg.addEventListener('pointerdown', e => { pressed = true; svg.setPointerCapture(e.pointerId); ring(at(e)); e.preventDefault(); });
+      svg.addEventListener('pointermove', e => { if (pressed || e.pointerType === 'mouse') ring(at(e)); });
+      svg.addEventListener('pointerup', e => { if (!pressed) return; pressed = false; const l = at(e); ring(e.pointerType === 'mouse' ? l : null); if (l) commit(l); });
+      svg.addEventListener('pointercancel', () => { pressed = false; ring(null); });
+      svg.addEventListener('pointerleave', e => { if (e.pointerType === 'mouse') ring(null); });
+      let typed = '';
+      document.addEventListener('keydown', e => {
+        if (e.metaKey || e.ctrlKey || e.altKey || solve.isFinished) return;
+        const ch = e.key.length === 1 ? e.key.toUpperCase() : '';
+        if (M.DIGITS.includes(ch)) {
+          typed += ch;
+          if (typed.length === 2) { const l = { x: M.DIGITS.indexOf(typed[0]), y: M.DIGITS.indexOf(typed[1]) }; typed = ''; commit(l); }
+          else { notice(typed + '_', false); }
+        } else if (e.key === 'Escape' || e.key === 'Backspace') { typed = ''; render(); }
+      });
+    }
+
+    function ring(l) {
+      if (!l || solve.isFinished) { layers.ring.setAttribute('visibility', 'hidden'); return; }
+      layers.ring.setAttribute('cx', l.x); layers.ring.setAttribute('cy', l.y); layers.ring.setAttribute('visibility', 'visible');
+    }
+
+    let wrongTimer;
+    function commit(l) {
+      if (solve.isFinished) return;
+      const step = solve.tap(l);
+      if (step.outcome === 'ignored') return;
+      if (step.outcome === 'wrong') {
+        layers.wrong.setAttribute('transform', `translate(${l.x} ${l.y})`);
+        layers.wrong.setAttribute('visibility', 'visible');
+        notice(t('wrong', M.pair(step.tapped), M.pair(step.wanted)), true);
+        if (navigator.vibrate) navigator.vibrate(40);
+        clearTimeout(wrongTimer);
+        wrongTimer = setTimeout(() => { layers.wrong.setAttribute('visibility', 'hidden'); render(); }, 1600);
+        save(); renderHearts(); renderCode();
+        if (solve.burned && solve.burnsColors) paintFills();
+        return;
+      }
+      clearTimeout(wrongTimer);
+      layers.wrong.setAttribute('visibility', 'hidden');
+      if (step.outcome === 'line') line(step.from, l);
+      if (step.outcome === 'dot') dot(l);
+      if (step.newlyColored.length) paintFills();
+      save();
+      render();
+    }
+
+    const save = () => store.set(saveKey, solve.saved);
+
+    // MARK: What the panel says
+
+    function notice(text, wrong) { const n = $('notice'); n.textContent = text; n.className = 'notice ' + (wrong ? 'wrong' : 'mono'); }
+
+    function render() {
+      renderHearts();
+      const target = solve.target;
+      // The pen sits on the last point of the line being drawn.
+      if (!solve.isFinished && solve.point > 0) {
+        const p = picture.segments[solve.segment][solve.point - 1];
+        layers.pen.setAttribute('cx', p.x); layers.pen.setAttribute('cy', p.y); layers.pen.setAttribute('visibility', 'visible');
+      } else layers.pen.setAttribute('visibility', 'hidden');
+      if (target) notice(solve.burned ? t('burnedNext', M.pair(target)) : t(solve.point === 0 ? 'startAt' : 'next', M.pair(target)), false);
+      renderCode();
+      if (solve.isFinished) reveal();
+    }
+
+    function renderHearts() {
+      const h = $('hearts');
+      h.replaceChildren();
+      for (let k = 0; k < M.HEARTS; k++) { const s = document.createElement('span'); s.textContent = k < solve.heartsLeft ? '♥' : '♡'; if (k >= solve.heartsLeft) s.className = 'gone'; h.appendChild(s); }
+      h.setAttribute('aria-label', t('left', solve.heartsLeft));
+    }
+
+    function renderCode() {
+      const box = $('code');
+      box.replaceChildren();
+      let now;
+      picture.segments.forEach((seg, i) => {
+        if (i > 0) box.appendChild(document.createTextNode(' '));
+        seg.forEach((p, j) => {
+          if (j > 0) box.appendChild(document.createElement('wbr'));
+          const s = document.createElement('span');
+          s.textContent = M.pair(p);
+          if (i < solve.segment || (i === solve.segment && j < solve.point)) s.className = 'done';
+          else if (i === solve.segment && j === solve.point) { s.className = 'now'; now = s; }
+          box.appendChild(s);
+        });
+      });
+      if (now) now.scrollIntoView({ block: 'nearest' });
+    }
+
+    function reveal() {
+      $('panel').hidden = true;
+      layers.pen.setAttribute('visibility', 'hidden');
+      layers.ring.setAttribute('visibility', 'hidden');
+      const wordsBurned = solve.burned && !solve.burnsColors;
+      $('revealTitle').textContent = picture.title && !wordsBurned ? t('its', picture.title) : t('solved');
+      $('perfect').hidden = !solve.perfect;
+      $('burnLine').hidden = !wordsBurned;
+      const m = $('revealMsg');
+      m.hidden = wordsBurned || !picture.message;
+      m.textContent = picture.message ? '“' + picture.message + '”' : '';
+      $('revealFrom').textContent = picture.from ? t('from', picture.from) : '';
+      $('reveal').hidden = false;
+      $('reveal').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+  }
+
+  // MARK: Drawing helpers
+
+  function el(name, attrs, parent) {
+    const e = document.createElementNS(NS, name);
+    for (const [k, v] of Object.entries(attrs)) e.setAttribute(k, v);
+    if (parent) parent.appendChild(e);
+    return e;
+  }
+
+  // The 16 × 16 grid: a line every square, a bolder one every four (0, 4, 8, C), 0–F along the top and left.
+  function gridInto(svg, axes) {
+    el('rect', { x: 0, y: 0, width: 15, height: 15, fill: '#fffdf8' }, svg);
+    const g = el('g', { 'stroke-linecap': 'square' }, svg);
+    for (let i = 0; i <= 15; i++) {
+      const bold = i % 4 === 0 || i === 15;
+      const a = { stroke: bold ? 'rgba(27,25,23,.30)' : 'rgba(27,25,23,.12)', 'stroke-width': bold ? 0.05 : 0.03 };
+      el('line', { x1: i, y1: 0, x2: i, y2: 15, ...a }, g);
+      el('line', { x1: 0, y1: i, x2: 15, y2: i, ...a }, g);
+    }
+    if (!axes) return;
+    const lab = el('g', { 'font-family': 'ui-monospace,SFMono-Regular,Menlo,monospace', 'font-size': 0.62, fill: '#6d6557', 'text-anchor': 'middle' }, svg);
+    for (let i = 0; i <= 15; i++) {
+      const w = i % 4 === 0 ? 700 : 400;
+      el('text', { x: i, y: -0.55, 'font-weight': w }, lab).textContent = M.DIGITS[i];
+      el('text', { x: -0.68, y: i + 0.21, 'font-weight': w }, lab).textContent = M.DIGITS[i];
+    }
+  }
+})();
+</script>
+</body>
+</html>
