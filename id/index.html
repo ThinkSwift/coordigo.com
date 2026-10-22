@@ -15,7 +15,7 @@
 <meta property="og:description" content="Sebuah gambar tetap jadi rahasia sampai seseorang menghubungkan titik-titiknya.">
 <meta property="og:image" content="https://coordigo.com/og.png">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="apple-itunes-app" content="app-id=1486330879">
+<meta name="apple-itunes-app-after-6.2" content="app-id=1486330879">
 <!-- hreflang:start -->
 <link rel="alternate" hreflang="en" href="https://coordigo.com/">
 <link rel="alternate" hreflang="ar" href="https://coordigo.com/ar/">
@@ -156,6 +156,7 @@
     <a href="https://swiftian.com">Swiftian</a>
   </footer>
 </main>
+<script src="/store.js"></script>
 <script src="/mystery/strings.js"></script>
 <script src="/mystery/engine.js"></script>
 <script src="/library.js"></script>
@@ -188,7 +189,8 @@
   for (const el of document.querySelectorAll('[data-store]')) el.href = STORE + '?ct=' + el.dataset.store;
   // Coordigo runs on iPhone, iPad and Mac: elsewhere the store links would lead nowhere.
   const appleDevice = /iPhone|iPad|Macintosh/.test(navigator.userAgent);
-  if (!appleDevice) for (const el of document.querySelectorAll('[data-apple]')) el.hidden = true;
+  // Before Coordigo 6.2 is in the App Store (store.js), no link leads to the app: the store has a different one.
+  if (!appleDevice || window.CO_STORE !== true) for (const el of document.querySelectorAll('[data-apple]')) el.hidden = true;
 
   // MARK: The Library — the app's, in its order; today's picture is the app's too.
   const all = window.CO_LIBRARY || [];
