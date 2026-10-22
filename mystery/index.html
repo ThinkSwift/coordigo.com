@@ -89,6 +89,10 @@
   .burn{color:#c74d26;font-size:15px;margin:8px 0}
   .small{font-size:13px;color:var(--muted);margin-top:14px}
   [hidden]{display:none!important}
+  /* Inside the landing (coordigo.com/): the page around it has the nav and the store links. */
+  .embed nav,.embed [data-store],.embed [data-apple],.embed #openApp1,.embed #openApp2{display:none!important}
+  .embed{background:transparent;min-height:0;display:flow-root}   /* its height is the landing's to set */
+  .embed main{padding-bottom:8px}
 </style>
 </head>
 <body>
@@ -169,6 +173,9 @@
   // MARK: Words — the reader's language, else English.
   const table = window.MYSTERY_STRINGS;
   const lang = (() => {
+    // Inside a landing language page, that page's language (`?lang=ko`).
+    const asked = new URLSearchParams(location.search).get('lang');
+    if (asked && table[asked]) return asked;
     for (const raw of navigator.languages || [navigator.language || 'en']) {
       const l = raw.toLowerCase();
       if (l.startsWith('zh')) return /hant|tw|hk|mo/.test(l) ? 'zh-Hant' : 'zh-Hans';
@@ -188,6 +195,21 @@
   for (const el of document.querySelectorAll('[data-store]')) el.href = STORE + '?ct=' + el.dataset.store;
 
   // MARK: The picture in the link
+
+  // Inside the landing (`?embed`): the landing has the nav and the store links; this page reports its height and
+  // what was solved.
+  const embed = new URLSearchParams(location.search).has('embed');
+  if (embed) {
+    document.body.classList.add('embed');
+    let sent = 0;
+    const tell = () => {
+      const h = Math.ceil(document.body.getBoundingClientRect().height);
+      if (h !== sent) { sent = h; parent.postMessage({ co: 'height', h }, '*'); }
+    };
+    // Observed, and checked twice a second (a font or a section that appears after the payload is read).
+    new ResizeObserver(tell).observe(document.body);
+    setInterval(tell, 500);
+  }
 
   const payload = location.hash.slice(1);
   window.addEventListener('hashchange', () => location.reload());
@@ -439,6 +461,8 @@
           } catch (e) {}
         };
       }
+      store.set(saveKey + '.solved', true);
+      if (embed) parent.postMessage({ co: 'solved', key: saveKey }, '*');
       $('reveal').hidden = false;
       $('reveal').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }
