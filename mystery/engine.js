@@ -11,6 +11,7 @@
   const K = 10;                       // raster cells per unit
   const W = SIDE * K, H = SIDE * K;
   const LIMITS = { m: 120, t: 40, f: 30 };
+  const SIZE = { code: 1500, colorText: 2600, segments: 300, points: 600, fills: 256 };   // MysteryLink.Limits
   const HEARTS = 3;
 
   // 0 ink · 1 grey · 2 white · 3 red · 4 orange · 5 yellow · 6 peach · 7 tan · 8 dark grey · 9 light green ·
@@ -48,7 +49,9 @@
   function parseColors(s) {
     return (s || '').split(/\s+/).filter(Boolean).map(entry => {
       const parts = entry.split(',');
-      const x = parts.length === 3 ? Number(parts[0]) : NaN, y = parts.length === 3 ? Number(parts[1]) : NaN;
+      // `7`, `12` or `7.5` — exactly what the app writes; no signs, exponents or hex (the app reads the same).
+      const num = t => (/^[0-9]{1,2}(\.[0-9])?$/.test(t) ? Number(t) : NaN);
+      const x = parts.length === 3 ? num(parts[0]) : NaN, y = parts.length === 3 ? num(parts[1]) : NaN;
       const c = parts.length === 3 && parts[2].length === 1 ? DIGITS.indexOf(parts[2].toUpperCase()) : -1;
       if (!(parts[0] !== '' && parts[1] !== '' && isFinite(x) && isFinite(y) && c >= 0 && x >= 0 && x <= 15 && y >= 0 && y <= 15)) {
         throw new Problem('badCharacter');
@@ -68,8 +71,21 @@
   }
 
   async function inflateRaw(bytes) {
-    const stream = new Blob([bytes]).stream().pipeThrough(new DecompressionStream('deflate-raw'));
-    return new Uint8Array(await new Response(stream).arrayBuffer());
+    // At most 16 KB out (MysteryLink.Limits.inflated): a crafted link cannot balloon in the page.
+    const reader = new Blob([bytes]).stream().pipeThrough(new DecompressionStream('deflate-raw')).getReader();
+    const chunks = [];
+    let size = 0;
+    for (;;) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      size += value.length;
+      if (size > 16384) { reader.cancel(); throw new Problem('broken'); }
+      chunks.push(value);
+    }
+    const out = new Uint8Array(size);
+    let at = 0;
+    for (const c of chunks) { out.set(c, at); at += c.length; }
+    return out;
   }
 
   const clip = (s, n) => {
@@ -91,10 +107,17 @@
       try { bytes = await inflate(packed); } catch (e) { bytes = packed; }
       json = JSON.parse(new TextDecoder().decode(bytes));
     } catch (e) { throw new Problem('broken'); }
-    if (!json || typeof json.v !== 'number' || typeof json.d !== 'string') throw new Problem('broken');
+    // The app's rules: v a whole number; the texts strings when present; a 16 × 16 picture's worth, no more.
+    const text = k => json[k] === undefined || json[k] === null || typeof json[k] === 'string';
+    if (!json || !Number.isInteger(json.v) || typeof json.d !== 'string' || !['c', 'm', 't', 'f', 'ct'].every(text)) {
+      throw new Problem('broken');
+    }
     if (json.v > VERSION) throw new Problem('newer');
     let segments, colors;
+    if (json.d.length > SIZE.code || (json.c || '').length > SIZE.colorText) throw new Problem('broken');
     try { segments = parseCode(json.d); colors = parseColors(json.c); } catch (e) { throw new Problem('broken'); }
+    if (segments.length > SIZE.segments || segments.reduce((n, s) => n + s.length, 0) > SIZE.points ||
+        colors.length > SIZE.fills) throw new Problem('broken');
     return { segments, colors, message: clip(json.m, LIMITS.m), title: clip(json.t, LIMITS.t),
              from: clip(json.f, LIMITS.f), campaign: typeof json.ct === 'string' ? json.ct : null };
   }

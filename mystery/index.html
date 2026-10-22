@@ -18,6 +18,10 @@
 <meta property="og:image" content="https://coordigo.com/og.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="apple-itunes-app" content="app-id=1486330879">
+<script>
+  // The banner's "Open" carries the picture into the app (the fragment never reaches a server).
+  document.querySelector('meta[name="apple-itunes-app"]').content = 'app-id=1486330879, app-argument=' + location.href;
+</script>
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -103,6 +107,17 @@
     </div>
   </section>
 
+  <!-- No picture: how a code names a point, in three taps, then the birthday cake (the app's first launch too) -->
+  <section id="lesson" hidden>
+    <div class="caps" data-t="lessonCaps"></div>
+    <h1 id="lessonPrompt" style="margin:6px 0 4px"></h1>
+    <p id="lessonHint" style="color:var(--muted);margin:0 0 6px"></p>
+    <div class="notice wrong" id="lessonMiss" aria-live="polite"></div>
+    <div class="board"><svg id="lessonSvg" viewBox="-0.7 -0.6 8.4 3.5" aria-label="Points"></svg></div>
+    <button class="btn ink" id="lessonNext" data-t="lessonNext" style="margin-top:16px" hidden></button>
+    <button class="btn quiet" id="lessonSkip" data-t="skip"></button>
+  </section>
+
   <!-- The envelope -->
   <section id="envelope" hidden class="center">
     <div class="env-grid"><svg id="envGrid" viewBox="-0.2 -0.2 15.4 15.4"></svg><span>?</span></div>
@@ -110,7 +125,7 @@
     <div class="from" id="envFrom"></div>
     <div class="caps" id="envLength" style="margin-top:6px"></div>
     <div class="card rules">
-      <p>♥ <span data-t="hearts"></span></p>
+      <p>♥ <span id="heartsLine"></span></p>
       <p id="hexLine"># <span data-t="hex"></span></p>
     </div>
     <button class="btn ink" id="start" data-t="start"></button>
@@ -133,14 +148,17 @@
       <div class="burn" id="burnLine" data-t="burned" hidden></div>
       <div class="msg" id="revealMsg" hidden></div>
       <div class="from" id="revealFrom" style="font-size:14px"></div>
-      <a class="btn ink" data-store="web-mystery-reply"><span data-t="sendBack"></span></a>
-      <p class="small" data-t="sendBackSub"></p>
+      <a class="btn ink" data-store="web-mystery-reply" data-apple><span data-t="sendBack"></span></a>
+      <p class="small" data-t="sendBackSub" data-apple></p>
+      <!-- Where the App Store can't help (Android, Windows): a reply to the sender is still one tap away. -->
+      <button class="btn ink" id="tellThem" data-t="tellThem" hidden></button>
       <a class="btn line" id="openApp2" data-t="open" hidden></a>
     </div>
   </section>
 </main>
 <script src="strings.js"></script>
 <script src="engine.js"></script>
+<script src="cake.js"></script>
 <script>
 (() => {
   'use strict';
@@ -175,6 +193,8 @@
   window.addEventListener('hashchange', () => location.reload());
   // The app opens the same link (coordigo://…); shown where the app can run.
   const appleDevice = /iPhone|iPad|Macintosh/.test(navigator.userAgent);
+  // Coordigo runs on iPhone, iPad and Mac only: elsewhere the store links would lead nowhere.
+  if (!appleDevice) for (const el of document.querySelectorAll('[data-store], [data-apple]')) el.hidden = true;
   for (const id of ['openApp1', 'openApp2']) { $(id).href = 'coordigo://mystery#' + payload; $(id).hidden = !appleDevice || !payload; }
 
   const store = {
@@ -188,7 +208,46 @@
     $('intro').hidden = false;
   }
 
-  if (!payload) { showIntro('intro'); return; }
+  if (!payload) { lesson(); return; }
+
+  // MARK: The lesson — tap 30 (across), then 12 and 52 (down): a triangle.
+
+  function lesson() {
+    const targets = [[3, 0], [1, 2], [5, 2]], code = ([x, y]) => M.DIGITS[x] + M.DIGITS[y];
+    const tapped = [], svg = $('lessonSvg');
+    $('lesson').hidden = false;
+    $('lessonSkip').onclick = () => { $('lesson').hidden = true; showIntro('intro'); };
+    $('lessonNext').onclick = () => { location.hash = (window.MYSTERY_CAKE || {})[lang] || window.MYSTERY_CAKE.en; };
+    function draw() {
+      const step = tapped.length, done = step === targets.length, rows = step === 0 ? 1 : 3;
+      svg.textContent = '';
+      if (tapped.length) {
+        const pts = tapped.map(([x, y]) => x + ',' + y).join(' ');
+        el(done ? 'polygon' : 'polyline', { points: pts, fill: done ? 'rgb(255,214,10)' : 'none', stroke: '#1f1c1f',
+          'stroke-width': 0.08, 'stroke-linejoin': 'round', 'stroke-linecap': 'round' }, svg);
+      }
+      for (let y = 0; y < rows; y++) for (let x = 0; x < 8; x++) {
+        const hit = tapped.some(p => p[0] === x && p[1] === y);
+        const g = el('g', { role: 'button', 'aria-label': code([x, y]), style: 'cursor:pointer' }, svg);
+        el('circle', { cx: x, cy: y, r: 0.45, fill: 'transparent' }, g);
+        el('circle', { cx: x, cy: y, r: hit ? 0.13 : 0.09, fill: hit ? '#1f1c1f' : 'rgba(31,28,31,.4)' }, g);
+        el('text', { x, y: y + 0.42, 'text-anchor': 'middle', 'font-size': 0.26, fill: '#6d6557',
+          'font-family': 'ui-monospace,SFMono-Regular,Menlo,monospace' }, g).textContent = code([x, y]);
+        if (!done && !hit) g.addEventListener('click', () => tap([x, y]));
+      }
+      $('lessonPrompt').textContent = done ? t('lessonDone') : t('lessonTap', code(targets[step]));
+      $('lessonHint').textContent = t(done ? 'lessonDoneSub' : ['lessonHint1', 'lessonHint2', 'lessonHint3'][step]);
+      $('lessonNext').hidden = !done;
+      $('lessonSkip').hidden = done;
+    }
+    function tap(p) {
+      const want = targets[tapped.length];
+      if (p[0] === want[0] && p[1] === want[1]) { tapped.push(p); $('lessonMiss').textContent = ''; }
+      else $('lessonMiss').textContent = t('lessonMiss', code(p), code(want));
+      draw();
+    }
+    draw();
+  }
 
   M.readPayload(payload).then(start, e => showIntro(e && e.kind === 'newer' ? 'newer' : 'broken'));
 
@@ -205,6 +264,7 @@
     gridInto(envGrid, false);
     $('envFrom').textContent = picture.from ? t('from', picture.from) : '';
     $('envLength').textContent = t(M.length(solve.pointCount));
+    $('heartsLine').textContent = t(solve.burnsColors ? 'heartsColors' : 'heartsMessage');
     $('hexLine').hidden = !!store.get('coordigo.mystery.hexExplained');
     $('start').onclick = () => { store.set('coordigo.mystery.hexExplained', true); $('envelope').hidden = true; play(); };
     if (saved && (saved.segment || saved.point || saved.wrongTotal)) play(); else $('envelope').hidden = false;
@@ -368,6 +428,17 @@
       m.hidden = wordsBurned || !picture.message;
       m.textContent = picture.message ? '“' + picture.message + '”' : '';
       $('revealFrom').textContent = picture.from ? t('from', picture.from) : '';
+      if (!appleDevice) {
+        const tell = $('tellThem');
+        tell.hidden = false;
+        tell.onclick = async () => {
+          const text = t('solvedShare') + (picture.title && !wordsBurned ? ' ' + t('its', picture.title) : '');
+          try {
+            if (navigator.share) await navigator.share({ text });
+            else { await navigator.clipboard.writeText(text); tell.textContent = t('copied'); }
+          } catch (e) {}
+        };
+      }
       $('reveal').hidden = false;
       $('reveal').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }
