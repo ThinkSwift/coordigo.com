@@ -82,7 +82,7 @@
   .notice{min-height:26px;margin:12px 2px 6px;font-size:17px}
   .notice.wrong{color:var(--wrong);font-family:inherit;font-size:15px}
   /* Lines break between pairs only — never inside one — and a gap marks lifting the pen. */
-  .code{font-size:18px;line-height:1.75;max-height:132px;overflow:auto;word-break:normal;overflow-wrap:normal;word-spacing:.45em}
+  .code{position:relative;font-size:18px;line-height:1.75;max-height:132px;overflow:auto;word-break:normal;overflow-wrap:normal;word-spacing:.45em}
   .code .done{opacity:.28}
   .code .now{background:rgba(168,118,26,.35);font-weight:700;border-radius:3px}
   .px{color:var(--x)} .py{color:var(--y)}
@@ -100,7 +100,11 @@
   .small{font-size:13px;color:var(--muted);margin-top:14px}
   [hidden]{display:none!important}
   /* Inside the landing (coordigo.com/): the page around it has the nav and the store links. */
-  .embed nav,.embed [data-store],.embed [data-apple],.embed #openApp1,.embed #openApp2{display:none!important}
+  .embed nav > a,.embed [data-store],.embed [data-apple],.embed #openApp1,.embed #openApp2{display:none!important}
+  .embed nav{padding:0 12px 4px;min-height:0}   /* only the hearts: the landing has the brand */
+  /* The first point, shown once: where to begin on a page that opens straight on the board. */
+  @keyframes beckon{0%{r:.3;opacity:.9}70%{r:.75;opacity:0}100%{r:.75;opacity:0}}
+  .beckon{animation:beckon 1.4s ease-out infinite}
   .embed{background:transparent;min-height:0;display:flow-root}   /* its height is the landing's to set */
   .embed main{padding-bottom:8px}
 </style>
@@ -155,6 +159,7 @@
       <div class="notice mono" id="notice" aria-live="polite"></div>
       <div class="code mono" id="code"></div>
       <div class="hint" id="hint" data-t="typeHint"></div>
+      <div class="hint" id="heartsHint" hidden></div>
     </div>
     <div id="reveal" class="card reveal" style="margin-top:12px" hidden>
       <div style="display:flex;align-items:baseline;gap:10px;justify-content:space-between">
@@ -301,6 +306,7 @@
   function start(picture) {
     const saveKey = keyOf(payload);
     let layers;                                   // the board's SVG layers, made when play starts
+    let lit = null;                               // the column and row lit on the axes (a press, or the first point)
     const solve = new M.Solve(picture);
     const saved = store.get(saveKey);
     if (saved) solve.resume(saved);
@@ -314,7 +320,10 @@
     $('heartsLine').textContent = t(solve.burnsColors ? 'heartsColors' : 'heartsMessage');
     $('hexLine').hidden = !!store.get('coordigo.mystery.hexExplained');
     $('start').onclick = () => { store.set('coordigo.mystery.hexExplained', true); $('envelope').hidden = true; play(); };
-    if (saved && (saved.segment || saved.point || saved.wrongTotal)) play(); else $('envelope').hidden = false;
+    // On the landing the board is open at once (founder 2026-10-23: no envelope, no Start — the first tap starts it);
+    // a link someone sent opens on its envelope, which names who it is from.
+    if (embed || (saved && (saved.segment || saved.point || saved.wrongTotal))) { store.set('coordigo.mystery.hexExplained', true); play(); }
+    else $('envelope').hidden = false;
 
     // MARK: Board
 
@@ -329,6 +338,7 @@
         dots: el('g', { fill: '#1b1917' }, svg),
         pen: el('circle', { r: 0.28, fill: 'none', stroke: '#a8761a', 'stroke-width': 0.12, visibility: 'hidden' }, svg),
         guides: el('g', { 'stroke-width': 0.06, 'stroke-dasharray': '0.2 0.16', visibility: 'hidden' }, svg),
+        beckon: el('circle', { r: 0.5, fill: 'none', stroke: '#a8761a', 'stroke-width': 0.1, class: 'beckon', visibility: 'hidden' }, svg),
         ring: el('circle', { r: 0.42, fill: 'rgba(168,118,26,.12)', stroke: 'rgba(168,118,26,.7)', 'stroke-width': 0.06, visibility: 'hidden' }, svg),
         wrong: el('g', { stroke: '#c7333f', 'stroke-width': 0.14, 'stroke-linecap': 'round', visibility: 'hidden' }, svg),
       };
@@ -338,6 +348,7 @@
       // Lines and dots already found (a picture picked up again).
       redrawAll();
       input(svg);
+      if (embed) { const h = $('heartsHint'); h.textContent = '♥ ' + t(solve.burnsColors ? 'heartsColors' : 'heartsMessage'); h.hidden = false; }
       render();
     }
 
@@ -393,8 +404,7 @@
 
     // Where the finger is: the ring, its column lit on top and its row on the left, and a guide to each — a finger
     // covers the point it aims at, the axes say which it is before it lifts.
-    let lit = null;
-    function ring(l) {
+    function ring(l, beckoned) {
       if (lit) {
         axisX[lit.x].setAttribute('fill-opacity', 0.72); axisX[lit.x].removeAttribute('font-size'); axisX[lit.x].setAttribute('font-weight', lit.x % 4 === 0 ? 700 : 500);
         axisY[lit.y].setAttribute('fill-opacity', 0.72); axisY[lit.y].removeAttribute('font-size'); axisY[lit.y].setAttribute('font-weight', lit.y % 4 === 0 ? 700 : 500);
@@ -403,7 +413,8 @@
       if (!l || solve.isFinished) { layers.ring.setAttribute('visibility', 'hidden'); layers.guides.setAttribute('visibility', 'hidden'); return; }
       layers.ring.setAttribute('cx', l.x); layers.ring.setAttribute('cy', l.y); layers.ring.setAttribute('visibility', 'visible');
       for (const a of [axisX[l.x], axisY[l.y]]) { a.setAttribute('fill-opacity', 1); a.setAttribute('font-size', 0.8); a.setAttribute('font-weight', 800); }
-      lit = l;
+      lit = { x: l.x, y: l.y, beckoned: !!beckoned };
+      if (beckoned) layers.ring.setAttribute('visibility', 'hidden');
       const [gx, gy] = layers.guides.children;
       gx.setAttribute('x1', l.x); gx.setAttribute('x2', l.x); gx.setAttribute('y1', -0.2); gx.setAttribute('y2', l.y);
       gy.setAttribute('y1', l.y); gy.setAttribute('y2', l.y); gy.setAttribute('x1', -0.2); gy.setAttribute('x2', l.x);
@@ -458,6 +469,11 @@
         layers.pen.setAttribute('cx', p.x); layers.pen.setAttribute('cy', p.y); layers.pen.setAttribute('visibility', 'visible');
       } else layers.pen.setAttribute('visibility', 'hidden');
       if (target) notice(solve.burned ? t('burnedNext', M.pair(target)) : t(solve.point === 0 ? 'startAt' : 'next', M.pair(target)), false, target);
+      // Nothing placed yet on a board that opened by itself: the first point beckons, its column and row lit.
+      const first = embed && target && solve.segment === 0 && solve.point === 0 && !solve.wrongTotal;
+      layers.beckon.setAttribute('visibility', first ? 'visible' : 'hidden');
+      if (first) { layers.beckon.setAttribute('cx', target.x); layers.beckon.setAttribute('cy', target.y); if (!lit) ring(target, true); }
+      else if (lit && lit.beckoned) ring(null);
       renderCode();
       if (solve.isFinished) reveal();
     }
@@ -483,7 +499,12 @@
           box.appendChild(s);
         });
       });
-      if (now) now.scrollIntoView({ block: 'nearest' });
+      // Keep the point wanted now in view inside the code box only (scrollIntoView would also move the page around it).
+      if (now) {
+        const top = now.offsetTop, bottom = top + now.offsetHeight;      // the box is the span's offset parent
+        if (top < box.scrollTop) box.scrollTop = top;
+        else if (bottom > box.scrollTop + box.clientHeight) box.scrollTop = bottom - box.clientHeight;
+      }
     }
 
     function reveal() {
