@@ -33,13 +33,15 @@
     --paper:#f7f4ec; --mat:#fffdf8; --ink:#1b1917; --muted:#6d6557;
     --line:rgba(27,25,23,.14); --hair:rgba(27,25,23,.09);
     --gold:#a8761a; --grid:rgba(27,25,23,.055); --mark:#d02670; --heart:#e3404d; --wrong:#c7333f;
+    /* A pair is column then row: the first digit goes across (blue, the top axis), the second down (orange, the left). */
+    --x:#1f6bd1; --y:#d0631a;
     --shadow:0 1px 2px rgba(27,25,23,.07), 0 10px 26px rgba(27,25,23,.08);
   }
   @media (prefers-color-scheme: dark){
     :root{
       --paper:#15161c; --mat:#1d1f27; --ink:#eae5da; --muted:#9b9486;
       --line:rgba(234,229,218,.16); --hair:rgba(234,229,218,.10);
-      --gold:#dcac48; --grid:rgba(234,229,218,.05); --mark:#ef5fa0;
+      --gold:#dcac48; --grid:rgba(234,229,218,.05); --mark:#ef5fa0; --x:#6aa6ff; --y:#ff9a52;
       --shadow:0 1px 2px rgba(0,0,0,.5), 0 12px 30px rgba(0,0,0,.45);
     }
   }
@@ -83,6 +85,12 @@
   .code{font-size:18px;line-height:1.75;max-height:132px;overflow:auto;word-break:normal;overflow-wrap:normal;word-spacing:.45em}
   .code .done{opacity:.28}
   .code .now{background:rgba(168,118,26,.35);font-weight:700;border-radius:3px}
+  .px{color:var(--x)} .py{color:var(--y)}
+  .code .done .px,.code .done .py{color:inherit}
+  /* A phone: the board takes the screen's width, as Photos does with a picture. */
+  @media (max-width:600px){ main{padding:0 12px 40px} .board{margin:0 -12px;border-radius:0;padding:2px} }
+  .embed main{padding:0 0 8px} .embed #panel,.embed #reveal,.embed #notice{margin-left:12px;margin-right:12px}
+  .embed .board{margin:0;border-radius:0;padding:2px}
   .hint{font-size:13px;color:var(--muted);margin-top:8px}
   .reveal h2{font-weight:600;font-size:26px;margin:0}
   .reveal .msg{font-style:italic;font-size:19px;margin:10px 0 4px}
@@ -141,7 +149,7 @@
 
   <!-- Solving -->
   <section id="play" hidden>
-    <div class="board" id="board"><svg id="svg" viewBox="-1.25 -1.25 16.75 16.75" aria-label="Mystery picture grid"></svg></div>
+    <div class="board" id="board"><svg id="svg" viewBox="-1.15 -1.15 16.6 16.6" aria-label="Mystery picture grid"></svg></div>
     <div id="panel" class="card" style="margin-top:12px">
       <div class="notice mono" id="notice" aria-live="polite"></div>
       <div class="code mono" id="code"></div>
@@ -258,11 +266,22 @@
         const g = el('g', { role: 'button', 'aria-label': code([x, y]), style: 'cursor:pointer' }, svg);
         el('circle', { cx: x, cy: y, r: 0.45, fill: 'transparent' }, g);
         el('circle', { cx: x, cy: y, r: hit ? 0.13 : 0.09, fill: hit ? '#1f1c1f' : 'rgba(31,28,31,.4)' }, g);
-        el('text', { x, y: y + 0.42, 'text-anchor': 'middle', 'font-size': 0.26, fill: '#6d6557',
-          'font-family': 'ui-monospace,SFMono-Regular,Menlo,monospace' }, g).textContent = code([x, y]);
+        const label = el('text', { x, y: y + 0.42, 'text-anchor': 'middle', 'font-size': 0.26, 'font-weight': 600,
+          'font-family': 'ui-monospace,SFMono-Regular,Menlo,monospace' }, g);
+        el('tspan', { fill: '#1f6bd1' }, label).textContent = M.DIGITS[x];        // across: the first digit
+        el('tspan', { fill: '#d0631a' }, label).textContent = M.DIGITS[y];        // down: the second
         if (!done && !hit) g.addEventListener('click', () => tap([x, y]));
       }
-      $('lessonPrompt').textContent = done ? t('lessonDone') : t('lessonTap', code(targets[step]));
+      const prompt = $('lessonPrompt');
+      if (done) prompt.textContent = t('lessonDone');
+      else {
+        // The pair to tap in the axes' colours (its digits are found in the text, wherever the language puts them).
+        const want = targets[step], text = t('lessonTap', code(want)), at = text.lastIndexOf(code(want));
+        prompt.replaceChildren(text.slice(0, at));
+        const a = document.createElement('span'); a.style.color = 'var(--x)'; a.textContent = M.DIGITS[want[0]];
+        const b = document.createElement('span'); b.style.color = 'var(--y)'; b.textContent = M.DIGITS[want[1]];
+        prompt.append(a, b, text.slice(at + 2));
+      }
       $('lessonHint').textContent = t(done ? 'lessonDoneSub' : ['lessonHint1', 'lessonHint2', 'lessonHint3'][step]);
       $('lessonNext').hidden = !done;
       $('lessonSkip').hidden = done;
@@ -308,9 +327,11 @@
         lines: el('g', { stroke: '#1b1917', 'stroke-width': 0.16, 'stroke-linecap': 'round', fill: 'none' }, svg),
         dots: el('g', { fill: '#1b1917' }, svg),
         pen: el('circle', { r: 0.28, fill: 'none', stroke: '#a8761a', 'stroke-width': 0.12, visibility: 'hidden' }, svg),
+        guides: el('g', { 'stroke-width': 0.06, 'stroke-dasharray': '0.2 0.16', visibility: 'hidden' }, svg),
         ring: el('circle', { r: 0.42, fill: 'rgba(168,118,26,.12)', stroke: 'rgba(168,118,26,.7)', 'stroke-width': 0.06, visibility: 'hidden' }, svg),
         wrong: el('g', { stroke: '#c7333f', 'stroke-width': 0.14, 'stroke-linecap': 'round', visibility: 'hidden' }, svg),
       };
+      el('line', { stroke: X_COLOR }, layers.guides); el('line', { stroke: Y_COLOR }, layers.guides);
       el('line', { x1: -0.3, y1: -0.3, x2: 0.3, y2: 0.3 }, layers.wrong);
       el('line', { x1: -0.3, y1: 0.3, x2: 0.3, y2: -0.3 }, layers.wrong);
       // Lines and dots already found (a picture picked up again).
@@ -369,9 +390,23 @@
       });
     }
 
+    // Where the finger is: the ring, its column lit on top and its row on the left, and a guide to each — a finger
+    // covers the point it aims at, the axes say which it is before it lifts.
+    let lit = null;
     function ring(l) {
-      if (!l || solve.isFinished) { layers.ring.setAttribute('visibility', 'hidden'); return; }
+      if (lit) {
+        axisX[lit.x].setAttribute('fill-opacity', 0.72); axisX[lit.x].removeAttribute('font-size'); axisX[lit.x].setAttribute('font-weight', lit.x % 4 === 0 ? 700 : 500);
+        axisY[lit.y].setAttribute('fill-opacity', 0.72); axisY[lit.y].removeAttribute('font-size'); axisY[lit.y].setAttribute('font-weight', lit.y % 4 === 0 ? 700 : 500);
+        lit = null;
+      }
+      if (!l || solve.isFinished) { layers.ring.setAttribute('visibility', 'hidden'); layers.guides.setAttribute('visibility', 'hidden'); return; }
       layers.ring.setAttribute('cx', l.x); layers.ring.setAttribute('cy', l.y); layers.ring.setAttribute('visibility', 'visible');
+      for (const a of [axisX[l.x], axisY[l.y]]) { a.setAttribute('fill-opacity', 1); a.setAttribute('font-size', 0.8); a.setAttribute('font-weight', 800); }
+      lit = l;
+      const [gx, gy] = layers.guides.children;
+      gx.setAttribute('x1', l.x); gx.setAttribute('x2', l.x); gx.setAttribute('y1', -0.2); gx.setAttribute('y2', l.y);
+      gy.setAttribute('y1', l.y); gy.setAttribute('y2', l.y); gy.setAttribute('x1', -0.2); gy.setAttribute('x2', l.x);
+      layers.guides.setAttribute('visibility', 'visible');
     }
 
     let wrongTimer;
@@ -382,7 +417,7 @@
       if (step.outcome === 'wrong') {
         layers.wrong.setAttribute('transform', `translate(${l.x} ${l.y})`);
         layers.wrong.setAttribute('visibility', 'visible');
-        notice(t('wrong', M.pair(step.tapped), M.pair(step.wanted)), true);
+        notice(t('wrong', M.pair(step.tapped), M.pair(step.wanted)), true, step.wanted);
         if (navigator.vibrate) navigator.vibrate(40);
         clearTimeout(wrongTimer);
         wrongTimer = setTimeout(() => { layers.wrong.setAttribute('visibility', 'hidden'); render(); }, 1600);
@@ -403,7 +438,15 @@
 
     // MARK: What the panel says
 
-    function notice(text, wrong) { const n = $('notice'); n.textContent = text; n.className = 'notice ' + (wrong ? 'wrong' : 'mono'); }
+    function notice(text, wrong, pair) {
+      const n = $('notice');
+      n.className = 'notice ' + (wrong ? 'wrong' : 'mono');
+      n.replaceChildren();
+      // The pair it names wears the axes' colours.
+      const at = pair ? text.lastIndexOf(M.pair(pair)) : -1;
+      if (at < 0) { n.textContent = text; return; }
+      n.append(text.slice(0, at)); pairSpans(pair, n); n.append(text.slice(at + 2));
+    }
 
     function render() {
       renderHearts();
@@ -413,7 +456,7 @@
         const p = picture.segments[solve.segment][solve.point - 1];
         layers.pen.setAttribute('cx', p.x); layers.pen.setAttribute('cy', p.y); layers.pen.setAttribute('visibility', 'visible');
       } else layers.pen.setAttribute('visibility', 'hidden');
-      if (target) notice(solve.burned ? t('burnedNext', M.pair(target)) : t(solve.point === 0 ? 'startAt' : 'next', M.pair(target)), false);
+      if (target) notice(solve.burned ? t('burnedNext', M.pair(target)) : t(solve.point === 0 ? 'startAt' : 'next', M.pair(target)), false, target);
       renderCode();
       if (solve.isFinished) reveal();
     }
@@ -433,8 +476,7 @@
         if (i > 0) box.appendChild(document.createTextNode(' '));
         seg.forEach((p, j) => {
           if (j > 0) box.appendChild(document.createElement('wbr'));
-          const s = document.createElement('span');
-          s.textContent = M.pair(p);
+          const s = pairSpans(p, document.createElement('span'));
           if (i < solve.segment || (i === solve.segment && j < solve.point)) s.className = 'done';
           else if (i === solve.segment && j === solve.point) { s.className = 'now'; now = s; }
           box.appendChild(s);
@@ -493,12 +535,25 @@
       el('line', { x1: 0, y1: i, x2: 15, y2: i, ...a }, g);
     }
     if (!axes) return;
-    const lab = el('g', { 'font-family': 'ui-monospace,SFMono-Regular,Menlo,monospace', 'font-size': 0.62, fill: '#6d6557', 'text-anchor': 'middle' }, svg);
+    // Across on top in blue, down the left in orange: the colours the code's two digits wear.
+    const lab = el('g', { 'font-family': 'ui-monospace,SFMono-Regular,Menlo,monospace', 'font-size': 0.62, 'text-anchor': 'middle' }, svg);
+    axisX = []; axisY = [];
     for (let i = 0; i <= 15; i++) {
-      const w = i % 4 === 0 ? 700 : 400;
-      el('text', { x: i, y: -0.55, 'font-weight': w }, lab).textContent = M.DIGITS[i];
-      el('text', { x: -0.68, y: i + 0.21, 'font-weight': w }, lab).textContent = M.DIGITS[i];
+      const w = i % 4 === 0 ? 700 : 500;
+      const tx = el('text', { x: i, y: -0.55, 'font-weight': w, fill: X_COLOR, 'fill-opacity': 0.72 }, lab); tx.textContent = M.DIGITS[i];
+      const ty = el('text', { x: -0.68, y: i + 0.21, 'font-weight': w, fill: Y_COLOR, 'fill-opacity': 0.72 }, lab); ty.textContent = M.DIGITS[i];
+      axisX.push(tx); axisY.push(ty);
     }
+  }
+  // The board is paper in both themes: the axis colours are the light ones.
+  const X_COLOR = '#1f6bd1', Y_COLOR = '#d0631a';
+  let axisX = [], axisY = [];
+  /// A pair in two colours: column (across) then row (down).
+  function pairSpans(p, parent) {
+    const a = document.createElement('span'); a.className = 'px'; a.textContent = M.DIGITS[p.x];
+    const b = document.createElement('span'); b.className = 'py'; b.textContent = M.DIGITS[p.y];
+    parent.append(a, b);
+    return parent;
   }
 })();
 </script>
