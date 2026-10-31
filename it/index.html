@@ -81,8 +81,17 @@
   .play{background:var(--mat);border:1px solid var(--hair);border-radius:16px;box-shadow:var(--shadow);padding:10px 4px 2px}
   .play .caps{padding:4px 14px 0}
   .play iframe{display:block;width:100%;height:640px;border:0;background:transparent}
+  /* The intro film shows first; today's picture (or a tile) takes its place. */
+  .film{position:relative;margin:0 6px}
+  .film video{display:block;width:100%;aspect-ratio:1;border-radius:10px;background:#fff}
+  .film .sound{position:absolute;right:10px;bottom:10px;width:36px;height:36px;border:0;border-radius:999px;cursor:pointer;
+    display:flex;align-items:center;justify-content:center;background:rgba(27,25,23,.55);color:#fff}
+  .film .sound svg{width:18px;height:18px}
+  .try{display:block;margin:12px auto 12px;font:600 15px/1.2 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;cursor:pointer;
+    border:1px solid var(--ink);border-radius:999px;padding:10px 20px;background:none;color:var(--ink)}
   /* A phone: the board takes the screen's width (as Photos does with a picture) — no card margin around it. */
   @media (max-width:600px){ .play{margin:0 -16px;border-radius:0;border-left:0;border-right:0;padding:8px 0 0}
+    .film{margin:0} .film video{border-radius:0}
     h1{font-size:26px;margin:6px 0 8px} .lede{font-size:16px} .hero{padding-top:12px;gap:14px} }
   section{padding:30px 0 6px}
   .sub{color:var(--muted);margin:0 0 14px;max-width:36em}
@@ -121,8 +130,13 @@
       <p class="lede" data-t="heroSub">Friends send each other 16 × 16 pictures as a code. Try one here — no app needed.</p>
     </div>
     <div class="play" id="play">
-      <div class="caps" id="playCaps"></div>
-      <iframe id="player" title="Mystery picture"></iframe>
+      <div class="film" id="film">
+        <video id="filmVideo" src="/intro.mp4" poster="/intro.jpg" autoplay muted loop playsinline preload="auto" aria-label="Coordigo"></video>
+        <button class="sound" id="sound" type="button" aria-label="Sound" aria-pressed="false"></button>
+      </div>
+      <button class="try" id="try" type="button" data-t="todayCaps">Today's picture</button>
+      <div class="caps" id="playCaps" hidden></div>
+      <iframe id="player" title="Mystery picture" hidden></iframe>
     </div>
   </header>
 
@@ -211,6 +225,11 @@
   let current = null;
   function open(item, scroll) {
     current = item;
+    if (!$('film').hidden) {
+      $('filmVideo').pause();
+      $('film').hidden = $('try').hidden = true;
+      $('playCaps').hidden = player.hidden = false;
+    }
     const n = toSolve.indexOf(item) + 1;
     $('playCaps').textContent = item === today ? t('todayCaps') : item.theme === 'messages' ? t('msgCaps') : t('number', n);
     player.src = '/mystery/?embed&lang=' + encodeURIComponent(lang) + '#' + localized(item);
@@ -294,7 +313,18 @@
     for (const e of document.querySelectorAll('.tile')) e.classList.toggle('on', !!current && e.dataset.id === current.id);
   }
 
-  if (today) open(today, false);
+  // MARK: The intro film — muted until asked; still for readers who turn motion off.
+  const film = $('filmVideo'), sound = $('sound');
+  const speaker = on => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">'
+    + '<path d="M4 9h4l5-4v14l-5-4H4z" fill="currentColor"/>' + (on ? '<path d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12"/>' : '<path d="M17 9l5 6M22 9l-5 6"/>') + '</svg>';
+  sound.innerHTML = speaker(false);
+  sound.onclick = () => {
+    film.muted = !film.muted;
+    if (!film.muted) film.play();
+    sound.innerHTML = speaker(!film.muted); sound.setAttribute('aria-pressed', String(!film.muted));
+  };
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) { film.removeAttribute('autoplay'); film.pause(); film.controls = true; }
+  if (today) $('try').onclick = () => open(today, false); else $('try').hidden = true;
   render();
 })();
 </script>
