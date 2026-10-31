@@ -243,11 +243,10 @@
     try {
       const p = await M.readPayload(payload);
       const regions = M.regionsOf(p);
-      const px = M.pixels(regions, new Set(regions.map(r => r.id)));
-      if (px) {
-        const c = document.createElement('canvas'); c.width = M.W; c.height = M.H;
-        c.getContext('2d').putImageData(new ImageData(px, M.W, M.H), 0, 0);
-        el('image', { href: c.toDataURL(), x: 0, y: 0, width: 15, height: 15, preserveAspectRatio: 'none' }, svg);
+      const all = M.pictureAtoms(p.segments);
+      // Each region as its exact faces, under the ink (INC-2026-10-31-co-fill-edges).
+      for (const f of M.fillPaths(regions, new Set(regions.map(r => r.id)), M.faces(all, M.raster(all)))) {
+        el('path', { d: f.d, fill: `rgb(${f.color[0]},${f.color[1]},${f.color[2]})`, 'fill-rule': 'evenodd' }, svg);
       }
       for (const seg of p.segments) {
         if (seg.length === 1) { el('circle', { cx: seg[0].x, cy: seg[0].y, r: 0.22, fill: '#1b1917' }, svg); continue; }

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>A mystery picture — Coordigo</title>
+<title>Mystery Picture — Coordigo</title>
 <!-- The picture travels in the fragment (#…), which never reaches a server: the preview card is fixed, and the page
      reads the picture on the device. No tracking, no cookies. -->
 <meta name="description" content="Someone drew you a picture as a code. Connect the dots to see what it is.">
@@ -363,7 +363,7 @@
       const svg = $('svg');
       gridInto(svg, true);
       layers = {
-        fill: el('image', { x: 0, y: 0, width: 15, height: 15, preserveAspectRatio: 'none', style: 'image-rendering:pixelated' }, svg),
+        fill: el('g', { 'fill-rule': 'evenodd' }, svg),
         lines: el('g', { stroke: '#1b1917', 'stroke-width': 0.16, 'stroke-linecap': 'round', fill: 'none' }, svg),
         dots: el('g', { fill: '#1b1917' }, svg),
         pen: el('circle', { r: 0.28, fill: 'none', stroke: '#a8761a', 'stroke-width': 0.12, visibility: 'hidden' }, svg),
@@ -398,12 +398,12 @@
 
     function paintFills(colored = solve.colored) {
       const hide = solve.burned && solve.burnsColors;
-      const px = hide ? null : M.pixels(solve.regions, colored);
-      if (!px) { layers.fill.removeAttribute('href'); return; }
-      const c = document.createElement('canvas');
-      c.width = M.W; c.height = M.H;
-      c.getContext('2d').putImageData(new ImageData(px, M.W, M.H), 0, 0);
-      layers.fill.setAttribute('href', c.toDataURL());
+      // Each region as its exact faces, under the ink (INC-2026-10-31-co-fill-edges).
+      layers.fill.replaceChildren();
+      if (hide) return;
+      for (const f of M.fillPaths(solve.regions, colored, solve.faces)) {
+        el('path', { d: f.d, fill: `rgb(${f.color[0]},${f.color[1]},${f.color[2]})` }, layers.fill);
+      }
     }
 
     // MARK: Taps — press, slide to adjust, release to commit (as in the app); or type a pair.

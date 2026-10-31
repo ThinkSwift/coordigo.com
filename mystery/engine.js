@@ -234,29 +234,177 @@
     });
   }
 
-  // RGBA pixels (one per raster cell) for the colored regions; wall cells beside a colored cell take its color.
-  function pixels(regions, shownIds) {
-    const px = new Uint8ClampedArray(W * H * 4);
-    let any = false;
-    for (const reg of regions) {
-      if (!shownIds.has(reg.id)) continue;
-      any = true;
-      const c = PALETTE[Math.min(Math.max(reg.color, 0), 15)];
-      for (const i of reg.cells) { px[i * 4] = c[0]; px[i * 4 + 1] = c[1]; px[i * 4 + 2] = c[2]; px[i * 4 + 3] = 255; }
+  // MARK: Exact fills — each region drawn as the faces of its lines, so a fill meets the ink exactly and the ink on top
+  // covers the seam (INC-2026-10-31-co-fill-edges: raster cells stair-stepped past the lines, and wall cells took one
+  // neighbour's colour). A port of the app's Faces.swift and SheetRaster.faces(); the raster still names the region.
+
+  const cross = (a, b) => a.x * b.y - a.y * b.x;
+  const area = ring => { let s = 0; for (let k = 0; k < ring.length; k++) { const p = ring[k], q = ring[(k + 1) % ring.length]; s += p.x * q.y - q.x * p.y; } return s / 2; };
+  function contains(ring, p) {
+    let inside = false;
+    for (let i = 0, j = ring.length - 1; i < ring.length; j = i++) {
+      const a = ring[i], b = ring[j];
+      if ((a.y > p.y) !== (b.y > p.y) && p.x < (b.x - a.x) * (p.y - a.y) / (b.y - a.y) + a.x) inside = !inside;
     }
-    if (!any) return null;
-    const filled = px.slice();
-    for (let c = 0; c < W * H; c++) {
-      if (filled[c * 4 + 3]) continue;
-      const x = c % W, y = (c / W) | 0;
-      for (const n of [x > 0 ? c - 1 : -1, x < W - 1 ? c + 1 : -1, y > 0 ? c - W : -1, y < H - 1 ? c + W : -1]) {
-        if (n >= 0 && filled[n * 4 + 3] === 255) {
-          px[c * 4] = filled[n * 4]; px[c * 4 + 1] = filled[n * 4 + 1]; px[c * 4 + 2] = filled[n * 4 + 2]; px[c * 4 + 3] = 255;
-          break;
+    return inside;
+  }
+  const containsRings = (rings, p) => rings.reduce((acc, r) => acc !== contains(r, p), false);
+  function distance(p, a, b) {
+    const rx = b.x - a.x, ry = b.y - a.y, len2 = rx * rx + ry * ry;
+    const t = len2 > 0 ? Math.min(Math.max(((p.x - a.x) * rx + (p.y - a.y) * ry) / len2, 0), 1) : 0;
+    return Math.hypot(p.x - a.x - rx * t, p.y - a.y - ry * t);
+  }
+  function clearance(rings, p) {
+    let best = Infinity;
+    for (const r of rings) for (let k = 0; k < r.length; k++) best = Math.min(best, distance(p, r[k], r[(k + 1) % r.length]));
+    return best;
+  }
+
+  // Every segment cut where another crosses or touches it; overlapping pieces become one edge.
+  function split(segs) {
+    const cuts = segs.map(() => [0, 1]);
+    const on = (e, p, r) => {
+      const len2 = r.x * r.x + r.y * r.y;
+      if (!(len2 > 0)) return null;
+      const t = ((e.x - p.x) * r.x + (e.y - p.y) * r.y) / len2;
+      return t > -1e-9 && t < 1 + 1e-9 ? Math.min(Math.max(t, 0), 1) : null;
+    };
+    for (let i = 0; i < segs.length; i++) {
+      const [p, p2] = segs[i], r = { x: p2.x - p.x, y: p2.y - p.y };
+      for (let j = i + 1; j < segs.length; j++) {
+        const [q, q2] = segs[j], s = { x: q2.x - q.x, y: q2.y - q.y };
+        const d = cross(r, s), qp = { x: q.x - p.x, y: q.y - p.y };
+        if (Math.abs(d) < 1e-12) {
+          if (Math.abs(cross(qp, r)) >= 1e-9) continue;
+          for (const e of [q, q2]) { const t = on(e, p, r); if (t !== null) cuts[i].push(t); }
+          for (const e of [p, p2]) { const u = on(e, q, s); if (u !== null) cuts[j].push(u); }
+          continue;
         }
+        const t = cross(qp, s) / d, u = cross(qp, r) / d;
+        if (!(t > -1e-9 && t < 1 + 1e-9 && u > -1e-9 && u < 1 + 1e-9)) continue;
+        cuts[i].push(Math.min(Math.max(t, 0), 1)); cuts[j].push(Math.min(Math.max(u, 0), 1));
       }
     }
-    return px;
+    const index = new Map(), points = [], seen = new Set(), edges = [];
+    const vertex = p => {
+      const k = Math.round(p.x * 1e7) + ',' + Math.round(p.y * 1e7);
+      if (!index.has(k)) { index.set(k, points.length); points.push(p); }
+      return index.get(k);
+    };
+    segs.forEach(([p, p2], i) => {
+      let last = null;
+      for (const t of cuts[i].slice().sort((a, b) => a - b)) {
+        const v = vertex({ x: p.x + (p2.x - p.x) * t, y: p.y + (p2.y - p.y) * t });
+        if (last !== null && last !== v) {
+          const a = Math.min(last, v), b = Math.max(last, v), key = a + ',' + b;
+          if (!seen.has(key)) { seen.add(key); edges.push([a, b]); }
+        }
+        last = v;
+      }
+    });
+    return { points, edges };
+  }
+
+  // Walks every face with the face on the left: bounded faces come out with positive area, each drawing's outside negative.
+  function traverse(points, edges) {
+    const out = points.map(() => []);
+    for (const [a, b] of edges) { out[a].push(b); out[b].push(a); }
+    out.forEach((list, v) => {
+      const o = points[v];
+      list.sort((m, n) => Math.atan2(points[m].y - o.y, points[m].x - o.x) - Math.atan2(points[n].y - o.y, points[n].x - o.x));
+    });
+    const used = new Set(), cycles = [];
+    for (const [a, b] of edges) {
+      for (const [sa, sb] of [[a, b], [b, a]]) {
+        if (used.has(sa + '>' + sb)) continue;
+        const ring = [];
+        let ha = sa, hb = sb;
+        while (!used.has(ha + '>' + hb)) {
+          used.add(ha + '>' + hb);
+          ring.push(points[ha]);
+          const around = out[hb], k = around.indexOf(ha);
+          const next = around[(k - 1 + around.length) % around.length];
+          ha = hb; hb = next;
+        }
+        cycles.push(ring);
+      }
+    }
+    return cycles;
+  }
+
+  // The clearest of a few points stepped in from each edge's middle (then a quarter-step grid): well inside the face.
+  function insidePoint(rings) {
+    let best = null;
+    const consider = p => {
+      if (!containsRings(rings, p)) return;
+      const c = clearance(rings, p);
+      if (!best || c > best.c) best = { p, c };
+    };
+    const o = rings[0];
+    for (let k = 0; k < o.length; k++) {
+      const a = o[k], b = o[(k + 1) % o.length], len = Math.hypot(b.x - a.x, b.y - a.y);
+      if (!(len > 1e-9)) continue;
+      const m = { x: (a.x + b.x) / 2, y: (a.y + b.y) / 2 }, n = { x: -(b.y - a.y) / len, y: (b.x - a.x) / len };
+      for (const d of [0.05, 0.15, 0.3, 0.5, 1.0]) consider({ x: m.x + n.x * d, y: m.y + n.y * d });
+    }
+    if (best && best.c >= 0.2) return best.p;
+    const xs = o.map(p => p.x), ys = o.map(p => p.y);
+    for (let y = Math.floor(Math.min(...ys) * 4) / 4; y <= Math.max(...ys); y += 0.25) {
+      for (let x = Math.floor(Math.min(...xs) * 4) / 4; x <= Math.max(...xs); x += 0.25) consider({ x: x + 0.125, y: y + 0.125 });
+    }
+    return best ? best.p : null;
+  }
+
+  // The bounded faces of the lines with the paper's edge as a wall, each with the raster region it is.
+  function faces(atomSet, r) {
+    const segs = [];
+    for (const key of atomSet) { const [x1, y1, x2, y2] = key.split(',').map(Number); segs.push([{ x: x1, y: y1 }, { x: x2, y: y2 }]); }
+    const c = [{ x: 0, y: 0 }, { x: SIDE, y: 0 }, { x: SIDE, y: SIDE }, { x: 0, y: SIDE }];
+    for (let k = 0; k < 4; k++) segs.push([c[k], c[(k + 1) % 4]]);
+    const { points, edges } = split(segs);
+    const cycles = traverse(points, edges);
+    const outer = cycles.filter(c => area(c) > 1e-9), holes = cycles.filter(c => area(c) < -1e-9);
+    const rings = outer.map(o => [o]), areas = outer.map(area);
+    for (const h of holes) {
+      const left = h.reduce((m, p) => (p.x < m.x || (p.x === m.x && p.y < m.y) ? p : m));
+      const probe = { x: left.x - 1e-4, y: left.y };
+      let best = -1;
+      outer.forEach((o, k) => { if (contains(o, probe) && (best < 0 || areas[k] < areas[best])) best = k; });
+      if (best >= 0) rings[best].push(h);
+    }
+    const idNear = p => {
+      const cx = Math.min(Math.max(Math.trunc(p.x * K), 0), W - 1), cy = Math.min(Math.max(Math.trunc(p.y * K), 0), H - 1);
+      if (r.cells[cy * W + cx] > 0) return r.cells[cy * W + cx];
+      for (let d = 1; d <= 3; d++) {
+        for (let dy = -d; dy <= d; dy++) for (let dx = -d; dx <= d; dx++) {
+          if (Math.max(Math.abs(dx), Math.abs(dy)) !== d) continue;
+          const x = cx + dx, y = cy + dy;
+          if (x < 0 || y < 0 || x >= W || y >= H || !(r.cells[y * W + x] > 0)) continue;
+          return r.cells[y * W + x];
+        }
+      }
+      return 0;
+    };
+    const list = [];
+    for (const rs of rings) {
+      const p = insidePoint(rs);
+      if (!p) continue;
+      const id = idNear(p);
+      if (id > 0) list.push({ id, rings: rs });
+    }
+    return list;
+  }
+
+  const regionArea = (faceList, id) => faceList.filter(f => f.id === id).reduce((s, f) => s + f.rings.reduce((t, r) => t + area(r), 0), 0);
+
+  // The shown regions as SVG paths in board units (fill-rule evenodd) with their colors.
+  function fillPaths(regions, shownIds, faceList) {
+    const color = new Map(regions.filter(g => shownIds.has(g.id)).map(g => [g.id, g.color]));
+    const fmt = v => +v.toFixed(4);
+    return faceList.filter(f => color.has(f.id)).map(f => ({
+      d: f.rings.map(r => 'M' + r.map(p => fmt(p.x) + ' ' + fmt(p.y)).join('L') + 'Z').join(''),
+      color: PALETTE[Math.min(Math.max(color.get(f.id), 0), 15)],
+    }));
   }
 
   // MARK: Solving by hand
@@ -265,6 +413,8 @@
     constructor(picture) {
       this.picture = picture;
       this.regions = regionsOf(picture);
+      const all = pictureAtoms(picture.segments);
+      this.faces = faces(all, raster(all));
       this.segment = 0; this.point = 0; this.wrongTotal = 0;
       this.drawn = new Set(); this.dots = []; this.colored = new Set();
       this.pointCount = picture.segments.reduce((n, s) => n + s.length, 0);
@@ -316,7 +466,7 @@
   const length = pointCount => (pointCount < 40 ? 'quick' : pointCount < 90 ? 'medium' : 'long');
 
   const api = { DIGITS, VERSION, SIDE, K, W, H, HEARTS, PALETTE, Problem, pair, codeString, parseCode, parseColors,
-                readPayload, atoms, pictureAtoms, raster, regionAt, regionsOf, earned, pixels, Solve, length };
+                readPayload, atoms, pictureAtoms, raster, regionAt, regionsOf, earned, faces, regionArea, fillPaths, Solve, length };
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
   else root.Mystery = api;
 })(typeof globalThis !== 'undefined' ? globalThis : this);
