@@ -13,10 +13,19 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Coordigo">
 <meta property="og:url" content="https://coordigo.com/mystery">
-<meta property="og:title" content="Someone drew you a mystery picture">
-<meta property="og:description" content="Connect the dots to see what it is.">
-<meta property="og:image" content="https://coordigo.com/og.png">
+<!-- A sealed card, never the picture: the code is in the fragment, which a chat's crawler never sees. -->
+<meta property="og:title" content="A secret for you">
+<meta property="og:description" content="Connect the dots to reveal it.">
+<meta property="og:image" content="https://coordigo.com/mystery/og-secret.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="An empty 16 by 16 dot grid with two question marks in the middle">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="A secret for you">
+<meta name="twitter:description" content="Connect the dots to reveal it.">
+<meta name="twitter:image" content="https://coordigo.com/mystery/og-secret.png">
+<meta name="twitter:image:alt" content="An empty 16 by 16 dot grid with two question marks in the middle">
 <meta name="apple-itunes-app-after-6.2" content="app-id=1486330879">
 <script>
   // The banner's "Open" carries the picture into the app (the fragment never reaches a server).
@@ -94,7 +103,18 @@
   .embed .board{margin:0;border-radius:0;padding:2px}
   .hint{font-size:13px;color:var(--muted);margin-top:8px}
   .reveal h2{font-weight:600;font-size:26px;margin:0}
-  .reveal .msg{font-style:italic;font-size:19px;margin:10px 0 4px}
+  .reveal .msg{font-style:italic;font-size:26px;line-height:1.3;margin:12px 0 4px}
+  .reveal .sig{font-style:italic;font-size:17px;color:var(--muted);text-align:right;margin:2px 0 0}
+  /* 100% plays once, then holds: each part rises in when its moment comes, and stays. */
+  .stage{opacity:0;transform:translateY(10px);transition:opacity .45s ease-out,transform .45s ease-out}
+  .stage.on{opacity:1;transform:none}
+  .reveal .after{display:flex;flex-wrap:wrap;gap:6px 20px;margin:18px 0 0;font:500 15px/1.4 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+  .reveal .after .link{background:none;border:none;padding:0;cursor:pointer;font:inherit;color:var(--muted);text-decoration:none}
+  .reveal .after .link:hover{color:var(--ink);text-decoration:underline}
+  .reveal .after .link[data-store]{color:var(--gold)}
+  @keyframes cardIn{from{opacity:0}to{opacity:1}}
+  .reveal{animation:cardIn .45s ease-out}
+  @media (prefers-reduced-motion: reduce){ .stage{transition:none;transform:none} .reveal{animation:none} }
   .badge{font:600 12px -apple-system,sans-serif;color:var(--gold)}
   .burn{color:#c74d26;font-size:15px;margin:8px 0}
   .small{font-size:13px;color:var(--muted);margin-top:14px}
@@ -162,17 +182,24 @@
       <div class="hint" id="heartsHint" hidden></div>
     </div>
     <div id="reveal" class="card reveal" style="margin-top:12px" hidden>
-      <div style="display:flex;align-items:baseline;gap:10px;justify-content:space-between">
-        <h2 id="revealTitle"></h2><span class="badge" id="perfect" data-t="perfect" hidden></span>
+      <!-- 100% (RDM-co-6-2-real-arrival-savour): the colours fill, then the title, then the words rise, signed by the
+           sender; then nothing else for the reading time; then one quiet line. Nothing moves on by itself. -->
+      <div class="stage" id="revealHead">
+        <div style="display:flex;align-items:baseline;gap:10px;justify-content:space-between">
+          <h2 id="revealTitle"></h2><span class="badge" id="perfect" data-t="perfect" hidden></span>
+        </div>
+        <div class="burn" id="burnLine" data-t="burned" hidden></div>
       </div>
-      <div class="burn" id="burnLine" data-t="burned" hidden></div>
-      <div class="msg" id="revealMsg" hidden></div>
-      <div class="from" id="revealFrom" style="font-size:14px"></div>
-      <a class="btn ink" data-store="web-mystery-reply" data-apple><span data-t="sendBack"></span></a>
-      <p class="small" data-t="sendBackSub" data-apple></p>
-      <!-- Where the App Store can't help (Android, Windows): a reply to the sender is still one tap away. -->
-      <button class="btn ink" id="tellThem" data-t="tellThem" hidden></button>
-      <a class="btn line" id="openApp2" data-t="open" hidden></a>
+      <div class="stage" id="revealWords">
+        <div class="msg" id="revealMsg" hidden></div>
+        <p class="sig" id="revealFrom" hidden></p>
+      </div>
+      <div class="after stage" id="revealAfter">
+        <a class="link" data-store="web-mystery-reply" data-apple><span data-t="sendBack"></span> ›</a>
+        <!-- Where the App Store can't help (Android, Windows): a reply to the sender is still one tap away. -->
+        <button class="link" id="tellThem" data-t="tellThem" hidden></button>
+        <a class="link" id="openApp2" data-t="open" hidden></a>
+      </div>
     </div>
   </section>
 </main>
@@ -307,6 +334,8 @@
     const saveKey = keyOf(payload);
     let layers;                                   // the board's SVG layers, made when play starts
     let lit = null;                               // the column and row lit on the axes (a press, or the first point)
+    let finishedNow = false;                      // solved in this visit: 100% plays once (a solved one reopened holds)
+    let revealed = false;
     const solve = new M.Solve(picture);
     const saved = store.get(saveKey);
     if (saved) solve.resume(saved);
@@ -315,13 +344,14 @@
 
     const envGrid = $('envGrid');
     gridInto(envGrid, false);
-    $('envFrom').textContent = picture.from ? t('from', picture.from) : '';
+    // Who it is from is said only at 100%, as a signature under their words — never before or while solving.
+    $('envFrom').textContent = '';
     $('envLength').textContent = t(M.length(solve.pointCount));
     $('heartsLine').textContent = t(solve.burnsColors ? 'heartsColors' : 'heartsMessage');
     $('hexLine').hidden = !!store.get('coordigo.mystery.hexExplained');
     $('start').onclick = () => { store.set('coordigo.mystery.hexExplained', true); $('envelope').hidden = true; play(); };
     // On the landing the board is open at once (founder 2026-10-23: no envelope, no Start — the first tap starts it);
-    // a link someone sent opens on its envelope, which names who it is from.
+    // a link someone sent opens on its envelope.
     if (embed || (saved && (saved.segment || saved.point || saved.wrongTotal))) { store.set('coordigo.mystery.hexExplained', true); play(); }
     else $('envelope').hidden = false;
 
@@ -362,12 +392,13 @@
       }
       paintFills();
     }
-    const line = (a, b) => el('line', { x1: a.x, y1: a.y, x2: b.x, y2: b.y }, layers.lines);
-    const dot = p => el('circle', { cx: p.x, cy: p.y, r: 0.2 }, layers.dots);
+    // Declarations, not consts: a picture picked up again draws its lines before start() reaches this point.
+    function line(a, b) { return el('line', { x1: a.x, y1: a.y, x2: b.x, y2: b.y }, layers.lines); }
+    function dot(p) { return el('circle', { cx: p.x, cy: p.y, r: 0.2 }, layers.dots); }
 
-    function paintFills() {
+    function paintFills(colored = solve.colored) {
       const hide = solve.burned && solve.burnsColors;
-      const px = hide ? null : M.pixels(solve.regions, solve.colored);
+      const px = hide ? null : M.pixels(solve.regions, colored);
       if (!px) { layers.fill.removeAttribute('href'); return; }
       const c = document.createElement('canvas');
       c.width = M.W; c.height = M.H;
@@ -441,12 +472,21 @@
       layers.wrong.setAttribute('visibility', 'hidden');
       if (step.outcome === 'line') line(step.from, l);
       if (step.outcome === 'dot') dot(l);
-      if (step.newlyColored.length) paintFills();
+      if (step.finished) { finishedNow = true; fillOneByOne(step.newlyColored); }
+      else if (step.newlyColored.length) paintFills();
       save();
       render();
     }
 
-    const save = () => store.set(saveKey, solve.saved);
+    // The last point: the regions it closes fill one by one within 1.6 s (at once with reduced motion).
+    function fillOneByOne(fresh) {
+      if (!fresh.length || stillMotion()) { paintFills(); return; }
+      const shown = new Set([...solve.colored].filter(id => !fresh.some(r => r.id === id)));
+      const gap = Math.min(180, 1600 / fresh.length);
+      fresh.forEach((r, k) => setTimeout(() => { shown.add(r.id); paintFills(shown); }, k * gap));
+    }
+
+    function save() { store.set(saveKey, solve.saved); }
 
     // MARK: What the panel says
 
@@ -507,7 +547,13 @@
       }
     }
 
+    // 100% plays once, then holds (RDM-co-6-2-real-arrival-savour): 0–1.6 s the colours fill (fillOneByOne);
+    // 1.6 s the title, 2.0 s the words rise, signed "— Jun" (up by 2.4 s); then nothing else for the reading time,
+    // max(3 s, 0.3 s a word); then one quiet line. Nothing moves on by itself. Reduced motion: all still at once, the
+    // quiet line after the same reading time. A picture solved before, reopened, shows it all as it was left.
     function reveal() {
+      if (revealed) return;
+      revealed = true;
       $('panel').hidden = true;
       layers.pen.setAttribute('visibility', 'hidden');
       layers.ring.setAttribute('visibility', 'hidden');
@@ -515,10 +561,13 @@
       $('revealTitle').textContent = picture.title && !wordsBurned ? t('its', picture.title) : t('solved');
       $('perfect').hidden = !solve.perfect;
       $('burnLine').hidden = !wordsBurned;
+      const message = (picture.message || '').trim(), from = (picture.from || '').trim();
       const m = $('revealMsg');
-      m.hidden = wordsBurned || !picture.message;
-      m.textContent = picture.message ? '“' + picture.message + '”' : '';
-      $('revealFrom').textContent = picture.from ? t('from', picture.from) : '';
+      m.hidden = wordsBurned || !message;
+      m.textContent = message ? '“' + message + '”' : '';
+      const sig = $('revealFrom');
+      sig.hidden = !from;
+      sig.textContent = from ? '— ' + from : '';
       if (!appleDevice) {
         const tell = $('tellThem');
         tell.hidden = false;
@@ -532,10 +581,30 @@
       }
       store.set(saveKey + '.solved', true);
       if (embed) parent.postMessage({ co: 'solved', key: saveKey }, '*');
-      $('reveal').hidden = false;
-      $('reveal').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+      const on = id => $(id).classList.add('on');
+      const show = () => { $('reveal').hidden = false; $('reveal').scrollIntoView({ behavior: 'smooth', block: 'nearest' }); };
+      const read = readingSeconds(wordsBurned ? '' : message) * 1000;
+      if (!finishedNow) { for (const id of ['revealHead', 'revealWords', 'revealAfter']) on(id); show(); return; }
+      if (stillMotion()) {
+        on('revealHead'); on('revealWords'); show();
+        setTimeout(() => on('revealAfter'), read);
+        return;
+      }
+      setTimeout(() => { show(); requestAnimationFrame(() => requestAnimationFrame(() => on('revealHead'))); }, 1600);
+      setTimeout(() => on('revealWords'), 2000);
+      setTimeout(() => on('revealAfter'), 2400 + read);
     }
   }
+
+  // The time to read the sender's words: 0.3 s a word, never under 3 s (words as the language counts them: CJK, Thai…).
+  function readingSeconds(text) {
+    let words = 0;
+    if (text && window.Intl && Intl.Segmenter) { for (const w of new Intl.Segmenter(undefined, { granularity: 'word' }).segment(text)) if (w.isWordLike) words++; }
+    else if (text) words = text.split(/\s+/).filter(Boolean).length;
+    return Math.max(3, 0.3 * words);
+  }
+  function stillMotion() { return matchMedia('(prefers-reduced-motion: reduce)').matches; }
 
   // MARK: Drawing helpers
 
