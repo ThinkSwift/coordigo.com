@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>#232 Snowy cottage · Coordigo mystery picture</title>
-<meta name="description" content="Snowy cottage: a coordinate drawing on a 16 × 16 grid. See it, save it, or print its worksheet — the empty grid and the code to join the points.">
+<meta name="description" content="Snowy cottage (Epic): a coordinate drawing on a 16 × 16 grid. See it, save it, or print its worksheet — the empty grid and the code to join the points.">
 <meta name="theme-color" content="#f7f4ec" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#15161c" media="(prefers-color-scheme: dark)">
 <link rel="canonical" href="https://coordigo.com/library/genre-iso-house/">
@@ -12,7 +12,7 @@
 <meta property="og:site_name" content="Coordigo">
 <meta property="og:url" content="https://coordigo.com/library/genre-iso-house/">
 <meta property="og:title" content="#232 Snowy cottage · Coordigo mystery picture">
-<meta property="og:description" content="Snowy cottage: a coordinate drawing on a 16 × 16 grid. See it, save it, or print its worksheet — the empty grid and the code to join the points.">
+<meta property="og:description" content="Snowy cottage (Epic): a coordinate drawing on a 16 × 16 grid. See it, save it, or print its worksheet — the empty grid and the code to join the points.">
 <meta property="og:image" content="https://coordigo.com/library/img/genre-iso-house.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="apple-itunes-app-after-6.2" content="app-id=1486330879">
@@ -148,6 +148,12 @@
   /* the Library, open (founder 2026-11-04): pictures as images, a page per picture with its worksheet */
   .tile{display:block;text-decoration:none;color:inherit}
   .tile .face img{position:absolute;inset:0;width:100%;height:100%;display:block}
+  /* rarity as in the app (Coordigo Theme.swift): the frame in its colour, a chip with its name */
+  .tier{display:inline-block;font:600 11.5px/1 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;padding:3px 7px;border-radius:999px;margin-right:6px;vertical-align:1px;
+    background:#efebe4;color:#3d3a37}
+  .tier.rare{background:#d6e8ff;color:#00468f} .tier.epic{background:#e2e0fa;color:#2f2a8f} .tier.legendary{background:#ffe2bd;color:#6b3a00}
+  .tile.rare .face, .pic-grid figure.rare{border:2px solid #007aff} .tile.epic .face, .pic-grid figure.epic{border:2px solid #5952de}
+  .tile.legendary .face, .pic-grid figure.legendary{border:3px solid #ff9400}
   .pager{display:flex;justify-content:center;gap:8px;margin:22px 0 0}
   .pager a{min-width:44px;height:44px;display:grid;place-items:center;border-radius:12px;border:1px solid var(--line);background:var(--mat);color:var(--ink);
     text-decoration:none;font:600 15px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
@@ -189,10 +195,10 @@
   <section class="pic-page" data-picture="genre-iso-house" data-number="232" data-title="Snowy cottage" data-file="coordigo-232-genre-iso-house" data-payload="HYxLCsMwDAWvIrwWJv5IsrPz7wQ9QUlLd83GtITSu1fN4sEw8OZjNrOaaBmTFWRwzuYTI7ASW0IPSY3HAG5Bt6gRIHQOCYL-_hsGzU07MkILiViKjF67SAHiGroAJ0lJshSu3AhqqzmX3CGeItZYNDE1cXnu7wO2fc7r467uZVb__QE">
     <p class="crumb"><a href="/library/" data-t="libCaps">Library</a></p>
     <h1>#232 Snowy cottage</h1>
-    <p class="count">Places · 5 lines · 28 points · Quick · about 2 min</p>
+    <p class="count"><span class="tier epic">Epic</span>Places · 5 lines · 28 points · Quick · about 2 min</p>
     
     <div class="pic-grid">
-      <figure><img src="/library/img/genre-iso-house.png" width="600" height="600" alt="Snowy cottage: a Coordigo mystery picture, drawn by joining points on a 16 × 16 grid"></figure>
+      <figure class="epic"><img src="/library/img/genre-iso-house.png" width="600" height="600" alt="Snowy cottage: a Coordigo mystery picture, drawn by joining points on a 16 × 16 grid"></figure>
       <div class="menu">
         <h2>Worksheet</h2>
         <form id="sheetForm" onsubmit="return false">

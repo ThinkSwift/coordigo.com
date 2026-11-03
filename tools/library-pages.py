@@ -3,7 +3,7 @@
 image files Google can find, a grid of them in pages (newest number first), and one page per picture with its worksheet
 (settings, PDF), its PNG and solving it here.
 
-  node tools/library-data.mjs [library.js] > co-lib.json && python3 tools/library-pages.py co-lib.json
+  node tools/library-data.mjs [library.js] > co-lib.json && python3 tools/library-pages.py co-lib.json [Coordigo library.json]
 
 The app's whole Library (242 in Coordigo 6.2) comes from Coordigo scripts/web-library.py <dir> → <dir>/library.js.
 
@@ -18,6 +18,8 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 ORIGIN = 'https://coordigo.com'
 PER = 24
 data = json.load(open(sys.argv[1]))
+# each picture's rarity, from the app's index (Coordigo Sources/Resources/Mystery/library.json), shown as the app does
+TIER = {e['id']: e['tier'] for e in json.load(open(sys.argv[2]))} if len(sys.argv) > 2 else {}
 STR = json.loads(re.search(r'MYSTERY_STRINGS\s*=\s*(\{.*\})', open(os.path.join(ROOT, 'mystery/strings.js')).read(), re.S).group(1))['en']
 esc = lambda s: html.escape(s, quote=True)
 
@@ -38,6 +40,8 @@ KIND = {'animals': 'Animals', 'objects': 'Things', 'food-drink': 'Food & drink',
         'arms-battle': 'Arms & armour', 'sky-space': 'Sky & space', 'art-pattern': 'Art & patterns'}
 pages = max(1, -(-len(newest) // PER))
 
+def badge(d):
+    t = TIER.get(d['id']); return f'<span class="tier {t.lower()}">{t}</span>' if t else ''
 def title(d): return (f"#{number[d['id']]} " if d['id'] in number else '') + d['title']
 def points(d): return sum(len(s) for s in d['segments'])
 def length(d):
@@ -79,6 +83,12 @@ CSS = '''
   /* the Library, open (founder 2026-11-04): pictures as images, a page per picture with its worksheet */
   .tile{display:block;text-decoration:none;color:inherit}
   .tile .face img{position:absolute;inset:0;width:100%;height:100%;display:block}
+  /* rarity as in the app (Coordigo Theme.swift): the frame in its colour, a chip with its name */
+  .tier{display:inline-block;font:600 11.5px/1 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;padding:3px 7px;border-radius:999px;margin-right:6px;vertical-align:1px;
+    background:#efebe4;color:#3d3a37}
+  .tier.rare{background:#d6e8ff;color:#00468f} .tier.epic{background:#e2e0fa;color:#2f2a8f} .tier.legendary{background:#ffe2bd;color:#6b3a00}
+  .tile.rare .face, .pic-grid figure.rare{border:2px solid #007aff} .tile.epic .face, .pic-grid figure.epic{border:2px solid #5952de}
+  .tile.legendary .face, .pic-grid figure.legendary{border:3px solid #ff9400}
   .pager{display:flex;justify-content:center;gap:8px;margin:22px 0 0}
   .pager a{min-width:44px;height:44px;display:grid;place-items:center;border-radius:12px;border:1px solid var(--line);background:var(--mat);color:var(--ink);
     text-decoration:none;font:600 15px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
@@ -143,9 +153,10 @@ def nav(cur):
     return n.replace('href="/library/">', 'href="/library/" aria-current="page">') if cur == 'library' else n
 
 def tile(d):
-    return (f'<a class="tile" href="/library/{d["id"]}/"><div class="face"><img src="/library/img/{d["id"]}.png" width="600" height="600" '
+    t = TIER.get(d['id'], '').lower()
+    return (f'<a class="tile{" " + t if t else ""}" href="/library/{d["id"]}/"><div class="face"><img src="/library/img/{d["id"]}.png" width="600" height="600" '
             f'loading="lazy" alt="{esc(alt(d))}"></div><div class="t">{esc(title(d))}</div>'
-            f'<div class="d">{esc(d["message"] if d["theme"] == "messages" else KIND.get(d["theme"], length(d)))}</div></a>')
+            f'<div class="d">{badge(d)}{esc(d["message"] if d["theme"] == "messages" else KIND.get(d["theme"], length(d)))}</div></a>')
 
 def body(inner):
     return f'''<body>
@@ -195,10 +206,10 @@ def picture_page(d, prev, nxt):
   <section class="pic-page" data-picture="{d['id']}" data-number="{number.get(d['id'], 0)}" data-title="{esc(d['title'])}" data-file="{file_stem(d)}" data-payload="{esc(d['payload'])}">
     <p class="crumb"><a href="/library/" data-t="libCaps">Library</a></p>
     <h1>{esc(title(d))}</h1>
-    <p class="count">{esc(KIND[d['theme']]) + ' · ' if d['theme'] in KIND else ''}{len(d['segments'])} lines · {points(d)} points{'' if d['theme'] == 'messages' else ' · ' + esc(length(d))}</p>
+    <p class="count">{badge(d)}{esc(KIND[d['theme']]) + ' · ' if d['theme'] in KIND else ''}{len(d['segments'])} lines · {points(d)} points{'' if d['theme'] == 'messages' else ' · ' + esc(length(d))}</p>
     {words}
     <div class="pic-grid">
-      <figure><img src="/library/img/{d['id']}.png" width="600" height="600" alt="{esc(alt(d))}"></figure>
+      <figure class="{TIER.get(d['id'], '').lower()}"><img src="/library/img/{d['id']}.png" width="600" height="600" alt="{esc(alt(d))}"></figure>
       <div class="menu">
         <h2>Worksheet</h2>
         <form id="sheetForm" onsubmit="return false">
@@ -226,7 +237,7 @@ def picture_page(d, prev, nxt):
   </section>
 '''
     t = f'{title(d)} · Coordigo mystery picture'
-    desc = f'{d["title"]}: a coordinate drawing on a 16 × 16 grid. See it, save it, or print its worksheet — the empty grid and the code to join the points.'
+    desc = f'{d["title"]}{" (" + TIER[d["id"]] + ")" if d["id"] in TIER else ""}: a coordinate drawing on a 16 × 16 grid. See it, save it, or print its worksheet — the empty grid and the code to join the points.'
     out = os.path.join(ROOT, 'library', d['id'], 'index.html')
     os.makedirs(os.path.dirname(out), exist_ok=True)
     page = head(t, desc, path, f'/library/img/{d["id"]}.png') + body(inner)

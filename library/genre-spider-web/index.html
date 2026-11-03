@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>#178 Spider on its web · Coordigo mystery picture</title>
-<meta name="description" content="Spider on its web: a coordinate drawing on a 16 × 16 grid. See it, save it, or print its worksheet — the empty grid and the code to join the points.">
+<meta name="description" content="Spider on its web (Common): a coordinate drawing on a 16 × 16 grid. See it, save it, or print its worksheet — the empty grid and the code to join the points.">
 <meta name="theme-color" content="#f7f4ec" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#15161c" media="(prefers-color-scheme: dark)">
 <link rel="canonical" href="https://coordigo.com/library/genre-spider-web/">
@@ -12,7 +12,7 @@
 <meta property="og:site_name" content="Coordigo">
 <meta property="og:url" content="https://coordigo.com/library/genre-spider-web/">
 <meta property="og:title" content="#178 Spider on its web · Coordigo mystery picture">
-<meta property="og:description" content="Spider on its web: a coordinate drawing on a 16 × 16 grid. See it, save it, or print its worksheet — the empty grid and the code to join the points.">
+<meta property="og:description" content="Spider on its web (Common): a coordinate drawing on a 16 × 16 grid. See it, save it, or print its worksheet — the empty grid and the code to join the points.">
 <meta property="og:image" content="https://coordigo.com/library/img/genre-spider-web.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="apple-itunes-app-after-6.2" content="app-id=1486330879">
@@ -148,6 +148,12 @@
   /* the Library, open (founder 2026-11-04): pictures as images, a page per picture with its worksheet */
   .tile{display:block;text-decoration:none;color:inherit}
   .tile .face img{position:absolute;inset:0;width:100%;height:100%;display:block}
+  /* rarity as in the app (Coordigo Theme.swift): the frame in its colour, a chip with its name */
+  .tier{display:inline-block;font:600 11.5px/1 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;padding:3px 7px;border-radius:999px;margin-right:6px;vertical-align:1px;
+    background:#efebe4;color:#3d3a37}
+  .tier.rare{background:#d6e8ff;color:#00468f} .tier.epic{background:#e2e0fa;color:#2f2a8f} .tier.legendary{background:#ffe2bd;color:#6b3a00}
+  .tile.rare .face, .pic-grid figure.rare{border:2px solid #007aff} .tile.epic .face, .pic-grid figure.epic{border:2px solid #5952de}
+  .tile.legendary .face, .pic-grid figure.legendary{border:3px solid #ff9400}
   .pager{display:flex;justify-content:center;gap:8px;margin:22px 0 0}
   .pager a{min-width:44px;height:44px;display:grid;place-items:center;border-radius:12px;border:1px solid var(--line);background:var(--mat);color:var(--ink);
     text-decoration:none;font:600 15px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
@@ -189,10 +195,10 @@
   <section class="pic-page" data-picture="genre-spider-web" data-number="178" data-title="Spider on its web" data-file="coordigo-178-genre-spider-web" data-payload="LU5LTkMxDLyKlfVTlPg5_nSXXy_ADaBddAMIKlgg7o5f6MLRzHhm4p_wEk4hxbIdU4C3nLYzqBPzmZAxyqaRfIdbPl6X9-Wl6DzuC5W1I2cY1VGJ6C45GiN7Ny-kD00Oz0qK8_-EuCd7qoA92mx1mKO8vg5buPixnFgBWZOhEheiHSlBwjMCY2UW5Iw5QeWGLYGZalEy6mXosG7WZDCIqmmXAWQoWYEqWm5Ansku9n3iBKu9jg7WWu8TdNTZJpTGXRqUClL9pLuf9PR-u1w_4O0VbvdP-L4-u_4VTvj7Bw">
     <p class="crumb"><a href="/library/" data-t="libCaps">Library</a></p>
     <h1>#178 Spider on its web</h1>
-    <p class="count">Animals · 17 lines · 62 points · Medium · about 5 min</p>
+    <p class="count"><span class="tier common">Common</span>Animals · 17 lines · 62 points · Medium · about 5 min</p>
     
     <div class="pic-grid">
-      <figure><img src="/library/img/genre-spider-web.png" width="600" height="600" alt="Spider on its web: a Coordigo mystery picture, drawn by joining points on a 16 × 16 grid"></figure>
+      <figure class="common"><img src="/library/img/genre-spider-web.png" width="600" height="600" alt="Spider on its web: a Coordigo mystery picture, drawn by joining points on a 16 × 16 grid"></figure>
       <div class="menu">
         <h2>Worksheet</h2>
         <form id="sheetForm" onsubmit="return false">

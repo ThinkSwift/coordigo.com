@@ -148,6 +148,12 @@
   /* the Library, open (founder 2026-11-04): pictures as images, a page per picture with its worksheet */
   .tile{display:block;text-decoration:none;color:inherit}
   .tile .face img{position:absolute;inset:0;width:100%;height:100%;display:block}
+  /* rarity as in the app (Coordigo Theme.swift): the frame in its colour, a chip with its name */
+  .tier{display:inline-block;font:600 11.5px/1 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;padding:3px 7px;border-radius:999px;margin-right:6px;vertical-align:1px;
+    background:#efebe4;color:#3d3a37}
+  .tier.rare{background:#d6e8ff;color:#00468f} .tier.epic{background:#e2e0fa;color:#2f2a8f} .tier.legendary{background:#ffe2bd;color:#6b3a00}
+  .tile.rare .face, .pic-grid figure.rare{border:2px solid #007aff} .tile.epic .face, .pic-grid figure.epic{border:2px solid #5952de}
+  .tile.legendary .face, .pic-grid figure.legendary{border:3px solid #ff9400}
   .pager{display:flex;justify-content:center;gap:8px;margin:22px 0 0}
   .pager a{min-width:44px;height:44px;display:grid;place-items:center;border-radius:12px;border:1px solid var(--line);background:var(--mat);color:var(--ink);
     text-decoration:none;font:600 15px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
@@ -190,7 +196,7 @@
     <div class="caps" data-t="libCaps">Library</div>
     <h1 style="font-size:28px;margin:6px 0 4px">242 mystery pictures, open</h1>
     <p class="sub">Every picture to see, take and pass on. Open one for its worksheet: the empty grid and the code, ready to print.</p>
-    <div class="grid" style="margin-top:16px"><a class="tile" href="/library/genre-witch-moon/"><div class="face"><img src="/library/img/genre-witch-moon.png" width="600" height="600" loading="lazy" alt="Witch and the moon: a Coordigo mystery picture, drawn by joining points on a 16 × 16 grid"></div><div class="t">#2 Witch and the moon</div><div class="d">Fantasy &amp; sci-fi</div></a><a class="tile" href="/library/founder-theFlyingMonkeys/"><div class="face"><img src="/library/img/founder-theFlyingMonkeys.png" width="600" height="600" loading="lazy" alt="Flying monkey: a Coordigo mystery picture, drawn by joining points on a 16 × 16 grid"></div><div class="t">#1 Flying monkey</div><div class="d">Fantasy &amp; sci-fi</div></a></div>
+    <div class="grid" style="margin-top:16px"><a class="tile common" href="/library/genre-witch-moon/"><div class="face"><img src="/library/img/genre-witch-moon.png" width="600" height="600" loading="lazy" alt="Witch and the moon: a Coordigo mystery picture, drawn by joining points on a 16 × 16 grid"></div><div class="t">#2 Witch and the moon</div><div class="d"><span class="tier common">Common</span>Fantasy &amp; sci-fi</div></a><a class="tile common" href="/library/founder-theFlyingMonkeys/"><div class="face"><img src="/library/img/founder-theFlyingMonkeys.png" width="600" height="600" loading="lazy" alt="Flying monkey: a Coordigo mystery picture, drawn by joining points on a 16 × 16 grid"></div><div class="t">#1 Flying monkey</div><div class="d"><span class="tier common">Common</span>Fantasy &amp; sci-fi</div></a></div>
     <nav class="pager" aria-label="Pages"><a href="/library/">1</a><a href="/library/2/">2</a><a href="/library/3/">3</a><a href="/library/4/">4</a><a href="/library/5/">5</a><a href="/library/6/">6</a><a href="/library/7/">7</a><a href="/library/8/">8</a><a href="/library/9/">9</a><a href="/library/10/">10</a><a href="/library/11/" aria-current="page">11</a></nav>
   </section>
 

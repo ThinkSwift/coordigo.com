@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>#28 Duck · Coordigo mystery picture</title>
-<meta name="description" content="Duck: a coordinate drawing on a 16 × 16 grid. See it, save it, or print its worksheet — the empty grid and the code to join the points.">
+<meta name="description" content="Duck (Common): a coordinate drawing on a 16 × 16 grid. See it, save it, or print its worksheet — the empty grid and the code to join the points.">
 <meta name="theme-color" content="#f7f4ec" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#15161c" media="(prefers-color-scheme: dark)">
 <link rel="canonical" href="https://coordigo.com/library/duck/">
@@ -12,7 +12,7 @@
 <meta property="og:site_name" content="Coordigo">
 <meta property="og:url" content="https://coordigo.com/library/duck/">
 <meta property="og:title" content="#28 Duck · Coordigo mystery picture">
-<meta property="og:description" content="Duck: a coordinate drawing on a 16 × 16 grid. See it, save it, or print its worksheet — the empty grid and the code to join the points.">
+<meta property="og:description" content="Duck (Common): a coordinate drawing on a 16 × 16 grid. See it, save it, or print its worksheet — the empty grid and the code to join the points.">
 <meta property="og:image" content="https://coordigo.com/library/img/duck.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="apple-itunes-app-after-6.2" content="app-id=1486330879">
@@ -148,6 +148,12 @@
   /* the Library, open (founder 2026-11-04): pictures as images, a page per picture with its worksheet */
   .tile{display:block;text-decoration:none;color:inherit}
   .tile .face img{position:absolute;inset:0;width:100%;height:100%;display:block}
+  /* rarity as in the app (Coordigo Theme.swift): the frame in its colour, a chip with its name */
+  .tier{display:inline-block;font:600 11.5px/1 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;padding:3px 7px;border-radius:999px;margin-right:6px;vertical-align:1px;
+    background:#efebe4;color:#3d3a37}
+  .tier.rare{background:#d6e8ff;color:#00468f} .tier.epic{background:#e2e0fa;color:#2f2a8f} .tier.legendary{background:#ffe2bd;color:#6b3a00}
+  .tile.rare .face, .pic-grid figure.rare{border:2px solid #007aff} .tile.epic .face, .pic-grid figure.epic{border:2px solid #5952de}
+  .tile.legendary .face, .pic-grid figure.legendary{border:3px solid #ff9400}
   .pager{display:flex;justify-content:center;gap:8px;margin:22px 0 0}
   .pager a{min-width:44px;height:44px;display:grid;place-items:center;border-radius:12px;border:1px solid var(--line);background:var(--mat);color:var(--ink);
     text-decoration:none;font:600 15px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
@@ -189,10 +195,10 @@
   <section class="pic-page" data-picture="duck" data-number="28" data-title="Duck" data-file="coordigo-28-duck" data-payload="FYwxDsMwDAO_IngWjMiSYjubLDkfSbeubZeif69zAEEuvG-60pEaMjpwbkicCQMkKzZU6NhRoOQd5Q4QI6EmTI_1Cgvp-0KUFwrF1IeHnQYspKKyl1ZsM6jV6uh9rKrgFNukKE5Azg4jIkBnnSCy1K9b_b6ea37SUX5_">
     <p class="crumb"><a href="/library/" data-t="libCaps">Library</a></p>
     <h1>#28 Duck</h1>
-    <p class="count">Animals · 9 lines · 38 points · Quick · about 2 min</p>
+    <p class="count"><span class="tier common">Common</span>Animals · 9 lines · 38 points · Quick · about 2 min</p>
     
     <div class="pic-grid">
-      <figure><img src="/library/img/duck.png" width="600" height="600" alt="Duck: a Coordigo mystery picture, drawn by joining points on a 16 × 16 grid"></figure>
+      <figure class="common"><img src="/library/img/duck.png" width="600" height="600" alt="Duck: a Coordigo mystery picture, drawn by joining points on a 16 × 16 grid"></figure>
       <div class="menu">
         <h2>Worksheet</h2>
         <form id="sheetForm" onsubmit="return false">
