@@ -188,6 +188,14 @@
   .pn a{color:var(--ink)}
   @media (max-width:760px){ .pic-grid{grid-template-columns:1fr} .pic-grid figure{width:100%;max-width:420px;margin:0 auto} }
 </style>
+<style id="site-hints">
+  /* site buttons: own icon, name, then what is there (founder 2026-11-04, RDM-sites-button-hints) */
+  .sites .site{width:300px;max-width:100%}
+  .site .hints{margin-left:auto;display:flex;gap:4px;padding-left:12px}
+  .site .hints img{display:block;width:32px;height:32px;border-radius:6px}
+  .site .hints img.px{image-rendering:pixelated;border-radius:0}
+  @media (max-width:640px){ .sites .site{width:100%;flex:1 1 100%} }
+</style>
 </head>
 <body>
 <main>
@@ -230,7 +238,7 @@
     <nav class="pn" aria-label="More pictures"><a href="/library/genre-egg-basket/">Newer: #146 Easter egg basket</a><a href="/library/genre-frog/">Older: #144 Frog</a></nav>
   </section>
 
-  <section class="sites" aria-label="Also from Swiftian"><a class="site" href="https://iflipbook.com/?ct=web-co-if"><img src="/assets/links/iflipbook-32.png" srcset="/assets/links/iflipbook-32.png 1x, /assets/links/iflipbook-64.png 2x, /assets/links/iflipbook-96.png 3x" width="32" height="32" alt=""><span>iflipbook.com</span></a><a class="site" href="https://swiftian.com/?ct=web-co-sw"><img src="/assets/links/swiftian-32.png" srcset="/assets/links/swiftian-32.png 1x, /assets/links/swiftian-64.png 2x, /assets/links/swiftian-96.png 3x" width="32" height="32" alt=""><span>swiftian.com</span></a></section>
+  <section class="sites" aria-label="Also from Swiftian"><a class="site" href="https://iflipbook.com/?ct=web-co-if"><img src="/assets/links/iflipbook-32.png" srcset="/assets/links/iflipbook-32.png 1x, /assets/links/iflipbook-64.png 2x, /assets/links/iflipbook-96.png 3x" width="32" height="32" alt=""><span>iflipbook.com</span><span class="hints" aria-hidden="true"><img src="/assets/links/hint-otto-32.png" srcset="/assets/links/hint-otto-32.png 1x, /assets/links/hint-otto-64.png 2x, /assets/links/hint-otto-96.png 3x" width="32" height="32" alt=""></span></a><a class="site" href="https://swiftian.com/?ct=web-co-sw"><img src="/assets/links/swiftian-32.png" srcset="/assets/links/swiftian-32.png 1x, /assets/links/swiftian-64.png 2x, /assets/links/swiftian-96.png 3x" width="32" height="32" alt=""><span>swiftian.com</span><span class="hints" aria-hidden="true"><img src="/assets/links/hint-ea-32.png" srcset="/assets/links/hint-ea-32.png 1x, /assets/links/hint-ea-64.png 2x, /assets/links/hint-ea-96.png 3x" width="32" height="32" alt=""><img src="/assets/links/hint-cp-32.png" srcset="/assets/links/hint-cp-32.png 1x, /assets/links/hint-cp-64.png 2x, /assets/links/hint-cp-96.png 3x" width="32" height="32" alt=""><img src="/assets/links/hint-cf-32.png" srcset="/assets/links/hint-cf-32.png 1x, /assets/links/hint-cf-64.png 2x, /assets/links/hint-cf-96.png 3x" width="32" height="32" alt=""></span></a></section>
   <footer>
     <a href="/privacy/" data-t="privacy">Privacy Policy</a>
     <a href="/support/" data-t="support">Support</a>
