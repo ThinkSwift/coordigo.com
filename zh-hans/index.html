@@ -116,42 +116,71 @@
   footer{display:flex;flex-wrap:wrap;gap:18px;justify-content:center;font-size:14px;color:var(--muted);padding:28px 0 0}
   footer a{color:inherit}
   [hidden]{display:none!important}
+
+  /* coordigo.com pages: top tabs, App Store link, two site buttons (founder 2026-11-03) */
+  nav.tabs-bar{display:flex;align-items:flex-end;padding:18px 0 0;border-bottom:1px solid var(--line)}
+  .tabs{display:flex;gap:6px}
+  .tab{min-width:118px;padding:10px 16px 9px;margin-bottom:-1px;text-align:center;text-decoration:none;color:var(--muted);
+    font:600 14px/1.2 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:transparent;
+    border:1px solid var(--line);border-bottom:none;border-radius:10px 10px 0 0}
+  .tab:hover{color:var(--ink);border-color:var(--ink)}
+  .tab[aria-current]{color:var(--ink);background:var(--mat);border-color:var(--ink);border-top-width:3px;padding-top:8px}
+  .store-row{display:flex;justify-content:center;padding:40px 0 0}
+  .store-row[hidden]{display:none}
+  .appstore{display:inline-flex;align-items:center;gap:10px;min-height:52px;padding:8px 18px 8px 10px;border-radius:14px;
+    background:#000;color:#fff;text-decoration:none;border:1px solid rgba(255,255,255,.28);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+  .appstore img{border-radius:7px}
+  .appstore span{display:flex;flex-direction:column;line-height:1.05}
+  .appstore small{font-size:10.5px;opacity:.85}
+  .appstore b{font-size:19px;font-weight:600;letter-spacing:-.01em}
+  .sites{display:flex;flex-wrap:wrap;gap:8px;margin:44px 0 0;padding:22px 0 0;border-top:1px solid var(--line)}
+  .site{box-sizing:border-box;width:168px;min-height:42px;display:flex;align-items:center;gap:8px;padding:3px 10px 3px 3px;
+    color:#0b0f1a;text-decoration:none;font:500 13.5px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    background:#eef1f7;border:2px solid #eef1f7;border-radius:10px}
+  .site img{display:block;width:32px;height:32px;border-radius:6px;image-rendering:pixelated}
+  .site:hover{border-color:#0b0f1a}
+  @media (prefers-color-scheme: dark){ .site{border-color:#eef1f7} .site:hover{border-color:#6d6557} }
+  @media (max-width:600px){ .tab{min-width:0;flex:1;padding:10px 6px 9px} .tabs{flex:1} .site{flex:1;width:auto} }
+
+  /* landing: a small film beside the words, then the puzzle as the page's main */
+  .intro{display:grid;grid-template-columns:1fr 300px;gap:28px;align-items:center;padding:26px 0 6px}
+  .intro .film{margin:0;border-radius:14px;overflow:hidden;box-shadow:var(--shadow);background:#fff}
+  .intro .film video{border-radius:0}
+  .bigplay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;border:0;background:rgba(27,25,23,.12);cursor:pointer}
+  .bigplay span{width:64px;height:64px;border-radius:50%;background:rgba(27,25,23,.72);display:grid;place-items:center}
+  .bigplay svg{width:26px;height:26px;margin-left:4px;fill:#fff}
+  .bigplay[hidden]{display:none}
+  .puzzle{margin:22px 0 0;background:var(--mat);border:1px solid var(--hair);border-radius:16px;box-shadow:var(--shadow);padding:12px 6px 4px}
+  .puzzle .head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:2px 12px 0}
+  .puzzle iframe{display:block;width:100%;height:640px;border:0;background:transparent}
+  .another{font:600 14px/1.2 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;cursor:pointer;border:1px solid var(--ink);border-radius:999px;padding:8px 16px;background:none;color:var(--ink)}
+  @media (max-width:820px){ .intro{grid-template-columns:1fr 200px;gap:16px} }
+  @media (max-width:600px){
+    .intro{grid-template-columns:1fr;gap:12px}
+    .intro .film{width:min(240px,70%);margin:0 auto}
+    .puzzle{margin:16px -16px 0;border-radius:0;border-left:0;border-right:0;padding:8px 0 0}
+  }
 </style>
 </head>
 <body>
 <main>
-  <nav>
-    <a href="/" aria-label="Coordigo"><span class="mark">Co</span><span class="name">Coordigo</span></a>
-    <a class="store" data-store="web-home-nav" data-t="getShort" data-apple>Get the app</a>
-  </nav>
+  <nav class="tabs-bar" aria-label="Coordigo"><div class="tabs"><a class="tab" href="/" aria-current="page"><span>Coordigo</span></a><a class="tab" href="/library/"><span data-t="libCaps">Library</span></a><a class="tab" href="/postcards/"><span>Postcards</span></a></div></nav>
 
-  <header class="hero">
+  <header class="intro">
     <div>
       <div class="caps" data-t="heroCaps">Mystery pictures</div>
       <h1 data-t="heroTitle">A picture stays a secret until someone connects the dots.</h1>
       <p class="lede" data-t="heroSub">Friends send each other 16 × 16 pictures as a code. Try one here — no app needed.</p>
     </div>
-    <div class="play" id="play">
-      <div class="film" id="film">
-        <video id="filmVideo" src="/intro.mp4" poster="/intro.jpg" autoplay muted loop playsinline preload="auto" aria-label="Coordigo"></video>
-        <button class="sound" id="sound" type="button" aria-label="Sound" aria-pressed="false"></button>
-      </div>
-      <button class="try" id="try" type="button" data-t="todayCaps">Today's picture</button>
-      <div class="caps" id="playCaps" hidden></div>
-      <iframe id="player" title="Mystery picture" hidden></iframe>
+    <div class="film" id="film">
+      <video id="filmVideo" src="/intro.mp4" poster="/intro.jpg" playsinline preload="metadata" aria-label="Coordigo"></video>
+      <button class="bigplay" id="bigplay" type="button" aria-label="Play"><span><svg viewBox="0 0 24 24"><path d="M6 4l15 8-15 8z"/></svg></span></button>
     </div>
   </header>
 
-  <section>
-    <div class="caps" data-t="libCaps">Library</div>
-    <p class="sub" data-t="libSub">Mystery pictures to solve on your own. Connect the points; the answer comes at the end.</p>
-    <div id="solve"></div>
-  </section>
-
-  <section>
-    <div class="caps" data-t="msgCaps">Messages to send</div>
-    <p class="sub" data-t="msgSub">Solve one here. In the app, send it with your own words.</p>
-    <div class="grid" id="messages"></div>
+  <section class="puzzle" aria-labelledby="puzzleNo">
+    <div class="head"><div class="caps" id="puzzleNo"></div><button class="another" id="another" type="button">Another picture</button></div>
+    <iframe id="player" title="Mystery picture"></iframe>
   </section>
 
   <section>
@@ -163,16 +192,11 @@
     </div>
   </section>
 
-  <section class="get" data-apple>
-    <h2 data-t="getTitle">Draw your own and send it</h2>
-    <p class="sub" style="margin:0 auto" data-t="getSub">Free on iPhone, iPad and Mac.</p>
-    <a class="btn" data-store="web-home" data-t="get">Get Coordigo — free</a>
-  </section>
-
+  <div class="store-row" data-apple><a class="appstore" data-store="web-co-home"><img src="/art/icon-512.png" width="32" height="32" alt=""><span><small>Download on the</small><b>App Store</b></span></a></div>
+  <section class="sites" aria-label="Also from Swiftian"><a class="site" href="https://iflipbook.com/?ct=web-co-if"><img src="/assets/links/iflipbook-32.png" srcset="/assets/links/iflipbook-32.png 1x, /assets/links/iflipbook-64.png 2x, /assets/links/iflipbook-96.png 3x" width="32" height="32" alt=""><span>iflipbook.com</span></a><a class="site" href="https://swiftian.com/?ct=web-co-sw"><img src="/assets/links/swiftian-32.png" srcset="/assets/links/swiftian-32.png 1x, /assets/links/swiftian-64.png 2x, /assets/links/swiftian-96.png 3x" width="32" height="32" alt=""><span>swiftian.com</span></a></section>
   <footer>
     <a href="/privacy/" data-t="privacy">Privacy Policy</a>
     <a href="/support/" data-t="support">Support</a>
-    <a href="https://swiftian.com">Swiftian</a>
   </footer>
 </main>
 <script src="/store.js"></script>
@@ -183,10 +207,9 @@
 <script>
 (() => {
   'use strict';
+
   const M = window.Mystery, $ = id => document.getElementById(id), NS = 'http://www.w3.org/2000/svg';
   const STORE = 'https://apps.apple.com/app/id1486330879';
-
-  // MARK: Words — the page's language (a language folder sets data-lang), else the reader's, else English.
   const table = window.MYSTERY_STRINGS;
   const lang = document.documentElement.dataset.lang || (() => {
     for (const raw of navigator.languages || [navigator.language || 'en']) {
@@ -206,128 +229,38 @@
   };
   for (const el of document.querySelectorAll('[data-t]')) { const s = t(el.dataset.t); if (s) el.textContent = s; }
   for (const el of document.querySelectorAll('[data-store]')) el.href = STORE + '?ct=' + el.dataset.store;
-  // Coordigo runs on iPhone, iPad and Mac: elsewhere the store links would lead nowhere.
+  // Coordigo runs on iPhone, iPad and Mac; and before Coordigo 6.2 is in the App Store (store.js) no link leads to the app.
   const appleDevice = /iPhone|iPad|Macintosh/.test(navigator.userAgent);
-  // Before Coordigo 6.2 is in the App Store (store.js), no link leads to the app: the store has a different one.
   if (!appleDevice || window.CO_STORE !== true) for (const el of document.querySelectorAll('[data-apple]')) el.hidden = true;
-
-  // MARK: The Library — the app's, in its order; today's picture is the app's too.
   const all = window.CO_LIBRARY || [];
   const toSolve = all.filter(i => i.theme !== 'messages');
-  const now = new Date();
-  const days = Math.floor((Date.UTC(now.getFullYear(), now.getMonth(), now.getDate()) - Date.UTC(2026, 0, 1)) / 864e5);
-  const today = toSolve.length ? toSolve[((days % toSolve.length) + toSolve.length) % toSolve.length] : null;
-  // A message picture's words in the reader's language (scripts/web-strings.py).
   const localized = item => (item.theme === 'messages' && ((window.MYSTERY_LIBRARY_WORDS || {})[lang] || {})[item.id]) || item.payload;
-
-  const solvedKey = payload => { let h = 0x811c9dc5; for (let i = 0; i < payload.length; i++) { h ^= payload.charCodeAt(i); h = Math.imul(h, 0x01000193) >>> 0; } return 'coordigo.mystery.' + h.toString(16) + '.solved'; };
-  const solved = payload => { try { return JSON.parse(localStorage.getItem(solvedKey(payload))) === true; } catch (e) { return false; } };
-
   const player = $('player');
-  let current = null;
-  function open(item, scroll) {
-    current = item;
-    if (!$('film').hidden) {
-      $('filmVideo').pause();
-      $('film').hidden = $('try').hidden = true;
-      $('playCaps').hidden = player.hidden = false;
-    }
-    const n = toSolve.indexOf(item) + 1;
-    $('playCaps').textContent = item === today ? t('todayCaps') : item.theme === 'messages' ? t('msgCaps') : t('number', n);
-    player.src = '/mystery/?embed&lang=' + encodeURIComponent(lang) + '#' + localized(item);
-    for (const e of document.querySelectorAll('.tile')) e.classList.toggle('on', e.dataset.id === item.id);
-    if (scroll) $('play').scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }
   addEventListener('message', e => {
     if (e.source !== player.contentWindow || !e.data || !e.data.co) return;
     if (e.data.co === 'height') player.style.height = Math.max(420, e.data.h + 8) + 'px';
-    if (e.data.co === 'solved') render();
+    if (e.data.co === 'solved' && window.onSolved) window.onSolved();
   });
+  const load = item => { player.src = '/mystery/?embed&lang=' + encodeURIComponent(lang) + '#' + localized(item); };
 
-  // MARK: Tiles — an envelope for pictures to solve (the answer stays hidden), the picture itself for messages.
-  function el(name, attrs, parent) {
-    const e = document.createElementNS(NS, name);
-    for (const [k, v] of Object.entries(attrs)) e.setAttribute(k, v);
-    if (parent) parent.appendChild(e);
-    return e;
-  }
-  function gridSVG() {
-    const svg = el('svg', { viewBox: '-0.2 -0.2 15.4 15.4' });
-    for (let i = 0; i <= 15; i++) {
-      const a = { stroke: i % 4 === 0 || i === 15 ? 'rgba(27,25,23,.28)' : 'rgba(27,25,23,.1)', 'stroke-width': 0.04 };
-      el('line', { x1: i, y1: 0, x2: i, y2: 15, ...a }, svg); el('line', { x1: 0, y1: i, x2: 15, y2: i, ...a }, svg);
-    }
-    return svg;
-  }
-  async function pictureSVG(payload) {
-    const svg = gridSVG();
-    try {
-      const p = await M.readPayload(payload);
-      const regions = M.regionsOf(p);
-      const px = M.pixels(regions, new Set(regions.map(r => r.id)));
-      if (px) {
-        const c = document.createElement('canvas'); c.width = M.W; c.height = M.H;
-        c.getContext('2d').putImageData(new ImageData(px, M.W, M.H), 0, 0);
-        el('image', { href: c.toDataURL(), x: 0, y: 0, width: 15, height: 15, preserveAspectRatio: 'none' }, svg);
-      }
-      for (const seg of p.segments) {
-        if (seg.length === 1) { el('circle', { cx: seg[0].x, cy: seg[0].y, r: 0.22, fill: '#1b1917' }, svg); continue; }
-        el('polyline', { points: seg.map(q => q.x + ',' + q.y).join(' '), fill: 'none', stroke: '#1b1917', 'stroke-width': 0.22,
-                         'stroke-linejoin': 'round', 'stroke-linecap': 'round' }, svg);
-      }
-    } catch (e) {}
-    return svg;
-  }
-  async function tile(item, number) {
-    const b = document.createElement('button');
-    b.className = 'tile'; b.dataset.id = item.id; b.type = 'button';
-    const face = document.createElement('div'); face.className = 'face';
-    if (item.theme === 'messages') face.appendChild(await pictureSVG(localized(item)));
-    else { face.appendChild(gridSVG()); const q = document.createElement('div'); q.className = 'q'; q.textContent = '?'; face.appendChild(q); }
-    if (solved(localized(item))) { const d = document.createElement('span'); d.className = 'done'; d.textContent = t('solved'); face.appendChild(d); }
-    const title = document.createElement('div'); title.className = 't';
-    const detail = document.createElement('div'); detail.className = 'd';
-    const p = await M.readPayload(localized(item)).catch(() => null);
-    if (item.theme === 'messages') {
-      title.textContent = (p && p.message) || '';
-    } else {
-      title.textContent = t('number', number);
-      const points = p ? p.segments.reduce((n, s) => n + s.length, 0) : 0;
-      detail.textContent = (item === today ? t('todayCaps') + ' · ' : '') + (p ? t(M.length(points)) : '');
-    }
-    b.append(face, title, detail);
-    b.onclick = () => open(item, true);
-    return b;
-  }
 
-  async function render() {
-    const solveBox = $('solve'); solveBox.textContent = '';
-    for (const theme of ['animals', 'things', 'games']) {
-      const items = toSolve.filter(i => i.theme === theme);
-      if (!items.length) continue;
-      const cap = document.createElement('div'); cap.className = 'caps'; cap.style.margin = '18px 0 10px'; cap.textContent = t(theme) || theme;
-      const grid = document.createElement('div'); grid.className = 'grid';
-      for (const item of items) grid.appendChild(await tile(item, toSolve.indexOf(item) + 1));
-      solveBox.append(cap, grid);
-    }
-    const msg = $('messages'); msg.textContent = '';
-    for (const item of all.filter(i => i.theme === 'messages')) msg.appendChild(await tile(item, 0));
-    for (const e of document.querySelectorAll('.tile')) e.classList.toggle('on', !!current && e.dataset.id === current.id);
+  // MARK: A random picture from the Library — a new one each visit, and on "Another".
+  let current = null;
+  function pick() {
+    const rest = toSolve.filter(i => i !== current);
+    current = rest[Math.floor(Math.random() * rest.length)];
+    $('puzzleNo').textContent = t('number', toSolve.indexOf(current) + 1);
+    load(current);
   }
+  $('another').onclick = pick;
+  if (toSolve.length) pick();
 
-  // MARK: The intro film — muted until asked; still for readers who turn motion off.
-  const film = $('filmVideo'), sound = $('sound');
-  const speaker = on => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">'
-    + '<path d="M4 9h4l5-4v14l-5-4H4z" fill="currentColor"/>' + (on ? '<path d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12"/>' : '<path d="M17 9l5 6M22 9l-5 6"/>') + '</svg>';
-  sound.innerHTML = speaker(false);
-  sound.onclick = () => {
-    film.muted = !film.muted;
-    if (!film.muted) film.play();
-    sound.innerHTML = speaker(!film.muted); sound.setAttribute('aria-pressed', String(!film.muted));
-  };
-  if (matchMedia('(prefers-reduced-motion: reduce)').matches) { film.removeAttribute('autoplay'); film.pause(); film.controls = true; }
-  if (today) $('try').onclick = () => open(today, false); else $('try').hidden = true;
-  render();
+  // MARK: The intro film — still until pressed; one play per press, with sound.
+  const film = $('filmVideo'), big = $('bigplay');
+  big.onclick = () => { film.currentTime = 0; film.muted = false; film.play(); big.hidden = true; };
+  film.addEventListener('ended', () => { big.hidden = false; });
+  film.addEventListener('pause', () => { if (!film.ended) big.hidden = false; });
+
 })();
 </script>
 </body>
