@@ -124,8 +124,22 @@
   .pager button{min-width:44px;height:44px;border-radius:12px;border:1px solid var(--line);background:var(--mat);color:var(--ink);cursor:pointer;
     font:600 15px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
   .pager button[aria-current]{border-color:var(--ink);background:var(--ink);color:var(--paper)}
-  .play{margin:18px 0 0}
+  .play{margin:18px 0 0;padding:16px}
   .play[hidden]{display:none}
+  .detail{display:grid;grid-template-columns:minmax(0,320px) 1fr;gap:22px;align-items:start}
+  .detail .pic{position:relative;aspect-ratio:1;background:#fffdf8;border:1px solid var(--hair);border-radius:12px;overflow:hidden}
+  .detail .pic svg{position:absolute;inset:6%;width:88%;height:88%}
+  .detail h2{margin:4px 0 4px}
+  .detail .count{color:var(--muted);margin:0;font-size:14px}
+  .detail .words{margin:10px 0 0;font-style:italic}
+  .detail .words:empty{display:none}
+  .acts{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 0}
+  .act{font:600 14px/1.2 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;cursor:pointer;border:1px solid var(--ink);border-radius:999px;
+    padding:10px 16px;background:none;color:var(--ink)}
+  .act.primary{background:var(--ink);color:var(--paper)}
+  .act[disabled]{opacity:.5;cursor:default}
+  .play iframe{margin-top:14px}
+  @media (max-width:640px){ .detail{grid-template-columns:1fr} .detail .pic{max-width:320px;width:100%;margin:0 auto} }
 </style>
 </head>
 <body>
@@ -134,10 +148,22 @@
 
   <section id="libTop">
     <div class="caps" data-t="libCaps">Library</div>
-    <p class="sub" data-t="libSub">Mystery pictures to solve on your own. Connect the points; the answer comes at the end.</p>
+    <p class="sub">Every picture, open. Take one, print its worksheet, pass it on.</p>
     <div class="play" id="play" hidden>
-      <div class="caps" id="playCaps"></div>
-      <iframe id="player" title="Mystery picture"></iframe>
+      <div class="detail">
+        <div class="pic" id="pPic"></div>
+        <div class="info">
+          <h2 id="pTitle"></h2>
+          <p class="count" id="pCount"></p>
+          <p class="words" id="pWords"></p>
+          <div class="acts">
+            <button class="act primary" id="pSheet" type="button">Worksheet (PDF)</button>
+            <button class="act" id="pPng" type="button">Save picture</button>
+            <button class="act" id="pSolve" type="button">Solve it here</button>
+          </div>
+        </div>
+      </div>
+      <iframe id="player" title="Mystery picture" hidden></iframe>
     </div>
     <div class="grid" id="solve" style="margin-top:16px"></div>
     <nav class="pager" id="pager" aria-label="Pages"></nav>
@@ -201,9 +227,7 @@
   const load = item => { player.src = '/mystery/?embed&lang=' + encodeURIComponent(lang) + '#' + localized(item); };
 
 
-  // MARK: Tiles — an envelope for pictures to solve (the answer stays hidden), the picture itself for messages.
-  const solvedKey = payload => { let h = 0x811c9dc5; for (let i = 0; i < payload.length; i++) { h ^= payload.charCodeAt(i); h = Math.imul(h, 0x01000193) >>> 0; } return 'coordigo.mystery.' + h.toString(16) + '.solved'; };
-  const solved = payload => { try { return JSON.parse(localStorage.getItem(solvedKey(payload))) === true; } catch (e) { return false; } };
+  // MARK: The Library, open (founder 2026-11-04): every picture shown with its number and title, to take, print and pass on.
   function el(name, attrs, parent) { const e = document.createElementNS(NS, name); for (const [k, v] of Object.entries(attrs)) e.setAttribute(k, v); if (parent) parent.appendChild(e); return e; }
   function gridSVG() {
     const svg = el('svg', { viewBox: '-0.2 -0.2 15.4 15.4' });
@@ -213,67 +237,203 @@
     }
     return svg;
   }
-  async function pictureSVG(payload) {
-    const svg = gridSVG();
-    try {
-      const p = await M.readPayload(payload);
-      const regions = M.regionsOf(p);
-      const px = M.pixels(regions, new Set(regions.map(r => r.id)));
-      if (px) {
-        const c = document.createElement('canvas'); c.width = M.W; c.height = M.H;
-        c.getContext('2d').putImageData(new ImageData(px, M.W, M.H), 0, 0);
-        el('image', { href: c.toDataURL(), x: 0, y: 0, width: 15, height: 15, preserveAspectRatio: 'none' }, svg);
-      }
-      for (const seg of p.segments) {
-        if (seg.length === 1) { el('circle', { cx: seg[0].x, cy: seg[0].y, r: 0.22, fill: '#1b1917' }, svg); continue; }
-        el('polyline', { points: seg.map(q => q.x + ',' + q.y).join(' '), fill: 'none', stroke: '#1b1917', 'stroke-width': 0.22, 'stroke-linejoin': 'round', 'stroke-linecap': 'round' }, svg);
-      }
-    } catch (e) {}
+  const info = new Map();
+  async function read(item) {
+    if (!info.has(item.id)) info.set(item.id, await M.readPayload(localized(item)).catch(() => null));
+    return info.get(item.id);
+  }
+  function raster(p) {
+    const regions = M.regionsOf(p), px = M.pixels(regions, new Set(regions.map(r => r.id)));
+    if (!px) return null;
+    const c = document.createElement('canvas'); c.width = M.W; c.height = M.H;
+    c.getContext('2d').putImageData(new ImageData(px, M.W, M.H), 0, 0);
+    return c;
+  }
+  async function pictureSVG(item) {
+    const svg = gridSVG(), p = await read(item);
+    if (!p) return svg;
+    const c = raster(p);
+    if (c) el('image', { href: c.toDataURL(), x: 0, y: 0, width: 15, height: 15, preserveAspectRatio: 'none' }, svg);
+    for (const seg of p.segments) {
+      if (seg.length === 1) { el('circle', { cx: seg[0].x, cy: seg[0].y, r: 0.22, fill: '#1b1917' }, svg); continue; }
+      el('polyline', { points: seg.map(q => q.x + ',' + q.y).join(' '), fill: 'none', stroke: '#1b1917', 'stroke-width': 0.22, 'stroke-linejoin': 'round', 'stroke-linecap': 'round' }, svg);
+    }
     return svg;
   }
+  const numberOf = item => item.theme === 'messages' ? 0 : toSolve.indexOf(item) + 1;
+  const titleOf = (item, p) => (numberOf(item) ? '#' + numberOf(item) + ' ' : '') + ((p && p.title) || '');
+  const points = p => p ? p.segments.reduce((n, s) => n + s.length, 0) : 0;
+  const counts = p => p ? p.segments.length + ' lines · ' + points(p) + ' points' : '';
+  const slug = item => 'coordigo' + (numberOf(item) ? '-' + numberOf(item) : '') + '-' + item.id;
+
   let current = null;
-  function open(item) {
+  async function open(item, scroll) {
     current = item;
+    const p = await read(item);
     $('play').hidden = false;
-    $('playCaps').textContent = item.theme === 'messages' ? t('msgCaps') : t('number', toSolve.indexOf(item) + 1);
-    load(item);
+    $('pTitle').textContent = titleOf(item, p);
+    $('pCount').textContent = counts(p);
+    $('pWords').textContent = p && p.message ? '“' + p.message + '”' : '';
+    $('pPic').replaceChildren(await pictureSVG(item));
+    player.hidden = true; player.removeAttribute('src');
+    history.replaceState(null, '', location.pathname + location.search + '#' + item.id);
     for (const e of document.querySelectorAll('.tile')) e.classList.toggle('on', e.dataset.id === item.id);
-    $('play').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    if (scroll) $('play').scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
-  async function tile(item, number) {
+  $('pSolve').onclick = () => { if (!current) return; player.hidden = false; load(current); };
+  $('pSheet').onclick = () => current && worksheet(current);
+  $('pPng').onclick = () => current && savePNG(current);
+
+  async function tile(item) {
     const b = document.createElement('button');
     b.className = 'tile'; b.dataset.id = item.id; b.type = 'button';
     const face = document.createElement('div'); face.className = 'face';
-    if (item.theme === 'messages') face.appendChild(await pictureSVG(localized(item)));
-    else { face.appendChild(gridSVG()); const q = document.createElement('div'); q.className = 'q'; q.textContent = '?'; face.appendChild(q); }
-    if (solved(localized(item))) { const d = document.createElement('span'); d.className = 'done'; d.textContent = t('solved'); face.appendChild(d); }
-    const title = document.createElement('div'); title.className = 't';
+    face.appendChild(await pictureSVG(item));
+    const p = await read(item);
+    const title = document.createElement('div'); title.className = 't'; title.textContent = titleOf(item, p);
     const detail = document.createElement('div'); detail.className = 'd';
-    const p = await M.readPayload(localized(item)).catch(() => null);
-    if (item.theme === 'messages') title.textContent = (p && p.message) || '';
-    else { title.textContent = t('number', number); const points = p ? p.segments.reduce((n, s) => n + s.length, 0) : 0; detail.textContent = p ? t(M.length(points)) : ''; }
+    detail.textContent = item.theme === 'messages' ? ((p && p.message) || '') : (p ? t(M.length(points(p))) : '');
     b.append(face, title, detail);
-    b.onclick = () => open(item);
+    b.onclick = () => open(item, true);
     if (current && current.id === item.id) b.classList.add('on');
     return b;
   }
-  // MARK: The Library, newest number first, PER to a page; ?p=2 opens page 2.
+
+  // MARK: The worksheet — the app's page (Coordigo Print.swift): the title, the key, the empty grid at 70 % of the printable
+  // width with its 0–F axes, the count, the code as one run with a bar where the pen lifts; then the answer in colour.
+  // Drawn on a canvas, so every script prints, and put in a PDF.
+  const LETTER = ['US', 'CA', 'MX', 'PH', 'PR', 'CL', 'CO', 'VE', 'GT', 'CR', 'PA', 'DO', 'SV', 'NI', 'HN', 'BZ'];
+  const paper = () => {
+    const region = ((navigator.language || 'en-US').split('-')[1] || 'US').toUpperCase();
+    return LETTER.includes(region) ? { name: 'letter', w: 612, h: 792 } : { name: 'a4', w: 595.28, h: 841.89 };
+  };
+  const INK = '#1f1e1c', MUTED = '#5f5e5a';
+  const SANS = '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans", sans-serif';
+  const MONO = 'ui-monospace, SFMono-Regular, Menlo, Consolas, monospace';
+  function wrap(ctx, text, x, y, width, size, lh) {
+    const words = String(text).split(/(\s+)/); let line = '', out = y;
+    const flush = () => { ctx.fillText(line.trim(), x, out + size); out += lh; line = ''; };
+    for (const w of words) { if (line && ctx.measureText(line + w).width > width) flush(); line += w; }
+    if (line.trim()) flush();
+    return out;
+  }
+  function grid(ctx, ox, oy, side) {
+    const u = side / 15;
+    for (let k = 0; k <= 15; k++) {
+      const major = k % 4 === 0 || k === 15;
+      ctx.strokeStyle = major ? 'rgba(31,30,28,.32)' : 'rgba(31,30,28,.12)'; ctx.lineWidth = major ? 0.8 : 0.45;
+      ctx.beginPath(); ctx.moveTo(ox + k * u, oy); ctx.lineTo(ox + k * u, oy + side); ctx.moveTo(ox, oy + k * u); ctx.lineTo(ox + side, oy + k * u); ctx.stroke();
+    }
+    ctx.fillStyle = MUTED; ctx.font = '500 7.5px ' + MONO;
+    for (let k = 0; k <= 15; k++) {
+      const d = M.DIGITS[k], w = ctx.measureText(d).width;
+      ctx.fillText(d, ox + k * u - w / 2, oy - 4); ctx.fillText(d, ox - 6 - w, oy + k * u + 2.6);
+    }
+  }
+  function flow(ctx, segs, x, y, width, size, draw) {
+    ctx.font = size + 'px ' + MONO;
+    const gap = size * 0.6, bar = size * 1.1, lh = size * 1.9;
+    let cx = 0, row = 0;
+    segs.forEach((s, i) => s.forEach((q, j) => {
+      const text = M.pair(q), lift = i > 0 && j === 0, w = ctx.measureText(text).width + (lift ? bar : 0);
+      if (cx > 0 && cx + w > width) { cx = 0; row++; }
+      if (draw) {
+        const base = y + row * lh + lh * 0.68; let tx = x + cx;
+        if (lift) { ctx.strokeStyle = MUTED; ctx.lineWidth = Math.max(0.6, size * 0.07); ctx.beginPath(); ctx.moveTo(tx + size * 0.3, base - size * 0.9); ctx.lineTo(tx + size * 0.3, base + size * 0.22); ctx.stroke(); tx += bar; }
+        ctx.fillStyle = INK; ctx.fillText(text, tx, base);
+      }
+      cx += w + gap;
+    }));
+    return (row + 1) * lh;
+  }
+  function puzzlePage(ctx, pg, item, p) {
+    const m = 42, width = pg.w - 2 * m; let y = m;
+    ctx.fillStyle = '#fff'; ctx.fillRect(0, 0, pg.w, pg.h);
+    ctx.font = '10px ' + MONO; ctx.fillStyle = MUTED;
+    ctx.fillText('coordigo.com', pg.w - m - ctx.measureText('coordigo.com').width, y + 14);
+    ctx.font = '600 22px ' + SANS; ctx.fillStyle = INK;
+    y = wrap(ctx, titleOf(item, p), m, y, width - 110, 22, 28);
+    ctx.font = '9.5px ' + SANS; ctx.fillStyle = MUTED;
+    y = wrap(ctx, 'Join the points in order: first digit across, second down. At | lift the pen and start a new line.', m, y + 6, width, 9.5, 13) + 6;
+    const bottom = pg.h - m * 0.6;
+    let side = width * 0.7, size = 11.5;
+    const fixed = y + 14 + 16 + 18;
+    while (fixed + side + flow(ctx, p.segments, m, 0, width, size, false) > bottom) { if (size > 8) size -= 0.5; else if (side > width * 0.45) side -= 8; else break; }
+    const ox = (pg.w - side) / 2, oy = y + 12;
+    grid(ctx, ox, oy, side);
+    y = oy + side + 10;
+    ctx.font = '9.5px ' + SANS; ctx.fillStyle = MUTED; ctx.fillText(counts(p), m, y + 9);
+    flow(ctx, p.segments, m, y + 18, width, size, true);
+  }
+  function answerPage(ctx, pg, item, p) {
+    const m = 42, width = pg.w - 2 * m; let y = m;
+    ctx.fillStyle = '#fff'; ctx.fillRect(0, 0, pg.w, pg.h);
+    ctx.font = '600 10px ' + SANS; ctx.fillStyle = MUTED; y = wrap(ctx, 'ANSWER', m, y, width, 10, 14) + 4;
+    ctx.font = '600 22px ' + SANS; ctx.fillStyle = INK; y = wrap(ctx, titleOf(item, p), m, y, width, 22, 28) + 6;
+    const side = width * 0.86, ox = (pg.w - side) / 2, oy = y + 8, u = side / 15;
+    const c = raster(p); if (c) { ctx.imageSmoothingEnabled = false; ctx.drawImage(c, ox, oy, side, side); }
+    ctx.strokeStyle = INK; ctx.lineWidth = 0.12 * u; ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+    for (const s of p.segments) {
+      if (s.length === 1) { ctx.fillStyle = INK; ctx.beginPath(); ctx.arc(ox + s[0].x * u, oy + s[0].y * u, 0.12 * u, 0, 7); ctx.fill(); continue; }
+      ctx.beginPath(); ctx.moveTo(ox + s[0].x * u, oy + s[0].y * u); for (const q of s.slice(1)) ctx.lineTo(ox + q.x * u, oy + q.y * u); ctx.stroke();
+    }
+    ctx.strokeStyle = 'rgba(31,30,28,.25)'; ctx.lineWidth = 0.7; ctx.strokeRect(ox, oy, side, side);
+    if (p.message) { ctx.font = 'italic 15px ' + SANS; ctx.fillStyle = INK; wrap(ctx, '“' + p.message + '”', m, oy + side + 22, width, 15, 20); }
+  }
+  function pageCanvas(pg, draw) {
+    const S = 3, c = document.createElement('canvas'); c.width = Math.round(pg.w * S); c.height = Math.round(pg.h * S);
+    const ctx = c.getContext('2d'); ctx.scale(S, S); draw(ctx); return c;
+  }
+  let pdfLib = null;
+  const loadPDF = () => pdfLib || (pdfLib = new Promise((ok, fail) => {
+    const s = document.createElement('script'); s.src = 'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js';
+    s.onload = () => ok(window.jspdf); s.onerror = fail; document.head.appendChild(s);
+  }));
+  async function worksheet(item) {
+    const btn = $('pSheet'); btn.disabled = true;
+    try {
+      const [lib, p] = await Promise.all([loadPDF(), read(item)]);
+      const pg = paper(), doc = new lib.jsPDF({ unit: 'pt', format: pg.name });
+      [c => puzzlePage(c, pg, item, p), c => answerPage(c, pg, item, p)].forEach((draw, i) => {
+        if (i) doc.addPage(pg.name);
+        doc.addImage(pageCanvas(pg, draw).toDataURL('image/jpeg', 0.92), 'JPEG', 0, 0, pg.w, pg.h);
+      });
+      doc.save(slug(item) + '-worksheet.pdf');
+    } finally { btn.disabled = false; }
+  }
+  async function savePNG(item) {
+    const p = await read(item), W = 1200, c = document.createElement('canvas'); c.width = W; c.height = W + 150;
+    const ctx = c.getContext('2d'); ctx.fillStyle = '#fffdf8'; ctx.fillRect(0, 0, c.width, c.height);
+    const side = W - 160, ox = 80, oy = 80, u = side / 15;
+    const r = raster(p); if (r) { ctx.imageSmoothingEnabled = false; ctx.drawImage(r, ox, oy, side, side); }
+    ctx.strokeStyle = '#1b1917'; ctx.lineWidth = 0.22 * u; ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+    for (const s of p.segments) {
+      if (s.length === 1) { ctx.fillStyle = '#1b1917'; ctx.beginPath(); ctx.arc(ox + s[0].x * u, oy + s[0].y * u, 0.22 * u, 0, 7); ctx.fill(); continue; }
+      ctx.beginPath(); ctx.moveTo(ox + s[0].x * u, oy + s[0].y * u); for (const q of s.slice(1)) ctx.lineTo(ox + q.x * u, oy + q.y * u); ctx.stroke();
+    }
+    ctx.fillStyle = '#1b1917'; ctx.font = '600 44px ' + SANS; ctx.fillText(titleOf(item, p), ox, oy + side + 76);
+    ctx.fillStyle = '#6d6557'; ctx.font = '30px ' + MONO; const mark = 'coordigo.com'; ctx.fillText(mark, W - 80 - ctx.measureText(mark).width, oy + side + 76);
+    const a = document.createElement('a'); a.download = slug(item) + '.png'; a.href = c.toDataURL('image/png'); a.click();
+  }
+
+  // MARK: Pages — newest number first, PER to a page; ?p=2 opens page 2, #<id> opens that picture.
   const PER = 6, newest = toSolve.slice().reverse(), pages = Math.max(1, Math.ceil(newest.length / PER));
   let page = Math.min(pages, Math.max(1, +(new URLSearchParams(location.search).get('p') || 1)));
+  const wanted = all.find(i => i.id === decodeURIComponent(location.hash.slice(1)));
+  if (wanted && wanted.theme !== 'messages') page = Math.floor(newest.indexOf(wanted) / PER) + 1;
   async function render() {
-    const grid = $('solve'); grid.textContent = '';
-    for (const item of newest.slice((page - 1) * PER, page * PER)) grid.appendChild(await tile(item, toSolve.indexOf(item) + 1));
+    const gridBox = $('solve'); gridBox.textContent = '';
+    for (const item of newest.slice((page - 1) * PER, page * PER)) gridBox.appendChild(await tile(item));
     $('pager').innerHTML = Array.from({ length: pages }, (_, i) => `<button type="button" data-p="${i + 1}"${i + 1 === page ? ' aria-current="page"' : ''}>${i + 1}</button>`).join('');
     const msg = $('messages'); msg.textContent = '';
-    for (const item of all.filter(i => i.theme === 'messages')) msg.appendChild(await tile(item, 0));
+    for (const item of all.filter(i => i.theme === 'messages')) msg.appendChild(await tile(item));
   }
   $('pager').onclick = e => {
     const b = e.target.closest('button'); if (!b) return;
-    page = +b.dataset.p; history.replaceState(null, '', page > 1 ? '?p=' + page : location.pathname); render();
+    page = +b.dataset.p; history.replaceState(null, '', (page > 1 ? '?p=' + page : location.pathname) + location.hash); render();
     $('libTop').scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
-  window.onSolved = render;
-  render();
+  render().then(() => { if (wanted) open(wanted, true); });
 
 })();
 </script>
