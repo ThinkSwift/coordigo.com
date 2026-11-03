@@ -174,6 +174,7 @@
   .seg{display:inline-flex;border:1px solid var(--line);border-radius:999px;overflow:hidden;width:max-content}
   .seg label{padding:6px 14px;cursor:pointer}
   .seg input{position:absolute;opacity:0;pointer-events:none}
+  .menu select{font:15px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;padding:6px 10px;border-radius:10px;border:1px solid var(--line);background:var(--paper);color:var(--ink);width:max-content}
   .seg label:has(input:checked){background:var(--ink);color:var(--paper)}
   .preview{border:1px solid var(--hair);border-radius:8px;overflow:hidden;background:#fff;max-width:240px;margin:6px 0 14px}
   .acts{display:flex;flex-wrap:wrap;gap:8px}
@@ -202,6 +203,10 @@
       <div class="menu">
         <h2>Worksheet</h2>
         <form id="sheetForm" onsubmit="return false">
+          <fieldset>
+            <legend>Language</legend>
+            <select name="lang" aria-label="The worksheet's language"></select>
+          </fieldset>
           <fieldset>
             <legend>Paper</legend>
             <div class="seg"><label><input type="radio" name="paper" value="letter"> Letter</label><label><input type="radio" name="paper" value="a4"> A4</label></div>
@@ -235,6 +240,8 @@
 <script src="/store.js"></script>
 <script src="/mystery/strings.js"></script>
 <script src="/mystery/engine.js"></script>
+<script type="application/json" id="faces">[["#ff9400",[[[8,12],[7,12],[6,12],[5,12],[3,11],[2,10],[2,9],[3,10],[5,11],[6,11],[7,11],[8,11],[9,11],[11,10],[12,10],[11,11],[9,12]]]],["#ffc482",[[[5,14],[4,14],[3,14],[3,13],[3,12],[3,11],[5,12],[5,13]]]],["#ff9400",[[[8,12],[9,12],[9,13],[8,13]]]],["#ffc482",[[[12,7],[13,7],[14,8],[14,9],[13,10],[12,10],[12,9],[12,8]]]],["#ffc482",[[[9,5],[11,6],[12,7],[12,8],[12,9],[12,10],[11,10],[9,11],[8,11],[7,11],[6,11],[5,11],[3,10],[2,9],[2,8],[3,6],[5,5],[6,5],[7,5],[8,5]]]],["#ff9400",[[[11,6],[9,5],[10,4],[11,3],[11,4],[11,5]]]],["#ffd60a",[[[7,1],[8,2],[8,3],[7,4],[6,4],[5,3],[5,2],[6,1]]]],["#ffc482",[[[10,14],[9,14],[9,13],[9,12],[11,11],[11,12],[11,13],[11,14]]]],["#ff9400",[[[6,13],[5,13],[5,12],[6,12]]]],["#c9f5ff",[[[0,0],[15,0],[15,15],[0,15]],[[7,12],[8,12],[8,13],[9,13],[9,14],[10,14],[11,14],[11,13],[11,12],[11,11],[12,10],[13,10],[14,9],[14,8],[13,7],[12,7],[11,6],[11,5],[11,4],[11,3],[10,4],[9,5],[8,5],[7,5],[6,5],[5,5],[3,6],[2,8],[1,7],[1,6],[2,6],[1,6],[1,7],[2,8],[2,9],[2,10],[3,11],[3,12],[3,13],[3,14],[4,14],[5,14],[5,13],[6,13],[6,12]],[[8,2],[7,1],[6,1],[5,2],[5,3],[6,4],[7,4],[8,3]]]]]</script>
+<script src="/library/worksheet-words.js"></script>
 <script src="/library/worksheet.js"></script>
 <script>
   (function () {   // the site's words in the reader's language, and the App Store bar on Apple devices once Coordigo 6.2 is in the store

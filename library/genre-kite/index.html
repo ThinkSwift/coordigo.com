@@ -174,6 +174,7 @@
   .seg{display:inline-flex;border:1px solid var(--line);border-radius:999px;overflow:hidden;width:max-content}
   .seg label{padding:6px 14px;cursor:pointer}
   .seg input{position:absolute;opacity:0;pointer-events:none}
+  .menu select{font:15px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;padding:6px 10px;border-radius:10px;border:1px solid var(--line);background:var(--paper);color:var(--ink);width:max-content}
   .seg label:has(input:checked){background:var(--ink);color:var(--paper)}
   .preview{border:1px solid var(--hair);border-radius:8px;overflow:hidden;background:#fff;max-width:240px;margin:6px 0 14px}
   .acts{display:flex;flex-wrap:wrap;gap:8px}
@@ -202,6 +203,10 @@
       <div class="menu">
         <h2>Worksheet</h2>
         <form id="sheetForm" onsubmit="return false">
+          <fieldset>
+            <legend>Language</legend>
+            <select name="lang" aria-label="The worksheet's language"></select>
+          </fieldset>
           <fieldset>
             <legend>Paper</legend>
             <div class="seg"><label><input type="radio" name="paper" value="letter"> Letter</label><label><input type="radio" name="paper" value="a4"> A4</label></div>
@@ -235,6 +240,8 @@
 <script src="/store.js"></script>
 <script src="/mystery/strings.js"></script>
 <script src="/mystery/engine.js"></script>
+<script type="application/json" id="faces">[["#c9f5ff",[[[4,10],[4,11],[4,12],[5,11],[5,12],[4,13],[3,13],[2,13],[3,12],[2,12],[1,12],[2,13],[1,13],[0,14],[0,0],[15,0],[15,12],[13,9],[11,6],[10.742,5.613],[13,4],[12,3],[11,2],[10,1],[5,2],[6,9],[5,10],[5,11]]]],["#ff9400",[[[4,11],[4,10],[5,11],[4,12]]]],["#33c759",[[[9,3],[10.742,5.613],[6,9],[7,7],[8,5]]]],["#33c759",[[[10.742,5.613],[9,3],[13,4]]]],["#c9f5ff",[[[10.742,5.613],[11,6],[13,9],[15,12],[15,15],[0,15],[0,14],[1,13],[2,13],[1,14],[2,14],[3,14],[2,13],[3,13],[4,13],[5,12],[5,11],[6,12],[6,11],[6,10],[5,11],[5,10],[6,9]]]],["#ffd60a",[[[11,2],[12,3],[13,4],[9,3],[10,1]]]],["#ff9400",[[[1,14],[2,13],[3,14],[2,14]]]],["#ff3b30",[[[10,1],[9,3],[5,2]]]],["#007aff",[[[5,2],[9,3],[8,5],[7,7],[6,9]]]],["#ff9400",[[[2,13],[1,12],[2,12],[3,12]]]],["#ff9400",[[[6,11],[6,12],[5,11],[6,10]]]]]</script>
+<script src="/library/worksheet-words.js"></script>
 <script src="/library/worksheet.js"></script>
 <script>
   (function () {   // the site's words in the reader's language, and the App Store bar on Apple devices once Coordigo 6.2 is in the store

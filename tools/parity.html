@@ -1,0 +1,19 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>Worksheet parity</title>
+<!-- tools/worksheet-parity.py opens this headless: it loads a picture's page and writes its worksheet pages as PNG data (or, with pdf=1, the PDF). -->
+<iframe id="f" style="width:1200px;height:900px"></iframe>
+<pre id="out"></pre>
+<script>
+  const q = new URLSearchParams(location.search), f = document.getElementById('f');
+  f.src = '/library/' + q.get('id') + '/';
+  f.onload = async () => {
+    const W = f.contentWindow;
+    for (let i = 0; i < 100 && !W.CoWorksheet; i++) await new Promise(r => setTimeout(r, 50));
+    const o = { paper: q.get('paper'), title: q.get('title') === '1', name: q.get('name') === '1', words: q.get('words') === '1',
+                answer: q.get('answer') === '1', lang: q.get('lang') || 'en' };
+    if (q.get('pdf') === '1') { const doc = await W.CoWorksheet.pdf(o); document.getElementById('out').textContent = 'PDF ' + doc.output('datauristring') + ' END'; return; }
+    const pages = await W.CoWorksheet.pages(o);
+    document.getElementById('out').textContent = 'PAGES ' + JSON.stringify(pages) + ' END';
+  };
+</script>

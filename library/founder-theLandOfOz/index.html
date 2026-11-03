@@ -174,6 +174,7 @@
   .seg{display:inline-flex;border:1px solid var(--line);border-radius:999px;overflow:hidden;width:max-content}
   .seg label{padding:6px 14px;cursor:pointer}
   .seg input{position:absolute;opacity:0;pointer-events:none}
+  .menu select{font:15px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;padding:6px 10px;border-radius:10px;border:1px solid var(--line);background:var(--paper);color:var(--ink);width:max-content}
   .seg label:has(input:checked){background:var(--ink);color:var(--paper)}
   .preview{border:1px solid var(--hair);border-radius:8px;overflow:hidden;background:#fff;max-width:240px;margin:6px 0 14px}
   .acts{display:flex;flex-wrap:wrap;gap:8px}
@@ -192,16 +193,20 @@
 <main>
   <nav class="tabs-bar" aria-label="Coordigo"><div class="tabs"><a class="tab" href="/"><span>Coordigo</span></a><a class="tab" href="/library/" aria-current="page"><span data-t="libCaps">Library</span></a><a class="tab" href="/postcards/"><span>Postcards</span></a></div></nav>
 
-  <section class="pic-page" data-picture="founder-theLandOfOz" data-number="4" data-title="Country road" data-file="coordigo-4-founder-theLandOfOz" data-payload="JY7BbsMwDEN_hcjZCGLZju3eJDn5j2E9r0DRDRiK_fuY5GI9U6Sk9_Q53aYS8lyCo4WYCB3LTFyICpnX0OdEUfiPkU9FDlGCoFymhMPAVg6GSmCLjR7SBQzPEja6-rFAOJXxc1UBY2dWLu70xgMTyynbwdcNG2KmEnPQKUx3Xi5t6Sg9N2mxi2VNtto6ULT0pq67IVvRqqthMXGIyUCyNCKL51FH82ZVUb0ONLcd7rrBvA_sbq6K4abe0NTa3sCAYvOxoyVOTJa5PvGeF-_xx_fX6_mL5-PjTulnusnfPw">
+  <section class="pic-page" data-picture="founder-theLandOfOz" data-number="4" data-title="Country road" data-file="coordigo-4-founder-theLandOfOz" data-payload="JU5BbsMwDPsK4bNhxLIdy71JcvKPYT2vQNENGIr9fUpysWiKFPkOn-EWWqypRQPHXBwMLGnEvDgUUFrjSMVJ8n_O_nTUmCkS2iUqOAS-qlHRHfgqHyfKBdycKG6uGkcA-VW3n1ENbju9dOHh2nzA4uOk9cBXhw25OpNrlBDD3ZsTL2NRMrRRmTgP0ipFV10nmrTBYrIrqjbpsipIaaJomdmH1dknG2sXdOsTbLrDTDaojYnd1EQwTcUYLMo7ww2CzeYOLh5ctHpy8Tovr2OP76_X8xfPx8fdqZ9wo79_">
     <p class="crumb"><a href="/library/" data-t="libCaps">Library</a></p>
     <h1>#4 Country road</h1>
-    <p class="count"><span class="tier common">Common</span>Places · 18 lines · 60 points · Medium · about 5 min</p>
+    <p class="count"><span class="tier common">Common</span>Places · 17 lines · 60 points · Medium · about 5 min</p>
     
     <div class="pic-grid">
       <figure class="common"><img src="/library/img/founder-theLandOfOz.png" width="600" height="600" alt="Country road: a Coordigo mystery picture, drawn by joining points on a 16 × 16 grid"></figure>
       <div class="menu">
         <h2>Worksheet</h2>
         <form id="sheetForm" onsubmit="return false">
+          <fieldset>
+            <legend>Language</legend>
+            <select name="lang" aria-label="The worksheet's language"></select>
+          </fieldset>
           <fieldset>
             <legend>Paper</legend>
             <div class="seg"><label><input type="radio" name="paper" value="letter"> Letter</label><label><input type="radio" name="paper" value="a4"> A4</label></div>
@@ -235,6 +240,8 @@
 <script src="/store.js"></script>
 <script src="/mystery/strings.js"></script>
 <script src="/mystery/engine.js"></script>
+<script type="application/json" id="faces">[["#33c759",[[[0,10],[0,9],[2,8],[1,9],[2,11],[2,12],[0,11]]]],["#8afa99",[[[2,11],[1,9],[2,8],[3,8],[4,8],[5,9],[5,10],[4,11],[3,11],[4,10]]]],["#8afa99",[[[2,12],[2,13],[1,13],[2,13],[3,13],[3,12],[4,13],[5,13],[6,13],[7,13],[8,12],[9,13],[10,14],[11,15],[0,15],[0,11]]]],["#a37045",[[[2,13],[2,12],[2,11],[4,10],[3,11],[3,12],[3,13]]]],["#ffffff",[[[8,3],[11,2],[12,3],[11,4],[10,4],[9,4]]]],["#33c759",[[[10,14],[9,13],[11,12],[12,12],[11,13]]]],["#ffffff",[[[4,11],[5,11],[6,11],[6,12],[6,13],[5,13],[4,13],[3,12],[3,11]]]],["#ff3b30",[[[5,11],[4,11],[5,10],[6,10],[7,10],[6,11]]]],["#0a6624",[[[12,10],[15,11],[15,12],[14,12],[13,12],[12,11],[11,10]]]],["#5952de",[[[15,11],[12,10],[13,8],[14,8],[15,8]]]],["#0a6624",[[[6,10],[5,10],[5,9],[8,10],[9,10],[10,10],[11,12],[9,13],[8,12],[8,11],[7,10]]]],["#c9f5ff",[[[14,8],[13,8],[12,8],[11,8],[8,10],[5,9],[4,8],[3,8],[2,8],[0,9],[0,0],[15,0],[15,8]],[[11,2],[8,3],[9,4],[10,4],[11,4],[12,3]]]],["#5952de",[[[10,10],[9,10],[8,10],[11,8],[12,8],[11,10]]]],["#ffffff",[[[8,11],[8,12],[7,13],[7,12],[7,13],[6,13],[6,12],[6,11],[7,10]]]],["#ffd60a",[[[12,10],[11,10],[12,8],[13,8]]]],["#ffd60a",[[[11,12],[10,10],[11,10],[12,11],[13,12],[12,12]]]],["#ffd60a",[[[11,15],[10,14],[11,13],[12,12],[13,12],[14,12],[13,15]]]],["#33c759",[[[14,12],[15,12],[15,15],[13,15]]]]]</script>
+<script src="/library/worksheet-words.js"></script>
 <script src="/library/worksheet.js"></script>
 <script>
   (function () {   // the site's words in the reader's language, and the App Store bar on Apple devices once Coordigo 6.2 is in the store

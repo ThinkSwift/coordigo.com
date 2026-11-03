@@ -3,7 +3,8 @@
 image files Google can find, a grid of them in pages (newest number first), and one page per picture with its worksheet
 (settings, PDF), its PNG and solving it here.
 
-  node tools/library-data.mjs [library.js] > co-lib.json && python3 tools/library-pages.py co-lib.json [Coordigo library.json]
+  node tools/library-data.mjs [library.js] > co-lib.json && python3 tools/library-pages.py co-lib.json [Coordigo library.json] [faces.json]
+(tools/library-sync.sh runs the whole chain from a Coordigo ref.)
 
 The app's whole Library (242 in Coordigo 6.2) comes from Coordigo scripts/web-library.py <dir> → <dir>/library.js.
 
@@ -20,6 +21,8 @@ PER = 24
 data = json.load(open(sys.argv[1]))
 # each picture's rarity, from the app's index (Coordigo Sources/Resources/Mystery/library.json), shown as the app does
 TIER = {e['id']: e['tier'] for e in json.load(open(sys.argv[2]))} if len(sys.argv) > 2 else {}
+# the answer's colours as the app fills them (tools/worksheet-ref.py faces), carried by each picture's page
+FACES = json.load(open(sys.argv[3])) if len(sys.argv) > 3 else {}
 STR = json.loads(re.search(r'MYSTERY_STRINGS\s*=\s*(\{.*\})', open(os.path.join(ROOT, 'mystery/strings.js')).read(), re.S).group(1))['en']
 esc = lambda s: html.escape(s, quote=True)
 
@@ -72,7 +75,7 @@ def render(d, size=600, pad=30):
 
 import shutil
 for name in os.listdir(os.path.join(ROOT, 'library')):
-    if name not in ('worksheet.js',):
+    if name not in ('worksheet.js', 'worksheet-words.js'):
         q = os.path.join(ROOT, 'library', name); shutil.rmtree(q) if os.path.isdir(q) else os.remove(q)
 os.makedirs(os.path.join(ROOT, 'library/img'), exist_ok=True)
 for d in data:
@@ -109,6 +112,7 @@ CSS = '''
   .seg{display:inline-flex;border:1px solid var(--line);border-radius:999px;overflow:hidden;width:max-content}
   .seg label{padding:6px 14px;cursor:pointer}
   .seg input{position:absolute;opacity:0;pointer-events:none}
+  .menu select{font:15px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;padding:6px 10px;border-radius:10px;border:1px solid var(--line);background:var(--paper);color:var(--ink);width:max-content}
   .seg label:has(input:checked){background:var(--ink);color:var(--paper)}
   .preview{border:1px solid var(--hair);border-radius:8px;overflow:hidden;background:#fff;max-width:240px;margin:6px 0 14px}
   .acts{display:flex;flex-wrap:wrap;gap:8px}
@@ -214,6 +218,10 @@ def picture_page(d, prev, nxt):
         <h2>Worksheet</h2>
         <form id="sheetForm" onsubmit="return false">
           <fieldset>
+            <legend>Language</legend>
+            <select name="lang" aria-label="The worksheet's language"></select>
+          </fieldset>
+          <fieldset>
             <legend>Paper</legend>
             <div class="seg"><label><input type="radio" name="paper" value="letter"> Letter</label><label><input type="radio" name="paper" value="a4"> A4</label></div>
           </fieldset>
@@ -242,7 +250,9 @@ def picture_page(d, prev, nxt):
     os.makedirs(os.path.dirname(out), exist_ok=True)
     page = head(t, desc, path, f'/library/img/{d["id"]}.png') + body(inner)
     page = page.replace('<script src="/mystery/strings.js"></script>',
-                        '<script src="/mystery/strings.js"></script>\n<script src="/mystery/engine.js"></script>\n<script src="/library/worksheet.js"></script>', 1)
+                        '<script src="/mystery/strings.js"></script>\n<script src="/mystery/engine.js"></script>\n'
+                        + (f'<script type="application/json" id="faces">{json.dumps(FACES[d["id"]], separators=(",", ":"))}</script>\n' if d['id'] in FACES else '')
+                        + '<script src="/library/worksheet-words.js"></script>\n<script src="/library/worksheet.js"></script>', 1)
     open(out, 'w').write(page)
 
 for k in range(1, pages + 1): grid_page(k)
