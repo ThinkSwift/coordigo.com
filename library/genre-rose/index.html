@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>#67 Rose · Coordigo mystery picture</title>
+<meta name="description" content="Rose: a coordinate drawing on a 16 × 16 grid. See it, save it, or print its worksheet — the empty grid and the code to join the points.">
+<meta name="theme-color" content="#f7f4ec" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#15161c" media="(prefers-color-scheme: dark)">
+<link rel="canonical" href="https://coordigo.com/library/genre-rose/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Coordigo">
+<meta property="og:url" content="https://coordigo.com/library/genre-rose/">
+<meta property="og:title" content="#67 Rose · Coordigo mystery picture">
+<meta property="og:description" content="Rose: a coordinate drawing on a 16 × 16 grid. See it, save it, or print its worksheet — the empty grid and the code to join the points.">
+<meta property="og:image" content="https://coordigo.com/library/img/genre-rose.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="apple-itunes-app-after-6.2" content="app-id=1486330879">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png?v=20261103">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png?v=20261103">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png?v=20261103">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=20261103">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#f7f4ec; --mat:#fffdf8; --ink:#1b1917; --muted:#6d6557;
+    --line:rgba(27,25,23,.14); --hair:rgba(27,25,23,.09);
+    --gold:#a8761a; --grid:rgba(27,25,23,.055); --mark:#d02670;
+    --shadow:0 1px 2px rgba(27,25,23,.07), 0 10px 26px rgba(27,25,23,.08);
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --paper:#15161c; --mat:#1d1f27; --ink:#eae5da; --muted:#9b9486;
+      --line:rgba(234,229,218,.16); --hair:rgba(234,229,218,.10);
+      --gold:#dcac48; --grid:rgba(234,229,218,.05); --mark:#ef5fa0;
+      --shadow:0 1px 2px rgba(0,0,0,.5), 0 12px 30px rgba(0,0,0,.45);
+    }
+  }
+  *{box-sizing:border-box} html,body{margin:0}
+  body{
+    background:var(--paper); color:var(--ink);
+    font-family:"Source Serif 4",Georgia,"Times New Roman",serif;
+    font-size:17px; line-height:1.55; -webkit-font-smoothing:antialiased;
+    background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+    background-size:23px 23px; min-height:100vh;
+  }
+  main{max-width:1080px;margin:0 auto;padding:0 16px 48px}
+  nav{display:flex;align-items:center;gap:10px;padding:18px 0 6px}
+  nav a{display:flex;align-items:center;gap:10px;text-decoration:none;color:inherit}
+  .mark{width:26px;height:26px;display:flex;align-items:center;justify-content:center;color:#fff;background:var(--mark);font-weight:600;font-size:12px}
+  nav .name{font-weight:600;font-size:17px}
+  nav .store{margin-left:auto;font:600 14px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;border:1px solid var(--ink);border-radius:999px;padding:7px 14px}
+  .caps{font:12px/1.4 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
+  h1{font-weight:600;font-size:clamp(30px,4.4vw,46px);line-height:1.12;margin:8px 0 12px;letter-spacing:-.01em}
+  h2{font-weight:600;font-size:24px;margin:4px 0 6px}
+  .lede{font-size:19px;color:var(--muted);max-width:30em;margin:0}
+  .hero{display:grid;grid-template-columns:1fr minmax(320px,520px);gap:36px;align-items:start;padding:22px 0 10px}
+  @media (max-width:820px){ .hero{grid-template-columns:1fr;gap:18px} }
+  .play{background:var(--mat);border:1px solid var(--hair);border-radius:16px;box-shadow:var(--shadow);padding:10px 4px 2px}
+  .play .caps{padding:4px 14px 0}
+  .play iframe{display:block;width:100%;height:640px;border:0;background:transparent}
+  /* The intro film shows first; today's picture (or a tile) takes its place. */
+  .film{position:relative;margin:0 6px}
+  .film video{display:block;width:100%;aspect-ratio:1;border-radius:10px;background:#fff}
+  .film .sound{position:absolute;right:10px;bottom:10px;width:36px;height:36px;border:0;border-radius:999px;cursor:pointer;
+    display:flex;align-items:center;justify-content:center;background:rgba(27,25,23,.55);color:#fff}
+  .film .sound svg{width:18px;height:18px}
+  .try{display:block;margin:12px auto 12px;font:600 15px/1.2 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;cursor:pointer;
+    border:1px solid var(--ink);border-radius:999px;padding:10px 20px;background:none;color:var(--ink)}
+  /* A phone: the board takes the screen's width (as Photos does with a picture) — no card margin around it. */
+  @media (max-width:600px){ .play{margin:0 -16px;border-radius:0;border-left:0;border-right:0;padding:8px 0 0}
+    .film{margin:0} .film video{border-radius:0}
+    h1{font-size:26px;margin:6px 0 8px} .lede{font-size:16px} .hero{padding-top:12px;gap:14px} }
+  section{padding:30px 0 6px}
+  .sub{color:var(--muted);margin:0 0 14px;max-width:36em}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:16px}
+  .tile{display:block;width:100%;text-align:left;font:inherit;color:inherit;cursor:pointer;background:none;border:0;padding:0}
+  .tile .face{position:relative;aspect-ratio:1;background:#fffdf8;border:1px solid var(--hair);border-radius:12px;box-shadow:var(--shadow);overflow:hidden}
+  .tile .face svg{position:absolute;inset:8%;width:84%;height:84%}
+  .tile .q{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:52px;color:#1b1917b0}
+  .tile .t{font-weight:600;font-size:15px;margin:8px 2px 0}
+  .tile .d{font-size:13px;color:var(--muted);margin:0 2px}
+  .tile.on .face{outline:2px solid var(--gold);outline-offset:2px}
+  .tile .done{position:absolute;right:8px;top:8px;font:600 11px -apple-system,sans-serif;color:var(--gold);background:var(--mat);border-radius:999px;padding:3px 8px}
+  .how{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  @media (max-width:700px){ .how{grid-template-columns:1fr} }
+  .how div{background:var(--mat);border:1px solid var(--hair);border-radius:14px;padding:14px 16px}
+  .how b{display:block;font:12px ui-monospace,Menlo,monospace;color:var(--gold);margin-bottom:4px}
+  .get{text-align:center;padding:40px 0 10px}
+  .btn{display:inline-block;text-decoration:none;font:600 16px/1.2 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    border-radius:14px;padding:15px 26px;margin-top:12px;background:var(--ink);color:var(--paper)}
+  footer{display:flex;flex-wrap:wrap;gap:18px;justify-content:center;font-size:14px;color:var(--muted);padding:28px 0 0}
+  footer a{color:inherit}
+  [hidden]{display:none!important}
+
+  /* coordigo.com pages: top tabs, App Store link, two site buttons (founder 2026-11-03) */
+  nav.tabs-bar{display:flex;align-items:flex-end;padding:18px 0 0;border-bottom:1px solid var(--line)}
+  .tabs{display:flex;gap:6px}
+  .tab{min-width:118px;padding:10px 16px 9px;margin-bottom:-1px;text-align:center;text-decoration:none;color:var(--muted);
+    font:600 14px/1.2 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:transparent;
+    border:1px solid var(--line);border-bottom:none;border-radius:10px 10px 0 0}
+  .tab:hover{color:var(--ink);border-color:var(--ink)}
+  .tab[aria-current]{color:var(--ink);background:var(--mat);border-color:var(--ink);border-top-width:3px;padding-top:8px}
+  .appbar{position:fixed;left:0;right:0;bottom:0;z-index:20;background:var(--paper);border-top:1px solid var(--line);
+    padding:10px 16px calc(10px + env(safe-area-inset-bottom))}
+  .appbar[hidden]{display:none}
+  body:has(.appbar:not([hidden])){padding-bottom:84px}
+  .appbar-in{max-width:880px;margin:0 auto;display:flex;align-items:center;gap:12px;color:var(--ink);text-decoration:none;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+  .appbar-in img{border-radius:8px;display:block}
+  .appbar-in .nm{flex:1;display:flex;flex-direction:column;line-height:1.2;min-width:0}
+  .appbar-in .nm b{font-size:15px}
+  .appbar-in .nm small{font-size:12.5px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .appbar-in .get{display:flex;flex-direction:column;line-height:1.05;background:#000;color:#fff;border:1px solid rgba(255,255,255,.28);
+    border-radius:12px;padding:6px 14px}
+  .appbar-in .get small{font-size:10px;opacity:.85}
+  .appbar-in .get b{font-size:17px;font-weight:600;letter-spacing:-.01em}
+  .sites{display:flex;flex-wrap:wrap;gap:8px;margin:44px 0 0;padding:22px 0 0;border-top:1px solid var(--line)}
+  .site{box-sizing:border-box;width:168px;min-height:42px;display:flex;align-items:center;gap:8px;padding:3px 10px 3px 3px;
+    color:#0b0f1a;text-decoration:none;font:500 13.5px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    background:#eef1f7;border:2px solid #eef1f7;border-radius:10px}
+  .site img{display:block;width:32px;height:32px;border-radius:6px;image-rendering:pixelated}
+  .site:hover{border-color:#0b0f1a}
+  @media (prefers-color-scheme: dark){ .site{border-color:#eef1f7} .site:hover{border-color:#6d6557} }
+  @media (max-width:600px){ .tab{min-width:0;flex:1;padding:10px 6px 9px} .tabs{flex:1} .site{flex:1;width:auto} }
+
+  /* landing: a small film beside the words, then the puzzle as the page's main */
+  .intro{display:grid;grid-template-columns:1fr 300px;gap:28px;align-items:center;padding:26px 0 6px}
+  .intro .film{margin:0;border-radius:14px;overflow:hidden;box-shadow:var(--shadow);background:#fff}
+  .intro .film video{border-radius:0}
+  .bigplay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;border:0;background:rgba(27,25,23,.12);cursor:pointer}
+  .bigplay span{width:64px;height:64px;border-radius:50%;background:rgba(27,25,23,.72);display:grid;place-items:center}
+  .bigplay svg{width:26px;height:26px;margin-left:4px;fill:#fff}
+  .bigplay[hidden]{display:none}
+  .puzzle{margin:22px 0 0;background:var(--mat);border:1px solid var(--hair);border-radius:16px;box-shadow:var(--shadow);padding:12px 6px 4px}
+  .puzzle .head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:2px 12px 0}
+  .puzzle iframe{display:block;width:100%;height:640px;border:0;background:transparent}
+  .another{font:600 14px/1.2 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;cursor:pointer;border:1px solid var(--ink);border-radius:999px;padding:8px 16px;background:none;color:var(--ink)}
+  @media (max-width:820px){ .intro{grid-template-columns:1fr 200px;gap:16px} }
+  @media (max-width:600px){
+    .intro{grid-template-columns:1fr;gap:12px}
+    .intro .film{width:min(240px,70%);margin:0 auto}
+    .puzzle{margin:16px -16px 0;border-radius:0;border-left:0;border-right:0;padding:8px 0 0}
+  }
+
+  /* the Library, open (founder 2026-11-04): pictures as images, a page per picture with its worksheet */
+  .tile{display:block;text-decoration:none;color:inherit}
+  .tile .face img{position:absolute;inset:0;width:100%;height:100%;display:block}
+  .pager{display:flex;justify-content:center;gap:8px;margin:22px 0 0}
+  .pager a{min-width:44px;height:44px;display:grid;place-items:center;border-radius:12px;border:1px solid var(--line);background:var(--mat);color:var(--ink);
+    text-decoration:none;font:600 15px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+  .pager a[aria-current]{border-color:var(--ink);background:var(--ink);color:var(--paper)}
+  .crumb{font:13px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--muted);margin:22px 0 0}
+  .crumb a{color:inherit}
+  .pic-page h1{margin:6px 0 4px}
+  .pic-page .count{color:var(--muted);margin:0}
+  .pic-page .words{font-style:italic;margin:8px 0 0}
+  .pic-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:28px;align-items:start;margin:18px 0 0}
+  .pic-grid figure{margin:0;background:var(--mat);border:1px solid var(--hair);border-radius:16px;box-shadow:var(--shadow);overflow:hidden}
+  .pic-grid figure img{display:block;width:100%;height:auto}
+  .menu{background:var(--mat);border:1px solid var(--hair);border-radius:16px;box-shadow:var(--shadow);padding:18px}
+  .menu h2{font-size:19px;margin:0 0 10px}
+  .menu fieldset{border:0;padding:0;margin:0 0 12px;display:grid;gap:8px;font:15px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+  .menu legend{font-weight:600;margin-bottom:4px}
+  .menu label{display:flex;gap:8px;align-items:center}
+  .seg{display:inline-flex;border:1px solid var(--line);border-radius:999px;overflow:hidden;width:max-content}
+  .seg label{padding:6px 14px;cursor:pointer}
+  .seg input{position:absolute;opacity:0;pointer-events:none}
+  .seg label:has(input:checked){background:var(--ink);color:var(--paper)}
+  .preview{border:1px solid var(--hair);border-radius:8px;overflow:hidden;background:#fff;max-width:240px;margin:6px 0 14px}
+  .acts{display:flex;flex-wrap:wrap;gap:8px}
+  .act{font:600 14px/1.2 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;cursor:pointer;border:1px solid var(--ink);border-radius:999px;
+    padding:10px 16px;background:none;color:var(--ink);text-decoration:none;display:inline-block}
+  .act.primary{background:var(--ink);color:var(--paper)}
+  .act[disabled]{opacity:.5;cursor:default}
+  #player{display:block;width:100%;height:640px;border:0;margin:22px 0 0}
+  #player[hidden]{display:none}
+  .pn{display:flex;justify-content:space-between;gap:12px;margin:26px 0 0;font:14px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+  .pn a{color:var(--ink)}
+  @media (max-width:760px){ .pic-grid{grid-template-columns:1fr} .pic-grid figure{width:100%;max-width:420px;margin:0 auto} }
+</style>
+</head>
+<body>
+<main>
+  <nav class="tabs-bar" aria-label="Coordigo"><div class="tabs"><a class="tab" href="/"><span>Coordigo</span></a><a class="tab" href="/library/" aria-current="page"><span data-t="libCaps">Library</span></a><a class="tab" href="/postcards/"><span>Postcards</span></a></div></nav>
+
+  <section class="pic-page" data-picture="genre-rose" data-number="67" data-title="Rose" data-file="coordigo-67-genre-rose" data-payload="LY07DgIxDESvEqW2Ijb-bxdHewGuANQUIBrE3fEuFDN-Go3td73UtfbmsHTohRuDpLAI0DEJdl9O2aBGiZqxpUaG4H9oCGkEUajJL61Qr3maEJlUzC10cqB36YScWRnsosI7o-MgZ2UlozJ5ZLOY5c4mmwYNNHYNtWIxfHqExfR88cwX5_vjlviqa_98AQ">
+    <p class="crumb"><a href="/library/" data-t="libCaps">Library</a></p>
+    <h1>#67 Rose</h1>
+    <p class="count">Plants &amp; nature · 5 lines · 44 points · Medium · about 5 min</p>
+    
+    <div class="pic-grid">
+      <figure><img src="/library/img/genre-rose.png" width="600" height="600" alt="Rose: a Coordigo mystery picture, drawn by joining points on a 16 × 16 grid"></figure>
+      <div class="menu">
+        <h2>Worksheet</h2>
+        <form id="sheetForm" onsubmit="return false">
+          <fieldset>
+            <legend>Paper</legend>
+            <div class="seg"><label><input type="radio" name="paper" value="letter"> Letter</label><label><input type="radio" name="paper" value="a4"> A4</label></div>
+          </fieldset>
+          <fieldset>
+            <label><input type="checkbox" name="answer" checked> Answer page in colour</label>
+            <label><input type="checkbox" name="title" checked> Title on top</label>
+            <label><input type="checkbox" name="name"> Name line</label>
+            
+          </fieldset>
+        </form>
+        <div class="preview" id="sheetPreview" aria-label="The worksheet's first page"></div>
+        <div class="acts">
+          <button class="act primary" id="sheetPDF" type="button">Download worksheet (PDF)</button>
+          <a class="act" href="/library/img/genre-rose.png" download="coordigo-67-genre-rose.png">Save picture (PNG)</a>
+          <button class="act" id="solveHere" type="button">Solve it here</button>
+        </div>
+      </div>
+    </div>
+    <iframe id="player" title="Mystery picture" hidden></iframe>
+    <nav class="pn" aria-label="More pictures"><a href="/library/genre-popsicle/">Newer: #68 Popsicle</a><a href="/library/genre-santa-hat/">Older: #66 Santa hat</a></nav>
+  </section>
+
+  <section class="sites" aria-label="Also from Swiftian"><a class="site" href="https://iflipbook.com/?ct=web-co-if"><img src="/assets/links/iflipbook-32.png" srcset="/assets/links/iflipbook-32.png 1x, /assets/links/iflipbook-64.png 2x, /assets/links/iflipbook-96.png 3x" width="32" height="32" alt=""><span>iflipbook.com</span></a><a class="site" href="https://swiftian.com/?ct=web-co-sw"><img src="/assets/links/swiftian-32.png" srcset="/assets/links/swiftian-32.png 1x, /assets/links/swiftian-64.png 2x, /assets/links/swiftian-96.png 3x" width="32" height="32" alt=""><span>swiftian.com</span></a></section>
+  <footer>
+    <a href="/privacy/" data-t="privacy">Privacy Policy</a>
+    <a href="/support/" data-t="support">Support</a>
+  </footer>
+</main>
+<div class="appbar" data-apple><a class="appbar-in" data-store="web-co-library"><img src="/art/icon-512.png" width="36" height="36" alt=""><span class="nm"><b>Coordigo</b><small>Draw, send, solve · iPhone, iPad, Mac</small></span><span class="get"><small>Download on the</small><b>App Store</b></span></a></div>
+<script src="/store.js"></script>
+<script src="/mystery/strings.js"></script>
+<script src="/mystery/engine.js"></script>
+<script src="/library/worksheet.js"></script>
+<script>
+  (function () {   // the site's words in the reader's language, and the App Store bar on Apple devices once Coordigo 6.2 is in the store
+    var table = window.MYSTERY_STRINGS || {}, lang = (navigator.language || 'en').toLowerCase(), L = 'en';
+    if (lang.indexOf('zh') === 0) L = /hant|tw|hk|mo/.test(lang) ? 'zh-Hant' : 'zh-Hans';
+    else if (lang.indexOf('pt') === 0) L = 'pt-BR'; else if (table[lang.split('-')[0]]) L = lang.split('-')[0];
+    document.querySelectorAll('[data-t]').forEach(function (el) { var s = (table[L] || {})[el.dataset.t]; if (s && s.indexOf('%') < 0) el.textContent = s; });
+    document.querySelectorAll('[data-store]').forEach(function (a) { a.href = 'https://apps.apple.com/app/id1486330879?ct=' + a.dataset.store; });
+    var apple = /iPhone|iPad|Macintosh/.test(navigator.userAgent), preview = /[?&]store=preview/.test(location.search);
+    if (!preview && (!apple || window.CO_STORE !== true)) document.querySelectorAll('[data-apple]').forEach(function (e) { e.hidden = true; });
+  })();
+</script>
+</body>
+</html>

@@ -125,14 +125,20 @@
     border:1px solid var(--line);border-bottom:none;border-radius:10px 10px 0 0}
   .tab:hover{color:var(--ink);border-color:var(--ink)}
   .tab[aria-current]{color:var(--ink);background:var(--mat);border-color:var(--ink);border-top-width:3px;padding-top:8px}
-  .store-row{display:flex;justify-content:center;padding:40px 0 0}
-  .store-row[hidden]{display:none}
-  .appstore{display:inline-flex;align-items:center;gap:10px;min-height:52px;padding:8px 18px 8px 10px;border-radius:14px;
-    background:#000;color:#fff;text-decoration:none;border:1px solid rgba(255,255,255,.28);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
-  .appstore img{border-radius:7px}
-  .appstore span{display:flex;flex-direction:column;line-height:1.05}
-  .appstore small{font-size:10.5px;opacity:.85}
-  .appstore b{font-size:19px;font-weight:600;letter-spacing:-.01em}
+  .appbar{position:fixed;left:0;right:0;bottom:0;z-index:20;background:var(--paper);border-top:1px solid var(--line);
+    padding:10px 16px calc(10px + env(safe-area-inset-bottom))}
+  .appbar[hidden]{display:none}
+  body:has(.appbar:not([hidden])){padding-bottom:84px}
+  .appbar-in{max-width:880px;margin:0 auto;display:flex;align-items:center;gap:12px;color:var(--ink);text-decoration:none;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+  .appbar-in img{border-radius:8px;display:block}
+  .appbar-in .nm{flex:1;display:flex;flex-direction:column;line-height:1.2;min-width:0}
+  .appbar-in .nm b{font-size:15px}
+  .appbar-in .nm small{font-size:12.5px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .appbar-in .get{display:flex;flex-direction:column;line-height:1.05;background:#000;color:#fff;border:1px solid rgba(255,255,255,.28);
+    border-radius:12px;padding:6px 14px}
+  .appbar-in .get small{font-size:10px;opacity:.85}
+  .appbar-in .get b{font-size:17px;font-weight:600;letter-spacing:-.01em}
   .sites{display:flex;flex-wrap:wrap;gap:8px;margin:44px 0 0;padding:22px 0 0;border-top:1px solid var(--line)}
   .site{box-sizing:border-box;width:168px;min-height:42px;display:flex;align-items:center;gap:8px;padding:3px 10px 3px 3px;
     color:#0b0f1a;text-decoration:none;font:500 13.5px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
@@ -192,13 +198,13 @@
     </div>
   </section>
 
-  <div class="store-row" data-apple><a class="appstore" data-store="web-co-home"><img src="/art/icon-512.png" width="32" height="32" alt=""><span><small>Download on the</small><b>App Store</b></span></a></div>
   <section class="sites" aria-label="Also from Swiftian"><a class="site" href="https://iflipbook.com/?ct=web-co-if"><img src="/assets/links/iflipbook-32.png" srcset="/assets/links/iflipbook-32.png 1x, /assets/links/iflipbook-64.png 2x, /assets/links/iflipbook-96.png 3x" width="32" height="32" alt=""><span>iflipbook.com</span></a><a class="site" href="https://swiftian.com/?ct=web-co-sw"><img src="/assets/links/swiftian-32.png" srcset="/assets/links/swiftian-32.png 1x, /assets/links/swiftian-64.png 2x, /assets/links/swiftian-96.png 3x" width="32" height="32" alt=""><span>swiftian.com</span></a></section>
   <footer>
     <a href="/privacy/" data-t="privacy">Privacy Policy</a>
     <a href="/support/" data-t="support">Support</a>
   </footer>
 </main>
+<div class="appbar" data-apple><a class="appbar-in" data-store="web-co-home"><img src="/art/icon-512.png" width="36" height="36" alt=""><span class="nm"><b>Coordigo</b><small>Draw, send, solve · iPhone, iPad, Mac</small></span><span class="get"><small>Download on the</small><b>App Store</b></span></a></div>
 <script src="/store.js"></script>
 <script src="/mystery/strings.js"></script>
 <script src="/mystery/engine.js"></script>
@@ -231,7 +237,8 @@
   for (const el of document.querySelectorAll('[data-store]')) el.href = STORE + '?ct=' + el.dataset.store;
   // Coordigo runs on iPhone, iPad and Mac; and before Coordigo 6.2 is in the App Store (store.js) no link leads to the app.
   const appleDevice = /iPhone|iPad|Macintosh/.test(navigator.userAgent);
-  if (!appleDevice || window.CO_STORE !== true) for (const el of document.querySelectorAll('[data-apple]')) el.hidden = true;
+  const preview = /[?&]store=preview/.test(location.search);   // to look at the bar before 6.2 is live
+  if (!preview && (!appleDevice || window.CO_STORE !== true)) for (const el of document.querySelectorAll('[data-apple]')) el.hidden = true;
   const all = window.CO_LIBRARY || [];
   const toSolve = all.filter(i => i.theme !== 'messages');
   const localized = item => (item.theme === 'messages' && ((window.MYSTERY_LIBRARY_WORDS || {})[lang] || {})[item.id]) || item.payload;

@@ -1,0 +1,251 @@
+#!/usr/bin/env python3
+"""The Library as plain pages, every picture open (founder 2026-11-04, RDM-co-site-open-library): the finished pictures as
+image files Google can find, a grid of them in pages (newest number first), and one page per picture with its worksheet
+(settings, PDF), its PNG and solving it here.
+
+  node tools/library-data.mjs [library.js] > co-lib.json && python3 tools/library-pages.py co-lib.json
+
+The app's whole Library (242 in Coordigo 6.2) comes from Coordigo scripts/web-library.py <dir> → <dir>/library.js.
+
+Writes library/img/<id>.png, library/index.html (+ library/<n>/ for later pages), library/<id>/index.html and the image
+sitemap entries in sitemap.xml. The head, tabs, site buttons, footer and the App Store bar come from index.html, so the
+pages look like the rest of the site. Re-run whenever library.js changes (Coordigo scripts/web-library.py).
+"""
+import base64, html, io, json, os, re, sys
+from PIL import Image, ImageDraw
+
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+ORIGIN = 'https://coordigo.com'
+PER = 24
+data = json.load(open(sys.argv[1]))
+STR = json.loads(re.search(r'MYSTERY_STRINGS\s*=\s*(\{.*\})', open(os.path.join(ROOT, 'mystery/strings.js')).read(), re.S).group(1))['en']
+esc = lambda s: html.escape(s, quote=True)
+
+home = open(os.path.join(ROOT, 'index.html')).read()
+HEAD = home[:home.index('</style>')]
+NAV = re.search(r'<nav class="tabs-bar".*?</nav>', home, re.S).group(0)
+SITES = re.search(r'<section class="sites".*?</section>', home, re.S).group(0)
+FOOT = re.search(r'  <footer>.*?</footer>', home, re.S).group(0)
+BAR = re.search(r'<div class="appbar".*?</a></div>', home).group(0).replace('web-co-home', 'web-co-library')
+
+solve = [d for d in data if d['theme'] != 'messages']
+messages = [d for d in data if d['theme'] == 'messages']
+# the app's number when the Library carries one (6.2: #1 … #242), else the order of the site's list
+number = {d['id']: d.get('number') or i + 1 for i, d in enumerate(solve)}
+newest = sorted(solve, key=lambda d: -number[d['id']])
+KIND = {'animals': 'Animals', 'objects': 'Things', 'food-drink': 'Food & drink', 'celebration': 'Celebrations', 'fantasy-scifi': 'Fantasy & sci-fi',
+        'places': 'Places', 'fashion': 'Fashion', 'plants-nature': 'Plants & nature', 'tech-games': 'Tech & games', 'vehicles': 'Vehicles',
+        'arms-battle': 'Arms & armour', 'sky-space': 'Sky & space', 'art-pattern': 'Art & patterns'}
+pages = max(1, -(-len(newest) // PER))
+
+def title(d): return (f"#{number[d['id']]} " if d['id'] in number else '') + d['title']
+def points(d): return sum(len(s) for s in d['segments'])
+def length(d):
+    n = points(d); return STR['quick' if n < 40 else 'medium' if n < 90 else 'long']
+def alt(d):
+    what = d['title'] + (f" — “{d['message']}”" if d['message'] else '')
+    return f"{what}: a Coordigo mystery picture, drawn by joining points on a 16 × 16 grid"
+def file_stem(d): return 'coordigo' + (f"-{number[d['id']]}" if d['id'] in number else '') + '-' + d['id']
+
+# MARK: The pictures as PNGs — the fills at their raster cells, the lines drawn smooth at 3x and filtered down.
+def render(d, size=600, pad=30):
+    S = 3; W = size * S
+    im = Image.new('RGB', (W, W), (255, 253, 248))
+    side = (size - 2 * pad) * S; ox = oy = pad * S; u = side / 15
+    if d['pixels']:
+        raw = base64.b64decode(d['pixels'])
+        fills = Image.frombytes('RGBA', (d['w'], d['h']), raw).resize((int(side), int(side)), Image.NEAREST)
+        im.paste(fills, (ox, oy), fills)
+    dr = ImageDraw.Draw(im)
+    lw = max(2, int(0.2 * u)); r = lw / 2
+    for seg in d['segments']:
+        pts = [(ox + x * u, oy + y * u) for x, y in seg]
+        if len(pts) == 1:
+            x, y = pts[0]; dr.ellipse((x - lw * 0.9, y - lw * 0.9, x + lw * 0.9, y + lw * 0.9), fill=(27, 25, 23)); continue
+        dr.line(pts, fill=(27, 25, 23), width=lw)
+        for x, y in pts: dr.ellipse((x - r, y - r, x + r, y + r), fill=(27, 25, 23))
+    return im.resize((size, size), Image.LANCZOS)
+
+import shutil
+for name in os.listdir(os.path.join(ROOT, 'library')):
+    if name not in ('worksheet.js',):
+        q = os.path.join(ROOT, 'library', name); shutil.rmtree(q) if os.path.isdir(q) else os.remove(q)
+os.makedirs(os.path.join(ROOT, 'library/img'), exist_ok=True)
+for d in data:
+    render(d).save(os.path.join(ROOT, 'library/img', d['id'] + '.png'), optimize=True)
+
+# MARK: Pages
+CSS = '''
+  /* the Library, open (founder 2026-11-04): pictures as images, a page per picture with its worksheet */
+  .tile{display:block;text-decoration:none;color:inherit}
+  .tile .face img{position:absolute;inset:0;width:100%;height:100%;display:block}
+  .pager{display:flex;justify-content:center;gap:8px;margin:22px 0 0}
+  .pager a{min-width:44px;height:44px;display:grid;place-items:center;border-radius:12px;border:1px solid var(--line);background:var(--mat);color:var(--ink);
+    text-decoration:none;font:600 15px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+  .pager a[aria-current]{border-color:var(--ink);background:var(--ink);color:var(--paper)}
+  .crumb{font:13px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--muted);margin:22px 0 0}
+  .crumb a{color:inherit}
+  .pic-page h1{margin:6px 0 4px}
+  .pic-page .count{color:var(--muted);margin:0}
+  .pic-page .words{font-style:italic;margin:8px 0 0}
+  .pic-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:28px;align-items:start;margin:18px 0 0}
+  .pic-grid figure{margin:0;background:var(--mat);border:1px solid var(--hair);border-radius:16px;box-shadow:var(--shadow);overflow:hidden}
+  .pic-grid figure img{display:block;width:100%;height:auto}
+  .menu{background:var(--mat);border:1px solid var(--hair);border-radius:16px;box-shadow:var(--shadow);padding:18px}
+  .menu h2{font-size:19px;margin:0 0 10px}
+  .menu fieldset{border:0;padding:0;margin:0 0 12px;display:grid;gap:8px;font:15px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+  .menu legend{font-weight:600;margin-bottom:4px}
+  .menu label{display:flex;gap:8px;align-items:center}
+  .seg{display:inline-flex;border:1px solid var(--line);border-radius:999px;overflow:hidden;width:max-content}
+  .seg label{padding:6px 14px;cursor:pointer}
+  .seg input{position:absolute;opacity:0;pointer-events:none}
+  .seg label:has(input:checked){background:var(--ink);color:var(--paper)}
+  .preview{border:1px solid var(--hair);border-radius:8px;overflow:hidden;background:#fff;max-width:240px;margin:6px 0 14px}
+  .acts{display:flex;flex-wrap:wrap;gap:8px}
+  .act{font:600 14px/1.2 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;cursor:pointer;border:1px solid var(--ink);border-radius:999px;
+    padding:10px 16px;background:none;color:var(--ink);text-decoration:none;display:inline-block}
+  .act.primary{background:var(--ink);color:var(--paper)}
+  .act[disabled]{opacity:.5;cursor:default}
+  #player{display:block;width:100%;height:640px;border:0;margin:22px 0 0}
+  #player[hidden]{display:none}
+  .pn{display:flex;justify-content:space-between;gap:12px;margin:26px 0 0;font:14px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+  .pn a{color:var(--ink)}
+  @media (max-width:760px){ .pic-grid{grid-template-columns:1fr} .pic-grid figure{width:100%;max-width:420px;margin:0 auto} }
+'''
+
+I18N = '''<script src="/store.js"></script>
+<script src="/mystery/strings.js"></script>
+<script>
+  (function () {   // the site's words in the reader's language, and the App Store bar on Apple devices once Coordigo 6.2 is in the store
+    var table = window.MYSTERY_STRINGS || {}, lang = (navigator.language || 'en').toLowerCase(), L = 'en';
+    if (lang.indexOf('zh') === 0) L = /hant|tw|hk|mo/.test(lang) ? 'zh-Hant' : 'zh-Hans';
+    else if (lang.indexOf('pt') === 0) L = 'pt-BR'; else if (table[lang.split('-')[0]]) L = lang.split('-')[0];
+    document.querySelectorAll('[data-t]').forEach(function (el) { var s = (table[L] || {})[el.dataset.t]; if (s && s.indexOf('%') < 0) el.textContent = s; });
+    document.querySelectorAll('[data-store]').forEach(function (a) { a.href = 'https://apps.apple.com/app/id1486330879?ct=' + a.dataset.store; });
+    var apple = /iPhone|iPad|Macintosh/.test(navigator.userAgent), preview = /[?&]store=preview/.test(location.search);
+    if (!preview && (!apple || window.CO_STORE !== true)) document.querySelectorAll('[data-apple]').forEach(function (e) { e.hidden = true; });
+  })();
+</script>'''
+
+def head(page_title, desc, path, image=None):
+    h = re.sub(r'<title>.*?</title>', f'<title>{esc(page_title)}</title>', HEAD, count=1)
+    h = re.sub(r'<!-- hreflang:start -->.*?<!-- hreflang:end -->\n', '', h, flags=re.S)
+    h = re.sub(r'<meta name="description" content="[^"]*">', f'<meta name="description" content="{esc(desc)}">', h, count=1)
+    h = re.sub(r'<link rel="canonical" href="[^"]*">', f'<link rel="canonical" href="{ORIGIN}{path}">', h, count=1)
+    h = re.sub(r'<meta property="og:url" content="[^"]*">', f'<meta property="og:url" content="{ORIGIN}{path}">', h, count=1)
+    h = re.sub(r'<meta property="og:title" content="[^"]*">', f'<meta property="og:title" content="{esc(page_title)}">', h, count=1)
+    h = re.sub(r'<meta property="og:description" content="[^"]*">', f'<meta property="og:description" content="{esc(desc)}">', h, count=1)
+    if image: h = re.sub(r'<meta property="og:image" content="[^"]*">', f'<meta property="og:image" content="{ORIGIN}{image}">', h, count=1)
+    return h + CSS + '</style>\n</head>\n'
+
+def nav(cur):
+    n = NAV.replace(' aria-current="page"', '')
+    return n.replace('href="/library/">', 'href="/library/" aria-current="page">') if cur == 'library' else n
+
+def tile(d):
+    return (f'<a class="tile" href="/library/{d["id"]}/"><div class="face"><img src="/library/img/{d["id"]}.png" width="600" height="600" '
+            f'loading="lazy" alt="{esc(alt(d))}"></div><div class="t">{esc(title(d))}</div>'
+            f'<div class="d">{esc(d["message"] if d["theme"] == "messages" else KIND.get(d["theme"], length(d)))}</div></a>')
+
+def body(inner):
+    return f'''<body>
+<main>
+  {nav('library')}
+{inner}
+  {SITES}
+{FOOT}
+</main>
+{BAR}
+{I18N}
+</body>
+</html>
+'''
+
+def grid_page(k):
+    path = '/library/' if k == 1 else f'/library/{k}/'
+    items = newest[(k - 1) * PER: k * PER]
+    pager = ''.join(f'<a href="{"/library/" if i == 1 else f"/library/{i}/"}"{" aria-current=\"page\"" if i == k else ""}>{i}</a>' for i in range(1, pages + 1))
+    inner = f'''
+  <section>
+    <div class="caps" data-t="libCaps">Library</div>
+    <h1 style="font-size:28px;margin:6px 0 4px">{len(solve)} mystery pictures, open</h1>
+    <p class="sub">Every picture to see, take and pass on. Open one for its worksheet: the empty grid and the code, ready to print.</p>
+    <div class="grid" style="margin-top:16px">{''.join(tile(d) for d in items)}</div>
+    <nav class="pager" aria-label="Pages">{pager}</nav>
+  </section>
+''' + (f'''
+  <section>
+    <div class="caps" data-t="msgCaps">Messages to send</div>
+    <p class="sub" data-t="msgSub">Solve one here. In the app, send it with your own words.</p>
+    <div class="grid">{''.join(tile(d) for d in messages)}</div>
+  </section>
+''' if k == 1 and messages else '')
+    t = 'Library · Coordigo' + ('' if k == 1 else f' · page {k}')
+    d = 'Coordigo mystery pictures, open: coordinate drawings on a 16 × 16 grid, each with a printable worksheet.'
+    out = os.path.join(ROOT, path.strip('/'), 'index.html')
+    os.makedirs(os.path.dirname(out), exist_ok=True)
+    open(out, 'w').write(head(t, d, path, f'/library/img/{items[0]["id"]}.png') + body(inner))
+
+def picture_page(d, prev, nxt):
+    path = f'/library/{d["id"]}/'
+    words = f'<p class="words">“{esc(d["message"])}”</p>' if d['message'] else ''
+    fold = ('<label><input type="checkbox" name="words" checked> Words under a fold</label>' if d['message'] else '')
+    link = lambda e, label: f'<a href="/library/{e["id"]}/">{label}: {esc(title(e))}</a>' if e else '<span></span>'
+    inner = f'''
+  <section class="pic-page" data-picture="{d['id']}" data-number="{number.get(d['id'], 0)}" data-title="{esc(d['title'])}" data-file="{file_stem(d)}" data-payload="{esc(d['payload'])}">
+    <p class="crumb"><a href="/library/" data-t="libCaps">Library</a></p>
+    <h1>{esc(title(d))}</h1>
+    <p class="count">{esc(KIND[d['theme']]) + ' · ' if d['theme'] in KIND else ''}{len(d['segments'])} lines · {points(d)} points{'' if d['theme'] == 'messages' else ' · ' + esc(length(d))}</p>
+    {words}
+    <div class="pic-grid">
+      <figure><img src="/library/img/{d['id']}.png" width="600" height="600" alt="{esc(alt(d))}"></figure>
+      <div class="menu">
+        <h2>Worksheet</h2>
+        <form id="sheetForm" onsubmit="return false">
+          <fieldset>
+            <legend>Paper</legend>
+            <div class="seg"><label><input type="radio" name="paper" value="letter"> Letter</label><label><input type="radio" name="paper" value="a4"> A4</label></div>
+          </fieldset>
+          <fieldset>
+            <label><input type="checkbox" name="answer" checked> Answer page in colour</label>
+            <label><input type="checkbox" name="title" checked> Title on top</label>
+            <label><input type="checkbox" name="name"> Name line</label>
+            {fold}
+          </fieldset>
+        </form>
+        <div class="preview" id="sheetPreview" aria-label="The worksheet's first page"></div>
+        <div class="acts">
+          <button class="act primary" id="sheetPDF" type="button">Download worksheet (PDF)</button>
+          <a class="act" href="/library/img/{d['id']}.png" download="{file_stem(d)}.png">Save picture (PNG)</a>
+          <button class="act" id="solveHere" type="button">Solve it here</button>
+        </div>
+      </div>
+    </div>
+    <iframe id="player" title="Mystery picture" hidden></iframe>
+    <nav class="pn" aria-label="More pictures">{link(prev, 'Newer')}{link(nxt, 'Older')}</nav>
+  </section>
+'''
+    t = f'{title(d)} · Coordigo mystery picture'
+    desc = f'{d["title"]}: a coordinate drawing on a 16 × 16 grid. See it, save it, or print its worksheet — the empty grid and the code to join the points.'
+    out = os.path.join(ROOT, 'library', d['id'], 'index.html')
+    os.makedirs(os.path.dirname(out), exist_ok=True)
+    page = head(t, desc, path, f'/library/img/{d["id"]}.png') + body(inner)
+    page = page.replace('<script src="/mystery/strings.js"></script>',
+                        '<script src="/mystery/strings.js"></script>\n<script src="/mystery/engine.js"></script>\n<script src="/library/worksheet.js"></script>', 1)
+    open(out, 'w').write(page)
+
+for k in range(1, pages + 1): grid_page(k)
+order = newest + messages
+for i, d in enumerate(order):
+    picture_page(d, order[i - 1] if i > 0 else None, order[i + 1] if i + 1 < len(order) else None)
+
+# MARK: Sitemap — every Library page, each picture's page with its image
+sm_path = os.path.join(ROOT, 'sitemap.xml'); sm = open(sm_path).read()
+sm = re.sub(r'\s*<url><loc>https://coordigo\.com/library/[^<]*</loc>.*?</url>', '', sm, flags=re.S)
+if 'xmlns:image' not in sm:
+    sm = sm.replace('<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"', '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"', 1)
+urls = [f'  <url><loc>{ORIGIN}/library/</loc></url>'] + [f'  <url><loc>{ORIGIN}/library/{k}/</loc></url>' for k in range(2, pages + 1)]
+urls += [f'  <url><loc>{ORIGIN}/library/{d["id"]}/</loc><image:image><image:loc>{ORIGIN}/library/img/{d["id"]}.png</image:loc></image:image></url>' for d in order]
+sm = sm.replace('</urlset>', '\n'.join(urls) + '\n</urlset>')
+open(sm_path, 'w').write(sm)
+print(f'{len(data)} pictures · {pages} Library pages · {len(order)} picture pages')
