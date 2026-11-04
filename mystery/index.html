@@ -408,8 +408,8 @@
     // covers the point it aims at, the axes say which it is before it lifts.
     function ring(l, beckoned) {
       if (lit) {
-        axisX[lit.x].setAttribute('fill-opacity', 0.72); axisX[lit.x].removeAttribute('font-size'); axisX[lit.x].setAttribute('font-weight', lit.x % 4 === 0 ? 700 : 500);
-        axisY[lit.y].setAttribute('fill-opacity', 0.72); axisY[lit.y].removeAttribute('font-size'); axisY[lit.y].setAttribute('font-weight', lit.y % 4 === 0 ? 700 : 500);
+        axisX[lit.x].setAttribute('fill-opacity', 0.72); axisX[lit.x].removeAttribute('font-size'); axisX[lit.x].setAttribute('font-weight', lit.x % 5 === 0 ? 700 : 500);
+        axisY[lit.y].setAttribute('fill-opacity', 0.72); axisY[lit.y].removeAttribute('font-size'); axisY[lit.y].setAttribute('font-weight', lit.y % 5 === 0 ? 700 : 500);
         lit = null;
       }
       if (!l || solve.isFinished) { layers.ring.setAttribute('visibility', 'hidden'); layers.guides.setAttribute('visibility', 'hidden'); return; }
@@ -553,7 +553,7 @@
     el('rect', { x: 0, y: 0, width: 15, height: 15, fill: '#fffdf8' }, svg);
     const g = el('g', { 'stroke-linecap': 'square' }, svg);
     for (let i = 0; i <= 15; i++) {
-      const bold = i % 4 === 0 || i === 15;
+      const bold = i % 5 === 0;               // 0, 5, A, F: three groups of five (founder 11-04)
       const a = { stroke: bold ? 'rgba(27,25,23,.30)' : 'rgba(27,25,23,.12)', 'stroke-width': bold ? 0.05 : 0.03 };
       el('line', { x1: i, y1: 0, x2: i, y2: 15, ...a }, g);
       el('line', { x1: 0, y1: i, x2: 15, y2: i, ...a }, g);
@@ -563,7 +563,7 @@
     const lab = el('g', { 'font-family': 'ui-monospace,SFMono-Regular,Menlo,monospace', 'font-size': 0.62, 'text-anchor': 'middle' }, svg);
     axisX = []; axisY = [];
     for (let i = 0; i <= 15; i++) {
-      const w = i % 4 === 0 ? 700 : 500;
+      const w = i % 5 === 0 ? 700 : 500;
       const tx = el('text', { x: i, y: -0.55, 'font-weight': w, fill: X_COLOR, 'fill-opacity': 0.72 }, lab); tx.textContent = M.DIGITS[i];
       const ty = el('text', { x: -0.68, y: i + 0.21, 'font-weight': w, fill: Y_COLOR, 'fill-opacity': 0.72 }, lab); ty.textContent = M.DIGITS[i];
       axisX.push(tx); axisY.push(ty);
