@@ -5,9 +5,14 @@ library/worksheet.js. Never typed by hand: re-run when the app's catalog changes
   tools/worksheet-words.py <Localizable.xcstrings>   → library/worksheet-words.js
 """
 import json, pathlib, sys
-KEYS = {'key': 'Join the points in order: first digit across, second down. At | lift the pen and start a new line.',
-        'name': 'Name', 'answer': 'Answer', 'fold': '✂ fold under · open when the picture is done',
-        'counts': '%lld lines · %lld points'}
+KEYS = {  # on the page (Print.swift WorksheetPage)
+        'heading': 'Mystery Picture', 'key': 'Join the points in order: first digit across, second down. At | lift the pen and start a new line.',
+        'code': 'Code', 'counts': '%lld lines · %lld points', 'yourPicture': 'Your picture',
+        'common': 'Common', 'rare': 'Rare', 'epic': 'Epic', 'legendary': 'Legendary',
+        # in the menu (the app's worksheet sheet and Settings › Worksheets)
+        'worksheet': 'Worksheet', 'paper': 'Paper', 'letter': 'Letter', 'a4': 'A4', 'answerPage': 'Answer page in color',
+        'titleField': 'Title · optional, on the answer page', 'wordsField': 'Words · optional, on the answer page',
+        'print': 'Print', 'sharePDF': 'Share as PDF'}
 cat = json.loads(pathlib.Path(sys.argv[1]).read_text())['strings']
 out = {'en': {k: v.replace('%lld', '%@') for k, v in KEYS.items()}}
 for k, src in KEYS.items():

@@ -3,7 +3,7 @@
 WorksheetPage part of Print.swift as it is, and run it.
 
   tools/worksheet-ref.py <Coordigo source dir> faces <out.json>
-  tools/worksheet-ref.py <Coordigo source dir> pages <out dir> <id> <letter|a4> <title> <name> <words> <answer>
+  tools/worksheet-ref.py <Coordigo source dir> pages <out dir> <id> <letter|a4> <title> <words> <answer> <label>
 """
 import json, pathlib, re, subprocess, sys, tempfile
 SRC = pathlib.Path(sys.argv[1]); HERE = pathlib.Path(__file__).resolve().parent
@@ -14,6 +14,9 @@ def build():
     part = print_swift[print_swift.index('enum PaperSize'):print_swift.index('// MARK: - The PDF')]
     # PrintOptions.for reads the app's Settings; the tool sets the options itself
     part = re.sub(r'\n    /// A picture\'s page as it first comes.*?\n    }\n', '\n', part, flags=re.S)
+    # the app's icon from its asset catalog (a command-line tool has no bundle to name it from)
+    mark = SRC / 'Sources/Resources/Assets.xcassets/PrintMark.imageset/printmark.png'
+    part = part.replace('NSImage(named: "PrintMark")', f'NSImage(contentsOfFile: "{mark}")')
     tmp = pathlib.Path(tempfile.mkdtemp())
     (tmp / 'Worksheet.swift').write_text('import Foundation\nimport CoreText\nimport AppKit\nimport SwiftUI\n\n' + part)
     (tmp / 'main.swift').write_text((HERE / 'worksheet-ref.swift').read_text())
