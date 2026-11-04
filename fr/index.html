@@ -149,14 +149,24 @@
   @media (max-width:600px){ .tab{min-width:0;flex:1;padding:10px 6px 9px} .tabs{flex:1} .site{flex:1;width:auto} }
 
   /* landing: a small film beside the words, then the puzzle as the page's main */
-  .intro{display:grid;grid-template-columns:1fr 300px;gap:28px;align-items:center;padding:26px 0 6px}
+  /* the puzzle first, then the intro with How it works folded behind one line (founder 2026-11-05) */
+  .intro{display:grid;grid-template-columns:1fr 300px;gap:28px;align-items:center;padding:34px 0 6px}
+  .howto{margin:14px 0 0}
+  .howto summary{display:inline-flex;align-items:center;gap:8px;cursor:pointer;list-style:none;font:600 14px/1.2 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    color:var(--ink);border:1px solid var(--line);border-radius:999px;padding:8px 14px}
+  .howto summary::-webkit-details-marker{display:none}
+  .howto summary::after{content:"";width:7px;height:7px;border-right:1.6px solid currentColor;border-bottom:1.6px solid currentColor;transform:rotate(45deg) translateY(-2px);transition:transform .15s}
+  .howto[open] summary::after{transform:rotate(-135deg) translateY(-1px)}
+  .howto .how{list-style:none;margin:12px 0 0;padding:0;display:grid;gap:8px;grid-template-columns:1fr}
+  .howto .how li{display:flex;gap:10px;align-items:baseline;background:var(--mat);border:1px solid var(--hair);border-radius:12px;padding:10px 14px}
+  .howto .how b{flex:0 0 auto;margin:0}
   .intro .film{margin:0;border-radius:14px;overflow:hidden;box-shadow:var(--shadow);background:#fff}
   .intro .film video{border-radius:0}
   .bigplay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;border:0;background:rgba(27,25,23,.12);cursor:pointer}
   .bigplay span{width:64px;height:64px;border-radius:50%;background:rgba(27,25,23,.72);display:grid;place-items:center}
   .bigplay svg{width:26px;height:26px;margin-left:4px;fill:#fff}
   .bigplay[hidden]{display:none}
-  .puzzle{margin:22px 0 0;background:var(--mat);border:1px solid var(--hair);border-radius:16px;box-shadow:var(--shadow);padding:12px 6px 4px}
+  .puzzle{margin:18px 0 0;background:var(--mat);border:1px solid var(--hair);border-radius:16px;box-shadow:var(--shadow);padding:12px 6px 4px}
   .puzzle .head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:2px 12px 0}
   .puzzle iframe{display:block;width:100%;height:640px;border:0;background:transparent}
   .another{font:600 14px/1.2 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;cursor:pointer;border:1px solid var(--ink);border-radius:999px;padding:8px 16px;background:none;color:var(--ink)}
@@ -180,31 +190,30 @@
 <main>
   <nav class="tabs-bar" aria-label="Coordigo"><div class="tabs"><a class="tab" href="/" aria-current="page"><span>Coordigo</span></a><a class="tab" href="/library/"><span data-t="libCaps">Library</span></a><a class="tab" href="/postcards/"><span>Postcards</span></a></div></nav>
 
+  <section class="puzzle" aria-labelledby="puzzleNo">
+    <div class="head"><div class="caps" id="puzzleNo"></div><button class="another" id="another" type="button">Another picture</button></div>
+    <iframe id="player" title="Mystery picture"></iframe>
+  </section>
+
   <header class="intro">
     <div>
       <div class="caps" data-t="heroCaps">Mystery pictures</div>
       <h1 data-t="heroTitle">A picture stays a secret until someone connects the dots.</h1>
       <p class="lede" data-t="heroSub">Friends send each other 16 × 16 pictures as a code. Try one here — no app needed.</p>
+      <details class="howto">
+        <summary><span data-t="howCaps">How it works</span></summary>
+        <ol class="how">
+          <li><b>1</b><span data-t="how1">Draw on a 16 × 16 grid, or pick a ready picture.</span></li>
+          <li><b>2</b><span data-t="how2">Send it as a link. Your message waits behind it.</span></li>
+          <li><b>3</b><span data-t="how3">Your friend connects the dots to see what it is.</span></li>
+        </ol>
+      </details>
     </div>
     <div class="film" id="film">
       <video id="filmVideo" src="/intro.mp4" poster="/intro.jpg" playsinline preload="metadata" aria-label="Coordigo"></video>
       <button class="bigplay" id="bigplay" type="button" aria-label="Play"><span><svg viewBox="0 0 24 24"><path d="M6 4l15 8-15 8z"/></svg></span></button>
     </div>
   </header>
-
-  <section class="puzzle" aria-labelledby="puzzleNo">
-    <div class="head"><div class="caps" id="puzzleNo"></div><button class="another" id="another" type="button">Another picture</button></div>
-    <iframe id="player" title="Mystery picture"></iframe>
-  </section>
-
-  <section>
-    <div class="caps" data-t="howCaps">How it works</div>
-    <div class="how">
-      <div><b>1</b><span data-t="how1">Draw on a 16 × 16 grid, or pick a ready picture.</span></div>
-      <div><b>2</b><span data-t="how2">Send it as a link. Your message waits behind it.</span></div>
-      <div><b>3</b><span data-t="how3">Your friend connects the dots to see what it is.</span></div>
-    </div>
-  </section>
 
   <section class="sites" aria-label="Also from Swiftian"><a class="site" href="https://iflipbook.com/?ct=web-co-if"><img src="/assets/links/iflipbook-32.png" srcset="/assets/links/iflipbook-32.png 1x, /assets/links/iflipbook-64.png 2x, /assets/links/iflipbook-96.png 3x" width="32" height="32" alt=""><span>iflipbook.com</span><span class="hints" aria-hidden="true"><img src="/assets/links/hint-otto-32.png" srcset="/assets/links/hint-otto-32.png 1x, /assets/links/hint-otto-64.png 2x, /assets/links/hint-otto-96.png 3x" width="32" height="32" alt=""></span></a><a class="site" href="https://swiftian.com/?ct=web-co-sw"><img src="/assets/links/swiftian-32.png" srcset="/assets/links/swiftian-32.png 1x, /assets/links/swiftian-64.png 2x, /assets/links/swiftian-96.png 3x" width="32" height="32" alt=""><span>swiftian.com</span><span class="hints" aria-hidden="true"><img src="/assets/links/hint-ea-32.png" srcset="/assets/links/hint-ea-32.png 1x, /assets/links/hint-ea-64.png 2x, /assets/links/hint-ea-96.png 3x" width="32" height="32" alt=""><img src="/assets/links/hint-cp-32.png" srcset="/assets/links/hint-cp-32.png 1x, /assets/links/hint-cp-64.png 2x, /assets/links/hint-cp-96.png 3x" width="32" height="32" alt=""><img src="/assets/links/hint-cf-32.png" srcset="/assets/links/hint-cf-32.png 1x, /assets/links/hint-cf-64.png 2x, /assets/links/hint-cf-96.png 3x" width="32" height="32" alt=""></span></a></section>
   <footer>
