@@ -212,11 +212,11 @@
 <main>
   <nav class="tabs-bar" aria-label="Coordigo"><div class="tabs"><a class="tab" href="/"><span>Coordigo</span></a><a class="tab" href="/library/" aria-current="page"><span data-t="libCaps">Library</span></a><a class="tab" href="/postcards/"><span>Postcards</span></a></div></nav>
 
-  <section class="pic-page" data-picture="genre-sneaker" data-number="65" data-title="Sneaker" data-tier="Common" data-file="coordigo-65-genre-sneaker" data-payload="HY09CgJBDIWvEqYOi0kmk8x2k9k9gScQ3UqwELER726wen98vE-5lrUIKp6goS2KAowdDTq2fyJeGvaFkXMgSiHKRpaECpZb4qxkFDy3ucc-Np_W1cWkaa1SWdO0pqPPDjT2AZvHAHJxHWDVFbyawrBwCBsOEhpg0QMiZuTJK0_Oj-NyP56Z3mXl7w8">
+  <section class="pic-page" data-picture="genre-sneaker" data-number="65" data-title="Sneaker" data-tier="Common" data-file="coordigo-65-genre-sneaker" data-payload="HY09CgJBDIWvEqYOi0kmk4zdZHbxAJ5AdCvBQsRGvLvB6v3x8T7lWo5FUPEADW1RFGDseIKO7Z-Il4Z9YeQciFKIspEloYLlljgrGQXPdW6xjdWndXUxaVqrVNY0renoswONbcDqMYBcXAdYdQWvpjAsHMKGg4QGWPSAiBl58sqT82O_3Pdnpnc58vcH">
     <p class="crumb"><a href="/library/" data-t="libCaps">Library</a></p>
     <h1>#65 Sneaker</h1>
     <p class="count"><span class="tier common">Common</span>Fashion · 11 lines · 42 points · Medium · about 5 min</p>
-    
+    <p class="words">“The hardest step is the one out the door.”</p>
     <div class="pic-grid">
       <figure class="common"><img src="/library/img/genre-sneaker.png" width="600" height="600" alt="Sneaker: a Coordigo mystery picture, drawn by joining points on a 16 × 16 grid"></figure>
       <div class="menu">
@@ -228,8 +228,7 @@
             <div class="seg"><label><input type="radio" name="paper" value="letter"> <span data-w="letter">Letter</span></label><label><input type="radio" name="paper" value="a4"> <span data-w="a4">A4</span></label></div>
           </fieldset>
           <label class="check"><input type="checkbox" name="answer" checked> <span data-w="answerPage">Answer page in color</span></label>
-          <label class="field"><span data-w="titleField">Title · optional, on the answer page</span><input type="text" name="title" maxlength="40" autocomplete="off"></label>
-          <label class="field"><span data-w="wordsField">Words · optional, on the answer page</span><textarea name="words" maxlength="120" rows="2"></textarea></label>
+          <label class="field"><span data-w="noteField">Your words · optional, on the puzzle page (Class: Name:)</span><textarea name="note" rows="3" maxlength="200" autocomplete="off"></textarea></label>
         </form>
         <div class="acts">
           <button class="act primary" id="sheetPrint" type="button" data-w="print">Print</button>
@@ -256,7 +255,8 @@
 <script src="/store.js"></script>
 <script src="/mystery/strings.js"></script>
 <script src="/mystery/engine.js"></script>
-<script type="application/json" id="faces">[["#ffffff",[[[8,10],[9,10],[10,10],[11,10],[12,10],[13,10],[14,10],[14,11],[13,12],[12,12],[11,12],[10,12],[9,12],[8,12],[7,12],[6,12],[5,12],[4,12],[3,12],[2,12],[1,11],[1,10],[2,10],[3,10],[4,10],[5,10],[6,10],[7,10]]]],["#ff3b30",[[[9,10],[8,10],[7,10],[6,10],[5,10],[4,9],[3,8],[2,8],[1,8],[1,7],[2,5],[3,6],[4,6],[5,6],[6,5],[7,6],[8,7],[9,8],[10,9],[11,9],[12,9],[11,10],[10,10]]]],["#ff3b30",[[[12,9],[11,9],[10,9],[9,8],[8,7],[7,6],[6,5],[7,3],[8,3],[9,5],[12,7],[13,8]]]],["#a37045",[[[5,10],[4,10],[3,10],[2,10],[1,10],[1,9],[1,8],[2,8],[3,8],[4,9]]]],["#ffffff",[[[14,10],[13,10],[12,10],[11,10],[12,9],[13,8]]]],["#1f1c1f",[[[3,6],[2,5],[3,4],[4,4],[6,5],[5,6],[4,6]]]],["#ffd60a",[[[0,0],[15,0],[15,15],[0,15]],[[10,12],[11,12],[12,12],[13,12],[14,11],[14,10],[13,8],[12,7],[9,5],[8,3],[7,3],[6,5],[4,4],[3,4],[2,5],[1,7],[1,8],[1,9],[1,10],[1,11],[2,12],[3,12],[4,12],[5,12],[6,12],[7,12],[8,12],[9,12]]]]]</script>
+<script type="application/json" id="faces">[["#9e1f1f",[[[4,9],[5,10],[4,10],[3,10],[2,10],[1,10],[1,9],[1,8],[2,8],[3,8]]]],["#ff3b30",[[[5,10],[4,9],[3,8],[2,8],[1,8],[1,7],[2,5],[3,6],[4,6],[5,6],[6,5],[7,6],[8,7],[9,8],[10,9],[11,9],[12,9],[11,10],[10,10],[9,10],[8,10],[7,10],[6,10]]]],["#1f1c1f",[[[4,6],[3,6],[2,5],[3,4],[4,4],[6,5],[5,6]]]],["#ffffff",[[[4,10],[5,10],[6,10],[7,10],[8,10],[9,10],[10,10],[11,10],[12,10],[13,10],[14,10],[14,11],[13,12],[12,12],[11,12],[10,12],[9,12],[8,12],[7,12],[6,12],[5,12],[4,12],[3,12],[2,12],[1,11],[1,10],[2,10],[3,10]]]],["#ffffff",[[[13,8],[14,10],[13,10],[12,10],[11,10],[12,9]]]],["#ff3b30",[[[8,3],[9,5],[12,7],[13,8],[12,9],[11,9],[10,9],[9,8],[8,7],[7,6],[6,5],[7,3]]]],["#ffd60a",[[[0,0],[15,0],[15,15],[0,15]],[[1,11],[2,12],[3,12],[4,12],[5,12],[6,12],[7,12],[8,12],[9,12],[10,12],[11,12],[12,12],[13,12],[14,11],[14,10],[13,8],[12,7],[9,5],[8,3],[7,3],[6,5],[4,4],[3,4],[2,5],[1,7],[1,8],[1,9],[1,10]]]]]</script>
+<script type="application/json" id="picture-words">{"m":{"ar-SA":"أصعب خطوة هي الخطوة الأولى خارج الباب.","de-DE":"Der schwerste Schritt ist der vor die Tür.","en-AU":"The hardest step is the one out the door.","en-GB":"The hardest step is the one out the door.","en-US":"The hardest step is the one out the door.","es-ES":"El paso más difícil es el que te saca por la puerta.","es-MX":"El paso más difícil es el que te saca por la puerta.","fr-FR":"Le pas le plus dur, c'est celui qui passe la porte.","hi":"सबसे मुश्किल कदम, दरवाज़े से बाहर वाला होता है।","id":"Langkah tersulit adalah langkah keluar pintu.","it":"Il passo più difficile è quello fuori dalla porta.","ja":"いちばん難しい一歩は、玄関を出る一歩。","ko":"제일 어려운 한 걸음은 문 밖으로 나가는 것.","nl-NL":"De moeilijkste stap is die naar buiten.","pt-BR":"O passo mais difícil é o que te leva porta afora.","ru":"Самый трудный шаг — тот, что за порог.","sv":"Det svåraste steget är det ut genom dörren.","th":"ก้าวที่ยากที่สุด คือก้าวออกจากประตูบ้าน","tr":"En zor adım, kapıdan dışarı atılanıdır.","vi":"Bước khó nhất là bước ra khỏi cửa.","zh-Hans":"最难的一步，是迈出家门那一步。","zh-Hant":"最難的一步，是踏出家門那一步。"}}</script>
 <script src="/library/worksheet-words.js"></script>
 <script src="/library/worksheet.js"></script>
 <script>

@@ -216,7 +216,7 @@
     <p class="crumb"><a href="/library/" data-t="libCaps">Library</a></p>
     <h1>#143 Game controller</h1>
     <p class="count"><span class="tier common">Common</span>Tech &amp; games · 9 lines · 62 points · Medium · about 5 min</p>
-    
+    <p class="words">“Player two, ready? Let&#x27;s play.”</p>
     <div class="pic-grid">
       <figure class="common"><img src="/library/img/genre-game-controller.png" width="600" height="600" alt="Game controller: a Coordigo mystery picture, drawn by joining points on a 16 × 16 grid"></figure>
       <div class="menu">
@@ -228,8 +228,7 @@
             <div class="seg"><label><input type="radio" name="paper" value="letter"> <span data-w="letter">Letter</span></label><label><input type="radio" name="paper" value="a4"> <span data-w="a4">A4</span></label></div>
           </fieldset>
           <label class="check"><input type="checkbox" name="answer" checked> <span data-w="answerPage">Answer page in color</span></label>
-          <label class="field"><span data-w="titleField">Title · optional, on the answer page</span><input type="text" name="title" maxlength="40" autocomplete="off"></label>
-          <label class="field"><span data-w="wordsField">Words · optional, on the answer page</span><textarea name="words" maxlength="120" rows="2"></textarea></label>
+          <label class="field"><span data-w="noteField">Your words · optional, on the puzzle page (Class: Name:)</span><textarea name="note" rows="3" maxlength="200" autocomplete="off"></textarea></label>
         </form>
         <div class="acts">
           <button class="act primary" id="sheetPrint" type="button" data-w="print">Print</button>
@@ -256,7 +255,8 @@
 <script src="/store.js"></script>
 <script src="/mystery/strings.js"></script>
 <script src="/mystery/engine.js"></script>
-<script type="application/json" id="faces">[["#1f1c1f",[[[4,7],[5,7],[5,8],[4,8],[4,9],[3,9],[3,8],[2,8],[2,7],[3,7],[3,6],[4,6]]]],["#5952de",[[[7,11],[6,11],[5,12],[4,13],[3,13],[2,13],[1,12],[1,11],[2,12],[3,12],[4,12],[5,11],[6,10],[7,10],[8,10],[9,10],[10,11],[11,12],[12,12],[13,12],[14,11],[14,12],[13,13],[12,13],[11,13],[10,12],[9,11],[8,11]]]],["#bf59f2",[[[9,10],[8,10],[7,10],[6,10],[5,11],[4,12],[3,12],[2,12],[1,11],[1,10],[1,9],[1,8],[1,7],[2,5],[3,4],[5,3],[6,3],[7,3],[8,3],[9,3],[10,3],[12,4],[13,5],[14,7],[14,8],[14,9],[14,10],[14,11],[13,12],[12,12],[11,12],[10,11]],[[5,7],[4,7],[4,6],[3,6],[3,7],[2,7],[2,8],[3,8],[3,9],[4,9],[4,8],[5,8]],[[11,5],[10,5],[10,6],[11,6]],[[8,8],[9,8],[9,7],[8,7]],[[13,8],[13,7],[12,7],[12,8]],[[10,10],[11,10],[11,9],[10,9]]]],["#33c759",[[[10,5],[11,5],[11,6],[10,6]]]],["#ffd60a",[[[9,8],[8,8],[8,7],[9,7]]]],["#ff3b30",[[[13,7],[13,8],[12,8],[12,7]]]],["#007aff",[[[11,10],[10,10],[10,9],[11,9]]]],["#c9f5ff",[[[0,0],[15,0],[15,15],[0,15]],[[6,11],[7,11],[8,11],[9,11],[10,12],[11,13],[12,13],[13,13],[14,12],[14,11],[14,10],[14,9],[14,8],[14,7],[13,5],[12,4],[10,3],[9,3],[8,3],[7,3],[6,3],[5,3],[3,4],[2,5],[1,7],[1,8],[1,9],[1,10],[1,11],[1,12],[2,13],[3,13],[4,13],[5,12]]]]]</script>
+<script type="application/json" id="faces">[["#1f1c1f",[[[3,6],[4,6],[4,7],[5,7],[5,8],[4,8],[4,9],[3,9],[3,8],[2,8],[2,7],[3,7]]]],["#5952de",[[[7,11],[6,11],[5,12],[4,13],[3,13],[2,13],[1,12],[1,11],[2,12],[3,12],[4,12],[5,11],[6,10],[7,10],[8,10],[9,10],[10,11],[11,12],[12,12],[13,12],[14,11],[14,12],[13,13],[12,13],[11,13],[10,12],[9,11],[8,11]]]],["#ff3b30",[[[12,8],[12,7],[13,7],[13,8]]]],["#007aff",[[[11,10],[10,10],[10,9],[11,9]]]],["#bf59f2",[[[14,11],[13,12],[12,12],[11,12],[10,11],[9,10],[8,10],[7,10],[6,10],[5,11],[4,12],[3,12],[2,12],[1,11],[1,10],[1,9],[1,8],[1,7],[2,5],[3,4],[5,3],[6,3],[7,3],[8,3],[9,3],[10,3],[12,4],[13,5],[14,7],[14,8],[14,9],[14,10]],[[4,6],[3,6],[3,7],[2,7],[2,8],[3,8],[3,9],[4,9],[4,8],[5,8],[5,7],[4,7]],[[12,7],[12,8],[13,8],[13,7]],[[10,10],[11,10],[11,9],[10,9]],[[8,7],[8,8],[9,8],[9,7]],[[11,5],[10,5],[10,6],[11,6]]]],["#ffd60a",[[[8,8],[8,7],[9,7],[9,8]]]],["#33c759",[[[10,5],[11,5],[11,6],[10,6]]]],["#c9f5ff",[[[0,0],[15,0],[15,15],[0,15]],[[6,11],[7,11],[8,11],[9,11],[10,12],[11,13],[12,13],[13,13],[14,12],[14,11],[14,10],[14,9],[14,8],[14,7],[13,5],[12,4],[10,3],[9,3],[8,3],[7,3],[6,3],[5,3],[3,4],[2,5],[1,7],[1,8],[1,9],[1,10],[1,11],[1,12],[2,13],[3,13],[4,13],[5,12]]]]]</script>
+<script type="application/json" id="picture-words">{"m":{"ar-SA":"اللاعب الثاني، جاهز؟ هيا نلعب.","de-DE":"Spieler zwei, bereit? Los geht's.","en-AU":"Player two, ready? Let's play.","en-GB":"Player two, ready? Let's play.","en-US":"Player two, ready? Let's play.","es-ES":"Jugador 2, ¿preparado? Echemos una partida.","es-MX":"Jugador 2, ¿listo? ¡A jugar!","fr-FR":"Joueur 2, prêt ? On joue.","hi":"प्लेयर टू, तैयार? चलो खेलें।","id":"Pemain dua, siap? Ayo main.","it":"Giocatore 2, pronto? Si gioca.","ja":"プレイヤー2、準備いい？さあ遊ぼう。","ko":"2P 준비됐어? 한 판 하자.","nl-NL":"Speler twee, klaar? Spelen maar.","pt-BR":"Jogador 2, pronto? Bora jogar.","ru":"Второй игрок на месте? Поиграем!","sv":"Spelare två, redo? Nu kör vi.","th":"ผู้เล่นสองพร้อมยัง? เล่นกัน!","tr":"2. oyuncu hazır mı? Hadi oynayalım.","vi":"Người chơi 2 sẵn sàng chưa? Chơi thôi.","zh-Hans":"玩家二号准备好了吗？开一局！","zh-Hant":"二號玩家準備好了嗎？來一場吧。"}}</script>
 <script src="/library/worksheet-words.js"></script>
 <script src="/library/worksheet.js"></script>
 <script>

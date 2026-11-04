@@ -216,7 +216,7 @@
     <p class="crumb"><a href="/library/" data-t="libCaps">Library</a></p>
     <h1>#23 Skateboard</h1>
     <p class="count"><span class="tier common">Common</span>Tech &amp; games · 9 lines · 39 points · Quick · about 2 min</p>
-    
+    <p class="words">“Sidewalks were boring until wheels came along.”</p>
     <div class="pic-grid">
       <figure class="common"><img src="/library/img/genre-skateboard.png" width="600" height="600" alt="Skateboard: a Coordigo mystery picture, drawn by joining points on a 16 × 16 grid"></figure>
       <div class="menu">
@@ -228,8 +228,7 @@
             <div class="seg"><label><input type="radio" name="paper" value="letter"> <span data-w="letter">Letter</span></label><label><input type="radio" name="paper" value="a4"> <span data-w="a4">A4</span></label></div>
           </fieldset>
           <label class="check"><input type="checkbox" name="answer" checked> <span data-w="answerPage">Answer page in color</span></label>
-          <label class="field"><span data-w="titleField">Title · optional, on the answer page</span><input type="text" name="title" maxlength="40" autocomplete="off"></label>
-          <label class="field"><span data-w="wordsField">Words · optional, on the answer page</span><textarea name="words" maxlength="120" rows="2"></textarea></label>
+          <label class="field"><span data-w="noteField">Your words · optional, on the puzzle page (Class: Name:)</span><textarea name="note" rows="3" maxlength="200" autocomplete="off"></textarea></label>
         </form>
         <div class="acts">
           <button class="act primary" id="sheetPrint" type="button" data-w="print">Print</button>
@@ -256,7 +255,8 @@
 <script src="/store.js"></script>
 <script src="/mystery/strings.js"></script>
 <script src="/mystery/engine.js"></script>
-<script type="application/json" id="faces">[["#ff9400",[[[2,8],[1,7],[1,6],[2,7],[3,8],[4,8],[5,8],[6,8],[7,8],[8,8],[9,8],[10,8],[11,8],[12,8],[13,7],[14,6],[14,7],[13,8],[12,9],[11,9],[10,9],[9,9],[8,9],[7,9],[6,9],[5,9],[4,9],[3,9]]]],["#ffd60a",[[[10,10],[11,10],[12,10],[13,11],[13,12],[13,13],[12,14],[11,14],[10,14],[9,13],[9,12],[9,11]]]],["#c9f5ff",[[[11,9],[12,9],[11,10],[10,9]]]],["#c9f5ff",[[[6,9],[5,10],[4,9],[5,9]]]],["#c9f5ff",[[[1,11],[2,11],[1,11],[0,11],[0,9],[1,9],[0,9],[0,0],[15,0],[15,15],[0,15],[0,13],[1,13],[0,13],[0,11]],[[1,7],[2,8],[3,9],[4,9],[5,10],[4,10],[3,11],[3,12],[3,13],[4,14],[5,14],[6,14],[7,13],[7,12],[7,11],[6,10],[5,10],[6,9],[7,9],[8,9],[9,9],[10,9],[11,10],[10,10],[9,11],[9,12],[9,13],[10,14],[11,14],[12,14],[13,13],[13,12],[13,11],[12,10],[11,10],[12,9],[13,8],[14,7],[14,6],[13,7],[12,8],[11,8],[10,8],[9,8],[8,8],[7,8],[6,8],[5,8],[4,8],[3,8],[2,7],[1,6]]]],["#ffd60a",[[[4,10],[5,10],[6,10],[7,11],[7,12],[7,13],[6,14],[5,14],[4,14],[3,13],[3,12],[3,11]]]]]</script>
+<script type="application/json" id="faces">[["#ff9400",[[[7,9],[6,9],[5,9],[4,9],[3,9],[2,8],[1,7],[1,6],[2,7],[3,8],[4,8],[5,8],[6,8],[7,8],[8,8],[9,8],[10,8],[11,8],[12,8],[13,7],[14,6],[14,7],[13,8],[12,9],[11,9],[10,9],[9,9],[8,9]]]],["#ffd60a",[[[13,13],[12,14],[11,14],[10,14],[9,13],[9,12],[9,11],[10,10],[11,10],[12,10],[13,11],[13,12]]]],["#c9f5ff",[[[5,10],[4,9],[5,9],[6,9]]]],["#ffd60a",[[[6,14],[5,14],[4,14],[3,13],[3,12],[3,11],[4,10],[5,10],[6,10],[7,11],[7,12],[7,13]]]],["#c9f5ff",[[[0,11],[1,11],[2,11],[1,11],[0,11],[0,9],[1,9],[0,9],[0,0],[15,0],[15,15],[0,15],[0,13],[1,13],[0,13]],[[6,9],[7,9],[8,9],[9,9],[10,9],[11,10],[10,10],[9,11],[9,12],[9,13],[10,14],[11,14],[12,14],[13,13],[13,12],[13,11],[12,10],[11,10],[12,9],[13,8],[14,7],[14,6],[13,7],[12,8],[11,8],[10,8],[9,8],[8,8],[7,8],[6,8],[5,8],[4,8],[3,8],[2,7],[1,6],[1,7],[2,8],[3,9],[4,9],[5,10],[4,10],[3,11],[3,12],[3,13],[4,14],[5,14],[6,14],[7,13],[7,12],[7,11],[6,10],[5,10]]]],["#c9f5ff",[[[10,9],[11,9],[12,9],[11,10]]]]]</script>
+<script type="application/json" id="picture-words">{"m":{"ar-SA":"كانت الأرصفة مملة حتى جاءت العجلات.","de-DE":"Gehwege waren langweilig, bis Rollen kamen.","en-AU":"Sidewalks were boring until wheels came along.","en-GB":"Sidewalks were boring until wheels came along.","en-US":"Sidewalks were boring until wheels came along.","es-ES":"Las aceras eran aburridas hasta que llegaron las ruedas.","es-MX":"Las banquetas eran aburridas hasta que llegaron las ruedas.","fr-FR":"Les trottoirs étaient ennuyeux avant les roulettes.","hi":"फ़ुटपाथ बोरिंग थे, फिर पहिये आए।","id":"Trotoar membosankan sampai roda datang.","it":"I marciapiedi erano noiosi prima delle ruote.","ja":"車輪が来るまで、歩道なんて退屈だった。","ko":"바퀴가 오기 전까지 인도는 지루했어요.","nl-NL":"Stoepen waren saai tot er wieltjes kwamen.","pt-BR":"As calçadas eram chatas até chegarem as rodinhas.","ru":"Тротуары были скучными, пока не появились колёса.","sv":"Trottoarer var tråkiga tills hjulen kom.","th":"ทางเท้าน่าเบื่อ จนกระทั่งมีล้อ","tr":"Tekerlekler gelene kadar kaldırımlar sıkıcıydı.","vi":"Vỉa hè từng nhàm chán cho đến khi có bánh xe.","zh-Hans":"有轮子之前，人行道好无聊。","zh-Hant":"有輪子以前，人行道好無聊。"}}</script>
 <script src="/library/worksheet-words.js"></script>
 <script src="/library/worksheet.js"></script>
 <script>

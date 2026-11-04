@@ -216,7 +216,7 @@
     <p class="crumb"><a href="/library/" data-t="libCaps">Library</a></p>
     <h1>#68 Popsicle</h1>
     <p class="count"><span class="tier common">Common</span>Food &amp; drink · 3 lines · 16 points · Quick · about 2 min</p>
-    
+    <p class="words">“Invented by a happy accident. The best things often are. 😋”</p>
     <div class="pic-grid">
       <figure class="common"><img src="/library/img/genre-popsicle.png" width="600" height="600" alt="Popsicle: a Coordigo mystery picture, drawn by joining points on a 16 × 16 grid"></figure>
       <div class="menu">
@@ -228,8 +228,7 @@
             <div class="seg"><label><input type="radio" name="paper" value="letter"> <span data-w="letter">Letter</span></label><label><input type="radio" name="paper" value="a4"> <span data-w="a4">A4</span></label></div>
           </fieldset>
           <label class="check"><input type="checkbox" name="answer" checked> <span data-w="answerPage">Answer page in color</span></label>
-          <label class="field"><span data-w="titleField">Title · optional, on the answer page</span><input type="text" name="title" maxlength="40" autocomplete="off"></label>
-          <label class="field"><span data-w="wordsField">Words · optional, on the answer page</span><textarea name="words" maxlength="120" rows="2"></textarea></label>
+          <label class="field"><span data-w="noteField">Your words · optional, on the puzzle page (Class: Name:)</span><textarea name="note" rows="3" maxlength="200" autocomplete="off"></textarea></label>
         </form>
         <div class="acts">
           <button class="act primary" id="sheetPrint" type="button" data-w="print">Print</button>
@@ -256,7 +255,8 @@
 <script src="/store.js"></script>
 <script src="/mystery/strings.js"></script>
 <script src="/mystery/engine.js"></script>
-<script type="application/json" id="faces">[["#5952de",[[[13,6],[12,7],[11,8],[10,9],[9,10],[8,11],[7,12],[6,11],[7,10],[8,9],[9,8],[10,7],[11,6],[12,5],[12,4],[12,3],[13,4],[13,5]]]],["#ffffff",[[[6,8],[5,8],[6,7],[7,6],[8,5],[9,4]]]],["#bf59f2",[[[12,5],[11,6],[10,7],[9,8],[8,9],[7,10],[6,11],[5,10],[4,9],[3,8],[4,7],[5,6],[6,5],[7,4],[8,3],[9,2],[10,2],[11,2],[12,3],[12,4]],[[5,8],[6,8],[9,4],[8,5],[7,6],[6,7]]]],["#ffc482",[[[5,10],[6,11],[5,12],[4,13],[3,14],[2,13],[3,12],[4,11]]]],["#c9f5ff",[[[0,0],[15,0],[15,15],[0,15]],[[12,7],[13,6],[13,5],[13,4],[12,3],[11,2],[10,2],[9,2],[8,3],[7,4],[6,5],[5,6],[4,7],[3,8],[4,9],[5,10],[4,11],[3,12],[2,13],[3,14],[4,13],[5,12],[6,11],[7,12],[8,11],[9,10],[10,9],[11,8]]]]]</script>
+<script type="application/json" id="faces">[["#ffffff",[[[7,6],[8,5],[9,4],[6,8],[5,8],[6,7]]]],["#5952de",[[[10,9],[9,10],[8,11],[7,12],[6,11],[7,10],[8,9],[9,8],[10,7],[11,6],[12,5],[12,4],[12,3],[13,4],[13,5],[13,6],[12,7],[11,8]]]],["#ffc482",[[[2,13],[3,12],[4,11],[5,10],[6,11],[5,12],[4,13],[3,14]]]],["#bf59f2",[[[5,10],[4,9],[3,8],[4,7],[5,6],[6,5],[7,4],[8,3],[9,2],[10,2],[11,2],[12,3],[12,4],[12,5],[11,6],[10,7],[9,8],[8,9],[7,10],[6,11]],[[8,5],[7,6],[6,7],[5,8],[6,8],[9,4]]]],["#c9f5ff",[[[0,0],[15,0],[15,15],[0,15]],[[9,10],[10,9],[11,8],[12,7],[13,6],[13,5],[13,4],[12,3],[11,2],[10,2],[9,2],[8,3],[7,4],[6,5],[5,6],[4,7],[3,8],[4,9],[5,10],[4,11],[3,12],[2,13],[3,14],[4,13],[5,12],[6,11],[7,12],[8,11]]]]]</script>
+<script type="application/json" id="picture-words">{"m":{"ar-SA":"اختُرعت بالصدفة السعيدة. وأجمل الأشياء غالبًا كذلك. 😋","de-DE":"Aus Versehen erfunden. Das Beste entsteht oft so. 😋","en-AU":"Invented by a happy accident. The best things often are. 😋","en-GB":"Invented by a happy accident. The best things often are. 😋","en-US":"Invented by a happy accident. The best things often are. 😋","es-ES":"Inventado por accidente. Lo mejor suele llegar así. 😋","es-MX":"Se inventó de chiripa. Lo mejor suele pasar así. 😋","fr-FR":"Inventé par un heureux hasard. Comme les meilleures choses. 😋","hi":"एक इत्तफ़ाक़ से बनी। अच्छी चीज़ें अक्सर ऐसे ही बनती हैं। 😋","id":"Lahir dari kebetulan. Hal terbaik sering begitu. 😋","it":"Nato da un errore felice. Come tante cose belle. 😋","ja":"偶然から生まれたんだって。いいものはだいたいそう。😋","ko":"우연히 발명된 거래. 좋은 건 대개 그래. 😋","nl-NL":"Per ongeluk uitgevonden. Het beste ontstaat vaak zo. 😋","pt-BR":"Inventado por um feliz acidente. Como as melhores coisas. 😋","ru":"Придумано по счастливой случайности. Как всё лучшее. 😋","sv":"Uppfunnen av en lycklig slump. Det bästa blir ofta så. 😋","th":"เกิดจากความบังเอิญ ของดีมักเป็นงั้น 😋","tr":"Mutlu bir kazayla icat edildi. En güzel şeyler öyledir. 😋","vi":"Ra đời từ một sự tình cờ. Điều tuyệt nhất thường vậy. 😋","zh-Hans":"它诞生于一场美丽的意外。好东西常这样。😋","zh-Hant":"它是意外發明的。好東西常常都是這樣。😋"}}</script>
 <script src="/library/worksheet-words.js"></script>
 <script src="/library/worksheet.js"></script>
 <script>

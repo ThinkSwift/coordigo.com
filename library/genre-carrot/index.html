@@ -216,7 +216,7 @@
     <p class="crumb"><a href="/library/" data-t="libCaps">Library</a></p>
     <h1>#30 Carrot</h1>
     <p class="count"><span class="tier common">Common</span>Food &amp; drink · 4 lines · 20 points · Quick · about 2 min</p>
-    
+    <p class="words">“Eat well today. Consider it a friendly order.”</p>
     <div class="pic-grid">
       <figure class="common"><img src="/library/img/genre-carrot.png" width="600" height="600" alt="Carrot: a Coordigo mystery picture, drawn by joining points on a 16 × 16 grid"></figure>
       <div class="menu">
@@ -228,8 +228,7 @@
             <div class="seg"><label><input type="radio" name="paper" value="letter"> <span data-w="letter">Letter</span></label><label><input type="radio" name="paper" value="a4"> <span data-w="a4">A4</span></label></div>
           </fieldset>
           <label class="check"><input type="checkbox" name="answer" checked> <span data-w="answerPage">Answer page in color</span></label>
-          <label class="field"><span data-w="titleField">Title · optional, on the answer page</span><input type="text" name="title" maxlength="40" autocomplete="off"></label>
-          <label class="field"><span data-w="wordsField">Words · optional, on the answer page</span><textarea name="words" maxlength="120" rows="2"></textarea></label>
+          <label class="field"><span data-w="noteField">Your words · optional, on the puzzle page (Class: Name:)</span><textarea name="note" rows="3" maxlength="200" autocomplete="off"></textarea></label>
         </form>
         <div class="acts">
           <button class="act primary" id="sheetPrint" type="button" data-w="print">Print</button>
@@ -256,7 +255,8 @@
 <script src="/store.js"></script>
 <script src="/mystery/strings.js"></script>
 <script src="/mystery/engine.js"></script>
-<script type="application/json" id="faces">[["#33c759",[[[10,2],[9,3],[8,4],[7,4]]]],["#ff9400",[[[5,5],[7,4],[9,7],[9,8],[9,7],[11,10],[10,10],[11,10],[13,13],[10,11],[7,9],[8,8],[7,9],[4,7]]]],["#0a6624",[[[5,5],[6,2],[6,3],[6,4]]]],["#33c759",[[[3,2],[5,5],[4,5]]]],["#c9f5ff",[[[0,0],[15,0],[15,15],[0,15]],[[9,3],[10,2],[7,4],[5,5],[6,4],[6,3],[6,2],[5,5],[3,2],[4,5],[5,5],[4,7],[7,9],[10,11],[13,13],[11,10],[9,7],[7,4],[8,4]]]]]</script>
+<script type="application/json" id="faces">[["#ff9400",[[[9,7],[11,10],[10,10],[11,10],[13,13],[10,11],[7,9],[8,8],[7,9],[4,7],[5,5],[7,4],[9,7],[9,8]]]],["#33c759",[[[5,5],[4,5],[3,2]]]],["#0a6624",[[[6,4],[5,5],[6,2],[6,3]]]],["#33c759",[[[9,3],[8,4],[7,4],[10,2]]]],["#c9f5ff",[[[0,0],[15,0],[15,15],[0,15]],[[11,10],[9,7],[7,4],[8,4],[9,3],[10,2],[7,4],[5,5],[6,4],[6,3],[6,2],[5,5],[3,2],[4,5],[5,5],[4,7],[7,9],[10,11],[13,13]]]]]</script>
+<script type="application/json" id="picture-words">{"m":{"ar-SA":"كُل جيدًا اليوم. اعتبره أمرًا من صديق.","de-DE":"Iss heute was Gutes. Das ist ein freundlicher Befehl.","en-AU":"Eat well today. Consider it a friendly order.","en-GB":"Eat well today. Consider it a friendly order.","en-US":"Eat well today. Consider it a friendly order.","es-ES":"Hoy come bien. Considéralo una orden cariñosa.","es-MX":"Hoy come bien. Tómalo como una orden cariñosa.","fr-FR":"Mange bien aujourd'hui. C'est un ordre amical.","hi":"आज ठीक से खाना खाना। ये दोस्ताना हुक्म है।","id":"Makan yang benar hari ini. Anggap perintah dari teman.","it":"Oggi mangia bene. È un ordine, ma con affetto.","ja":"今日はちゃんと食べてね。やさしい命令です。","ko":"오늘은 잘 챙겨 먹어. 다정한 명령이야.","nl-NL":"Eet vandaag goed. Zie het als een vriendelijk bevel.","pt-BR":"Come direito hoje. É uma ordem carinhosa.","ru":"Поешь сегодня как следует. Это дружеский приказ.","sv":"Ät ordentligt i dag. Se det som en vänlig order.","th":"วันนี้กินดี ๆ นะ ถือเป็นคำสั่งแบบเพื่อน","tr":"Bugün iyi beslen. Dostça bir emir say.","vi":"Hôm nay ăn uống đàng hoàng nhé. Lệnh từ bạn thân đấy.","zh-Hans":"今天好好吃饭。这是温柔的命令。","zh-Hant":"今天要好好吃飯。這是溫柔的命令。"}}</script>
 <script src="/library/worksheet-words.js"></script>
 <script src="/library/worksheet.js"></script>
 <script>

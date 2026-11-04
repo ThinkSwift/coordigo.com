@@ -216,7 +216,7 @@
     <p class="crumb"><a href="/library/" data-t="libCaps">Library</a></p>
     <h1>#230 Owl</h1>
     <p class="count"><span class="tier epic">Epic</span>Animals · 13 lines · 62 points · Medium · about 5 min</p>
-    
+    <p class="words">“Up late again? Get some sleep, night owl.”</p>
     <div class="pic-grid">
       <figure class="epic"><img src="/library/img/genre-owl.png" width="600" height="600" alt="Owl: a Coordigo mystery picture, drawn by joining points on a 16 × 16 grid"></figure>
       <div class="menu">
@@ -228,8 +228,7 @@
             <div class="seg"><label><input type="radio" name="paper" value="letter"> <span data-w="letter">Letter</span></label><label><input type="radio" name="paper" value="a4"> <span data-w="a4">A4</span></label></div>
           </fieldset>
           <label class="check"><input type="checkbox" name="answer" checked> <span data-w="answerPage">Answer page in color</span></label>
-          <label class="field"><span data-w="titleField">Title · optional, on the answer page</span><input type="text" name="title" maxlength="40" autocomplete="off"></label>
-          <label class="field"><span data-w="wordsField">Words · optional, on the answer page</span><textarea name="words" maxlength="120" rows="2"></textarea></label>
+          <label class="field"><span data-w="noteField">Your words · optional, on the puzzle page (Class: Name:)</span><textarea name="note" rows="3" maxlength="200" autocomplete="off"></textarea></label>
         </form>
         <div class="acts">
           <button class="act primary" id="sheetPrint" type="button" data-w="print">Print</button>
@@ -256,7 +255,8 @@
 <script src="/store.js"></script>
 <script src="/mystery/strings.js"></script>
 <script src="/mystery/engine.js"></script>
-<script type="application/json" id="faces">[["#1f1c1f",[[[10,8],[10,7],[11,7],[11,6],[12,6],[12,7],[12,8],[11,8]]]],["#1f1c1f",[[[4,7],[5,7],[5,6],[6,6],[6,7],[6,8],[5,8],[4,8]]]],["#ffffff",[[[5,7],[4,7],[4,6],[5,6]]]],["#ffd60a",[[[2,9],[1,8],[1,7],[1,6],[2,5],[3,4],[4,4],[5,4],[6,4],[7,5],[8,6],[8,7],[8,8],[7,9],[6,10],[5,10],[4,10],[3,10]],[[4,8],[5,8],[6,8],[6,7],[6,6],[5,6],[4,6],[4,7]]]],["#ffffff",[[[10,7],[10,6],[11,6],[11,7]]]],["#ff9400",[[[8,10],[9,10],[8,12],[7,10]]]],["#ffd60a",[[[10,5],[11,5],[12,5],[13,6],[13,7],[13,8],[12,9],[11,9],[10,9],[9,8],[9,7],[9,6]],[[10,7],[10,8],[11,8],[12,8],[12,7],[12,6],[11,6],[10,6]]]],["#ffc482",[[[3,2],[4,2],[5,2],[6,2],[7,3],[8,4],[10,3],[13,2],[15,3],[15,11],[13,12],[12,12],[11,12],[10,12],[8,13],[6,12],[5,12],[4,12],[3,12],[0,11],[0,3]],[[1,8],[2,9],[3,10],[4,10],[5,10],[6,10],[7,9],[8,8],[8,7],[8,6],[7,5],[6,4],[5,4],[4,4],[3,4],[2,5],[1,6],[1,7]],[[9,10],[8,10],[7,10],[8,12]],[[11,5],[10,5],[9,6],[9,7],[9,8],[10,9],[11,9],[12,9],[13,8],[13,7],[13,6],[12,5]]]],["#a37045",[[[4,2],[3,2],[2,0],[14,0],[13,2],[10,3],[8,4],[7,3],[6,2],[5,2]]]],["#a37045",[[[10,12],[11,12],[12,12],[13,12],[15,11],[15,15],[0,15],[0,11],[3,12],[4,12],[5,12],[6,12],[8,13]]]],["#a37045",[[[2,0],[3,2],[0,3],[0,0]]]],["#a37045",[[[15,3],[13,2],[14,0],[15,0]]]]]</script>
+<script type="application/json" id="faces">[["#a37045",[[[5,12],[6,12],[8,13],[10,12],[11,12],[12,12],[13,12],[15,11],[15,15],[0,15],[0,11],[3,12],[4,12]]]],["#ffc482",[[[6,12],[5,12],[4,12],[3,12],[0,11],[0,3],[3,2],[4,2],[5,2],[6,2],[7,3],[8,4],[10,3],[13,2],[15,3],[15,11],[13,12],[12,12],[11,12],[10,12],[8,13]],[[8,12],[9,10],[8,10],[7,10]],[[6,4],[5,4],[4,4],[3,4],[2,5],[1,6],[1,7],[1,8],[2,9],[3,10],[4,10],[5,10],[6,10],[7,9],[8,8],[8,7],[8,6],[7,5]],[[11,9],[12,9],[13,8],[13,7],[13,6],[12,5],[11,5],[10,5],[9,6],[9,7],[9,8],[10,9]]]],["#ff9400",[[[9,10],[8,12],[7,10],[8,10]]]],["#1f1c1f",[[[10,8],[10,7],[11,7],[11,6],[12,6],[12,7],[12,8],[11,8]]]],["#ffd60a",[[[5,4],[6,4],[7,5],[8,6],[8,7],[8,8],[7,9],[6,10],[5,10],[4,10],[3,10],[2,9],[1,8],[1,7],[1,6],[2,5],[3,4],[4,4]],[[5,6],[4,6],[4,7],[4,8],[5,8],[6,8],[6,7],[6,6]]]],["#ffffff",[[[11,6],[11,7],[10,7],[10,6]]]],["#ffffff",[[[4,6],[5,6],[5,7],[4,7]]]],["#1f1c1f",[[[4,8],[4,7],[5,7],[5,6],[6,6],[6,7],[6,8],[5,8]]]],["#ffd60a",[[[12,9],[11,9],[10,9],[9,8],[9,7],[9,6],[10,5],[11,5],[12,5],[13,6],[13,7],[13,8]],[[10,7],[10,8],[11,8],[12,8],[12,7],[12,6],[11,6],[10,6]]]],["#a37045",[[[8,4],[7,3],[6,2],[5,2],[4,2],[3,2],[2,0],[14,0],[13,2],[10,3]]]],["#a37045",[[[13,2],[14,0],[15,0],[15,3]]]],["#a37045",[[[3,2],[0,3],[0,0],[2,0]]]]]</script>
+<script type="application/json" id="picture-words">{"m":{"ar-SA":"سهران مجددًا؟ نم قليلًا يا بومة الليل.","de-DE":"Schon wieder so spät? Ab ins Bett, Nachteule.","en-AU":"Up late again? Get some sleep, night owl.","en-GB":"Up late again? Get some sleep, night owl.","en-US":"Up late again? Get some sleep, night owl.","es-ES":"¿Otra vez trasnochando? A dormir, búho.","es-MX":"¿Otra vez desvelándote? A dormir, búho.","fr-FR":"Encore debout ? Va dormir, oiseau de nuit.","hi":"फिर रतजगा? अब सो भी जाओ, रात के पंछी।","id":"Begadang lagi? Tidur sana, burung hantu.","it":"Ancora a far tardi? Fila a dormire, gufo.","ja":"また夜ふかし？もう寝なよ、フクロウさん。","ko":"또 밤새? 이제 좀 자, 올빼미야.","nl-NL":"Alweer zo laat op? Ga slapen, nachtuil.","pt-BR":"Acordado de novo? Vai dormir, coruja.","ru":"Опять не спишь? Пора в кровать, сова.","sv":"Uppe sent igen? Sov nu, din nattuggla.","th":"นอนดึกอีกแล้ว? ไปนอนได้แล้ว นกฮูก","tr":"Yine mi uyumadın? Hadi yat artık, gece kuşu.","vi":"Lại thức khuya à? Đi ngủ đi, cú đêm.","zh-Hans":"又熬夜？快去睡吧，夜猫子。","zh-Hant":"又熬夜？快去睡啦，夜貓子。"}}</script>
 <script src="/library/worksheet-words.js"></script>
 <script src="/library/worksheet.js"></script>
 <script>

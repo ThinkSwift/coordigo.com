@@ -13,7 +13,7 @@ sitemap entries in sitemap.xml. The head, tabs, site buttons, footer and the App
 pages look like the rest of the site. Re-run whenever library.js changes (Coordigo scripts/web-library.py).
 """
 import base64, html, io, json, os, re, sys
-from PIL import Image, ImageDraw
+from PIL import Image, ImageChops, ImageDraw
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 ORIGIN = 'https://coordigo.com'
@@ -63,12 +63,19 @@ def alt(d):
     return f"{what}: a Coordigo mystery picture, drawn by joining points on a 16 × 16 grid"
 def file_stem(d): return 'coordigo' + (f"-{number[d['id']]}" if d['id'] in number else '') + '-' + d['id']
 
-# MARK: The pictures as PNGs — the fills at their raster cells, the lines drawn smooth at 3x and filtered down.
+# MARK: The pictures as PNGs — the fills as the app's exact faces (even-odd), the lines drawn smooth, all at 3x and filtered down.
 def render(d, size=600, pad=30):
     S = 3; W = size * S
     im = Image.new('RGB', (W, W), (255, 253, 248))
     side = (size - 2 * pad) * S; ox = oy = pad * S; u = side / 15
-    if d['pixels']:
+    for color, rings in FACES.get(d['id'], []):
+        mask = Image.new('1', (W, W), 0)
+        for ring in rings:                                     # even-odd: each ring flips what is inside it
+            r = Image.new('1', (W, W), 0)
+            ImageDraw.Draw(r).polygon([(ox + x * u, oy + y * u) for x, y in ring], fill=1)
+            mask = ImageChops.logical_xor(mask, r)
+        im.paste(color, (0, 0), mask)
+    if not FACES.get(d['id']) and d.get('pixels'):            # the site's own list, without the app's faces
         raw = base64.b64decode(d['pixels'])
         fills = Image.frombytes('RGBA', (d['w'], d['h']), raw).resize((int(side), int(side)), Image.NEAREST)
         im.paste(fills, (ox, oy), fills)

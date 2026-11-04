@@ -216,7 +216,7 @@
     <p class="crumb"><a href="/library/" data-t="libCaps">Library</a></p>
     <h1>#157 Comet</h1>
     <p class="count"><span class="tier common">Common</span>Sky &amp; space · 16 lines · 42 points · Medium · about 5 min</p>
-    
+    <p class="words">“Make a wish quickly. It won&#x27;t be back for years.”</p>
     <div class="pic-grid">
       <figure class="common"><img src="/library/img/genre-comet.png" width="600" height="600" alt="Comet: a Coordigo mystery picture, drawn by joining points on a 16 × 16 grid"></figure>
       <div class="menu">
@@ -228,8 +228,7 @@
             <div class="seg"><label><input type="radio" name="paper" value="letter"> <span data-w="letter">Letter</span></label><label><input type="radio" name="paper" value="a4"> <span data-w="a4">A4</span></label></div>
           </fieldset>
           <label class="check"><input type="checkbox" name="answer" checked> <span data-w="answerPage">Answer page in color</span></label>
-          <label class="field"><span data-w="titleField">Title · optional, on the answer page</span><input type="text" name="title" maxlength="40" autocomplete="off"></label>
-          <label class="field"><span data-w="wordsField">Words · optional, on the answer page</span><textarea name="words" maxlength="120" rows="2"></textarea></label>
+          <label class="field"><span data-w="noteField">Your words · optional, on the puzzle page (Class: Name:)</span><textarea name="note" rows="3" maxlength="200" autocomplete="off"></textarea></label>
         </form>
         <div class="acts">
           <button class="act primary" id="sheetPrint" type="button" data-w="print">Print</button>
@@ -256,7 +255,8 @@
 <script src="/store.js"></script>
 <script src="/mystery/strings.js"></script>
 <script src="/mystery/engine.js"></script>
-<script type="application/json" id="faces">[["#c9f5ff",[[[13,3],[14,2],[15,1],[15,4],[11,7],[15,4],[15,7],[13,8],[10,10],[7,12],[8,9],[11,5],[7,6],[5,7],[3,8],[5,5],[7,2],[8,0],[11,0],[9,3],[11,0],[15,0],[15,1],[14,2],[13,3],[12,4]]]],["#ffffff",[[[11,5],[8,9],[7,12],[6,13],[4,14],[2,13],[1,11],[2,9],[3,8],[5,7],[7,6]],[[4,10],[3,11],[4,12],[5,11],[5,10]]]],["#5952de",[[[8,0],[7,2],[5,5],[3,8],[2,9],[1,11],[2,13],[4,14],[6,13],[7,12],[10,10],[13,8],[15,7],[15,15],[0,15],[0,0]]]],["#ffd60a",[[[3,11],[4,10],[5,10],[5,11],[4,12]]]]]</script>
+<script type="application/json" id="faces">[["#5952de",[[[4,14],[6,13],[7,12],[10,10],[13,8],[15,7],[15,15],[0,15],[0,0],[8,0],[7,2],[5,5],[3,8],[2,9],[1,11],[2,13]]]],["#ffffff",[[[6,13],[4,14],[2,13],[1,11],[2,9],[3,8],[5,7],[7,6],[11,5],[8,9],[7,12]],[[5,10],[4,10],[3,11],[4,12],[5,11]]]],["#ffd60a",[[[4,10],[5,10],[5,11],[4,12],[3,11]]]],["#c9f5ff",[[[7,2],[8,0],[11,0],[9,3],[11,0],[15,0],[15,1],[14,2],[13,3],[12,4],[13,3],[14,2],[15,1],[15,4],[11,7],[15,4],[15,7],[13,8],[10,10],[7,12],[8,9],[11,5],[7,6],[5,7],[3,8],[5,5]]]]]</script>
+<script type="application/json" id="picture-words">{"m":{"ar-SA":"تمنَّ بسرعة. لن يعود قبل سنوات.","de-DE":"Wünsch dir schnell was. Er kommt erst in Jahren wieder.","en-AU":"Make a wish quickly. It won't be back for years.","en-GB":"Make a wish quickly. It won't be back for years.","en-US":"Make a wish quickly. It won't be back for years.","es-ES":"Pide un deseo rápido. Tardará años en volver.","es-MX":"Pide un deseo rápido. Tardará años en volver.","fr-FR":"Fais vite un vœu. Elle ne repassera pas avant des années.","hi":"जल्दी मन्नत माँगो। यह बरसों बाद लौटेगा।","id":"Cepat buat permintaan. Ia baru kembali bertahun-tahun lagi.","it":"Esprimi un desiderio, presto. Tornerà fra molti anni.","ja":"急いで願いごとを。次に来るのはずっと先。","ko":"얼른 소원 빌어요. 몇 년은 지나야 다시 와요.","nl-NL":"Doe snel een wens. Hij komt pas over jaren terug.","pt-BR":"Faça um pedido rápido. Ele vai levar anos para voltar.","ru":"Загадывай скорее. Она вернётся только через годы.","sv":"Önska något fort. Den kommer inte tillbaka på åratal.","th":"รีบอธิษฐานเลย อีกหลายปีกว่าจะกลับมา","tr":"Çabuk dilek tut. Yıllarca geri gelmeyecek.","vi":"Ước nhanh lên. Phải nhiều năm nữa nó mới quay lại.","zh-Hans":"快许愿，它要好多年才会再来。","zh-Hant":"快許願，它要好多年才會再來。"}}</script>
 <script src="/library/worksheet-words.js"></script>
 <script src="/library/worksheet.js"></script>
 <script>

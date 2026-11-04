@@ -216,7 +216,7 @@
     <p class="crumb"><a href="/library/" data-t="libCaps">Library</a></p>
     <h1>#113 Drum</h1>
     <p class="count"><span class="tier common">Common</span>Things · 4 lines · 47 points · Medium · about 5 min</p>
-    
+    <p class="words">“Go at your own beat.”</p>
     <div class="pic-grid">
       <figure class="common"><img src="/library/img/genre-drum.png" width="600" height="600" alt="Drum: a Coordigo mystery picture, drawn by joining points on a 16 × 16 grid"></figure>
       <div class="menu">
@@ -228,8 +228,7 @@
             <div class="seg"><label><input type="radio" name="paper" value="letter"> <span data-w="letter">Letter</span></label><label><input type="radio" name="paper" value="a4"> <span data-w="a4">A4</span></label></div>
           </fieldset>
           <label class="check"><input type="checkbox" name="answer" checked> <span data-w="answerPage">Answer page in color</span></label>
-          <label class="field"><span data-w="titleField">Title · optional, on the answer page</span><input type="text" name="title" maxlength="40" autocomplete="off"></label>
-          <label class="field"><span data-w="wordsField">Words · optional, on the answer page</span><textarea name="words" maxlength="120" rows="2"></textarea></label>
+          <label class="field"><span data-w="noteField">Your words · optional, on the puzzle page (Class: Name:)</span><textarea name="note" rows="3" maxlength="200" autocomplete="off"></textarea></label>
         </form>
         <div class="acts">
           <button class="act primary" id="sheetPrint" type="button" data-w="print">Print</button>
@@ -256,7 +255,8 @@
 <script src="/store.js"></script>
 <script src="/mystery/strings.js"></script>
 <script src="/mystery/engine.js"></script>
-<script type="application/json" id="faces">[["#a37045",[[[11,3],[10,2],[11,1],[12,2]]]],["#ffd60a",[[[8,8],[9,8],[10,8],[11,8],[13,7],[14,6],[14,7],[13,8],[11,9],[10,9],[9,9],[8,9],[7,9],[6,9],[5,9],[3,8],[2,7],[2,6],[3,7],[5,8],[6,8],[7,8]]]],["#ffffff",[[[9,8],[8,8],[7,8],[6,8],[5,8],[3,7],[2,6],[3,5],[5,4],[6,4],[7,4],[8,4],[8.857,4.429],[8,5],[5,7],[8,5],[8.857,4.429],[10,5],[12,6],[10,5],[8.857,4.429],[9.5,4],[10,4],[11,4],[13,5],[14,6],[13,7],[11,8],[10,8]]]],["#ffd60a",[[[2,11],[3,12],[5,13],[6,13],[7,13],[8,13],[9,13],[10,13],[11,13],[13,12],[14,11],[14,12],[13,13],[11,14],[10,14],[9,14],[8,14],[7,14],[6,14],[5,14],[3,13],[2,12]]]],["#ffffff",[[[3,12],[2,11],[3,8],[5,13]]]],["#ffffff",[[[11,13],[10,13],[9,13],[8,13],[7,13],[6,13],[5,13],[8,9]]]],["#ffffff",[[[13,8],[14,11],[13,12],[11,13]]]],["#ff3b30",[[[14,11],[13,8],[14,7],[14,8],[14,9],[14,10]]]],["#ff3b30",[[[9,9],[10,9],[11,9],[13,8],[11,13],[8,9]]]],["#ffffff",[[[8.857,4.429],[8,4],[9,4],[9.5,4]]]],["#a37045",[[[3,1],[4,2],[3,3],[2,2]]]],["#ff3b30",[[[2,10],[2,9],[2,8],[2,7],[3,8],[2,11]]]],["#ff3b30",[[[5,13],[3,8],[5,9],[6,9],[7,9],[8,9]]]],["#c9f5ff",[[[0,0],[15,0],[15,15],[0,15]],[[10,2],[11,3],[9.5,4],[9,4],[8,4],[6,3],[4,2],[3,1],[2,2],[3,3],[4,2],[6,3],[8,4],[7,4],[6,4],[5,4],[3,5],[2,6],[2,7],[2,8],[2,9],[2,10],[2,11],[2,12],[3,13],[5,14],[6,14],[7,14],[8,14],[9,14],[10,14],[11,14],[13,13],[14,12],[14,11],[14,10],[14,9],[14,8],[14,7],[14,6],[13,5],[11,4],[10,4],[9.5,4],[11,3],[12,2],[11,1]]]]]</script>
+<script type="application/json" id="faces">[["#ffd60a",[[[8,8],[9,8],[10,8],[11,8],[13,7],[14,6],[14,7],[13,8],[11,9],[10,9],[9,9],[8,9],[7,9],[6,9],[5,9],[3,8],[2,7],[2,6],[3,7],[5,8],[6,8],[7,8]]]],["#ffffff",[[[9,8],[8,8],[7,8],[6,8],[5,8],[3,7],[2,6],[3,5],[5,4],[6,4],[7,4],[8,4],[8.857,4.429],[8,5],[5,7],[8,5],[8.857,4.429],[10,5],[12,6],[10,5],[8.857,4.429],[9.5,4],[10,4],[11,4],[13,5],[14,6],[13,7],[11,8],[10,8]]]],["#a37045",[[[10,2],[11,1],[12,2],[11,3]]]],["#ffffff",[[[2,11],[3,8],[5,13],[3,12]]]],["#ff3b30",[[[3,8],[2,11],[2,10],[2,9],[2,8],[2,7]]]],["#ffd60a",[[[14,12],[13,13],[11,14],[10,14],[9,14],[8,14],[7,14],[6,14],[5,14],[3,13],[2,12],[2,11],[3,12],[5,13],[6,13],[7,13],[8,13],[9,13],[10,13],[11,13],[13,12],[14,11]]]],["#ff3b30",[[[10,9],[11,9],[13,8],[11,13],[8,9],[9,9]]]],["#ff3b30",[[[13,8],[14,7],[14,8],[14,9],[14,10],[14,11]]]],["#ffffff",[[[8,9],[11,13],[10,13],[9,13],[8,13],[7,13],[6,13],[5,13]]]],["#ffffff",[[[8,4],[9,4],[9.5,4],[8.857,4.429]]]],["#ff3b30",[[[8,9],[5,13],[3,8],[5,9],[6,9],[7,9]]]],["#a37045",[[[3,1],[4,2],[3,3],[2,2]]]],["#ffffff",[[[13,12],[11,13],[13,8],[14,11]]]],["#c9f5ff",[[[0,0],[15,0],[15,15],[0,15]],[[7,4],[6,4],[5,4],[3,5],[2,6],[2,7],[2,8],[2,9],[2,10],[2,11],[2,12],[3,13],[5,14],[6,14],[7,14],[8,14],[9,14],[10,14],[11,14],[13,13],[14,12],[14,11],[14,10],[14,9],[14,8],[14,7],[14,6],[13,5],[11,4],[10,4],[9.5,4],[11,3],[12,2],[11,1],[10,2],[11,3],[9.5,4],[9,4],[8,4],[6,3],[4,2],[3,1],[2,2],[3,3],[4,2],[6,3],[8,4]]]]]</script>
+<script type="application/json" id="picture-words">{"m":{"ar-SA":"امشِ على إيقاعك.","de-DE":"Geh in deinem eigenen Takt.","en-AU":"Go at your own beat.","en-GB":"Go at your own beat.","en-US":"Go at your own beat.","es-ES":"Ve a tu ritmo.","es-MX":"Ve a tu ritmo.","fr-FR":"Avance à ton rythme.","hi":"अपनी ताल पर चलो।","id":"Jalan sesuai iramamu sendiri.","it":"Vai al tuo ritmo.","ja":"自分のリズムでいこう。","ko":"네 박자대로 가.","nl-NL":"Ga op je eigen ritme.","pt-BR":"Vai no seu ritmo.","ru":"Иди в своём ритме.","sv":"Gå i din egen takt.","th":"ไปตามจังหวะของเธอ","tr":"Kendi ritminde ilerle.","vi":"Cứ đi theo nhịp của riêng bạn.","zh-Hans":"按你自己的节奏来。","zh-Hant":"照你自己的節奏走。"}}</script>
 <script src="/library/worksheet-words.js"></script>
 <script src="/library/worksheet.js"></script>
 <script>

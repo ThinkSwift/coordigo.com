@@ -216,7 +216,7 @@
     <p class="crumb"><a href="/library/" data-t="libCaps">Library</a></p>
     <h1>#71 Party hat and horn</h1>
     <p class="count"><span class="tier common">Common</span>Celebrations · 13 lines · 55 points · Medium · about 5 min</p>
-    
+    <p class="words">“Hat on. It&#x27;s your day.”</p>
     <div class="pic-grid">
       <figure class="common"><img src="/library/img/genre-party-hat.png" width="600" height="600" alt="Party hat and horn: a Coordigo mystery picture, drawn by joining points on a 16 × 16 grid"></figure>
       <div class="menu">
@@ -228,8 +228,7 @@
             <div class="seg"><label><input type="radio" name="paper" value="letter"> <span data-w="letter">Letter</span></label><label><input type="radio" name="paper" value="a4"> <span data-w="a4">A4</span></label></div>
           </fieldset>
           <label class="check"><input type="checkbox" name="answer" checked> <span data-w="answerPage">Answer page in color</span></label>
-          <label class="field"><span data-w="titleField">Title · optional, on the answer page</span><input type="text" name="title" maxlength="40" autocomplete="off"></label>
-          <label class="field"><span data-w="wordsField">Words · optional, on the answer page</span><textarea name="words" maxlength="120" rows="2"></textarea></label>
+          <label class="field"><span data-w="noteField">Your words · optional, on the puzzle page (Class: Name:)</span><textarea name="note" rows="3" maxlength="200" autocomplete="off"></textarea></label>
         </form>
         <div class="acts">
           <button class="act primary" id="sheetPrint" type="button" data-w="print">Print</button>
@@ -256,7 +255,8 @@
 <script src="/store.js"></script>
 <script src="/mystery/strings.js"></script>
 <script src="/mystery/engine.js"></script>
-<script type="application/json" id="faces">[["#bf59f2",[[[3,13],[1,12],[2,9],[3,10],[4,10],[5,10],[6,9],[7,12],[5,13],[4,13]]]],["#8afa99",[[[5,6],[6,9],[5,10],[4,10],[3,10],[2,9],[3,6],[4,7]]]],["#ffd60a",[[[6,2],[5,3],[4,3],[3,3],[2,2],[3,1],[4,1],[5,1]]]],["#ffffff",[[[9,13],[8,14],[7,13],[8,12]]]],["#ff3b30",[[[11,11],[10,12],[9,13],[8,12],[9,10]]]],["#ffd60a",[[[7,6],[6,6],[6,5],[7,5]]]],["#ffd60a",[[[13,9],[12,10],[11,11],[9,10],[10,8]]]],["#ff9400",[[[13,5],[14,6],[14,7],[14,8],[12,7],[11,6],[12,5]]]],["#bf59f2",[[[4,3],[5,6],[4,7],[3,6]]]],["#ff3b30",[[[7,2],[8,1],[9,2],[8,3]]]],["#ff3b30",[[[10,8],[11,6],[12,7],[14,8],[13,9]]]],["#007aff",[[[13,12],[13,13],[12,13]]]],["#c9f5ff",[[[0,0],[15,0],[15,15],[0,15]],[[1,12],[3,13],[4,13],[5,13],[7,12],[6,9],[5,6],[4,3],[5,3],[6,2],[5,1],[4,1],[3,1],[2,2],[3,3],[4,3],[3,6],[2,9]],[[8,14],[9,13],[10,12],[11,11],[12,10],[13,9],[14,8],[14,7],[14,6],[13,5],[12,5],[11,6],[10,8],[9,10],[8,12],[7,13]],[[6,6],[7,6],[7,5],[6,5]],[[8,1],[7,2],[8,3],[9,2]],[[13,13],[13,12],[12,13]]]]]</script>
+<script type="application/json" id="faces">[["#ff3b30",[[[8,1],[9,2],[8,3],[7,2]]]],["#8afa99",[[[4,7],[5,6],[6,9],[5,10],[4,10],[3,10],[2,9],[3,6]]]],["#bf59f2",[[[5,6],[4,7],[3,6],[4,3]]]],["#ff9400",[[[11,6],[12,5],[13,5],[14,6],[14,7],[14,8],[12,7]]]],["#ffd60a",[[[12,10],[11,11],[9,10],[10,8],[13,9]]]],["#ffd60a",[[[4,3],[3,3],[2,2],[3,1],[4,1],[5,1],[6,2],[5,3]]]],["#bf59f2",[[[2,9],[3,10],[4,10],[5,10],[6,9],[7,12],[5,13],[4,13],[3,13],[1,12]]]],["#ffffff",[[[8,12],[9,13],[8,14],[7,13]]]],["#ff3b30",[[[9,13],[8,12],[9,10],[11,11],[10,12]]]],["#ff3b30",[[[13,9],[10,8],[11,6],[12,7],[14,8]]]],["#007aff",[[[13,12],[13,13],[12,13]]]],["#ffd60a",[[[7,6],[6,6],[6,5],[7,5]]]],["#c9f5ff",[[[0,0],[15,0],[15,15],[0,15]],[[9,2],[8,1],[7,2],[8,3]],[[12,5],[11,6],[10,8],[9,10],[8,12],[7,13],[8,14],[9,13],[10,12],[11,11],[12,10],[13,9],[14,8],[14,7],[14,6],[13,5]],[[4,3],[3,6],[2,9],[1,12],[3,13],[4,13],[5,13],[7,12],[6,9],[5,6],[4,3],[5,3],[6,2],[5,1],[4,1],[3,1],[2,2],[3,3]],[[13,13],[13,12],[12,13]],[[6,6],[7,6],[7,5],[6,5]]]]]</script>
+<script type="application/json" id="picture-words">{"m":{"ar-SA":"البس القبعة، اليوم يومك.","de-DE":"Hut auf. Heute ist dein Tag.","en-AU":"Hat on. It's your day.","en-GB":"Hat on. It's your day.","en-US":"Hat on. It's your day.","es-ES":"Ponte el gorro. Hoy es tu día.","es-MX":"Ponte el gorrito. Hoy es tu día.","fr-FR":"Chapeau sur la tête. C'est ton jour.","hi":"टोपी पहनो। आज तुम्हारा दिन है।","id":"Pakai topinya. Ini harimu.","it":"Cappello in testa. Oggi è il tuo giorno.","ja":"帽子をかぶって。今日はきみの日。","ko":"모자 써. 오늘은 네 날이야.","nl-NL":"Hoedje op. Het is jouw dag.","pt-BR":"Chapéu na cabeça. Hoje é o seu dia.","ru":"Надевай колпак. Сегодня твой день.","sv":"Hatten på. Det är din dag.","th":"ใส่หมวกเลย วันนี้วันของเธอ","tr":"Şapkanı tak. Bugün senin günün.","vi":"Đội mũ lên. Hôm nay là ngày của bạn.","zh-Hans":"帽子戴上。今天是你的日子。","zh-Hant":"帽子戴上。今天是你的日子。"}}</script>
 <script src="/library/worksheet-words.js"></script>
 <script src="/library/worksheet.js"></script>
 <script>

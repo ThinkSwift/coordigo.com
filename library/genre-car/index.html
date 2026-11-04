@@ -216,7 +216,7 @@
     <p class="crumb"><a href="/library/" data-t="libCaps">Library</a></p>
     <h1>#31 Car</h1>
     <p class="count"><span class="tier common">Common</span>Vehicles · 11 lines · 55 points · Medium · about 5 min</p>
-    
+    <p class="words">“The best roads aren&#x27;t on the map yet.”</p>
     <div class="pic-grid">
       <figure class="common"><img src="/library/img/genre-car.png" width="600" height="600" alt="Car: a Coordigo mystery picture, drawn by joining points on a 16 × 16 grid"></figure>
       <div class="menu">
@@ -228,8 +228,7 @@
             <div class="seg"><label><input type="radio" name="paper" value="letter"> <span data-w="letter">Letter</span></label><label><input type="radio" name="paper" value="a4"> <span data-w="a4">A4</span></label></div>
           </fieldset>
           <label class="check"><input type="checkbox" name="answer" checked> <span data-w="answerPage">Answer page in color</span></label>
-          <label class="field"><span data-w="titleField">Title · optional, on the answer page</span><input type="text" name="title" maxlength="40" autocomplete="off"></label>
-          <label class="field"><span data-w="wordsField">Words · optional, on the answer page</span><textarea name="words" maxlength="120" rows="2"></textarea></label>
+          <label class="field"><span data-w="noteField">Your words · optional, on the puzzle page (Class: Name:)</span><textarea name="note" rows="3" maxlength="200" autocomplete="off"></textarea></label>
         </form>
         <div class="acts">
           <button class="act primary" id="sheetPrint" type="button" data-w="print">Print</button>
@@ -256,7 +255,8 @@
 <script src="/store.js"></script>
 <script src="/mystery/strings.js"></script>
 <script src="/mystery/engine.js"></script>
-<script type="application/json" id="faces">[["#ff3b30",[[[6,7],[7,7],[8,7],[8,8],[8,9],[8,10],[8,11],[7,11],[7,10],[6,9],[5,9],[4,9],[3,10],[3,11],[2,11],[1,11],[1,10],[2,8],[5,7],[6,4],[7,4],[8,4],[9,4],[10,4],[11,4],[13,7],[14,8],[14,9],[14,10],[14,11],[13,11],[13,10],[12,9],[11,9],[10,9],[9,10],[9,11],[8,11],[8,10],[8,9],[8,8],[8,7],[9,7],[9,6],[9,5],[8,5],[7,5]],[[10,6],[10,7],[11,7],[12,7],[11,5],[10,5]]]],["#c9f5ff",[[[7,7],[6,7],[7,5],[8,5],[9,5],[9,6],[9,7],[8,7]]]],["#ffffff",[[[10,13],[11,13],[12,13],[13,13],[14,13],[15,13],[15,15],[0,15],[0,13],[1,13],[2,13],[3,13],[4,13],[5,13],[6,13],[7,13],[8,13],[9,13]]]],["#1f1c1f",[[[11,13],[10,13],[9,12],[9,11],[9,10],[10,9],[11,9],[12,9],[13,10],[13,11],[13,12],[12,13]],[[11,10],[10,11],[11,12],[12,11]]]],["#c9f5ff",[[[10,7],[10,6],[10,5],[11,5],[12,7],[11,7]]]],["#ffffff",[[[3,13],[2,13],[1,13],[0,13],[0,0],[15,0],[15,13],[14,13],[13,13],[12,13],[13,12],[13,11],[14,11],[14,10],[14,9],[14,8],[13,7],[11,4],[10,4],[9,4],[8,4],[7,4],[6,4],[5,7],[2,8],[1,10],[1,11],[2,11],[3,11],[3,12],[4,13]]]],["#1f1c1f",[[[4,9],[5,9],[6,9],[7,10],[7,11],[7,12],[6,13],[5,13],[4,13],[3,12],[3,11],[3,10]],[[5,10],[4,11],[5,12],[6,11]]]],["#ffffff",[[[10,13],[9,13],[8,13],[7,13],[6,13],[7,12],[7,11],[8,11],[9,11],[9,12]]]],["#ffffff",[[[10,11],[11,10],[12,11],[11,12]]]],["#ffffff",[[[4,11],[5,10],[6,11],[5,12]]]]]</script>
+<script type="application/json" id="faces">[["#ff3b30",[[[6,7],[7,7],[8,7],[8,8],[8,9],[8,10],[8,11],[7,11],[7,10],[6,9],[5,9],[4,9],[3,10],[3,11],[2,11],[1,11],[1,10],[2,8],[5,7],[6,4],[7,4],[8,4],[9,4],[10,4],[11,4],[13,7],[14,8],[14,9],[14,10],[14,11],[13,11],[13,10],[12,9],[11,9],[10,9],[9,10],[9,11],[8,11],[8,10],[8,9],[8,8],[8,7],[9,7],[9,6],[9,5],[8,5],[7,5]],[[10,5],[10,6],[10,7],[11,7],[12,7],[11,5]]]],["#c9f5ff",[[[7,7],[6,7],[7,5],[8,5],[9,5],[9,6],[9,7],[8,7]]]],["#ffffff",[[[12,13],[13,12],[13,11],[14,11],[14,10],[14,9],[14,8],[13,7],[11,4],[10,4],[9,4],[8,4],[7,4],[6,4],[5,7],[2,8],[1,10],[1,11],[2,11],[3,11],[3,12],[4,13],[3,13],[2,13],[1,13],[0,13],[0,0],[15,0],[15,13],[14,13],[13,13]]]],["#1f1c1f",[[[13,12],[12,13],[11,13],[10,13],[9,12],[9,11],[9,10],[10,9],[11,9],[12,9],[13,10],[13,11]],[[11,12],[12,11],[11,10],[10,11]]]],["#ffffff",[[[12,11],[11,12],[10,11],[11,10]]]],["#c9f5ff",[[[10,6],[10,5],[11,5],[12,7],[11,7],[10,7]]]],["#1f1c1f",[[[4,9],[5,9],[6,9],[7,10],[7,11],[7,12],[6,13],[5,13],[4,13],[3,12],[3,11],[3,10]],[[6,11],[5,10],[4,11],[5,12]]]],["#ffffff",[[[8,13],[9,13],[10,13],[11,13],[12,13],[13,13],[14,13],[15,13],[15,15],[0,15],[0,13],[1,13],[2,13],[3,13],[4,13],[5,13],[6,13],[7,13]]]],["#ffffff",[[[9,13],[8,13],[7,13],[6,13],[7,12],[7,11],[8,11],[9,11],[9,12],[10,13]]]],["#ffffff",[[[5,10],[6,11],[5,12],[4,11]]]]]</script>
+<script type="application/json" id="picture-words">{"m":{"ar-SA":"أجمل الطرق لم تُرسم على الخريطة بعد.","de-DE":"Die besten Straßen stehen noch auf keiner Karte.","en-AU":"The best roads aren't on the map yet.","en-GB":"The best roads aren't on the map yet.","en-US":"The best roads aren't on the map yet.","es-ES":"Las mejores carreteras aún no están en el mapa.","es-MX":"Los mejores caminos todavía no están en el mapa.","fr-FR":"Les plus belles routes ne sont pas encore sur la carte.","hi":"सबसे अच्छी सड़कें अभी नक्शे पर नहीं हैं।","id":"Jalan terbaik belum ada di peta.","it":"Le strade migliori non sono ancora sulle mappe.","ja":"いちばんいい道は、まだ地図にない。","ko":"제일 좋은 길은 아직 지도에 없다.","nl-NL":"De mooiste wegen staan nog niet op de kaart.","pt-BR":"As melhores estradas ainda não estão no mapa.","ru":"Лучших дорог ещё нет на карте.","sv":"De bästa vägarna finns inte på kartan än.","th":"ถนนที่ดีที่สุดยังไม่อยู่บนแผนที่","tr":"En güzel yollar henüz haritada yok.","vi":"Những con đường đẹp nhất chưa có trên bản đồ.","zh-Hans":"最好的路，还没画在地图上。","zh-Hant":"最好的路，還沒出現在地圖上。"}}</script>
 <script src="/library/worksheet-words.js"></script>
 <script src="/library/worksheet.js"></script>
 <script>

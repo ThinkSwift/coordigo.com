@@ -216,7 +216,7 @@
     <p class="crumb"><a href="/library/" data-t="libCaps">Library</a></p>
     <h1>#26 Knitted scarf</h1>
     <p class="count"><span class="tier common">Common</span>Fashion · 11 lines · 42 points · Medium · about 5 min</p>
-    
+    <p class="words">“Hand-knit, slightly crooked, perfectly warm.”</p>
     <div class="pic-grid">
       <figure class="common"><img src="/library/img/genre-scarf.png" width="600" height="600" alt="Knitted scarf: a Coordigo mystery picture, drawn by joining points on a 16 × 16 grid"></figure>
       <div class="menu">
@@ -228,8 +228,7 @@
             <div class="seg"><label><input type="radio" name="paper" value="letter"> <span data-w="letter">Letter</span></label><label><input type="radio" name="paper" value="a4"> <span data-w="a4">A4</span></label></div>
           </fieldset>
           <label class="check"><input type="checkbox" name="answer" checked> <span data-w="answerPage">Answer page in color</span></label>
-          <label class="field"><span data-w="titleField">Title · optional, on the answer page</span><input type="text" name="title" maxlength="40" autocomplete="off"></label>
-          <label class="field"><span data-w="wordsField">Words · optional, on the answer page</span><textarea name="words" maxlength="120" rows="2"></textarea></label>
+          <label class="field"><span data-w="noteField">Your words · optional, on the puzzle page (Class: Name:)</span><textarea name="note" rows="3" maxlength="200" autocomplete="off"></textarea></label>
         </form>
         <div class="acts">
           <button class="act primary" id="sheetPrint" type="button" data-w="print">Print</button>
@@ -256,7 +255,8 @@
 <script src="/store.js"></script>
 <script src="/mystery/strings.js"></script>
 <script src="/mystery/engine.js"></script>
-<script type="application/json" id="faces">[["#ff3b30",[[[4,5],[5,5],[6,5],[7,5],[7,6],[7,7],[7,8],[7,9],[7,10],[6,10],[5,10],[4,10],[3,10],[3,9],[3,8],[3,7],[3,6],[3,5]]]],["#c9f5ff",[[[5,5],[4,5],[3,4],[4,3],[5,3],[6,3],[7,3],[8,3],[9,3],[10,3],[11,4],[10,5],[9,5],[8,5],[7,5],[6,5]]]],["#ff3b30",[[[6,3],[5,3],[4,3],[3,4],[4,5],[3,5],[3,6],[3,7],[2,6],[1,4],[2,2],[4,1],[5,1],[6,1],[7,1],[8,1],[9,1],[10,1],[12,2],[13,4],[12,6],[10,7],[9,7],[8,7],[7,7],[7,6],[7,5],[8,5],[9,5],[10,5],[11,4],[10,3],[9,3],[8,3],[7,3]]]],["#ff3b30",[[[8,9],[7,7],[8,7],[9,7],[10,7],[11,9],[10,9],[9,9]]]],["#ffd60a",[[[9,9],[10,9],[11,9],[12,11],[11,11],[10,11],[9,11],[8,9]]]],["#ffd60a",[[[5,12],[4,12],[3,12],[3,11],[3,10],[4,10],[5,10],[6,10],[7,10],[7,11],[7,12],[6,12]]]],["#c9f5ff",[[[0,0],[15,0],[15,15],[0,15]],[[6,12],[6,13],[6,14],[6,13],[6,12],[7,12],[8,14],[7,12],[7,11],[7,10],[7,9],[7,8],[7,7],[8,9],[9,11],[10,11],[11,13],[10,11],[11,11],[12,13],[11,11],[12,11],[11,9],[10,7],[12,6],[13,4],[12,2],[10,1],[9,1],[8,1],[7,1],[6,1],[5,1],[4,1],[2,2],[1,4],[2,6],[3,7],[3,8],[3,9],[3,10],[3,11],[3,12],[2,14],[3,12],[4,12],[4,13],[4,14],[4,13],[4,12],[5,12],[5,13],[5,14],[5,13],[5,12]]]]]</script>
+<script type="application/json" id="faces">[["#ff3b30",[[[10,7],[11,9],[10,9],[9,9],[8,9],[7,7],[8,7],[9,7]]]],["#ff3b30",[[[6,5],[7,5],[7,6],[7,7],[7,8],[7,9],[7,10],[6,10],[5,10],[4,10],[3,10],[3,9],[3,8],[3,7],[3,6],[3,5],[4,5],[5,5]]]],["#c9f5ff",[[[7,5],[6,5],[5,5],[4,5],[3,4],[4,3],[5,3],[6,3],[7,3],[8,3],[9,3],[10,3],[11,4],[10,5],[9,5],[8,5]]]],["#ffd60a",[[[4,12],[3,12],[3,11],[3,10],[4,10],[5,10],[6,10],[7,10],[7,11],[7,12],[6,12],[5,12]]]],["#ff3b30",[[[10,3],[9,3],[8,3],[7,3],[6,3],[5,3],[4,3],[3,4],[4,5],[3,5],[3,6],[3,7],[2,6],[1,4],[2,2],[4,1],[5,1],[6,1],[7,1],[8,1],[9,1],[10,1],[12,2],[13,4],[12,6],[10,7],[9,7],[8,7],[7,7],[7,6],[7,5],[8,5],[9,5],[10,5],[11,4]]]],["#ffd60a",[[[9,9],[10,9],[11,9],[12,11],[11,11],[10,11],[9,11],[8,9]]]],["#c9f5ff",[[[0,0],[15,0],[15,15],[0,15]],[[11,9],[10,7],[12,6],[13,4],[12,2],[10,1],[9,1],[8,1],[7,1],[6,1],[5,1],[4,1],[2,2],[1,4],[2,6],[3,7],[3,8],[3,9],[3,10],[3,11],[3,12],[2,14],[3,12],[4,12],[4,13],[4,14],[4,13],[4,12],[5,12],[5,13],[5,14],[5,13],[5,12],[6,12],[6,13],[6,14],[6,13],[6,12],[7,12],[8,14],[7,12],[7,11],[7,10],[7,9],[7,8],[7,7],[8,9],[9,11],[10,11],[11,13],[10,11],[11,11],[12,13],[11,11],[12,11]]]]]</script>
+<script type="application/json" id="picture-words">{"m":{"ar-SA":"محاك يدويًا، مائل قليلًا، دافئ تمامًا.","de-DE":"Handgestrickt, etwas schief, perfekt warm.","en-AU":"Hand-knit, slightly crooked, perfectly warm.","en-GB":"Hand-knit, slightly crooked, perfectly warm.","en-US":"Hand-knit, slightly crooked, perfectly warm.","es-ES":"Tejida a mano, algo torcida, perfectamente calentita.","es-MX":"Tejida a mano, medio chueca, perfectamente calientita.","fr-FR":"Tricotée main, un peu de travers, parfaitement chaude.","hi":"हाथ से बुना, थोड़ा टेढ़ा, बिल्कुल गर्म।","id":"Rajutan tangan, agak miring, hangatnya sempurna.","it":"Fatta a mano, un po' storta, calda alla perfezione.","ja":"手編みで、ちょっといびつで、最高にあったかい。","ko":"손뜨개라 조금 삐뚤어도, 완벽하게 따뜻해요.","nl-NL":"Handgebreid, beetje scheef, heerlijk warm.","pt-BR":"Feito à mão, meio torto, perfeitamente quentinho.","ru":"Связан вручную, слегка кривой, идеально тёплый.","sv":"Handstickad, lite sned, perfekt varm.","th":"ถักมือ เบี้ยวนิดๆ อุ่นกำลังดี","tr":"El örgüsü, biraz yamuk, tam kıvamında sıcak.","vi":"Đan tay, hơi xiêu vẹo, ấm áp hoàn hảo.","zh-Hans":"手工编织，有点歪，却刚刚好暖。","zh-Hant":"手工編織，有點歪，卻剛好溫暖。"}}</script>
 <script src="/library/worksheet-words.js"></script>
 <script src="/library/worksheet.js"></script>
 <script>

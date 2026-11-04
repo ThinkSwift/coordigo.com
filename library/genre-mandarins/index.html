@@ -216,7 +216,7 @@
     <p class="crumb"><a href="/library/" data-t="libCaps">Library</a></p>
     <h1>#72 Mandarin oranges</h1>
     <p class="count"><span class="tier common">Common</span>Food &amp; drink · 13 lines · 49 points · Medium · about 5 min</p>
-    
+    <p class="words">“Peel one, share one. That is the winter rule.”</p>
     <div class="pic-grid">
       <figure class="common"><img src="/library/img/genre-mandarins.png" width="600" height="600" alt="Mandarin oranges: a Coordigo mystery picture, drawn by joining points on a 16 × 16 grid"></figure>
       <div class="menu">
@@ -228,8 +228,7 @@
             <div class="seg"><label><input type="radio" name="paper" value="letter"> <span data-w="letter">Letter</span></label><label><input type="radio" name="paper" value="a4"> <span data-w="a4">A4</span></label></div>
           </fieldset>
           <label class="check"><input type="checkbox" name="answer" checked> <span data-w="answerPage">Answer page in color</span></label>
-          <label class="field"><span data-w="titleField">Title · optional, on the answer page</span><input type="text" name="title" maxlength="40" autocomplete="off"></label>
-          <label class="field"><span data-w="wordsField">Words · optional, on the answer page</span><textarea name="words" maxlength="120" rows="2"></textarea></label>
+          <label class="field"><span data-w="noteField">Your words · optional, on the puzzle page (Class: Name:)</span><textarea name="note" rows="3" maxlength="200" autocomplete="off"></textarea></label>
         </form>
         <div class="acts">
           <button class="act primary" id="sheetPrint" type="button" data-w="print">Print</button>
@@ -256,7 +255,8 @@
 <script src="/store.js"></script>
 <script src="/mystery/strings.js"></script>
 <script src="/mystery/engine.js"></script>
-<script type="application/json" id="faces">[["#ff9400",[[[10,7],[10,8],[9,9],[8,10],[8,11],[8,12],[7,12],[6,12],[5,12],[3,11],[2,9],[2,8],[2,7],[3,5],[5,4],[6,4],[7,4],[8,4],[9,5],[10,6]],[[5,6],[5,5],[4,6],[5,7]]]],["#a37045",[[[10,8],[10,7],[10,6],[9,5],[8,4],[9,4],[11,5],[12,7],[12,8],[11,8]]]],["#ff9400",[[[13,9],[13,10],[13,11],[13,12],[12,14],[11,14],[10,14],[9,13],[8,12],[8,11],[8,10],[9,9],[10,8],[11,8],[12,8]]]],["#a37045",[[[13,10],[13,9],[14,10],[14,11],[14,12],[13,13],[12,14],[13,12],[13,11]]]],["#33c759",[[[11,1],[12,1],[10,2],[9,2],[8,2],[7,2],[9,1],[10,1]]]],["#33c759",[[[3,1],[4,1],[5,1],[6,2],[7,3],[1,2]]]],["#0a6624",[[[7,3],[4,4],[1,2]]]],["#ffffff",[[[5,5],[5,6],[5,7],[4,6]]]],["#c9f5ff",[[[0,0],[15,0],[15,15],[0,15]],[[12,1],[11,1],[10,1],[9,1],[7,2],[7,3],[6,2],[5,1],[4,1],[3,1],[1,2],[4,4],[7,3],[7,4],[6,4],[5,4],[3,5],[2,7],[2,8],[2,9],[3,11],[5,12],[6,12],[7,12],[8,12],[9,13],[10,14],[11,14],[12,14],[13,13],[14,12],[14,11],[14,10],[13,9],[12,8],[12,7],[11,5],[9,4],[8,4],[7,4],[7,3],[7,2],[8,2],[9,2],[10,2]]]]]</script>
+<script type="application/json" id="faces">[["#ff9400",[[[8,12],[7,12],[6,12],[5,12],[3,11],[2,9],[2,8],[2,7],[3,5],[5,4],[6,4],[7,4],[8,4],[9,5],[10,6],[10,7],[10,8],[9,9],[8,10],[8,11]],[[5,5],[4,6],[5,7],[5,6]]]],["#33c759",[[[6,2],[7,3],[1,2],[3,1],[4,1],[5,1]]]],["#ff9400",[[[12,8],[13,9],[13,10],[13,11],[13,12],[12,14],[11,14],[10,14],[9,13],[8,12],[8,11],[8,10],[9,9],[10,8],[11,8]]]],["#a37045",[[[11,8],[10,8],[10,7],[10,6],[9,5],[8,4],[9,4],[11,5],[12,7],[12,8]]]],["#ffffff",[[[4,6],[5,5],[5,6],[5,7]]]],["#33c759",[[[10,2],[9,2],[8,2],[7,2],[9,1],[10,1],[11,1],[12,1]]]],["#0a6624",[[[4,4],[1,2],[7,3]]]],["#a37045",[[[12,14],[13,12],[13,11],[13,10],[13,9],[14,10],[14,11],[14,12],[13,13]]]],["#c9f5ff",[[[0,0],[15,0],[15,15],[0,15]],[[7,12],[8,12],[9,13],[10,14],[11,14],[12,14],[13,13],[14,12],[14,11],[14,10],[13,9],[12,8],[12,7],[11,5],[9,4],[8,4],[7,4],[7,3],[7,2],[8,2],[9,2],[10,2],[12,1],[11,1],[10,1],[9,1],[7,2],[7,3],[6,2],[5,1],[4,1],[3,1],[1,2],[4,4],[7,3],[7,4],[6,4],[5,4],[3,5],[2,7],[2,8],[2,9],[3,11],[5,12],[6,12]]]]]</script>
+<script type="application/json" id="picture-words">{"m":{"ar-SA":"قشّر واحدة وشارك واحدة. هذه قاعدة الشتاء.","de-DE":"Eine schälen, eine teilen. So lautet die Winterregel.","en-AU":"Peel one, share one. That is the winter rule.","en-GB":"Peel one, share one. That is the winter rule.","en-US":"Peel one, share one. That is the winter rule.","es-ES":"Pela una, comparte otra. Es la ley del invierno.","es-MX":"Pela una, comparte otra. Es la ley del invierno.","fr-FR":"Une à éplucher, une à partager. C'est la règle de l'hiver.","hi":"एक छीलो, एक बाँटो। यही सर्दियों का नियम है।","id":"Kupas satu, bagi satu. Begitulah aturannya.","it":"Sbucciane uno, dividine uno. È la regola dell'inverno.","ja":"一つむいたら、一つ分ける。それが冬のルール。","ko":"하나 까면 하나 나눠요. 그게 겨울 규칙.","nl-NL":"Pel er één, deel er één. Zo gaat dat in de winter.","pt-BR":"Descasque uma, divida outra. É a regra do inverno.","ru":"Почисти одну, поделись другой. Таков закон зимы.","sv":"Skala en, dela en. Det är vinterns regel.","th":"ปอกหนึ่งลูก แบ่งหนึ่งลูก กฎของหน้าหนาว","tr":"Birini soy, birini paylaş. Kışın kuralı bu.","vi":"Bóc một quả, chia một quả. Luật của mùa đông đấy.","zh-Hans":"剥一个，分一个，这是冬天的规矩。","zh-Hant":"剝一顆，分一顆，這是冬天的規矩。"}}</script>
 <script src="/library/worksheet-words.js"></script>
 <script src="/library/worksheet.js"></script>
 <script>

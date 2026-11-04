@@ -216,7 +216,7 @@
     <p class="crumb"><a href="/library/" data-t="libCaps">Library</a></p>
     <h1>#177 Daffodil</h1>
     <p class="count"><span class="tier common">Common</span>Plants &amp; nature · 9 lines · 60 points · Medium · about 5 min</p>
-    
+    <p class="words">“Heard spring knocking before anyone else.”</p>
     <div class="pic-grid">
       <figure class="common"><img src="/library/img/genre-daffodils.png" width="600" height="600" alt="Daffodil: a Coordigo mystery picture, drawn by joining points on a 16 × 16 grid"></figure>
       <div class="menu">
@@ -228,8 +228,7 @@
             <div class="seg"><label><input type="radio" name="paper" value="letter"> <span data-w="letter">Letter</span></label><label><input type="radio" name="paper" value="a4"> <span data-w="a4">A4</span></label></div>
           </fieldset>
           <label class="check"><input type="checkbox" name="answer" checked> <span data-w="answerPage">Answer page in color</span></label>
-          <label class="field"><span data-w="titleField">Title · optional, on the answer page</span><input type="text" name="title" maxlength="40" autocomplete="off"></label>
-          <label class="field"><span data-w="wordsField">Words · optional, on the answer page</span><textarea name="words" maxlength="120" rows="2"></textarea></label>
+          <label class="field"><span data-w="noteField">Your words · optional, on the puzzle page (Class: Name:)</span><textarea name="note" rows="3" maxlength="200" autocomplete="off"></textarea></label>
         </form>
         <div class="acts">
           <button class="act primary" id="sheetPrint" type="button" data-w="print">Print</button>
@@ -256,7 +255,8 @@
 <script src="/store.js"></script>
 <script src="/mystery/strings.js"></script>
 <script src="/mystery/engine.js"></script>
-<script type="application/json" id="faces">[["#33c759",[[[6,11],[7,11],[7,12],[7,13],[7,14],[7,15],[6,15],[6,14],[6,13],[6,12]]]],["#ffd60a",[[[7,11],[6,11],[6,10],[6,9]]]],["#ff9400",[[[10,6],[10,7],[11,9],[10,9],[9,9],[8,9],[5,8],[4,7],[5,6],[8,5],[10,4],[11,3],[10,5]]]],["#a37045",[[[10,7],[10,6],[10,5],[11,3],[12,4],[11,5],[12,6],[11,7],[12,8],[11,9]]]],["#ffd60a",[[[2,4],[4,5],[5,6],[4,7],[3,7],[1,6],[1,5],[1,4]]]],["#c9f5ff",[[[4,5],[2,4],[1,4],[1,5],[1,6],[3,7],[1,8],[1,9],[1,10],[2,10],[4,9],[4,10],[4,11],[5,12],[6,11],[6,12],[6,13],[6,14],[6,15],[4,15],[3,13],[2,12],[1,11],[1,12],[1,13],[2,15],[0,15],[0,0],[15,0],[15,15],[13,15],[14,13],[14,12],[14,11],[13,12],[12,13],[11,15],[7,15],[7,14],[7,13],[7,12],[7,11],[9,12],[10,10],[10,9],[11,9],[12,8],[11,7],[12,6],[11,5],[12,4],[11,3],[10,4],[10,3],[10,2],[9,2],[8,3],[7,4],[6,3],[5,2],[4,3],[4,4]]]],["#ffd60a",[[[9,9],[10,9],[10,10],[9,12],[7,11],[6,9],[5,8],[8,9]]]],["#ffd60a",[[[1,8],[3,7],[4,7],[5,8],[4,9],[2,10],[1,10],[1,9]]]],["#33c759",[[[11,15],[12,13],[13,12],[14,11],[14,12],[14,13],[13,15]]]],["#ffd60a",[[[6,9],[6,10],[6,11],[5,12],[4,11],[4,10],[4,9],[5,8]]]],["#0a6624",[[[3,13],[4,15],[2,15],[1,13],[1,12],[1,11],[2,12]]]],["#ffd60a",[[[10,3],[10,4],[8,5],[7,4],[8,3],[9,2],[10,2]]]],["#ffd60a",[[[5,2],[6,3],[7,4],[8,5],[5,6],[4,5],[4,4],[4,3]]]]]</script>
+<script type="application/json" id="faces">[["#c9f5ff",[[[9,12],[10,10],[10,9],[11,9],[12,8],[11,7],[12,6],[11,5],[12,4],[11,3],[10,4],[10,3],[10,2],[9,2],[8,3],[7,4],[6,3],[5,2],[4,3],[4,4],[4,5],[2,4],[1,4],[1,5],[1,6],[3,7],[1,8],[1,9],[1,10],[2,10],[4,9],[4,10],[4,11],[5,12],[6,11],[6,12],[6,13],[6,14],[6,15],[4,15],[3,13],[2,12],[1,11],[1,12],[1,13],[2,15],[0,15],[0,0],[15,0],[15,15],[13,15],[14,13],[14,12],[14,11],[13,12],[12,13],[11,15],[7,15],[7,14],[7,13],[7,12],[7,11]]]],["#ffd60a",[[[10,10],[9,12],[7,11],[6,9],[5,8],[8,9],[9,9],[10,9]]]],["#0a6624",[[[2,15],[1,13],[1,12],[1,11],[2,12],[3,13],[4,15]]]],["#33c759",[[[14,12],[14,13],[13,15],[11,15],[12,13],[13,12],[14,11]]]],["#ffd60a",[[[4,5],[5,6],[4,7],[3,7],[1,6],[1,5],[1,4],[2,4]]]],["#ffd60a",[[[5,6],[4,5],[4,4],[4,3],[5,2],[6,3],[7,4],[8,5]]]],["#ffd60a",[[[6,9],[6,10],[6,11],[5,12],[4,11],[4,10],[4,9],[5,8]]]],["#ffd60a",[[[6,10],[6,9],[7,11],[6,11]]]],["#a37045",[[[11,3],[12,4],[11,5],[12,6],[11,7],[12,8],[11,9],[10,7],[10,6],[10,5]]]],["#33c759",[[[6,15],[6,14],[6,13],[6,12],[6,11],[7,11],[7,12],[7,13],[7,14],[7,15]]]],["#ffd60a",[[[4,9],[2,10],[1,10],[1,9],[1,8],[3,7],[4,7],[5,8]]]],["#ffd60a",[[[8,5],[7,4],[8,3],[9,2],[10,2],[10,3],[10,4]]]],["#ff9400",[[[9,9],[8,9],[5,8],[4,7],[5,6],[8,5],[10,4],[11,3],[10,5],[10,6],[10,7],[11,9],[10,9]]]]]</script>
+<script type="application/json" id="picture-words">{"m":{"ar-SA":"سمع الربيع يطرق الباب قبل الجميع.","de-DE":"Hat den Frühling vor allen anderen klopfen hören.","en-AU":"Heard spring knocking before anyone else.","en-GB":"Heard spring knocking before anyone else.","en-US":"Heard spring knocking before anyone else.","es-ES":"Oyó a la primavera llamar antes que nadie.","es-MX":"Oyó a la primavera llamar antes que nadie.","fr-FR":"A entendu le printemps frapper avant tout le monde.","hi":"वसंत की दस्तक सबसे पहले इसी ने सुनी।","id":"Mendengar musim semi mengetuk lebih dulu dari siapa pun.","it":"Ha sentito la primavera bussare prima di tutti.","ja":"誰よりも先に、春のノックを聞いた花。","ko":"누구보다 먼저 봄의 노크를 들었어요.","nl-NL":"Hoorde de lente kloppen, nog vóór de rest.","pt-BR":"Ouviu a primavera bater à porta antes de todo mundo.","ru":"Услышал стук весны раньше всех.","sv":"Hörde våren knacka före alla andra.","th":"ได้ยินฤดูใบไม้ผลิเคาะประตูก่อนใคร","tr":"Baharın kapıyı çaldığını herkesten önce duydu.","vi":"Nghe tiếng mùa xuân gõ cửa trước tất cả mọi người.","zh-Hans":"比谁都先听见春天的敲门声。","zh-Hant":"比誰都早聽見春天在敲門。"}}</script>
 <script src="/library/worksheet-words.js"></script>
 <script src="/library/worksheet.js"></script>
 <script>

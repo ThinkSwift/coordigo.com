@@ -216,7 +216,7 @@
     <p class="crumb"><a href="/library/" data-t="libCaps">Library</a></p>
     <h1>#57 Cranberry sauce</h1>
     <p class="count"><span class="tier common">Common</span>Food &amp; drink · 5 lines · 49 points · Medium · about 5 min</p>
-    
+    <p class="words">“Ripe cranberries bounce back. So do you. Thankful.”</p>
     <div class="pic-grid">
       <figure class="common"><img src="/library/img/genre-cranberry-sauce.png" width="600" height="600" alt="Cranberry sauce: a Coordigo mystery picture, drawn by joining points on a 16 × 16 grid"></figure>
       <div class="menu">
@@ -228,8 +228,7 @@
             <div class="seg"><label><input type="radio" name="paper" value="letter"> <span data-w="letter">Letter</span></label><label><input type="radio" name="paper" value="a4"> <span data-w="a4">A4</span></label></div>
           </fieldset>
           <label class="check"><input type="checkbox" name="answer" checked> <span data-w="answerPage">Answer page in color</span></label>
-          <label class="field"><span data-w="titleField">Title · optional, on the answer page</span><input type="text" name="title" maxlength="40" autocomplete="off"></label>
-          <label class="field"><span data-w="wordsField">Words · optional, on the answer page</span><textarea name="words" maxlength="120" rows="2"></textarea></label>
+          <label class="field"><span data-w="noteField">Your words · optional, on the puzzle page (Class: Name:)</span><textarea name="note" rows="3" maxlength="200" autocomplete="off"></textarea></label>
         </form>
         <div class="acts">
           <button class="act primary" id="sheetPrint" type="button" data-w="print">Print</button>
@@ -256,7 +255,8 @@
 <script src="/store.js"></script>
 <script src="/mystery/strings.js"></script>
 <script src="/mystery/engine.js"></script>
-<script type="application/json" id="faces">[["#a37045",[[[4,7],[3,6],[4,5],[5,6]]]],["#a37045",[[[12,7],[11,8],[10,7],[11,6]]]],["#007aff",[[[8,10],[9,10],[10,10],[12,9],[11,11],[10,12],[9,13],[8,13],[7,13],[6,13],[5,13],[3,12],[1,9],[1,8],[1,7],[1,6],[2,8],[3,9],[5,10],[6,10],[7,10]]]],["#ff3b30",[[[9,10],[8,10],[7,10],[6,10],[5,10],[3,9],[2,8],[1,6],[2,5],[3,4],[5,3],[6,3],[7,3],[8,3],[9,3],[10,3],[12,4],[13,5],[14,6],[13,8],[12,9],[10,10]],[[3,6],[4,7],[5,6],[4,5]],[[11,8],[12,7],[11,6],[10,7]],[[6,8],[7,9],[8,8],[7,7]],[[8,6],[9,5],[8,4],[7,5]]]],["#007aff",[[[12,3],[13,4],[14,6],[13,5],[12,4],[10,3],[9,3],[8,3],[7,3],[6,3],[5,3],[3,4],[2,5],[1,6],[2,4],[3,3],[5,2],[6,2],[7,2],[8,2],[9,2],[10,2]]]],["#5952de",[[[14,9],[12,12],[10,13],[9,13],[10,12],[11,11],[12,9],[13,8],[14,6],[14,7],[14,8]]]],["#a37045",[[[7,9],[6,8],[7,7],[8,8]]]],["#a37045",[[[9,5],[8,6],[7,5],[8,4]]]],["#ffffff",[[[0,0],[15,0],[15,15],[0,15]],[[13,4],[12,3],[10,2],[9,2],[8,2],[7,2],[6,2],[5,2],[3,3],[2,4],[1,6],[1,7],[1,8],[1,9],[3,12],[5,13],[6,13],[7,13],[8,13],[9,13],[10,13],[12,12],[14,9],[14,8],[14,7],[14,6]]]]]</script>
+<script type="application/json" id="faces">[["#a37045",[[[4,7],[3,6],[4,5],[5,6]]]],["#007aff",[[[12,3],[13,4],[14,6],[13,5],[12,4],[10,3],[9,3],[8,3],[7,3],[6,3],[5,3],[3,4],[2,5],[1,6],[2,4],[3,3],[5,2],[6,2],[7,2],[8,2],[9,2],[10,2]]]],["#a37045",[[[12,7],[11,8],[10,7],[11,6]]]],["#5952de",[[[11,11],[12,9],[13,8],[14,6],[14,7],[14,8],[14,9],[12,12],[10,13],[9,13],[10,12]]]],["#007aff",[[[12,9],[11,11],[10,12],[9,13],[8,13],[7,13],[6,13],[5,13],[3,12],[1,9],[1,8],[1,7],[1,6],[2,8],[3,9],[5,10],[6,10],[7,10],[8,10],[9,10],[10,10]]]],["#ff3b30",[[[8,10],[7,10],[6,10],[5,10],[3,9],[2,8],[1,6],[2,5],[3,4],[5,3],[6,3],[7,3],[8,3],[9,3],[10,3],[12,4],[13,5],[14,6],[13,8],[12,9],[10,10],[9,10]],[[3,6],[4,7],[5,6],[4,5]],[[11,8],[12,7],[11,6],[10,7]],[[8,4],[7,5],[8,6],[9,5]],[[7,9],[8,8],[7,7],[6,8]]]],["#a37045",[[[7,5],[8,4],[9,5],[8,6]]]],["#a37045",[[[8,8],[7,9],[6,8],[7,7]]]],["#ffffff",[[[0,0],[15,0],[15,15],[0,15]],[[13,4],[12,3],[10,2],[9,2],[8,2],[7,2],[6,2],[5,2],[3,3],[2,4],[1,6],[1,7],[1,8],[1,9],[3,12],[5,13],[6,13],[7,13],[8,13],[9,13],[10,13],[12,12],[14,9],[14,8],[14,7],[14,6]]]]]</script>
+<script type="application/json" id="picture-words">{"m":{"ar-SA":"التوت البري الناضج يرتدّ. وأنت كذلك. شكرًا لك.","de-DE":"Reife Cranberrys hüpfen zurück. Du auch. Danke dir.","en-AU":"Ripe cranberries bounce back. So do you. Thankful.","en-GB":"Ripe cranberries bounce back. So do you. Thankful.","en-US":"Ripe cranberries bounce back. So do you. Thankful.","es-ES":"Los arándanos rojos maduros rebotan. Tú también. Gracias.","es-MX":"Los arándanos maduros rebotan. Igual que tú. Gracias.","fr-FR":"Les canneberges mûres rebondissent. Toi aussi. Merci.","hi":"पकी क्रैनबेरी उछलती है। तुम भी। शुक्रिया।","id":"Cranberry matang bisa memantul. Kamu juga. Bersyukur.","it":"I mirtilli rossi maturi rimbalzano. Anche tu. Grazie.","ja":"熟したクランベリーは弾むんだって。君もね。感謝。","ko":"잘 익은 크랜베리는 통통 튄대. 너처럼. 고마워.","nl-NL":"Rijpe cranberry's stuiteren terug. Jij ook. Dank je.","pt-BR":"Cranberries maduras quicam de volta. Você também. Gratidão.","ru":"Спелая клюква пружинит. Ты тоже не сдаёшься. Спасибо.","sv":"Mogna tranbär studsar tillbaka. Det gör du också. Tack.","th":"แครนเบอร์รีสุกเด้งได้ เธอก็เหมือนกัน ขอบคุณนะ","tr":"Olgun turna yemişi zıplar. Sen de hep toparlanırsın. Sağ ol.","vi":"Nam việt quất chín sẽ nảy lên. Bạn cũng vậy. Biết ơn.","zh-Hans":"熟透的蔓越莓会弹起来，你也是。感恩。","zh-Hant":"熟透的蔓越莓會彈起來，你也是。感恩。"}}</script>
 <script src="/library/worksheet-words.js"></script>
 <script src="/library/worksheet.js"></script>
 <script>

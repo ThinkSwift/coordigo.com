@@ -216,7 +216,7 @@
     <p class="crumb"><a href="/library/" data-t="libCaps">Library</a></p>
     <h1>#120 Pumpkin patch</h1>
     <p class="count"><span class="tier common">Common</span>Plants &amp; nature · 8 lines · 58 points · Medium · about 5 min</p>
-    
+    <p class="words">“Every pumpkin here is auditioning for one night.”</p>
     <div class="pic-grid">
       <figure class="common"><img src="/library/img/genre-pumpkin-patch.png" width="600" height="600" alt="Pumpkin patch: a Coordigo mystery picture, drawn by joining points on a 16 × 16 grid"></figure>
       <div class="menu">
@@ -228,8 +228,7 @@
             <div class="seg"><label><input type="radio" name="paper" value="letter"> <span data-w="letter">Letter</span></label><label><input type="radio" name="paper" value="a4"> <span data-w="a4">A4</span></label></div>
           </fieldset>
           <label class="check"><input type="checkbox" name="answer" checked> <span data-w="answerPage">Answer page in color</span></label>
-          <label class="field"><span data-w="titleField">Title · optional, on the answer page</span><input type="text" name="title" maxlength="40" autocomplete="off"></label>
-          <label class="field"><span data-w="wordsField">Words · optional, on the answer page</span><textarea name="words" maxlength="120" rows="2"></textarea></label>
+          <label class="field"><span data-w="noteField">Your words · optional, on the puzzle page (Class: Name:)</span><textarea name="note" rows="3" maxlength="200" autocomplete="off"></textarea></label>
         </form>
         <div class="acts">
           <button class="act primary" id="sheetPrint" type="button" data-w="print">Print</button>
@@ -256,7 +255,8 @@
 <script src="/store.js"></script>
 <script src="/mystery/strings.js"></script>
 <script src="/mystery/engine.js"></script>
-<script type="application/json" id="faces">[["#ff9400",[[[11,8],[12,7],[13,9],[13,10],[13,11],[12,12],[11,12],[10,12],[10,11],[10,10],[10,9],[10,8],[10,7]]]],["#a37045",[[[12,7],[11,8],[11,7],[11,6],[12,6]]]],["#a37045",[[[13,10],[13,9],[12,7],[13,7],[14,9],[14,10],[14,11],[13,12],[12,12],[13,11]]]],["#ff9400",[[[10,7],[10,8],[10,9],[10,10],[10,11],[10,12],[9,11],[8,9],[8,8],[9,7]]]],["#ff9400",[[[5,9],[5,10],[5,11],[5,12],[5,13],[5,14],[4,14],[3,12],[3,11],[3,10],[4,8]]]],["#ff9400",[[[5,10],[5,9],[6,8],[7,10],[7,11],[7,12],[6,14],[5,14],[5,13],[5,12],[5,11]]]],["#a37045",[[[8,13],[7,14],[6,14],[7,12],[7,11],[7,10],[6,8],[7,8],[8,9],[9,11]]]],["#ff9400",[[[2,13],[1,11],[2,9],[3,8],[4,8],[3,10],[3,11],[3,12],[4,14],[3,14]]]],["#a37045",[[[6,6],[7,6],[6,7],[6,8],[5,9],[5,8],[5,7]]]],["#c9f5ff",[[[6,3],[5,3],[4,3],[3,3],[2,3],[1,3],[0,3],[0,0],[15,0],[15,3],[14,3],[13,3],[12,3],[11,3],[10,3],[9,3],[8,3],[7,3]]]],["#ff9400",[[[3,5],[3,6],[3,7],[2,7],[1,6],[2,5]]]],["#a37045",[[[3,6],[3,5],[4,5],[5,6],[4,7],[3,7]]]]]</script>
+<script type="application/json" id="faces">[["#a37045",[[[4,5],[5,6],[4,7],[3,7],[3,6],[3,5]]]],["#a37045",[[[12,7],[13,7],[14,9],[14,10],[14,11],[13,12],[12,12],[13,11],[13,10],[13,9]]]],["#ff9400",[[[4,8],[5,9],[5,10],[5,11],[5,12],[5,13],[5,14],[4,14],[3,12],[3,11],[3,10]]]],["#ff9400",[[[3,7],[2,7],[1,6],[2,5],[3,5],[3,6]]]],["#a37045",[[[6,6],[7,6],[6,7],[6,8],[5,9],[5,8],[5,7]]]],["#a37045",[[[8,13],[7,14],[6,14],[7,12],[7,11],[7,10],[6,8],[7,8],[8,9],[9,11]]]],["#c9f5ff",[[[11,3],[10,3],[9,3],[8,3],[7,3],[6,3],[5,3],[4,3],[3,3],[2,3],[1,3],[0,3],[0,0],[15,0],[15,3],[14,3],[13,3],[12,3]]]],["#ff9400",[[[8,9],[8,8],[9,7],[10,7],[10,8],[10,9],[10,10],[10,11],[10,12],[9,11]]]],["#ff9400",[[[11,12],[10,12],[10,11],[10,10],[10,9],[10,8],[10,7],[11,8],[12,7],[13,9],[13,10],[13,11],[12,12]]]],["#ff9400",[[[3,11],[3,12],[4,14],[3,14],[2,13],[1,11],[2,9],[3,8],[4,8],[3,10]]]],["#ff9400",[[[7,12],[6,14],[5,14],[5,13],[5,12],[5,11],[5,10],[5,9],[6,8],[7,10],[7,11]]]],["#a37045",[[[12,6],[12,7],[11,8],[11,7],[11,6]]]]]</script>
+<script type="application/json" id="picture-words">{"m":{"ar-SA":"كل يقطينة هنا تخوض تجربة أداء لليلة واحدة.","de-DE":"Jeder Kürbis hier spricht für eine einzige Nacht vor.","en-AU":"Every pumpkin here is auditioning for one night.","en-GB":"Every pumpkin here is auditioning for one night.","en-US":"Every pumpkin here is auditioning for one night.","es-ES":"Aquí todas las calabazas hacen casting para una sola noche.","es-MX":"Aquí cada calabaza audiciona para una sola noche.","fr-FR":"Chaque citrouille ici auditionne pour une seule nuit.","hi":"यहाँ हर कद्दू बस एक रात के लिए ऑडिशन दे रहा है।","id":"Semua labu di sini sedang audisi untuk satu malam.","it":"Ogni zucca qui fa il provino per una sola notte.","ja":"ここのカボチャはみな、一夜限りのオーディション中。","ko":"여기 호박들은 전부 단 하룻밤을 위한 오디션 중.","nl-NL":"Elke pompoen hier doet auditie voor één nacht.","pt-BR":"Toda abóbora aqui está fazendo teste para uma noite só.","ru":"Каждая тыква здесь проходит кастинг на одну ночь.","sv":"Varje pumpa här provspelar för en enda natt.","th":"ฟักทองทุกลูกที่นี่ กำลังออดิชันเพื่อคืนเดียว","tr":"Buradaki her bal kabağı tek bir gece için seçmelerde.","vi":"Quả bí nào ở đây cũng đang thử vai cho một đêm.","zh-Hans":"这里每个南瓜，都在为同一个夜晚试镜。","zh-Hant":"這裡每顆南瓜，都在為同一晚試鏡。"}}</script>
 <script src="/library/worksheet-words.js"></script>
 <script src="/library/worksheet.js"></script>
 <script>

@@ -216,7 +216,7 @@
     <p class="crumb"><a href="/library/" data-t="libCaps">Library</a></p>
     <h1>#34 Book</h1>
     <p class="count"><span class="tier common">Common</span>Things · 9 lines · 42 points · Medium · about 5 min</p>
-    
+    <p class="words">“Bookmarked right where the good part starts.”</p>
     <div class="pic-grid">
       <figure class="common"><img src="/library/img/genre-book.png" width="600" height="600" alt="Book: a Coordigo mystery picture, drawn by joining points on a 16 × 16 grid"></figure>
       <div class="menu">
@@ -228,8 +228,7 @@
             <div class="seg"><label><input type="radio" name="paper" value="letter"> <span data-w="letter">Letter</span></label><label><input type="radio" name="paper" value="a4"> <span data-w="a4">A4</span></label></div>
           </fieldset>
           <label class="check"><input type="checkbox" name="answer" checked> <span data-w="answerPage">Answer page in color</span></label>
-          <label class="field"><span data-w="titleField">Title · optional, on the answer page</span><input type="text" name="title" maxlength="40" autocomplete="off"></label>
-          <label class="field"><span data-w="wordsField">Words · optional, on the answer page</span><textarea name="words" maxlength="120" rows="2"></textarea></label>
+          <label class="field"><span data-w="noteField">Your words · optional, on the puzzle page (Class: Name:)</span><textarea name="note" rows="3" maxlength="200" autocomplete="off"></textarea></label>
         </form>
         <div class="acts">
           <button class="act primary" id="sheetPrint" type="button" data-w="print">Print</button>
@@ -256,7 +255,8 @@
 <script src="/store.js"></script>
 <script src="/mystery/strings.js"></script>
 <script src="/mystery/engine.js"></script>
-<script type="application/json" id="faces">[["#ff3b30",[[[2,12],[4,11],[5,11],[6,11],[7,12],[8,13],[9,12],[10,11],[11,11],[12,11],[14,12],[14,13],[12,12],[11,12],[10,12],[9,13],[8,14],[7,13],[6,12],[5,12],[4,12],[2,13]]]],["#c9f5ff",[[[4,11],[2,12],[2,11],[4,10],[5,10],[6,10],[7,11],[8,12],[9,11],[10,10],[11,10],[12,10],[14,11],[14,12],[12,11],[11,11],[10,11],[9,12],[8,13],[7,12],[6,11],[5,11]]]],["#ffffff",[[[12,3],[13,4],[14,5],[14,6],[14,7],[14,8],[14,9],[14,10],[14,11],[12,10],[11,10],[10,10],[9,11],[8,12],[8,11],[8,10],[8,9],[8,8],[8,7],[8,6],[8,5],[9,4],[10,3],[11,3]]]],["#ffffff",[[[5,3],[6,3],[7,4],[8,5],[8,6],[8,7],[8,8],[8,9],[8,10],[8,11],[8,12],[7,11],[6,10],[5,10],[4,10],[2,11],[2,10],[2,9],[2,8],[2,7],[2,6],[2,5],[3,4],[4,3]]]],["#8afa99",[[[0,0],[15,0],[15,15],[0,15]],[[8,14],[9,13],[10,12],[11,12],[12,12],[14,13],[14,12],[14,11],[14,10],[14,9],[14,8],[14,7],[14,6],[14,5],[13,4],[12,3],[11,3],[10,3],[9,4],[8,5],[7,4],[6,3],[5,3],[4,3],[3,4],[2,5],[2,6],[2,7],[2,8],[2,9],[2,10],[2,11],[2,12],[2,13],[4,12],[5,12],[6,12],[7,13]]]]]</script>
+<script type="application/json" id="faces">[["#ff3b30",[[[7,13],[6,12],[5,12],[4,12],[2,13],[2,12],[4,11],[5,11],[6,11],[7,12],[8,13],[9,12],[10,11],[11,11],[12,11],[14,12],[14,13],[12,12],[11,12],[10,12],[9,13],[8,14]]]],["#ffffff",[[[14,9],[14,10],[14,11],[12,10],[11,10],[10,10],[9,11],[8,12],[8,11],[8,10],[8,9],[8,8],[8,7],[8,6],[8,5],[9,4],[10,3],[11,3],[12,3],[13,4],[14,5],[14,6],[14,7],[14,8]]]],["#c9f5ff",[[[7,11],[8,12],[9,11],[10,10],[11,10],[12,10],[14,11],[14,12],[12,11],[11,11],[10,11],[9,12],[8,13],[7,12],[6,11],[5,11],[4,11],[2,12],[2,11],[4,10],[5,10],[6,10]]]],["#ffffff",[[[8,12],[7,11],[6,10],[5,10],[4,10],[2,11],[2,10],[2,9],[2,8],[2,7],[2,6],[2,5],[3,4],[4,3],[5,3],[6,3],[7,4],[8,5],[8,6],[8,7],[8,8],[8,9],[8,10],[8,11]]]],["#8afa99",[[[0,0],[15,0],[15,15],[0,15]],[[6,12],[7,13],[8,14],[9,13],[10,12],[11,12],[12,12],[14,13],[14,12],[14,11],[14,10],[14,9],[14,8],[14,7],[14,6],[14,5],[13,4],[12,3],[11,3],[10,3],[9,4],[8,5],[7,4],[6,3],[5,3],[4,3],[3,4],[2,5],[2,6],[2,7],[2,8],[2,9],[2,10],[2,11],[2,12],[2,13],[4,12],[5,12]]]]]</script>
+<script type="application/json" id="picture-words">{"m":{"ar-SA":"الفاصل عند بداية الجزء الممتع تمامًا.","de-DE":"Lesezeichen genau da, wo es spannend wird.","en-AU":"Bookmarked right where the good part starts.","en-GB":"Bookmarked right where the good part starts.","en-US":"Bookmarked right where the good part starts.","es-ES":"Marcado justo donde empieza lo bueno.","es-MX":"Marcado justo donde empieza lo bueno.","fr-FR":"Marque-page pile là où ça devient bien.","hi":"बुकमार्क ठीक वहीं, जहाँ मज़ेदार हिस्सा शुरू होता है।","id":"Pembatas buku tepat di bagian yang mulai seru.","it":"Segnalibro proprio dove comincia il bello.","ja":"しおりは、ちょうど面白くなるところに。","ko":"책갈피는 딱 재밌어지는 곳에.","nl-NL":"Bladwijzer precies waar het goede deel begint.","pt-BR":"Marcado bem onde começa a parte boa.","ru":"Закладка ровно там, где начинается самое интересное.","sv":"Bokmärket precis där det blir spännande.","th":"คั่นไว้ตรงที่กำลังจะสนุกพอดี","tr":"Ayraç tam güzel yerin başladığı sayfada.","vi":"Kẹp sách ngay đúng đoạn bắt đầu hay.","zh-Hans":"书签正夹在好戏开场的那一页。","zh-Hant":"書籤正夾在好戲開場的那一頁。"}}</script>
 <script src="/library/worksheet-words.js"></script>
 <script src="/library/worksheet.js"></script>
 <script>

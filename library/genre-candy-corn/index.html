@@ -216,7 +216,7 @@
     <p class="crumb"><a href="/library/" data-t="libCaps">Library</a></p>
     <h1>#39 Candy corn</h1>
     <p class="count"><span class="tier common">Common</span>Food &amp; drink · 3 lines · 25 points · Quick · about 2 min</p>
-    
+    <p class="words">“Trick or treat? Why not both.”</p>
     <div class="pic-grid">
       <figure class="common"><img src="/library/img/genre-candy-corn.png" width="600" height="600" alt="Candy corn: a Coordigo mystery picture, drawn by joining points on a 16 × 16 grid"></figure>
       <div class="menu">
@@ -228,8 +228,7 @@
             <div class="seg"><label><input type="radio" name="paper" value="letter"> <span data-w="letter">Letter</span></label><label><input type="radio" name="paper" value="a4"> <span data-w="a4">A4</span></label></div>
           </fieldset>
           <label class="check"><input type="checkbox" name="answer" checked> <span data-w="answerPage">Answer page in color</span></label>
-          <label class="field"><span data-w="titleField">Title · optional, on the answer page</span><input type="text" name="title" maxlength="40" autocomplete="off"></label>
-          <label class="field"><span data-w="wordsField">Words · optional, on the answer page</span><textarea name="words" maxlength="120" rows="2"></textarea></label>
+          <label class="field"><span data-w="noteField">Your words · optional, on the puzzle page (Class: Name:)</span><textarea name="note" rows="3" maxlength="200" autocomplete="off"></textarea></label>
         </form>
         <div class="acts">
           <button class="act primary" id="sheetPrint" type="button" data-w="print">Print</button>
@@ -256,7 +255,8 @@
 <script src="/store.js"></script>
 <script src="/mystery/strings.js"></script>
 <script src="/mystery/engine.js"></script>
-<script type="application/json" id="faces">[["#ffd60a",[[[10,13],[9,14],[8,14],[7,14],[6,14],[5,14],[4,14],[3,13],[3,12],[3,11],[5,12],[6,12],[7,12],[8,12],[10,11],[10,12]]]],["#ffffff",[[[14,11],[12,12],[13,10]]]],["#ffffff",[[[5,5],[6,3],[7,3],[8,5],[9,8],[7,9],[6,9],[4,8]]]],["#ff9400",[[[13,10],[12,12],[10,13],[11,11],[11,10],[11,9]]]],["#ff9400",[[[6,12],[5,12],[3,11],[4,8],[6,9],[7,9],[9,8],[10,11],[8,12],[7,12]]]],["#ffd60a",[[[10,13],[10,12],[10,11],[9,8],[11,9],[11,10],[11,11]]]],["#bf59f2",[[[0,0],[15,0],[15,15],[0,15]],[[9,14],[10,13],[12,12],[14,11],[13,10],[11,9],[9,8],[8,5],[7,3],[6,3],[5,5],[4,8],[3,11],[3,12],[3,13],[4,14],[5,14],[6,14],[7,14],[8,14]]]]]</script>
+<script type="application/json" id="faces">[["#ffffff",[[[13,10],[14,11],[12,12]]]],["#ff9400",[[[12,12],[10,13],[11,11],[11,10],[11,9],[13,10]]]],["#ff9400",[[[4,8],[6,9],[7,9],[9,8],[10,11],[8,12],[7,12],[6,12],[5,12],[3,11]]]],["#ffffff",[[[6,9],[4,8],[5,5],[6,3],[7,3],[8,5],[9,8],[7,9]]]],["#ffd60a",[[[10,11],[9,8],[11,9],[11,10],[11,11],[10,13],[10,12]]]],["#ffd60a",[[[10,12],[10,13],[9,14],[8,14],[7,14],[6,14],[5,14],[4,14],[3,13],[3,12],[3,11],[5,12],[6,12],[7,12],[8,12],[10,11]]]],["#bf59f2",[[[0,0],[15,0],[15,15],[0,15]],[[14,11],[13,10],[11,9],[9,8],[8,5],[7,3],[6,3],[5,5],[4,8],[3,11],[3,12],[3,13],[4,14],[5,14],[6,14],[7,14],[8,14],[9,14],[10,13],[12,12]]]]]</script>
+<script type="application/json" id="picture-words">{"m":{"ar-SA":"حلوى أم خدعة؟ لمَ لا الاثنان معًا؟","de-DE":"Süßes oder Saures? Warum nicht beides.","en-AU":"Trick or treat? Why not both.","en-GB":"Trick or treat? Why not both.","en-US":"Trick or treat? Why not both.","es-ES":"¿Truco o trato? ¿Por qué no los dos?","es-MX":"¿Dulce o truco? ¿Por qué no los dos?","fr-FR":"Un bonbon ou un sort ? Pourquoi pas les deux.","hi":"ट्रिक या ट्रीट? दोनों क्यों नहीं।","id":"Trick or treat? Kenapa nggak dua-duanya.","it":"Dolcetto o scherzetto? Perché non tutti e due.","ja":"トリック・オア・トリート？両方でいいじゃん。","ko":"과자 줄래, 장난칠래? 둘 다 하면 되지.","nl-NL":"Snoep of je leven? Waarom niet allebei.","pt-BR":"Doces ou travessuras? Por que não os dois?","ru":"Сладость или гадость? А почему не всё сразу?","sv":"Bus eller godis? Varför inte båda.","th":"ให้ขนมหรือโดนแกล้ง? เอาทั้งคู่ไปเลย","tr":"Şaka mı şeker mi? İkisi birden olmaz mı?","vi":"Cho kẹo hay bị ghẹo? Sao không cả hai.","zh-Hans":"不给糖就捣蛋？那就两样都要。","zh-Hant":"不給糖就搗蛋？那就兩個都要。"}}</script>
 <script src="/library/worksheet-words.js"></script>
 <script src="/library/worksheet.js"></script>
 <script>

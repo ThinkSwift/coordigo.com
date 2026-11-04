@@ -216,7 +216,7 @@
     <p class="crumb"><a href="/library/" data-t="libCaps">Library</a></p>
     <h1>#25 Letter</h1>
     <p class="count"><span class="tier common">Common</span>Things · 5 lines · 25 points · Quick · about 2 min</p>
-    
+    <p class="words">“Sealed with a heart, opened by you.”</p>
     <div class="pic-grid">
       <figure class="common"><img src="/library/img/genre-letter.png" width="600" height="600" alt="Letter: a Coordigo mystery picture, drawn by joining points on a 16 × 16 grid"></figure>
       <div class="menu">
@@ -228,8 +228,7 @@
             <div class="seg"><label><input type="radio" name="paper" value="letter"> <span data-w="letter">Letter</span></label><label><input type="radio" name="paper" value="a4"> <span data-w="a4">A4</span></label></div>
           </fieldset>
           <label class="check"><input type="checkbox" name="answer" checked> <span data-w="answerPage">Answer page in color</span></label>
-          <label class="field"><span data-w="titleField">Title · optional, on the answer page</span><input type="text" name="title" maxlength="40" autocomplete="off"></label>
-          <label class="field"><span data-w="wordsField">Words · optional, on the answer page</span><textarea name="words" maxlength="120" rows="2"></textarea></label>
+          <label class="field"><span data-w="noteField">Your words · optional, on the puzzle page (Class: Name:)</span><textarea name="note" rows="3" maxlength="200" autocomplete="off"></textarea></label>
         </form>
         <div class="acts">
           <button class="act primary" id="sheetPrint" type="button" data-w="print">Print</button>
@@ -256,7 +255,8 @@
 <script src="/store.js"></script>
 <script src="/mystery/strings.js"></script>
 <script src="/mystery/engine.js"></script>
-<script type="application/json" id="faces">[["#007aff",[[[3,6],[4,5],[4,6],[4,7],[3,7],[2,7]]]],["#c9f5ff",[[[2,7],[4,8],[6,9],[8,10],[10,9],[12,8],[14,7],[14,8],[14,9],[14,10],[14,11],[14,12],[14,13],[13,13],[12,13],[11,13],[10,13],[9,13],[8,13],[7,13],[6,13],[5,13],[4,13],[3,13],[2,13],[2,12],[2,11],[2,10],[2,9],[2,8]]]],["#5952de",[[[4,8],[2,7],[3,7],[4,7]]]],["#ff3b30",[[[9,4],[10,5],[9,6],[8,7],[7,6],[6,5],[7,4],[8,5]]]],["#ffffff",[[[5,3],[6,3],[7,3],[8,3],[9,3],[10,3],[11,3],[12,3],[12,4],[12,5],[12,6],[12,7],[12,8],[10,9],[8,10],[6,9],[4,8],[4,7],[4,6],[4,5],[4,4],[4,3]],[[10,5],[9,4],[8,5],[7,4],[6,5],[7,6],[8,7],[9,6]]]],["#007aff",[[[6,3],[7,2],[8,1],[9,2],[10,3],[9,3],[8,3],[7,3]]]],["#5952de",[[[13,7],[14,7],[12,8],[12,7]]]],["#007aff",[[[14,7],[13,7],[12,7],[12,6],[12,5],[13,6]]]],["#ffc482",[[[0,0],[15,0],[15,15],[0,15]],[[4,5],[3,6],[2,7],[2,8],[2,9],[2,10],[2,11],[2,12],[2,13],[3,13],[4,13],[5,13],[6,13],[7,13],[8,13],[9,13],[10,13],[11,13],[12,13],[13,13],[14,13],[14,12],[14,11],[14,10],[14,9],[14,8],[14,7],[13,6],[12,5],[12,4],[12,3],[11,3],[10,3],[9,2],[8,1],[7,2],[6,3],[5,3],[4,3],[4,4]]]]]</script>
+<script type="application/json" id="faces">[["#ffffff",[[[12,6],[12,7],[12,8],[10,9],[8,10],[6,9],[4,8],[4,7],[4,6],[4,5],[4,4],[4,3],[5,3],[6,3],[7,3],[8,3],[9,3],[10,3],[11,3],[12,3],[12,4],[12,5]],[[8,7],[9,6],[10,5],[9,4],[8,5],[7,4],[6,5],[7,6]]]],["#007aff",[[[12,7],[12,6],[12,5],[13,6],[14,7],[13,7]]]],["#c9f5ff",[[[14,10],[14,11],[14,12],[14,13],[13,13],[12,13],[11,13],[10,13],[9,13],[8,13],[7,13],[6,13],[5,13],[4,13],[3,13],[2,13],[2,12],[2,11],[2,10],[2,9],[2,8],[2,7],[4,8],[6,9],[8,10],[10,9],[12,8],[14,7],[14,8],[14,9]]]],["#ff3b30",[[[9,6],[8,7],[7,6],[6,5],[7,4],[8,5],[9,4],[10,5]]]],["#5952de",[[[3,7],[4,7],[4,8],[2,7]]]],["#007aff",[[[4,7],[3,7],[2,7],[3,6],[4,5],[4,6]]]],["#007aff",[[[9,2],[10,3],[9,3],[8,3],[7,3],[6,3],[7,2],[8,1]]]],["#5952de",[[[14,7],[12,8],[12,7],[13,7]]]],["#ffc482",[[[0,0],[15,0],[15,15],[0,15]],[[14,11],[14,10],[14,9],[14,8],[14,7],[13,6],[12,5],[12,4],[12,3],[11,3],[10,3],[9,2],[8,1],[7,2],[6,3],[5,3],[4,3],[4,4],[4,5],[3,6],[2,7],[2,8],[2,9],[2,10],[2,11],[2,12],[2,13],[3,13],[4,13],[5,13],[6,13],[7,13],[8,13],[9,13],[10,13],[11,13],[12,13],[13,13],[14,13],[14,12]]]]]</script>
+<script type="application/json" id="picture-words">{"m":{"ar-SA":"مختومة بقلب، وأنت من فتحها.","de-DE":"Mit einem Herz versiegelt, von dir geöffnet.","en-AU":"Sealed with a heart, opened by you.","en-GB":"Sealed with a heart, opened by you.","en-US":"Sealed with a heart, opened by you.","es-ES":"Sellada con un corazón, abierta por ti.","es-MX":"Sellada con un corazón, abierta por ti.","fr-FR":"Scellée d'un cœur, ouverte par toi.","hi":"दिल की मुहर, खोला तुमने।","id":"Disegel dengan hati, dibuka olehmu.","it":"Sigillata con un cuore, aperta da te.","ja":"ハートで封をして、開けたのはあなた。","ko":"하트로 봉하고, 당신이 열었어요.","nl-NL":"Verzegeld met een hart, geopend door jou.","pt-BR":"Selada com um coração, aberta por você.","ru":"Запечатано сердцем, открыто тобой.","sv":"Förseglat med ett hjärta, öppnat av dig.","th":"ผนึกด้วยหัวใจ เปิดโดยคุณ","tr":"Bir kalple mühürlendi, senin elinle açıldı.","vi":"Niêm phong bằng trái tim, mở ra bởi bạn.","zh-Hans":"用一颗心封好，由你来拆开。","zh-Hant":"用一顆心封好，由你來拆開。"},"t":{"ar":"Letter","de":"US-Letter","es":"Carta","fr":"Lettre US","hi":"लेटर","id":"Letter","it":"Lettera","ja":"レター","ko":"레터","nl":"Letter","pt-BR":"Carta","ru":"Letter","sv":"Letter","th":"Letter","tr":"Letter","vi":"Letter","zh-Hans":"Letter","zh-Hant":"Letter"}}</script>
 <script src="/library/worksheet-words.js"></script>
 <script src="/library/worksheet.js"></script>
 <script>

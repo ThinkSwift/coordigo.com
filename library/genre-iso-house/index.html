@@ -216,7 +216,7 @@
     <p class="crumb"><a href="/library/" data-t="libCaps">Library</a></p>
     <h1>#232 Snowy cottage</h1>
     <p class="count"><span class="tier epic">Epic</span>Places · 5 lines · 28 points · Quick · about 2 min</p>
-    
+    <p class="words">“Snow on the roof, a lamp in the window, someone home.”</p>
     <div class="pic-grid">
       <figure class="epic"><img src="/library/img/genre-iso-house.png" width="600" height="600" alt="Snowy cottage: a Coordigo mystery picture, drawn by joining points on a 16 × 16 grid"></figure>
       <div class="menu">
@@ -228,8 +228,7 @@
             <div class="seg"><label><input type="radio" name="paper" value="letter"> <span data-w="letter">Letter</span></label><label><input type="radio" name="paper" value="a4"> <span data-w="a4">A4</span></label></div>
           </fieldset>
           <label class="check"><input type="checkbox" name="answer" checked> <span data-w="answerPage">Answer page in color</span></label>
-          <label class="field"><span data-w="titleField">Title · optional, on the answer page</span><input type="text" name="title" maxlength="40" autocomplete="off"></label>
-          <label class="field"><span data-w="wordsField">Words · optional, on the answer page</span><textarea name="words" maxlength="120" rows="2"></textarea></label>
+          <label class="field"><span data-w="noteField">Your words · optional, on the puzzle page (Class: Name:)</span><textarea name="note" rows="3" maxlength="200" autocomplete="off"></textarea></label>
         </form>
         <div class="acts">
           <button class="act primary" id="sheetPrint" type="button" data-w="print">Print</button>
@@ -256,7 +255,8 @@
 <script src="/store.js"></script>
 <script src="/mystery/strings.js"></script>
 <script src="/mystery/engine.js"></script>
-<script type="application/json" id="faces">[["#ffc482",[[[7,11],[7,12],[7,13],[7,14],[5,13],[3,12],[3,11],[3,10],[3,9],[3,8],[4,7],[5,6],[6,8],[7,10]],[[6,11],[4,10],[4,11],[6,12]]]],["#ff9400",[[[7,12],[7,11],[7,10],[9,9],[11,8],[13,7],[13,8],[13,9],[13,10],[13,11],[11,12],[11,11],[11,10],[11,9],[9,10],[9,11],[9,12],[9,13],[7,14],[7,13]]]],["#ffd60a",[[[4,10],[6,11],[6,12],[4,11]]]],["#ffffff",[[[7,5],[9,4],[11,3],[12,5],[11,6],[10,6],[9,7],[8,7],[7,8],[6,8],[5,6]]]],["#ff3b30",[[[13,7],[11,8],[9,9],[7,10],[6,8],[7,8],[8,7],[9,7],[10,6],[11,6],[12,5]]]],["#a37045",[[[9,10],[11,9],[11,10],[11,11],[11,12],[9,13],[9,12],[9,11]]]],["#5952de",[[[0,0],[15,0],[15,15],[0,15]],[[9,4],[7,5],[5,6],[4,7],[3,8],[3,9],[3,10],[3,11],[3,12],[5,13],[7,14],[9,13],[11,12],[13,11],[13,10],[13,9],[13,8],[13,7],[12,5],[11,3]]]]]</script>
+<script type="application/json" id="faces">[["#ffc482",[[[6,8],[7,10],[7,11],[7,12],[7,13],[7,14],[5,13],[3,12],[3,11],[3,10],[3,9],[3,8],[4,7],[5,6]],[[6,11],[4,10],[4,11],[6,12]]]],["#ff3b30",[[[7,10],[6,8],[7,8],[8,7],[9,7],[10,6],[11,6],[12,5],[13,7],[11,8],[9,9]]]],["#ff9400",[[[7,11],[7,10],[9,9],[11,8],[13,7],[13,8],[13,9],[13,10],[13,11],[11,12],[11,11],[11,10],[11,9],[9,10],[9,11],[9,12],[9,13],[7,14],[7,13],[7,12]]]],["#ffffff",[[[5,6],[7,5],[9,4],[11,3],[12,5],[11,6],[10,6],[9,7],[8,7],[7,8],[6,8]]]],["#a37045",[[[11,9],[11,10],[11,11],[11,12],[9,13],[9,12],[9,11],[9,10]]]],["#ffd60a",[[[4,10],[6,11],[6,12],[4,11]]]],["#5952de",[[[0,0],[15,0],[15,15],[0,15]],[[13,7],[12,5],[11,3],[9,4],[7,5],[5,6],[4,7],[3,8],[3,9],[3,10],[3,11],[3,12],[5,13],[7,14],[9,13],[11,12],[13,11],[13,10],[13,9],[13,8]]]]]</script>
+<script type="application/json" id="picture-words">{"m":{"ar-SA":"ثلج على السطح، ومصباح في النافذة، وأحدهم في البيت.","de-DE":"Schnee auf dem Dach, Licht im Fenster, jemand ist zu Hause.","en-AU":"Snow on the roof, a lamp in the window, someone home.","en-GB":"Snow on the roof, a lamp in the window, someone home.","en-US":"Snow on the roof, a lamp in the window, someone home.","es-ES":"Nieve en el tejado, luz en la ventana, alguien en casa.","es-MX":"Nieve en el tejado, luz en la ventana, alguien en casa.","fr-FR":"Neige sur le toit, lampe à la fenêtre, quelqu'un est là.","hi":"छत पर बर्फ़, खिड़की में दीया, घर में कोई है।","id":"Salju di atap, lampu di jendela, ada orang di rumah.","it":"Neve sul tetto, una luce alla finestra, qualcuno in casa.","ja":"屋根に雪、窓に灯り、中には誰かがいる。","ko":"지붕엔 눈, 창가엔 불빛, 누군가 집에 있어요.","nl-NL":"Sneeuw op het dak, een lamp voor het raam, iemand thuis.","pt-BR":"Neve no telhado, luz na janela, alguém em casa.","ru":"Снег на крыше, лампа в окне, кто-то дома.","sv":"Snö på taket, en lampa i fönstret, någon hemma.","th":"หิมะบนหลังคา ไฟที่หน้าต่าง มีคนอยู่บ้าน","tr":"Çatıda kar, pencerede lamba, evde biri var.","vi":"Tuyết trên mái, đèn bên cửa sổ, có người ở nhà.","zh-Hans":"屋顶有雪，窗里有灯，有人在家。","zh-Hant":"屋頂有雪，窗裡有燈，有人在家。"}}</script>
 <script src="/library/worksheet-words.js"></script>
 <script src="/library/worksheet.js"></script>
 <script>

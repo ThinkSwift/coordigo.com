@@ -216,7 +216,7 @@
     <p class="crumb"><a href="/library/" data-t="libCaps">Library</a></p>
     <h1>#201 Dice</h1>
     <p class="count"><span class="tier rare">Rare</span>Tech &amp; games · 13 lines · 31 points · Quick · about 2 min</p>
-    
+    <p class="words">“Take the chance. The worst you get is a story.”</p>
     <div class="pic-grid">
       <figure class="rare"><img src="/library/img/genre-dice.png" width="600" height="600" alt="Dice: a Coordigo mystery picture, drawn by joining points on a 16 × 16 grid"></figure>
       <div class="menu">
@@ -228,8 +228,7 @@
             <div class="seg"><label><input type="radio" name="paper" value="letter"> <span data-w="letter">Letter</span></label><label><input type="radio" name="paper" value="a4"> <span data-w="a4">A4</span></label></div>
           </fieldset>
           <label class="check"><input type="checkbox" name="answer" checked> <span data-w="answerPage">Answer page in color</span></label>
-          <label class="field"><span data-w="titleField">Title · optional, on the answer page</span><input type="text" name="title" maxlength="40" autocomplete="off"></label>
-          <label class="field"><span data-w="wordsField">Words · optional, on the answer page</span><textarea name="words" maxlength="120" rows="2"></textarea></label>
+          <label class="field"><span data-w="noteField">Your words · optional, on the puzzle page (Class: Name:)</span><textarea name="note" rows="3" maxlength="200" autocomplete="off"></textarea></label>
         </form>
         <div class="acts">
           <button class="act primary" id="sheetPrint" type="button" data-w="print">Print</button>
@@ -256,7 +255,8 @@
 <script src="/store.js"></script>
 <script src="/mystery/strings.js"></script>
 <script src="/mystery/engine.js"></script>
-<script type="application/json" id="faces">[["#c9f5ff",[[[12,5],[12,6],[10,5],[10,4],[10,3],[12,4]]]],["#007aff",[[[12,6],[12,5],[12,4],[14,3],[14,4],[14,5]]]],["#c9f5ff",[[[3,8],[5,9],[5,10],[5,11],[5,12],[5,13],[3,12],[1,11],[1,10],[1,9],[1,8],[1,7]]]],["#ffffff",[[[5,9],[3,8],[1,7],[3,6],[5,5],[7,6],[9,7],[7,8]]]],["#007aff",[[[7,12],[5,13],[5,12],[5,11],[5,10],[5,9],[7,8],[9,7],[9,8],[9,9],[9,10],[9,11]]]],["#ffffff",[[[10,3],[12,2],[14,3],[12,4]]]],["#33c759",[[[0,0],[15,0],[15,15],[0,15]],[[5,13],[7,12],[9,11],[9,10],[9,9],[9,8],[9,7],[7,6],[5,5],[3,6],[1,7],[1,8],[1,9],[1,10],[1,11],[3,12]],[[10,5],[12,6],[14,5],[14,4],[14,3],[12,2],[10,3],[10,4]]]]]</script>
+<script type="application/json" id="faces">[["#c9f5ff",[[[5,11],[5,12],[5,13],[3,12],[1,11],[1,10],[1,9],[1,8],[1,7],[3,8],[5,9],[5,10]]]],["#007aff",[[[5,12],[5,11],[5,10],[5,9],[7,8],[9,7],[9,8],[9,9],[9,10],[9,11],[7,12],[5,13]]]],["#ffffff",[[[1,7],[3,6],[5,5],[7,6],[9,7],[7,8],[5,9],[3,8]]]],["#c9f5ff",[[[12,6],[10,5],[10,4],[10,3],[12,4],[12,5]]]],["#ffffff",[[[10,3],[12,2],[14,3],[12,4]]]],["#007aff",[[[14,3],[14,4],[14,5],[12,6],[12,5],[12,4]]]],["#33c759",[[[0,0],[15,0],[15,15],[0,15]],[[9,8],[9,7],[7,6],[5,5],[3,6],[1,7],[1,8],[1,9],[1,10],[1,11],[3,12],[5,13],[7,12],[9,11],[9,10],[9,9]],[[10,5],[12,6],[14,5],[14,4],[14,3],[12,2],[10,3],[10,4]]]]]</script>
+<script type="application/json" id="picture-words">{"m":{"ar-SA":"جرّب حظك. أسوأ ما قد يحدث قصة تحكيها.","de-DE":"Trau dich. Schlimmstenfalls hast du eine Geschichte.","en-AU":"Take the chance. The worst you get is a story.","en-GB":"Take the chance. The worst you get is a story.","en-US":"Take the chance. The worst you get is a story.","es-ES":"Atrévete. Como mucho, te llevas una buena historia.","es-MX":"Anímate. Lo peor que pasa es que te quede una historia.","fr-FR":"Tente ta chance. Au pire, ça fera une histoire.","hi":"मौक़ा ले लो। बुरा भी हुआ तो एक क़िस्सा बनेगा।","id":"Ambil kesempatannya. Paling apes, jadi cerita.","it":"Tenta la sorte. Male che vada, avrai una storia.","ja":"やってみなよ。最悪でも話のネタになる。","ko":"굴려 봐. 못 돼도 이야깃거리는 남아.","nl-NL":"Waag de gok. In het ergste geval heb je een verhaal.","pt-BR":"Arrisca. No pior dos casos, vira história.","ru":"Рискни. В худшем случае будет что рассказать.","sv":"Chansa. I värsta fall får du en historia.","th":"ลองเสี่ยงดู แย่สุดก็ได้เรื่องเล่า","tr":"Şansını dene. En kötü ihtimalle anlatacak bir hikâyen olur.","vi":"Cứ liều đi. Tệ nhất thì cũng có chuyện để kể.","zh-Hans":"试试看。最坏也就多个故事。","zh-Hant":"試試看嘛。最糟也多一個故事。"}}</script>
 <script src="/library/worksheet-words.js"></script>
 <script src="/library/worksheet.js"></script>
 <script>

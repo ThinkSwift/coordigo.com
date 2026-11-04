@@ -14,7 +14,7 @@ const out = [];
 for (const item of L) {
   let p;
   try { p = await M.readPayload(item.payload); } catch (e) { console.error(item.id, e.message); continue; }
-  const regions = M.regionsOf(p), px = M.pixels(regions, new Set(regions.map(r => r.id)));
+  const regions = M.regionsOf(p), px = M.pixels ? M.pixels(regions, new Set(regions.map(r => r.id))) : null;   // the fills come from the app's faces now
   out.push({ id: item.id, number: item.number || 0, theme: item.theme, payload: item.payload, title: p.title || '', message: p.message || '',
              segments: p.segments.map(s => s.map(q => [q.x, q.y])), w: M.W, h: M.H,
              pixels: px ? Buffer.from(px.buffer).toString('base64') : null, code: p.segments.map(s => s.map(M.pair).join(' ')) });

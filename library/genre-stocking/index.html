@@ -216,7 +216,7 @@
     <p class="crumb"><a href="/library/" data-t="libCaps">Library</a></p>
     <h1>#64 Stocking</h1>
     <p class="count"><span class="tier common">Common</span>Celebrations · 6 lines · 41 points · Medium · about 5 min</p>
-    
+    <p class="words">“Hung up empty, on pure faith.”</p>
     <div class="pic-grid">
       <figure class="common"><img src="/library/img/genre-stocking.png" width="600" height="600" alt="Stocking: a Coordigo mystery picture, drawn by joining points on a 16 × 16 grid"></figure>
       <div class="menu">
@@ -228,8 +228,7 @@
             <div class="seg"><label><input type="radio" name="paper" value="letter"> <span data-w="letter">Letter</span></label><label><input type="radio" name="paper" value="a4"> <span data-w="a4">A4</span></label></div>
           </fieldset>
           <label class="check"><input type="checkbox" name="answer" checked> <span data-w="answerPage">Answer page in color</span></label>
-          <label class="field"><span data-w="titleField">Title · optional, on the answer page</span><input type="text" name="title" maxlength="40" autocomplete="off"></label>
-          <label class="field"><span data-w="wordsField">Words · optional, on the answer page</span><textarea name="words" maxlength="120" rows="2"></textarea></label>
+          <label class="field"><span data-w="noteField">Your words · optional, on the puzzle page (Class: Name:)</span><textarea name="note" rows="3" maxlength="200" autocomplete="off"></textarea></label>
         </form>
         <div class="acts">
           <button class="act primary" id="sheetPrint" type="button" data-w="print">Print</button>
@@ -256,7 +255,8 @@
 <script src="/store.js"></script>
 <script src="/mystery/strings.js"></script>
 <script src="/mystery/engine.js"></script>
-<script type="application/json" id="faces">[["#ff3b30",[[[10,7],[10,8],[10,9],[11,9],[12,9],[11,11],[12,14],[11,14],[10,14],[9,14],[8,14],[7,14],[6,12],[4,11],[4,10],[4,9],[4,8],[4,7],[4,6],[5,7],[6,6],[7,7],[8,6],[9,7],[10,6]]]],["#33c759",[[[7,14],[5,13],[4,11],[6,12]]]],["#ffffff",[[[9,2],[9,3],[8,3],[8,2],[9,1],[10,1],[10,2]]]],["#ff3b30",[[[10,1],[11,1],[12,2],[12,3],[11,3],[11,2],[10,2]]]],["#ffffff",[[[3,6],[3,5],[3,4],[4,4],[5,4],[6,4],[7,4],[8,4],[9,4],[10,4],[11,4],[11,5],[11,6],[11,7],[10,6],[9,7],[8,6],[7,7],[6,6],[5,7],[4,6],[3,7]]]],["#33c759",[[[12,14],[11,11],[12,9],[13,10],[14,11],[14,12],[14,13],[13,14]]]],["#ff3b30",[[[9,4],[8,4],[8,3],[9,3]]]],["#c9f5ff",[[[0,0],[15,0],[15,15],[0,15]],[[10,8],[10,7],[10,6],[11,7],[11,6],[11,5],[11,4],[10,4],[9,4],[9,3],[9,2],[10,2],[11,2],[11,3],[12,3],[12,2],[11,1],[10,1],[9,1],[8,2],[8,3],[8,4],[7,4],[6,4],[5,4],[4,4],[3,4],[3,5],[3,6],[3,7],[4,6],[4,7],[4,8],[4,9],[4,10],[4,11],[5,13],[7,14],[8,14],[9,14],[10,14],[11,14],[12,14],[13,14],[14,13],[14,12],[14,11],[13,10],[12,9],[11,9],[10,9]]]]]</script>
+<script type="application/json" id="faces">[["#33c759",[[[14,13],[13,14],[12,14],[11,11],[12,9],[13,10],[14,11],[14,12]]]],["#ffffff",[[[9,1],[10,1],[10,2],[9,2],[9,3],[8,3],[8,2]]]],["#ff3b30",[[[12,9],[11,11],[12,14],[11,14],[10,14],[9,14],[8,14],[7,14],[6,12],[4,11],[4,10],[4,9],[4,8],[4,7],[4,6],[5,7],[6,6],[7,7],[8,6],[9,7],[10,6],[10,7],[10,8],[10,9],[11,9]]]],["#ff3b30",[[[12,2],[12,3],[11,3],[11,2],[10,2],[10,1],[11,1]]]],["#ffffff",[[[6,4],[7,4],[8,4],[9,4],[10,4],[11,4],[11,5],[11,6],[11,7],[10,6],[9,7],[8,6],[7,7],[6,6],[5,7],[4,6],[3,7],[3,6],[3,5],[3,4],[4,4],[5,4]]]],["#ff3b30",[[[9,3],[9,4],[8,4],[8,3]]]],["#33c759",[[[4,11],[6,12],[7,14],[5,13]]]],["#c9f5ff",[[[0,0],[15,0],[15,15],[0,15]],[[13,14],[14,13],[14,12],[14,11],[13,10],[12,9],[11,9],[10,9],[10,8],[10,7],[10,6],[11,7],[11,6],[11,5],[11,4],[10,4],[9,4],[9,3],[9,2],[10,2],[11,2],[11,3],[12,3],[12,2],[11,1],[10,1],[9,1],[8,2],[8,3],[8,4],[7,4],[6,4],[5,4],[4,4],[3,4],[3,5],[3,6],[3,7],[4,6],[4,7],[4,8],[4,9],[4,10],[4,11],[5,13],[7,14],[8,14],[9,14],[10,14],[11,14],[12,14]]]]]</script>
+<script type="application/json" id="picture-words">{"m":{"ar-SA":"يُعلَّق فارغًا، بإيمان خالص.","de-DE":"Leer aufgehängt, aus reinem Vertrauen.","en-AU":"Hung up empty, on pure faith.","en-GB":"Hung up empty, on pure faith.","en-US":"Hung up empty, on pure faith.","es-ES":"Se cuelga sin nada dentro, por pura fe.","es-MX":"Se cuelga sin nada adentro, por pura fe.","fr-FR":"Accrochée vide, par pure confiance.","hi":"खाली टाँगा है, बस भरोसे के सहारे।","id":"Digantung kosong, hanya bermodal percaya.","it":"Appesa vuota, sulla fiducia.","ja":"空っぽのまま吊るす。信じる心だけで。","ko":"빈 채로 걸어 둔다. 믿음 하나로.","nl-NL":"Leeg opgehangen, op goed vertrouwen.","pt-BR":"Pendurada vazia, só na fé.","ru":"Висит пустой. Держится на одной вере.","sv":"Upphängd tom, i ren tillit.","th":"แขวนไว้ทั้งที่ว่างเปล่า ด้วยศรัทธาล้วน ๆ","tr":"Boş asılır, sırf inançla.","vi":"Treo lên khi còn trống, chỉ bằng niềm tin.","zh-Hans":"空着挂上去，全凭相信。","zh-Hant":"空空地掛上去，全憑相信。"}}</script>
 <script src="/library/worksheet-words.js"></script>
 <script src="/library/worksheet.js"></script>
 <script>

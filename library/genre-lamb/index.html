@@ -216,7 +216,7 @@
     <p class="crumb"><a href="/library/" data-t="libCaps">Library</a></p>
     <h1>#73 Lamb</h1>
     <p class="count"><span class="tier common">Common</span>Animals · 9 lines · 44 points · Medium · about 5 min</p>
-    
+    <p class="words">“Sleep well. One sheep is enough tonight. 😴”</p>
     <div class="pic-grid">
       <figure class="common"><img src="/library/img/genre-lamb.png" width="600" height="600" alt="Lamb: a Coordigo mystery picture, drawn by joining points on a 16 × 16 grid"></figure>
       <div class="menu">
@@ -228,8 +228,7 @@
             <div class="seg"><label><input type="radio" name="paper" value="letter"> <span data-w="letter">Letter</span></label><label><input type="radio" name="paper" value="a4"> <span data-w="a4">A4</span></label></div>
           </fieldset>
           <label class="check"><input type="checkbox" name="answer" checked> <span data-w="answerPage">Answer page in color</span></label>
-          <label class="field"><span data-w="titleField">Title · optional, on the answer page</span><input type="text" name="title" maxlength="40" autocomplete="off"></label>
-          <label class="field"><span data-w="wordsField">Words · optional, on the answer page</span><textarea name="words" maxlength="120" rows="2"></textarea></label>
+          <label class="field"><span data-w="noteField">Your words · optional, on the puzzle page (Class: Name:)</span><textarea name="note" rows="3" maxlength="200" autocomplete="off"></textarea></label>
         </form>
         <div class="acts">
           <button class="act primary" id="sheetPrint" type="button" data-w="print">Print</button>
@@ -256,7 +255,8 @@
 <script src="/store.js"></script>
 <script src="/mystery/strings.js"></script>
 <script src="/mystery/engine.js"></script>
-<script type="application/json" id="faces">[["#33c759",[[[1,7],[2,8],[3,9],[4,9],[5,10],[6,10],[6,11],[6,12],[6,13],[7,13],[8,13],[8,12],[8,11],[8,10],[9,10],[10,10],[10,11],[10,12],[10,13],[11,13],[12,13],[12,12],[12,11],[12,10],[13,10],[14,9],[14,8],[14,7],[15,7],[15,15],[0,15],[0,7]]]],["#a37045",[[[2,8],[1,7],[1,6],[2,4],[3,3],[4,4],[5,6],[5,7],[5,8],[4,9],[3,9]]]],["#ffffff",[[[10,2],[11,3],[12,3],[13,4],[14,5],[14,6],[14,7],[14,8],[14,9],[13,10],[12,10],[11,10],[10,10],[9,10],[8,10],[7,10],[6,10],[5,10],[4,9],[5,8],[5,7],[5,6],[7,7],[6,5],[4,4],[3,3],[4,2],[5,3],[6,3],[7,2],[8,3],[9,3]]]],["#c9f5ff",[[[11,3],[10,2],[9,3],[8,3],[7,2],[6,3],[5,3],[4,2],[3,3],[2,4],[1,6],[1,7],[0,7],[0,0],[15,0],[15,7],[14,7],[14,6],[14,5],[13,4],[12,3]]]],["#a37045",[[[11,13],[10,13],[10,12],[10,11],[10,10],[11,10],[11,11],[11,12]]]],["#a37045",[[[12,10],[12,11],[12,12],[12,13],[11,13],[11,12],[11,11],[11,10]]]],["#a37045",[[[6,5],[7,7],[5,6],[4,4]]]],["#a37045",[[[8,10],[8,11],[8,12],[8,13],[7,13],[7,12],[7,11],[7,10]]]],["#a37045",[[[6,11],[6,10],[7,10],[7,11],[7,12],[7,13],[6,13],[6,12]]]]]</script>
+<script type="application/json" id="faces">[["#a37045",[[[11,10],[12,10],[12,11],[12,12],[12,13],[11,13],[11,12],[11,11]]]],["#ffffff",[[[12,10],[11,10],[10,10],[9,10],[8,10],[7,10],[6,10],[5,10],[4,9],[5,8],[5,7],[5,6],[7,7],[6,5],[4,4],[3,3],[4,2],[5,3],[6,3],[7,2],[8,3],[9,3],[10,2],[11,3],[12,3],[13,4],[14,5],[14,6],[14,7],[14,8],[14,9],[13,10]]]],["#33c759",[[[14,9],[14,8],[14,7],[15,7],[15,15],[0,15],[0,7],[1,7],[2,8],[3,9],[4,9],[5,10],[6,10],[6,11],[6,12],[6,13],[7,13],[8,13],[8,12],[8,11],[8,10],[9,10],[10,10],[10,11],[10,12],[10,13],[11,13],[12,13],[12,12],[12,11],[12,10],[13,10]]]],["#c9f5ff",[[[14,5],[13,4],[12,3],[11,3],[10,2],[9,3],[8,3],[7,2],[6,3],[5,3],[4,2],[3,3],[2,4],[1,6],[1,7],[0,7],[0,0],[15,0],[15,7],[14,7],[14,6]]]],["#a37045",[[[11,13],[10,13],[10,12],[10,11],[10,10],[11,10],[11,11],[11,12]]]],["#a37045",[[[7,11],[7,12],[7,13],[6,13],[6,12],[6,11],[6,10],[7,10]]]],["#a37045",[[[7,12],[7,11],[7,10],[8,10],[8,11],[8,12],[8,13],[7,13]]]],["#a37045",[[[1,7],[1,6],[2,4],[3,3],[4,4],[5,6],[5,7],[5,8],[4,9],[3,9],[2,8]]]],["#a37045",[[[7,7],[5,6],[4,4],[6,5]]]]]</script>
+<script type="application/json" id="picture-words">{"m":{"ar-SA":"نومًا هنيئًا. خروف واحد يكفي الليلة. 😴","de-DE":"Schlaf gut. Heute Nacht reicht ein Schaf. 😴","en-AU":"Sleep well. One sheep is enough tonight. 😴","en-GB":"Sleep well. One sheep is enough tonight. 😴","en-US":"Sleep well. One sheep is enough tonight. 😴","es-ES":"Que descanses. Esta noche basta con una oveja. 😴","es-MX":"Que descanses. Hoy basta con una ovejita. 😴","fr-FR":"Dors bien. Ce soir, un seul mouton suffit. 😴","hi":"शुभ रात्रि। आज एक भेड़ ही काफ़ी है। 😴","id":"Tidur nyenyak. Malam ini satu domba cukup. 😴","it":"Dormi bene. Stanotte basta una pecora. 😴","ja":"おやすみ。今夜は羊一匹で十分。😴","ko":"잘 자. 오늘 밤은 양 한 마리면 충분해. 😴","nl-NL":"Slaap lekker. Eén schaapje is vannacht genoeg. 😴","pt-BR":"Dorme bem. Hoje uma ovelhinha basta. 😴","ru":"Спокойной ночи. Сегодня хватит одной овечки. 😴","sv":"Sov gott. Ett får räcker i natt. 😴","th":"ฝันดีนะ คืนนี้นับแกะตัวเดียวก็พอ 😴","tr":"İyi uykular. Bu gece bir kuzu yeter. 😴","vi":"Ngủ ngon. Tối nay đếm một con cừu là đủ. 😴","zh-Hans":"晚安。今晚数一只羊就够了。😴","zh-Hant":"晚安。今晚數一隻羊就夠了。😴"}}</script>
 <script src="/library/worksheet-words.js"></script>
 <script src="/library/worksheet.js"></script>
 <script>

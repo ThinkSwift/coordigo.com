@@ -216,7 +216,7 @@
     <p class="crumb"><a href="/library/" data-t="libCaps">Library</a></p>
     <h1>#119 Pumpkin pie</h1>
     <p class="count"><span class="tier common">Common</span>Food &amp; drink · 6 lines · 37 points · Quick · about 2 min</p>
-    
+    <p class="words">“Saved for last, as all the best slices are.”</p>
     <div class="pic-grid">
       <figure class="common"><img src="/library/img/genre-pie.png" width="600" height="600" alt="Pumpkin pie: a Coordigo mystery picture, drawn by joining points on a 16 × 16 grid"></figure>
       <div class="menu">
@@ -228,8 +228,7 @@
             <div class="seg"><label><input type="radio" name="paper" value="letter"> <span data-w="letter">Letter</span></label><label><input type="radio" name="paper" value="a4"> <span data-w="a4">A4</span></label></div>
           </fieldset>
           <label class="check"><input type="checkbox" name="answer" checked> <span data-w="answerPage">Answer page in color</span></label>
-          <label class="field"><span data-w="titleField">Title · optional, on the answer page</span><input type="text" name="title" maxlength="40" autocomplete="off"></label>
-          <label class="field"><span data-w="wordsField">Words · optional, on the answer page</span><textarea name="words" maxlength="120" rows="2"></textarea></label>
+          <label class="field"><span data-w="noteField">Your words · optional, on the puzzle page (Class: Name:)</span><textarea name="note" rows="3" maxlength="200" autocomplete="off"></textarea></label>
         </form>
         <div class="acts">
           <button class="act primary" id="sheetPrint" type="button" data-w="print">Print</button>
@@ -256,7 +255,8 @@
 <script src="/store.js"></script>
 <script src="/mystery/strings.js"></script>
 <script src="/mystery/engine.js"></script>
-<script type="application/json" id="faces">[["#ff9400",[[[10,7],[10,8],[9,8],[8,8],[7,8],[6,8],[5,8],[4,8],[3,8],[2,8],[9,2],[10,5],[10,6]],[[6,7],[7,7],[8,7],[9,7],[9,6],[8,5],[7,5],[6,6]]]],["#ffc482",[[[10,8],[10,7],[10,6],[10,5],[9,2],[10,1],[11,1],[12,2],[11,3],[12,2],[13,4],[12,5],[13,4],[13,5],[13,6],[13,7],[13,8],[12,7],[11,7]]]],["#ffc482",[[[13,9],[13,10],[13,11],[12,11],[11,11],[10,11],[9,11],[8,11],[7,11],[6,11],[5,11],[4,11],[3,11],[2,11],[2,10],[3,10],[4,10],[5,10],[6,10],[7,10],[8,10],[9,10],[10,10],[10,9],[10,8],[11,7],[12,7],[13,8]]]],["#ffffff",[[[13,10],[13,9],[14,11],[13,12],[11,13],[10,13],[9,13],[8,13],[7,13],[6,13],[5,13],[4,13],[2,12],[1,11],[2,9],[2,10],[2,11],[3,11],[4,11],[5,11],[6,11],[7,11],[8,11],[9,11],[10,11],[11,11],[12,11],[13,11]]]],["#a37045",[[[9,10],[8,10],[7,10],[6,10],[5,10],[4,10],[3,10],[2,10],[2,9],[2,8],[3,8],[4,8],[5,8],[6,8],[7,8],[8,8],[9,8],[10,8],[10,9],[10,10]]]],["#ffffff",[[[7,7],[6,7],[6,6],[7,5],[8,5]]]],["#c9f5ff",[[[7,7],[8,5],[9,6],[9,7],[8,7]]]],["#c9f5ff",[[[0,0],[15,0],[15,15],[0,15]],[[9,2],[2,8],[2,9],[1,11],[2,12],[4,13],[5,13],[6,13],[7,13],[8,13],[9,13],[10,13],[11,13],[13,12],[14,11],[13,9],[13,8],[13,7],[13,6],[13,5],[13,4],[12,2],[11,1],[10,1]]]]]</script>
+<script type="application/json" id="faces">[["#ffffff",[[[10,13],[9,13],[8,13],[7,13],[6,13],[5,13],[4,13],[2,12],[1,11],[2,9],[2,10],[2,11],[3,11],[4,11],[5,11],[6,11],[7,11],[8,11],[9,11],[10,11],[11,11],[12,11],[13,11],[13,10],[13,9],[14,11],[13,12],[11,13]]]],["#ffc482",[[[13,6],[13,7],[13,8],[12,7],[11,7],[10,8],[10,7],[10,6],[10,5],[9,2],[10,1],[11,1],[12,2],[11,3],[12,2],[13,4],[12,5],[13,4],[13,5]]]],["#ffc482",[[[10,11],[9,11],[8,11],[7,11],[6,11],[5,11],[4,11],[3,11],[2,11],[2,10],[3,10],[4,10],[5,10],[6,10],[7,10],[8,10],[9,10],[10,10],[10,9],[10,8],[11,7],[12,7],[13,8],[13,9],[13,10],[13,11],[12,11],[11,11]]]],["#ff9400",[[[10,6],[10,7],[10,8],[9,8],[8,8],[7,8],[6,8],[5,8],[4,8],[3,8],[2,8],[9,2],[10,5]],[[7,7],[8,7],[9,7],[9,6],[8,5],[7,5],[6,6],[6,7]]]],["#a37045",[[[7,10],[6,10],[5,10],[4,10],[3,10],[2,10],[2,9],[2,8],[3,8],[4,8],[5,8],[6,8],[7,8],[8,8],[9,8],[10,8],[10,9],[10,10],[9,10],[8,10]]]],["#c9f5ff",[[[8,7],[7,7],[8,5],[9,6],[9,7]]]],["#ffffff",[[[7,7],[6,7],[6,6],[7,5],[8,5]]]],["#c9f5ff",[[[0,0],[15,0],[15,15],[0,15]],[[9,13],[10,13],[11,13],[13,12],[14,11],[13,9],[13,8],[13,7],[13,6],[13,5],[13,4],[12,2],[11,1],[10,1],[9,2],[2,8],[2,9],[1,11],[2,12],[4,13],[5,13],[6,13],[7,13],[8,13]]]]]</script>
+<script type="application/json" id="picture-words">{"m":{"ar-SA":"مؤجلة إلى الأخير، كأفضل القطع دائمًا.","de-DE":"Bis zum Schluss aufgehoben, wie alle besten Stücke.","en-AU":"Saved for last, as all the best slices are.","en-GB":"Saved for last, as all the best slices are.","en-US":"Saved for last, as all the best slices are.","es-ES":"Guardada para el final, como los mejores trozos.","es-MX":"Guardado para el final, como las mejores rebanadas.","fr-FR":"Gardée pour la fin, comme toutes les meilleures parts.","hi":"सबसे आख़िर के लिए बचाया, जैसे हर बेहतरीन टुकड़ा।","id":"Disimpan untuk terakhir, seperti semua potongan terbaik.","it":"Tenuta per ultima, come tutte le fette migliori.","ja":"最後にとっておいた。いちばんの一切れはいつもそう。","ko":"마지막까지 아껴 둔 조각. 최고는 늘 그래요.","nl-NL":"Bewaard voor het laatst, zoals alle beste stukken.","pt-BR":"Guardada para o fim, como todas as melhores fatias.","ru":"Оставлен на потом, как все лучшие кусочки.","sv":"Sparad till sist, som alla de bästa bitarna.","th":"เก็บไว้ท้ายสุด เหมือนชิ้นอร่อยที่สุดเสมอ","tr":"En sona saklandı, en iyi dilimler gibi.","vi":"Để dành sau cùng, như mọi miếng ngon nhất.","zh-Hans":"留到最后，最好的那块总是这样。","zh-Hant":"留到最後，最好的那塊總是這樣。"}}</script>
 <script src="/library/worksheet-words.js"></script>
 <script src="/library/worksheet.js"></script>
 <script>

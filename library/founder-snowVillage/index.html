@@ -216,7 +216,7 @@
     <p class="crumb"><a href="/library/" data-t="libCaps">Library</a></p>
     <h1>#195 Snowy village</h1>
     <p class="count"><span class="tier rare">Rare</span>Places · 13 lines · 46 points · Medium · about 5 min</p>
-    
+    <p class="words">“Snow day. Nowhere to be, nothing to rush.”</p>
     <div class="pic-grid">
       <figure class="rare"><img src="/library/img/founder-snowVillage.png" width="600" height="600" alt="Snowy village: a Coordigo mystery picture, drawn by joining points on a 16 × 16 grid"></figure>
       <div class="menu">
@@ -228,8 +228,7 @@
             <div class="seg"><label><input type="radio" name="paper" value="letter"> <span data-w="letter">Letter</span></label><label><input type="radio" name="paper" value="a4"> <span data-w="a4">A4</span></label></div>
           </fieldset>
           <label class="check"><input type="checkbox" name="answer" checked> <span data-w="answerPage">Answer page in color</span></label>
-          <label class="field"><span data-w="titleField">Title · optional, on the answer page</span><input type="text" name="title" maxlength="40" autocomplete="off"></label>
-          <label class="field"><span data-w="wordsField">Words · optional, on the answer page</span><textarea name="words" maxlength="120" rows="2"></textarea></label>
+          <label class="field"><span data-w="noteField">Your words · optional, on the puzzle page (Class: Name:)</span><textarea name="note" rows="3" maxlength="200" autocomplete="off"></textarea></label>
         </form>
         <div class="acts">
           <button class="act primary" id="sheetPrint" type="button" data-w="print">Print</button>
@@ -256,7 +255,8 @@
 <script src="/store.js"></script>
 <script src="/mystery/strings.js"></script>
 <script src="/mystery/engine.js"></script>
-<script type="application/json" id="faces">[["#ffffff",[[[4,7],[5,7],[6,7],[7,7],[8,7],[7,9],[6,9],[5,9],[4,9],[3,9],[2,9],[3,7]]]],["#5952de",[[[5,7],[4,7],[3,7],[2,9],[2,10],[2,11],[2,12],[2,13],[1,13],[0,13],[0,0],[15,0],[15,9],[14,7],[11,6],[10,7],[9,8],[8,7],[7,7],[7,6],[6,6],[6,7]]]],["#a37045",[[[7,7],[6,7],[6,6],[7,6]]]],["#a37045",[[[13,9],[13,10],[13,11],[12,11],[12,10],[12,9],[11,9],[10,9],[9,8],[10,7],[11,6],[12,7],[13,8]]]],["#a37045",[[[13,10],[13,9],[13,8],[15,9],[15,10],[15,11],[15,12],[13,11]]]],["#ffffff",[[[2,13],[3,13],[4,13],[5,13],[6,13],[7,13],[10,12],[10,11],[11,11],[12,11],[13,11],[15,12],[15,13],[14,13],[13,13],[12,13],[13,13],[14,13],[15,13],[15,15],[0,15],[0,13],[1,13]]]],["#ffc482",[[[3,13],[2,13],[2,12],[2,11],[2,10],[2,9],[3,9],[4,9],[5,9],[6,9],[7,9],[7,10],[7,11],[7,12],[7,13],[6,13],[5,13],[5,12],[5,11],[4,11],[4,10],[3,10],[3,11],[4,11],[4,12],[4,13]]]],["#a37045",[[[5,12],[5,13],[4,13],[4,12],[4,11],[5,11]]]],["#a37045",[[[12,10],[12,11],[11,11],[11,10],[11,9],[12,9]]]],["#ffd60a",[[[4,11],[3,11],[3,10],[4,10]]]],["#ffc482",[[[10,10],[11,10],[11,11],[10,11]]]],["#ffd60a",[[[11,10],[10,10],[10,9],[11,9]]]],["#a37045",[[[7,10],[7,9],[8,7],[9,8],[10,9],[10,10],[10,11],[10,12],[7,13],[7,12],[7,11]]]],["#ffffff",[[[11,6],[14,7],[15,9],[13,8],[12,7]]]]]</script>
+<script type="application/json" id="faces">[["#ffd60a",[[[11,9],[11,10],[10,10],[10,9]]]],["#a37045",[[[11,10],[11,9],[12,9],[12,10],[12,11],[11,11]]]],["#ffc482",[[[2,9],[3,9],[4,9],[5,9],[6,9],[7,9],[7,10],[7,11],[7,12],[7,13],[6,13],[5,13],[5,12],[5,11],[4,11],[4,10],[3,10],[3,11],[4,11],[4,12],[4,13],[3,13],[2,13],[2,12],[2,11],[2,10]]]],["#ffffff",[[[3,9],[2,9],[3,7],[4,7],[5,7],[6,7],[7,7],[8,7],[7,9],[6,9],[5,9],[4,9]]]],["#ffd60a",[[[3,11],[3,10],[4,10],[4,11]]]],["#a37045",[[[13,8],[15,9],[15,10],[15,11],[15,12],[13,11],[13,10],[13,9]]]],["#ffffff",[[[15,9],[13,8],[12,7],[11,6],[14,7]]]],["#ffffff",[[[12,13],[13,13],[14,13],[15,13],[15,15],[0,15],[0,13],[1,13],[2,13],[3,13],[4,13],[5,13],[6,13],[7,13],[10,12],[10,11],[11,11],[12,11],[13,11],[15,12],[15,13],[14,13],[13,13]]]],["#a37045",[[[5,13],[4,13],[4,12],[4,11],[5,11],[5,12]]]],["#a37045",[[[7,11],[7,10],[7,9],[8,7],[9,8],[10,9],[10,10],[10,11],[10,12],[7,13],[7,12]]]],["#a37045",[[[7,7],[6,7],[6,6],[7,6]]]],["#5952de",[[[2,10],[2,11],[2,12],[2,13],[1,13],[0,13],[0,0],[15,0],[15,9],[14,7],[11,6],[10,7],[9,8],[8,7],[7,7],[7,6],[6,6],[6,7],[5,7],[4,7],[3,7],[2,9]]]],["#a37045",[[[12,9],[11,9],[10,9],[9,8],[10,7],[11,6],[12,7],[13,8],[13,9],[13,10],[13,11],[12,11],[12,10]]]],["#ffc482",[[[10,11],[10,10],[11,10],[11,11]]]]]</script>
+<script type="application/json" id="picture-words">{"m":{"ar-SA":"يوم ثلج. لا مكان تذهب إليه، ولا شيء يستعجلك.","de-DE":"Schneetag. Nichts vor, nichts eilt.","en-AU":"Snow day. Nowhere to be, nothing to rush.","en-GB":"Snow day. Nowhere to be, nothing to rush.","en-US":"Snow day. Nowhere to be, nothing to rush.","es-ES":"Día de nieve. Ni prisas ni planes.","es-MX":"Día de nieve. Sin prisas y sin pendientes.","fr-FR":"Jour de neige. Rien à faire, rien ne presse.","hi":"बर्फ़ वाला दिन। न कहीं जाना, न कोई जल्दी।","id":"Hari bersalju. Nggak ke mana-mana, nggak buru-buru.","it":"Giorno di neve. Niente da fare, niente fretta.","ja":"雪の日。行く場所も、急ぐこともない。","ko":"눈 오는 날. 갈 데도, 서두를 일도 없다.","nl-NL":"Sneeuwdag. Nergens heen, niks hoeft.","pt-BR":"Dia de neve. Nenhum lugar pra ir, nenhuma pressa.","ru":"Снежный день. Никуда не надо, некуда спешить.","sv":"Snödag. Inget att passa, inget att stressa över.","th":"วันหิมะตก ไม่ต้องไปไหน ไม่ต้องรีบอะไร","tr":"Kar tatili. Ne gidecek yer var ne acele.","vi":"Ngày tuyết rơi. Chẳng phải đi đâu, chẳng cần vội.","zh-Hans":"下雪天。哪儿也不去，啥也不急。","zh-Hant":"下雪天。哪裡都不用去，什麼都不用趕。"}}</script>
 <script src="/library/worksheet-words.js"></script>
 <script src="/library/worksheet.js"></script>
 <script>

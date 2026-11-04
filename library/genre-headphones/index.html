@@ -216,7 +216,7 @@
     <p class="crumb"><a href="/library/" data-t="libCaps">Library</a></p>
     <h1>#50 Headphones</h1>
     <p class="count"><span class="tier common">Common</span>Tech &amp; games · 3 lines · 42 points · Medium · about 5 min</p>
-    
+    <p class="words">“Put on your favorite song. The rest can wait.”</p>
     <div class="pic-grid">
       <figure class="common"><img src="/library/img/genre-headphones.png" width="600" height="600" alt="Headphones: a Coordigo mystery picture, drawn by joining points on a 16 × 16 grid"></figure>
       <div class="menu">
@@ -228,8 +228,7 @@
             <div class="seg"><label><input type="radio" name="paper" value="letter"> <span data-w="letter">Letter</span></label><label><input type="radio" name="paper" value="a4"> <span data-w="a4">A4</span></label></div>
           </fieldset>
           <label class="check"><input type="checkbox" name="answer" checked> <span data-w="answerPage">Answer page in color</span></label>
-          <label class="field"><span data-w="titleField">Title · optional, on the answer page</span><input type="text" name="title" maxlength="40" autocomplete="off"></label>
-          <label class="field"><span data-w="wordsField">Words · optional, on the answer page</span><textarea name="words" maxlength="120" rows="2"></textarea></label>
+          <label class="field"><span data-w="noteField">Your words · optional, on the puzzle page (Class: Name:)</span><textarea name="note" rows="3" maxlength="200" autocomplete="off"></textarea></label>
         </form>
         <div class="acts">
           <button class="act primary" id="sheetPrint" type="button" data-w="print">Print</button>
@@ -256,7 +255,8 @@
 <script src="/store.js"></script>
 <script src="/mystery/strings.js"></script>
 <script src="/mystery/engine.js"></script>
-<script type="application/json" id="faces">[["#ff3b30",[[[2,11],[2,10],[3,9],[4,9],[4,10],[4,11],[4,12],[4,13],[4,14],[3,14],[2,13],[2,12]]]],["#5952de",[[[10,2],[11,3],[12,4],[13,6],[13,7],[13,8],[13,9],[12,9],[12,8],[12,7],[12,6],[11,4],[9,3],[8,3],[7,3],[5,4],[4,6],[4,7],[4,8],[4,9],[3,9],[3,8],[3,7],[3,6],[4,4],[5,3],[6,2],[7,2],[8,2],[9,2]]]],["#5952de",[[[5,12],[5,13],[4,14],[4,13],[4,12],[4,11],[4,10],[4,9],[5,10],[5,11]]]],["#1f1c1f",[[[7,11],[6,11],[6,10],[7,10]]]],["#5952de",[[[12,10],[12,11],[12,12],[12,13],[12,14],[11,13],[11,12],[11,11],[11,10],[12,9]]]],["#ff3b30",[[[12,11],[12,10],[12,9],[13,9],[14,10],[14,11],[14,12],[14,13],[13,14],[12,14],[12,13],[12,12]]]],["#1f1c1f",[[[9,9],[10,9],[10,10],[9,10]]]],["#c9f5ff",[[[0,0],[15,0],[15,15],[0,15]],[[2,10],[2,11],[2,12],[2,13],[3,14],[4,14],[5,13],[5,12],[5,11],[5,10],[4,9],[4,8],[4,7],[4,6],[5,4],[7,3],[8,3],[9,3],[11,4],[12,6],[12,7],[12,8],[12,9],[11,10],[11,11],[11,12],[11,13],[12,14],[13,14],[14,13],[14,12],[14,11],[14,10],[13,9],[13,8],[13,7],[13,6],[12,4],[11,3],[10,2],[9,2],[8,2],[7,2],[6,2],[5,3],[4,4],[3,6],[3,7],[3,8],[3,9]],[[10,7],[10,8],[10,9],[9,9],[9,10],[10,10],[10,9],[10,8],[10,7],[10,6],[7,7],[7,8],[7,9],[7,10],[6,10],[6,11],[7,11],[7,10],[7,9],[7,8],[7,7],[10,6]]]]]</script>
+<script type="application/json" id="faces">[["#5952de",[[[5,13],[4,14],[4,13],[4,12],[4,11],[4,10],[4,9],[5,10],[5,11],[5,12]]]],["#5952de",[[[3,9],[3,8],[3,7],[3,6],[4,4],[5,3],[6,2],[7,2],[8,2],[9,2],[10,2],[11,3],[12,4],[13,6],[13,7],[13,8],[13,9],[12,9],[12,8],[12,7],[12,6],[11,4],[9,3],[8,3],[7,3],[5,4],[4,6],[4,7],[4,8],[4,9]]]],["#1f1c1f",[[[7,10],[7,11],[6,11],[6,10]]]],["#ff3b30",[[[4,9],[4,10],[4,11],[4,12],[4,13],[4,14],[3,14],[2,13],[2,12],[2,11],[2,10],[3,9]]]],["#5952de",[[[11,11],[11,10],[12,9],[12,10],[12,11],[12,12],[12,13],[12,14],[11,13],[11,12]]]],["#ff3b30",[[[12,10],[12,9],[13,9],[14,10],[14,11],[14,12],[14,13],[13,14],[12,14],[12,13],[12,12],[12,11]]]],["#1f1c1f",[[[9,10],[9,9],[10,9],[10,10]]]],["#c9f5ff",[[[0,0],[15,0],[15,15],[0,15]],[[10,8],[10,9],[9,9],[9,10],[10,10],[10,9],[10,8],[10,7],[10,6],[7,7],[7,8],[7,9],[7,10],[6,10],[6,11],[7,11],[7,10],[7,9],[7,8],[7,7],[10,6],[10,7]],[[4,14],[5,13],[5,12],[5,11],[5,10],[4,9],[4,8],[4,7],[4,6],[5,4],[7,3],[8,3],[9,3],[11,4],[12,6],[12,7],[12,8],[12,9],[11,10],[11,11],[11,12],[11,13],[12,14],[13,14],[14,13],[14,12],[14,11],[14,10],[13,9],[13,8],[13,7],[13,6],[12,4],[11,3],[10,2],[9,2],[8,2],[7,2],[6,2],[5,3],[4,4],[3,6],[3,7],[3,8],[3,9],[2,10],[2,11],[2,12],[2,13],[3,14]]]]]</script>
+<script type="application/json" id="picture-words">{"m":{"ar-SA":"شغّل أغنيتك المفضلة، والباقي ينتظر.","de-DE":"Mach dein Lieblingslied an. Der Rest kann warten.","en-AU":"Put on your favorite song. The rest can wait.","en-GB":"Put on your favorite song. The rest can wait.","en-US":"Put on your favorite song. The rest can wait.","es-ES":"Pon tu canción favorita. Lo demás puede esperar.","es-MX":"Pon tu canción favorita. Lo demás puede esperar.","fr-FR":"Mets ta chanson préférée. Le reste attendra.","hi":"अपना पसंदीदा गाना लगाओ। बाक़ी सब बाद में।","id":"Putar lagu favoritmu. Sisanya bisa nunggu.","it":"Metti la tua canzone preferita. Il resto può aspettare.","ja":"好きな曲をかけて。ほかはあとでいい。","ko":"좋아하는 노래 틀어. 나머진 나중에.","nl-NL":"Zet je favoriete nummer op. De rest kan wachten.","pt-BR":"Coloca sua música favorita. O resto pode esperar.","ru":"Включи любимую песню. Остальное подождёт.","sv":"Sätt på din favoritlåt. Resten kan vänta.","th":"เปิดเพลงโปรดสิ เรื่องอื่นรอได้","tr":"En sevdiğin şarkıyı aç. Gerisi bekleyebilir.","vi":"Bật bài hát bạn thích đi. Mọi thứ khác để sau.","zh-Hans":"放首你最爱的歌。别的等会儿再说。","zh-Hant":"放一首你最愛的歌。其他的等等再說。"}}</script>
 <script src="/library/worksheet-words.js"></script>
 <script src="/library/worksheet.js"></script>
 <script>

@@ -216,7 +216,7 @@
     <p class="crumb"><a href="/library/" data-t="libCaps">Library</a></p>
     <h1>#151 Big Ben</h1>
     <p class="count"><span class="tier common">Common</span>Places · 9 lines · 33 points · Quick · about 2 min</p>
-    
+    <p class="words">“Any hour is a good hour to say hello.”</p>
     <div class="pic-grid">
       <figure class="common"><img src="/library/img/genre-big-ben.png" width="600" height="600" alt="Big Ben: a Coordigo mystery picture, drawn by joining points on a 16 × 16 grid"></figure>
       <div class="menu">
@@ -228,8 +228,7 @@
             <div class="seg"><label><input type="radio" name="paper" value="letter"> <span data-w="letter">Letter</span></label><label><input type="radio" name="paper" value="a4"> <span data-w="a4">A4</span></label></div>
           </fieldset>
           <label class="check"><input type="checkbox" name="answer" checked> <span data-w="answerPage">Answer page in color</span></label>
-          <label class="field"><span data-w="titleField">Title · optional, on the answer page</span><input type="text" name="title" maxlength="40" autocomplete="off"></label>
-          <label class="field"><span data-w="wordsField">Words · optional, on the answer page</span><textarea name="words" maxlength="120" rows="2"></textarea></label>
+          <label class="field"><span data-w="noteField">Your words · optional, on the puzzle page (Class: Name:)</span><textarea name="note" rows="3" maxlength="200" autocomplete="off"></textarea></label>
         </form>
         <div class="acts">
           <button class="act primary" id="sheetPrint" type="button" data-w="print">Print</button>
@@ -256,7 +255,8 @@
 <script src="/store.js"></script>
 <script src="/mystery/strings.js"></script>
 <script src="/mystery/engine.js"></script>
-<script type="application/json" id="faces">[["#5952de",[[[10,7],[10,8],[9,8],[8,8],[8,7],[8,6],[9,6],[10,6]]]],["#5952de",[[[10,8],[10,7],[10,6],[12,5],[12,6],[12,7]]]],["#ffd60a",[[[4,8],[5,8],[6,8],[7,8],[8,8],[9,8],[10,8],[10,9],[10,10],[10,11],[10,12],[10,13],[10,14],[9,14],[8,14],[7,14],[6,14],[5,14],[4,14],[4,13],[4,12],[4,11],[4,10],[4,9]],[[6,9],[5,10],[5,11],[5,12],[6,13],[7,13],[8,13],[9,12],[9,11],[9,10],[8,9],[7,9]]]],["#5952de",[[[5,8],[4,8],[4,7],[4,6],[5,6],[6,6],[6,7],[6,8]]]],["#a37045",[[[10,14],[10,13],[10,12],[10,11],[10,10],[10,9],[10,8],[12,7],[12,8],[12,9],[12,10],[12,11],[12,12],[12,13]]]],["#5952de",[[[6,6],[7,6],[8,6],[8,7],[8,8],[7,8],[6,8],[6,7]]]],["#007aff",[[[7,6],[6,6],[5,6],[4,6],[8,1],[10,6],[9,6],[8,6]]]],["#c9f5ff",[[[12,11],[12,10],[12,9],[12,8],[12,7],[12,6],[12,5],[11,4],[10,3],[9,2],[8,1],[4,6],[4,7],[4,8],[4,9],[4,10],[4,11],[4,12],[4,13],[4,14],[4,15],[0,15],[0,0],[15,0],[15,15],[12,15],[12,14],[12,13],[12,12]]]],["#ffc482",[[[6,14],[7,14],[8,14],[9,14],[10,14],[10,15],[4,15],[4,14],[5,14]]]],["#ffffff",[[[5,10],[6,9],[7,9],[8,9],[9,10],[9,11],[9,12],[8,13],[7,13],[6,13],[5,12],[5,11]]]],["#a37045",[[[12,13],[12,14],[12,15],[10,15],[10,14]]]],["#5952de",[[[10,3],[11,4],[12,5],[10,6],[8,1],[9,2]]]]]</script>
+<script type="application/json" id="faces">[["#5952de",[[[7,6],[8,6],[8,7],[8,8],[7,8],[6,8],[6,7],[6,6]]]],["#007aff",[[[8,6],[7,6],[6,6],[5,6],[4,6],[8,1],[10,6],[9,6]]]],["#5952de",[[[5,6],[6,6],[6,7],[6,8],[5,8],[4,8],[4,7],[4,6]]]],["#5952de",[[[8,1],[9,2],[10,3],[11,4],[12,5],[10,6]]]],["#c9f5ff",[[[9,2],[8,1],[4,6],[4,7],[4,8],[4,9],[4,10],[4,11],[4,12],[4,13],[4,14],[4,15],[0,15],[0,0],[15,0],[15,15],[12,15],[12,14],[12,13],[12,12],[12,11],[12,10],[12,9],[12,8],[12,7],[12,6],[12,5],[11,4],[10,3]]]],["#ffd60a",[[[8,8],[9,8],[10,8],[10,9],[10,10],[10,11],[10,12],[10,13],[10,14],[9,14],[8,14],[7,14],[6,14],[5,14],[4,14],[4,13],[4,12],[4,11],[4,10],[4,9],[4,8],[5,8],[6,8],[7,8]],[[8,13],[9,12],[9,11],[9,10],[8,9],[7,9],[6,9],[5,10],[5,11],[5,12],[6,13],[7,13]]]],["#5952de",[[[9,8],[8,8],[8,7],[8,6],[9,6],[10,6],[10,7],[10,8]]]],["#a37045",[[[10,12],[10,11],[10,10],[10,9],[10,8],[12,7],[12,8],[12,9],[12,10],[12,11],[12,12],[12,13],[10,14],[10,13]]]],["#ffffff",[[[9,12],[8,13],[7,13],[6,13],[5,12],[5,11],[5,10],[6,9],[7,9],[8,9],[9,10],[9,11]]]],["#5952de",[[[12,6],[12,7],[10,8],[10,7],[10,6],[12,5]]]],["#ffc482",[[[5,14],[6,14],[7,14],[8,14],[9,14],[10,14],[10,15],[4,15],[4,14]]]],["#a37045",[[[10,14],[12,13],[12,14],[12,15],[10,15]]]]]</script>
+<script type="application/json" id="picture-words">{"m":{"ar-SA":"كل ساعة مناسبة لإلقاء التحية.","de-DE":"Für ein Hallo ist jede Stunde die richtige.","en-AU":"Any hour is a good hour to say hello.","en-GB":"Any hour is a good hour to say hello.","en-US":"Any hour is a good hour to say hello.","es-ES":"Cualquier hora es buena para saludar.","es-MX":"Cualquier hora es buena para saludar.","fr-FR":"Toute heure est bonne pour dire bonjour.","hi":"हालचाल पूछने के लिए हर घड़ी सही है।","id":"Jam berapa pun pas buat menyapa.","it":"Ogni ora è buona per dire ciao.","ja":"あいさつするのに、悪い時間なんてない。","ko":"안부 전하기엔 어느 시간이든 좋아.","nl-NL":"Elk uur is een goed uur om hallo te zeggen.","pt-BR":"Toda hora é boa hora pra dar um oi.","ru":"Любой час хорош, чтобы сказать «привет».","sv":"Varje timme är en bra timme att säga hej.","th":"จะทักทายกัน เวลาไหนก็ดีทั้งนั้น","tr":"Merhaba demek için her saat uygun.","vi":"Giờ nào cũng là giờ đẹp để hỏi thăm nhau.","zh-Hans":"想问声好，什么时候都不晚。","zh-Hant":"想打聲招呼，什麼時候都剛好。"}}</script>
 <script src="/library/worksheet-words.js"></script>
 <script src="/library/worksheet.js"></script>
 <script>
