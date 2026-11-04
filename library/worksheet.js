@@ -3,8 +3,9 @@
 // WorksheetPage (Coordigo Print.swift) step for step: the puzzle with a header, the key, the grid and the code in a panel;
 // the answer as a postcard with the picture, the words and the brand at its foot. The words are the app's own in its 19
 // languages (worksheet-words.js, from the app's string catalog), and the menu speaks the language chosen; the settings are
-// the app's (paper, answer page in color, the sheet's title and words); the answer's colours are the app's exact faces
-// (the page's #faces). Drawn for the preview (canvases, both pages) and for the PDF (lines and fills as vectors, words at
+// the app's (paper, answer page in color, and the printer's own words on the puzzle page — founder 2026-11-05,
+// RDM-co-6-2-worksheet-puzzle-note); the answer prints as it is, with the picture's own message in the worksheet's
+// language (the app's messages.json, the page's #picture-words); the answer's colours are the app's exact faces (#faces). Drawn for the preview (canvases, both pages) and for the PDF (lines and fills as vectors, words at
 // 432 dpi). tools/worksheet-parity.py checks it against the app's own pages.
 (() => {
   'use strict';
@@ -16,7 +17,8 @@
     : (window.CO_LIBRARY || []).find(i => i.id === page.dataset.picture);
   if (!item) return;
   const NUMBER = +page.dataset.number || 0, TITLE = page.dataset.title || '', TIER = (page.dataset.tier || '').toLowerCase();
-  const FACES = (() => { try { return JSON.parse(($('faces') || {}).textContent || 'null'); } catch (e) { return null; } })();
+  const json = id => { try { return JSON.parse(($(id) || {}).textContent || 'null'); } catch (e) { return null; } };
+  const FACES = json('faces'), OWN = json('picture-words') || {};   // OWN: {m: locale → message, t: locale → title}
 
   // MARK: Words — the app's, in the reader's language unless they pick another
   const WORDS = window.CO_WORKSHEET_WORDS || {};
@@ -36,10 +38,21 @@
     let i = 0;
     return ((WORDS[lang] || {})[key] || (WORDS.en || {})[key] || '').replace(/%(?:(\d)\$)?@/g, (_, n) => String(args[n ? +n - 1 : i++]));
   };
+  // The picture's own message and title in a language, as the app picks them (MysteryLibrary.pick): the reader's own
+  // region if it is that language, the language, its usual region, any region of it, then English
+  const USUAL = { en: 'en-US', es: 'es-ES', ar: 'ar-SA', de: 'de-DE', fr: 'fr-FR', nl: 'nl-NL' };
+  const pick = (byLocale, lang) => {
+    if (!byLocale) return '';
+    const own = (navigator.languages || []).find(t => t.split('-')[0] === lang.split('-')[0] && t.includes('-'));
+    const keys = Object.keys(byLocale).sort();
+    const tries = [own, lang, USUAL[lang], ...keys.filter(k => k.startsWith(lang + '-')), 'en-US', 'en'];
+    for (const t of tries) if (t && byLocale[t]) return byLocale[t];
+    return '';
+  };
   // "#242 · Legendary", beside the brand (PrintOptions.label)
   const label = lang => NUMBER ? '#' + NUMBER + (TIER ? ' · ' + say(lang, TIER) : '') : '';
 
-  // MARK: Settings — the app's: Settings › Worksheets (paper, answer page) and the worksheet sheet (title, words)
+  // MARK: Settings — the app's: Settings › Worksheets (paper, answer page) and the worksheet sheet (the printer's words)
   const LETTER = ['US', 'CA', 'MX', 'PH', 'PR', 'CL', 'CO', 'VE', 'GT', 'CR', 'PA', 'DO', 'SV', 'NI', 'HN', 'BZ'];
   const PAPER = { letter: { w: 612, h: 792 }, a4: { w: 595.28, h: 841.89 } };
   const region = ((navigator.language || 'en-US').split('-')[1] || 'US').toUpperCase();
@@ -52,7 +65,7 @@
   }
   const options = () => ({
     paper: form.elements.paper.value, answer: form.elements.answer.checked, lang: form.elements.lang.value || readerLang,
-    title: form.elements.title.value.trim(), words: form.elements.words.value.trim(),
+    note: form.elements.note.value.trim(),
   });
   // The menu in the worksheet's language (the app's own words for its sheet and settings)
   function speak(lang) {
@@ -73,7 +86,7 @@
   // Lines are spaced as Core Text spaces them for the app's fonts (measured with the app's NSFont/CTFramesetter: the first
   // baseline, the line pitch and one line's frame height), so a paragraph takes the same room in every browser; the code's
   // pairs are laid out at SF Mono's advance.
-  const CORE_TEXT = { 'sans 11': [11, 13, 14], 'sans 12': [12, 15, 15], 'sans 22': [21, 26, 26], 'serif 18': [27.5, 31.5, 32] };
+  const CORE_TEXT = { 'sans 11': [11, 13, 14], 'sans 13': [13, 16, 16], 'sans 12': [12, 15, 15], 'sans 22': [21, 26, 26], 'serif 18': [27.5, 31.5, 32] };
   const metrics = font => {
     const z = parseFloat(/([\d.]+)px/.exec(font)[1]), fam = font.includes(SERIF) ? 'serif' : 'sans';
     const [base, pitch, one] = CORE_TEXT[fam + ' ' + z] || [Math.round(0.9668 * z), Math.round(0.9668 * z) + Math.round(0.2109 * z), Math.ceil(1.1777 * z)];
@@ -91,14 +104,14 @@
     }
     return out;
   };
-  const lines = (s, font, w, lang) => {
+  const lines = (s, font, w, lang) => s.split('\n').flatMap(para => {      // a typed line break stays a break
     const out = []; let line = '';
-    for (const p of pieces(s, lang)) {
+    for (const p of pieces(para, lang)) {
       if (line && width((line + p).trimEnd(), font) > w) { out.push(line.trim()); line = p.trimStart(); } else line += p;
     }
-    if (line.trim()) out.push(line.trim());
+    out.push(line.trim());
     return out;
-  };
+  });
   // Core Text's natural alignment: a paragraph runs the way its first strong letter does
   const RTL = s => { const m = /[A-Za-zÀ-ɏͰ-῿぀-￯]|[֐-ࣿיִ-﷿ﹰ-﻿]/.exec(s); return !!m && /[֐-ࣿיִ-﷿ﹰ-﻿]/.test(m[0]); };
   // The page reads right to left in Arabic: the heading and the brand swap sides (WorksheetPage.rtl)
@@ -236,7 +249,10 @@
     S.rect(0, 0, pg.w, pg.h, '#ffffff');
     const hb = header(S, say(o.lang, 'heading'), null, label(o.lang), pg, o.lang);
     const bottom = pg.h - m;
-    const top = paragraph(S, say(o.lang, 'key'), sans(11), INK, m, hb + 14, w, o.lang);
+    let top = paragraph(S, say(o.lang, 'key'), sans(11), INK, m, hb + 14, w, o.lang);
+    // the printer's words in the room between the reading line and the grid, three lines at most ("Class: Name:")
+    const note = o.note.split('\n').slice(0, 3).join('\n').trim();
+    if (note) top = paragraph(S, note, sans(13), INK, m, top + 16, w, o.lang);
     const toks = tokens(p.segments), inner = w - 2 * PAD;
     let side = w * SHARE, size = 13;
     const block = (g, s) => AXIS + g + 24 + panelHeight(codeHeight(toks, s, inner));
@@ -249,10 +265,10 @@
   function answerPage(S, pg, p, o) {
     const m = MARGIN, w = pg.w - 2 * m;
     S.rect(0, 0, pg.w, pg.h, '#ffffff');
-    const hb = header(S, TITLE || say(o.lang, 'yourPicture'), o.title, null, pg, o.lang);
+    const hb = header(S, pick(OWN.t, o.lang) || TITLE || say(o.lang, 'yourPicture'), null, null, pg, o.lang);
     const brandTop = pg.h - m - BRAND_H;
     brand(S, label(o.lang), brandTop, pg, o.lang);
-    const bottom = brandTop - 24, side = Math.round(w * 0.56), words = o.words, textWidth = Math.round(w * 0.74), poem = serif(18);
+    const bottom = brandTop - 24, side = Math.round(w * 0.56), words = (o.words != null ? o.words : pick(OWN.m, o.lang)).trim(), textWidth = Math.round(w * 0.74), poem = serif(18);
     // balanced lines, as a poem is set: the narrowest measure that keeps the same number of lines
     let pw = textWidth;
     if (words) {
@@ -325,7 +341,9 @@
   let typing = 0;
   form.addEventListener('change', preview);
   form.elements.lang.addEventListener('change', preview);           // the language sits in the menu's head, outside the form
-  form.addEventListener('input', e => { if (e.target.type === 'text' || e.target.tagName === 'TEXTAREA') { clearTimeout(typing); typing = setTimeout(preview, 250); } });
+  form.addEventListener('input', e => { if (e.target.tagName === 'TEXTAREA') { clearTimeout(typing); typing = setTimeout(preview, 250); } });
+  // three lines at most, as the app keeps them
+  form.elements.note.addEventListener('input', e => { const t = e.target, ls = t.value.split('\n'); if (ls.length > 3) t.value = ls.slice(0, 3).join('\n'); });
   const solve = $('solveHere'), player = $('player');
   solve.addEventListener('click', () => {
     player.hidden = false;

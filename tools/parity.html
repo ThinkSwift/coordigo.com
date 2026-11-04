@@ -10,7 +10,7 @@
   f.onload = async () => {
     const W = f.contentWindow;
     for (let i = 0; i < 100 && !W.CoWorksheet; i++) await new Promise(r => setTimeout(r, 50));
-    const o = { paper: q.get('paper'), title: q.get('title') || '', words: q.get('words') || '', answer: q.get('answer') === '1', lang: q.get('lang') || 'en' };
+    const o = { paper: q.get('paper'), note: q.get('note') || '', words: q.get('words'), answer: q.get('answer') === '1', lang: q.get('lang') || 'en' };
     if (q.get('pdf') === '1') { const doc = await W.CoWorksheet.pdf(o); document.getElementById('out').textContent = 'PDF ' + doc.output('datauristring') + ' END'; return; }
     const pages = await W.CoWorksheet.pages(o);
     document.getElementById('out').textContent = 'PAGES ' + JSON.stringify(pages) + ' END';

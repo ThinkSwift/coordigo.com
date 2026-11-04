@@ -11,7 +11,7 @@ KEYS = {  # on the page (Print.swift WorksheetPage)
         'common': 'Common', 'rare': 'Rare', 'epic': 'Epic', 'legendary': 'Legendary',
         # in the menu (the app's worksheet sheet and Settings › Worksheets)
         'worksheet': 'Worksheet', 'paper': 'Paper', 'letter': 'Letter', 'a4': 'A4', 'answerPage': 'Answer page in color',
-        'titleField': 'Title · optional, on the answer page', 'wordsField': 'Words · optional, on the answer page',
+        'noteField': 'Your words · optional, on the puzzle page (Class: Name:)',
         'print': 'Print', 'sharePDF': 'Share as PDF'}
 cat = json.loads(pathlib.Path(sys.argv[1]).read_text())['strings']
 out = {'en': {k: v.replace('%lld', '%@') for k, v in KEYS.items()}}

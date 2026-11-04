@@ -3,7 +3,7 @@
 WorksheetPage part of Print.swift as it is, and run it.
 
   tools/worksheet-ref.py <Coordigo source dir> faces <out.json>
-  tools/worksheet-ref.py <Coordigo source dir> pages <out dir> <id> <letter|a4> <title> <words> <answer> <label>
+  tools/worksheet-ref.py <Coordigo source dir> pages <out dir> <id> <letter|a4> <note> <words> <answer> <label>
 """
 import json, pathlib, re, subprocess, sys, tempfile
 SRC = pathlib.Path(sys.argv[1]); HERE = pathlib.Path(__file__).resolve().parent

@@ -13,21 +13,22 @@ SITE = pathlib.Path(__file__).resolve().parent.parent
 SRC = sys.argv[1]; OUT = pathlib.Path(sys.argv[2] if len(sys.argv) > 2 else tempfile.mkdtemp()); OUT.mkdir(parents=True, exist_ok=True)
 CHROME = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'
 lib = {e['id']: e for e in json.loads((pathlib.Path(SRC) / 'Sources/Resources/Mystery/library.json').read_text())}
-CASES = [  # id, paper, typed title, words, answer page
-    ('genre-samurai-helmet', 'letter', '', '', 1), ('genre-greek-helmet', 'a4', '', '', 1), ('genre-mushrooms', 'letter', '', '', 1),
-    ('founder-theEmeraldCity', 'a4', 'For Grandma', '', 1),
+MESSAGES = json.loads((pathlib.Path(SRC) / 'Sources/Resources/Mystery/messages.json').read_text())
+CASES = [  # id, paper, the printer's words on the puzzle page, answer page — the answer carries the picture's en-US message
+    ('genre-samurai-helmet', 'letter', '', 1), ('genre-greek-helmet', 'a4', 'Class 3B\nName: ____________', 1), ('genre-mushrooms', 'letter', '', 1),
+    ('founder-theEmeraldCity', 'a4', 'For Mina, with love from Dad', 1),
 ]
 handler = functools.partial(http.server.SimpleHTTPRequestHandler, directory=str(SITE))
 handler.log_message = lambda *a: None
 srv = http.server.ThreadingHTTPServer(('127.0.0.1', 0), handler); port = srv.server_address[1]
 threading.Thread(target=srv.serve_forever, daemon=True).start()
 worst, fails = 0, []
-for id, paper, typed, words, answer in CASES:
-    e = lib[id]; label = f"#{e['number']} · {e['tier']}"
+for id, paper, note, answer in CASES:
+    e = lib[id]; label = f"#{e['number']} · {e['tier']}"; words = ((MESSAGES.get(id) or {}).get('m') or {}).get('en-US', '')
     app = OUT / 'app'; app.mkdir(exist_ok=True)
-    subprocess.run([sys.executable, str(SITE / 'tools/worksheet-ref.py'), SRC, 'pages', str(app), id, paper, typed, words, str(answer), label],
+    subprocess.run([sys.executable, str(SITE / 'tools/worksheet-ref.py'), SRC, 'pages', str(app), id, paper, note, words, str(answer), label],
                    check=True, capture_output=True)
-    q = urllib.parse.urlencode({'id': id, 'paper': paper, 'title': typed, 'words': words, 'answer': answer, 'lang': 'en'})
+    q = urllib.parse.urlencode({'id': id, 'paper': paper, 'note': note, 'words': words, 'answer': answer, 'lang': 'en'})
     url = f'http://127.0.0.1:{port}/tools/parity.html?{q}'
     dom = subprocess.run([CHROME, '--headless=new', '--disable-gpu', f'--user-data-dir={tempfile.mkdtemp()}', '--virtual-time-budget=15000', '--dump-dom', url],
                          capture_output=True, text=True, timeout=120).stdout

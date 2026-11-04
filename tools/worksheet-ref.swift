@@ -5,7 +5,7 @@ import UniformTypeIdentifiers
 // The app's own worksheet code, run for the site (tools/worksheet-ref.py compiles it with Coordigo's sources and the
 // WorksheetPage part of Print.swift, unchanged):
 //   faces <Mystery folder> <id>...                → each picture's colour faces as the app fills them (JSON)
-//   pages <Mystery folder> <out> <id> <letter|a4> <title> <words> <answer 0|1> <label>
+//   pages <Mystery folder> <out> <id> <letter|a4> <note> <words> <answer 0|1> <label>
 //                                                 → the pages as the app draws them, PNG at 3x (for the parity check)
 let args = CommandLine.arguments
 let folder = URL(fileURLWithPath: args[2])
@@ -43,7 +43,7 @@ case "pages":
     let p = picture(id)
     var o = PrintOptions()
     o.paper = args[5] == "a4" ? .a4 : .letter
-    o.title = args[6]; o.words = args[7]; o.answer = args[8] == "1"; o.label = args[9]
+    o.note = args[6]; o.words = args[7]; o.answer = args[8] == "1"; o.label = args[9]
     let size = o.paper.size, scale: CGFloat = 3
     for (i, kind) in WorksheetPage.kinds(o).enumerated() {
         let w = Int(size.width * scale), h = Int(size.height * scale)
