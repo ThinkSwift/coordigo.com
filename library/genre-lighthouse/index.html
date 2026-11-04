@@ -127,14 +127,24 @@
   @media (max-width:600px){ .tab{min-width:0;flex:1;padding:10px 6px 9px} .tabs{flex:1} .site{flex:1;width:auto} }
 
   /* landing: a small film beside the words, then the puzzle as the page's main */
-  .intro{display:grid;grid-template-columns:1fr 300px;gap:28px;align-items:center;padding:26px 0 6px}
+  /* the puzzle first, then the intro with How it works folded behind one line (founder 2026-11-05) */
+  .intro{display:grid;grid-template-columns:1fr 300px;gap:28px;align-items:center;padding:34px 0 6px}
+  .howto{margin:14px 0 0}
+  .howto summary{display:inline-flex;align-items:center;gap:8px;cursor:pointer;list-style:none;font:600 14px/1.2 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    color:var(--ink);border:1px solid var(--line);border-radius:999px;padding:8px 14px}
+  .howto summary::-webkit-details-marker{display:none}
+  .howto summary::after{content:"";width:7px;height:7px;border-right:1.6px solid currentColor;border-bottom:1.6px solid currentColor;transform:rotate(45deg) translateY(-2px);transition:transform .15s}
+  .howto[open] summary::after{transform:rotate(-135deg) translateY(-1px)}
+  .howto .how{list-style:none;margin:12px 0 0;padding:0;display:grid;gap:8px;grid-template-columns:1fr}
+  .howto .how li{display:flex;gap:10px;align-items:baseline;background:var(--mat);border:1px solid var(--hair);border-radius:12px;padding:10px 14px}
+  .howto .how b{flex:0 0 auto;margin:0}
   .intro .film{margin:0;border-radius:14px;overflow:hidden;box-shadow:var(--shadow);background:#fff}
   .intro .film video{border-radius:0}
   .bigplay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;border:0;background:rgba(27,25,23,.12);cursor:pointer}
   .bigplay span{width:64px;height:64px;border-radius:50%;background:rgba(27,25,23,.72);display:grid;place-items:center}
   .bigplay svg{width:26px;height:26px;margin-left:4px;fill:#fff}
   .bigplay[hidden]{display:none}
-  .puzzle{margin:22px 0 0;background:var(--mat);border:1px solid var(--hair);border-radius:16px;box-shadow:var(--shadow);padding:12px 6px 4px}
+  .puzzle{margin:18px 0 0;background:var(--mat);border:1px solid var(--hair);border-radius:16px;box-shadow:var(--shadow);padding:12px 6px 4px}
   .puzzle .head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:2px 12px 0}
   .puzzle iframe{display:block;width:100%;height:640px;border:0;background:transparent}
   .another{font:600 14px/1.2 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;cursor:pointer;border:1px solid var(--ink);border-radius:999px;padding:8px 16px;background:none;color:var(--ink)}
@@ -255,7 +265,7 @@
 <script src="/store.js"></script>
 <script src="/mystery/strings.js"></script>
 <script src="/mystery/engine.js"></script>
-<script type="application/json" id="faces">[["#ff3b30",[[[3,14],[4,11],[7,12],[6,12],[6,13],[6,14],[5,14],[4,14]]]],["#5952de",[[[4,11],[3,14],[2,14],[1,14],[0,14],[0,0],[15,0],[12,1],[9,2],[8,1],[7,1],[6,2],[6,3],[6,4],[5,4],[5,5],[6,5],[5,8]]]],["#a37045",[[[7,13],[7,14],[6,14],[6,13],[6,12],[7,12]]]],["#ff3b30",[[[7,14],[7,13],[7,12],[8,12],[10.1,11.3],[11,14],[10,14],[9,14],[8,14]]]],["#ff3b30",[[[8,5],[9,5],[10,8],[9.143,8.429],[9,8]]]],["#1f1c1f",[[[9,5],[8,5],[7,5],[6,5],[5,5],[5,4],[6,4],[7,4],[8,4],[9,4],[10,4],[10,5]]]],["#ffd60a",[[[7,4],[6,4],[6,3],[6,2],[7,2],[7,3]]]],["#ffd60a",[[[9,3],[9,4],[8,4],[7,4],[7,3],[7,2],[8,2],[9,2]]]],["#5952de",[[[9,4],[9,3],[12,4],[15,5],[15,14],[14,14],[13,14],[12,14],[11,11],[10,8],[9,5],[10,5],[10,4]]]],["#ff3b30",[[[8,1],[9,2],[8,2],[7,2],[6,2],[7,1]]]],["#ffffff",[[[8,12],[7,12],[4,11],[5,8],[7,9],[8,9],[9.143,8.429],[10,11],[10.1,11.3]]]],["#33c759",[[[0,14],[1,14],[2,14],[3,14],[4,14],[5,14],[6,14],[7,14],[8,14],[9,14],[10,14],[11,14],[12,14],[13,14],[14,14],[15,14],[15,15],[0,15]]]],["#ff3b30",[[[7,5],[8,5],[9,8],[9.143,8.429],[8,9],[7,9],[5,8],[6,5]],[[7,7],[8,7],[8,6],[7,6]]]],["#ff3b30",[[[11,11],[12,14],[11,14],[10.1,11.3]]]],["#ffd60a",[[[8,7],[7,7],[7,6],[8,6]]]],["#c9f5ff",[[[10,11],[9.143,8.429],[10,8],[11,11],[10.1,11.3]]]],["#ffd60a",[[[9,3],[9,2],[12,1],[15,0],[15,5],[12,4]]]]]</script>
+<script type="application/json" id="faces">[["#1f1c1f",[[[8,4],[9,4],[10,4],[10,5],[9,5],[8,5],[7,5],[6,5],[5,5],[5,4],[6,4],[7,4]]]],["#ffd60a",[[[9,4],[8,4],[7,4],[7,3],[7,2],[8,2],[9,2],[9,3]]]],["#ff3b30",[[[9,5],[10,8],[9.143,8.429],[9,8],[8,5]]]],["#5952de",[[[10,8],[9,5],[10,5],[10,4],[9,4],[9,3],[12,4],[15,5],[15,14],[14,14],[13,14],[12,14],[11,11]]]],["#ffd60a",[[[15,5],[12,4],[9,3],[9,2],[12,1],[15,0]]]],["#ff3b30",[[[6,13],[6,14],[5,14],[4,14],[3,14],[4,11],[7,12],[6,12]]]],["#a37045",[[[6,14],[6,13],[6,12],[7,12],[7,13],[7,14]]]],["#ffd60a",[[[6,2],[7,2],[7,3],[7,4],[6,4],[6,3]]]],["#ff3b30",[[[7,2],[6,2],[7,1],[8,1],[9,2],[8,2]]]],["#33c759",[[[11,14],[12,14],[13,14],[14,14],[15,14],[15,15],[0,15],[0,14],[1,14],[2,14],[3,14],[4,14],[5,14],[6,14],[7,14],[8,14],[9,14],[10,14]]]],["#ff3b30",[[[12,14],[11,14],[10.1,11.3],[11,11]]]],["#ff3b30",[[[7,12],[8,12],[10.1,11.3],[11,14],[10,14],[9,14],[8,14],[7,14],[7,13]]]],["#ffffff",[[[8,12],[7,12],[4,11],[5,8],[7,9],[8,9],[9.143,8.429],[10,11],[10.1,11.3]]]],["#ff3b30",[[[7,9],[5,8],[6,5],[7,5],[8,5],[9,8],[9.143,8.429],[8,9]],[[8,7],[8,6],[7,6],[7,7]]]],["#5952de",[[[15,0],[12,1],[9,2],[8,1],[7,1],[6,2],[6,3],[6,4],[5,4],[5,5],[6,5],[5,8],[4,11],[3,14],[2,14],[1,14],[0,14],[0,0]]]],["#c9f5ff",[[[10.1,11.3],[10,11],[9.143,8.429],[10,8],[11,11]]]],["#ffd60a",[[[8,6],[8,7],[7,7],[7,6]]]]]</script>
 <script type="application/json" id="picture-words">{"m":{"ar-SA":"كل سفينة هناك تجد طريقها إلى البيت الليلة.","de-DE":"Jedes Schiff da draußen findet heute Nacht nach Hause.","en-AU":"Every ship out there finds its way home tonight.","en-GB":"Every ship out there finds its way home tonight.","en-US":"Every ship out there finds its way home tonight.","es-ES":"Todos los barcos encontrarán el camino a casa esta noche.","es-MX":"Todos los barcos encontrarán el camino a casa esta noche.","fr-FR":"Ce soir, chaque navire au large retrouve le chemin du port.","hi":"आज रात वहाँ हर जहाज़ घर का रास्ता पा लेगा।","id":"Setiap kapal di luar sana menemukan jalan pulang malam ini.","it":"Stanotte ogni nave là fuori ritrova la strada di casa.","ja":"今夜、沖の船はみんな家に帰れる。","ko":"오늘 밤, 바다 위 모든 배가 집을 찾아가요.","nl-NL":"Elk schip daarbuiten vindt vannacht de weg naar huis.","pt-BR":"Todo navio lá fora encontra o caminho de casa esta noite.","ru":"Каждый корабль сегодня найдёт дорогу домой.","sv":"Varje skepp där ute hittar hem i natt.","th":"เรือทุกลำคืนนี้จะหาทางกลับบ้านเจอ","tr":"Bu gece denizdeki her gemi evinin yolunu bulacak.","vi":"Đêm nay, mọi con tàu ngoài kia đều tìm được đường về.","zh-Hans":"今晚，海上每一艘船都能找到回家的路。","zh-Hant":"今晚，海上每一艘船都找得到回家的路。"}}</script>
 <script src="/library/worksheet-words.js"></script>
 <script src="/library/worksheet.js"></script>

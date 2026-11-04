@@ -127,14 +127,24 @@
   @media (max-width:600px){ .tab{min-width:0;flex:1;padding:10px 6px 9px} .tabs{flex:1} .site{flex:1;width:auto} }
 
   /* landing: a small film beside the words, then the puzzle as the page's main */
-  .intro{display:grid;grid-template-columns:1fr 300px;gap:28px;align-items:center;padding:26px 0 6px}
+  /* the puzzle first, then the intro with How it works folded behind one line (founder 2026-11-05) */
+  .intro{display:grid;grid-template-columns:1fr 300px;gap:28px;align-items:center;padding:34px 0 6px}
+  .howto{margin:14px 0 0}
+  .howto summary{display:inline-flex;align-items:center;gap:8px;cursor:pointer;list-style:none;font:600 14px/1.2 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    color:var(--ink);border:1px solid var(--line);border-radius:999px;padding:8px 14px}
+  .howto summary::-webkit-details-marker{display:none}
+  .howto summary::after{content:"";width:7px;height:7px;border-right:1.6px solid currentColor;border-bottom:1.6px solid currentColor;transform:rotate(45deg) translateY(-2px);transition:transform .15s}
+  .howto[open] summary::after{transform:rotate(-135deg) translateY(-1px)}
+  .howto .how{list-style:none;margin:12px 0 0;padding:0;display:grid;gap:8px;grid-template-columns:1fr}
+  .howto .how li{display:flex;gap:10px;align-items:baseline;background:var(--mat);border:1px solid var(--hair);border-radius:12px;padding:10px 14px}
+  .howto .how b{flex:0 0 auto;margin:0}
   .intro .film{margin:0;border-radius:14px;overflow:hidden;box-shadow:var(--shadow);background:#fff}
   .intro .film video{border-radius:0}
   .bigplay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;border:0;background:rgba(27,25,23,.12);cursor:pointer}
   .bigplay span{width:64px;height:64px;border-radius:50%;background:rgba(27,25,23,.72);display:grid;place-items:center}
   .bigplay svg{width:26px;height:26px;margin-left:4px;fill:#fff}
   .bigplay[hidden]{display:none}
-  .puzzle{margin:22px 0 0;background:var(--mat);border:1px solid var(--hair);border-radius:16px;box-shadow:var(--shadow);padding:12px 6px 4px}
+  .puzzle{margin:18px 0 0;background:var(--mat);border:1px solid var(--hair);border-radius:16px;box-shadow:var(--shadow);padding:12px 6px 4px}
   .puzzle .head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:2px 12px 0}
   .puzzle iframe{display:block;width:100%;height:640px;border:0;background:transparent}
   .another{font:600 14px/1.2 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;cursor:pointer;border:1px solid var(--ink);border-radius:999px;padding:8px 16px;background:none;color:var(--ink)}
@@ -255,7 +265,7 @@
 <script src="/store.js"></script>
 <script src="/mystery/strings.js"></script>
 <script src="/mystery/engine.js"></script>
-<script type="application/json" id="faces">[["#a37045",[[[7,12],[6,11],[5,11],[6,9],[7,10],[8,9],[9,10],[10,9],[10,10],[10,11],[9,12],[8,13]]]],["#a37045",[[[4,7],[5,6],[6,5],[7,6],[8,5],[9,6],[10,5],[11,7],[10,8],[9,7],[8,8],[7,7],[6,8],[5,7]]]],["#a37045",[[[4,9],[5,7],[6,8],[7,7],[8,8],[9,7],[10,8],[11,7],[10,9],[9,10],[8,9],[7,10],[6,9],[5,9]]]],["#a37045",[[[10,5],[11,6],[12,7],[11,7]]]],["#a37045",[[[8,3],[9,3],[10,5],[9,6],[8,5],[7,6],[7,5],[7,4],[7,3]]]],["#ffc482",[[[7,4],[7,5],[7,6],[6,5],[5,5],[6,4],[7,3]]]],["#a37045",[[[12,9],[11,9],[10,9],[11,7]]]],["#a37045",[[[10,11],[10,10],[10,9],[11,11]]]],["#a37045",[[[10,4],[11,5],[10,5],[9,3]]]],["#c9f5ff",[[[0,0],[15,0],[15,15],[0,15]],[[6,11],[7,12],[8,13],[9,12],[10,11],[11,11],[10,9],[11,9],[12,9],[11,7],[12,7],[11,6],[10,5],[11,5],[10,4],[9,3],[8,3],[8,2],[9,1],[8,2],[8,3],[7,3],[6,4],[5,5],[6,5],[5,6],[4,7],[5,7],[4,9],[5,9],[6,9],[5,11]]]]]</script>
+<script type="application/json" id="faces">[["#a37045",[[[4,9],[5,7],[6,8],[7,7],[8,8],[9,7],[10,8],[11,7],[10,9],[9,10],[8,9],[7,10],[6,9],[5,9]]]],["#a37045",[[[6,8],[5,7],[4,7],[5,6],[6,5],[7,6],[8,5],[9,6],[10,5],[11,7],[10,8],[9,7],[8,8],[7,7]]]],["#a37045",[[[7,3],[8,3],[9,3],[10,5],[9,6],[8,5],[7,6],[7,5],[7,4]]]],["#a37045",[[[10,9],[10,10],[10,11],[9,12],[8,13],[7,12],[6,11],[5,11],[6,9],[7,10],[8,9],[9,10]]]],["#a37045",[[[10,10],[10,9],[11,11],[10,11]]]],["#a37045",[[[11,7],[10,5],[11,6],[12,7]]]],["#ffc482",[[[7,6],[6,5],[5,5],[6,4],[7,3],[7,4],[7,5]]]],["#a37045",[[[10,4],[11,5],[10,5],[9,3]]]],["#a37045",[[[11,9],[10,9],[11,7],[12,9]]]],["#c9f5ff",[[[0,0],[15,0],[15,15],[0,15]],[[5,7],[4,9],[5,9],[6,9],[5,11],[6,11],[7,12],[8,13],[9,12],[10,11],[11,11],[10,9],[11,9],[12,9],[11,7],[12,7],[11,6],[10,5],[11,5],[10,4],[9,3],[8,3],[8,2],[9,1],[8,2],[8,3],[7,3],[6,4],[5,5],[6,5],[5,6],[4,7]]]]]</script>
 <script type="application/json" id="picture-words">{"m":{"ar-SA":"داخل هذا الكوز، غابة تنتظر أن تنمو.","de-DE":"In diesem Zapfen wartet ein ganzer Wald aufs Wachsen.","en-AU":"Inside this cone, a forest is waiting to grow.","en-GB":"Inside this cone, a forest is waiting to grow.","en-US":"Inside this cone, a forest is waiting to grow.","es-ES":"Dentro de esta piña espera todo un bosque.","es-MX":"Dentro de esta piña de pino espera todo un bosque.","fr-FR":"Dans cette pomme de pin, une forêt attend de pousser.","hi":"इस चीड़ फल में एक पूरा जंगल उगने को तैयार है।","id":"Di dalam buah pinus ini, sebuah hutan menunggu tumbuh.","it":"Dentro questa pigna, un bosco aspetta di crescere.","ja":"この松ぼっくりの中で、森が育つのを待っている。","ko":"이 솔방울 속에서 숲 하나가 자랄 날을 기다려요.","nl-NL":"In deze dennenappel wacht een heel bos om te groeien.","pt-BR":"Dentro desta pinha, uma floresta espera para crescer.","ru":"В этой шишке ждёт своего часа целый лес.","sv":"Inuti den här kotten väntar en hel skog på att växa.","th":"ในลูกสนนี้ ป่าทั้งป่ากำลังรอเติบโต","tr":"Bu kozalağın içinde büyümeyi bekleyen bir orman var.","vi":"Bên trong quả thông này, cả một cánh rừng đang chờ lớn.","zh-Hans":"这颗松果里，有一片森林在等着长大。","zh-Hant":"這顆松果裡，有一片森林等著長大。"}}</script>
 <script src="/library/worksheet-words.js"></script>
 <script src="/library/worksheet.js"></script>

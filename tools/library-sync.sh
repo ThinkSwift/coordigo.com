@@ -11,8 +11,6 @@ SITE=$(cd "$(dirname "$0")/.." && pwd); TMP=$(mktemp -d); trap 'rm -rf "$TMP"' E
 mkdir "$TMP/src" "$TMP/out"
 if [ "$REF" = "--worktree" ]; then (cd "$REPO" && tar -c Sources Tests/Web scripts) | tar -x -C "$TMP/src"
 else git -C "$REPO" archive "$REF" Sources Tests/Web scripts | tar -x -C "$TMP/src"; fi
-# until Coordigo fixes it (INC-2026-11-04-co-web-library-script-stale): the script's source list lacks Faces.swift
-grep -q Faces.swift "$TMP/src/scripts/web-library.py" || sed -i '' 's|"Sources/CoordigoKit/Palette.swift"\]|"Sources/CoordigoKit/Palette.swift", "Sources/CoordigoKit/Faces.swift"]|' "$TMP/src/scripts/web-library.py"
 (cd "$TMP/src" && python3 scripts/web-library.py "$TMP/out" >/dev/null)
 node "$SITE/tools/library-data.mjs" "$TMP/out/library.js" > "$TMP/lib.json"
 python3 "$SITE/tools/worksheet-ref.py" "$TMP/src" faces "$TMP/faces.json"

@@ -127,14 +127,24 @@
   @media (max-width:600px){ .tab{min-width:0;flex:1;padding:10px 6px 9px} .tabs{flex:1} .site{flex:1;width:auto} }
 
   /* landing: a small film beside the words, then the puzzle as the page's main */
-  .intro{display:grid;grid-template-columns:1fr 300px;gap:28px;align-items:center;padding:26px 0 6px}
+  /* the puzzle first, then the intro with How it works folded behind one line (founder 2026-11-05) */
+  .intro{display:grid;grid-template-columns:1fr 300px;gap:28px;align-items:center;padding:34px 0 6px}
+  .howto{margin:14px 0 0}
+  .howto summary{display:inline-flex;align-items:center;gap:8px;cursor:pointer;list-style:none;font:600 14px/1.2 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    color:var(--ink);border:1px solid var(--line);border-radius:999px;padding:8px 14px}
+  .howto summary::-webkit-details-marker{display:none}
+  .howto summary::after{content:"";width:7px;height:7px;border-right:1.6px solid currentColor;border-bottom:1.6px solid currentColor;transform:rotate(45deg) translateY(-2px);transition:transform .15s}
+  .howto[open] summary::after{transform:rotate(-135deg) translateY(-1px)}
+  .howto .how{list-style:none;margin:12px 0 0;padding:0;display:grid;gap:8px;grid-template-columns:1fr}
+  .howto .how li{display:flex;gap:10px;align-items:baseline;background:var(--mat);border:1px solid var(--hair);border-radius:12px;padding:10px 14px}
+  .howto .how b{flex:0 0 auto;margin:0}
   .intro .film{margin:0;border-radius:14px;overflow:hidden;box-shadow:var(--shadow);background:#fff}
   .intro .film video{border-radius:0}
   .bigplay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;border:0;background:rgba(27,25,23,.12);cursor:pointer}
   .bigplay span{width:64px;height:64px;border-radius:50%;background:rgba(27,25,23,.72);display:grid;place-items:center}
   .bigplay svg{width:26px;height:26px;margin-left:4px;fill:#fff}
   .bigplay[hidden]{display:none}
-  .puzzle{margin:22px 0 0;background:var(--mat);border:1px solid var(--hair);border-radius:16px;box-shadow:var(--shadow);padding:12px 6px 4px}
+  .puzzle{margin:18px 0 0;background:var(--mat);border:1px solid var(--hair);border-radius:16px;box-shadow:var(--shadow);padding:12px 6px 4px}
   .puzzle .head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:2px 12px 0}
   .puzzle iframe{display:block;width:100%;height:640px;border:0;background:transparent}
   .another{font:600 14px/1.2 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;cursor:pointer;border:1px solid var(--ink);border-radius:999px;padding:8px 16px;background:none;color:var(--ink)}
@@ -255,7 +265,7 @@
 <script src="/store.js"></script>
 <script src="/mystery/strings.js"></script>
 <script src="/mystery/engine.js"></script>
-<script type="application/json" id="faces">[["#ffc482",[[[6,8],[7,10],[7,11],[7,12],[7,13],[7,14],[5,13],[3,12],[3,11],[3,10],[3,9],[3,8],[4,7],[5,6]],[[6,11],[4,10],[4,11],[6,12]]]],["#ff3b30",[[[7,10],[6,8],[7,8],[8,7],[9,7],[10,6],[11,6],[12,5],[13,7],[11,8],[9,9]]]],["#ff9400",[[[7,11],[7,10],[9,9],[11,8],[13,7],[13,8],[13,9],[13,10],[13,11],[11,12],[11,11],[11,10],[11,9],[9,10],[9,11],[9,12],[9,13],[7,14],[7,13],[7,12]]]],["#ffffff",[[[5,6],[7,5],[9,4],[11,3],[12,5],[11,6],[10,6],[9,7],[8,7],[7,8],[6,8]]]],["#a37045",[[[11,9],[11,10],[11,11],[11,12],[9,13],[9,12],[9,11],[9,10]]]],["#ffd60a",[[[4,10],[6,11],[6,12],[4,11]]]],["#5952de",[[[0,0],[15,0],[15,15],[0,15]],[[13,7],[12,5],[11,3],[9,4],[7,5],[5,6],[4,7],[3,8],[3,9],[3,10],[3,11],[3,12],[5,13],[7,14],[9,13],[11,12],[13,11],[13,10],[13,9],[13,8]]]]]</script>
+<script type="application/json" id="faces">[["#ffc482",[[[5,13],[3,12],[3,11],[3,10],[3,9],[3,8],[4,7],[5,6],[6,8],[7,10],[7,11],[7,12],[7,13],[7,14]],[[4,11],[6,12],[6,11],[4,10]]]],["#a37045",[[[11,9],[11,10],[11,11],[11,12],[9,13],[9,12],[9,11],[9,10]]]],["#ff9400",[[[11,10],[11,9],[9,10],[9,11],[9,12],[9,13],[7,14],[7,13],[7,12],[7,11],[7,10],[9,9],[11,8],[13,7],[13,8],[13,9],[13,10],[13,11],[11,12],[11,11]]]],["#ffffff",[[[7,5],[9,4],[11,3],[12,5],[11,6],[10,6],[9,7],[8,7],[7,8],[6,8],[5,6]]]],["#ffd60a",[[[6,12],[4,11],[4,10],[6,11]]]],["#ff3b30",[[[6,8],[7,8],[8,7],[9,7],[10,6],[11,6],[12,5],[13,7],[11,8],[9,9],[7,10]]]],["#5952de",[[[0,0],[15,0],[15,15],[0,15]],[[3,12],[5,13],[7,14],[9,13],[11,12],[13,11],[13,10],[13,9],[13,8],[13,7],[12,5],[11,3],[9,4],[7,5],[5,6],[4,7],[3,8],[3,9],[3,10],[3,11]]]]]</script>
 <script type="application/json" id="picture-words">{"m":{"ar-SA":"ثلج على السطح، ومصباح في النافذة، وأحدهم في البيت.","de-DE":"Schnee auf dem Dach, Licht im Fenster, jemand ist zu Hause.","en-AU":"Snow on the roof, a lamp in the window, someone home.","en-GB":"Snow on the roof, a lamp in the window, someone home.","en-US":"Snow on the roof, a lamp in the window, someone home.","es-ES":"Nieve en el tejado, luz en la ventana, alguien en casa.","es-MX":"Nieve en el tejado, luz en la ventana, alguien en casa.","fr-FR":"Neige sur le toit, lampe à la fenêtre, quelqu'un est là.","hi":"छत पर बर्फ़, खिड़की में दीया, घर में कोई है।","id":"Salju di atap, lampu di jendela, ada orang di rumah.","it":"Neve sul tetto, una luce alla finestra, qualcuno in casa.","ja":"屋根に雪、窓に灯り、中には誰かがいる。","ko":"지붕엔 눈, 창가엔 불빛, 누군가 집에 있어요.","nl-NL":"Sneeuw op het dak, een lamp voor het raam, iemand thuis.","pt-BR":"Neve no telhado, luz na janela, alguém em casa.","ru":"Снег на крыше, лампа в окне, кто-то дома.","sv":"Snö på taket, en lampa i fönstret, någon hemma.","th":"หิมะบนหลังคา ไฟที่หน้าต่าง มีคนอยู่บ้าน","tr":"Çatıda kar, pencerede lamba, evde biri var.","vi":"Tuyết trên mái, đèn bên cửa sổ, có người ở nhà.","zh-Hans":"屋顶有雪，窗里有灯，有人在家。","zh-Hant":"屋頂有雪，窗裡有燈，有人在家。"}}</script>
 <script src="/library/worksheet-words.js"></script>
 <script src="/library/worksheet.js"></script>

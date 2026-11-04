@@ -127,14 +127,24 @@
   @media (max-width:600px){ .tab{min-width:0;flex:1;padding:10px 6px 9px} .tabs{flex:1} .site{flex:1;width:auto} }
 
   /* landing: a small film beside the words, then the puzzle as the page's main */
-  .intro{display:grid;grid-template-columns:1fr 300px;gap:28px;align-items:center;padding:26px 0 6px}
+  /* the puzzle first, then the intro with How it works folded behind one line (founder 2026-11-05) */
+  .intro{display:grid;grid-template-columns:1fr 300px;gap:28px;align-items:center;padding:34px 0 6px}
+  .howto{margin:14px 0 0}
+  .howto summary{display:inline-flex;align-items:center;gap:8px;cursor:pointer;list-style:none;font:600 14px/1.2 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    color:var(--ink);border:1px solid var(--line);border-radius:999px;padding:8px 14px}
+  .howto summary::-webkit-details-marker{display:none}
+  .howto summary::after{content:"";width:7px;height:7px;border-right:1.6px solid currentColor;border-bottom:1.6px solid currentColor;transform:rotate(45deg) translateY(-2px);transition:transform .15s}
+  .howto[open] summary::after{transform:rotate(-135deg) translateY(-1px)}
+  .howto .how{list-style:none;margin:12px 0 0;padding:0;display:grid;gap:8px;grid-template-columns:1fr}
+  .howto .how li{display:flex;gap:10px;align-items:baseline;background:var(--mat);border:1px solid var(--hair);border-radius:12px;padding:10px 14px}
+  .howto .how b{flex:0 0 auto;margin:0}
   .intro .film{margin:0;border-radius:14px;overflow:hidden;box-shadow:var(--shadow);background:#fff}
   .intro .film video{border-radius:0}
   .bigplay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;border:0;background:rgba(27,25,23,.12);cursor:pointer}
   .bigplay span{width:64px;height:64px;border-radius:50%;background:rgba(27,25,23,.72);display:grid;place-items:center}
   .bigplay svg{width:26px;height:26px;margin-left:4px;fill:#fff}
   .bigplay[hidden]{display:none}
-  .puzzle{margin:22px 0 0;background:var(--mat);border:1px solid var(--hair);border-radius:16px;box-shadow:var(--shadow);padding:12px 6px 4px}
+  .puzzle{margin:18px 0 0;background:var(--mat);border:1px solid var(--hair);border-radius:16px;box-shadow:var(--shadow);padding:12px 6px 4px}
   .puzzle .head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:2px 12px 0}
   .puzzle iframe{display:block;width:100%;height:640px;border:0;background:transparent}
   .another{font:600 14px/1.2 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;cursor:pointer;border:1px solid var(--ink);border-radius:999px;padding:8px 16px;background:none;color:var(--ink)}
@@ -255,7 +265,7 @@
 <script src="/store.js"></script>
 <script src="/mystery/strings.js"></script>
 <script src="/mystery/engine.js"></script>
-<script type="application/json" id="faces">[["#a37045",[[[10,2],[11,2],[12,2],[13,3],[13,4],[13,5],[11,6],[11,5],[12,4],[11,3],[10,3],[9,3],[9,2]]]],["#5952de",[[[4,9],[4,10],[5,11],[6,12],[7,12],[8,12],[9,12],[10,11],[11,10],[11,9],[12,8],[13,7],[14,10],[13,11],[12,12],[10,13],[8,14],[7,14],[5,13],[3,12],[2,11],[1,10],[2,7],[3,8]]]],["#5952de",[[[8,4],[8,5],[7,5],[7,4]]]],["#c9f5ff",[[[8,5],[8,4],[9,3],[10,3],[11,3],[12,4],[11,5],[10,5],[9,5]]]],["#5952de",[[[4,6],[4,5],[5,5],[6,5],[7,5],[8,5],[9,5],[10,5],[11,5],[11,6],[10,6],[9,6],[8,6],[7,6],[6,6],[5,6]]]],["#5952de",[[[7,6],[8,6],[8,7],[8,8],[8,9],[8,10],[8,11],[8,12],[7,12],[7,11],[7,10],[7,9],[7,8],[7,7]]]],["#5952de",[[[6,2],[7,1],[8,1],[9,2],[9,3],[8,4],[7,4],[6,3]],[[7,3],[8,3],[8,2],[7,2]]]],["#c9f5ff",[[[8,3],[7,3],[7,2],[8,2]]]],["#c9f5ff",[[[0,0],[15,0],[15,15],[0,15]],[[11,2],[10,2],[9,2],[8,1],[7,1],[6,2],[6,3],[7,4],[7,5],[6,5],[5,5],[4,5],[4,6],[5,6],[6,6],[7,6],[7,7],[7,8],[7,9],[7,10],[7,11],[7,12],[6,12],[5,11],[4,10],[4,9],[3,8],[2,7],[1,10],[2,11],[3,12],[5,13],[7,14],[8,14],[10,13],[12,12],[13,11],[14,10],[13,7],[12,8],[11,9],[11,10],[10,11],[9,12],[8,12],[8,11],[8,10],[8,9],[8,8],[8,7],[8,6],[9,6],[10,6],[11,6],[13,5],[13,4],[13,3],[12,2]]]]]</script>
+<script type="application/json" id="faces">[["#5952de",[[[7,8],[7,7],[7,6],[8,6],[8,7],[8,8],[8,9],[8,10],[8,11],[8,12],[7,12],[7,11],[7,10],[7,9]]]],["#5952de",[[[2,11],[1,10],[2,7],[3,8],[4,9],[4,10],[5,11],[6,12],[7,12],[8,12],[9,12],[10,11],[11,10],[11,9],[12,8],[13,7],[14,10],[13,11],[12,12],[10,13],[8,14],[7,14],[5,13],[3,12]]]],["#c9f5ff",[[[8,3],[7,3],[7,2],[8,2]]]],["#5952de",[[[9,6],[8,6],[7,6],[6,6],[5,6],[4,6],[4,5],[5,5],[6,5],[7,5],[8,5],[9,5],[10,5],[11,5],[11,6],[10,6]]]],["#a37045",[[[11,5],[12,4],[11,3],[10,3],[9,3],[9,2],[10,2],[11,2],[12,2],[13,3],[13,4],[13,5],[11,6]]]],["#c9f5ff",[[[12,4],[11,5],[10,5],[9,5],[8,5],[8,4],[9,3],[10,3],[11,3]]]],["#5952de",[[[6,2],[7,1],[8,1],[9,2],[9,3],[8,4],[7,4],[6,3]],[[7,3],[8,3],[8,2],[7,2]]]],["#5952de",[[[7,4],[8,4],[8,5],[7,5]]]],["#c9f5ff",[[[0,0],[15,0],[15,15],[0,15]],[[7,7],[7,8],[7,9],[7,10],[7,11],[7,12],[6,12],[5,11],[4,10],[4,9],[3,8],[2,7],[1,10],[2,11],[3,12],[5,13],[7,14],[8,14],[10,13],[12,12],[13,11],[14,10],[13,7],[12,8],[11,9],[11,10],[10,11],[9,12],[8,12],[8,11],[8,10],[8,9],[8,8],[8,7],[8,6],[9,6],[10,6],[11,6],[13,5],[13,4],[13,3],[12,2],[11,2],[10,2],[9,2],[8,1],[7,1],[6,2],[6,3],[7,4],[7,5],[6,5],[5,5],[4,5],[4,6],[5,6],[6,6],[7,6]]]]]</script>
 <script type="application/json" id="picture-words">{"m":{"ar-SA":"نزلت المرساة، فقررت السفينة البقاء.","de-DE":"Runter damit, und das Schiff beschließt zu bleiben.","en-AU":"Down it goes, and the ship decides to stay.","en-GB":"Down it goes, and the ship decides to stay.","en-US":"Down it goes, and the ship decides to stay.","es-ES":"Allá va, y el barco decide quedarse.","es-MX":"Allá va, y el barco decide quedarse.","fr-FR":"Elle descend, et le navire décide de rester.","hi":"लंगर नीचे गया, और जहाज़ ने रुकने का फ़ैसला किया।","id":"Jangkar turun, dan kapal pun memutuskan untuk tinggal.","it":"Scende giù, e la nave decide di restare.","ja":"錨を下ろしたら、船はここに住むと決めた。","ko":"닻을 내리자, 배는 여기 머물기로 했어요.","nl-NL":"Daar gaat hij, en het schip besluit te blijven.","pt-BR":"Lá vai ela, e o navio resolve ficar.","ru":"Якорь на дно — и корабль решает остаться.","sv":"Ner går det, och skeppet bestämmer sig för att stanna.","th":"สมอลงแล้ว เรือเลยตัดสินใจอยู่ต่อ","tr":"Çapa iniyor ve gemi kalmaya karar veriyor.","vi":"Neo thả xuống, và con tàu quyết định ở lại.","zh-Hans":"锚一落下，船就决定留下来了。","zh-Hant":"錨一放下，船就決定留下來了。"}}</script>
 <script src="/library/worksheet-words.js"></script>
 <script src="/library/worksheet.js"></script>

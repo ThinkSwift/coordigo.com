@@ -127,14 +127,24 @@
   @media (max-width:600px){ .tab{min-width:0;flex:1;padding:10px 6px 9px} .tabs{flex:1} .site{flex:1;width:auto} }
 
   /* landing: a small film beside the words, then the puzzle as the page's main */
-  .intro{display:grid;grid-template-columns:1fr 300px;gap:28px;align-items:center;padding:26px 0 6px}
+  /* the puzzle first, then the intro with How it works folded behind one line (founder 2026-11-05) */
+  .intro{display:grid;grid-template-columns:1fr 300px;gap:28px;align-items:center;padding:34px 0 6px}
+  .howto{margin:14px 0 0}
+  .howto summary{display:inline-flex;align-items:center;gap:8px;cursor:pointer;list-style:none;font:600 14px/1.2 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    color:var(--ink);border:1px solid var(--line);border-radius:999px;padding:8px 14px}
+  .howto summary::-webkit-details-marker{display:none}
+  .howto summary::after{content:"";width:7px;height:7px;border-right:1.6px solid currentColor;border-bottom:1.6px solid currentColor;transform:rotate(45deg) translateY(-2px);transition:transform .15s}
+  .howto[open] summary::after{transform:rotate(-135deg) translateY(-1px)}
+  .howto .how{list-style:none;margin:12px 0 0;padding:0;display:grid;gap:8px;grid-template-columns:1fr}
+  .howto .how li{display:flex;gap:10px;align-items:baseline;background:var(--mat);border:1px solid var(--hair);border-radius:12px;padding:10px 14px}
+  .howto .how b{flex:0 0 auto;margin:0}
   .intro .film{margin:0;border-radius:14px;overflow:hidden;box-shadow:var(--shadow);background:#fff}
   .intro .film video{border-radius:0}
   .bigplay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;border:0;background:rgba(27,25,23,.12);cursor:pointer}
   .bigplay span{width:64px;height:64px;border-radius:50%;background:rgba(27,25,23,.72);display:grid;place-items:center}
   .bigplay svg{width:26px;height:26px;margin-left:4px;fill:#fff}
   .bigplay[hidden]{display:none}
-  .puzzle{margin:22px 0 0;background:var(--mat);border:1px solid var(--hair);border-radius:16px;box-shadow:var(--shadow);padding:12px 6px 4px}
+  .puzzle{margin:18px 0 0;background:var(--mat);border:1px solid var(--hair);border-radius:16px;box-shadow:var(--shadow);padding:12px 6px 4px}
   .puzzle .head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:2px 12px 0}
   .puzzle iframe{display:block;width:100%;height:640px;border:0;background:transparent}
   .another{font:600 14px/1.2 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;cursor:pointer;border:1px solid var(--ink);border-radius:999px;padding:8px 16px;background:none;color:var(--ink)}
@@ -255,7 +265,7 @@
 <script src="/store.js"></script>
 <script src="/mystery/strings.js"></script>
 <script src="/mystery/engine.js"></script>
-<script type="application/json" id="faces">[["#007aff",[[[1,11],[2,11],[3,11],[4,11],[4,12],[5,12],[8,13],[7,11],[8,10],[9,9],[10,8],[11,6],[12,5],[12,4],[11,4],[10,5],[8,6],[7,7],[6,8],[5,9],[4,8],[5,7],[5,6],[4,5],[5,6],[5,7],[4,8],[3,8],[2,7],[2,6],[2,5],[3,3],[4,3],[5,3],[6,2],[7,2],[8,2],[9,3],[11,2],[13,3],[15,4],[15,15],[0,15],[0,11]]]],["#c9f5ff",[[[2,11],[1,11],[0,11],[0,0],[15,0],[15,4],[13,3],[11,2],[9,1],[8,1],[7,1],[6,1],[4,2],[3,3],[2,5],[2,6],[2,7],[3,8],[4,8],[5,9],[4,11],[3,11]]]],["#ff9400",[[[9,9],[8,10],[7,11],[5,12],[4,12],[5,11],[6,10],[7,9],[8,8],[9,7],[10,6],[11,5],[12,4],[12,5],[11,6],[10,8]]]],["#ffffff",[[[11,2],[9,3],[8,2],[7,2],[6,2],[5,3],[4,3],[3,3],[4,2],[6,1],[7,1],[8,1],[9,1]]]],["#ffd60a",[[[4,11],[5,9],[6,8],[7,7],[8,6],[10,5],[11,4],[12,4],[11,5],[10,6],[9,7],[8,8],[7,9],[6,10],[5,11],[4,12]]]],["#ff3b30",[[[5,12],[7,11],[8,13]]]]]</script>
+<script type="application/json" id="faces">[["#ffffff",[[[6,1],[7,1],[8,1],[9,1],[11,2],[9,3],[8,2],[7,2],[6,2],[5,3],[4,3],[3,3],[4,2]]]],["#c9f5ff",[[[7,1],[6,1],[4,2],[3,3],[2,5],[2,6],[2,7],[3,8],[4,8],[5,9],[4,11],[3,11],[2,11],[1,11],[0,11],[0,0],[15,0],[15,4],[13,3],[11,2],[9,1],[8,1]]]],["#007aff",[[[5,9],[4,8],[5,7],[5,6],[4,5],[5,6],[5,7],[4,8],[3,8],[2,7],[2,6],[2,5],[3,3],[4,3],[5,3],[6,2],[7,2],[8,2],[9,3],[11,2],[13,3],[15,4],[15,15],[0,15],[0,11],[1,11],[2,11],[3,11],[4,11],[4,12],[5,12],[8,13],[7,11],[8,10],[9,9],[10,8],[11,6],[12,5],[12,4],[11,4],[10,5],[8,6],[7,7],[6,8]]]],["#ffd60a",[[[4,11],[5,9],[6,8],[7,7],[8,6],[10,5],[11,4],[12,4],[11,5],[10,6],[9,7],[8,8],[7,9],[6,10],[5,11],[4,12]]]],["#ff9400",[[[11,5],[12,4],[12,5],[11,6],[10,8],[9,9],[8,10],[7,11],[5,12],[4,12],[5,11],[6,10],[7,9],[8,8],[9,7],[10,6]]]],["#ff3b30",[[[5,12],[7,11],[8,13]]]]]</script>
 <script type="application/json" id="picture-words">{"m":{"ar-SA":"ركوب الأمواج انتظار في معظمه. وموجة جيدة تستحق العناء.","de-DE":"Surfen ist vor allem Warten. Eine gute Welle lohnt alles.","en-AU":"Surfing is mostly waiting. One good wave makes it worth it.","en-GB":"Surfing is mostly waiting. One good wave makes it worth it.","en-US":"Surfing is mostly waiting. One good wave makes it worth it.","es-ES":"Surfear es sobre todo esperar. Una buena ola lo compensa.","es-MX":"Surfear es casi puro esperar. Una buena ola lo vale todo.","fr-FR":"Le surf, c'est surtout attendre. Une belle vague vaut tout.","hi":"सर्फ़िंग ज़्यादातर इंतज़ार है। एक अच्छी लहर, सब वसूल।","id":"Selancar itu banyak menunggu. Satu ombak bagus, semua impas.","it":"Il surf è soprattutto attesa. Un'onda buona ripaga tutto.","ja":"サーフィンはほぼ待つ時間。いい波ひとつで報われる。","ko":"서핑은 대부분 기다림이래. 좋은 파도 하나면 충분해.","nl-NL":"Surfen is vooral wachten. Eén goede golf maakt alles goed.","pt-BR":"Surfar é mais esperar. Uma onda boa faz tudo valer a pena.","ru":"Сёрфинг — это в основном ожидание. Одна волна всё окупает.","sv":"Surfing är mest väntan. En bra våg gör det värt det.","th":"เซิร์ฟคือการรอเป็นส่วนใหญ่ คลื่นดีลูกเดียวก็คุ้ม","tr":"Sörf çoğunlukla beklemektir. Tek iyi dalga her şeye değer.","vi":"Lướt sóng chủ yếu là chờ. Một con sóng đẹp là đáng cả.","zh-Hans":"冲浪大多是在等。一道好浪就值了。","zh-Hant":"衝浪大多是在等待。一道好浪就值得了。"}}</script>
 <script src="/library/worksheet-words.js"></script>
 <script src="/library/worksheet.js"></script>

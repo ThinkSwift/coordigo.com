@@ -127,14 +127,24 @@
   @media (max-width:600px){ .tab{min-width:0;flex:1;padding:10px 6px 9px} .tabs{flex:1} .site{flex:1;width:auto} }
 
   /* landing: a small film beside the words, then the puzzle as the page's main */
-  .intro{display:grid;grid-template-columns:1fr 300px;gap:28px;align-items:center;padding:26px 0 6px}
+  /* the puzzle first, then the intro with How it works folded behind one line (founder 2026-11-05) */
+  .intro{display:grid;grid-template-columns:1fr 300px;gap:28px;align-items:center;padding:34px 0 6px}
+  .howto{margin:14px 0 0}
+  .howto summary{display:inline-flex;align-items:center;gap:8px;cursor:pointer;list-style:none;font:600 14px/1.2 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    color:var(--ink);border:1px solid var(--line);border-radius:999px;padding:8px 14px}
+  .howto summary::-webkit-details-marker{display:none}
+  .howto summary::after{content:"";width:7px;height:7px;border-right:1.6px solid currentColor;border-bottom:1.6px solid currentColor;transform:rotate(45deg) translateY(-2px);transition:transform .15s}
+  .howto[open] summary::after{transform:rotate(-135deg) translateY(-1px)}
+  .howto .how{list-style:none;margin:12px 0 0;padding:0;display:grid;gap:8px;grid-template-columns:1fr}
+  .howto .how li{display:flex;gap:10px;align-items:baseline;background:var(--mat);border:1px solid var(--hair);border-radius:12px;padding:10px 14px}
+  .howto .how b{flex:0 0 auto;margin:0}
   .intro .film{margin:0;border-radius:14px;overflow:hidden;box-shadow:var(--shadow);background:#fff}
   .intro .film video{border-radius:0}
   .bigplay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;border:0;background:rgba(27,25,23,.12);cursor:pointer}
   .bigplay span{width:64px;height:64px;border-radius:50%;background:rgba(27,25,23,.72);display:grid;place-items:center}
   .bigplay svg{width:26px;height:26px;margin-left:4px;fill:#fff}
   .bigplay[hidden]{display:none}
-  .puzzle{margin:22px 0 0;background:var(--mat);border:1px solid var(--hair);border-radius:16px;box-shadow:var(--shadow);padding:12px 6px 4px}
+  .puzzle{margin:18px 0 0;background:var(--mat);border:1px solid var(--hair);border-radius:16px;box-shadow:var(--shadow);padding:12px 6px 4px}
   .puzzle .head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:2px 12px 0}
   .puzzle iframe{display:block;width:100%;height:640px;border:0;background:transparent}
   .another{font:600 14px/1.2 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;cursor:pointer;border:1px solid var(--ink);border-radius:999px;padding:8px 16px;background:none;color:var(--ink)}
@@ -255,7 +265,7 @@
 <script src="/store.js"></script>
 <script src="/mystery/strings.js"></script>
 <script src="/mystery/engine.js"></script>
-<script type="application/json" id="faces">[["#ff9400",[[[9,7],[11,10],[10,10],[11,10],[13,13],[10,11],[7,9],[8,8],[7,9],[4,7],[5,5],[7,4],[9,7],[9,8]]]],["#33c759",[[[5,5],[4,5],[3,2]]]],["#0a6624",[[[6,4],[5,5],[6,2],[6,3]]]],["#33c759",[[[9,3],[8,4],[7,4],[10,2]]]],["#c9f5ff",[[[0,0],[15,0],[15,15],[0,15]],[[11,10],[9,7],[7,4],[8,4],[9,3],[10,2],[7,4],[5,5],[6,4],[6,3],[6,2],[5,5],[3,2],[4,5],[5,5],[4,7],[7,9],[10,11],[13,13]]]]]</script>
+<script type="application/json" id="faces">[["#0a6624",[[[6,4],[5,5],[6,2],[6,3]]]],["#33c759",[[[9,3],[8,4],[7,4],[10,2]]]],["#ff9400",[[[10,10],[11,10],[13,13],[10,11],[7,9],[8,8],[7,9],[4,7],[5,5],[7,4],[9,7],[9,8],[9,7],[11,10]]]],["#33c759",[[[4,5],[3,2],[5,5]]]],["#c9f5ff",[[[0,0],[15,0],[15,15],[0,15]],[[5,5],[6,4],[6,3],[6,2],[5,5],[3,2],[4,5],[5,5],[4,7],[7,9],[10,11],[13,13],[11,10],[9,7],[7,4],[8,4],[9,3],[10,2],[7,4]]]]]</script>
 <script type="application/json" id="picture-words">{"m":{"ar-SA":"كُل جيدًا اليوم. اعتبره أمرًا من صديق.","de-DE":"Iss heute was Gutes. Das ist ein freundlicher Befehl.","en-AU":"Eat well today. Consider it a friendly order.","en-GB":"Eat well today. Consider it a friendly order.","en-US":"Eat well today. Consider it a friendly order.","es-ES":"Hoy come bien. Considéralo una orden cariñosa.","es-MX":"Hoy come bien. Tómalo como una orden cariñosa.","fr-FR":"Mange bien aujourd'hui. C'est un ordre amical.","hi":"आज ठीक से खाना खाना। ये दोस्ताना हुक्म है।","id":"Makan yang benar hari ini. Anggap perintah dari teman.","it":"Oggi mangia bene. È un ordine, ma con affetto.","ja":"今日はちゃんと食べてね。やさしい命令です。","ko":"오늘은 잘 챙겨 먹어. 다정한 명령이야.","nl-NL":"Eet vandaag goed. Zie het als een vriendelijk bevel.","pt-BR":"Come direito hoje. É uma ordem carinhosa.","ru":"Поешь сегодня как следует. Это дружеский приказ.","sv":"Ät ordentligt i dag. Se det som en vänlig order.","th":"วันนี้กินดี ๆ นะ ถือเป็นคำสั่งแบบเพื่อน","tr":"Bugün iyi beslen. Dostça bir emir say.","vi":"Hôm nay ăn uống đàng hoàng nhé. Lệnh từ bạn thân đấy.","zh-Hans":"今天好好吃饭。这是温柔的命令。","zh-Hant":"今天要好好吃飯。這是溫柔的命令。"}}</script>
 <script src="/library/worksheet-words.js"></script>
 <script src="/library/worksheet.js"></script>

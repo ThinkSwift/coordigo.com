@@ -127,14 +127,24 @@
   @media (max-width:600px){ .tab{min-width:0;flex:1;padding:10px 6px 9px} .tabs{flex:1} .site{flex:1;width:auto} }
 
   /* landing: a small film beside the words, then the puzzle as the page's main */
-  .intro{display:grid;grid-template-columns:1fr 300px;gap:28px;align-items:center;padding:26px 0 6px}
+  /* the puzzle first, then the intro with How it works folded behind one line (founder 2026-11-05) */
+  .intro{display:grid;grid-template-columns:1fr 300px;gap:28px;align-items:center;padding:34px 0 6px}
+  .howto{margin:14px 0 0}
+  .howto summary{display:inline-flex;align-items:center;gap:8px;cursor:pointer;list-style:none;font:600 14px/1.2 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    color:var(--ink);border:1px solid var(--line);border-radius:999px;padding:8px 14px}
+  .howto summary::-webkit-details-marker{display:none}
+  .howto summary::after{content:"";width:7px;height:7px;border-right:1.6px solid currentColor;border-bottom:1.6px solid currentColor;transform:rotate(45deg) translateY(-2px);transition:transform .15s}
+  .howto[open] summary::after{transform:rotate(-135deg) translateY(-1px)}
+  .howto .how{list-style:none;margin:12px 0 0;padding:0;display:grid;gap:8px;grid-template-columns:1fr}
+  .howto .how li{display:flex;gap:10px;align-items:baseline;background:var(--mat);border:1px solid var(--hair);border-radius:12px;padding:10px 14px}
+  .howto .how b{flex:0 0 auto;margin:0}
   .intro .film{margin:0;border-radius:14px;overflow:hidden;box-shadow:var(--shadow);background:#fff}
   .intro .film video{border-radius:0}
   .bigplay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;border:0;background:rgba(27,25,23,.12);cursor:pointer}
   .bigplay span{width:64px;height:64px;border-radius:50%;background:rgba(27,25,23,.72);display:grid;place-items:center}
   .bigplay svg{width:26px;height:26px;margin-left:4px;fill:#fff}
   .bigplay[hidden]{display:none}
-  .puzzle{margin:22px 0 0;background:var(--mat);border:1px solid var(--hair);border-radius:16px;box-shadow:var(--shadow);padding:12px 6px 4px}
+  .puzzle{margin:18px 0 0;background:var(--mat);border:1px solid var(--hair);border-radius:16px;box-shadow:var(--shadow);padding:12px 6px 4px}
   .puzzle .head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:2px 12px 0}
   .puzzle iframe{display:block;width:100%;height:640px;border:0;background:transparent}
   .another{font:600 14px/1.2 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;cursor:pointer;border:1px solid var(--ink);border-radius:999px;padding:8px 16px;background:none;color:var(--ink)}
@@ -255,7 +265,7 @@
 <script src="/store.js"></script>
 <script src="/mystery/strings.js"></script>
 <script src="/mystery/engine.js"></script>
-<script type="application/json" id="faces">[["#ffffff",[[[4,8],[4,9],[4,10],[4,11],[3,11],[2,11],[1,11],[0,11],[0,5],[1,5],[2,5],[3,5],[4,5],[4,6],[4,7]]]],["#ff3b30",[[[4,9],[4,8],[4,7],[4,6],[4,5],[4,4],[4,3],[5,3],[6,3],[7,3],[8,3],[9,3],[10,3],[11,3],[12,3],[13,3],[14,3],[15,3],[15,11],[14,11],[13,11],[12,11],[11,11],[10,11],[9,11],[8,11],[7,11],[6,11],[5,11],[4,11],[4,10]]]],["#ffffff",[[[1,5],[0,5],[0,0],[4,0],[4,1],[4,2],[4,3],[4,4],[4,5],[3,5],[2,5]]]],["#ffffff",[[[4,3],[4,2],[4,1],[4,0],[10,0],[10,1],[10,2],[10,3],[9,3],[8,3],[7,3],[6,3],[5,3]]]],["#ffffff",[[[12,11],[13,11],[13,12],[13,13],[13,14],[13,15],[4,15],[4,14],[4,13],[4,12],[4,11],[5,11],[6,11],[7,11],[8,11],[9,11],[10,11],[11,11]]]],["#ffffff",[[[13,3],[12,3],[11,3],[10,3],[10,2],[10,1],[10,0],[15,0],[15,3],[14,3]]]],["#ffd60a",[[[14,13],[15,13],[15,15],[13,15],[13,14],[13,13]]]],["#ffffff",[[[15,13],[14,13],[13,13],[13,12],[13,11],[14,11],[15,11]]]],["#007aff",[[[4,14],[4,15],[0,15],[0,11],[1,11],[2,11],[3,11],[4,11],[4,12],[4,13]]]]]</script>
+<script type="application/json" id="faces">[["#ff3b30",[[[13,3],[14,3],[15,3],[15,11],[14,11],[13,11],[12,11],[11,11],[10,11],[9,11],[8,11],[7,11],[6,11],[5,11],[4,11],[4,10],[4,9],[4,8],[4,7],[4,6],[4,5],[4,4],[4,3],[5,3],[6,3],[7,3],[8,3],[9,3],[10,3],[11,3],[12,3]]]],["#ffffff",[[[14,3],[13,3],[12,3],[11,3],[10,3],[10,2],[10,1],[10,0],[15,0],[15,3]]]],["#ffffff",[[[4,6],[4,7],[4,8],[4,9],[4,10],[4,11],[3,11],[2,11],[1,11],[0,11],[0,5],[1,5],[2,5],[3,5],[4,5]]]],["#ffffff",[[[10,2],[10,3],[9,3],[8,3],[7,3],[6,3],[5,3],[4,3],[4,2],[4,1],[4,0],[10,0],[10,1]]]],["#ffffff",[[[9,11],[10,11],[11,11],[12,11],[13,11],[13,12],[13,13],[13,14],[13,15],[4,15],[4,14],[4,13],[4,12],[4,11],[5,11],[6,11],[7,11],[8,11]]]],["#ffffff",[[[13,13],[13,12],[13,11],[14,11],[15,11],[15,13],[14,13]]]],["#ffd60a",[[[13,13],[14,13],[15,13],[15,15],[13,15],[13,14]]]],["#007aff",[[[4,13],[4,14],[4,15],[0,15],[0,11],[1,11],[2,11],[3,11],[4,11],[4,12]]]],["#ffffff",[[[3,5],[2,5],[1,5],[0,5],[0,0],[4,0],[4,1],[4,2],[4,3],[4,4],[4,5]]]]]</script>
 <script type="application/json" id="picture-words">{"m":{"ar-SA":"خطوط وثلاثة ألوان فقط. البساطة هي الجزء الصعب.","de-DE":"Nur Linien und drei Farben. Das Einfache ist das Schwere.","en-AU":"Only lines and three colors. Simple is the hard part.","en-GB":"Only lines and three colors. Simple is the hard part.","en-US":"Only lines and three colors. Simple is the hard part.","es-ES":"Solo líneas y tres colores. Lo difícil es lo simple.","es-MX":"Solo líneas y tres colores. Lo simple es lo más difícil.","fr-FR":"Des lignes, trois couleurs. Faire simple, c'est le plus dur.","hi":"बस रेखाएँ और तीन रंग। सादगी ही सबसे मुश्किल है।","id":"Cuma garis dan tiga warna. Yang sederhana justru tersulit.","it":"Solo linee e tre colori. Il difficile è la semplicità.","ja":"線と三色だけ。シンプルがいちばん難しい。","ko":"선과 세 가지 색뿐. 단순한 게 제일 어려워.","nl-NL":"Alleen lijnen en drie kleuren. Simpel is het moeilijkst.","pt-BR":"Só linhas e três cores. O difícil é ser simples.","ru":"Только линии и три цвета. Просто — это сложнее всего.","sv":"Bara linjer och tre färger. Det enkla är det svåra.","th":"มีแค่เส้นกับสามสี ความเรียบง่ายนี่แหละยากสุด","tr":"Sadece çizgiler ve üç renk. Asıl zor olan sadelik.","vi":"Chỉ có đường kẻ và ba màu. Đơn giản mới là khó nhất.","zh-Hans":"只有线条和三种颜色。简单才最难。","zh-Hant":"只有線條和三個顏色。簡單才是最難的。"}}</script>
 <script src="/library/worksheet-words.js"></script>
 <script src="/library/worksheet.js"></script>

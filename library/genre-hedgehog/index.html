@@ -127,14 +127,24 @@
   @media (max-width:600px){ .tab{min-width:0;flex:1;padding:10px 6px 9px} .tabs{flex:1} .site{flex:1;width:auto} }
 
   /* landing: a small film beside the words, then the puzzle as the page's main */
-  .intro{display:grid;grid-template-columns:1fr 300px;gap:28px;align-items:center;padding:26px 0 6px}
+  /* the puzzle first, then the intro with How it works folded behind one line (founder 2026-11-05) */
+  .intro{display:grid;grid-template-columns:1fr 300px;gap:28px;align-items:center;padding:34px 0 6px}
+  .howto{margin:14px 0 0}
+  .howto summary{display:inline-flex;align-items:center;gap:8px;cursor:pointer;list-style:none;font:600 14px/1.2 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    color:var(--ink);border:1px solid var(--line);border-radius:999px;padding:8px 14px}
+  .howto summary::-webkit-details-marker{display:none}
+  .howto summary::after{content:"";width:7px;height:7px;border-right:1.6px solid currentColor;border-bottom:1.6px solid currentColor;transform:rotate(45deg) translateY(-2px);transition:transform .15s}
+  .howto[open] summary::after{transform:rotate(-135deg) translateY(-1px)}
+  .howto .how{list-style:none;margin:12px 0 0;padding:0;display:grid;gap:8px;grid-template-columns:1fr}
+  .howto .how li{display:flex;gap:10px;align-items:baseline;background:var(--mat);border:1px solid var(--hair);border-radius:12px;padding:10px 14px}
+  .howto .how b{flex:0 0 auto;margin:0}
   .intro .film{margin:0;border-radius:14px;overflow:hidden;box-shadow:var(--shadow);background:#fff}
   .intro .film video{border-radius:0}
   .bigplay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;border:0;background:rgba(27,25,23,.12);cursor:pointer}
   .bigplay span{width:64px;height:64px;border-radius:50%;background:rgba(27,25,23,.72);display:grid;place-items:center}
   .bigplay svg{width:26px;height:26px;margin-left:4px;fill:#fff}
   .bigplay[hidden]{display:none}
-  .puzzle{margin:22px 0 0;background:var(--mat);border:1px solid var(--hair);border-radius:16px;box-shadow:var(--shadow);padding:12px 6px 4px}
+  .puzzle{margin:18px 0 0;background:var(--mat);border:1px solid var(--hair);border-radius:16px;box-shadow:var(--shadow);padding:12px 6px 4px}
   .puzzle .head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:2px 12px 0}
   .puzzle iframe{display:block;width:100%;height:640px;border:0;background:transparent}
   .another{font:600 14px/1.2 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;cursor:pointer;border:1px solid var(--ink);border-radius:999px;padding:8px 16px;background:none;color:var(--ink)}
@@ -255,7 +265,7 @@
 <script src="/store.js"></script>
 <script src="/mystery/strings.js"></script>
 <script src="/mystery/engine.js"></script>
-<script type="application/json" id="faces">[["#a37045",[[[9,3],[10,5],[11,7],[10,9],[9,11],[8,11],[7,11],[6,11],[5,11],[4,11],[3,12],[1,11],[2,10],[3,9],[1,8],[4,7],[3,6],[2,5],[3,5],[4,5],[5,5],[4,3],[7,4],[7,3],[7,2],[9,5],[9,4]]]],["#c9f5ff",[[[10,5],[9,3],[9,4],[9,5],[7,2],[7,3],[7,4],[4,3],[5,5],[4,5],[3,5],[2,5],[3,6],[4,7],[1,8],[3,9],[2,10],[1,11],[3,12],[4,12],[4,13],[4,14],[3,14],[2,14],[1,14],[0,14],[0,0],[15,0],[15,14],[14,14],[13,14],[12,14],[11,14],[11,13],[11,12],[12,11],[14,10],[14,9],[12,8],[11,7]]]],["#33c759",[[[4,14],[5,14],[6,14],[7,14],[8,14],[9,14],[10,14],[11,14],[12,14],[13,14],[14,14],[15,14],[15,15],[0,15],[0,14],[1,14],[2,14],[3,14]]]],["#a37045",[[[5,14],[4,14],[4,13],[4,12],[5,12],[5,13]]]],["#c9f5ff",[[[8,14],[7,14],[6,14],[5,14],[5,13],[5,12],[6,12],[7,12],[8,12],[9,12],[10,12],[10,13],[10,14],[9,14]]]],["#ffc482",[[[7,11],[8,11],[9,11],[10,9],[11,7],[12,8],[14,9],[14,10],[12,11],[11,12],[10,12],[9,12],[8,12],[7,12],[6,12],[5,12],[4,12],[3,12],[4,11],[5,11],[6,11]]]],["#a37045",[[[10,13],[10,12],[11,12],[11,13],[11,14],[10,14]]]]]</script>
+<script type="application/json" id="faces">[["#c9f5ff",[[[9,4],[9,5],[7,2],[7,3],[7,4],[4,3],[5,5],[4,5],[3,5],[2,5],[3,6],[4,7],[1,8],[3,9],[2,10],[1,11],[3,12],[4,12],[4,13],[4,14],[3,14],[2,14],[1,14],[0,14],[0,0],[15,0],[15,14],[14,14],[13,14],[12,14],[11,14],[11,13],[11,12],[12,11],[14,10],[14,9],[12,8],[11,7],[10,5],[9,3]]]],["#a37045",[[[9,5],[9,4],[9,3],[10,5],[11,7],[10,9],[9,11],[8,11],[7,11],[6,11],[5,11],[4,11],[3,12],[1,11],[2,10],[3,9],[1,8],[4,7],[3,6],[2,5],[3,5],[4,5],[5,5],[4,3],[7,4],[7,3],[7,2]]]],["#33c759",[[[11,14],[12,14],[13,14],[14,14],[15,14],[15,15],[0,15],[0,14],[1,14],[2,14],[3,14],[4,14],[5,14],[6,14],[7,14],[8,14],[9,14],[10,14]]]],["#c9f5ff",[[[10,12],[10,13],[10,14],[9,14],[8,14],[7,14],[6,14],[5,14],[5,13],[5,12],[6,12],[7,12],[8,12],[9,12]]]],["#a37045",[[[10,13],[10,12],[11,12],[11,13],[11,14],[10,14]]]],["#ffc482",[[[8,12],[7,12],[6,12],[5,12],[4,12],[3,12],[4,11],[5,11],[6,11],[7,11],[8,11],[9,11],[10,9],[11,7],[12,8],[14,9],[14,10],[12,11],[11,12],[10,12],[9,12]]]],["#a37045",[[[4,14],[4,13],[4,12],[5,12],[5,13],[5,14]]]]]</script>
 <script type="application/json" id="picture-words">{"m":{"ar-SA":"شائك قليلًا اليوم؟ لا بأس بذلك.","de-DE":"Heute ein bisschen stachelig? Ist erlaubt.","en-AU":"A little prickly today? That's allowed.","en-GB":"A little prickly today? That's allowed.","en-US":"A little prickly today? That's allowed.","es-ES":"¿Hoy vas un poco erizo? También vale.","es-MX":"¿Hoy andas medio erizo? Se vale.","fr-FR":"Tu piques un peu aujourd'hui ? C'est permis.","hi":"आज मूड थोड़ा काँटेदार है? चलता है।","id":"Lagi agak sensi hari ini? Nggak apa-apa.","it":"Oggi un po' pungente? È concesso.","ja":"今日はちょっとトゲトゲ？それもアリ。","ko":"오늘 좀 까칠해도 괜찮아.","nl-NL":"Een beetje stekelig vandaag? Mag best.","pt-BR":"Meio espinhoso hoje? Pode.","ru":"Сегодня колючее настроение? Так можно.","sv":"Lite taggig i dag? Det är tillåtet.","th":"วันนี้หงุดหงิดนิดหน่อย? ไม่เป็นไรหรอก","tr":"Bugün biraz dikenli misin? Olabilir.","vi":"Hôm nay hơi xù lông à? Không sao đâu.","zh-Hans":"今天有点扎人？没事，允许的。","zh-Hant":"今天有點刺刺的？沒關係，可以的。"}}</script>
 <script src="/library/worksheet-words.js"></script>
 <script src="/library/worksheet.js"></script>

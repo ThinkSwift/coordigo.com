@@ -127,14 +127,24 @@
   @media (max-width:600px){ .tab{min-width:0;flex:1;padding:10px 6px 9px} .tabs{flex:1} .site{flex:1;width:auto} }
 
   /* landing: a small film beside the words, then the puzzle as the page's main */
-  .intro{display:grid;grid-template-columns:1fr 300px;gap:28px;align-items:center;padding:26px 0 6px}
+  /* the puzzle first, then the intro with How it works folded behind one line (founder 2026-11-05) */
+  .intro{display:grid;grid-template-columns:1fr 300px;gap:28px;align-items:center;padding:34px 0 6px}
+  .howto{margin:14px 0 0}
+  .howto summary{display:inline-flex;align-items:center;gap:8px;cursor:pointer;list-style:none;font:600 14px/1.2 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    color:var(--ink);border:1px solid var(--line);border-radius:999px;padding:8px 14px}
+  .howto summary::-webkit-details-marker{display:none}
+  .howto summary::after{content:"";width:7px;height:7px;border-right:1.6px solid currentColor;border-bottom:1.6px solid currentColor;transform:rotate(45deg) translateY(-2px);transition:transform .15s}
+  .howto[open] summary::after{transform:rotate(-135deg) translateY(-1px)}
+  .howto .how{list-style:none;margin:12px 0 0;padding:0;display:grid;gap:8px;grid-template-columns:1fr}
+  .howto .how li{display:flex;gap:10px;align-items:baseline;background:var(--mat);border:1px solid var(--hair);border-radius:12px;padding:10px 14px}
+  .howto .how b{flex:0 0 auto;margin:0}
   .intro .film{margin:0;border-radius:14px;overflow:hidden;box-shadow:var(--shadow);background:#fff}
   .intro .film video{border-radius:0}
   .bigplay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;border:0;background:rgba(27,25,23,.12);cursor:pointer}
   .bigplay span{width:64px;height:64px;border-radius:50%;background:rgba(27,25,23,.72);display:grid;place-items:center}
   .bigplay svg{width:26px;height:26px;margin-left:4px;fill:#fff}
   .bigplay[hidden]{display:none}
-  .puzzle{margin:22px 0 0;background:var(--mat);border:1px solid var(--hair);border-radius:16px;box-shadow:var(--shadow);padding:12px 6px 4px}
+  .puzzle{margin:18px 0 0;background:var(--mat);border:1px solid var(--hair);border-radius:16px;box-shadow:var(--shadow);padding:12px 6px 4px}
   .puzzle .head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:2px 12px 0}
   .puzzle iframe{display:block;width:100%;height:640px;border:0;background:transparent}
   .another{font:600 14px/1.2 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;cursor:pointer;border:1px solid var(--ink);border-radius:999px;padding:8px 16px;background:none;color:var(--ink)}
@@ -255,7 +265,7 @@
 <script src="/store.js"></script>
 <script src="/mystery/strings.js"></script>
 <script src="/mystery/engine.js"></script>
-<script type="application/json" id="faces">[["#c9f5ff",[[[5,11],[5,12],[5,13],[3,12],[1,11],[1,10],[1,9],[1,8],[1,7],[3,8],[5,9],[5,10]]]],["#007aff",[[[5,12],[5,11],[5,10],[5,9],[7,8],[9,7],[9,8],[9,9],[9,10],[9,11],[7,12],[5,13]]]],["#ffffff",[[[1,7],[3,6],[5,5],[7,6],[9,7],[7,8],[5,9],[3,8]]]],["#c9f5ff",[[[12,6],[10,5],[10,4],[10,3],[12,4],[12,5]]]],["#ffffff",[[[10,3],[12,2],[14,3],[12,4]]]],["#007aff",[[[14,3],[14,4],[14,5],[12,6],[12,5],[12,4]]]],["#33c759",[[[0,0],[15,0],[15,15],[0,15]],[[9,8],[9,7],[7,6],[5,5],[3,6],[1,7],[1,8],[1,9],[1,10],[1,11],[3,12],[5,13],[7,12],[9,11],[9,10],[9,9]],[[10,5],[12,6],[14,5],[14,4],[14,3],[12,2],[10,3],[10,4]]]]]</script>
+<script type="application/json" id="faces">[["#c9f5ff",[[[5,13],[3,12],[1,11],[1,10],[1,9],[1,8],[1,7],[3,8],[5,9],[5,10],[5,11],[5,12]]]],["#ffffff",[[[12,2],[14,3],[12,4],[10,3]]]],["#007aff",[[[5,11],[5,10],[5,9],[7,8],[9,7],[9,8],[9,9],[9,10],[9,11],[7,12],[5,13],[5,12]]]],["#ffffff",[[[7,8],[5,9],[3,8],[1,7],[3,6],[5,5],[7,6],[9,7]]]],["#c9f5ff",[[[12,6],[10,5],[10,4],[10,3],[12,4],[12,5]]]],["#007aff",[[[12,4],[14,3],[14,4],[14,5],[12,6],[12,5]]]],["#33c759",[[[0,0],[15,0],[15,15],[0,15]],[[3,12],[5,13],[7,12],[9,11],[9,10],[9,9],[9,8],[9,7],[7,6],[5,5],[3,6],[1,7],[1,8],[1,9],[1,10],[1,11]],[[14,3],[12,2],[10,3],[10,4],[10,5],[12,6],[14,5],[14,4]]]]]</script>
 <script type="application/json" id="picture-words">{"m":{"ar-SA":"جرّب حظك. أسوأ ما قد يحدث قصة تحكيها.","de-DE":"Trau dich. Schlimmstenfalls hast du eine Geschichte.","en-AU":"Take the chance. The worst you get is a story.","en-GB":"Take the chance. The worst you get is a story.","en-US":"Take the chance. The worst you get is a story.","es-ES":"Atrévete. Como mucho, te llevas una buena historia.","es-MX":"Anímate. Lo peor que pasa es que te quede una historia.","fr-FR":"Tente ta chance. Au pire, ça fera une histoire.","hi":"मौक़ा ले लो। बुरा भी हुआ तो एक क़िस्सा बनेगा।","id":"Ambil kesempatannya. Paling apes, jadi cerita.","it":"Tenta la sorte. Male che vada, avrai una storia.","ja":"やってみなよ。最悪でも話のネタになる。","ko":"굴려 봐. 못 돼도 이야깃거리는 남아.","nl-NL":"Waag de gok. In het ergste geval heb je een verhaal.","pt-BR":"Arrisca. No pior dos casos, vira história.","ru":"Рискни. В худшем случае будет что рассказать.","sv":"Chansa. I värsta fall får du en historia.","th":"ลองเสี่ยงดู แย่สุดก็ได้เรื่องเล่า","tr":"Şansını dene. En kötü ihtimalle anlatacak bir hikâyen olur.","vi":"Cứ liều đi. Tệ nhất thì cũng có chuyện để kể.","zh-Hans":"试试看。最坏也就多个故事。","zh-Hant":"試試看嘛。最糟也多一個故事。"}}</script>
 <script src="/library/worksheet-words.js"></script>
 <script src="/library/worksheet.js"></script>

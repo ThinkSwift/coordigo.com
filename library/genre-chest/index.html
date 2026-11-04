@@ -127,14 +127,24 @@
   @media (max-width:600px){ .tab{min-width:0;flex:1;padding:10px 6px 9px} .tabs{flex:1} .site{flex:1;width:auto} }
 
   /* landing: a small film beside the words, then the puzzle as the page's main */
-  .intro{display:grid;grid-template-columns:1fr 300px;gap:28px;align-items:center;padding:26px 0 6px}
+  /* the puzzle first, then the intro with How it works folded behind one line (founder 2026-11-05) */
+  .intro{display:grid;grid-template-columns:1fr 300px;gap:28px;align-items:center;padding:34px 0 6px}
+  .howto{margin:14px 0 0}
+  .howto summary{display:inline-flex;align-items:center;gap:8px;cursor:pointer;list-style:none;font:600 14px/1.2 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    color:var(--ink);border:1px solid var(--line);border-radius:999px;padding:8px 14px}
+  .howto summary::-webkit-details-marker{display:none}
+  .howto summary::after{content:"";width:7px;height:7px;border-right:1.6px solid currentColor;border-bottom:1.6px solid currentColor;transform:rotate(45deg) translateY(-2px);transition:transform .15s}
+  .howto[open] summary::after{transform:rotate(-135deg) translateY(-1px)}
+  .howto .how{list-style:none;margin:12px 0 0;padding:0;display:grid;gap:8px;grid-template-columns:1fr}
+  .howto .how li{display:flex;gap:10px;align-items:baseline;background:var(--mat);border:1px solid var(--hair);border-radius:12px;padding:10px 14px}
+  .howto .how b{flex:0 0 auto;margin:0}
   .intro .film{margin:0;border-radius:14px;overflow:hidden;box-shadow:var(--shadow);background:#fff}
   .intro .film video{border-radius:0}
   .bigplay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;border:0;background:rgba(27,25,23,.12);cursor:pointer}
   .bigplay span{width:64px;height:64px;border-radius:50%;background:rgba(27,25,23,.72);display:grid;place-items:center}
   .bigplay svg{width:26px;height:26px;margin-left:4px;fill:#fff}
   .bigplay[hidden]{display:none}
-  .puzzle{margin:22px 0 0;background:var(--mat);border:1px solid var(--hair);border-radius:16px;box-shadow:var(--shadow);padding:12px 6px 4px}
+  .puzzle{margin:18px 0 0;background:var(--mat);border:1px solid var(--hair);border-radius:16px;box-shadow:var(--shadow);padding:12px 6px 4px}
   .puzzle .head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:2px 12px 0}
   .puzzle iframe{display:block;width:100%;height:640px;border:0;background:transparent}
   .another{font:600 14px/1.2 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;cursor:pointer;border:1px solid var(--ink);border-radius:999px;padding:8px 16px;background:none;color:var(--ink)}
@@ -255,7 +265,7 @@
 <script src="/store.js"></script>
 <script src="/mystery/strings.js"></script>
 <script src="/mystery/engine.js"></script>
-<script type="application/json" id="faces">[["#a37045",[[[12,5],[12,6],[12,7],[11,6],[9,5],[7,6],[6,5],[4,6],[4,5],[4,4],[5,3],[6,3],[7,3],[8,3],[9,3],[10,3],[11,3],[12,4]]]],["#a37045",[[[12,6],[12,5],[12,4],[12,3],[11,2],[12,2],[13,2],[14,3],[14,4],[14,5],[13,6],[12,7]]]],["#ff9400",[[[12,3],[12,4],[11,3],[10,3],[9,3],[8,3],[7,3],[6,3],[5,3],[4,4],[4,3],[5,2],[6,2],[7,2],[8,2],[9,2],[10,2],[11,2]]]],["#a37045",[[[12,9],[12,10],[12,11],[12,12],[11,13],[10,14],[10,13],[10,12],[10,11],[10,10],[11,9],[12,8]]]],["#a37045",[[[7,14],[6,14],[5,14],[4,14],[3,14],[2,14],[2,13],[2,12],[2,11],[2,10],[3,10],[4,10],[5,10],[5,11],[5,12],[6,12],[7,12],[7,11],[7,10],[8,10],[9,10],[10,10],[10,11],[10,12],[10,13],[10,14],[9,14],[8,14]]]],["#ff9400",[[[7,10],[7,11],[7,12],[6,12],[5,12],[5,11],[5,10],[6,10]]]],["#ffd60a",[[[12,7],[11,8],[10,9],[9,9],[8,9],[7,9],[6,9],[5,9],[4,9],[3,9],[2,9],[3,7],[4,6],[6,5],[7,6],[9,5],[11,6]],[[8,6],[7,7],[8,8],[9,7]]]],["#ff9400",[[[11,8],[12,7],[12,8],[11,9],[10,10],[10,9]]]],["#ff9400",[[[2,9],[3,9],[4,9],[5,9],[6,9],[7,9],[8,9],[9,9],[10,9],[10,10],[9,10],[8,10],[7,10],[6,10],[5,10],[4,10],[3,10],[2,10]]]],["#ff3b30",[[[7,7],[8,6],[9,7],[8,8]]]],["#ffffff",[[[0,0],[15,0],[15,15],[0,15]],[[12,10],[12,9],[12,8],[12,7],[13,6],[14,5],[14,4],[14,3],[13,2],[12,2],[11,2],[10,2],[9,2],[8,2],[7,2],[6,2],[5,2],[4,3],[4,4],[4,5],[4,6],[3,7],[2,9],[2,10],[2,11],[2,12],[2,13],[2,14],[3,14],[4,14],[5,14],[6,14],[7,14],[8,14],[9,14],[10,14],[11,13],[12,12],[12,11]]]]]</script>
+<script type="application/json" id="faces">[["#a37045",[[[5,11],[5,12],[6,12],[7,12],[7,11],[7,10],[8,10],[9,10],[10,10],[10,11],[10,12],[10,13],[10,14],[9,14],[8,14],[7,14],[6,14],[5,14],[4,14],[3,14],[2,14],[2,13],[2,12],[2,11],[2,10],[3,10],[4,10],[5,10]]]],["#ff9400",[[[5,12],[5,11],[5,10],[6,10],[7,10],[7,11],[7,12],[6,12]]]],["#ffd60a",[[[2,9],[3,7],[4,6],[6,5],[7,6],[9,5],[11,6],[12,7],[11,8],[10,9],[9,9],[8,9],[7,9],[6,9],[5,9],[4,9],[3,9]],[[8,8],[9,7],[8,6],[7,7]]]],["#ff9400",[[[11,2],[12,3],[12,4],[11,3],[10,3],[9,3],[8,3],[7,3],[6,3],[5,3],[4,4],[4,3],[5,2],[6,2],[7,2],[8,2],[9,2],[10,2]]]],["#a37045",[[[12,3],[11,2],[12,2],[13,2],[14,3],[14,4],[14,5],[13,6],[12,7],[12,6],[12,5],[12,4]]]],["#a37045",[[[10,13],[10,12],[10,11],[10,10],[11,9],[12,8],[12,9],[12,10],[12,11],[12,12],[11,13],[10,14]]]],["#ff9400",[[[4,9],[5,9],[6,9],[7,9],[8,9],[9,9],[10,9],[10,10],[9,10],[8,10],[7,10],[6,10],[5,10],[4,10],[3,10],[2,10],[2,9],[3,9]]]],["#ff9400",[[[10,9],[11,8],[12,7],[12,8],[11,9],[10,10]]]],["#a37045",[[[9,5],[7,6],[6,5],[4,6],[4,5],[4,4],[5,3],[6,3],[7,3],[8,3],[9,3],[10,3],[11,3],[12,4],[12,5],[12,6],[12,7],[11,6]]]],["#ff3b30",[[[9,7],[8,8],[7,7],[8,6]]]],["#ffffff",[[[0,0],[15,0],[15,15],[0,15]],[[3,7],[2,9],[2,10],[2,11],[2,12],[2,13],[2,14],[3,14],[4,14],[5,14],[6,14],[7,14],[8,14],[9,14],[10,14],[11,13],[12,12],[12,11],[12,10],[12,9],[12,8],[12,7],[13,6],[14,5],[14,4],[14,3],[13,2],[12,2],[11,2],[10,2],[9,2],[8,2],[7,2],[6,2],[5,2],[4,3],[4,4],[4,5],[4,6]]]]]</script>
 <script type="application/json" id="picture-words">{"m":{"ar-SA":"تمامًا حيث قالت الخريطة. هيا، افتحه.","de-DE":"Genau da, wo die Karte sagte. Na los, mach sie auf.","en-AU":"Right where the map said. Go on, open it.","en-GB":"Right where the map said. Go on, open it.","en-US":"Right where the map said. Go on, open it.","es-ES":"Justo donde decía el mapa. Venga, ábrelo.","es-MX":"Justo donde decía el mapa. Ándale, ábrelo.","fr-FR":"Pile où la carte l'indiquait. Vas-y, ouvre-le.","hi":"ठीक वहीं जहाँ नक्शे ने बताया। चलो, खोलो।","id":"Tepat di tempat yang ditunjuk peta. Ayo, buka.","it":"Proprio dove diceva la mappa. Dai, aprilo.","ja":"地図のとおりの場所。さあ、開けてみて。","ko":"지도가 말한 바로 그 자리. 자, 열어 봐요.","nl-NL":"Precies waar de kaart zei. Toe maar, maak hem open.","pt-BR":"Bem onde o mapa dizia. Vai, abre.","ru":"Ровно там, где указывала карта. Ну же, открывай.","sv":"Precis där kartan sa. Kör, öppna den.","th":"อยู่ตรงที่แผนที่บอกเป๊ะ เปิดเลยสิ","tr":"Tam haritanın dediği yerde. Hadi, aç.","vi":"Đúng chỗ bản đồ chỉ. Mở ra đi.","zh-Hans":"就在地图说的地方。去吧，打开它。","zh-Hant":"就在地圖說的地方。去吧，打開它。"}}</script>
 <script src="/library/worksheet-words.js"></script>
 <script src="/library/worksheet.js"></script>

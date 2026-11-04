@@ -127,14 +127,24 @@
   @media (max-width:600px){ .tab{min-width:0;flex:1;padding:10px 6px 9px} .tabs{flex:1} .site{flex:1;width:auto} }
 
   /* landing: a small film beside the words, then the puzzle as the page's main */
-  .intro{display:grid;grid-template-columns:1fr 300px;gap:28px;align-items:center;padding:26px 0 6px}
+  /* the puzzle first, then the intro with How it works folded behind one line (founder 2026-11-05) */
+  .intro{display:grid;grid-template-columns:1fr 300px;gap:28px;align-items:center;padding:34px 0 6px}
+  .howto{margin:14px 0 0}
+  .howto summary{display:inline-flex;align-items:center;gap:8px;cursor:pointer;list-style:none;font:600 14px/1.2 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    color:var(--ink);border:1px solid var(--line);border-radius:999px;padding:8px 14px}
+  .howto summary::-webkit-details-marker{display:none}
+  .howto summary::after{content:"";width:7px;height:7px;border-right:1.6px solid currentColor;border-bottom:1.6px solid currentColor;transform:rotate(45deg) translateY(-2px);transition:transform .15s}
+  .howto[open] summary::after{transform:rotate(-135deg) translateY(-1px)}
+  .howto .how{list-style:none;margin:12px 0 0;padding:0;display:grid;gap:8px;grid-template-columns:1fr}
+  .howto .how li{display:flex;gap:10px;align-items:baseline;background:var(--mat);border:1px solid var(--hair);border-radius:12px;padding:10px 14px}
+  .howto .how b{flex:0 0 auto;margin:0}
   .intro .film{margin:0;border-radius:14px;overflow:hidden;box-shadow:var(--shadow);background:#fff}
   .intro .film video{border-radius:0}
   .bigplay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;border:0;background:rgba(27,25,23,.12);cursor:pointer}
   .bigplay span{width:64px;height:64px;border-radius:50%;background:rgba(27,25,23,.72);display:grid;place-items:center}
   .bigplay svg{width:26px;height:26px;margin-left:4px;fill:#fff}
   .bigplay[hidden]{display:none}
-  .puzzle{margin:22px 0 0;background:var(--mat);border:1px solid var(--hair);border-radius:16px;box-shadow:var(--shadow);padding:12px 6px 4px}
+  .puzzle{margin:18px 0 0;background:var(--mat);border:1px solid var(--hair);border-radius:16px;box-shadow:var(--shadow);padding:12px 6px 4px}
   .puzzle .head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:2px 12px 0}
   .puzzle iframe{display:block;width:100%;height:640px;border:0;background:transparent}
   .another{font:600 14px/1.2 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;cursor:pointer;border:1px solid var(--ink);border-radius:999px;padding:8px 16px;background:none;color:var(--ink)}
@@ -255,7 +265,7 @@
 <script src="/store.js"></script>
 <script src="/mystery/strings.js"></script>
 <script src="/mystery/engine.js"></script>
-<script type="application/json" id="faces">[["#1f1c1f",[[[9,4],[10,4],[12,3],[13,8],[9,9],[8,9],[7,9],[6,9],[4,8],[5,3],[7,4],[8,4]],[[6,5],[6,6],[6,7],[6,8],[7,5]]]],["#1f1c1f",[[[10,4],[9,4],[8,4],[7,4],[5,3],[7,2],[8,2],[9,2],[10,2],[12,3]]]],["#1f1c1f",[[[9,12],[13,11],[14,12],[14,13],[12,14],[11,14],[10,14],[9,14],[8,14],[7,14],[6,14],[5,14],[4,14],[2,13],[1,12],[2,11],[3,11],[4,11],[6,12],[7,12],[8,12]]]],["#a37045",[[[13,11],[9,12],[9,11],[9,10],[9,9],[13,8],[13,9],[13,10]]]],["#a37045",[[[6,10],[6,11],[6,12],[4,11],[4,10],[4,9],[4,8],[6,9]]]],["#ffd60a",[[[6,11],[6,10],[6,9],[7,9],[8,9],[9,9],[9,10],[9,11],[9,12],[8,12],[7,12],[6,12]],[[8,10],[7,10],[7,11],[8,11]]]],["#ffffff",[[[6,6],[6,5],[7,5],[6,8],[6,7]]]],["#a37045",[[[7,10],[8,10],[8,11],[7,11]]]],["#c9f5ff",[[[0,0],[15,0],[15,15],[0,15]],[[12,14],[14,13],[14,12],[13,11],[13,10],[13,9],[13,8],[12,3],[10,2],[9,2],[8,2],[7,2],[5,3],[4,8],[4,9],[4,10],[4,11],[3,11],[2,11],[1,12],[2,13],[4,14],[5,14],[6,14],[7,14],[8,14],[9,14],[10,14],[11,14]]]]]</script>
+<script type="application/json" id="faces">[["#1f1c1f",[[[8,4],[9,4],[10,4],[12,3],[13,8],[9,9],[8,9],[7,9],[6,9],[4,8],[5,3],[7,4]],[[7,5],[6,5],[6,6],[6,7],[6,8]]]],["#1f1c1f",[[[9,4],[8,4],[7,4],[5,3],[7,2],[8,2],[9,2],[10,2],[12,3],[10,4]]]],["#a37045",[[[13,9],[13,10],[13,11],[9,12],[9,11],[9,10],[9,9],[13,8]]]],["#1f1c1f",[[[12,14],[11,14],[10,14],[9,14],[8,14],[7,14],[6,14],[5,14],[4,14],[2,13],[1,12],[2,11],[3,11],[4,11],[6,12],[7,12],[8,12],[9,12],[13,11],[14,12],[14,13]]]],["#ffd60a",[[[8,12],[7,12],[6,12],[6,11],[6,10],[6,9],[7,9],[8,9],[9,9],[9,10],[9,11],[9,12]],[[8,10],[7,10],[7,11],[8,11]]]],["#a37045",[[[4,9],[4,8],[6,9],[6,10],[6,11],[6,12],[4,11],[4,10]]]],["#ffffff",[[[6,5],[7,5],[6,8],[6,7],[6,6]]]],["#a37045",[[[7,10],[8,10],[8,11],[7,11]]]],["#c9f5ff",[[[0,0],[15,0],[15,15],[0,15]],[[13,10],[13,9],[13,8],[12,3],[10,2],[9,2],[8,2],[7,2],[5,3],[4,8],[4,9],[4,10],[4,11],[3,11],[2,11],[1,12],[2,13],[4,14],[5,14],[6,14],[7,14],[8,14],[9,14],[10,14],[11,14],[12,14],[14,13],[14,12],[13,11]]]]]</script>
 <script type="application/json" id="picture-words">{"m":{"ar-SA":"ممتن للرحلة، ولوجودك فيها.","de-DE":"Dankbar für die Reise – und dass du dabei bist.","en-AU":"Grateful for the journey, and for you in it.","en-GB":"Grateful for the journey, and for you in it.","en-US":"Grateful for the journey, and for you in it.","es-ES":"Gracias por el viaje, y por estar en él.","es-MX":"Gracias por el viaje, y por estar en él.","fr-FR":"Merci pour le voyage, et d'en faire partie.","hi":"इस सफ़र का शुक्रिया, और इसमें तुम्हारे होने का भी।","id":"Bersyukur atas perjalanan ini, dan atas kamu di dalamnya.","it":"Grazie per il viaggio, e per averlo fatto con me.","ja":"この旅に感謝。そこにいるきみにも。","ko":"이 여정이 고마워. 그 안의 너도.","nl-NL":"Dankbaar voor de reis, en dat jij erbij bent.","pt-BR":"Gratidão pela jornada, e por você nela.","ru":"Спасибо за этот путь — и за тебя в нём.","sv":"Tacksam för resan, och för att du är med.","th":"ขอบคุณการเดินทางนี้ และขอบคุณที่มีเธอ","tr":"Bu yolculuğa ve içindeki sana teşekkürler.","vi":"Biết ơn chặng đường này, và biết ơn có bạn.","zh-Hans":"感谢这一路，也感谢一路有你。","zh-Hant":"感謝這段旅程，也感謝有你同行。"}}</script>
 <script src="/library/worksheet-words.js"></script>
 <script src="/library/worksheet.js"></script>

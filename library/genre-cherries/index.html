@@ -127,14 +127,24 @@
   @media (max-width:600px){ .tab{min-width:0;flex:1;padding:10px 6px 9px} .tabs{flex:1} .site{flex:1;width:auto} }
 
   /* landing: a small film beside the words, then the puzzle as the page's main */
-  .intro{display:grid;grid-template-columns:1fr 300px;gap:28px;align-items:center;padding:26px 0 6px}
+  /* the puzzle first, then the intro with How it works folded behind one line (founder 2026-11-05) */
+  .intro{display:grid;grid-template-columns:1fr 300px;gap:28px;align-items:center;padding:34px 0 6px}
+  .howto{margin:14px 0 0}
+  .howto summary{display:inline-flex;align-items:center;gap:8px;cursor:pointer;list-style:none;font:600 14px/1.2 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    color:var(--ink);border:1px solid var(--line);border-radius:999px;padding:8px 14px}
+  .howto summary::-webkit-details-marker{display:none}
+  .howto summary::after{content:"";width:7px;height:7px;border-right:1.6px solid currentColor;border-bottom:1.6px solid currentColor;transform:rotate(45deg) translateY(-2px);transition:transform .15s}
+  .howto[open] summary::after{transform:rotate(-135deg) translateY(-1px)}
+  .howto .how{list-style:none;margin:12px 0 0;padding:0;display:grid;gap:8px;grid-template-columns:1fr}
+  .howto .how li{display:flex;gap:10px;align-items:baseline;background:var(--mat);border:1px solid var(--hair);border-radius:12px;padding:10px 14px}
+  .howto .how b{flex:0 0 auto;margin:0}
   .intro .film{margin:0;border-radius:14px;overflow:hidden;box-shadow:var(--shadow);background:#fff}
   .intro .film video{border-radius:0}
   .bigplay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;border:0;background:rgba(27,25,23,.12);cursor:pointer}
   .bigplay span{width:64px;height:64px;border-radius:50%;background:rgba(27,25,23,.72);display:grid;place-items:center}
   .bigplay svg{width:26px;height:26px;margin-left:4px;fill:#fff}
   .bigplay[hidden]{display:none}
-  .puzzle{margin:22px 0 0;background:var(--mat);border:1px solid var(--hair);border-radius:16px;box-shadow:var(--shadow);padding:12px 6px 4px}
+  .puzzle{margin:18px 0 0;background:var(--mat);border:1px solid var(--hair);border-radius:16px;box-shadow:var(--shadow);padding:12px 6px 4px}
   .puzzle .head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:2px 12px 0}
   .puzzle iframe{display:block;width:100%;height:640px;border:0;background:transparent}
   .another{font:600 14px/1.2 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;cursor:pointer;border:1px solid var(--ink);border-radius:999px;padding:8px 16px;background:none;color:var(--ink)}
@@ -255,7 +265,7 @@
 <script src="/store.js"></script>
 <script src="/mystery/strings.js"></script>
 <script src="/mystery/engine.js"></script>
-<script type="application/json" id="faces">[["#0a6624",[[[12,3],[11,3],[10,3],[9,2],[10,2],[11,2],[12,2],[13,2],[14,2]]]],["#33c759",[[[11,2],[10,2],[9,2],[11,1],[12,1],[13,1],[14,2],[13,2],[12,2]]]],["#ffffff",[[[10,10],[11,10],[10,11]]]],["#ff3b30",[[[9,11],[9,10],[9,9],[10,8],[11,8],[12,8],[13,9],[13,10],[13,11],[12,12],[11,12],[10,12]],[[11,10],[10,10],[10,11]]]],["#ff3b30",[[[3,13],[2,12],[2,11],[2,10],[3,9],[4,8],[5,8],[6,8],[7,9],[8,10],[8,11],[8,12],[7,13],[6,14],[5,14],[4,14]],[[3,11],[4,10],[3,10]]]],["#ffffff",[[[4,10],[3,11],[3,10]]]],["#c9f5ff",[[[0,0],[15,0],[15,15],[0,15]],[[6,5],[7,4],[8,3],[9,2],[10,5],[11,8],[10,8],[9,9],[9,10],[9,11],[10,12],[11,12],[12,12],[13,11],[13,10],[13,9],[12,8],[11,8],[10,5],[9,2],[10,3],[11,3],[12,3],[14,2],[13,1],[12,1],[11,1],[9,2],[8,3],[7,4],[6,5],[5,8],[4,8],[3,9],[2,10],[2,11],[2,12],[3,13],[4,14],[5,14],[6,14],[7,13],[8,12],[8,11],[8,10],[7,9],[6,8],[5,8]]]]]</script>
+<script type="application/json" id="faces">[["#ff3b30",[[[3,9],[4,8],[5,8],[6,8],[7,9],[8,10],[8,11],[8,12],[7,13],[6,14],[5,14],[4,14],[3,13],[2,12],[2,11],[2,10]],[[3,11],[4,10],[3,10]]]],["#0a6624",[[[13,2],[14,2],[12,3],[11,3],[10,3],[9,2],[10,2],[11,2],[12,2]]]],["#33c759",[[[14,2],[13,2],[12,2],[11,2],[10,2],[9,2],[11,1],[12,1],[13,1]]]],["#ff3b30",[[[13,9],[13,10],[13,11],[12,12],[11,12],[10,12],[9,11],[9,10],[9,9],[10,8],[11,8],[12,8]],[[10,10],[10,11],[11,10]]]],["#ffffff",[[[10,11],[10,10],[11,10]]]],["#ffffff",[[[4,10],[3,11],[3,10]]]],["#c9f5ff",[[[0,0],[15,0],[15,15],[0,15]],[[4,8],[3,9],[2,10],[2,11],[2,12],[3,13],[4,14],[5,14],[6,14],[7,13],[8,12],[8,11],[8,10],[7,9],[6,8],[5,8],[6,5],[7,4],[8,3],[9,2],[10,5],[11,8],[10,8],[9,9],[9,10],[9,11],[10,12],[11,12],[12,12],[13,11],[13,10],[13,9],[12,8],[11,8],[10,5],[9,2],[10,3],[11,3],[12,3],[14,2],[13,1],[12,1],[11,1],[9,2],[8,3],[7,4],[6,5],[5,8]]]]]</script>
 <script type="application/json" id="picture-words">{"m":{"ar-SA":"أجمل حين يكونان اثنين. مثلنا.","de-DE":"Zu zweit ist's schöner. So wie bei uns.","en-AU":"Better in pairs. Like us.","en-GB":"Better in pairs. Like us.","en-US":"Better in pairs. Like us.","es-ES":"Mejor de dos en dos. Como nosotros.","es-MX":"Mejor de dos en dos. Como nosotros.","fr-FR":"C'est mieux à deux. Comme nous.","hi":"जोड़ी में ही मज़ा है। हमारी तरह।","id":"Lebih asyik berdua. Kayak kita.","it":"In coppia è meglio. Come noi.","ja":"ふたつ並ぶとなおいい。わたしたちみたいに。","ko":"둘이라서 더 좋아. 우리처럼.","nl-NL":"Met z'n tweeën is het leuker. Net als wij.","pt-BR":"Melhor em dupla. Igual a gente.","ru":"Вдвоём лучше. Как мы.","sv":"Bättre två och två. Som vi.","th":"คู่กันดีกว่า เหมือนเรา","tr":"İkisi bir arada daha güzel. Bizim gibi.","vi":"Có đôi mới vui. Như tụi mình.","zh-Hans":"成双成对更好。就像我们。","zh-Hant":"兩個在一起更好。就像我們。"}}</script>
 <script src="/library/worksheet-words.js"></script>
 <script src="/library/worksheet.js"></script>

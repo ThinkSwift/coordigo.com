@@ -127,14 +127,24 @@
   @media (max-width:600px){ .tab{min-width:0;flex:1;padding:10px 6px 9px} .tabs{flex:1} .site{flex:1;width:auto} }
 
   /* landing: a small film beside the words, then the puzzle as the page's main */
-  .intro{display:grid;grid-template-columns:1fr 300px;gap:28px;align-items:center;padding:26px 0 6px}
+  /* the puzzle first, then the intro with How it works folded behind one line (founder 2026-11-05) */
+  .intro{display:grid;grid-template-columns:1fr 300px;gap:28px;align-items:center;padding:34px 0 6px}
+  .howto{margin:14px 0 0}
+  .howto summary{display:inline-flex;align-items:center;gap:8px;cursor:pointer;list-style:none;font:600 14px/1.2 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    color:var(--ink);border:1px solid var(--line);border-radius:999px;padding:8px 14px}
+  .howto summary::-webkit-details-marker{display:none}
+  .howto summary::after{content:"";width:7px;height:7px;border-right:1.6px solid currentColor;border-bottom:1.6px solid currentColor;transform:rotate(45deg) translateY(-2px);transition:transform .15s}
+  .howto[open] summary::after{transform:rotate(-135deg) translateY(-1px)}
+  .howto .how{list-style:none;margin:12px 0 0;padding:0;display:grid;gap:8px;grid-template-columns:1fr}
+  .howto .how li{display:flex;gap:10px;align-items:baseline;background:var(--mat);border:1px solid var(--hair);border-radius:12px;padding:10px 14px}
+  .howto .how b{flex:0 0 auto;margin:0}
   .intro .film{margin:0;border-radius:14px;overflow:hidden;box-shadow:var(--shadow);background:#fff}
   .intro .film video{border-radius:0}
   .bigplay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;border:0;background:rgba(27,25,23,.12);cursor:pointer}
   .bigplay span{width:64px;height:64px;border-radius:50%;background:rgba(27,25,23,.72);display:grid;place-items:center}
   .bigplay svg{width:26px;height:26px;margin-left:4px;fill:#fff}
   .bigplay[hidden]{display:none}
-  .puzzle{margin:22px 0 0;background:var(--mat);border:1px solid var(--hair);border-radius:16px;box-shadow:var(--shadow);padding:12px 6px 4px}
+  .puzzle{margin:18px 0 0;background:var(--mat);border:1px solid var(--hair);border-radius:16px;box-shadow:var(--shadow);padding:12px 6px 4px}
   .puzzle .head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:2px 12px 0}
   .puzzle iframe{display:block;width:100%;height:640px;border:0;background:transparent}
   .another{font:600 14px/1.2 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;cursor:pointer;border:1px solid var(--ink);border-radius:999px;padding:8px 16px;background:none;color:var(--ink)}
@@ -255,7 +265,7 @@
 <script src="/store.js"></script>
 <script src="/mystery/strings.js"></script>
 <script src="/mystery/engine.js"></script>
-<script type="application/json" id="faces">[["#33c759",[[[7,6],[8,7],[7,7],[6,7]]]],["#c9f5ff",[[[8,7],[7,6],[6,7],[7,7],[8,7],[8,8],[8,9],[7,10],[6,10],[5,9],[4,9],[4,8],[4,7],[4,6],[5,6],[6,6],[7,5],[8,4],[8,3],[7,3],[6,3],[5,4],[4,6],[3,4],[2,3],[1,4],[1,5],[2,6],[3,6],[4,6],[4,7],[4,8],[4,9],[3,9],[2,10],[1,10],[0,10],[0,0],[15,0],[15,10],[14,10],[13,9],[12,9],[12,8],[12,7],[13,7],[14,6],[13,6],[12,7],[12,6],[12,5],[12,4],[13,4],[14,2],[14,1],[13,2],[12,4],[12,3],[11,1],[10,1],[10,2],[11,3],[12,3],[12,4],[12,5],[12,6],[11,5],[10,5],[11,6],[12,6],[12,7],[12,8],[12,9],[11,9],[10,10],[9,10],[8,9],[8,8],[8,7],[9,7],[10,6],[9,6]]]],["#0a6624",[[[8,4],[7,5],[6,6],[5,6],[4,6],[8,3]]]],["#33c759",[[[12,3],[11,3],[10,2],[10,1],[11,1]]]],["#a37045",[[[8,10],[8,11],[8,10],[8,9],[9,10],[10,10],[11,9],[12,9],[12,10],[12,11],[12,12],[12,13],[11,14],[12,13],[12,12],[14,13],[12,12],[12,11],[13,12],[12,11],[12,10],[12,9],[13,9],[14,10],[15,10],[15,15],[0,15],[0,10],[1,10],[2,10],[3,9],[4,9],[4,10],[4,11],[4,12],[3,13],[4,12],[4,11],[5,12],[4,11],[4,10],[4,9],[5,9],[6,10],[7,10],[8,9],[8,10],[7,11]]]],["#0a6624",[[[4,6],[3,6],[2,6],[1,5],[1,4]]]],["#33c759",[[[14,1],[14,2],[13,4],[12,4],[13,2]]]],["#33c759",[[[1,4],[2,3],[3,4],[4,6]]]],["#0a6624",[[[13,6],[14,6],[13,7],[12,7]]]],["#33c759",[[[6,3],[7,3],[8,3],[4,6],[5,4]]]],["#33c759",[[[12,6],[11,6],[10,5],[11,5]]]],["#33c759",[[[8,7],[9,6],[10,6],[9,7]]]]]</script>
+<script type="application/json" id="faces">[["#c9f5ff",[[[7,5],[8,4],[8,3],[7,3],[6,3],[5,4],[4,6],[3,4],[2,3],[1,4],[1,5],[2,6],[3,6],[4,6],[4,7],[4,8],[4,9],[3,9],[2,10],[1,10],[0,10],[0,0],[15,0],[15,10],[14,10],[13,9],[12,9],[12,8],[12,7],[13,7],[14,6],[13,6],[12,7],[12,6],[12,5],[12,4],[13,4],[14,2],[14,1],[13,2],[12,4],[12,3],[11,1],[10,1],[10,2],[11,3],[12,3],[12,4],[12,5],[12,6],[11,5],[10,5],[11,6],[12,6],[12,7],[12,8],[12,9],[11,9],[10,10],[9,10],[8,9],[8,8],[8,7],[9,7],[10,6],[9,6],[8,7],[7,6],[6,7],[7,7],[8,7],[8,8],[8,9],[7,10],[6,10],[5,9],[4,9],[4,8],[4,7],[4,6],[5,6],[6,6]]]],["#0a6624",[[[8,4],[7,5],[6,6],[5,6],[4,6],[8,3]]]],["#33c759",[[[5,4],[6,3],[7,3],[8,3],[4,6]]]],["#33c759",[[[7,6],[8,7],[7,7],[6,7]]]],["#a37045",[[[14,10],[15,10],[15,15],[0,15],[0,10],[1,10],[2,10],[3,9],[4,9],[4,10],[4,11],[4,12],[3,13],[4,12],[4,11],[5,12],[4,11],[4,10],[4,9],[5,9],[6,10],[7,10],[8,9],[8,10],[7,11],[8,10],[8,11],[8,10],[8,9],[9,10],[10,10],[11,9],[12,9],[12,10],[12,11],[12,12],[12,13],[11,14],[12,13],[12,12],[14,13],[12,12],[12,11],[13,12],[12,11],[12,10],[12,9],[13,9]]]],["#0a6624",[[[2,6],[1,5],[1,4],[4,6],[3,6]]]],["#33c759",[[[1,4],[2,3],[3,4],[4,6]]]],["#33c759",[[[12,3],[11,3],[10,2],[10,1],[11,1]]]],["#0a6624",[[[12,7],[13,6],[14,6],[13,7]]]],["#33c759",[[[11,6],[10,5],[11,5],[12,6]]]],["#33c759",[[[9,7],[8,7],[9,6],[10,6]]]],["#33c759",[[[12,4],[13,2],[14,1],[14,2],[13,4]]]]]</script>
 <script type="application/json" id="picture-words">{"m":{"ar-SA":"صغيرة اليوم. انظر إليها بعد أسبوع.","de-DE":"Heute noch klein. Schau in einer Woche wieder.","en-AU":"Small today. Look again in a week.","en-GB":"Small today. Look again in a week.","en-US":"Small today. Look again in a week.","es-ES":"Hoy es poca cosa. Míralo dentro de una semana.","es-MX":"Hoy es chiquito. Velo de nuevo en una semana.","fr-FR":"Tout petit aujourd'hui. Reviens voir dans une semaine.","hi":"आज छोटा है। एक हफ़्ते बाद फिर देखना।","id":"Hari ini masih kecil. Lihat lagi minggu depan.","it":"Oggi è piccolo. Ripassa tra una settimana.","ja":"今日は小さくても、一週間後にまた見てみて。","ko":"오늘은 작아도, 일주일 뒤에 다시 봐.","nl-NL":"Vandaag nog klein. Kijk over een week nog eens.","pt-BR":"Pequeno hoje. Olha de novo daqui a uma semana.","ru":"Сегодня росток мал. Загляни через неделю.","sv":"Liten i dag. Titta igen om en vecka.","th":"วันนี้ยังเล็ก อีกสัปดาห์ลองมาดูใหม่","tr":"Bugün küçük. Bir hafta sonra yine bak.","vi":"Hôm nay còn bé. Một tuần nữa xem lại nhé.","zh-Hans":"今天还小，一周后再来看看。","zh-Hant":"今天還小小的，一週後再來看看。"}}</script>
 <script src="/library/worksheet-words.js"></script>
 <script src="/library/worksheet.js"></script>

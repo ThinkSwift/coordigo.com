@@ -127,14 +127,24 @@
   @media (max-width:600px){ .tab{min-width:0;flex:1;padding:10px 6px 9px} .tabs{flex:1} .site{flex:1;width:auto} }
 
   /* landing: a small film beside the words, then the puzzle as the page's main */
-  .intro{display:grid;grid-template-columns:1fr 300px;gap:28px;align-items:center;padding:26px 0 6px}
+  /* the puzzle first, then the intro with How it works folded behind one line (founder 2026-11-05) */
+  .intro{display:grid;grid-template-columns:1fr 300px;gap:28px;align-items:center;padding:34px 0 6px}
+  .howto{margin:14px 0 0}
+  .howto summary{display:inline-flex;align-items:center;gap:8px;cursor:pointer;list-style:none;font:600 14px/1.2 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    color:var(--ink);border:1px solid var(--line);border-radius:999px;padding:8px 14px}
+  .howto summary::-webkit-details-marker{display:none}
+  .howto summary::after{content:"";width:7px;height:7px;border-right:1.6px solid currentColor;border-bottom:1.6px solid currentColor;transform:rotate(45deg) translateY(-2px);transition:transform .15s}
+  .howto[open] summary::after{transform:rotate(-135deg) translateY(-1px)}
+  .howto .how{list-style:none;margin:12px 0 0;padding:0;display:grid;gap:8px;grid-template-columns:1fr}
+  .howto .how li{display:flex;gap:10px;align-items:baseline;background:var(--mat);border:1px solid var(--hair);border-radius:12px;padding:10px 14px}
+  .howto .how b{flex:0 0 auto;margin:0}
   .intro .film{margin:0;border-radius:14px;overflow:hidden;box-shadow:var(--shadow);background:#fff}
   .intro .film video{border-radius:0}
   .bigplay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;border:0;background:rgba(27,25,23,.12);cursor:pointer}
   .bigplay span{width:64px;height:64px;border-radius:50%;background:rgba(27,25,23,.72);display:grid;place-items:center}
   .bigplay svg{width:26px;height:26px;margin-left:4px;fill:#fff}
   .bigplay[hidden]{display:none}
-  .puzzle{margin:22px 0 0;background:var(--mat);border:1px solid var(--hair);border-radius:16px;box-shadow:var(--shadow);padding:12px 6px 4px}
+  .puzzle{margin:18px 0 0;background:var(--mat);border:1px solid var(--hair);border-radius:16px;box-shadow:var(--shadow);padding:12px 6px 4px}
   .puzzle .head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:2px 12px 0}
   .puzzle iframe{display:block;width:100%;height:640px;border:0;background:transparent}
   .another{font:600 14px/1.2 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;cursor:pointer;border:1px solid var(--ink);border-radius:999px;padding:8px 16px;background:none;color:var(--ink)}
@@ -255,7 +265,7 @@
 <script src="/store.js"></script>
 <script src="/mystery/strings.js"></script>
 <script src="/mystery/engine.js"></script>
-<script type="application/json" id="faces">[["#ffd60a",[[[3,8],[3,7],[4,7],[4,8]]]],["#ff9400",[[[14,4],[14,5],[14,6],[13,8],[11,9],[10,9],[9,9],[7,8],[6,6],[6,5],[6,4],[7,2],[9,1],[10,1],[11,1],[13,2]],[[8,3],[7,4],[7,5],[8,5],[9,5],[10,4],[10,3],[9,3]],[[11,8],[12,7],[12,6],[11,6],[10,6],[10,7]]]],["#a37045",[[[6,10],[7,10],[8,10],[6,15],[0,15],[0,10],[1,10],[1,11],[1,12],[2,12],[3,12],[4,12],[5,12],[6,12],[6,11]]]],["#5952de",[[[7,10],[6,10],[6,9],[5,7],[4,6],[3,6],[2,7],[1,9],[1,10],[0,10],[0,0],[15,0],[15,10],[14,10],[13,10],[12,10],[11,10],[10,10],[9,10],[8,10]],[[14,5],[14,4],[13,2],[11,1],[10,1],[9,1],[7,2],[6,4],[6,5],[6,6],[7,8],[9,9],[10,9],[11,9],[13,8],[14,6]]]],["#a37045",[[[7,4],[8,3],[9,3],[10,3],[10,4],[9,5],[8,5],[7,5]]]],["#ffffff",[[[4,12],[3,12],[2,12],[3.5,11],[5,12]]]],["#ff3b30",[[[4,9],[5,9],[6,9],[6,10],[6,11],[6,12],[5,12],[5,11],[5,10],[4,10],[3,10],[2,10],[2,11],[2,12],[1,12],[1,11],[1,10],[1,9],[2,9],[3,9]]]],["#a37045",[[[5,9],[4,9],[3,9],[2,9],[1,9],[2,7],[3,6],[4,6],[5,7],[6,9]],[[3,7],[3,8],[4,8],[4,7]]]],["#a37045",[[[12,7],[11,8],[10,7],[10,6],[11,6],[12,6]]]],["#ffffff",[[[4,10],[5,10],[3.5,11],[2,10],[3,10]]]],["#a37045",[[[6,15],[8,10],[9,10],[8,15]]]],["#a37045",[[[10,12],[10,13],[10,14],[10,15],[8,15],[9,10],[10,10],[10,11]]]],["#a37045",[[[10,13],[10,12],[10,11],[10,10],[11,10],[12,15],[10,15],[10,14]]]],["#a37045",[[[12,10],[14,15],[12,15],[11,10]]]],["#a37045",[[[14,15],[12,10],[13,10],[14,10],[15,10],[15,15]]]],["#ff3b30",[[[2,11],[2,10],[3.5,11],[2,12]]]],["#ff3b30",[[[5,12],[3.5,11],[5,10],[5,11]]]]]</script>
+<script type="application/json" id="faces">[["#a37045",[[[2,12],[3,12],[4,12],[5,12],[6,12],[6,11],[6,10],[7,10],[8,10],[6,15],[0,15],[0,10],[1,10],[1,11],[1,12]]]],["#ffffff",[[[3,12],[2,12],[3.5,11],[5,12],[4,12]]]],["#a37045",[[[14,10],[15,10],[15,15],[14,15],[12,10],[13,10]]]],["#5952de",[[[15,10],[14,10],[13,10],[12,10],[11,10],[10,10],[9,10],[8,10],[7,10],[6,10],[6,9],[5,7],[4,6],[3,6],[2,7],[1,9],[1,10],[0,10],[0,0],[15,0]],[[13,8],[14,6],[14,5],[14,4],[13,2],[11,1],[10,1],[9,1],[7,2],[6,4],[6,5],[6,6],[7,8],[9,9],[10,9],[11,9]]]],["#ff9400",[[[14,6],[13,8],[11,9],[10,9],[9,9],[7,8],[6,6],[6,5],[6,4],[7,2],[9,1],[10,1],[11,1],[13,2],[14,4],[14,5]],[[9,5],[10,4],[10,3],[9,3],[8,3],[7,4],[7,5],[8,5]],[[12,7],[12,6],[11,6],[10,6],[10,7],[11,8]]]],["#ff3b30",[[[3.5,11],[2,12],[2,11],[2,10]]]],["#ff3b30",[[[3.5,11],[5,10],[5,11],[5,12]]]],["#ffffff",[[[5,10],[3.5,11],[2,10],[3,10],[4,10]]]],["#a37045",[[[1,9],[2,7],[3,6],[4,6],[5,7],[6,9],[5,9],[4,9],[3,9],[2,9]],[[3,8],[4,8],[4,7],[3,7]]]],["#a37045",[[[8,10],[9,10],[8,15],[6,15]]]],["#a37045",[[[10,11],[10,12],[10,13],[10,14],[10,15],[8,15],[9,10],[10,10]]]],["#a37045",[[[10,12],[10,11],[10,10],[11,10],[12,15],[10,15],[10,14],[10,13]]]],["#a37045",[[[12,15],[11,10],[12,10],[14,15]]]],["#ff3b30",[[[4,9],[5,9],[6,9],[6,10],[6,11],[6,12],[5,12],[5,11],[5,10],[4,10],[3,10],[2,10],[2,11],[2,12],[1,12],[1,11],[1,10],[1,9],[2,9],[3,9]]]],["#a37045",[[[10,4],[9,5],[8,5],[7,5],[7,4],[8,3],[9,3],[10,3]]]],["#ffd60a",[[[4,8],[3,8],[3,7],[4,7]]]],["#a37045",[[[12,6],[12,7],[11,8],[10,7],[10,6],[11,6]]]]]</script>
 <script type="application/json" id="picture-words">{"m":{"ar-SA":"القمر نفسه فوقنا الليلة.","de-DE":"Heute Nacht scheint derselbe Mond über uns beiden.","en-AU":"Same moon over both of us tonight.","en-GB":"Same moon over both of us tonight.","en-US":"Same moon over both of us tonight.","es-ES":"Esta noche, la misma luna sobre los dos.","es-MX":"Esta noche, la misma luna sobre los dos.","fr-FR":"Ce soir, la même lune brille sur nous deux.","hi":"आज रात हम दोनों के ऊपर एक ही चाँद है।","id":"Bulan yang sama di atas kita malam ini.","it":"Stanotte, la stessa luna sopra tutti e due.","ja":"今夜、ふたりの上には同じ月。","ko":"오늘 밤, 우리 위엔 같은 달.","nl-NL":"Vannacht dezelfde maan boven ons allebei.","pt-BR":"Hoje à noite, a mesma lua sobre nós dois.","ru":"Сегодня над нами одна и та же луна.","sv":"Samma måne över oss båda i kväll.","th":"คืนนี้ เราอยู่ใต้ดวงจันทร์ดวงเดียวกัน","tr":"Bu gece ikimizin üstünde aynı ay.","vi":"Đêm nay, trên đầu hai ta là cùng một vầng trăng.","zh-Hans":"今晚，我们头顶是同一个月亮。","zh-Hant":"今晚，我們頭上是同一個月亮。"}}</script>
 <script src="/library/worksheet-words.js"></script>
 <script src="/library/worksheet.js"></script>

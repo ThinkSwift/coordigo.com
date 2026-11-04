@@ -127,14 +127,24 @@
   @media (max-width:600px){ .tab{min-width:0;flex:1;padding:10px 6px 9px} .tabs{flex:1} .site{flex:1;width:auto} }
 
   /* landing: a small film beside the words, then the puzzle as the page's main */
-  .intro{display:grid;grid-template-columns:1fr 300px;gap:28px;align-items:center;padding:26px 0 6px}
+  /* the puzzle first, then the intro with How it works folded behind one line (founder 2026-11-05) */
+  .intro{display:grid;grid-template-columns:1fr 300px;gap:28px;align-items:center;padding:34px 0 6px}
+  .howto{margin:14px 0 0}
+  .howto summary{display:inline-flex;align-items:center;gap:8px;cursor:pointer;list-style:none;font:600 14px/1.2 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    color:var(--ink);border:1px solid var(--line);border-radius:999px;padding:8px 14px}
+  .howto summary::-webkit-details-marker{display:none}
+  .howto summary::after{content:"";width:7px;height:7px;border-right:1.6px solid currentColor;border-bottom:1.6px solid currentColor;transform:rotate(45deg) translateY(-2px);transition:transform .15s}
+  .howto[open] summary::after{transform:rotate(-135deg) translateY(-1px)}
+  .howto .how{list-style:none;margin:12px 0 0;padding:0;display:grid;gap:8px;grid-template-columns:1fr}
+  .howto .how li{display:flex;gap:10px;align-items:baseline;background:var(--mat);border:1px solid var(--hair);border-radius:12px;padding:10px 14px}
+  .howto .how b{flex:0 0 auto;margin:0}
   .intro .film{margin:0;border-radius:14px;overflow:hidden;box-shadow:var(--shadow);background:#fff}
   .intro .film video{border-radius:0}
   .bigplay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;border:0;background:rgba(27,25,23,.12);cursor:pointer}
   .bigplay span{width:64px;height:64px;border-radius:50%;background:rgba(27,25,23,.72);display:grid;place-items:center}
   .bigplay svg{width:26px;height:26px;margin-left:4px;fill:#fff}
   .bigplay[hidden]{display:none}
-  .puzzle{margin:22px 0 0;background:var(--mat);border:1px solid var(--hair);border-radius:16px;box-shadow:var(--shadow);padding:12px 6px 4px}
+  .puzzle{margin:18px 0 0;background:var(--mat);border:1px solid var(--hair);border-radius:16px;box-shadow:var(--shadow);padding:12px 6px 4px}
   .puzzle .head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:2px 12px 0}
   .puzzle iframe{display:block;width:100%;height:640px;border:0;background:transparent}
   .another{font:600 14px/1.2 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;cursor:pointer;border:1px solid var(--ink);border-radius:999px;padding:8px 16px;background:none;color:var(--ink)}
@@ -255,7 +265,7 @@
 <script src="/store.js"></script>
 <script src="/mystery/strings.js"></script>
 <script src="/mystery/engine.js"></script>
-<script type="application/json" id="faces">[["#ffffff",[[[5,7],[5,6],[5,5],[5,4],[6,4],[5,8]]]],["#ffd60a",[[[2,13],[2,12],[3,12],[4,12],[5,12],[6,12],[7,12],[8,12],[9,12],[10,12],[11,12],[11,13],[10,13],[9,13],[8,13],[7,13],[6,13],[5,13],[4,13],[3,13]]]],["#a37045",[[[7,14],[6,14],[6,13],[7,13],[8,13],[8,14]]]],["#ffd60a",[[[6,12],[5,12],[4,12],[3,12],[2,12],[2,11],[3,9],[3,8],[3,7],[3,6],[4,4],[5,3],[6,3],[7,3],[8,3],[9,4],[10,6],[10,7],[10,8],[10,9],[11,11],[11,12],[10,12],[9,12],[8,12],[7,12]],[[5,6],[5,7],[5,8],[6,4],[5,4],[5,5]]]],["#ff9400",[[[11,8],[11,9],[12,11],[12,12],[11,12],[11,11],[10,9],[10,8],[10,7],[10,6],[9,4],[8,3],[9,3],[10,4],[11,6],[11,7]]]],["#c9f5ff",[[[8,2],[8,3],[7,3],[6,3],[6,2],[7,2]]]],["#ffd60a",[[[8,3],[8,2],[7,2],[6,2],[6,3],[5,3],[5,2],[6,1],[7,1],[8,1],[9,2],[9,3]]]],["#ff9400",[[[11,12],[12,12],[12,13],[11,13]]]],["#c9f5ff",[[[0,0],[15,0],[15,15],[0,15]],[[2,12],[2,13],[3,13],[4,13],[5,13],[6,13],[6,14],[7,14],[8,14],[8,13],[9,13],[10,13],[11,13],[12,13],[12,12],[12,11],[11,9],[11,8],[11,7],[11,6],[10,4],[9,3],[9,2],[8,1],[7,1],[6,1],[5,2],[5,3],[4,4],[3,6],[3,7],[3,8],[3,9],[2,11]]]]]</script>
+<script type="application/json" id="faces">[["#ffd60a",[[[6,1],[7,1],[8,1],[9,2],[9,3],[8,3],[8,2],[7,2],[6,2],[6,3],[5,3],[5,2]]]],["#ffd60a",[[[2,12],[3,12],[4,12],[5,12],[6,12],[7,12],[8,12],[9,12],[10,12],[11,12],[11,13],[10,13],[9,13],[8,13],[7,13],[6,13],[5,13],[4,13],[3,13],[2,13]]]],["#ffd60a",[[[3,12],[2,12],[2,11],[3,9],[3,8],[3,7],[3,6],[4,4],[5,3],[6,3],[7,3],[8,3],[9,4],[10,6],[10,7],[10,8],[10,9],[11,11],[11,12],[10,12],[9,12],[8,12],[7,12],[6,12],[5,12],[4,12]],[[5,6],[5,7],[5,8],[6,4],[5,4],[5,5]]]],["#a37045",[[[6,14],[6,13],[7,13],[8,13],[8,14],[7,14]]]],["#c9f5ff",[[[6,2],[7,2],[8,2],[8,3],[7,3],[6,3]]]],["#ff9400",[[[10,4],[11,6],[11,7],[11,8],[11,9],[12,11],[12,12],[11,12],[11,11],[10,9],[10,8],[10,7],[10,6],[9,4],[8,3],[9,3]]]],["#ff9400",[[[12,12],[12,13],[11,13],[11,12]]]],["#ffffff",[[[5,7],[5,6],[5,5],[5,4],[6,4],[5,8]]]],["#c9f5ff",[[[0,0],[15,0],[15,15],[0,15]],[[7,1],[6,1],[5,2],[5,3],[4,4],[3,6],[3,7],[3,8],[3,9],[2,11],[2,12],[2,13],[3,13],[4,13],[5,13],[6,13],[6,14],[7,14],[8,14],[8,13],[9,13],[10,13],[11,13],[12,13],[12,12],[12,11],[11,9],[11,8],[11,7],[11,6],[10,4],[9,3],[9,2],[8,1]]]]]</script>
 <script type="application/json" id="picture-words">{"m":{"ar-SA":"صغير، لكن حين يتكلم يلتفت الجميع.","de-DE":"Klein, aber wenn sie spricht, drehen sich alle um.","en-AU":"Small, but everyone turns around when it speaks.","en-GB":"Small, but everyone turns around when it speaks.","en-US":"Small, but everyone turns around when it speaks.","es-ES":"Pequeña, pero cuando habla, todos se giran.","es-MX":"Pequeña, pero cuando habla, todos voltean.","fr-FR":"Petite, mais quand elle parle, tout le monde se retourne.","hi":"छोटी है, पर बजे तो सब मुड़कर देखते हैं।","id":"Kecil, tapi saat berbunyi semua orang menoleh.","it":"Piccola, ma quando parla si girano tutti.","ja":"小さくても、鳴ればみんな振り向く。","ko":"작아도, 울리면 모두 돌아본다.","nl-NL":"Klein, maar als ze klinkt, kijkt iedereen om.","pt-BR":"Pequeno, mas quando fala, todo mundo se vira.","ru":"Маленький, но стоит ему заговорить — все оборачиваются.","sv":"Liten, men när den talar vänder sig alla om.","th":"ตัวเล็ก แต่พอดัง ทุกคนหันมามอง","tr":"Küçük ama konuştuğunda herkes dönüp bakar.","vi":"Nhỏ thôi, nhưng hễ cất tiếng là ai cũng quay lại.","zh-Hans":"个子小，可一响起来，大家都回头。","zh-Hant":"雖然小，一響大家都會回頭。"}}</script>
 <script src="/library/worksheet-words.js"></script>
 <script src="/library/worksheet.js"></script>

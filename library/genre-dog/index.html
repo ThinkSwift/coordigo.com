@@ -127,14 +127,24 @@
   @media (max-width:600px){ .tab{min-width:0;flex:1;padding:10px 6px 9px} .tabs{flex:1} .site{flex:1;width:auto} }
 
   /* landing: a small film beside the words, then the puzzle as the page's main */
-  .intro{display:grid;grid-template-columns:1fr 300px;gap:28px;align-items:center;padding:26px 0 6px}
+  /* the puzzle first, then the intro with How it works folded behind one line (founder 2026-11-05) */
+  .intro{display:grid;grid-template-columns:1fr 300px;gap:28px;align-items:center;padding:34px 0 6px}
+  .howto{margin:14px 0 0}
+  .howto summary{display:inline-flex;align-items:center;gap:8px;cursor:pointer;list-style:none;font:600 14px/1.2 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    color:var(--ink);border:1px solid var(--line);border-radius:999px;padding:8px 14px}
+  .howto summary::-webkit-details-marker{display:none}
+  .howto summary::after{content:"";width:7px;height:7px;border-right:1.6px solid currentColor;border-bottom:1.6px solid currentColor;transform:rotate(45deg) translateY(-2px);transition:transform .15s}
+  .howto[open] summary::after{transform:rotate(-135deg) translateY(-1px)}
+  .howto .how{list-style:none;margin:12px 0 0;padding:0;display:grid;gap:8px;grid-template-columns:1fr}
+  .howto .how li{display:flex;gap:10px;align-items:baseline;background:var(--mat);border:1px solid var(--hair);border-radius:12px;padding:10px 14px}
+  .howto .how b{flex:0 0 auto;margin:0}
   .intro .film{margin:0;border-radius:14px;overflow:hidden;box-shadow:var(--shadow);background:#fff}
   .intro .film video{border-radius:0}
   .bigplay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;border:0;background:rgba(27,25,23,.12);cursor:pointer}
   .bigplay span{width:64px;height:64px;border-radius:50%;background:rgba(27,25,23,.72);display:grid;place-items:center}
   .bigplay svg{width:26px;height:26px;margin-left:4px;fill:#fff}
   .bigplay[hidden]{display:none}
-  .puzzle{margin:22px 0 0;background:var(--mat);border:1px solid var(--hair);border-radius:16px;box-shadow:var(--shadow);padding:12px 6px 4px}
+  .puzzle{margin:18px 0 0;background:var(--mat);border:1px solid var(--hair);border-radius:16px;box-shadow:var(--shadow);padding:12px 6px 4px}
   .puzzle .head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:2px 12px 0}
   .puzzle iframe{display:block;width:100%;height:640px;border:0;background:transparent}
   .another{font:600 14px/1.2 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;cursor:pointer;border:1px solid var(--ink);border-radius:999px;padding:8px 16px;background:none;color:var(--ink)}
@@ -255,7 +265,7 @@
 <script src="/store.js"></script>
 <script src="/mystery/strings.js"></script>
 <script src="/mystery/engine.js"></script>
-<script type="application/json" id="faces">[["#a37045",[[[13,13],[13,14],[12,14],[11,14],[11,13],[11,12],[11,11],[11,10],[10,11],[10,12],[10,13],[10,14],[9,14],[8,13],[7,13],[8,12],[7,10],[5,9],[4,9],[6,6],[7,5],[8,4],[8,5],[8,6],[10,5],[10,4],[10,3],[9,2],[10,2],[11,2],[12,3],[14,4],[14,5],[13,5],[14,5],[12,6],[11,7],[12,9],[12,10],[12,11],[12,12]]]],["#a37045",[[[3,13],[3,12],[3,11],[4,9],[5,9],[7,10],[8,12],[7,13],[8,13],[9,14],[8,14],[7,14],[6,14],[5,14]]]],["#664024",[[[10,14],[10,13],[10,12],[10,11],[11,10],[11,11],[11,12],[11,13],[11,14]]]],["#664024",[[[10,3],[10,4],[10,5],[8,6],[8,5],[8,4],[9,2]]]],["#c9f5ff",[[[0,0],[15,0],[15,15],[0,15]],[[13,14],[13,13],[12,12],[12,11],[12,10],[12,9],[11,7],[12,6],[14,5],[14,4],[12,3],[11,2],[10,2],[9,2],[8,4],[7,5],[6,6],[4,9],[3,11],[2,10],[1,9],[2,7],[1,9],[2,10],[3,11],[3,12],[3,13],[5,14],[6,14],[7,14],[8,14],[9,14],[10,14],[11,14],[12,14]]]]]</script>
+<script type="application/json" id="faces">[["#a37045",[[[7,5],[8,4],[8,5],[8,6],[10,5],[10,4],[10,3],[9,2],[10,2],[11,2],[12,3],[14,4],[14,5],[13,5],[14,5],[12,6],[11,7],[12,9],[12,10],[12,11],[12,12],[13,13],[13,14],[12,14],[11,14],[11,13],[11,12],[11,11],[11,10],[10,11],[10,12],[10,13],[10,14],[9,14],[8,13],[7,13],[8,12],[7,10],[5,9],[4,9],[6,6]]]],["#a37045",[[[5,14],[3,13],[3,12],[3,11],[4,9],[5,9],[7,10],[8,12],[7,13],[8,13],[9,14],[8,14],[7,14],[6,14]]]],["#664024",[[[10,13],[10,12],[10,11],[11,10],[11,11],[11,12],[11,13],[11,14],[10,14]]]],["#664024",[[[10,4],[10,5],[8,6],[8,5],[8,4],[9,2],[10,3]]]],["#c9f5ff",[[[0,0],[15,0],[15,15],[0,15]],[[8,4],[7,5],[6,6],[4,9],[3,11],[2,10],[1,9],[2,7],[1,9],[2,10],[3,11],[3,12],[3,13],[5,14],[6,14],[7,14],[8,14],[9,14],[10,14],[11,14],[12,14],[13,14],[13,13],[12,12],[12,11],[12,10],[12,9],[11,7],[12,6],[14,5],[14,4],[12,3],[11,2],[10,2],[9,2]]]]]</script>
 <script type="application/json" id="picture-words">{"m":{"ar-SA":"ينتظر عند الباب حتى تعود إلى البيت.","de-DE":"Wartet an der Tür, bis du nach Hause kommst.","en-AU":"Waiting by the door until you come home.","en-GB":"Waiting by the door until you come home.","en-US":"Waiting by the door until you come home.","es-ES":"Esperando junto a la puerta hasta que vuelvas a casa.","es-MX":"Esperando junto a la puerta hasta que vuelvas a casa.","fr-FR":"Il attend à la porte jusqu'à ton retour.","hi":"तुम्हारे घर आने तक दरवाज़े पर इंतज़ार।","id":"Menunggu di pintu sampai kamu pulang.","it":"Aspetta alla porta finché non torni a casa.","ja":"あなたが帰るまで、ドアのそばで待ってる。","ko":"당신이 돌아올 때까지 문 앞에서 기다려요.","nl-NL":"Wacht bij de deur tot je thuiskomt.","pt-BR":"Esperando na porta até você voltar para casa.","ru":"Ждёт у двери, пока ты не вернёшься домой.","sv":"Väntar vid dörren tills du kommer hem.","th":"นั่งรอที่ประตูจนกว่าคุณจะกลับบ้าน","tr":"Sen eve gelene kadar kapının önünde bekliyor.","vi":"Ngồi chờ bên cửa cho đến khi bạn về.","zh-Hans":"守在门口，等你回家。","zh-Hant":"守在門口，等你回家。"}}</script>
 <script src="/library/worksheet-words.js"></script>
 <script src="/library/worksheet.js"></script>

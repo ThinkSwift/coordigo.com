@@ -127,14 +127,24 @@
   @media (max-width:600px){ .tab{min-width:0;flex:1;padding:10px 6px 9px} .tabs{flex:1} .site{flex:1;width:auto} }
 
   /* landing: a small film beside the words, then the puzzle as the page's main */
-  .intro{display:grid;grid-template-columns:1fr 300px;gap:28px;align-items:center;padding:26px 0 6px}
+  /* the puzzle first, then the intro with How it works folded behind one line (founder 2026-11-05) */
+  .intro{display:grid;grid-template-columns:1fr 300px;gap:28px;align-items:center;padding:34px 0 6px}
+  .howto{margin:14px 0 0}
+  .howto summary{display:inline-flex;align-items:center;gap:8px;cursor:pointer;list-style:none;font:600 14px/1.2 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    color:var(--ink);border:1px solid var(--line);border-radius:999px;padding:8px 14px}
+  .howto summary::-webkit-details-marker{display:none}
+  .howto summary::after{content:"";width:7px;height:7px;border-right:1.6px solid currentColor;border-bottom:1.6px solid currentColor;transform:rotate(45deg) translateY(-2px);transition:transform .15s}
+  .howto[open] summary::after{transform:rotate(-135deg) translateY(-1px)}
+  .howto .how{list-style:none;margin:12px 0 0;padding:0;display:grid;gap:8px;grid-template-columns:1fr}
+  .howto .how li{display:flex;gap:10px;align-items:baseline;background:var(--mat);border:1px solid var(--hair);border-radius:12px;padding:10px 14px}
+  .howto .how b{flex:0 0 auto;margin:0}
   .intro .film{margin:0;border-radius:14px;overflow:hidden;box-shadow:var(--shadow);background:#fff}
   .intro .film video{border-radius:0}
   .bigplay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;border:0;background:rgba(27,25,23,.12);cursor:pointer}
   .bigplay span{width:64px;height:64px;border-radius:50%;background:rgba(27,25,23,.72);display:grid;place-items:center}
   .bigplay svg{width:26px;height:26px;margin-left:4px;fill:#fff}
   .bigplay[hidden]{display:none}
-  .puzzle{margin:22px 0 0;background:var(--mat);border:1px solid var(--hair);border-radius:16px;box-shadow:var(--shadow);padding:12px 6px 4px}
+  .puzzle{margin:18px 0 0;background:var(--mat);border:1px solid var(--hair);border-radius:16px;box-shadow:var(--shadow);padding:12px 6px 4px}
   .puzzle .head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:2px 12px 0}
   .puzzle iframe{display:block;width:100%;height:640px;border:0;background:transparent}
   .another{font:600 14px/1.2 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;cursor:pointer;border:1px solid var(--ink);border-radius:999px;padding:8px 16px;background:none;color:var(--ink)}
@@ -255,7 +265,7 @@
 <script src="/store.js"></script>
 <script src="/mystery/strings.js"></script>
 <script src="/mystery/engine.js"></script>
-<script type="application/json" id="faces">[["#ffffff",[[[4,12],[5,12],[6,12],[7,12],[8,12],[9,12],[10,12],[11,12],[12,12],[14,13],[13,15],[2,15],[1,13],[3,12]],[[7,14],[8,14],[9,14],[9,13],[8,13],[7,13],[6,13],[6,14]]]],["#c9f5ff",[[[5,12],[4,12],[3,12],[4,11],[5,11],[6,11],[7,11],[8,11],[9,11],[10,11],[11,11],[12,12],[11,12],[10,12],[9,12],[8,12],[7,12],[6,12]]]],["#ffffff",[[[9,11],[8,11],[7,11],[6,11],[5,11],[4,11],[3,10],[2,9],[1,6],[2,4],[3,2],[5,1],[6,1],[7,1],[8,1],[9,1],[10,1],[12,2],[13,4],[14,6],[13,9],[12,10],[11,11],[10,11]],[[6,4],[5,4],[4,4],[3,6],[4,8],[6,9],[7,9],[8,9],[9,9],[11,8],[12,6],[11,5],[10,4],[9,4],[8,4],[7,4]]]],["#007aff",[[[8,14],[7,14],[7,13],[8,13],[9,13],[9,14]]]],["#ffd60a",[[[5,4],[6,4],[7,4],[8,4],[9,4],[10,4],[11,5],[12,6],[11,8],[9,9],[8,9],[7,9],[6,9],[4,8],[3,6],[4,4]],[[6,5],[5,5],[5,6],[5,7],[6,6],[7,5]]]],["#5952de",[[[14,6],[13,4],[12,2],[10,1],[9,1],[8,1],[7,1],[6,1],[5,1],[3,2],[2,4],[1,6],[2,9],[3,10],[4,11],[3,12],[1,13],[0,13],[0,0],[15,0],[15,13],[14,13],[12,12],[11,11],[12,10],[13,9]]]],["#ffffff",[[[5,5],[6,5],[7,5],[6,6],[5,7],[5,6]]]],["#c9f5ff",[[[1,13],[2,15],[0,15],[0,13]]]],["#ff3b30",[[[7,14],[6,14],[6,13],[7,13]]]],["#c9f5ff",[[[14,13],[15,13],[15,15],[13,15]]]]]</script>
+<script type="application/json" id="faces">[["#ffd60a",[[[8,4],[9,4],[10,4],[11,5],[12,6],[11,8],[9,9],[8,9],[7,9],[6,9],[4,8],[3,6],[4,4],[5,4],[6,4],[7,4]],[[5,7],[6,6],[7,5],[6,5],[5,5],[5,6]]]],["#ffffff",[[[6,1],[7,1],[8,1],[9,1],[10,1],[12,2],[13,4],[14,6],[13,9],[12,10],[11,11],[10,11],[9,11],[8,11],[7,11],[6,11],[5,11],[4,11],[3,10],[2,9],[1,6],[2,4],[3,2],[5,1]],[[9,4],[8,4],[7,4],[6,4],[5,4],[4,4],[3,6],[4,8],[6,9],[7,9],[8,9],[9,9],[11,8],[12,6],[11,5],[10,4]]]],["#5952de",[[[7,1],[6,1],[5,1],[3,2],[2,4],[1,6],[2,9],[3,10],[4,11],[3,12],[1,13],[0,13],[0,0],[15,0],[15,13],[14,13],[12,12],[11,11],[12,10],[13,9],[14,6],[13,4],[12,2],[10,1],[9,1],[8,1]]]],["#ffffff",[[[1,13],[3,12],[4,12],[5,12],[6,12],[7,12],[8,12],[9,12],[10,12],[11,12],[12,12],[14,13],[13,15],[2,15]],[[6,13],[6,14],[7,14],[8,14],[9,14],[9,13],[8,13],[7,13]]]],["#ff3b30",[[[6,14],[6,13],[7,13],[7,14]]]],["#ffffff",[[[6,6],[5,7],[5,6],[5,5],[6,5],[7,5]]]],["#c9f5ff",[[[9,11],[10,11],[11,11],[12,12],[11,12],[10,12],[9,12],[8,12],[7,12],[6,12],[5,12],[4,12],[3,12],[4,11],[5,11],[6,11],[7,11],[8,11]]]],["#c9f5ff",[[[1,13],[2,15],[0,15],[0,13]]]],["#007aff",[[[7,14],[7,13],[8,13],[9,13],[9,14],[8,14]]]],["#c9f5ff",[[[13,15],[14,13],[15,13],[15,15]]]]]</script>
 <script type="application/json" id="picture-words">{"m":{"ar-SA":"هنا في الأعلى، لا شيء تُسقطه يصل إلى الأرض.","de-DE":"Hier oben fällt nichts, was du loslässt, je zu Boden.","en-AU":"Up here, nothing you drop ever hits the floor.","en-GB":"Up here, nothing you drop ever hits the floor.","en-US":"Up here, nothing you drop ever hits the floor.","es-ES":"Aquí arriba, nada de lo que sueltas llega al suelo.","es-MX":"Aquí arriba, nada de lo que sueltas llega al suelo.","fr-FR":"Ici, rien de ce que tu lâches ne touche le sol.","hi":"यहाँ ऊपर, कुछ भी गिराओ, फ़र्श तक नहीं पहुँचता।","id":"Di atas sini, apa pun yang jatuh tak pernah sampai lantai.","it":"Quassù niente di ciò che lasci cade mai a terra.","ja":"ここでは、落とした物が床に届かない。","ko":"여기선 뭘 떨어뜨려도 바닥에 닿지 않아요.","nl-NL":"Hierboven valt niets wat je loslaat ooit op de grond.","pt-BR":"Aqui em cima, nada que você solta cai no chão.","ru":"Тут, наверху, что ни урони — до пола не долетит.","sv":"Här uppe landar inget du tappar någonsin på golvet.","th":"บนนี้ ทำอะไรหล่นก็ไม่ถึงพื้นสักที","tr":"Burada, yukarıda, düşürdüğün hiçbir şey yere değmez.","vi":"Trên này, đánh rơi gì cũng chẳng bao giờ chạm sàn.","zh-Hans":"在这里，掉下的东西永远落不了地。","zh-Hant":"在這裡，掉下去的東西永遠不會落地。"}}</script>
 <script src="/library/worksheet-words.js"></script>
 <script src="/library/worksheet.js"></script>

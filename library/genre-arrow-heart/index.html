@@ -127,14 +127,24 @@
   @media (max-width:600px){ .tab{min-width:0;flex:1;padding:10px 6px 9px} .tabs{flex:1} .site{flex:1;width:auto} }
 
   /* landing: a small film beside the words, then the puzzle as the page's main */
-  .intro{display:grid;grid-template-columns:1fr 300px;gap:28px;align-items:center;padding:26px 0 6px}
+  /* the puzzle first, then the intro with How it works folded behind one line (founder 2026-11-05) */
+  .intro{display:grid;grid-template-columns:1fr 300px;gap:28px;align-items:center;padding:34px 0 6px}
+  .howto{margin:14px 0 0}
+  .howto summary{display:inline-flex;align-items:center;gap:8px;cursor:pointer;list-style:none;font:600 14px/1.2 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    color:var(--ink);border:1px solid var(--line);border-radius:999px;padding:8px 14px}
+  .howto summary::-webkit-details-marker{display:none}
+  .howto summary::after{content:"";width:7px;height:7px;border-right:1.6px solid currentColor;border-bottom:1.6px solid currentColor;transform:rotate(45deg) translateY(-2px);transition:transform .15s}
+  .howto[open] summary::after{transform:rotate(-135deg) translateY(-1px)}
+  .howto .how{list-style:none;margin:12px 0 0;padding:0;display:grid;gap:8px;grid-template-columns:1fr}
+  .howto .how li{display:flex;gap:10px;align-items:baseline;background:var(--mat);border:1px solid var(--hair);border-radius:12px;padding:10px 14px}
+  .howto .how b{flex:0 0 auto;margin:0}
   .intro .film{margin:0;border-radius:14px;overflow:hidden;box-shadow:var(--shadow);background:#fff}
   .intro .film video{border-radius:0}
   .bigplay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;border:0;background:rgba(27,25,23,.12);cursor:pointer}
   .bigplay span{width:64px;height:64px;border-radius:50%;background:rgba(27,25,23,.72);display:grid;place-items:center}
   .bigplay svg{width:26px;height:26px;margin-left:4px;fill:#fff}
   .bigplay[hidden]{display:none}
-  .puzzle{margin:22px 0 0;background:var(--mat);border:1px solid var(--hair);border-radius:16px;box-shadow:var(--shadow);padding:12px 6px 4px}
+  .puzzle{margin:18px 0 0;background:var(--mat);border:1px solid var(--hair);border-radius:16px;box-shadow:var(--shadow);padding:12px 6px 4px}
   .puzzle .head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:2px 12px 0}
   .puzzle iframe{display:block;width:100%;height:640px;border:0;background:transparent}
   .another{font:600 14px/1.2 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;cursor:pointer;border:1px solid var(--ink);border-radius:999px;padding:8px 16px;background:none;color:var(--ink)}
@@ -255,7 +265,7 @@
 <script src="/store.js"></script>
 <script src="/mystery/strings.js"></script>
 <script src="/mystery/engine.js"></script>
-<script type="application/json" id="faces">[["#a37045",[[[9,11],[8,12],[8,11],[9,10],[10,9],[11,8],[11,7],[11,6],[11,5],[11,4],[12,5],[12,6],[12,7],[12,8],[11,9],[10,10]]]],["#ffffff",[[[6,7],[5,6],[6,5],[6,6]]]],["#ff9400",[[[3,11],[4,10],[4,11],[4,12],[3,13],[3,12]]]],["#ffd60a",[[[4,10],[3,11],[2,11],[1,11],[2,10],[3,10]]]],["#ff3b30",[[[4,8],[4,7],[4,6],[4,5],[5,4],[6,4],[7,4],[8,5],[9,4],[10,4],[11,4],[11,5],[11,6],[11,7],[11,8],[10,9],[9,10],[8,11],[8,12],[7,11],[6,10],[5,9]],[[5,6],[6,7],[6,6],[6,5]]]],["#ffd60a",[[[11,1],[12,1],[13,1],[13,2],[13,3],[12,2]]]],["#ffc482",[[[0,0],[15,0],[15,15],[0,15]],[[8,12],[9,11],[10,10],[11,9],[12,8],[12,7],[12,6],[12,5],[11,4],[10,4],[11,3],[12,2],[13,3],[13,2],[13,1],[12,1],[11,1],[12,2],[11,3],[10,4],[9,4],[8,5],[7,4],[6,4],[5,4],[4,5],[4,6],[4,7],[4,8],[5,9],[4,10],[3,10],[2,10],[1,11],[2,11],[3,11],[2,12],[3,11],[3,12],[3,13],[4,12],[4,11],[4,10],[5,9],[6,10],[7,11]]]]]</script>
+<script type="application/json" id="faces">[["#ff3b30",[[[5,9],[4,8],[4,7],[4,6],[4,5],[5,4],[6,4],[7,4],[8,5],[9,4],[10,4],[11,4],[11,5],[11,6],[11,7],[11,8],[10,9],[9,10],[8,11],[8,12],[7,11],[6,10]],[[5,6],[6,7],[6,6],[6,5]]]],["#ffd60a",[[[11,1],[12,1],[13,1],[13,2],[13,3],[12,2]]]],["#a37045",[[[10,9],[11,8],[11,7],[11,6],[11,5],[11,4],[12,5],[12,6],[12,7],[12,8],[11,9],[10,10],[9,11],[8,12],[8,11],[9,10]]]],["#ffffff",[[[6,7],[5,6],[6,5],[6,6]]]],["#ff9400",[[[3,11],[4,10],[4,11],[4,12],[3,13],[3,12]]]],["#ffd60a",[[[4,10],[3,11],[2,11],[1,11],[2,10],[3,10]]]],["#ffc482",[[[0,0],[15,0],[15,15],[0,15]],[[4,8],[5,9],[4,10],[3,10],[2,10],[1,11],[2,11],[3,11],[2,12],[3,11],[3,12],[3,13],[4,12],[4,11],[4,10],[5,9],[6,10],[7,11],[8,12],[9,11],[10,10],[11,9],[12,8],[12,7],[12,6],[12,5],[11,4],[10,4],[11,3],[12,2],[13,3],[13,2],[13,1],[12,1],[11,1],[12,2],[11,3],[10,4],[9,4],[8,5],[7,4],[6,4],[5,4],[4,5],[4,6],[4,7]]]]]</script>
 <script type="application/json" id="picture-words">{"m":{"ar-SA":"في الصميم. قلب واحد صار محجوزًا رسميًا.","de-DE":"Volltreffer. Ein Herz, offiziell vergeben.","en-AU":"Bullseye. One heart, officially taken.","en-GB":"Bullseye. One heart, officially taken.","en-US":"Bullseye. One heart, officially taken.","es-ES":"En el blanco. Un corazón, oficialmente ocupado.","es-MX":"En el blanco. Un corazón, oficialmente ocupado.","fr-FR":"En plein dans le mille. Un cœur officiellement pris.","hi":"निशाना सटीक। एक दिल अब आधिकारिक रूप से किसी का।","id":"Tepat sasaran. Satu hati resmi sudah ada pemiliknya.","it":"Centro! Un cuore, ufficialmente occupato.","ja":"命中。このハート、正式に売約済み。","ko":"명중. 이 마음, 공식적으로 임자 있음.","nl-NL":"Raak. Eén hart, officieel bezet.","pt-BR":"Na mosca. Um coração, oficialmente ocupado.","ru":"В яблочко. Одно сердце официально занято.","sv":"Mitt i prick. Ett hjärta, officiellt upptaget.","th":"เข้าเป้า! หัวใจดวงนี้มีเจ้าของแล้ว","tr":"Tam on ikiden! Bir kalp artık resmen sahipli.","vi":"Trúng hồng tâm. Một trái tim chính thức có chủ.","zh-Hans":"正中靶心。这颗心，正式名花有主。","zh-Hant":"正中紅心。這顆心，正式名花有主。"}}</script>
 <script src="/library/worksheet-words.js"></script>
 <script src="/library/worksheet.js"></script>

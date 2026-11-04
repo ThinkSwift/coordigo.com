@@ -127,14 +127,24 @@
   @media (max-width:600px){ .tab{min-width:0;flex:1;padding:10px 6px 9px} .tabs{flex:1} .site{flex:1;width:auto} }
 
   /* landing: a small film beside the words, then the puzzle as the page's main */
-  .intro{display:grid;grid-template-columns:1fr 300px;gap:28px;align-items:center;padding:26px 0 6px}
+  /* the puzzle first, then the intro with How it works folded behind one line (founder 2026-11-05) */
+  .intro{display:grid;grid-template-columns:1fr 300px;gap:28px;align-items:center;padding:34px 0 6px}
+  .howto{margin:14px 0 0}
+  .howto summary{display:inline-flex;align-items:center;gap:8px;cursor:pointer;list-style:none;font:600 14px/1.2 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    color:var(--ink);border:1px solid var(--line);border-radius:999px;padding:8px 14px}
+  .howto summary::-webkit-details-marker{display:none}
+  .howto summary::after{content:"";width:7px;height:7px;border-right:1.6px solid currentColor;border-bottom:1.6px solid currentColor;transform:rotate(45deg) translateY(-2px);transition:transform .15s}
+  .howto[open] summary::after{transform:rotate(-135deg) translateY(-1px)}
+  .howto .how{list-style:none;margin:12px 0 0;padding:0;display:grid;gap:8px;grid-template-columns:1fr}
+  .howto .how li{display:flex;gap:10px;align-items:baseline;background:var(--mat);border:1px solid var(--hair);border-radius:12px;padding:10px 14px}
+  .howto .how b{flex:0 0 auto;margin:0}
   .intro .film{margin:0;border-radius:14px;overflow:hidden;box-shadow:var(--shadow);background:#fff}
   .intro .film video{border-radius:0}
   .bigplay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;border:0;background:rgba(27,25,23,.12);cursor:pointer}
   .bigplay span{width:64px;height:64px;border-radius:50%;background:rgba(27,25,23,.72);display:grid;place-items:center}
   .bigplay svg{width:26px;height:26px;margin-left:4px;fill:#fff}
   .bigplay[hidden]{display:none}
-  .puzzle{margin:22px 0 0;background:var(--mat);border:1px solid var(--hair);border-radius:16px;box-shadow:var(--shadow);padding:12px 6px 4px}
+  .puzzle{margin:18px 0 0;background:var(--mat);border:1px solid var(--hair);border-radius:16px;box-shadow:var(--shadow);padding:12px 6px 4px}
   .puzzle .head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:2px 12px 0}
   .puzzle iframe{display:block;width:100%;height:640px;border:0;background:transparent}
   .another{font:600 14px/1.2 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;cursor:pointer;border:1px solid var(--ink);border-radius:999px;padding:8px 16px;background:none;color:var(--ink)}
@@ -255,7 +265,7 @@
 <script src="/store.js"></script>
 <script src="/mystery/strings.js"></script>
 <script src="/mystery/engine.js"></script>
-<script type="application/json" id="faces">[["#8afa99",[[[9,1],[9,2],[8,1]]]],["#ff3b30",[[[6,8],[7,9],[9,10],[7,11],[6,10],[5,9],[4,8],[5,6]]]],["#1f1c1f",[[[7,9],[6,8],[5,6],[6,6],[7,6],[8,7],[9,8],[9,9],[9,10]]]],["#ff3b30",[[[10,2],[11,3],[10,4],[9,3]]]],["#ffd60a",[[[7,6],[6,6],[5,5],[5,4],[6,3],[6,2],[7,2],[7,3],[6,4],[6,5]]]],["#ffffff",[[[6,10],[7,11],[5,12],[4,11],[3,10],[4,8],[5,9]]]],["#ffd60a",[[[12,11],[12,12],[11,12],[11,11]]]],["#ffd60a",[[[1,13],[2,14],[1,14]]]],["#ffd60a",[[[12,1],[13,3],[12,3],[12,2]]]],["#ffffff",[[[12,6],[11,6],[11,5],[12,5]]]],["#ff9400",[[[14,5],[13,5],[13,4]]]],["#ff3b30",[[[3,10],[4,11],[5,12],[3,13],[2,12]]]],["#8afa99",[[[8,4],[9,5],[8,6],[8,5]]]],["#8afa99",[[[0,0],[15,0],[15,15],[0,15]],[[13,8],[12,8],[11,7],[10,7],[9,8],[8,7],[7,6],[6,5],[6,4],[7,3],[7,2],[6,2],[6,3],[5,4],[5,5],[6,6],[5,6],[4,8],[3,10],[2,12],[1,13],[1,14],[2,14],[1,13],[2,12],[3,13],[5,12],[7,11],[9,10],[9,9],[10,8],[11,8],[12,9],[13,9]],[[9,2],[9,1],[8,1]],[[11,3],[10,2],[9,3],[10,4]],[[12,12],[12,11],[11,11],[11,12]],[[13,3],[12,1],[12,2],[12,3]],[[11,6],[12,6],[12,5],[11,5]],[[13,5],[14,5],[13,4]],[[9,5],[8,4],[8,5],[8,6]]]]]</script>
+<script type="application/json" id="faces">[["#ffd60a",[[[5,4],[6,3],[6,2],[7,2],[7,3],[6,4],[6,5],[7,6],[6,6],[5,5]]]],["#ffffff",[[[4,8],[5,9],[6,10],[7,11],[5,12],[4,11],[3,10]]]],["#ff3b30",[[[5,9],[4,8],[5,6],[6,8],[7,9],[9,10],[7,11],[6,10]]]],["#1f1c1f",[[[7,6],[8,7],[9,8],[9,9],[9,10],[7,9],[6,8],[5,6],[6,6]]]],["#ff3b30",[[[3,13],[2,12],[3,10],[4,11],[5,12]]]],["#ff3b30",[[[9,3],[10,2],[11,3],[10,4]]]],["#ffd60a",[[[11,11],[12,11],[12,12],[11,12]]]],["#ff9400",[[[14,5],[13,5],[13,4]]]],["#8afa99",[[[8,4],[9,5],[8,6],[8,5]]]],["#ffd60a",[[[12,1],[13,3],[12,3],[12,2]]]],["#ffd60a",[[[1,13],[2,14],[1,14]]]],["#8afa99",[[[9,1],[9,2],[8,1]]]],["#ffffff",[[[11,6],[11,5],[12,5],[12,6]]]],["#8afa99",[[[0,0],[15,0],[15,15],[0,15]],[[6,3],[5,4],[5,5],[6,6],[5,6],[4,8],[3,10],[2,12],[1,13],[1,14],[2,14],[1,13],[2,12],[3,13],[5,12],[7,11],[9,10],[9,9],[10,8],[11,8],[12,9],[13,9],[13,8],[12,8],[11,7],[10,7],[9,8],[8,7],[7,6],[6,5],[6,4],[7,3],[7,2],[6,2]],[[10,2],[9,3],[10,4],[11,3]],[[12,11],[11,11],[11,12],[12,12]],[[13,5],[14,5],[13,4]],[[9,5],[8,4],[8,5],[8,6]],[[13,3],[12,1],[12,2],[12,3]],[[9,2],[9,1],[8,1]],[[11,5],[11,6],[12,6],[12,5]]]]]</script>
 <script type="application/json" id="picture-words">{"m":{"ar-SA":"بوب! هذه لك.","de-DE":"Peng! Der ist für dich.","en-AU":"Pop! This one's for you.","en-GB":"Pop! This one's for you.","en-US":"Pop! This one's for you.","es-ES":"¡Pum! Esto es para ti.","es-MX":"¡Pum! Esto es para ti.","fr-FR":"Pan ! Celui-là, c'est pour toi.","hi":"पॉप! ये तुम्हारे लिए।","id":"Duar! Yang ini buat kamu.","it":"Bum! Questo è per te.","ja":"パン！これはきみのために。","ko":"펑! 이건 너를 위한 거야.","nl-NL":"Pang! Deze is voor jou.","pt-BR":"Pou! Essa é pra você.","ru":"Хлоп! Это для тебя.","sv":"Pang! Den här är till dig.","th":"ป๊อป! อันนี้ให้เธอ","tr":"Pat! Bu senin için.","vi":"Bùm! Cái này dành cho bạn.","zh-Hans":"砰！这是给你的。","zh-Hant":"砰！這是給你的。"}}</script>
 <script src="/library/worksheet-words.js"></script>
 <script src="/library/worksheet.js"></script>

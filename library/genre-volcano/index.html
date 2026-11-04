@@ -127,14 +127,24 @@
   @media (max-width:600px){ .tab{min-width:0;flex:1;padding:10px 6px 9px} .tabs{flex:1} .site{flex:1;width:auto} }
 
   /* landing: a small film beside the words, then the puzzle as the page's main */
-  .intro{display:grid;grid-template-columns:1fr 300px;gap:28px;align-items:center;padding:26px 0 6px}
+  /* the puzzle first, then the intro with How it works folded behind one line (founder 2026-11-05) */
+  .intro{display:grid;grid-template-columns:1fr 300px;gap:28px;align-items:center;padding:34px 0 6px}
+  .howto{margin:14px 0 0}
+  .howto summary{display:inline-flex;align-items:center;gap:8px;cursor:pointer;list-style:none;font:600 14px/1.2 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    color:var(--ink);border:1px solid var(--line);border-radius:999px;padding:8px 14px}
+  .howto summary::-webkit-details-marker{display:none}
+  .howto summary::after{content:"";width:7px;height:7px;border-right:1.6px solid currentColor;border-bottom:1.6px solid currentColor;transform:rotate(45deg) translateY(-2px);transition:transform .15s}
+  .howto[open] summary::after{transform:rotate(-135deg) translateY(-1px)}
+  .howto .how{list-style:none;margin:12px 0 0;padding:0;display:grid;gap:8px;grid-template-columns:1fr}
+  .howto .how li{display:flex;gap:10px;align-items:baseline;background:var(--mat);border:1px solid var(--hair);border-radius:12px;padding:10px 14px}
+  .howto .how b{flex:0 0 auto;margin:0}
   .intro .film{margin:0;border-radius:14px;overflow:hidden;box-shadow:var(--shadow);background:#fff}
   .intro .film video{border-radius:0}
   .bigplay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;border:0;background:rgba(27,25,23,.12);cursor:pointer}
   .bigplay span{width:64px;height:64px;border-radius:50%;background:rgba(27,25,23,.72);display:grid;place-items:center}
   .bigplay svg{width:26px;height:26px;margin-left:4px;fill:#fff}
   .bigplay[hidden]{display:none}
-  .puzzle{margin:22px 0 0;background:var(--mat);border:1px solid var(--hair);border-radius:16px;box-shadow:var(--shadow);padding:12px 6px 4px}
+  .puzzle{margin:18px 0 0;background:var(--mat);border:1px solid var(--hair);border-radius:16px;box-shadow:var(--shadow);padding:12px 6px 4px}
   .puzzle .head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:2px 12px 0}
   .puzzle iframe{display:block;width:100%;height:640px;border:0;background:transparent}
   .another{font:600 14px/1.2 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;cursor:pointer;border:1px solid var(--ink);border-radius:999px;padding:8px 16px;background:none;color:var(--ink)}
@@ -255,7 +265,7 @@
 <script src="/store.js"></script>
 <script src="/mystery/strings.js"></script>
 <script src="/mystery/engine.js"></script>
-<script type="application/json" id="faces">[["#ff9400",[[[8,6],[8,7],[8,8],[7,11],[8,13],[7,13],[6,13],[5,13],[6,11],[7,9],[6,7],[7,5],[8,5]]]],["#a37045",[[[8,7],[8,6],[8,5],[9,5],[10,9],[11,13],[10,13],[9,13],[8,13],[7,11],[8,8]]]],["#33c759",[[[4,13],[5,13],[6,13],[7,13],[8,13],[9,13],[10,13],[11,13],[12,13],[13,13],[14,13],[15,13],[15,15],[0,15],[0,13],[1,13],[2,13],[3,13]]]],["#a37045",[[[5,13],[4,13],[3,13],[2,13],[1,13],[0,13],[1,12],[2,11],[3,10],[5,7],[6,5],[7,5],[6,7],[7,9],[6,11]]]],["#ffc482",[[[3,10],[2,11],[1,12],[0,13],[0,0],[5,0],[4,1],[4,2],[5,3],[6,3],[7,4],[6,5],[5,7]]]],["#5952de",[[[14,1],[14,2],[13,3],[12,3],[11,3],[10,2],[11,1],[10,2],[11,3],[10,4],[9,4],[8,4],[7,4],[6,3],[6,2],[7,1],[6,2],[6,3],[5,3],[4,2],[4,1],[5,0],[13,0]]]],["#ffc482",[[[14,2],[14,1],[13,0],[15,0],[15,12],[14,11],[13,10],[11,7],[10,5],[9,4],[10,4],[11,3],[12,3],[13,3]]]],["#664024",[[[14,11],[15,12],[15,13],[14,13],[13,13],[12,13],[11,13],[10,9],[9,5],[10,5],[11,7],[13,10]]]],["#ffd60a",[[[9,5],[8,5],[7,5],[6,5],[7,4],[8,4],[9,4],[10,5]]]]]</script>
+<script type="application/json" id="faces">[["#ffd60a",[[[8,4],[9,4],[10,5],[9,5],[8,5],[7,5],[6,5],[7,4]]]],["#5952de",[[[9,4],[8,4],[7,4],[6,3],[6,2],[7,1],[6,2],[6,3],[5,3],[4,2],[4,1],[5,0],[13,0],[14,1],[14,2],[13,3],[12,3],[11,3],[10,2],[11,1],[10,2],[11,3],[10,4]]]],["#a37045",[[[9,5],[10,9],[11,13],[10,13],[9,13],[8,13],[7,11],[8,8],[8,7],[8,6],[8,5]]]],["#664024",[[[10,9],[9,5],[10,5],[11,7],[13,10],[14,11],[15,12],[15,13],[14,13],[13,13],[12,13],[11,13]]]],["#ff9400",[[[8,8],[7,11],[8,13],[7,13],[6,13],[5,13],[6,11],[7,9],[6,7],[7,5],[8,5],[8,6],[8,7]]]],["#33c759",[[[12,13],[13,13],[14,13],[15,13],[15,15],[0,15],[0,13],[1,13],[2,13],[3,13],[4,13],[5,13],[6,13],[7,13],[8,13],[9,13],[10,13],[11,13]]]],["#ffc482",[[[14,11],[13,10],[11,7],[10,5],[9,4],[10,4],[11,3],[12,3],[13,3],[14,2],[14,1],[13,0],[15,0],[15,12]]]],["#a37045",[[[7,9],[6,11],[5,13],[4,13],[3,13],[2,13],[1,13],[0,13],[1,12],[2,11],[3,10],[5,7],[6,5],[7,5],[6,7]]]],["#ffc482",[[[5,0],[4,1],[4,2],[5,3],[6,3],[7,4],[6,5],[5,7],[3,10],[2,11],[1,12],[0,13],[0,0]]]]]</script>
 <script type="application/json" id="picture-words">{"m":{"ar-SA":"الهادئون عادةً لديهم أكثر ما يُقال.","de-DE":"Stille Wasser sind tief. Manchmal auch glühend heiß.","en-AU":"The quiet ones usually have the most to say.","en-GB":"The quiet ones usually have the most to say.","en-US":"The quiet ones usually have the most to say.","es-ES":"Los más callados suelen ser los que más tienen que decir.","es-MX":"Los más callados suelen ser los que más tienen que decir.","fr-FR":"Les plus calmes ont souvent le plus à dire.","hi":"चुप रहने वालों के पास अक्सर कहने को सबसे ज़्यादा होता है।","id":"Yang paling pendiam biasanya paling banyak cerita.","it":"I più tranquilli, di solito, hanno più da dire.","ja":"静かなやつほど、言いたいことが多い。","ko":"원래 조용한 쪽이 할 말이 제일 많다.","nl-NL":"Stille wateren, diepe gronden. En soms lava.","pt-BR":"Os mais quietos costumam ter mais a dizer.","ru":"Кто молчит дольше всех, тому есть что сказать.","sv":"De tystaste har oftast mest att säga.","th":"คนเงียบ ๆ มักมีเรื่องอยากพูดมากที่สุด","tr":"Sessizlerin genelde söyleyecek en çok sözü olur.","vi":"Người trầm lặng thường có nhiều điều muốn nói nhất.","zh-Hans":"越安静的，往往越有话要说。","zh-Hant":"越安靜的，通常越有話想說。"}}</script>
 <script src="/library/worksheet-words.js"></script>
 <script src="/library/worksheet.js"></script>

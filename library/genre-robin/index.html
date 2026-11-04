@@ -127,14 +127,24 @@
   @media (max-width:600px){ .tab{min-width:0;flex:1;padding:10px 6px 9px} .tabs{flex:1} .site{flex:1;width:auto} }
 
   /* landing: a small film beside the words, then the puzzle as the page's main */
-  .intro{display:grid;grid-template-columns:1fr 300px;gap:28px;align-items:center;padding:26px 0 6px}
+  /* the puzzle first, then the intro with How it works folded behind one line (founder 2026-11-05) */
+  .intro{display:grid;grid-template-columns:1fr 300px;gap:28px;align-items:center;padding:34px 0 6px}
+  .howto{margin:14px 0 0}
+  .howto summary{display:inline-flex;align-items:center;gap:8px;cursor:pointer;list-style:none;font:600 14px/1.2 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    color:var(--ink);border:1px solid var(--line);border-radius:999px;padding:8px 14px}
+  .howto summary::-webkit-details-marker{display:none}
+  .howto summary::after{content:"";width:7px;height:7px;border-right:1.6px solid currentColor;border-bottom:1.6px solid currentColor;transform:rotate(45deg) translateY(-2px);transition:transform .15s}
+  .howto[open] summary::after{transform:rotate(-135deg) translateY(-1px)}
+  .howto .how{list-style:none;margin:12px 0 0;padding:0;display:grid;gap:8px;grid-template-columns:1fr}
+  .howto .how li{display:flex;gap:10px;align-items:baseline;background:var(--mat);border:1px solid var(--hair);border-radius:12px;padding:10px 14px}
+  .howto .how b{flex:0 0 auto;margin:0}
   .intro .film{margin:0;border-radius:14px;overflow:hidden;box-shadow:var(--shadow);background:#fff}
   .intro .film video{border-radius:0}
   .bigplay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;border:0;background:rgba(27,25,23,.12);cursor:pointer}
   .bigplay span{width:64px;height:64px;border-radius:50%;background:rgba(27,25,23,.72);display:grid;place-items:center}
   .bigplay svg{width:26px;height:26px;margin-left:4px;fill:#fff}
   .bigplay[hidden]{display:none}
-  .puzzle{margin:22px 0 0;background:var(--mat);border:1px solid var(--hair);border-radius:16px;box-shadow:var(--shadow);padding:12px 6px 4px}
+  .puzzle{margin:18px 0 0;background:var(--mat);border:1px solid var(--hair);border-radius:16px;box-shadow:var(--shadow);padding:12px 6px 4px}
   .puzzle .head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:2px 12px 0}
   .puzzle iframe{display:block;width:100%;height:640px;border:0;background:transparent}
   .another{font:600 14px/1.2 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;cursor:pointer;border:1px solid var(--ink);border-radius:999px;padding:8px 16px;background:none;color:var(--ink)}
@@ -255,7 +265,7 @@
 <script src="/store.js"></script>
 <script src="/mystery/strings.js"></script>
 <script src="/mystery/engine.js"></script>
-<script type="application/json" id="faces">[["#a37045",[[[9,12],[10,12],[12,11],[14,10],[15,10],[15,11],[14,11],[12,12],[10,13],[9,13],[8,13],[7,13],[6,13],[5,13],[4,13],[3,13],[2,13],[1,13],[0,13],[0,12],[1,12],[2,12],[3,12],[4,12],[5,12],[6,12],[7,12],[8,12]]]],["#c9f5ff",[[[10,12],[9,12],[8,12],[9,11],[11,10],[12,9],[13,8],[14,7],[14,6],[14,5],[13,6],[12,7],[11,5],[10,3],[8,2],[7,2],[6,2],[4,3],[3,4],[2,5],[1,6],[2,6],[2,7],[3,9],[4,10],[6,11],[7,11],[7,12],[6,12],[5,12],[4,12],[3,12],[2,12],[1,12],[0,12],[0,0],[15,0],[15,10],[14,10],[12,11]]]],["#a37045",[[[12,9],[11,10],[9,11],[8,9],[6,8],[6,7],[6,6],[8,7],[10,8]]]],["#ffffff",[[[4,10],[5,9],[6,8],[8,9],[9,11],[8,11],[7,11],[6,11]]]],["#ff9400",[[[5,9],[4,10],[3,9],[2,7],[2,6],[2,5],[3,4],[4,3],[5,4],[6,6],[6,7],[6,8]]]],["#a37045",[[[10,8],[8,7],[6,6],[5,4],[6,4],[7,4],[9,5],[10,6],[11,7],[12,7],[12,8],[12,9]]]],["#c9f5ff",[[[3,13],[4,13],[5,13],[6,13],[7,13],[8,13],[9,13],[10,13],[12,12],[14,11],[15,11],[15,15],[0,15],[0,13],[1,13],[2,13]]]],["#a37045",[[[9,5],[7,4],[6,4],[5,4],[4,3],[6,2],[7,2],[8,2],[10,3],[11,5],[12,7],[11,7],[10,6]]]],["#a37045",[[[13,8],[12,9],[12,8],[12,7],[13,6],[14,5],[14,6],[14,7]]]],["#1f1c1f",[[[2,5],[2,6],[1,6]]]],["#c9f5ff",[[[8,11],[9,11],[8,12],[7,12],[7,11]]]]]</script>
+<script type="application/json" id="faces">[["#a37045",[[[2,12],[3,12],[4,12],[5,12],[6,12],[7,12],[8,12],[9,12],[10,12],[12,11],[14,10],[15,10],[15,11],[14,11],[12,12],[10,13],[9,13],[8,13],[7,13],[6,13],[5,13],[4,13],[3,13],[2,13],[1,13],[0,13],[0,12],[1,12]]]],["#c9f5ff",[[[3,12],[2,12],[1,12],[0,12],[0,0],[15,0],[15,10],[14,10],[12,11],[10,12],[9,12],[8,12],[9,11],[11,10],[12,9],[13,8],[14,7],[14,6],[14,5],[13,6],[12,7],[11,5],[10,3],[8,2],[7,2],[6,2],[4,3],[3,4],[2,5],[1,6],[2,6],[2,7],[3,9],[4,10],[6,11],[7,11],[7,12],[6,12],[5,12],[4,12]]]],["#a37045",[[[6,2],[7,2],[8,2],[10,3],[11,5],[12,7],[11,7],[10,6],[9,5],[7,4],[6,4],[5,4],[4,3]]]],["#ff9400",[[[4,10],[3,9],[2,7],[2,6],[2,5],[3,4],[4,3],[5,4],[6,6],[6,7],[6,8],[5,9]]]],["#c9f5ff",[[[8,12],[7,12],[7,11],[8,11],[9,11]]]],["#c9f5ff",[[[10,13],[12,12],[14,11],[15,11],[15,15],[0,15],[0,13],[1,13],[2,13],[3,13],[4,13],[5,13],[6,13],[7,13],[8,13],[9,13]]]],["#ffffff",[[[8,9],[9,11],[8,11],[7,11],[6,11],[4,10],[5,9],[6,8]]]],["#a37045",[[[9,11],[8,9],[6,8],[6,7],[6,6],[8,7],[10,8],[12,9],[11,10]]]],["#a37045",[[[12,9],[10,8],[8,7],[6,6],[5,4],[6,4],[7,4],[9,5],[10,6],[11,7],[12,7],[12,8]]]],["#a37045",[[[12,7],[13,6],[14,5],[14,6],[14,7],[13,8],[12,9],[12,8]]]],["#1f1c1f",[[[1,6],[2,5],[2,6]]]]]</script>
 <script type="application/json" id="picture-words">{"m":{"ar-SA":"أول من يغني في الربيع، وآخر من يغادر الغصن.","de-DE":"Singt als Erstes im Frühling, verlässt als Letztes den Ast.","en-AU":"First to sing in spring, last to leave the branch.","en-GB":"First to sing in spring, last to leave the branch.","en-US":"First to sing in spring, last to leave the branch.","es-ES":"Primero en cantar en primavera, último en dejar la rama.","es-MX":"Primero en cantar en primavera, último en dejar la rama.","fr-FR":"Premier à chanter au printemps, dernier sur la branche.","hi":"बसंत में सबसे पहले गाए, डाल सबसे आख़िर में छोड़े।","id":"Pertama bernyanyi di musim semi, terakhir pergi dari dahan.","it":"Primo a cantare in primavera, ultimo a lasciare il ramo.","ja":"春いちばんに歌って、最後まで枝に残る。","ko":"봄에 제일 먼저 노래하고, 마지막까지 가지에 남아요.","nl-NL":"Als eerste zingen in de lente, als laatste van de tak.","pt-BR":"O primeiro a cantar na primavera, o último a sair do galho.","ru":"Первым поёт весной, последним покидает ветку.","sv":"Först att sjunga om våren, sist att lämna grenen.","th":"ร้องก่อนใครเมื่อใบไม้ผลิ ออกจากกิ่งคนสุดท้าย","tr":"Baharda ilk öten, daldan en son ayrılan.","vi":"Hót đầu tiên khi xuân về, rời cành sau cùng.","zh-Hans":"春天第一个唱歌，最后一个离开枝头。","zh-Hant":"春天第一個唱歌，最後一個離開枝頭。"}}</script>
 <script src="/library/worksheet-words.js"></script>
 <script src="/library/worksheet.js"></script>

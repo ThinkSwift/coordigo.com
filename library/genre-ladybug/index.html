@@ -127,14 +127,24 @@
   @media (max-width:600px){ .tab{min-width:0;flex:1;padding:10px 6px 9px} .tabs{flex:1} .site{flex:1;width:auto} }
 
   /* landing: a small film beside the words, then the puzzle as the page's main */
-  .intro{display:grid;grid-template-columns:1fr 300px;gap:28px;align-items:center;padding:26px 0 6px}
+  /* the puzzle first, then the intro with How it works folded behind one line (founder 2026-11-05) */
+  .intro{display:grid;grid-template-columns:1fr 300px;gap:28px;align-items:center;padding:34px 0 6px}
+  .howto{margin:14px 0 0}
+  .howto summary{display:inline-flex;align-items:center;gap:8px;cursor:pointer;list-style:none;font:600 14px/1.2 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    color:var(--ink);border:1px solid var(--line);border-radius:999px;padding:8px 14px}
+  .howto summary::-webkit-details-marker{display:none}
+  .howto summary::after{content:"";width:7px;height:7px;border-right:1.6px solid currentColor;border-bottom:1.6px solid currentColor;transform:rotate(45deg) translateY(-2px);transition:transform .15s}
+  .howto[open] summary::after{transform:rotate(-135deg) translateY(-1px)}
+  .howto .how{list-style:none;margin:12px 0 0;padding:0;display:grid;gap:8px;grid-template-columns:1fr}
+  .howto .how li{display:flex;gap:10px;align-items:baseline;background:var(--mat);border:1px solid var(--hair);border-radius:12px;padding:10px 14px}
+  .howto .how b{flex:0 0 auto;margin:0}
   .intro .film{margin:0;border-radius:14px;overflow:hidden;box-shadow:var(--shadow);background:#fff}
   .intro .film video{border-radius:0}
   .bigplay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;border:0;background:rgba(27,25,23,.12);cursor:pointer}
   .bigplay span{width:64px;height:64px;border-radius:50%;background:rgba(27,25,23,.72);display:grid;place-items:center}
   .bigplay svg{width:26px;height:26px;margin-left:4px;fill:#fff}
   .bigplay[hidden]{display:none}
-  .puzzle{margin:22px 0 0;background:var(--mat);border:1px solid var(--hair);border-radius:16px;box-shadow:var(--shadow);padding:12px 6px 4px}
+  .puzzle{margin:18px 0 0;background:var(--mat);border:1px solid var(--hair);border-radius:16px;box-shadow:var(--shadow);padding:12px 6px 4px}
   .puzzle .head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:2px 12px 0}
   .puzzle iframe{display:block;width:100%;height:640px;border:0;background:transparent}
   .another{font:600 14px/1.2 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;cursor:pointer;border:1px solid var(--ink);border-radius:999px;padding:8px 16px;background:none;color:var(--ink)}
@@ -255,7 +265,7 @@
 <script src="/store.js"></script>
 <script src="/mystery/strings.js"></script>
 <script src="/mystery/engine.js"></script>
-<script type="application/json" id="faces">[["#ff3b30",[[[10,12],[9,12],[8,12],[8,11],[8,10],[8,9],[8,8],[8,7],[8,6],[8,5],[9,5],[10,5],[11,6],[12,7],[12,8],[12,9],[12,10],[11,11]],[[10,7],[9,7],[9,8],[10,8]],[[11,10],[11,9],[10,9],[10,10]]]],["#ff3b30",[[[8,6],[8,7],[8,8],[8,9],[8,10],[8,11],[8,12],[7,12],[6,12],[5,11],[4,10],[4,9],[4,8],[4,7],[5,6],[6,5],[7,5],[8,5]],[[6,9],[6,8],[5,8],[5,9]],[[7,10],[6,10],[6,11],[7,11]]]],["#1f1c1f",[[[6,8],[6,9],[5,9],[5,8]]]],["#1f1c1f",[[[7,5],[8,4],[7,4],[7,5],[6,5],[7,3],[8,3],[9,3],[10,5],[9,5],[9,4],[8,5]]]],["#ffffff",[[[8,4],[7,5],[7,4]]]],["#1f1c1f",[[[9,7],[10,7],[10,8],[9,8]]]],["#ffffff",[[[9,5],[8,5],[9,4]]]],["#1f1c1f",[[[6,10],[7,10],[7,11],[6,11]]]],["#1f1c1f",[[[11,9],[11,10],[10,10],[10,9]]]],["#33c759",[[[0,0],[15,0],[15,15],[0,15]],[[9,12],[10,12],[11,11],[12,12],[11,11],[12,10],[12,9],[13,9],[12,9],[12,8],[12,7],[13,6],[12,7],[11,6],[10,5],[9,3],[11,2],[9,3],[8,3],[7,3],[6,1],[7,3],[6,5],[5,6],[4,7],[3,6],[4,7],[4,8],[4,9],[3,9],[4,9],[4,10],[5,11],[4,12],[5,11],[6,12],[7,12],[8,12]]]]]</script>
+<script type="application/json" id="faces">[["#1f1c1f",[[[7,5],[8,4],[7,4],[7,5],[6,5],[7,3],[8,3],[9,3],[10,5],[9,5],[9,4],[8,5]]]],["#ffffff",[[[8,4],[7,5],[7,4]]]],["#ffffff",[[[9,4],[9,5],[8,5]]]],["#ff3b30",[[[8,12],[7,12],[6,12],[5,11],[4,10],[4,9],[4,8],[4,7],[5,6],[6,5],[7,5],[8,5],[8,6],[8,7],[8,8],[8,9],[8,10],[8,11]],[[5,9],[6,9],[6,8],[5,8]],[[7,10],[6,10],[6,11],[7,11]]]],["#ff3b30",[[[11,11],[10,12],[9,12],[8,12],[8,11],[8,10],[8,9],[8,8],[8,7],[8,6],[8,5],[9,5],[10,5],[11,6],[12,7],[12,8],[12,9],[12,10]],[[10,9],[10,10],[11,10],[11,9]],[[9,7],[9,8],[10,8],[10,7]]]],["#1f1c1f",[[[10,10],[10,9],[11,9],[11,10]]]],["#1f1c1f",[[[9,8],[9,7],[10,7],[10,8]]]],["#1f1c1f",[[[6,9],[5,9],[5,8],[6,8]]]],["#1f1c1f",[[[6,10],[7,10],[7,11],[6,11]]]],["#33c759",[[[0,0],[15,0],[15,15],[0,15]],[[6,1],[7,3],[6,5],[5,6],[4,7],[3,6],[4,7],[4,8],[4,9],[3,9],[4,9],[4,10],[5,11],[4,12],[5,11],[6,12],[7,12],[8,12],[9,12],[10,12],[11,11],[12,12],[11,11],[12,10],[12,9],[13,9],[12,9],[12,8],[12,7],[13,6],[12,7],[11,6],[10,5],[9,3],[11,2],[9,3],[8,3],[7,3]]]]]</script>
 <script type="application/json" id="picture-words">{"m":{"ar-SA":"حطّت عليك قطعة صغيرة من الحظ.","de-DE":"Landet gerade auf dir: ein kleines Stück Glück.","en-AU":"Landing on you: one small piece of luck.","en-GB":"Landing on you: one small piece of luck.","en-US":"Landing on you: one small piece of luck.","es-ES":"Se ha posado en ti un poquito de suerte.","es-MX":"Se posó en ti un poquito de suerte.","fr-FR":"Elle se pose sur toi : un petit bout de chance.","hi":"तुम पर आ बैठी: थोड़ी-सी किस्मत।","id":"Hinggap di kamu: sepotong keberuntungan kecil.","it":"Si posa su di te: un pizzico di fortuna.","ja":"きみにとまった、小さな幸運ひとつ。","ko":"너에게 내려앉은 작은 행운 하나.","nl-NL":"Landt op jou: een klein stukje geluk.","pt-BR":"Pousou em você: um pouquinho de sorte.","ru":"На тебя присела маленькая удача.","sv":"Landar på dig: en liten bit tur.","th":"โชคเล็ก ๆ ที่มาเกาะอยู่บนตัวเธอ","tr":"Üstüne küçük bir şans kondu.","vi":"Đậu lên bạn: một chút may mắn nhỏ.","zh-Hans":"落在你身上的，一点小幸运。","zh-Hant":"停在你身上的，一點小小幸運。"}}</script>
 <script src="/library/worksheet-words.js"></script>
 <script src="/library/worksheet.js"></script>

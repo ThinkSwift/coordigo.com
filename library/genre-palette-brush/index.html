@@ -127,14 +127,24 @@
   @media (max-width:600px){ .tab{min-width:0;flex:1;padding:10px 6px 9px} .tabs{flex:1} .site{flex:1;width:auto} }
 
   /* landing: a small film beside the words, then the puzzle as the page's main */
-  .intro{display:grid;grid-template-columns:1fr 300px;gap:28px;align-items:center;padding:26px 0 6px}
+  /* the puzzle first, then the intro with How it works folded behind one line (founder 2026-11-05) */
+  .intro{display:grid;grid-template-columns:1fr 300px;gap:28px;align-items:center;padding:34px 0 6px}
+  .howto{margin:14px 0 0}
+  .howto summary{display:inline-flex;align-items:center;gap:8px;cursor:pointer;list-style:none;font:600 14px/1.2 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    color:var(--ink);border:1px solid var(--line);border-radius:999px;padding:8px 14px}
+  .howto summary::-webkit-details-marker{display:none}
+  .howto summary::after{content:"";width:7px;height:7px;border-right:1.6px solid currentColor;border-bottom:1.6px solid currentColor;transform:rotate(45deg) translateY(-2px);transition:transform .15s}
+  .howto[open] summary::after{transform:rotate(-135deg) translateY(-1px)}
+  .howto .how{list-style:none;margin:12px 0 0;padding:0;display:grid;gap:8px;grid-template-columns:1fr}
+  .howto .how li{display:flex;gap:10px;align-items:baseline;background:var(--mat);border:1px solid var(--hair);border-radius:12px;padding:10px 14px}
+  .howto .how b{flex:0 0 auto;margin:0}
   .intro .film{margin:0;border-radius:14px;overflow:hidden;box-shadow:var(--shadow);background:#fff}
   .intro .film video{border-radius:0}
   .bigplay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;border:0;background:rgba(27,25,23,.12);cursor:pointer}
   .bigplay span{width:64px;height:64px;border-radius:50%;background:rgba(27,25,23,.72);display:grid;place-items:center}
   .bigplay svg{width:26px;height:26px;margin-left:4px;fill:#fff}
   .bigplay[hidden]{display:none}
-  .puzzle{margin:22px 0 0;background:var(--mat);border:1px solid var(--hair);border-radius:16px;box-shadow:var(--shadow);padding:12px 6px 4px}
+  .puzzle{margin:18px 0 0;background:var(--mat);border:1px solid var(--hair);border-radius:16px;box-shadow:var(--shadow);padding:12px 6px 4px}
   .puzzle .head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:2px 12px 0}
   .puzzle iframe{display:block;width:100%;height:640px;border:0;background:transparent}
   .another{font:600 14px/1.2 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;cursor:pointer;border:1px solid var(--ink);border-radius:999px;padding:8px 16px;background:none;color:var(--ink)}
@@ -255,7 +265,7 @@
 <script src="/store.js"></script>
 <script src="/mystery/strings.js"></script>
 <script src="/mystery/engine.js"></script>
-<script type="application/json" id="faces">[["#ff3b30",[[[4,4],[5,4],[5,5],[4,6],[3,6],[3,5],[3,4]]]],["#c9f5ff",[[[4,10],[3,9],[3,8],[4,7],[5,8],[5,9]]]],["#ffc482",[[[13,4],[14,7],[13,10],[12,11],[11,10],[10,9],[9,8],[6,6],[8,9],[9,10],[10,11],[11,12],[8,13],[7,12],[6,11],[5,11],[4,11],[3,11],[2,10],[1,9],[1,8],[1,7],[1,6],[2,4],[3,3],[4,2],[8,1],[11,2],[12,3]],[[5,4],[4,4],[3,4],[3,5],[3,6],[4,6],[5,5]],[[3,9],[4,10],[5,9],[5,8],[4,7],[3,8]],[[12,5],[11,7],[12,8],[13,8],[13,7],[13,6]],[[8,4],[8,3],[7,2],[6,3],[6,4],[7,4]],[[10,5],[11,4],[11,3],[10,3],[9,4]]]],["#007aff",[[[11,7],[12,5],[13,6],[13,7],[13,8],[12,8]]]],["#007aff",[[[6,6],[9,8],[8,9]]]],["#ffd60a",[[[9,10],[8,9],[9,8],[10,9]]]],["#ffd60a",[[[8,3],[8,4],[7,4],[6,4],[6,3],[7,2]]]],["#ff3b30",[[[13,14],[12,13],[11,12],[10,11],[9,10],[10,9],[11,10],[12,11],[13,12],[14,13]]]],["#33c759",[[[11,4],[10,5],[9,4],[10,3],[11,3]]]],["#c9f5ff",[[[0,0],[15,0],[15,15],[0,15]],[[14,7],[13,4],[12,3],[11,2],[8,1],[4,2],[3,3],[2,4],[1,6],[1,7],[1,8],[1,9],[2,10],[3,11],[4,11],[5,11],[6,11],[7,12],[8,13],[11,12],[12,13],[13,14],[14,13],[13,12],[12,11],[13,10]]]]]</script>
+<script type="application/json" id="faces">[["#ffc482",[[[1,7],[1,6],[2,4],[3,3],[4,2],[8,1],[11,2],[12,3],[13,4],[14,7],[13,10],[12,11],[11,10],[10,9],[9,8],[6,6],[8,9],[9,10],[10,11],[11,12],[8,13],[7,12],[6,11],[5,11],[4,11],[3,11],[2,10],[1,9],[1,8]],[[8,4],[8,3],[7,2],[6,3],[6,4],[7,4]],[[3,8],[3,9],[4,10],[5,9],[5,8],[4,7]],[[3,5],[3,6],[4,6],[5,5],[5,4],[4,4],[3,4]],[[11,3],[10,3],[9,4],[10,5],[11,4]],[[12,8],[13,8],[13,7],[13,6],[12,5],[11,7]]]],["#ffd60a",[[[8,3],[8,4],[7,4],[6,4],[6,3],[7,2]]]],["#c9f5ff",[[[3,9],[3,8],[4,7],[5,8],[5,9],[4,10]]]],["#ffd60a",[[[8,9],[9,8],[10,9],[9,10]]]],["#007aff",[[[9,8],[8,9],[6,6]]]],["#ff3b30",[[[13,14],[12,13],[11,12],[10,11],[9,10],[10,9],[11,10],[12,11],[13,12],[14,13]]]],["#ff3b30",[[[3,6],[3,5],[3,4],[4,4],[5,4],[5,5],[4,6]]]],["#33c759",[[[10,3],[11,3],[11,4],[10,5],[9,4]]]],["#007aff",[[[13,8],[12,8],[11,7],[12,5],[13,6],[13,7]]]],["#c9f5ff",[[[0,0],[15,0],[15,15],[0,15]],[[1,6],[1,7],[1,8],[1,9],[2,10],[3,11],[4,11],[5,11],[6,11],[7,12],[8,13],[11,12],[12,13],[13,14],[14,13],[13,12],[12,11],[13,10],[14,7],[13,4],[12,3],[11,2],[8,1],[4,2],[3,3],[2,4]]]]]</script>
 <script type="application/json" id="picture-words">{"m":{"ar-SA":"اختر لونًا، اليوم لوحتك.","de-DE":"Such dir eine Farbe aus. Heute ist deine Leinwand.","en-AU":"Pick a color. Today is your canvas.","en-GB":"Pick a color. Today is your canvas.","en-US":"Pick a color. Today is your canvas.","es-ES":"Elige un color. Hoy es tu lienzo.","es-MX":"Escoge un color. Hoy es tu lienzo.","fr-FR":"Choisis une couleur. Aujourd'hui, c'est ta toile.","hi":"कोई रंग चुनो। आज तुम्हारा कैनवास है।","id":"Pilih warna. Hari ini kanvasmu.","it":"Scegli un colore. Oggi è la tua tela.","ja":"色を選んで。今日はきみのキャンバス。","ko":"색을 골라. 오늘은 네 캔버스야.","nl-NL":"Kies een kleur. Vandaag is jouw doek.","pt-BR":"Escolhe uma cor. Hoje é a sua tela.","ru":"Выбери цвет. Сегодня — твой холст.","sv":"Välj en färg. Dagen är din duk.","th":"เลือกสีเลย วันนี้คือผืนผ้าใบของเธอ","tr":"Bir renk seç. Bugün senin tuvalin.","vi":"Chọn một màu đi. Hôm nay là bức tranh của bạn.","zh-Hans":"挑个颜色。今天是你的画布。","zh-Hant":"選個顏色。今天是你的畫布。"}}</script>
 <script src="/library/worksheet-words.js"></script>
 <script src="/library/worksheet.js"></script>

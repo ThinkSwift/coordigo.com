@@ -127,14 +127,24 @@
   @media (max-width:600px){ .tab{min-width:0;flex:1;padding:10px 6px 9px} .tabs{flex:1} .site{flex:1;width:auto} }
 
   /* landing: a small film beside the words, then the puzzle as the page's main */
-  .intro{display:grid;grid-template-columns:1fr 300px;gap:28px;align-items:center;padding:26px 0 6px}
+  /* the puzzle first, then the intro with How it works folded behind one line (founder 2026-11-05) */
+  .intro{display:grid;grid-template-columns:1fr 300px;gap:28px;align-items:center;padding:34px 0 6px}
+  .howto{margin:14px 0 0}
+  .howto summary{display:inline-flex;align-items:center;gap:8px;cursor:pointer;list-style:none;font:600 14px/1.2 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    color:var(--ink);border:1px solid var(--line);border-radius:999px;padding:8px 14px}
+  .howto summary::-webkit-details-marker{display:none}
+  .howto summary::after{content:"";width:7px;height:7px;border-right:1.6px solid currentColor;border-bottom:1.6px solid currentColor;transform:rotate(45deg) translateY(-2px);transition:transform .15s}
+  .howto[open] summary::after{transform:rotate(-135deg) translateY(-1px)}
+  .howto .how{list-style:none;margin:12px 0 0;padding:0;display:grid;gap:8px;grid-template-columns:1fr}
+  .howto .how li{display:flex;gap:10px;align-items:baseline;background:var(--mat);border:1px solid var(--hair);border-radius:12px;padding:10px 14px}
+  .howto .how b{flex:0 0 auto;margin:0}
   .intro .film{margin:0;border-radius:14px;overflow:hidden;box-shadow:var(--shadow);background:#fff}
   .intro .film video{border-radius:0}
   .bigplay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;border:0;background:rgba(27,25,23,.12);cursor:pointer}
   .bigplay span{width:64px;height:64px;border-radius:50%;background:rgba(27,25,23,.72);display:grid;place-items:center}
   .bigplay svg{width:26px;height:26px;margin-left:4px;fill:#fff}
   .bigplay[hidden]{display:none}
-  .puzzle{margin:22px 0 0;background:var(--mat);border:1px solid var(--hair);border-radius:16px;box-shadow:var(--shadow);padding:12px 6px 4px}
+  .puzzle{margin:18px 0 0;background:var(--mat);border:1px solid var(--hair);border-radius:16px;box-shadow:var(--shadow);padding:12px 6px 4px}
   .puzzle .head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:2px 12px 0}
   .puzzle iframe{display:block;width:100%;height:640px;border:0;background:transparent}
   .another{font:600 14px/1.2 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;cursor:pointer;border:1px solid var(--ink);border-radius:999px;padding:8px 16px;background:none;color:var(--ink)}
@@ -255,7 +265,7 @@
 <script src="/store.js"></script>
 <script src="/mystery/strings.js"></script>
 <script src="/mystery/engine.js"></script>
-<script type="application/json" id="faces">[["#c9f5ff",[[[5,8],[6,8],[7,8],[8,8],[9,8],[10,8],[11,8],[11,9],[10,9],[9,9],[8,9],[7,9],[6,9],[5,9],[4,9],[4,8]]]],["#1f1c1f",[[[6,8],[5,8],[4,8],[4,9],[3,8],[4,7],[5,7]]]],["#ffd60a",[[[8,9],[8,10],[8,11],[8,12],[7,12],[6,12],[5,12],[4,12],[3,12],[2,12],[1,12],[1,11],[1,10],[1,9],[1,8],[1,7],[1,6],[2,6],[3,6],[4,6],[5,6],[6,6],[7,6],[8,6],[8,7],[8,8],[7,8],[6,8],[5,7],[4,7],[3,8],[4,9],[3,11],[4,11],[5,11],[6,11],[5,9],[6,9],[7,9]]]],["#5952de",[[[3,3],[4,2],[5,2],[6,3],[6,4],[6,5],[6,6],[5,6],[4,6],[3,6],[3,5],[3,4]]]],["#c9f5ff",[[[4,2],[3,3],[3,4],[3,5],[3,6],[2,6],[2,5],[2,4],[2,3],[3,2],[4,1],[5,1],[6,2],[7,3],[7,4],[7,5],[7,6],[6,6],[6,5],[6,4],[6,3],[5,2]]]],["#1f1c1f",[[[5,9],[6,11],[5,11],[4,11],[3,11],[4,9]]]],["#c9f5ff",[[[13,11],[12,11],[11,10],[11,9],[11,8],[11,7],[12,6],[13,6],[14,7],[14,8],[14,9],[14,10]],[[12,9],[13,9],[13,8],[12,8]]]],["#5952de",[[[13,9],[12,9],[12,8],[13,8]]]],["#5952de",[[[0,0],[15,0],[15,15],[0,15]],[[8,10],[8,9],[9,9],[10,9],[11,9],[11,10],[12,11],[13,11],[14,10],[14,9],[14,8],[14,7],[13,6],[12,6],[11,7],[11,8],[10,8],[9,8],[8,8],[8,7],[8,6],[7,6],[7,5],[7,4],[7,3],[6,2],[5,1],[4,1],[3,2],[2,3],[2,4],[2,5],[2,6],[1,6],[1,7],[1,8],[1,9],[1,10],[1,11],[1,12],[2,12],[3,12],[4,12],[5,12],[6,12],[7,12],[8,12],[8,11]]]]]</script>
+<script type="application/json" id="faces">[["#ffd60a",[[[1,7],[1,6],[2,6],[3,6],[4,6],[5,6],[6,6],[7,6],[8,6],[8,7],[8,8],[7,8],[6,8],[5,7],[4,7],[3,8],[4,9],[3,11],[4,11],[5,11],[6,11],[5,9],[6,9],[7,9],[8,9],[8,10],[8,11],[8,12],[7,12],[6,12],[5,12],[4,12],[3,12],[2,12],[1,12],[1,11],[1,10],[1,9],[1,8]]]],["#1f1c1f",[[[5,9],[6,11],[5,11],[4,11],[3,11],[4,9]]]],["#1f1c1f",[[[5,7],[6,8],[5,8],[4,8],[4,9],[3,8],[4,7]]]],["#5952de",[[[5,2],[6,3],[6,4],[6,5],[6,6],[5,6],[4,6],[3,6],[3,5],[3,4],[3,3],[4,2]]]],["#c9f5ff",[[[6,3],[5,2],[4,2],[3,3],[3,4],[3,5],[3,6],[2,6],[2,5],[2,4],[2,3],[3,2],[4,1],[5,1],[6,2],[7,3],[7,4],[7,5],[7,6],[6,6],[6,5],[6,4]]]],["#5952de",[[[13,8],[13,9],[12,9],[12,8]]]],["#c9f5ff",[[[14,8],[14,9],[14,10],[13,11],[12,11],[11,10],[11,9],[11,8],[11,7],[12,6],[13,6],[14,7]],[[13,9],[13,8],[12,8],[12,9]]]],["#c9f5ff",[[[5,9],[4,9],[4,8],[5,8],[6,8],[7,8],[8,8],[9,8],[10,8],[11,8],[11,9],[10,9],[9,9],[8,9],[7,9],[6,9]]]],["#5952de",[[[0,0],[15,0],[15,15],[0,15]],[[1,6],[1,7],[1,8],[1,9],[1,10],[1,11],[1,12],[2,12],[3,12],[4,12],[5,12],[6,12],[7,12],[8,12],[8,11],[8,10],[8,9],[9,9],[10,9],[11,9],[11,10],[12,11],[13,11],[14,10],[14,9],[14,8],[14,7],[13,6],[12,6],[11,7],[11,8],[10,8],[9,8],[8,8],[8,7],[8,6],[7,6],[7,5],[7,4],[7,3],[6,2],[5,1],[4,1],[3,2],[2,3],[2,4],[2,5],[2,6]]]]]</script>
 <script type="application/json" id="picture-words">{"m":{"ar-SA":"مفتاح واحد فقط يناسبه. وهو معك.","de-DE":"Nur ein Schlüssel passt. Du hast ihn.","en-AU":"Only one key fits. You have it.","en-GB":"Only one key fits. You have it.","en-US":"Only one key fits. You have it.","es-ES":"Solo una llave encaja. La tienes tú.","es-MX":"Solo una llave encaja. La tienes tú.","fr-FR":"Une seule clé convient. C'est toi qui l'as.","hi":"सिर्फ़ एक चाबी फ़िट होती है। वो तुम्हारे पास है।","id":"Hanya satu kunci yang cocok. Kamu memegangnya.","it":"Entra una sola chiave. Ce l'hai tu.","ja":"合う鍵はひとつだけ。それを持っているのはあなた。","ko":"맞는 열쇠는 하나뿐. 그게 당신 손에 있어요.","nl-NL":"Er past maar één sleutel. Die heb jij.","pt-BR":"Só uma chave serve. Ela está com você.","ru":"Подходит только один ключ. Он у тебя.","sv":"Bara en nyckel passar. Du har den.","th":"มีกุญแจดอกเดียวที่ไขได้ และอยู่ในมือคุณ","tr":"Tek bir anahtar uyar. O da sende.","vi":"Chỉ một chiếc chìa vừa khóa. Bạn đang giữ nó.","zh-Hans":"只有一把钥匙打得开，就在你手里。","zh-Hant":"只有一把鑰匙打得開，就在你手上。"}}</script>
 <script src="/library/worksheet-words.js"></script>
 <script src="/library/worksheet.js"></script>

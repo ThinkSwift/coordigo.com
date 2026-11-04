@@ -127,14 +127,24 @@
   @media (max-width:600px){ .tab{min-width:0;flex:1;padding:10px 6px 9px} .tabs{flex:1} .site{flex:1;width:auto} }
 
   /* landing: a small film beside the words, then the puzzle as the page's main */
-  .intro{display:grid;grid-template-columns:1fr 300px;gap:28px;align-items:center;padding:26px 0 6px}
+  /* the puzzle first, then the intro with How it works folded behind one line (founder 2026-11-05) */
+  .intro{display:grid;grid-template-columns:1fr 300px;gap:28px;align-items:center;padding:34px 0 6px}
+  .howto{margin:14px 0 0}
+  .howto summary{display:inline-flex;align-items:center;gap:8px;cursor:pointer;list-style:none;font:600 14px/1.2 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    color:var(--ink);border:1px solid var(--line);border-radius:999px;padding:8px 14px}
+  .howto summary::-webkit-details-marker{display:none}
+  .howto summary::after{content:"";width:7px;height:7px;border-right:1.6px solid currentColor;border-bottom:1.6px solid currentColor;transform:rotate(45deg) translateY(-2px);transition:transform .15s}
+  .howto[open] summary::after{transform:rotate(-135deg) translateY(-1px)}
+  .howto .how{list-style:none;margin:12px 0 0;padding:0;display:grid;gap:8px;grid-template-columns:1fr}
+  .howto .how li{display:flex;gap:10px;align-items:baseline;background:var(--mat);border:1px solid var(--hair);border-radius:12px;padding:10px 14px}
+  .howto .how b{flex:0 0 auto;margin:0}
   .intro .film{margin:0;border-radius:14px;overflow:hidden;box-shadow:var(--shadow);background:#fff}
   .intro .film video{border-radius:0}
   .bigplay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;border:0;background:rgba(27,25,23,.12);cursor:pointer}
   .bigplay span{width:64px;height:64px;border-radius:50%;background:rgba(27,25,23,.72);display:grid;place-items:center}
   .bigplay svg{width:26px;height:26px;margin-left:4px;fill:#fff}
   .bigplay[hidden]{display:none}
-  .puzzle{margin:22px 0 0;background:var(--mat);border:1px solid var(--hair);border-radius:16px;box-shadow:var(--shadow);padding:12px 6px 4px}
+  .puzzle{margin:18px 0 0;background:var(--mat);border:1px solid var(--hair);border-radius:16px;box-shadow:var(--shadow);padding:12px 6px 4px}
   .puzzle .head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:2px 12px 0}
   .puzzle iframe{display:block;width:100%;height:640px;border:0;background:transparent}
   .another{font:600 14px/1.2 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;cursor:pointer;border:1px solid var(--ink);border-radius:999px;padding:8px 16px;background:none;color:var(--ink)}
@@ -255,7 +265,7 @@
 <script src="/store.js"></script>
 <script src="/mystery/strings.js"></script>
 <script src="/mystery/engine.js"></script>
-<script type="application/json" id="faces">[["#ffd60a",[[[6,7],[7,6],[6,6],[6,5],[6,4],[6,3],[7,2],[8,2],[9,2],[10,3],[10,4],[10,5],[9,6],[9,7],[9,8],[8,8],[7,8],[6,8]]]],["#ff9400",[[[7,6],[6,7],[6,6]]]],["#007aff",[[[8,13],[9,13],[10,13],[12,12],[14,13],[12,12],[13,10],[13,9],[13,8],[14,6],[13,4],[14,2],[13,4],[10,3],[9,2],[8,2],[7,2],[5,1],[6,3],[4,2],[5,3],[2,4],[1,2],[2,4],[1,6],[2,8],[2,9],[2,10],[0,11],[0,0],[15,0],[15,15],[0,15],[0,11],[2,10],[3,11],[4,12],[7,13]]]],["#a37045",[[[9,13],[8,13],[7,13],[4,12],[3,11],[2,10],[2,9],[2,8],[5,9],[6,9],[7,9],[8,9],[9,9],[10,9],[13,8],[13,9],[13,10],[12,12],[10,13]]]],["#ffc482",[[[7,9],[6,9],[5,9],[2,8],[1,6],[2,4],[5,3],[6,4],[5,4],[3,5],[2,6],[3,7],[5,8],[6,8],[7,8],[8,8],[9,8],[10,8],[12,7],[13,6],[12,5],[10,4],[10,3],[13,4],[14,6],[13,8],[10,9],[9,9],[8,9]]]],["#a37045",[[[10,4],[12,5],[13,6],[12,7],[10,8],[11,7],[12,6],[11,6],[10,5]]]],["#a37045",[[[3,6],[3,7],[2,6],[3,5],[5,4],[6,4],[6,5],[6,6],[5,5],[4,5]]]],["#ffd60a",[[[3,7],[3,6],[4,5],[5,5],[6,6],[6,7],[6,8],[5,8]]]],["#ff9400",[[[12,6],[11,7],[11,6]]]],["#ff9400",[[[4,2],[6,3],[6,4],[5,3]]]],["#ff9400",[[[7,2],[6,3],[5,1]]]],["#ffd60a",[[[10,5],[11,6],[11,7],[10,8],[9,8],[9,7],[9,6]]]]]</script>
+<script type="application/json" id="faces">[["#ffc482",[[[5,3],[6,4],[5,4],[3,5],[2,6],[3,7],[5,8],[6,8],[7,8],[8,8],[9,8],[10,8],[12,7],[13,6],[12,5],[10,4],[10,3],[13,4],[14,6],[13,8],[10,9],[9,9],[8,9],[7,9],[6,9],[5,9],[2,8],[1,6],[2,4]]]],["#ff9400",[[[6,4],[5,3],[4,2],[6,3]]]],["#007aff",[[[13,8],[14,6],[13,4],[14,2],[13,4],[10,3],[9,2],[8,2],[7,2],[5,1],[6,3],[4,2],[5,3],[2,4],[1,2],[2,4],[1,6],[2,8],[2,9],[2,10],[0,11],[0,0],[15,0],[15,15],[0,15],[0,11],[2,10],[3,11],[4,12],[7,13],[8,13],[9,13],[10,13],[12,12],[14,13],[12,12],[13,10],[13,9]]]],["#a37045",[[[13,9],[13,10],[12,12],[10,13],[9,13],[8,13],[7,13],[4,12],[3,11],[2,10],[2,9],[2,8],[5,9],[6,9],[7,9],[8,9],[9,9],[10,9],[13,8]]]],["#a37045",[[[2,6],[3,5],[5,4],[6,4],[6,5],[6,6],[5,5],[4,5],[3,6],[3,7]]]],["#ffd60a",[[[3,6],[4,5],[5,5],[6,6],[6,7],[6,8],[5,8],[3,7]]]],["#ffd60a",[[[9,7],[9,8],[8,8],[7,8],[6,8],[6,7],[7,6],[6,6],[6,5],[6,4],[6,3],[7,2],[8,2],[9,2],[10,3],[10,4],[10,5],[9,6]]]],["#ffd60a",[[[9,8],[9,7],[9,6],[10,5],[11,6],[11,7],[10,8]]]],["#a37045",[[[13,6],[12,7],[10,8],[11,7],[12,6],[11,6],[10,5],[10,4],[12,5]]]],["#ff9400",[[[7,2],[6,3],[5,1]]]],["#ff9400",[[[12,6],[11,7],[11,6]]]],["#ff9400",[[[6,6],[7,6],[6,7]]]]]</script>
 <script type="application/json" id="picture-words">{"m":{"ar-SA":"كل رحلة طويلة تبدأ من عشٍّ صغير.","de-DE":"Jeder weite Flug beginnt in einem kleinen Nest.","en-AU":"Every long flight starts in a small nest.","en-GB":"Every long flight starts in a small nest.","en-US":"Every long flight starts in a small nest.","es-ES":"Todo vuelo largo empieza en un nido pequeño.","es-MX":"Todo vuelo largo empieza en un nido pequeño.","fr-FR":"Tout long voyage commence dans un petit nid.","hi":"हर लंबी उड़ान एक छोटे घोंसले से शुरू होती है।","id":"Penerbangan jauh selalu bermula dari sarang kecil.","it":"Ogni lungo volo comincia in un piccolo nido.","ja":"遠い空への旅も、小さな巣から始まる。","ko":"먼 비행도 시작은 작은 둥지에서.","nl-NL":"Elke lange vlucht begint in een klein nest.","pt-BR":"Todo voo longo começa num ninho pequeno.","ru":"Любой дальний перелёт начинается с маленького гнезда.","sv":"Varje lång flygtur börjar i ett litet bo.","th":"การบินไกลทุกครั้ง เริ่มจากรังเล็ก ๆ","tr":"Her uzun uçuş küçük bir yuvada başlar.","vi":"Chuyến bay xa nào cũng bắt đầu từ một chiếc tổ nhỏ.","zh-Hans":"再远的飞行，也始于一个小小的窝。","zh-Hant":"再遠的飛行，也從小小的巢開始。"}}</script>
 <script src="/library/worksheet-words.js"></script>
 <script src="/library/worksheet.js"></script>

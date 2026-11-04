@@ -127,14 +127,24 @@
   @media (max-width:600px){ .tab{min-width:0;flex:1;padding:10px 6px 9px} .tabs{flex:1} .site{flex:1;width:auto} }
 
   /* landing: a small film beside the words, then the puzzle as the page's main */
-  .intro{display:grid;grid-template-columns:1fr 300px;gap:28px;align-items:center;padding:26px 0 6px}
+  /* the puzzle first, then the intro with How it works folded behind one line (founder 2026-11-05) */
+  .intro{display:grid;grid-template-columns:1fr 300px;gap:28px;align-items:center;padding:34px 0 6px}
+  .howto{margin:14px 0 0}
+  .howto summary{display:inline-flex;align-items:center;gap:8px;cursor:pointer;list-style:none;font:600 14px/1.2 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    color:var(--ink);border:1px solid var(--line);border-radius:999px;padding:8px 14px}
+  .howto summary::-webkit-details-marker{display:none}
+  .howto summary::after{content:"";width:7px;height:7px;border-right:1.6px solid currentColor;border-bottom:1.6px solid currentColor;transform:rotate(45deg) translateY(-2px);transition:transform .15s}
+  .howto[open] summary::after{transform:rotate(-135deg) translateY(-1px)}
+  .howto .how{list-style:none;margin:12px 0 0;padding:0;display:grid;gap:8px;grid-template-columns:1fr}
+  .howto .how li{display:flex;gap:10px;align-items:baseline;background:var(--mat);border:1px solid var(--hair);border-radius:12px;padding:10px 14px}
+  .howto .how b{flex:0 0 auto;margin:0}
   .intro .film{margin:0;border-radius:14px;overflow:hidden;box-shadow:var(--shadow);background:#fff}
   .intro .film video{border-radius:0}
   .bigplay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;border:0;background:rgba(27,25,23,.12);cursor:pointer}
   .bigplay span{width:64px;height:64px;border-radius:50%;background:rgba(27,25,23,.72);display:grid;place-items:center}
   .bigplay svg{width:26px;height:26px;margin-left:4px;fill:#fff}
   .bigplay[hidden]{display:none}
-  .puzzle{margin:22px 0 0;background:var(--mat);border:1px solid var(--hair);border-radius:16px;box-shadow:var(--shadow);padding:12px 6px 4px}
+  .puzzle{margin:18px 0 0;background:var(--mat);border:1px solid var(--hair);border-radius:16px;box-shadow:var(--shadow);padding:12px 6px 4px}
   .puzzle .head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:2px 12px 0}
   .puzzle iframe{display:block;width:100%;height:640px;border:0;background:transparent}
   .another{font:600 14px/1.2 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;cursor:pointer;border:1px solid var(--ink);border-radius:999px;padding:8px 16px;background:none;color:var(--ink)}
@@ -255,7 +265,7 @@
 <script src="/store.js"></script>
 <script src="/mystery/strings.js"></script>
 <script src="/mystery/engine.js"></script>
-<script type="application/json" id="faces">[["#c9f5ff",[[[2,13],[3,13],[4,13],[5,12],[5,11],[6,12],[6,11],[6,10],[5,11],[5,10],[6,9],[10.742,5.613],[11,6],[13,9],[15,12],[15,15],[0,15],[0,14],[1,13],[2,13],[1,14],[2,14],[3,14]]]],["#c9f5ff",[[[3,13],[2,13],[3,12],[2,12],[1,12],[2,13],[1,13],[0,14],[0,0],[15,0],[15,12],[13,9],[11,6],[10.742,5.613],[13,4],[12,3],[11,2],[10,1],[5,2],[6,9],[5,10],[5,11],[4,10],[4,11],[4,12],[5,11],[5,12],[4,13]]]],["#ffd60a",[[[10,1],[11,2],[12,3],[13,4],[9,3]]]],["#ff9400",[[[6,10],[6,11],[6,12],[5,11]]]],["#33c759",[[[9,3],[13,4],[10.742,5.613]]]],["#ff9400",[[[3,14],[2,14],[1,14],[2,13]]]],["#ff9400",[[[2,13],[1,12],[2,12],[3,12]]]],["#33c759",[[[7,7],[8,5],[9,3],[10.742,5.613],[6,9]]]],["#007aff",[[[8,5],[7,7],[6,9],[5,2],[9,3]]]],["#ff9400",[[[4,12],[4,11],[4,10],[5,11]]]],["#ff3b30",[[[10,1],[9,3],[5,2]]]]]</script>
+<script type="application/json" id="faces">[["#ffd60a",[[[12,3],[13,4],[9,3],[10,1],[11,2]]]],["#c9f5ff",[[[13,4],[12,3],[11,2],[10,1],[5,2],[6,9],[5,10],[5,11],[4,10],[4,11],[4,12],[5,11],[5,12],[4,13],[3,13],[2,13],[3,12],[2,12],[1,12],[2,13],[1,13],[0,14],[0,0],[15,0],[15,12],[13,9],[11,6],[10.742,5.613]]]],["#33c759",[[[6,9],[7,7],[8,5],[9,3],[10.742,5.613]]]],["#007aff",[[[7,7],[6,9],[5,2],[9,3],[8,5]]]],["#33c759",[[[9,3],[13,4],[10.742,5.613]]]],["#c9f5ff",[[[0,14],[1,13],[2,13],[1,14],[2,14],[3,14],[2,13],[3,13],[4,13],[5,12],[5,11],[6,12],[6,11],[6,10],[5,11],[5,10],[6,9],[10.742,5.613],[11,6],[13,9],[15,12],[15,15],[0,15]]]],["#ff9400",[[[5,11],[6,10],[6,11],[6,12]]]],["#ff9400",[[[2,12],[3,12],[2,13],[1,12]]]],["#ff9400",[[[4,11],[4,10],[5,11],[4,12]]]],["#ff9400",[[[2,14],[1,14],[2,13],[3,14]]]],["#ff3b30",[[[9,3],[5,2],[10,1]]]]]</script>
 <script type="application/json" id="picture-words">{"m":{"ar-SA":"أرخِ الخيط. الريح تتولى الباقي.","de-DE":"Lass die Schnur raus. Ab hier übernimmt der Wind.","en-AU":"Let out the string. The wind takes it from here.","en-GB":"Let out the string. The wind takes it from here.","en-US":"Let out the string. The wind takes it from here.","es-ES":"Suelta hilo. El viento se encarga del resto.","es-MX":"Suelta hilo. El viento se encarga del resto.","fr-FR":"Déroule le fil. Le vent s'occupe du reste.","hi":"डोर ढीली छोड़ो। आगे हवा सँभाल लेगी।","id":"Ulur benangnya. Biar angin yang melanjutkan.","it":"Lascia andare il filo. Da qui ci pensa il vento.","ja":"糸をのばして。あとは風におまかせ。","ko":"줄을 풀어요. 나머진 바람이 알아서 해요.","nl-NL":"Vier het touw. Vanaf hier neemt de wind het over.","pt-BR":"Solte a linha. O vento cuida do resto.","ru":"Отпускай нитку. Дальше ветер сам.","sv":"Släpp ut linan. Vinden tar det härifrån.","th":"ผ่อนสายป่าน ที่เหลือให้ลมจัดการ","tr":"İpi sal. Gerisini rüzgâr halleder.","vi":"Thả dây ra. Gió sẽ lo phần còn lại.","zh-Hans":"放线吧，剩下的交给风。","zh-Hant":"放線吧，接下來交給風。"}}</script>
 <script src="/library/worksheet-words.js"></script>
 <script src="/library/worksheet.js"></script>

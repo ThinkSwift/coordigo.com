@@ -127,14 +127,24 @@
   @media (max-width:600px){ .tab{min-width:0;flex:1;padding:10px 6px 9px} .tabs{flex:1} .site{flex:1;width:auto} }
 
   /* landing: a small film beside the words, then the puzzle as the page's main */
-  .intro{display:grid;grid-template-columns:1fr 300px;gap:28px;align-items:center;padding:26px 0 6px}
+  /* the puzzle first, then the intro with How it works folded behind one line (founder 2026-11-05) */
+  .intro{display:grid;grid-template-columns:1fr 300px;gap:28px;align-items:center;padding:34px 0 6px}
+  .howto{margin:14px 0 0}
+  .howto summary{display:inline-flex;align-items:center;gap:8px;cursor:pointer;list-style:none;font:600 14px/1.2 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    color:var(--ink);border:1px solid var(--line);border-radius:999px;padding:8px 14px}
+  .howto summary::-webkit-details-marker{display:none}
+  .howto summary::after{content:"";width:7px;height:7px;border-right:1.6px solid currentColor;border-bottom:1.6px solid currentColor;transform:rotate(45deg) translateY(-2px);transition:transform .15s}
+  .howto[open] summary::after{transform:rotate(-135deg) translateY(-1px)}
+  .howto .how{list-style:none;margin:12px 0 0;padding:0;display:grid;gap:8px;grid-template-columns:1fr}
+  .howto .how li{display:flex;gap:10px;align-items:baseline;background:var(--mat);border:1px solid var(--hair);border-radius:12px;padding:10px 14px}
+  .howto .how b{flex:0 0 auto;margin:0}
   .intro .film{margin:0;border-radius:14px;overflow:hidden;box-shadow:var(--shadow);background:#fff}
   .intro .film video{border-radius:0}
   .bigplay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;border:0;background:rgba(27,25,23,.12);cursor:pointer}
   .bigplay span{width:64px;height:64px;border-radius:50%;background:rgba(27,25,23,.72);display:grid;place-items:center}
   .bigplay svg{width:26px;height:26px;margin-left:4px;fill:#fff}
   .bigplay[hidden]{display:none}
-  .puzzle{margin:22px 0 0;background:var(--mat);border:1px solid var(--hair);border-radius:16px;box-shadow:var(--shadow);padding:12px 6px 4px}
+  .puzzle{margin:18px 0 0;background:var(--mat);border:1px solid var(--hair);border-radius:16px;box-shadow:var(--shadow);padding:12px 6px 4px}
   .puzzle .head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:2px 12px 0}
   .puzzle iframe{display:block;width:100%;height:640px;border:0;background:transparent}
   .another{font:600 14px/1.2 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;cursor:pointer;border:1px solid var(--ink);border-radius:999px;padding:8px 16px;background:none;color:var(--ink)}
@@ -255,7 +265,7 @@
 <script src="/store.js"></script>
 <script src="/mystery/strings.js"></script>
 <script src="/mystery/engine.js"></script>
-<script type="application/json" id="faces">[["#bf59f2",[[[3,14],[3,13],[4,12],[5,12],[6,12],[6,13],[5,14],[4,14]]]],["#bf59f2",[[[2,10],[2,9],[3,8],[5,9],[5,10],[5,11],[5,12],[4,12],[2,11]]]],["#c9f5ff",[[[10,8],[11,8],[12,8],[13,8],[14,7],[15,7],[15,15],[0,15],[0,0],[15,0],[15,7],[14,6],[13,5],[14,3],[14,2],[13,2],[12,4],[12,3],[11,2],[10,2],[9,3],[10,5],[9,6],[8,5],[7,3],[8,5],[6,4],[8,5],[7,6],[7,7],[8,8],[9,7]],[[3,13],[3,14],[4,14],[5,14],[6,13],[7,14],[8,14],[9,14],[9,13],[8,12],[10,11],[10,10],[10,9],[9,8],[7,9],[7,8],[6,7],[5,7],[4,8],[5,9],[3,8],[2,9],[2,10],[2,11],[4,12]]]],["#ffd60a",[[[11,8],[10,8],[9,7],[9,6],[10,5],[11,5],[11,6],[11,7]]]],["#a37045",[[[7,7],[7,6],[8,5],[9,6],[9,7],[8,8]]]],["#1f1c1f",[[[11,5],[12,5],[12,6],[12,7],[12,8],[11,8],[11,7],[11,6]]]],["#ffffff",[[[12,5],[11,5],[10,5],[9,3],[10,2],[11,2],[12,3],[12,4]]]],["#ffd60a",[[[12,6],[12,5],[13,5],[13,6],[13,7],[13,8],[12,8],[12,7]]]],["#1f1c1f",[[[13,7],[13,6],[13,5],[14,6],[14,7],[13,8]]]],["#ffffff",[[[12,4],[13,2],[14,2],[14,3],[13,5],[12,5]]]],["#ff9400",[[[6,12],[5,12],[5,11],[5,10],[6,10],[7,10],[7,11],[7,12]]]],["#bf59f2",[[[10,10],[10,11],[8,12],[7,12],[7,11],[7,10],[7,9],[9,8],[10,9]]]],["#bf59f2",[[[6,10],[5,10],[5,9],[4,8],[5,7],[6,7],[7,8],[7,9],[7,10]]]],["#bf59f2",[[[9,14],[8,14],[7,14],[6,13],[6,12],[7,12],[8,12],[9,13]]]],["#1f1c1f",[[[14,7],[14,6],[15,7]]]]]</script>
+<script type="application/json" id="faces">[["#bf59f2",[[[5,9],[4,8],[5,7],[6,7],[7,8],[7,9],[7,10],[6,10],[5,10]]]],["#bf59f2",[[[3,8],[5,9],[5,10],[5,11],[5,12],[4,12],[2,11],[2,10],[2,9]]]],["#ffffff",[[[13,2],[14,2],[14,3],[13,5],[12,5],[12,4]]]],["#c9f5ff",[[[14,2],[13,2],[12,4],[12,3],[11,2],[10,2],[9,3],[10,5],[9,6],[8,5],[7,3],[8,5],[6,4],[8,5],[7,6],[7,7],[8,8],[9,7],[10,8],[11,8],[12,8],[13,8],[14,7],[15,7],[15,15],[0,15],[0,0],[15,0],[15,7],[14,6],[13,5],[14,3]],[[4,8],[5,9],[3,8],[2,9],[2,10],[2,11],[4,12],[3,13],[3,14],[4,14],[5,14],[6,13],[7,14],[8,14],[9,14],[9,13],[8,12],[10,11],[10,10],[10,9],[9,8],[7,9],[7,8],[6,7],[5,7]]]],["#ffffff",[[[11,2],[12,3],[12,4],[12,5],[11,5],[10,5],[9,3],[10,2]]]],["#bf59f2",[[[7,12],[8,12],[9,13],[9,14],[8,14],[7,14],[6,13],[6,12]]]],["#bf59f2",[[[8,12],[7,12],[7,11],[7,10],[7,9],[9,8],[10,9],[10,10],[10,11]]]],["#ff9400",[[[5,10],[6,10],[7,10],[7,11],[7,12],[6,12],[5,12],[5,11]]]],["#a37045",[[[9,7],[8,8],[7,7],[7,6],[8,5],[9,6]]]],["#1f1c1f",[[[14,7],[13,8],[13,7],[13,6],[13,5],[14,6]]]],["#1f1c1f",[[[12,6],[12,7],[12,8],[11,8],[11,7],[11,6],[11,5],[12,5]]]],["#ffd60a",[[[12,7],[12,6],[12,5],[13,5],[13,6],[13,7],[13,8],[12,8]]]],["#ffd60a",[[[9,7],[9,6],[10,5],[11,5],[11,6],[11,7],[11,8],[10,8]]]],["#bf59f2",[[[3,14],[3,13],[4,12],[5,12],[6,12],[6,13],[5,14],[4,14]]]],["#1f1c1f",[[[14,6],[15,7],[14,7]]]]]</script>
 <script type="application/json" id="picture-words">{"m":{"ar-SA":"يتنقّل بين الزهور للعمل. ليست وظيفة سيئة.","de-DE":"Pendelt von Blüte zu Blüte. Kein schlechter Job.","en-AU":"Commutes from flower to flower. Not a bad job.","en-GB":"Commutes from flower to flower. Not a bad job.","en-US":"Commutes from flower to flower. Not a bad job.","es-ES":"Va de flor en flor a trabajar. No está mal el curro.","es-MX":"Va de flor en flor a trabajar. Nada mal la chamba.","fr-FR":"De fleur en fleur pour aller bosser. Pas un mauvais job.","hi":"फूल से फूल तक रोज़ का सफ़र। काम बुरा नहीं।","id":"Berangkat kerja dari bunga ke bunga. Lumayan juga.","it":"Pendolare da un fiore all'altro. Non è un brutto lavoro.","ja":"花から花へ通勤。悪くない仕事だ。","ko":"꽃에서 꽃으로 출근. 나쁘지 않은 직업.","nl-NL":"Pendelt van bloem naar bloem. Geen slechte baan.","pt-BR":"Bate ponto de flor em flor. Nada mal esse emprego.","ru":"С цветка на цветок — и это работа. Неплохо устроилась.","sv":"Pendlar från blomma till blomma. Inget dåligt jobb.","th":"บินจากดอกสู่ดอกทุกวัน งานนี้ก็ไม่เลว","tr":"Çiçekten çiçeğe mesai. Fena iş değil.","vi":"Đi làm từ hoa này sang hoa khác. Nghề cũng không tệ.","zh-Hans":"从一朵花通勤到另一朵花。这工作不赖。","zh-Hant":"從這朵花通勤到那朵花。這工作不錯。"}}</script>
 <script src="/library/worksheet-words.js"></script>
 <script src="/library/worksheet.js"></script>

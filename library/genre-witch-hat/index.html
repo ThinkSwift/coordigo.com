@@ -127,14 +127,24 @@
   @media (max-width:600px){ .tab{min-width:0;flex:1;padding:10px 6px 9px} .tabs{flex:1} .site{flex:1;width:auto} }
 
   /* landing: a small film beside the words, then the puzzle as the page's main */
-  .intro{display:grid;grid-template-columns:1fr 300px;gap:28px;align-items:center;padding:26px 0 6px}
+  /* the puzzle first, then the intro with How it works folded behind one line (founder 2026-11-05) */
+  .intro{display:grid;grid-template-columns:1fr 300px;gap:28px;align-items:center;padding:34px 0 6px}
+  .howto{margin:14px 0 0}
+  .howto summary{display:inline-flex;align-items:center;gap:8px;cursor:pointer;list-style:none;font:600 14px/1.2 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    color:var(--ink);border:1px solid var(--line);border-radius:999px;padding:8px 14px}
+  .howto summary::-webkit-details-marker{display:none}
+  .howto summary::after{content:"";width:7px;height:7px;border-right:1.6px solid currentColor;border-bottom:1.6px solid currentColor;transform:rotate(45deg) translateY(-2px);transition:transform .15s}
+  .howto[open] summary::after{transform:rotate(-135deg) translateY(-1px)}
+  .howto .how{list-style:none;margin:12px 0 0;padding:0;display:grid;gap:8px;grid-template-columns:1fr}
+  .howto .how li{display:flex;gap:10px;align-items:baseline;background:var(--mat);border:1px solid var(--hair);border-radius:12px;padding:10px 14px}
+  .howto .how b{flex:0 0 auto;margin:0}
   .intro .film{margin:0;border-radius:14px;overflow:hidden;box-shadow:var(--shadow);background:#fff}
   .intro .film video{border-radius:0}
   .bigplay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;border:0;background:rgba(27,25,23,.12);cursor:pointer}
   .bigplay span{width:64px;height:64px;border-radius:50%;background:rgba(27,25,23,.72);display:grid;place-items:center}
   .bigplay svg{width:26px;height:26px;margin-left:4px;fill:#fff}
   .bigplay[hidden]{display:none}
-  .puzzle{margin:22px 0 0;background:var(--mat);border:1px solid var(--hair);border-radius:16px;box-shadow:var(--shadow);padding:12px 6px 4px}
+  .puzzle{margin:18px 0 0;background:var(--mat);border:1px solid var(--hair);border-radius:16px;box-shadow:var(--shadow);padding:12px 6px 4px}
   .puzzle .head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:2px 12px 0}
   .puzzle iframe{display:block;width:100%;height:640px;border:0;background:transparent}
   .another{font:600 14px/1.2 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;cursor:pointer;border:1px solid var(--ink);border-radius:999px;padding:8px 16px;background:none;color:var(--ink)}
@@ -255,7 +265,7 @@
 <script src="/store.js"></script>
 <script src="/mystery/strings.js"></script>
 <script src="/mystery/engine.js"></script>
-<script type="application/json" id="faces">[["#bf59f2",[[[2,13],[1,12],[3,11],[5,12],[6,12],[7,12],[8,12],[9,12],[10,12],[11,14],[10,14],[9,14],[8,14],[7,14],[6,14],[5,14]]]],["#1f1c1f",[[[3,11],[4,9],[7,10],[7,11],[7,12],[6,12],[5,12]]]],["#5952de",[[[10,12],[12,11],[14,12],[13,13],[11,14]]]],["#1f1c1f",[[[12,11],[10,12],[9,12],[9,11],[9,10],[11,9]]]],["#ffd60a",[[[8,12],[7,12],[7,11],[7,10],[8,10],[9,10],[9,11],[9,12]]]],["#5952de",[[[11,9],[9,10],[8,6],[8,5],[8,4],[8,3],[8,2],[9,1],[10,1],[11,1],[14,3],[13,3],[12,3],[11,3],[10,5],[11,8]]]],["#bf59f2",[[[8,2],[8,3],[8,4],[8,5],[8,6],[9,10],[8,10],[7,10],[4,9],[5,7],[6,5],[7,3]]]],["#ffffff",[[[0,0],[15,0],[15,15],[0,15]],[[1,12],[2,13],[5,14],[6,14],[7,14],[8,14],[9,14],[10,14],[11,14],[13,13],[14,12],[12,11],[11,9],[11,8],[10,5],[11,3],[12,3],[13,3],[14,3],[11,1],[10,1],[9,1],[8,2],[7,3],[6,5],[5,7],[4,9],[3,11]]]]]</script>
+<script type="application/json" id="faces">[["#5952de",[[[14,3],[13,3],[12,3],[11,3],[10,5],[11,8],[11,9],[9,10],[8,6],[8,5],[8,4],[8,3],[8,2],[9,1],[10,1],[11,1]]]],["#bf59f2",[[[8,3],[8,4],[8,5],[8,6],[9,10],[8,10],[7,10],[4,9],[5,7],[6,5],[7,3],[8,2]]]],["#5952de",[[[14,12],[13,13],[11,14],[10,12],[12,11]]]],["#ffd60a",[[[8,10],[9,10],[9,11],[9,12],[8,12],[7,12],[7,11],[7,10]]]],["#bf59f2",[[[6,14],[5,14],[2,13],[1,12],[3,11],[5,12],[6,12],[7,12],[8,12],[9,12],[10,12],[11,14],[10,14],[9,14],[8,14],[7,14]]]],["#1f1c1f",[[[11,9],[12,11],[10,12],[9,12],[9,11],[9,10]]]],["#1f1c1f",[[[4,9],[7,10],[7,11],[7,12],[6,12],[5,12],[3,11]]]],["#ffffff",[[[0,0],[15,0],[15,15],[0,15]],[[13,3],[14,3],[11,1],[10,1],[9,1],[8,2],[7,3],[6,5],[5,7],[4,9],[3,11],[1,12],[2,13],[5,14],[6,14],[7,14],[8,14],[9,14],[10,14],[11,14],[13,13],[14,12],[12,11],[11,9],[11,8],[10,5],[11,3],[12,3]]]]]</script>
 <script type="application/json" id="picture-words">{"m":{"ar-SA":"ارتدِها، فتبدأ المكنسة بالإصغاء.","de-DE":"Setz ihn auf, und der Besen hört auf dich.","en-AU":"Wear it and the broom starts listening.","en-GB":"Wear it and the broom starts listening.","en-US":"Wear it and the broom starts listening.","es-ES":"Póntelo y la escoba empieza a hacerte caso.","es-MX":"Póntelo y la escoba empieza a hacerte caso.","fr-FR":"Mets-le, et le balai commence à t'écouter.","hi":"इसे पहनो और झाड़ू बात मानने लगती है।","id":"Pakai topinya, dan sapu mulai menurut.","it":"Indossalo e la scopa comincia ad ascoltarti.","ja":"かぶれば、ほうきが言うことを聞きだす。","ko":"쓰기만 하면 빗자루가 말을 듣기 시작해요.","nl-NL":"Zet hem op en de bezem gaat luisteren.","pt-BR":"Coloque e a vassoura começa a te obedecer.","ru":"Надень её — и метла начнёт слушаться.","sv":"Ta på den, så börjar kvasten lyssna.","th":"สวมหมวกปุ๊บ ไม้กวาดก็เชื่อฟังปั๊บ","tr":"Tak onu, süpürge seni dinlemeye başlasın.","vi":"Đội nó lên là cây chổi bắt đầu nghe lời.","zh-Hans":"戴上它，扫帚就开始听话了。","zh-Hant":"戴上它，掃帚就開始聽話。"}}</script>
 <script src="/library/worksheet-words.js"></script>
 <script src="/library/worksheet.js"></script>

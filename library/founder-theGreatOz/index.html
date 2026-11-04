@@ -127,14 +127,24 @@
   @media (max-width:600px){ .tab{min-width:0;flex:1;padding:10px 6px 9px} .tabs{flex:1} .site{flex:1;width:auto} }
 
   /* landing: a small film beside the words, then the puzzle as the page's main */
-  .intro{display:grid;grid-template-columns:1fr 300px;gap:28px;align-items:center;padding:26px 0 6px}
+  /* the puzzle first, then the intro with How it works folded behind one line (founder 2026-11-05) */
+  .intro{display:grid;grid-template-columns:1fr 300px;gap:28px;align-items:center;padding:34px 0 6px}
+  .howto{margin:14px 0 0}
+  .howto summary{display:inline-flex;align-items:center;gap:8px;cursor:pointer;list-style:none;font:600 14px/1.2 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    color:var(--ink);border:1px solid var(--line);border-radius:999px;padding:8px 14px}
+  .howto summary::-webkit-details-marker{display:none}
+  .howto summary::after{content:"";width:7px;height:7px;border-right:1.6px solid currentColor;border-bottom:1.6px solid currentColor;transform:rotate(45deg) translateY(-2px);transition:transform .15s}
+  .howto[open] summary::after{transform:rotate(-135deg) translateY(-1px)}
+  .howto .how{list-style:none;margin:12px 0 0;padding:0;display:grid;gap:8px;grid-template-columns:1fr}
+  .howto .how li{display:flex;gap:10px;align-items:baseline;background:var(--mat);border:1px solid var(--hair);border-radius:12px;padding:10px 14px}
+  .howto .how b{flex:0 0 auto;margin:0}
   .intro .film{margin:0;border-radius:14px;overflow:hidden;box-shadow:var(--shadow);background:#fff}
   .intro .film video{border-radius:0}
   .bigplay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;border:0;background:rgba(27,25,23,.12);cursor:pointer}
   .bigplay span{width:64px;height:64px;border-radius:50%;background:rgba(27,25,23,.72);display:grid;place-items:center}
   .bigplay svg{width:26px;height:26px;margin-left:4px;fill:#fff}
   .bigplay[hidden]{display:none}
-  .puzzle{margin:22px 0 0;background:var(--mat);border:1px solid var(--hair);border-radius:16px;box-shadow:var(--shadow);padding:12px 6px 4px}
+  .puzzle{margin:18px 0 0;background:var(--mat);border:1px solid var(--hair);border-radius:16px;box-shadow:var(--shadow);padding:12px 6px 4px}
   .puzzle .head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:2px 12px 0}
   .puzzle iframe{display:block;width:100%;height:640px;border:0;background:transparent}
   .another{font:600 14px/1.2 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;cursor:pointer;border:1px solid var(--ink);border-radius:999px;padding:8px 16px;background:none;color:var(--ink)}
@@ -255,7 +265,7 @@
 <script src="/store.js"></script>
 <script src="/mystery/strings.js"></script>
 <script src="/mystery/engine.js"></script>
-<script type="application/json" id="faces">[["#ffffff",[[[6,7],[6,8],[6,9],[6,10],[6,11],[6,12],[6,13],[7,15],[0,15],[0,0],[5,0],[6,1],[6,2],[5,5],[4,5],[3,6],[3,7],[4,8],[4,7],[5,6],[6,6]]]],["#ffffff",[[[6,8],[6,7],[6,6],[7,6]]]],["#33c759",[[[6,6],[5,6],[4,7],[4,8],[3,7],[4,6],[7,5],[8,5],[9,5],[10,5],[8,6],[7,6]]]],["#ff9400",[[[8,1],[8,2],[7,2],[6,2],[7,1]]]],["#ffffff",[[[8,2],[8,1],[9,0],[15,0],[15,15],[7,15],[8,13],[8,12],[8,11],[8,10],[8,9],[8,8],[8,7],[8,6],[9,6],[10,7],[10,8],[11,7],[11,6],[10,5],[9,5]]]],["#8afa99",[[[3,7],[3,6],[4,5],[5,5],[6,5],[7,5],[4,6]]]],["#33c759",[[[8,2],[9,5],[8,4],[7,5],[6,4],[6.5,3.5],[7,4],[8,3],[7,4],[6.5,3.5],[7,3]]]],["#ffffff",[[[6,11],[7,9],[7,10],[6,12]]]],["#c9f5ff",[[[7,9],[6,11],[6,10],[6,9],[6,8],[7,6],[7,7],[7,8]]]],["#5952de",[[[8,7],[8,8],[8,9],[8,10],[8,11],[8,12],[8,13],[7,12],[7,11],[7,10],[7,9],[7,8],[7,7],[7,6],[8,6]]]],["#0a6624",[[[9,5],[8,5],[7,5],[8,4]]]],["#a37045",[[[9,0],[8,1],[7,1]]]],["#0a6624",[[[10,5],[11,6],[11,7],[10,8],[10,7],[9,6],[8,6]]]],["#ffffff",[[[6,13],[7,12],[7,13]]]],["#c9f5ff",[[[7,12],[6,13],[6,12],[7,10],[7,11]]]],["#ffc482",[[[8,0],[9,0],[7,1],[6,1],[5,0],[6,0],[7,0]]]],["#8afa99",[[[6.5,3.5],[6,4],[5,5],[6,2],[7,3],[6.5,3.5],[6,3]]]],["#ffffff",[[[6,1],[7,1],[6,2]]]],["#007aff",[[[7,13],[7,12],[8,13],[7,15],[6,13]]]],["#0a6624",[[[7,5],[6,5],[5,5],[6,4]]]],["#0a6624",[[[6,2],[7,2],[8,2],[7,3]]]]]</script>
+<script type="application/json" id="faces">[["#0a6624",[[[7,5],[8,4],[9,5],[8,5]]]],["#33c759",[[[8,4],[7,5],[6,4],[6.5,3.5],[7,4],[8,3],[7,4],[6.5,3.5],[7,3],[8,2],[9,5]]]],["#ffc482",[[[6,0],[7,0],[8,0],[9,0],[7,1],[6,1],[5,0]]]],["#ffffff",[[[6,1],[7,1],[6,2]]]],["#33c759",[[[3,7],[4,6],[7,5],[8,5],[9,5],[10,5],[8,6],[7,6],[6,6],[5,6],[4,7],[4,8]]]],["#8afa99",[[[4,6],[3,7],[3,6],[4,5],[5,5],[6,5],[7,5]]]],["#ffffff",[[[9,5],[8,2],[8,1],[9,0],[15,0],[15,15],[7,15],[8,13],[8,12],[8,11],[8,10],[8,9],[8,8],[8,7],[8,6],[9,6],[10,7],[10,8],[11,7],[11,6],[10,5]]]],["#c9f5ff",[[[7,7],[7,8],[7,9],[6,11],[6,10],[6,9],[6,8],[7,6]]]],["#5952de",[[[7,8],[7,7],[7,6],[8,6],[8,7],[8,8],[8,9],[8,10],[8,11],[8,12],[8,13],[7,12],[7,11],[7,10],[7,9]]]],["#ffffff",[[[7,6],[6,8],[6,7],[6,6]]]],["#0a6624",[[[6,2],[7,2],[8,2],[7,3]]]],["#ff9400",[[[7,2],[6,2],[7,1],[8,1],[8,2]]]],["#0a6624",[[[9,6],[8,6],[10,5],[11,6],[11,7],[10,8],[10,7]]]],["#ffffff",[[[4,5],[3,6],[3,7],[4,8],[4,7],[5,6],[6,6],[6,7],[6,8],[6,9],[6,10],[6,11],[6,12],[6,13],[7,15],[0,15],[0,0],[5,0],[6,1],[6,2],[5,5]]]],["#c9f5ff",[[[6,12],[7,10],[7,11],[7,12],[6,13]]]],["#ffffff",[[[7,10],[6,12],[6,11],[7,9]]]],["#a37045",[[[7,1],[9,0],[8,1]]]],["#007aff",[[[8,13],[7,15],[6,13],[7,13],[7,12]]]],["#0a6624",[[[7,5],[6,5],[5,5],[6,4]]]],["#ffffff",[[[6,13],[7,12],[7,13]]]],["#8afa99",[[[6,2],[7,3],[6.5,3.5],[6,3],[6.5,3.5],[6,4],[5,5]]]]]</script>
 <script type="application/json" id="picture-words">{"m":{"ar-SA":"يد ثابتة وقلب شجاع. ستنجح.","de-DE":"Ruhige Hand, mutiges Herz. Du schaffst das.","en-AU":"Steady hand, brave heart. You've got this.","en-GB":"Steady hand, brave heart. You've got this.","en-US":"Steady hand, brave heart. You've got this.","es-ES":"Pulso firme, corazón valiente. Tú puedes.","es-MX":"Pulso firme, corazón valiente. Tú puedes.","fr-FR":"Main sûre, cœur vaillant. Tu vas y arriver.","hi":"हाथ स्थिर, दिल बहादुर। तुमसे हो जाएगा।","id":"Tangan mantap, hati berani. Kamu pasti bisa.","it":"Mano ferma, cuore coraggioso. Ce la fai.","ja":"揺るがない手、勇敢な心。きみならできる。","ko":"흔들림 없는 손, 용감한 마음. 넌 할 수 있어.","nl-NL":"Vaste hand, dapper hart. Jij kunt dit.","pt-BR":"Mão firme, coração valente. Você consegue.","ru":"Твёрдая рука, храброе сердце. У тебя получится.","sv":"Stadig hand, modigt hjärta. Du fixar det.","th":"มือมั่นคง ใจกล้าหาญ เธอทำได้แน่","tr":"Sağlam el, cesur yürek. Yaparsın sen.","vi":"Tay vững, lòng can đảm. Bạn làm được mà.","zh-Hans":"手要稳，心要勇。你一定行。","zh-Hant":"手要穩，心要勇敢。你一定可以。"}}</script>
 <script src="/library/worksheet-words.js"></script>
 <script src="/library/worksheet.js"></script>

@@ -127,14 +127,24 @@
   @media (max-width:600px){ .tab{min-width:0;flex:1;padding:10px 6px 9px} .tabs{flex:1} .site{flex:1;width:auto} }
 
   /* landing: a small film beside the words, then the puzzle as the page's main */
-  .intro{display:grid;grid-template-columns:1fr 300px;gap:28px;align-items:center;padding:26px 0 6px}
+  /* the puzzle first, then the intro with How it works folded behind one line (founder 2026-11-05) */
+  .intro{display:grid;grid-template-columns:1fr 300px;gap:28px;align-items:center;padding:34px 0 6px}
+  .howto{margin:14px 0 0}
+  .howto summary{display:inline-flex;align-items:center;gap:8px;cursor:pointer;list-style:none;font:600 14px/1.2 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    color:var(--ink);border:1px solid var(--line);border-radius:999px;padding:8px 14px}
+  .howto summary::-webkit-details-marker{display:none}
+  .howto summary::after{content:"";width:7px;height:7px;border-right:1.6px solid currentColor;border-bottom:1.6px solid currentColor;transform:rotate(45deg) translateY(-2px);transition:transform .15s}
+  .howto[open] summary::after{transform:rotate(-135deg) translateY(-1px)}
+  .howto .how{list-style:none;margin:12px 0 0;padding:0;display:grid;gap:8px;grid-template-columns:1fr}
+  .howto .how li{display:flex;gap:10px;align-items:baseline;background:var(--mat);border:1px solid var(--hair);border-radius:12px;padding:10px 14px}
+  .howto .how b{flex:0 0 auto;margin:0}
   .intro .film{margin:0;border-radius:14px;overflow:hidden;box-shadow:var(--shadow);background:#fff}
   .intro .film video{border-radius:0}
   .bigplay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;border:0;background:rgba(27,25,23,.12);cursor:pointer}
   .bigplay span{width:64px;height:64px;border-radius:50%;background:rgba(27,25,23,.72);display:grid;place-items:center}
   .bigplay svg{width:26px;height:26px;margin-left:4px;fill:#fff}
   .bigplay[hidden]{display:none}
-  .puzzle{margin:22px 0 0;background:var(--mat);border:1px solid var(--hair);border-radius:16px;box-shadow:var(--shadow);padding:12px 6px 4px}
+  .puzzle{margin:18px 0 0;background:var(--mat);border:1px solid var(--hair);border-radius:16px;box-shadow:var(--shadow);padding:12px 6px 4px}
   .puzzle .head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:2px 12px 0}
   .puzzle iframe{display:block;width:100%;height:640px;border:0;background:transparent}
   .another{font:600 14px/1.2 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;cursor:pointer;border:1px solid var(--ink);border-radius:999px;padding:8px 16px;background:none;color:var(--ink)}
@@ -255,7 +265,7 @@
 <script src="/store.js"></script>
 <script src="/mystery/strings.js"></script>
 <script src="/mystery/engine.js"></script>
-<script type="application/json" id="faces">[["#5952de",[[[4,14],[6,13],[7,12],[10,10],[13,8],[15,7],[15,15],[0,15],[0,0],[8,0],[7,2],[5,5],[3,8],[2,9],[1,11],[2,13]]]],["#ffffff",[[[6,13],[4,14],[2,13],[1,11],[2,9],[3,8],[5,7],[7,6],[11,5],[8,9],[7,12]],[[5,10],[4,10],[3,11],[4,12],[5,11]]]],["#ffd60a",[[[4,10],[5,10],[5,11],[4,12],[3,11]]]],["#c9f5ff",[[[7,2],[8,0],[11,0],[9,3],[11,0],[15,0],[15,1],[14,2],[13,3],[12,4],[13,3],[14,2],[15,1],[15,4],[11,7],[15,4],[15,7],[13,8],[10,10],[7,12],[8,9],[11,5],[7,6],[5,7],[3,8],[5,5]]]]]</script>
+<script type="application/json" id="faces">[["#c9f5ff",[[[5,5],[7,2],[8,0],[11,0],[9,3],[11,0],[15,0],[15,1],[14,2],[13,3],[12,4],[13,3],[14,2],[15,1],[15,4],[11,7],[15,4],[15,7],[13,8],[10,10],[7,12],[8,9],[11,5],[7,6],[5,7],[3,8]]]],["#5952de",[[[7,2],[5,5],[3,8],[2,9],[1,11],[2,13],[4,14],[6,13],[7,12],[10,10],[13,8],[15,7],[15,15],[0,15],[0,0],[8,0]]]],["#ffd60a",[[[4,12],[3,11],[4,10],[5,10],[5,11]]]],["#ffffff",[[[4,14],[2,13],[1,11],[2,9],[3,8],[5,7],[7,6],[11,5],[8,9],[7,12],[6,13]],[[3,11],[4,12],[5,11],[5,10],[4,10]]]]]</script>
 <script type="application/json" id="picture-words">{"m":{"ar-SA":"تمنَّ بسرعة. لن يعود قبل سنوات.","de-DE":"Wünsch dir schnell was. Er kommt erst in Jahren wieder.","en-AU":"Make a wish quickly. It won't be back for years.","en-GB":"Make a wish quickly. It won't be back for years.","en-US":"Make a wish quickly. It won't be back for years.","es-ES":"Pide un deseo rápido. Tardará años en volver.","es-MX":"Pide un deseo rápido. Tardará años en volver.","fr-FR":"Fais vite un vœu. Elle ne repassera pas avant des années.","hi":"जल्दी मन्नत माँगो। यह बरसों बाद लौटेगा।","id":"Cepat buat permintaan. Ia baru kembali bertahun-tahun lagi.","it":"Esprimi un desiderio, presto. Tornerà fra molti anni.","ja":"急いで願いごとを。次に来るのはずっと先。","ko":"얼른 소원 빌어요. 몇 년은 지나야 다시 와요.","nl-NL":"Doe snel een wens. Hij komt pas over jaren terug.","pt-BR":"Faça um pedido rápido. Ele vai levar anos para voltar.","ru":"Загадывай скорее. Она вернётся только через годы.","sv":"Önska något fort. Den kommer inte tillbaka på åratal.","th":"รีบอธิษฐานเลย อีกหลายปีกว่าจะกลับมา","tr":"Çabuk dilek tut. Yıllarca geri gelmeyecek.","vi":"Ước nhanh lên. Phải nhiều năm nữa nó mới quay lại.","zh-Hans":"快许愿，它要好多年才会再来。","zh-Hant":"快許願，它要好多年才會再來。"}}</script>
 <script src="/library/worksheet-words.js"></script>
 <script src="/library/worksheet.js"></script>
