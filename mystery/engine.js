@@ -6,6 +6,7 @@
   'use strict';
 
   const DIGITS = '0123456789ABCDEF';
+  const COLOR_DIGITS = '0123456789ABCDEFGHIJKLMNOPQRSTUV';   // a fill's color character: 32 slots (MysteryCode.colorDigits)
   const VERSION = 2;
   const SIDE = 15;                    // squares per side (16 points: 0–F)
   const K = 10;                       // raster cells per unit
@@ -15,13 +16,16 @@
   const HEARTS = 3;
 
   // 0 ink · 1 grey · 2 white · 3 red · 4 orange · 5 yellow · 6 peach · 7 tan · 8 dark grey · 9 light green ·
-  // A green · B dark green · C light cyan · D blue · E indigo · F purple — the app's MysteryPalette.rgb.
+  // A green · B dark green · C light cyan · D blue · E indigo · F purple · G dark red · H dark brown · I pink — the
+  // app's MysteryPalette.rgb (founder 2026-11-05); J–V are reserved for later colors.
   const PALETTE = [
     [0.12, 0.11, 0.12], [0.62, 0.64, 0.66], [1.00, 1.00, 1.00], [1.00, 0.23, 0.19],
     [1.00, 0.58, 0.00], [1.00, 0.84, 0.04], [1.00, 0.77, 0.51], [0.64, 0.44, 0.27],
     [0.40, 0.42, 0.44], [0.54, 0.98, 0.60], [0.20, 0.78, 0.35], [0.04, 0.40, 0.14],
     [0.79, 0.96, 1.00], [0.00, 0.48, 1.00], [0.35, 0.32, 0.87], [0.75, 0.35, 0.95],
+    [0.62, 0.12, 0.12], [0.40, 0.25, 0.14], [1.00, 0.60, 0.75],
   ].map(c => c.map(v => Math.trunc(v * 255)));           // UInt8(v * 255) truncates, as in the app
+  const paletteColor = k => PALETTE[k] || PALETTE[1];     // MysteryPalette.color: a reserved slot (J–V) draws grey
 
   class Problem extends Error { constructor(kind) { super(kind); this.kind = kind; } }
 
@@ -52,7 +56,7 @@
       // `7`, `12` or `7.5` — exactly what the app writes; no signs, exponents or hex (the app reads the same).
       const num = t => (/^[0-9]{1,2}(\.[0-9])?$/.test(t) ? Number(t) : NaN);
       const x = parts.length === 3 ? num(parts[0]) : NaN, y = parts.length === 3 ? num(parts[1]) : NaN;
-      const c = parts.length === 3 && parts[2].length === 1 ? DIGITS.indexOf(parts[2].toUpperCase()) : -1;
+      const c = parts.length === 3 && parts[2].length === 1 ? COLOR_DIGITS.indexOf(parts[2].toUpperCase()) : -1;
       if (!(parts[0] !== '' && parts[1] !== '' && isFinite(x) && isFinite(y) && c >= 0 && x >= 0 && x <= 15 && y >= 0 && y <= 15)) {
         throw new Problem('badCharacter');
       }
@@ -403,7 +407,7 @@
     const fmt = v => +v.toFixed(4);
     return faceList.filter(f => color.has(f.id)).map(f => ({
       d: f.rings.map(r => 'M' + r.map(p => fmt(p.x) + ' ' + fmt(p.y)).join('L') + 'Z').join(''),
-      color: PALETTE[Math.min(Math.max(color.get(f.id), 0), 15)],
+      color: paletteColor(color.get(f.id)),
     }));
   }
 
@@ -465,7 +469,7 @@
 
   const length = pointCount => (pointCount < 40 ? 'quick' : pointCount < 90 ? 'medium' : 'long');
 
-  const api = { DIGITS, VERSION, SIDE, K, W, H, HEARTS, PALETTE, Problem, pair, codeString, parseCode, parseColors,
+  const api = { DIGITS, COLOR_DIGITS, VERSION, SIDE, K, W, H, HEARTS, PALETTE, paletteColor, Problem, pair, codeString, parseCode, parseColors,
                 readPayload, atoms, pictureAtoms, raster, regionAt, regionsOf, earned, faces, regionArea, fillPaths, Solve, length };
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
   else root.Mystery = api;
