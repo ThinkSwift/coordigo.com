@@ -16,5 +16,6 @@ grep -q Faces.swift "$TMP/src/scripts/web-library.py" || sed -i '' 's|"Sources/C
 node "$SITE/tools/library-data.mjs" "$TMP/out/library.js" > "$TMP/lib.json"
 python3 "$SITE/tools/worksheet-ref.py" "$TMP/src" faces "$TMP/faces.json"
 python3 "$SITE/tools/worksheet-words.py" "$TMP/src/Sources/Resources/Localizable.xcstrings"
-python3 "$SITE/tools/library-pages.py" "$TMP/lib.json" "$TMP/src/Sources/Resources/Mystery/library.json" "$TMP/faces.json"
+python3 "$SITE/tools/library-pages.py" "$TMP/lib.json" "$TMP/src/Sources/Resources/Mystery/library.json" "$TMP/faces.json" \
+  "$TMP/src/Sources/Resources/Mystery/messages.json" "$TMP/src/Sources/Resources/Localizable.xcstrings"
 echo "from $(git -C "$REPO" rev-parse --short "$REF") ($REF)"

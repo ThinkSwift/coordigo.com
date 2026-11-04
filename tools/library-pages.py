@@ -23,6 +23,15 @@ data = json.load(open(sys.argv[1]))
 TIER = {e['id']: e['tier'] for e in json.load(open(sys.argv[2]))} if len(sys.argv) > 2 else {}
 # the answer's colours as the app fills them (tools/worksheet-ref.py faces), carried by each picture's page
 FACES = json.load(open(sys.argv[3])) if len(sys.argv) > 3 else {}
+# each picture's own message and title in the app's 22 languages (Coordigo Sources/Resources/Mystery/messages.json), and
+# the titles the app translates in its catalog (Localizable.xcstrings): the answer page prints them in the worksheet's language
+OWN = json.load(open(sys.argv[4])) if len(sys.argv) > 4 else {}
+if len(sys.argv) > 5:
+    cat = json.load(open(sys.argv[5]))['strings']
+    for e in json.load(open(sys.argv[2])):
+        tr = {l: u['stringUnit']['value'] for l, u in cat.get(e['title'], {}).get('localizations', {}).items() if u.get('stringUnit', {}).get('value')}
+        if tr: OWN.setdefault(e['id'], {}).setdefault('t', {}); OWN[e['id']]['t'] = {**tr, **(OWN[e['id']].get('t') or {})}
+def message(d, loc='en-US'): return ((OWN.get(d['id']) or {}).get('m') or {}).get(loc) or d['message']
 STR = json.loads(re.search(r'MYSTERY_STRINGS\s*=\s*(\{.*\})', open(os.path.join(ROOT, 'mystery/strings.js')).read(), re.S).group(1))['en']
 esc = lambda s: html.escape(s, quote=True)
 
@@ -214,7 +223,7 @@ def grid_page(k):
 
 def picture_page(d, prev, nxt):
     path = f'/library/{d["id"]}/'
-    words = f'<p class="words">“{esc(d["message"])}”</p>' if d['message'] else ''
+    words = f'<p class="words">“{esc(message(d))}”</p>' if message(d) else ''
     link = lambda e, label: f'<a href="/library/{e["id"]}/">{label}: {esc(title(e))}</a>' if e else '<span></span>'
     inner = f'''
   <section class="pic-page" data-picture="{d['id']}" data-number="{number.get(d['id'], 0)}" data-title="{esc(d['title'])}" data-tier="{TIER.get(d['id'], '')}" data-file="{file_stem(d)}" data-payload="{esc(d['payload'])}">
@@ -234,7 +243,7 @@ def picture_page(d, prev, nxt):
           </fieldset>
           <label class="check"><input type="checkbox" name="answer" checked> <span data-w="answerPage">Answer page in color</span></label>
           <label class="field"><span data-w="titleField">Title · optional, on the answer page</span><input type="text" name="title" maxlength="40" autocomplete="off"></label>
-          <label class="field"><span data-w="wordsField">Words · optional, on the answer page</span><textarea name="words" maxlength="120" rows="2">{esc(d['message'])}</textarea></label>
+          <label class="field"><span data-w="wordsField">Words · optional, on the answer page</span><textarea name="words" maxlength="120" rows="2"></textarea></label>
         </form>
         <div class="acts">
           <button class="act primary" id="sheetPrint" type="button" data-w="print">Print</button>
@@ -259,6 +268,7 @@ def picture_page(d, prev, nxt):
     page = page.replace('<script src="/mystery/strings.js"></script>',
                         '<script src="/mystery/strings.js"></script>\n<script src="/mystery/engine.js"></script>\n'
                         + (f'<script type="application/json" id="faces">{json.dumps(FACES[d["id"]], separators=(",", ":"))}</script>\n' if d['id'] in FACES else '')
+                        + (f'<script type="application/json" id="picture-words">{json.dumps(OWN[d["id"]], ensure_ascii=False, separators=(",", ":")).replace("</", "<\\/")}</script>\n' if d['id'] in OWN else '')
                         + '<script src="/library/worksheet-words.js"></script>\n<script src="/library/worksheet.js"></script>', 1)
     open(out, 'w').write(page)
 

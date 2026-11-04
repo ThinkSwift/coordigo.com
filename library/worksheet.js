@@ -16,7 +16,8 @@
     : (window.CO_LIBRARY || []).find(i => i.id === page.dataset.picture);
   if (!item) return;
   const NUMBER = +page.dataset.number || 0, TITLE = page.dataset.title || '', TIER = (page.dataset.tier || '').toLowerCase();
-  const FACES = (() => { try { return JSON.parse(($('faces') || {}).textContent || 'null'); } catch (e) { return null; } })();
+  const json = id => { try { return JSON.parse(($(id) || {}).textContent || 'null'); } catch (e) { return null; } };
+  const FACES = json('faces'), OWN = json('picture-words') || {};   // OWN: {m: locale → message, t: locale → title}
 
   // MARK: Words — the app's, in the reader's language unless they pick another
   const WORDS = window.CO_WORKSHEET_WORDS || {};
@@ -35,6 +36,17 @@
   const say = (lang, key, ...args) => {
     let i = 0;
     return ((WORDS[lang] || {})[key] || (WORDS.en || {})[key] || '').replace(/%(?:(\d)\$)?@/g, (_, n) => String(args[n ? +n - 1 : i++]));
+  };
+  // The picture's own message and title in a language, as the app picks them (MysteryLibrary.pick): the reader's own
+  // region if it is that language, the language, its usual region, any region of it, then English
+  const USUAL = { en: 'en-US', es: 'es-ES', ar: 'ar-SA', de: 'de-DE', fr: 'fr-FR', nl: 'nl-NL' };
+  const pick = (byLocale, lang) => {
+    if (!byLocale) return '';
+    const own = (navigator.languages || []).find(t => t.split('-')[0] === lang.split('-')[0] && t.includes('-'));
+    const keys = Object.keys(byLocale).sort();
+    const tries = [own, lang, USUAL[lang], ...keys.filter(k => k.startsWith(lang + '-')), 'en-US', 'en'];
+    for (const t of tries) if (t && byLocale[t]) return byLocale[t];
+    return '';
   };
   // "#242 · Legendary", beside the brand (PrintOptions.label)
   const label = lang => NUMBER ? '#' + NUMBER + (TIER ? ' · ' + say(lang, TIER) : '') : '';
@@ -55,6 +67,12 @@
     title: form.elements.title.value.trim(), words: form.elements.words.value.trim(),
   });
   // The menu in the worksheet's language (the app's own words for its sheet and settings)
+  // The Words field starts as the picture's own message (the app's PrintOptions.for), in the worksheet's language, until
+  // the reader writes their own
+  function ownWords(lang) {
+    const w = form.elements.words;
+    if (w && !w.dataset.edited) w.value = pick(OWN.m, lang);
+  }
   function speak(lang) {
     for (const el of document.querySelectorAll('[data-w]')) el.textContent = say(lang, el.dataset.w);
     const ws = document.querySelector('.menu'); if (ws) { ws.lang = lang; ws.dir = RTL_LANG(lang) ? 'rtl' : 'ltr'; }
@@ -249,7 +267,7 @@
   function answerPage(S, pg, p, o) {
     const m = MARGIN, w = pg.w - 2 * m;
     S.rect(0, 0, pg.w, pg.h, '#ffffff');
-    const hb = header(S, TITLE || say(o.lang, 'yourPicture'), o.title, null, pg, o.lang);
+    const hb = header(S, pick(OWN.t, o.lang) || TITLE || say(o.lang, 'yourPicture'), o.title, null, pg, o.lang);
     const brandTop = pg.h - m - BRAND_H;
     brand(S, label(o.lang), brandTop, pg, o.lang);
     const bottom = brandTop - 24, side = Math.round(w * 0.56), words = o.words, textWidth = Math.round(w * 0.74), poem = serif(18);
@@ -281,6 +299,7 @@
   const pagesOf = (p, o) => [S => puzzlePage(S, PAPER[o.paper], p, o)].concat(o.answer ? [S => answerPage(S, PAPER[o.paper], p, o)] : []);
   let drawing = 0;
   async function preview() {
+    ownWords(form.elements.lang.value || readerLang);
     const box = $('sheetPreview'), o = options(), n = ++drawing;
     speak(o.lang);
     if (!box) return;
@@ -325,6 +344,7 @@
   let typing = 0;
   form.addEventListener('change', preview);
   form.elements.lang.addEventListener('change', preview);           // the language sits in the menu's head, outside the form
+  form.elements.words.addEventListener('input', e => { e.target.dataset.edited = '1'; });
   form.addEventListener('input', e => { if (e.target.type === 'text' || e.target.tagName === 'TEXTAREA') { clearTimeout(typing); typing = setTimeout(preview, 250); } });
   const solve = $('solveHere'), player = $('player');
   solve.addEventListener('click', () => {
