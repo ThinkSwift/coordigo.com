@@ -192,6 +192,7 @@ def body(inner):
 </main>
 {BAR}
 {I18N}
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{{"token": "644eea6fa19b4175b7160496dfbd77a8"}}'></script>
 </body>
 </html>
 '''
