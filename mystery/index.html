@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>A mystery picture — Coordigo</title>
 <!-- The picture travels in the fragment (#…), which never reaches a server: the preview card is fixed, and the page
-     reads the picture on the device. No tracking, no cookies. -->
+     reads the picture on the device. No cookies: the visit and App Store click counts send the path, never the fragment. -->
 <meta name="description" content="Someone drew you a picture as a code. Connect the dots to see what it is.">
 <meta name="robots" content="noindex">
 <meta name="theme-color" content="#f7f4ec" media="(prefers-color-scheme: light)">
@@ -581,6 +581,7 @@
   }
 })();
 </script>
+<script type="module" src="/trace/track.js"></script>
 <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "644eea6fa19b4175b7160496dfbd77a8"}'></script>
 </body>
 </html>
