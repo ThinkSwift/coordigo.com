@@ -26,12 +26,13 @@ FACES = json.load(open(sys.argv[3])) if len(sys.argv) > 3 else {}
 # each picture's own message and title in the app's 22 languages (Coordigo Sources/Resources/Mystery/messages.json), and
 # the titles the app translates in its catalog (Localizable.xcstrings): the answer page prints them in the worksheet's language
 OWN = json.load(open(sys.argv[4])) if len(sys.argv) > 4 else {}
-# the answer page's description under each message, in the site's 19 languages (tools/descriptions.json: id → language →
-# text; the English is written in coordigo-engine tools/cross_stitch/descriptions.json, founder 2026-11-06/07)
-DESC_PATH = os.path.join(ROOT, 'tools', 'descriptions.json')
-if os.path.exists(DESC_PATH):
-    for pid, by_lang in json.load(open(DESC_PATH)).items():
-        if not pid.startswith('_') and by_lang: OWN.setdefault(pid, {})['d'] = by_lang
+# the answer page's description under each message, in the app's 22 locales, from the one source the app imports too:
+# Coordigo rules/coord-16-v0 Docs/library-descriptions.json ({"pictures": [{"id", "descriptions": {locale: text}}]}),
+# given as the sixth argument (tools/library-sync.sh passes it); without it, whatever the app's messages.json carries as d
+# (founder 2026-11-07, RDM-co-library-descriptions-one-source: one source, never a copy per place)
+if len(sys.argv) > 6:
+    for e in json.load(open(sys.argv[6]))['pictures']:
+        if e.get('descriptions'): OWN.setdefault(e['id'], {})['d'] = e['descriptions']
 if len(sys.argv) > 5:
     cat = json.load(open(sys.argv[5]))['strings']
     for e in json.load(open(sys.argv[2])):

@@ -51,6 +51,14 @@ for k in range(0, len(ids), 20):
     chunk = ids[k:k + 20]
     res += run({'ids': ','.join(chunk), 'papers': 'letter,a4', 'langs': LANGS}, budget=120000)
     print(f'{min(k + 20, len(ids))}/{len(ids)}', file=sys.stderr)
+# A batch of 20 can run out of headless Chrome's time budget before its last pictures load ("no worksheet"); those are
+# checked again on their own, so a slow batch is never reported as a broken sheet (2026-11-07: 2-3 such per full run)
+slow = sorted({r['id'] for r in res if r.get('error') == 'no worksheet'})
+if slow:
+    res = [r for r in res if r['id'] not in slow]
+    for id in slow:
+        res += run({'ids': id, 'papers': 'letter,a4', 'langs': LANGS}, budget=120000)
+    print(f'rechecked alone: {len(slow)} ({", ".join(slow)})', file=sys.stderr)
 fails, notes, cases = [], {}, 0
 for r in res:
     cases += 1
