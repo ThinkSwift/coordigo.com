@@ -15,8 +15,6 @@ window.CO_WORKSHEET_WORDS = {
 "print": "طباعة",
 "rare": "نادر",
 "sharePDF": "مشاركة كملف PDF",
-"titleField": "العنوان · اختياري، في صفحة الإجابة",
-"wordsField": "الكلمات · اختيارية، في صفحة الإجابة",
 "worksheet": "ورقة عمل",
 "yourPicture": "صورتك"
 },
@@ -35,8 +33,6 @@ window.CO_WORKSHEET_WORDS = {
 "print": "Drucken",
 "rare": "Selten",
 "sharePDF": "Als PDF teilen",
-"titleField": "Titel · optional, auf der Lösungsseite",
-"wordsField": "Worte · optional, auf der Lösungsseite",
 "worksheet": "Arbeitsblatt",
 "yourPicture": "Dein Bild"
 },
@@ -55,8 +51,6 @@ window.CO_WORKSHEET_WORDS = {
 "print": "Print",
 "rare": "Rare",
 "sharePDF": "Share as PDF",
-"titleField": "Title · optional, on the answer page",
-"wordsField": "Words · optional, on the answer page",
 "worksheet": "Worksheet",
 "yourPicture": "Your picture"
 },
@@ -75,8 +69,6 @@ window.CO_WORKSHEET_WORDS = {
 "print": "Imprimir",
 "rare": "Raro",
 "sharePDF": "Compartir como PDF",
-"titleField": "Título · opcional, en la página de la solución",
-"wordsField": "Palabras · opcional, en la página de la solución",
 "worksheet": "Hoja de trabajo",
 "yourPicture": "Tu dibujo"
 },
@@ -95,8 +87,6 @@ window.CO_WORKSHEET_WORDS = {
 "print": "Imprimer",
 "rare": "Rare",
 "sharePDF": "Partager en PDF",
-"titleField": "Titre · facultatif, sur la page de réponse",
-"wordsField": "Mots · facultatifs, sur la page de réponse",
 "worksheet": "Fiche",
 "yourPicture": "Votre dessin"
 },
@@ -115,8 +105,6 @@ window.CO_WORKSHEET_WORDS = {
 "print": "प्रिंट",
 "rare": "दुर्लभ",
 "sharePDF": "PDF के रूप में शेयर करें",
-"titleField": "शीर्षक · वैकल्पिक, उत्तर वाले पन्ने पर",
-"wordsField": "शब्द · वैकल्पिक, उत्तर वाले पन्ने पर",
 "worksheet": "वर्कशीट",
 "yourPicture": "आपका चित्र"
 },
@@ -135,8 +123,6 @@ window.CO_WORKSHEET_WORDS = {
 "print": "Cetak",
 "rare": "Langka",
 "sharePDF": "Bagikan sebagai PDF",
-"titleField": "Judul · opsional, di halaman jawaban",
-"wordsField": "Kata-kata · opsional, di halaman jawaban",
 "worksheet": "Lembar kerja",
 "yourPicture": "Gambarmu"
 },
@@ -155,8 +141,6 @@ window.CO_WORKSHEET_WORDS = {
 "print": "Stampa",
 "rare": "Raro",
 "sharePDF": "Condividi come PDF",
-"titleField": "Titolo · facoltativo, sulla pagina della soluzione",
-"wordsField": "Parole · facoltative, sulla pagina della soluzione",
 "worksheet": "Scheda",
 "yourPicture": "Il tuo disegno"
 },
@@ -175,8 +159,6 @@ window.CO_WORKSHEET_WORDS = {
 "print": "印刷",
 "rare": "レア",
 "sharePDF": "PDFで共有",
-"titleField": "タイトル · 任意、答えのページに",
-"wordsField": "言葉 · 任意、答えのページに",
 "worksheet": "ワークシート",
 "yourPicture": "あなたの絵"
 },
@@ -195,8 +177,6 @@ window.CO_WORKSHEET_WORDS = {
 "print": "인쇄",
 "rare": "레어",
 "sharePDF": "PDF로 공유",
-"titleField": "제목 · 선택, 정답 페이지에",
-"wordsField": "글 · 선택, 정답 페이지에",
 "worksheet": "워크시트",
 "yourPicture": "내 그림"
 },
@@ -215,8 +195,6 @@ window.CO_WORKSHEET_WORDS = {
 "print": "Afdrukken",
 "rare": "Zeldzaam",
 "sharePDF": "Deel als pdf",
-"titleField": "Titel · optioneel, op de antwoordpagina",
-"wordsField": "Woorden · optioneel, op de antwoordpagina",
 "worksheet": "Werkblad",
 "yourPicture": "Jouw tekening"
 },
@@ -235,8 +213,6 @@ window.CO_WORKSHEET_WORDS = {
 "print": "Imprimir",
 "rare": "Raro",
 "sharePDF": "Compartilhar como PDF",
-"titleField": "Título · opcional, na página de resposta",
-"wordsField": "Palavras · opcional, na página de resposta",
 "worksheet": "Folha de atividade",
 "yourPicture": "Seu desenho"
 },
@@ -255,8 +231,6 @@ window.CO_WORKSHEET_WORDS = {
 "print": "Печать",
 "rare": "Редкий",
 "sharePDF": "Поделиться в PDF",
-"titleField": "Заголовок · необязательно, на странице с ответом",
-"wordsField": "Слова · необязательно, на странице с ответом",
 "worksheet": "Лист с заданием",
 "yourPicture": "Ваш рисунок"
 },
@@ -275,8 +249,6 @@ window.CO_WORKSHEET_WORDS = {
 "print": "Skriv ut",
 "rare": "Sällsynt",
 "sharePDF": "Dela som PDF",
-"titleField": "Rubrik · valfri, på svarssidan",
-"wordsField": "Ord · valfria, på svarssidan",
 "worksheet": "Arbetsblad",
 "yourPicture": "Din bild"
 },
@@ -295,8 +267,6 @@ window.CO_WORKSHEET_WORDS = {
 "print": "พิมพ์",
 "rare": "หายาก",
 "sharePDF": "แชร์เป็น PDF",
-"titleField": "ชื่อ · ไม่บังคับ อยู่ในหน้าคำตอบ",
-"wordsField": "ข้อความ · ไม่บังคับ อยู่ในหน้าคำตอบ",
 "worksheet": "ใบงาน",
 "yourPicture": "ภาพของคุณ"
 },
@@ -315,8 +285,6 @@ window.CO_WORKSHEET_WORDS = {
 "print": "Yazdır",
 "rare": "Nadir",
 "sharePDF": "PDF olarak paylaş",
-"titleField": "Başlık · isteğe bağlı, cevap sayfasında",
-"wordsField": "Sözler · isteğe bağlı, cevap sayfasında",
 "worksheet": "Çalışma kâğıdı",
 "yourPicture": "Resmin"
 },
@@ -335,8 +303,6 @@ window.CO_WORKSHEET_WORDS = {
 "print": "In",
 "rare": "Hiếm",
 "sharePDF": "Chia sẻ dạng PDF",
-"titleField": "Tiêu đề · không bắt buộc, ở trang đáp án",
-"wordsField": "Lời nhắn · không bắt buộc, ở trang đáp án",
 "worksheet": "Phiếu bài tập",
 "yourPicture": "Tranh của bạn"
 },
@@ -355,8 +321,6 @@ window.CO_WORKSHEET_WORDS = {
 "print": "打印",
 "rare": "稀有",
 "sharePDF": "以 PDF 分享",
-"titleField": "标题 · 可选，印在答案页",
-"wordsField": "留言 · 可选，印在答案页",
 "worksheet": "纸上谜题",
 "yourPicture": "你的图"
 },
@@ -375,8 +339,6 @@ window.CO_WORKSHEET_WORDS = {
 "print": "列印",
 "rare": "稀有",
 "sharePDF": "以 PDF 分享",
-"titleField": "標題 · 可選，印在答案頁",
-"wordsField": "留言 · 可選，印在答案頁",
 "worksheet": "紙上謎題",
 "yourPicture": "你的圖"
 }

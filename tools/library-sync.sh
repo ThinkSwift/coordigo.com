@@ -4,7 +4,7 @@
 # It exports <ref> clean (never the working tree), builds each picture's code with the app's own Swift (scripts/web-library.py),
 # reads them with the site's engine, takes the answer's colour faces from the app's code (tools/worksheet-ref.py) and the
 # worksheet's words from the app's catalog (tools/worksheet-words.py), and rewrites library/ (PNGs, pages, sitemap).
-# Then: tools/worksheet-parity.py, review, commit, push.
+# Then: tools/worksheet-check.py (every worksheet fits, both papers, several languages), review, commit, push.
 set -e
 REPO=${1:-$HOME/Projects/Coordigo}; REF=${2:?name the Coordigo ref, e.g. main}
 SITE=$(cd "$(dirname "$0")/.." && pwd); TMP=$(mktemp -d); trap 'rm -rf "$TMP"' EXIT

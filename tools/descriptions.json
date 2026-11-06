@@ -1,0 +1,117 @@
+{
+ "_doc": "The worksheet answer page's description under each picture's message, by site language (en ar de es fr hi id it ja ko nl pt-BR ru sv th tr vi zh-Hans zh-Hant). English is written in coordigo-engine tools/cross_stitch/descriptions.json; tools/library-pages.py embeds these into each page's picture-words as d.",
+ "founder-theFlyingMonkeys": {
+  "en": "Everyone keeps a few flying monkeys: the friends who turn up the moment someone gives you a hard time. You rarely have to send them. Keep pushing, though, and you'll hear wings; they're already circling, and they know the way."
+ },
+ "genre-witch-moon": {
+  "en": "Other people check the forecast for picnics. She checks it for broomsticks: wind light, clouds none, a moon thin enough not to give her away. Tonight the whole sky has cleared its schedule for her."
+ },
+ "founder-theDeadlyPoppyField": {
+  "en": "Some places are so lovely they quietly ask you to stop: not forever, only long enough to see the red run all the way to the sky. The road will keep. Close your eyes for a minute."
+ },
+ "founder-theLandOfOz": {
+  "en": "Roads are more patient than people. This one has lain in the sun for years and will still be there after you stop to watch the clouds. Go when you're ready; it already knows you're coming."
+ },
+ "genre-basketball": {
+  "en": "The whole gym stops breathing at once. Somebody had to want the ball, and it was you. Whatever the net decides, you'll be the one who took it, and that is the part people remember."
+ },
+ "founder-theGreatOz": {
+  "en": "Courage rarely feels like courage from the inside. It feels like a shaking hand you decide to hold still anyway. That decision is the whole trick, and you've made it before."
+ },
+ "founder-theRescue": {
+  "en": "In the original story the shoes were silver, and three knocks of the heels could take you anywhere. Dorothy only ever asked for home. Wish for something that plain and true, and it will find you quickly."
+ },
+ "genre-knights-duel": {
+  "en": "Neither will give an inch, and neither has the faintest idea how to stop. Somewhere a squire is quietly unpacking lunch. The bards are going to need a much longer song."
+ },
+ "genre-cupcake": {
+  "en": "Small wins slip by unmarked, as if only the big ones deserve a candle. They don't. Today you did something that was hard for you, and that is reason enough for frosting."
+ },
+ "genre-mittens": {
+  "en": "A mitten on its own is no use, and it seems to know it. It stays in the pocket, by the door, at the bottom of the drawer, keeping its shape for a hand that might come back. That is what waiting looks like."
+ },
+ "genre-hammer": {
+  "en": "Every carpenter learns this exactly once, usually with a word they won't repeat at dinner. Keep your eye on what you mean to hit, not on what you're afraid of hitting. Your thumb will thank you."
+ },
+ "genre-flip-flops": {
+  "en": "Your auto-reply promises you'll respond on your return. It doesn't say how soon you mean to return. Out here the only schedule is the tide, and it has never once asked for an update."
+ },
+ "genre-cherries": {
+  "en": "One cherry is just a cherry. Two on the same stem is a promise: whoever reaches for one gets both. Some things were never meant to be picked apart."
+ },
+ "genre-anchor": {
+  "en": "A ship is built to leave. Then one day the anchor goes over, the chain runs out, and it chooses this harbour over every other. Some places are worth giving up the horizon for."
+ },
+ "founder-penghy": {
+  "en": "Penguins don't stride. They shuffle, a few inches at a time, and still cross miles of ice. Nobody gives prizes for the size of the step, only for not turning back."
+ },
+ "founder-theTinWoodman": {
+  "en": "The Tin Woodman asked the whole way for a heart, then cried so often over small things that he rusted. Nobody with an empty chest weeps for a beetle. What you think you lack may only be something you haven't used in a while."
+ },
+ "genre-fishing": {
+  "en": "On paper it is a terrible trade. Anyone who has fished knows the fish was never the point: the afternoon was the catch, and the fish was just the receipt."
+ },
+ "genre-yarn-and-needles": {
+  "en": "Every ball of yarn is a promise wound up tight: a winter, a neck, someone you love on a cold morning. All it needs is a few thousand stitches and a little patience. The future is already in your hands."
+ },
+ "founder-theScarecrow": {
+  "en": "The Scarecrow walked all the way to the Emerald City for a brain, and came up with every good plan along the road. The gift at the end only told him what his friends already knew. Trust the straw a little more."
+ },
+ "genre-clock": {
+  "en": "By day the house keeps its secrets well. Then both hands point straight up, the last light goes off, and every one of them sits up and listens. Whatever you whisper now, the house will remember."
+ },
+ "genre-polar-bear": {
+  "en": "To a polar bear, a little chilly means perfect. To everyone else on the ice it means a long, brave count to three. Either way, the first one in always says the water's lovely."
+ },
+ "genre-trophy": {
+  "en": "Trophies always weigh more than people expect. Packed inside are the early mornings, the losses that came first, the people who kept showing up for you. Lift it high; you've earned every ounce."
+ },
+ "genre-skateboard": {
+  "en": "Same cracks, same curbs, same hill everyone trudged up without a second look. Then four small wheels turned the whole street into somewhere to play. The sidewalk never changed; you found a new way to see it."
+ },
+ "genre-scissors": {
+  "en": "On its own, one blade only pushes the paper around. Join two at a single small point and they cut a clean line through almost anything. The best partners work the same way: opposite sides, one centre."
+ },
+ "genre-letter": {
+  "en": "Somebody chose these words, folded them, pressed a heart on the flap and trusted them to find the right hands. Of everyone in the world, they found yours. That is the whole magic of a letter."
+ },
+ "genre-scarf": {
+  "en": "A shop scarf is even all the way down. This one wobbles where someone lost count and tightens where they worried they'd finish late. Every mistake in it is proof somebody was thinking of you."
+ },
+ "genre-gingerbread": {
+  "en": "He spent the whole story shouting that nobody could catch him, and outran an old woman, an old man, a cow and a horse. Then you came along with a pencil and a little patience. Some races go to the sweet-toothed."
+ },
+ "duck": {
+  "en": "Nobody on the bank can see the feet. They see something gliding along as if the water did all the work. Only you and the duck know how hard those feet are going."
+ },
+ "genre-donut": {
+  "en": "And a warm one on a grey morning comes surprisingly close. The philosophers can go on arguing about happiness. The rest of us will be over here, sugar on our fingers, not arguing at all."
+ },
+ "genre-carrot": {
+  "en": "Some people say I love you with flowers; others push the vegetables across the table and wait. This is the second kind. Finish your carrots, because somebody wants you around for a very long time."
+ },
+ "founder-dorothy": {
+  "en": "Her hair is pulled back into one long braid, tied off and ready. Her eyes are already looking past you, at whatever comes next. You can tell she made up her mind before breakfast."
+ },
+ "game-ufo": {
+  "en": "A saucer hangs over the city with its windows lit and a wide yellow beam reaching down between the buildings. It came a very long way just to say hello. The lights across the street are still on, so somebody saw it."
+ },
+ "genre-lighthouse": {
+  "en": "The red and white tower stands at the edge of the land, its beam reaching far into the dark. Somewhere out there a ship turns toward it. That is all a light has to do."
+ },
+ "genre-snowman": {
+  "en": "A top hat, a carrot nose and a red scarf against the cold. By spring he will be gone, and he knows it. He smiles anyway."
+ },
+ "genre-ghost": {
+  "en": "Under the moon, a small white ghost drifts by with its mouth wide open. It is not here to scare anyone. It only wanted to see how you were doing."
+ },
+ "genre-black-cat": {
+  "en": "Up on the brick wall, back arched and tail high, one yellow eye fixed on you. All that effort for a single jump scare. Cats have time to spare."
+ },
+ "genre-owl": {
+  "en": "Two big yellow eyes, wide awake while the rest of the house sleeps. The owl was made for the dark. You, on the other hand, have a morning coming."
+ },
+ "genre-mushrooms": {
+  "en": "Mushrooms grow where no one is watching, in the shade and through the night. For a long while there is nothing to see. Then one morning, there they are."
+ }
+}

@@ -26,6 +26,12 @@ FACES = json.load(open(sys.argv[3])) if len(sys.argv) > 3 else {}
 # each picture's own message and title in the app's 22 languages (Coordigo Sources/Resources/Mystery/messages.json), and
 # the titles the app translates in its catalog (Localizable.xcstrings): the answer page prints them in the worksheet's language
 OWN = json.load(open(sys.argv[4])) if len(sys.argv) > 4 else {}
+# the answer page's description under each message, in the site's 19 languages (tools/descriptions.json: id → language →
+# text; the English is written in coordigo-engine tools/cross_stitch/descriptions.json, founder 2026-11-06/07)
+DESC_PATH = os.path.join(ROOT, 'tools', 'descriptions.json')
+if os.path.exists(DESC_PATH):
+    for pid, by_lang in json.load(open(DESC_PATH)).items():
+        if not pid.startswith('_') and by_lang: OWN.setdefault(pid, {})['d'] = by_lang
 if len(sys.argv) > 5:
     cat = json.load(open(sys.argv[5]))['strings']
     for e in json.load(open(sys.argv[2])):
@@ -84,7 +90,7 @@ def render(d, size=600, pad=30):
 
 import shutil
 for name in os.listdir(os.path.join(ROOT, 'library')):
-    if name not in ('worksheet.js', 'worksheet-words.js', 'printmark.png'):
+    if name not in ('worksheet.js', 'worksheet-words.js', 'worksheet-site-words.js', 'printmark.png'):
         q = os.path.join(ROOT, 'library', name); shutil.rmtree(q) if os.path.isdir(q) else os.remove(q)
 os.makedirs(os.path.join(ROOT, 'library/img'), exist_ok=True)
 for d in data:
@@ -131,6 +137,8 @@ CSS = '''
   .menu .field{display:grid;gap:5px;font:13px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--muted);margin:0 0 12px}
   .menu .field input,.menu .field textarea{font:15px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--ink);background:var(--paper);
     border:1px solid var(--line);border-radius:10px;padding:8px 10px;resize:vertical;width:100%;box-sizing:border-box}
+  .menu .field.names{grid-template-columns:1fr 1fr;gap:8px;margin-top:-4px}
+  .menu .field.names[hidden]{display:none}
   .acts.quiet{margin-top:8px}
   .acts.quiet .act{border-color:var(--line);font-weight:500}
   .sheets{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:20px;margin:24px 0 0}
@@ -244,8 +252,10 @@ def picture_page(d, prev, nxt):
             <div class="seg"><label><input type="radio" name="paper" value="letter"> <span data-w="letter">Letter</span></label><label><input type="radio" name="paper" value="a4"> <span data-w="a4">A4</span></label></div>
           </fieldset>
           <label class="check"><input type="checkbox" name="answer" checked> <span data-w="answerPage">Answer page in color</span></label>
-          <label class="field"><span data-w="titleField">Title · optional, on the answer page</span><input type="text" name="title" maxlength="40" autocomplete="off"></label>
-          <label class="field"><span data-w="wordsField">Words · optional, on the answer page</span><textarea name="words" maxlength="120" rows="2"></textarea></label>
+          <label class="check"><input type="checkbox" name="fields"> <span data-ws="lines">Name and class lines</span></label>
+          <div class="field names" id="fieldNames" hidden><input type="text" name="label1" maxlength="18" autocomplete="off" aria-label="1"><input type="text" name="label2" maxlength="18" autocomplete="off" aria-label="2"></div>
+          <label class="field"><span data-ws="titleField">Title · optional, on the answer page</span><input type="text" name="title" maxlength="40" autocomplete="off"></label>
+          <label class="field"><span data-ws="wordsField">Words · optional, on the answer page</span><textarea name="words" maxlength="120" rows="2"></textarea></label>
         </form>
         <div class="acts">
           <button class="act primary" id="sheetPrint" type="button" data-w="print">Print</button>
@@ -271,7 +281,9 @@ def picture_page(d, prev, nxt):
                         '<script src="/mystery/strings.js"></script>\n<script src="/mystery/engine.js"></script>\n'
                         + (f'<script type="application/json" id="faces">{json.dumps(FACES[d["id"]], separators=(",", ":"))}</script>\n' if d['id'] in FACES else '')
                         + (f'<script type="application/json" id="picture-words">{json.dumps(OWN[d["id"]], ensure_ascii=False, separators=(",", ":")).replace("</", "<\\/")}</script>\n' if d['id'] in OWN else '')
-                        + '<script src="/library/worksheet-words.js"></script>\n<script src="/library/worksheet.js"></script>', 1)
+                        + '<script src="/library/worksheet-words.js"></script>\n<script src="/library/worksheet-site-words.js"></script>\n<script src="/library/worksheet.js"></script>', 1)
+    # the worksheet's typefaces (Latin; other scripts use the reader's own fonts)
+    page = page.replace('</head>', '<link href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Karla:wght@400;700&family=JetBrains+Mono:wght@500;600&family=Silkscreen&display=swap" rel="stylesheet">\n</head>', 1)
     open(out, 'w').write(page)
 
 for k in range(1, pages + 1): grid_page(k)

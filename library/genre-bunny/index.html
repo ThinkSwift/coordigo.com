@@ -8,6 +8,11 @@
 <meta name="theme-color" content="#f7f4ec" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#15161c" media="(prefers-color-scheme: dark)">
 <link rel="canonical" href="https://coordigo.com/library/genre-bunny/">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[
+{"@type":"WebSite","@id":"https://coordigo.com/#site","name":"Coordigo","alternateName":"Coordigo: Mystery Pictures","url":"https://coordigo.com/","publisher":{"@id":"https://swiftian.com/#org"}},
+{"@type":"SoftwareApplication","name":"Coordigo","alternateName":"Coordigo: Mystery Pictures","url":"https://coordigo.com/","image":"https://coordigo.com/apple-touch-icon.png","operatingSystem":"iOS, iPadOS, macOS","applicationCategory":"GameApplication","description":"A picture stays a secret until someone connects the dots. Solve a 16 × 16 mystery picture, then draw your own and send it to a friend as a code.","author":{"@id":"https://swiftian.com/#org"}},
+{"@type":"Organization","@id":"https://swiftian.com/#org","name":"Swiftian Inc.","url":"https://swiftian.com/","logo":"https://swiftian.com/apple-touch-icon.png","sameAs":["https://pythoneer.io/","https://spriteer.com/","https://iflipbook.com/","https://coordigo.com/"]}
+]}</script>
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Coordigo">
 <meta property="og:url" content="https://coordigo.com/library/genre-bunny/">
@@ -127,14 +132,24 @@
   @media (max-width:600px){ .tab{min-width:0;flex:1;padding:10px 6px 9px} .tabs{flex:1} .site{flex:1;width:auto} }
 
   /* landing: a small film beside the words, then the puzzle as the page's main */
-  .intro{display:grid;grid-template-columns:1fr 300px;gap:28px;align-items:center;padding:26px 0 6px}
+  /* the puzzle first, then the intro with How it works folded behind one line (founder 2026-11-05) */
+  .intro{display:grid;grid-template-columns:1fr 300px;gap:28px;align-items:center;padding:34px 0 6px}
+  .howto{margin:14px 0 0}
+  .howto summary{display:inline-flex;align-items:center;gap:8px;cursor:pointer;list-style:none;font:600 14px/1.2 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    color:var(--ink);border:1px solid var(--line);border-radius:999px;padding:8px 14px}
+  .howto summary::-webkit-details-marker{display:none}
+  .howto summary::after{content:"";width:7px;height:7px;border-right:1.6px solid currentColor;border-bottom:1.6px solid currentColor;transform:rotate(45deg) translateY(-2px);transition:transform .15s}
+  .howto[open] summary::after{transform:rotate(-135deg) translateY(-1px)}
+  .howto .how{list-style:none;margin:12px 0 0;padding:0;display:grid;gap:8px;grid-template-columns:1fr}
+  .howto .how li{display:flex;gap:10px;align-items:baseline;background:var(--mat);border:1px solid var(--hair);border-radius:12px;padding:10px 14px}
+  .howto .how b{flex:0 0 auto;margin:0}
   .intro .film{margin:0;border-radius:14px;overflow:hidden;box-shadow:var(--shadow);background:#fff}
   .intro .film video{border-radius:0}
   .bigplay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;border:0;background:rgba(27,25,23,.12);cursor:pointer}
   .bigplay span{width:64px;height:64px;border-radius:50%;background:rgba(27,25,23,.72);display:grid;place-items:center}
   .bigplay svg{width:26px;height:26px;margin-left:4px;fill:#fff}
   .bigplay[hidden]{display:none}
-  .puzzle{margin:22px 0 0;background:var(--mat);border:1px solid var(--hair);border-radius:16px;box-shadow:var(--shadow);padding:12px 6px 4px}
+  .puzzle{margin:18px 0 0;background:var(--mat);border:1px solid var(--hair);border-radius:16px;box-shadow:var(--shadow);padding:12px 6px 4px}
   .puzzle .head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:2px 12px 0}
   .puzzle iframe{display:block;width:100%;height:640px;border:0;background:transparent}
   .another{font:600 14px/1.2 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;cursor:pointer;border:1px solid var(--ink);border-radius:999px;padding:8px 16px;background:none;color:var(--ink)}
@@ -184,6 +199,8 @@
   .menu .field{display:grid;gap:5px;font:13px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--muted);margin:0 0 12px}
   .menu .field input,.menu .field textarea{font:15px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--ink);background:var(--paper);
     border:1px solid var(--line);border-radius:10px;padding:8px 10px;resize:vertical;width:100%;box-sizing:border-box}
+  .menu .field.names{grid-template-columns:1fr 1fr;gap:8px;margin-top:-4px}
+  .menu .field.names[hidden]{display:none}
   .acts.quiet{margin-top:8px}
   .acts.quiet .act{border-color:var(--line);font-weight:500}
   .sheets{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:20px;margin:24px 0 0}
@@ -199,14 +216,7 @@
   .pn a{color:var(--ink)}
   @media (max-width:760px){ .pic-grid{grid-template-columns:1fr} .pic-grid figure{width:100%;max-width:420px;margin:0 auto} }
 </style>
-<style id="site-hints">
-  /* site buttons: own icon, name, then what is there (founder 2026-11-04, RDM-sites-button-hints) */
-  .sites .site{width:300px;max-width:100%}
-  .site .hints{margin-left:auto;display:flex;gap:4px;padding-left:12px}
-  .site .hints img{display:block;width:32px;height:32px;border-radius:6px}
-  .site .hints img.px{image-rendering:pixelated;border-radius:0}
-  @media (max-width:640px){ .sites .site{width:100%;flex:1 1 100%} }
-</style>
+<link href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Karla:wght@400;700&family=JetBrains+Mono:wght@500;600&family=Silkscreen&display=swap" rel="stylesheet">
 </head>
 <body>
 <main>
@@ -228,8 +238,10 @@
             <div class="seg"><label><input type="radio" name="paper" value="letter"> <span data-w="letter">Letter</span></label><label><input type="radio" name="paper" value="a4"> <span data-w="a4">A4</span></label></div>
           </fieldset>
           <label class="check"><input type="checkbox" name="answer" checked> <span data-w="answerPage">Answer page in color</span></label>
-          <label class="field"><span data-w="titleField">Title · optional, on the answer page</span><input type="text" name="title" maxlength="40" autocomplete="off"></label>
-          <label class="field"><span data-w="wordsField">Words · optional, on the answer page</span><textarea name="words" maxlength="120" rows="2"></textarea></label>
+          <label class="check"><input type="checkbox" name="fields"> <span data-ws="lines">Name and class lines</span></label>
+          <div class="field names" id="fieldNames" hidden><input type="text" name="label1" maxlength="18" autocomplete="off" aria-label="1"><input type="text" name="label2" maxlength="18" autocomplete="off" aria-label="2"></div>
+          <label class="field"><span data-ws="titleField">Title · optional, on the answer page</span><input type="text" name="title" maxlength="40" autocomplete="off"></label>
+          <label class="field"><span data-ws="wordsField">Words · optional, on the answer page</span><textarea name="words" maxlength="120" rows="2"></textarea></label>
         </form>
         <div class="acts">
           <button class="act primary" id="sheetPrint" type="button" data-w="print">Print</button>
@@ -256,9 +268,10 @@
 <script src="/store.js"></script>
 <script src="/mystery/strings.js"></script>
 <script src="/mystery/engine.js"></script>
-<script type="application/json" id="faces">[["#33c759",[[[3,11],[4,11],[4,12],[3,13],[4,13],[5,13],[6,13],[7,13],[7,12],[7,11],[8,12],[8,13],[9,13],[10,13],[11,13],[12,13],[13,12],[14,11],[15,11],[15,15],[0,15],[0,11],[1,11],[2,11]]]],["#c9f5ff",[[[4,11],[3,11],[2,11],[1,11],[0,11],[0,0],[15,0],[15,11],[14,11],[14,10],[13,9],[12,7],[10,6],[9,5],[11,2],[10,1],[9,1],[8,2],[7,1],[6,1],[5,2],[5,3],[5,4],[3,5],[2,6],[2,7],[3,8],[4,10]]]],["#a37045",[[[10,6],[12,7],[13,9],[12,10],[11,9],[9,10],[8,12],[7,11],[6,11],[6,12],[6,13],[5,13],[4,13],[3,13],[4,12],[4,11],[4,10],[3,8],[2,7],[3,7],[2,7],[2,6],[3,5],[5,4],[6,4],[7,4],[8,5],[9,5]]]],["#ffc482",[[[6,2],[7,1],[8,2],[7,4],[6,4],[6,3]]]],["#a37045",[[[7,1],[6,2],[6,3],[6,4],[5,4],[5,3],[5,2],[6,1]]]],["#a37045",[[[9,10],[11,9],[12,10],[12,11],[13,12],[12,13],[11,13],[10,13],[9,13],[8,13],[8,12]]]],["#ffffff",[[[14,10],[14,11],[13,12],[12,11],[12,10],[13,9]]]],["#a37045",[[[6,13],[6,12],[6,11],[7,11],[7,12],[7,13]]]],["#a37045",[[[9,1],[10,1],[11,2],[9,5],[8,5],[7,4],[8,2]]]]]</script>
+<script type="application/json" id="faces">[["#a37045",[[[12,10],[12,11],[13,12],[12,13],[11,13],[10,13],[9,13],[8,13],[8,12],[9,10],[11,9]]]],["#ffffff",[[[12,11],[12,10],[13,9],[14,10],[14,11],[13,12]]]],["#a37045",[[[9,1],[10,1],[11,2],[9,5],[8,5],[7,4],[8,2]]]],["#c9f5ff",[[[10,1],[9,1],[8,2],[7,1],[6,1],[5,2],[5,3],[5,4],[3,5],[2,6],[2,7],[3,8],[4,10],[4,11],[3,11],[2,11],[1,11],[0,11],[0,0],[15,0],[15,11],[14,11],[14,10],[13,9],[12,7],[10,6],[9,5],[11,2]]]],["#a37045",[[[2,7],[3,7],[2,7],[2,6],[3,5],[5,4],[6,4],[7,4],[8,5],[9,5],[10,6],[12,7],[13,9],[12,10],[11,9],[9,10],[8,12],[7,11],[6,11],[6,12],[6,13],[5,13],[4,13],[3,13],[4,12],[4,11],[4,10],[3,8]]]],["#ffc482",[[[8,2],[7,4],[6,4],[6,3],[6,2],[7,1]]]],["#a37045",[[[6,13],[6,12],[6,11],[7,11],[7,12],[7,13]]]],["#33c759",[[[10,13],[11,13],[12,13],[13,12],[14,11],[15,11],[15,15],[0,15],[0,11],[1,11],[2,11],[3,11],[4,11],[4,12],[3,13],[4,13],[5,13],[6,13],[7,13],[7,12],[7,11],[8,12],[8,13],[9,13]]]],["#a37045",[[[5,4],[5,3],[5,2],[6,1],[7,1],[6,2],[6,3],[6,4]]]]]</script>
 <script type="application/json" id="picture-words">{"m":{"ar-SA":"الأذنان منتصبتان. أحدهم قال جزر.","de-DE":"Ohren hoch. Jemand hat Karotte gesagt.","en-AU":"Ears up. Someone just said carrot.","en-GB":"Ears up. Someone just said carrot.","en-US":"Ears up. Someone just said carrot.","es-ES":"Orejas arriba. Alguien ha dicho zanahoria.","es-MX":"Orejas arriba. Alguien dijo zanahoria.","fr-FR":"Oreilles dressées. Quelqu'un a dit carotte.","hi":"कान खड़े। किसी ने अभी गाजर कहा?","id":"Telinga tegak. Ada yang bilang wortel.","it":"Orecchie dritte. Qualcuno ha detto carota.","ja":"耳がピン。誰かが「にんじん」って言った。","ko":"귀가 쫑긋. 누가 방금 당근이라고 했죠.","nl-NL":"Oren omhoog. Iemand zei wortel.","pt-BR":"Orelhas em pé. Alguém falou cenoura.","ru":"Ушки на макушке. Кто-то сказал «морковка».","sv":"Öronen upp. Någon sa morot.","th":"หูตั้งเลย มีใครพูดว่าแครอทเหรอ","tr":"Kulaklar dikildi. Biri havuç mu dedi?","vi":"Tai dựng đứng. Ai vừa nói cà rốt à?","zh-Hans":"耳朵竖起来——有人说了“胡萝卜”。","zh-Hant":"耳朵豎起來——有人說了「紅蘿蔔」。"}}</script>
 <script src="/library/worksheet-words.js"></script>
+<script src="/library/worksheet-site-words.js"></script>
 <script src="/library/worksheet.js"></script>
 <script>
   (function () {   // the site's words in the reader's language, and the App Store bar on Apple devices once Coordigo 6.2 is in the store

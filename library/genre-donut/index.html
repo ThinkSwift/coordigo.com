@@ -8,6 +8,11 @@
 <meta name="theme-color" content="#f7f4ec" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#15161c" media="(prefers-color-scheme: dark)">
 <link rel="canonical" href="https://coordigo.com/library/genre-donut/">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[
+{"@type":"WebSite","@id":"https://coordigo.com/#site","name":"Coordigo","alternateName":"Coordigo: Mystery Pictures","url":"https://coordigo.com/","publisher":{"@id":"https://swiftian.com/#org"}},
+{"@type":"SoftwareApplication","name":"Coordigo","alternateName":"Coordigo: Mystery Pictures","url":"https://coordigo.com/","image":"https://coordigo.com/apple-touch-icon.png","operatingSystem":"iOS, iPadOS, macOS","applicationCategory":"GameApplication","description":"A picture stays a secret until someone connects the dots. Solve a 16 × 16 mystery picture, then draw your own and send it to a friend as a code.","author":{"@id":"https://swiftian.com/#org"}},
+{"@type":"Organization","@id":"https://swiftian.com/#org","name":"Swiftian Inc.","url":"https://swiftian.com/","logo":"https://swiftian.com/apple-touch-icon.png","sameAs":["https://pythoneer.io/","https://spriteer.com/","https://iflipbook.com/","https://coordigo.com/"]}
+]}</script>
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Coordigo">
 <meta property="og:url" content="https://coordigo.com/library/genre-donut/">
@@ -127,14 +132,24 @@
   @media (max-width:600px){ .tab{min-width:0;flex:1;padding:10px 6px 9px} .tabs{flex:1} .site{flex:1;width:auto} }
 
   /* landing: a small film beside the words, then the puzzle as the page's main */
-  .intro{display:grid;grid-template-columns:1fr 300px;gap:28px;align-items:center;padding:26px 0 6px}
+  /* the puzzle first, then the intro with How it works folded behind one line (founder 2026-11-05) */
+  .intro{display:grid;grid-template-columns:1fr 300px;gap:28px;align-items:center;padding:34px 0 6px}
+  .howto{margin:14px 0 0}
+  .howto summary{display:inline-flex;align-items:center;gap:8px;cursor:pointer;list-style:none;font:600 14px/1.2 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    color:var(--ink);border:1px solid var(--line);border-radius:999px;padding:8px 14px}
+  .howto summary::-webkit-details-marker{display:none}
+  .howto summary::after{content:"";width:7px;height:7px;border-right:1.6px solid currentColor;border-bottom:1.6px solid currentColor;transform:rotate(45deg) translateY(-2px);transition:transform .15s}
+  .howto[open] summary::after{transform:rotate(-135deg) translateY(-1px)}
+  .howto .how{list-style:none;margin:12px 0 0;padding:0;display:grid;gap:8px;grid-template-columns:1fr}
+  .howto .how li{display:flex;gap:10px;align-items:baseline;background:var(--mat);border:1px solid var(--hair);border-radius:12px;padding:10px 14px}
+  .howto .how b{flex:0 0 auto;margin:0}
   .intro .film{margin:0;border-radius:14px;overflow:hidden;box-shadow:var(--shadow);background:#fff}
   .intro .film video{border-radius:0}
   .bigplay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;border:0;background:rgba(27,25,23,.12);cursor:pointer}
   .bigplay span{width:64px;height:64px;border-radius:50%;background:rgba(27,25,23,.72);display:grid;place-items:center}
   .bigplay svg{width:26px;height:26px;margin-left:4px;fill:#fff}
   .bigplay[hidden]{display:none}
-  .puzzle{margin:22px 0 0;background:var(--mat);border:1px solid var(--hair);border-radius:16px;box-shadow:var(--shadow);padding:12px 6px 4px}
+  .puzzle{margin:18px 0 0;background:var(--mat);border:1px solid var(--hair);border-radius:16px;box-shadow:var(--shadow);padding:12px 6px 4px}
   .puzzle .head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:2px 12px 0}
   .puzzle iframe{display:block;width:100%;height:640px;border:0;background:transparent}
   .another{font:600 14px/1.2 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;cursor:pointer;border:1px solid var(--ink);border-radius:999px;padding:8px 16px;background:none;color:var(--ink)}
@@ -184,6 +199,8 @@
   .menu .field{display:grid;gap:5px;font:13px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--muted);margin:0 0 12px}
   .menu .field input,.menu .field textarea{font:15px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--ink);background:var(--paper);
     border:1px solid var(--line);border-radius:10px;padding:8px 10px;resize:vertical;width:100%;box-sizing:border-box}
+  .menu .field.names{grid-template-columns:1fr 1fr;gap:8px;margin-top:-4px}
+  .menu .field.names[hidden]{display:none}
   .acts.quiet{margin-top:8px}
   .acts.quiet .act{border-color:var(--line);font-weight:500}
   .sheets{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:20px;margin:24px 0 0}
@@ -199,14 +216,7 @@
   .pn a{color:var(--ink)}
   @media (max-width:760px){ .pic-grid{grid-template-columns:1fr} .pic-grid figure{width:100%;max-width:420px;margin:0 auto} }
 </style>
-<style id="site-hints">
-  /* site buttons: own icon, name, then what is there (founder 2026-11-04, RDM-sites-button-hints) */
-  .sites .site{width:300px;max-width:100%}
-  .site .hints{margin-left:auto;display:flex;gap:4px;padding-left:12px}
-  .site .hints img{display:block;width:32px;height:32px;border-radius:6px}
-  .site .hints img.px{image-rendering:pixelated;border-radius:0}
-  @media (max-width:640px){ .sites .site{width:100%;flex:1 1 100%} }
-</style>
+<link href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Karla:wght@400;700&family=JetBrains+Mono:wght@500;600&family=Silkscreen&display=swap" rel="stylesheet">
 </head>
 <body>
 <main>
@@ -228,8 +238,10 @@
             <div class="seg"><label><input type="radio" name="paper" value="letter"> <span data-w="letter">Letter</span></label><label><input type="radio" name="paper" value="a4"> <span data-w="a4">A4</span></label></div>
           </fieldset>
           <label class="check"><input type="checkbox" name="answer" checked> <span data-w="answerPage">Answer page in color</span></label>
-          <label class="field"><span data-w="titleField">Title · optional, on the answer page</span><input type="text" name="title" maxlength="40" autocomplete="off"></label>
-          <label class="field"><span data-w="wordsField">Words · optional, on the answer page</span><textarea name="words" maxlength="120" rows="2"></textarea></label>
+          <label class="check"><input type="checkbox" name="fields"> <span data-ws="lines">Name and class lines</span></label>
+          <div class="field names" id="fieldNames" hidden><input type="text" name="label1" maxlength="18" autocomplete="off" aria-label="1"><input type="text" name="label2" maxlength="18" autocomplete="off" aria-label="2"></div>
+          <label class="field"><span data-ws="titleField">Title · optional, on the answer page</span><input type="text" name="title" maxlength="40" autocomplete="off"></label>
+          <label class="field"><span data-ws="wordsField">Words · optional, on the answer page</span><textarea name="words" maxlength="120" rows="2"></textarea></label>
         </form>
         <div class="acts">
           <button class="act primary" id="sheetPrint" type="button" data-w="print">Print</button>
@@ -256,9 +268,10 @@
 <script src="/store.js"></script>
 <script src="/mystery/strings.js"></script>
 <script src="/mystery/engine.js"></script>
-<script type="application/json" id="faces">[["#a37045",[[[8,3],[11,4],[12,6],[13,8],[12,10],[11,12],[8,13],[6,12],[4,11],[3,8],[4,6],[5,4]],[[10,9],[10,8],[10,7],[9,6],[8,6],[7,6],[6,7],[6,8],[6,9],[7,10],[8,10],[9,10]],[[7,5],[8,5],[9,4]],[[5,7],[4,9],[5,8]],[[11,7],[12,8],[11,6]],[[7,11],[6,11],[8,12]],[[10,10],[10,11],[11,9]]]],["#c9f5ff",[[[10,8],[10,9],[9,10],[8,10],[7,10],[6,9],[6,8],[6,7],[7,6],[8,6],[9,6],[10,7]]]],["#ff9400",[[[8,2],[11,3],[12,4],[13,5],[14,8],[13,11],[12,12],[11,13],[8,14],[5,13],[4,12],[3,11],[2,8],[3,5],[4,4],[5,3]],[[11,4],[8,3],[5,4],[4,6],[3,8],[4,11],[6,12],[8,13],[11,12],[12,10],[13,8],[12,6]]]],["#ff3b30",[[[8,5],[7,5],[9,4]]]],["#bf59f2",[[[4,9],[5,7],[5,8]]]],["#ffd60a",[[[12,8],[11,7],[11,6]]]],["#33c759",[[[6,11],[7,11],[8,12]]]],["#007aff",[[[10,11],[10,10],[11,9]]]],["#c9f5ff",[[[0,0],[15,0],[15,15],[0,15]],[[11,3],[8,2],[5,3],[4,4],[3,5],[2,8],[3,11],[4,12],[5,13],[8,14],[11,13],[12,12],[13,11],[14,8],[13,5],[12,4]]]]]</script>
-<script type="application/json" id="picture-words">{"m":{"ar-SA":"المال لا يشتري السعادة، لكنه يشتري الدونات. 😉","de-DE":"Glück kann man nicht kaufen. Donuts schon. 😉","en-AU":"Money can't buy happiness. It can buy donuts, though. 😉","en-GB":"Money can't buy happiness. It can buy donuts, though. 😉","en-US":"Money can't buy happiness. It can buy donuts, though. 😉","es-ES":"El dinero no da la felicidad, pero compra rosquillas. 😉","es-MX":"El dinero no compra la felicidad, pero sí donas. 😉","fr-FR":"L'argent ne fait pas le bonheur. Mais il paie les donuts. 😉","hi":"पैसों से खुशी नहीं ख़रीदी जा सकती, पर डोनट ज़रूर। 😉","id":"Uang tak bisa beli kebahagiaan. Tapi bisa beli donat. 😉","it":"I soldi non fanno la felicità. Però comprano le ciambelle. 😉","ja":"お金で幸せは買えない。でもドーナツは買える。😉","ko":"행복은 못 사도, 도넛은 살 수 있지. 😉","nl-NL":"Geld maakt niet gelukkig. Maar het koopt wel donuts. 😉","pt-BR":"Dinheiro não traz felicidade. Mas compra donut. 😉","ru":"Не в деньгах счастье. Но пончики на них купить можно. 😉","sv":"Lycka kan man inte köpa. Munkar däremot. 😉","th":"เงินซื้อความสุขไม่ได้ แต่ซื้อโดนัทได้นะ 😉","tr":"Mutluluk parayla alınmaz. Ama donut alınır. 😉","vi":"Tiền không mua được hạnh phúc, nhưng mua được bánh donut. 😉","zh-Hans":"钱买不到快乐，但能买甜甜圈。😉","zh-Hant":"錢買不到幸福，但買得到甜甜圈。😉"}}</script>
+<script type="application/json" id="faces">[["#a37045",[[[5,4],[8,3],[11,4],[12,6],[13,8],[12,10],[11,12],[8,13],[6,12],[4,11],[3,8],[4,6]],[[9,6],[8,6],[7,6],[6,7],[6,8],[6,9],[7,10],[8,10],[9,10],[10,9],[10,8],[10,7]],[[11,6],[11,7],[12,8]],[[5,8],[5,7],[4,9]],[[6,11],[8,12],[7,11]],[[11,9],[10,10],[10,11]],[[8,5],[9,4],[7,5]]]],["#ff9400",[[[4,12],[3,11],[2,8],[3,5],[4,4],[5,3],[8,2],[11,3],[12,4],[13,5],[14,8],[13,11],[12,12],[11,13],[8,14],[5,13]],[[8,3],[5,4],[4,6],[3,8],[4,11],[6,12],[8,13],[11,12],[12,10],[13,8],[12,6],[11,4]]]],["#c9f5ff",[[[8,6],[9,6],[10,7],[10,8],[10,9],[9,10],[8,10],[7,10],[6,9],[6,8],[6,7],[7,6]]]],["#ffd60a",[[[11,7],[11,6],[12,8]]]],["#bf59f2",[[[5,7],[5,8],[4,9]]]],["#33c759",[[[8,12],[6,11],[7,11]]]],["#007aff",[[[10,10],[11,9],[10,11]]]],["#ff3b30",[[[9,4],[8,5],[7,5]]]],["#c9f5ff",[[[0,0],[15,0],[15,15],[0,15]],[[3,11],[4,12],[5,13],[8,14],[11,13],[12,12],[13,11],[14,8],[13,5],[12,4],[11,3],[8,2],[5,3],[4,4],[3,5],[2,8]]]]]</script>
+<script type="application/json" id="picture-words">{"m":{"ar-SA":"المال لا يشتري السعادة، لكنه يشتري الدونات. 😉","de-DE":"Glück kann man nicht kaufen. Donuts schon. 😉","en-AU":"Money can't buy happiness. It can buy donuts, though. 😉","en-GB":"Money can't buy happiness. It can buy donuts, though. 😉","en-US":"Money can't buy happiness. It can buy donuts, though. 😉","es-ES":"El dinero no da la felicidad, pero compra rosquillas. 😉","es-MX":"El dinero no compra la felicidad, pero sí donas. 😉","fr-FR":"L'argent ne fait pas le bonheur. Mais il paie les donuts. 😉","hi":"पैसों से खुशी नहीं ख़रीदी जा सकती, पर डोनट ज़रूर। 😉","id":"Uang tak bisa beli kebahagiaan. Tapi bisa beli donat. 😉","it":"I soldi non fanno la felicità. Però comprano le ciambelle. 😉","ja":"お金で幸せは買えない。でもドーナツは買える。😉","ko":"행복은 못 사도, 도넛은 살 수 있지. 😉","nl-NL":"Geld maakt niet gelukkig. Maar het koopt wel donuts. 😉","pt-BR":"Dinheiro não traz felicidade. Mas compra donut. 😉","ru":"Не в деньгах счастье. Но пончики на них купить можно. 😉","sv":"Lycka kan man inte köpa. Munkar däremot. 😉","th":"เงินซื้อความสุขไม่ได้ แต่ซื้อโดนัทได้นะ 😉","tr":"Mutluluk parayla alınmaz. Ama donut alınır. 😉","vi":"Tiền không mua được hạnh phúc, nhưng mua được bánh donut. 😉","zh-Hans":"钱买不到快乐，但能买甜甜圈。😉","zh-Hant":"錢買不到幸福，但買得到甜甜圈。😉"},"d":{"en":"And a warm one on a grey morning comes surprisingly close. The philosophers can go on arguing about happiness. The rest of us will be over here, sugar on our fingers, not arguing at all."}}</script>
 <script src="/library/worksheet-words.js"></script>
+<script src="/library/worksheet-site-words.js"></script>
 <script src="/library/worksheet.js"></script>
 <script>
   (function () {   // the site's words in the reader's language, and the App Store bar on Apple devices once Coordigo 6.2 is in the store

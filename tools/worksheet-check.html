@@ -1,0 +1,36 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>Worksheet check</title>
+<!-- tools/worksheet-check.py opens this headless. check: ?ids=a,b&papers=letter,a4&langs=en,ko → each page's fit and notes.
+     shot: ?shot=<id>&paper=letter&lang=en[&fields=1] → the pages as PNG data; pdf=<id> (same settings) → the PDF. -->
+<iframe id="f" style="width:1200px;height:900px"></iframe>
+<pre id="out"></pre>
+<script>
+  const q = new URLSearchParams(location.search), f = document.getElementById('f'), out = document.getElementById('out');
+  const open = id => new Promise(ok => { f.onload = async () => {
+    const W = f.contentWindow; for (let i = 0; i < 400 && !W.CoWorksheet; i++) await new Promise(r => setTimeout(r, 25)); ok(W.CoWorksheet);
+  }; f.src = '/library/' + id + '/'; });
+  (async () => {
+    if (q.get('pdf')) {
+      const ws = await open(q.get('pdf'));
+      const doc = await ws.pdf({ paper: q.get('paper') || 'letter', answer: true, lang: q.get('lang') || 'en', fields: q.get('fields') === '1' });
+      out.textContent = 'PAGES ' + JSON.stringify([doc.output('datauristring')]) + ' END'; return;
+    }
+    if (q.get('shot')) {
+      const ws = await open(q.get('shot'));
+      const o = { paper: q.get('paper') || 'letter', answer: true, lang: q.get('lang') || 'en', fields: q.get('fields') === '1' };
+      out.textContent = 'PAGES ' + JSON.stringify(await ws.pages(o, 2)) + ' END'; return;
+    }
+    const res = [];
+    for (const id of (q.get('ids') || '').split(',').filter(Boolean)) {
+      const ws = await open(id);
+      if (!ws) { res.push({ id, error: 'no worksheet' }); continue; }
+      for (const paper of (q.get('papers') || 'letter,a4').split(','))
+        for (const lang of (q.get('langs') || 'en').split(',')) {
+          try { res.push({ id, paper, lang, pages: await ws.check({ paper, answer: true, lang, fields: true }) }); }
+          catch (e) { res.push({ id, paper, lang, error: String(e) }); }
+        }
+    }
+    out.textContent = 'RESULT ' + JSON.stringify(res) + ' END';
+  })();
+</script>

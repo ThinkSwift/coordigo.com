@@ -3,7 +3,8 @@
 WorksheetPage part of Print.swift as it is, and run it.
 
   tools/worksheet-ref.py <Coordigo source dir> faces <out.json>
-  tools/worksheet-ref.py <Coordigo source dir> pages <out dir> <id> <letter|a4> <title> <words> <answer> <label>
+
+The answer page's colours on the site are the app's exact faces; the site's sheet itself is its own design (2026-11-07).
 """
 import json, pathlib, re, subprocess, sys, tempfile
 SRC = pathlib.Path(sys.argv[1]); HERE = pathlib.Path(__file__).resolve().parent
@@ -27,10 +28,8 @@ def build():
 
 build()
 mystery = str(SRC / 'Sources/Resources/Mystery')
-if sys.argv[2] == 'faces':
-    ids = [e['id'] for e in json.loads((SRC / 'Sources/Resources/Mystery/library.json').read_text())]
-    out = subprocess.run([str(BIN), 'faces', mystery, *ids], check=True, capture_output=True).stdout
-    pathlib.Path(sys.argv[3]).write_bytes(out)
-    print(f'faces: {len(json.loads(out))} pictures')
-else:
-    subprocess.run([str(BIN), 'pages', mystery, *sys.argv[3:]], check=True)
+if sys.argv[2] != 'faces': sys.exit('faces only')
+ids = [e['id'] for e in json.loads((SRC / 'Sources/Resources/Mystery/library.json').read_text())]
+out = subprocess.run([str(BIN), 'faces', mystery, *ids], check=True, capture_output=True).stdout
+pathlib.Path(sys.argv[3]).write_bytes(out)
+print(f'faces: {len(json.loads(out))} pictures')
