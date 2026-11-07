@@ -33,11 +33,20 @@ OWN = json.load(open(sys.argv[4])) if len(sys.argv) > 4 else {}
 if len(sys.argv) > 6:
     for e in json.load(open(sys.argv[6]))['pictures']:
         if e.get('descriptions'): OWN.setdefault(e['id'], {})['d'] = e['descriptions']
+# each picture's title in the 22 locales, from the same source as the messages (Coordigo rules/coord-16-v0
+# Docs/library-messages.json, pictures[].titles; tools/library-sync.sh passes it as the seventh argument). It wins over
+# the app catalog's few translated titles below.
+RULE_TITLES = {}
+if len(sys.argv) > 7:
+    GRADE_TO_APP = {'library-game-ufo': 'game-ufo', 'library-game-penguin': 'game-penguin', 'founder-duck': 'duck'}
+    for e in json.load(open(sys.argv[7]))['pictures']:
+        if isinstance(e.get('titles'), dict): RULE_TITLES[GRADE_TO_APP.get(e['id'], e['id'])] = e['titles']
 if len(sys.argv) > 5:
     cat = json.load(open(sys.argv[5]))['strings']
     for e in json.load(open(sys.argv[2])):
         tr = {l: u['stringUnit']['value'] for l, u in cat.get(e['title'], {}).get('localizations', {}).items() if u.get('stringUnit', {}).get('value')}
         if tr: OWN.setdefault(e['id'], {}).setdefault('t', {}); OWN[e['id']]['t'] = {**tr, **(OWN[e['id']].get('t') or {})}
+for k, t in RULE_TITLES.items(): OWN.setdefault(k, {})['t'] = {**(OWN.get(k, {}).get('t') or {}), **t}
 def message(d, loc='en-US'): return ((OWN.get(d['id']) or {}).get('m') or {}).get(loc) or d['message']
 STR = json.loads(re.search(r'MYSTERY_STRINGS\s*=\s*(\{.*\})', open(os.path.join(ROOT, 'mystery/strings.js')).read(), re.S).group(1))['en']
 esc = lambda s: html.escape(s, quote=True)
@@ -94,7 +103,8 @@ def render(d, size=600, pad=30):
 
 import shutil
 for name in os.listdir(os.path.join(ROOT, 'library')):
-    if name not in ('worksheet.js', 'worksheet-words.js', 'worksheet-site-words.js', 'printmark.png'):
+    # kept: the worksheet's own files and the cross stitch pattern's (library/stitch*: coordigo-engine export_web.py, stitch.js)
+    if name not in ('worksheet.js', 'worksheet-words.js', 'worksheet-site-words.js', 'printmark.png', 'stitch.js', 'stitch-words.js', 'stitch-draw.js', 'stitch'):
         q = os.path.join(ROOT, 'library', name); shutil.rmtree(q) if os.path.isdir(q) else os.remove(q)
 os.makedirs(os.path.join(ROOT, 'library/img'), exist_ok=True)
 for d in data:

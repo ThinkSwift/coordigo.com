@@ -18,6 +18,8 @@ python3 "$SITE/tools/worksheet-ref.py" "$TMP/src" faces "$TMP/faces.json"
 python3 "$SITE/tools/worksheet-words.py" "$TMP/src/Sources/Resources/Localizable.xcstrings"
 # the answer page's descriptions: the one source the app imports as well (Coordigo scripts/import-library.py)
 git -C "$REPO" show "${WORDS_REF:-rules/coord-16-v0}:Docs/library-descriptions.json" > "$TMP/descriptions.json"
+# and the pictures' titles in every locale, from the messages' own file there
+git -C "$REPO" show "${WORDS_REF:-rules/coord-16-v0}:Docs/library-messages.json" > "$TMP/messages-rules.json"
 python3 "$SITE/tools/library-pages.py" "$TMP/lib.json" "$TMP/src/Sources/Resources/Mystery/library.json" "$TMP/faces.json" \
-  "$TMP/src/Sources/Resources/Mystery/messages.json" "$TMP/src/Sources/Resources/Localizable.xcstrings" "$TMP/descriptions.json"
+  "$TMP/src/Sources/Resources/Mystery/messages.json" "$TMP/src/Sources/Resources/Localizable.xcstrings" "$TMP/descriptions.json" "$TMP/messages-rules.json"
 echo "from $(git -C "$REPO" rev-parse --short "$REF") ($REF)"

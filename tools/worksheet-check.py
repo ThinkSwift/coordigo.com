@@ -6,6 +6,7 @@ the foot at the design's grid, the message and description fit the answer page, 
   tools/worksheet-check.py [--langs en,ko,ja,ar,th,hi] [--ids a,b]
   tools/worksheet-check.py --shot <id> <letter|a4> <lang> <out.png> [--fields 1]   → the pages as PNG
   tools/worksheet-check.py --pdf <id> <letter|a4> <lang> <out.pdf> [--fields 1]    → the PDF the page makes
+  add --kind stitch to any of these for the cross stitch pattern (library/stitch.js): there every note is a failure
 
 Replaced the pixel parity with the app's sheet (tools/worksheet-parity.py) when the site took its own design on
 2026-11-07 (RDM-co-site-worksheet-redesign-19); the app's Print.swift follows in a later version. Notes that are not
@@ -24,7 +25,9 @@ handler = functools.partial(Quiet, directory=str(SITE))
 srv = http.server.ThreadingHTTPServer(('127.0.0.1', 0), handler); port = srv.server_address[1]
 threading.Thread(target=srv.serve_forever, daemon=True).start()
 
+KIND = opt('--kind', 'worksheet')
 def run(query, budget=60000):
+    if KIND == 'stitch': query = {**query, 'kind': 'stitch'}
     url = f'http://127.0.0.1:{port}/tools/worksheet-check.html?{urllib.parse.urlencode(query)}'
     dom = subprocess.run([CHROME, '--headless=new', '--disable-gpu', f'--user-data-dir={tempfile.mkdtemp()}',
                           f'--virtual-time-budget={budget}', '--dump-dom', url], capture_output=True, text=True, timeout=900).stdout
@@ -53,7 +56,7 @@ for k in range(0, len(ids), 20):
     print(f'{min(k + 20, len(ids))}/{len(ids)}', file=sys.stderr)
 # A batch of 20 can run out of headless Chrome's time budget before its last pictures load ("no worksheet"); those are
 # checked again on their own, so a slow batch is never reported as a broken sheet (2026-11-07: 2-3 such per full run)
-slow = sorted({r['id'] for r in res if r.get('error') == 'no worksheet'})
+slow = sorted({r['id'] for r in res if r.get('error') == 'no worksheet' or (KIND == 'stitch' and 'error' in r)})
 if slow:
     res = [r for r in res if r['id'] not in slow]
     for id in slow:
@@ -67,7 +70,7 @@ for r in res:
     for n, pg in enumerate(r['pages'], 1):
         for s in pg['notes']:
             kind = s.split(':')[0]
-            if kind in ('code', 'overflow', 'kicker') or s.startswith('answer: runs'): fails.append(f'{tag} p{n}: {s}')
+            if KIND == 'stitch' or kind in ('code', 'overflow', 'kicker') or s.startswith('answer: runs'): fails.append(f'{tag} p{n}: {s}')
             else: notes.setdefault(kind, []).append(f'{tag} p{n}: {s}')
     if len(r['pages']) != 2: fails.append(f'{tag}: {len(r["pages"])} pages')
 want = len(ids) * 2 * len(LANGS.split(','))

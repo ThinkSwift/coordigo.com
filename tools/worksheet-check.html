@@ -2,14 +2,16 @@
 <meta charset="utf-8">
 <title>Worksheet check</title>
 <!-- tools/worksheet-check.py opens this headless. check: ?ids=a,b&papers=letter,a4&langs=en,ko → each page's fit and notes.
-     shot: ?shot=<id>&paper=letter&lang=en[&fields=1] → the pages as PNG data; pdf=<id> (same settings) → the PDF. -->
+     shot: ?shot=<id>&paper=letter&lang=en[&fields=1] → the pages as PNG data; pdf=<id> (same settings) → the PDF.
+     kind=stitch: the same for the cross stitch pattern (library/stitch.js) instead of the worksheet. -->
 <iframe id="f" style="width:1200px;height:900px"></iframe>
 <pre id="out"></pre>
 <script>
   const q = new URLSearchParams(location.search), f = document.getElementById('f'), out = document.getElementById('out');
+  const KIND = q.get('kind') === 'stitch' ? 'CoStitch' : 'CoWorksheet';
   const open = id => new Promise(ok => { f.onload = async () => {
-    const W = f.contentWindow; for (let i = 0; i < 400 && !W.CoWorksheet; i++) await new Promise(r => setTimeout(r, 25)); ok(W.CoWorksheet);
-  }; f.src = '/library/' + id + '/'; });
+    const W = f.contentWindow; for (let i = 0; i < 1200 && !W[KIND]; i++) await new Promise(r => setTimeout(r, 25)); ok(W[KIND]);
+  }; f.src = '/library/' + id + '/' + (KIND === 'CoStitch' ? '?stitch=preview' : ''); });
   (async () => {
     if (q.get('pdf')) {
       const ws = await open(q.get('pdf'));
@@ -23,7 +25,7 @@
     }
     const res = [];
     for (const id of (q.get('ids') || '').split(',').filter(Boolean)) {
-      const ws = await open(id);
+      const ws = (await open(id)) || (await open(id));         // a cold first page can miss the wait once
       if (!ws) { res.push({ id, error: 'no worksheet' }); continue; }
       for (const paper of (q.get('papers') || 'letter,a4').split(','))
         for (const lang of (q.get('langs') || 'en').split(',')) {
