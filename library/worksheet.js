@@ -5,7 +5,7 @@
 // few lines that carry it further (the page's #picture-words: m message, t title, d description, by language). Every page
 // carries coordigo.com, "Free to download" and the stamp "coordigo #N · Tier". The words are in the site's 19 languages:
 // the app's own (worksheet-words.js, from its string catalog) and the site's (worksheet-site-words.js); the menu speaks
-// the language chosen. The settings: paper, answer page, Name and Class lines (renamable), the sheet's title and words.
+// the reader's language; the sheet is in the reader's language or English. The settings: paper, answer page, Name and Class lines (renamable), the sheet's title and words.
 // Drawn for the preview (canvases, both pages) and for the PDF (lines and fills as vectors, words at 432 dpi).
 // tools/worksheet-check.py renders every picture in both papers and several languages and checks that everything fits.
 (() => {
@@ -60,7 +60,13 @@
   const form = $('sheetForm');
   if (form && !form.dataset.ready) {
     form.elements.paper.value = LETTER.includes(region) ? 'letter' : 'a4';
-    for (const l of Object.keys(NAMES).filter(l => WORDS[l])) form.elements.lang.add(new Option(NAMES[l], l));
+    // Two sheets to choose from: the reader's own language and English; an English reader is not asked
+    // (founder 2026-11-07, RDM-co-site-free-printables)
+    const own = $('langOwn');
+    if (own && readerLang !== 'en') {
+      own.value = readerLang; $('langOwnName').textContent = NAMES[readerLang] || readerLang;
+      $('langOwnName').lang = readerLang; $('langSet').hidden = false;
+    }
     form.elements.lang.value = readerLang;
     form.dataset.ready = '1';
   }
@@ -139,8 +145,13 @@
       ring(x, y, r, o) { ctx.save(); stroke(o); ctx.beginPath(); ctx.arc(x, y, r, 0, 2 * Math.PI); ctx.stroke(); ctx.restore(); },
       image(img, x, y, w, h, r) { ctx.save(); ctx.beginPath(); ctx.roundRect(x, y, w, h, r); ctx.clip(); ctx.drawImage(img, x, y, w, h); ctx.restore(); },
       words(box, draw) { ctx.save(); draw(ctx); ctx.restore(); },
+      picture(c, x, y, w, h) { ctx.drawImage(c, x, y, w, h); },
+      async svg(str, x, y, w, h) { const img = await svgImage(str); ctx.drawImage(img, x, y, w, h); },
     };
   }
+  // An SVG drawing (the cross stitch chart, its swatches and guide) as an image for the canvas, or a live element for the PDF
+  const svgImage = str => new Promise((ok, fail) => { const i = new Image(); i.onload = () => ok(i); i.onerror = fail;
+    i.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(str); });
   function pdfSurface(doc) {
     const rgb = c => [1, 3, 5].map(i => parseInt(c.slice(i, i + 2), 16));
     const stroke = o => { doc.setDrawColor(...rgb(o.color || INK)); doc.setLineWidth(o.width || 1); doc.setLineCap(o.cap === 'round' ? 'round' : 'butt');
@@ -165,6 +176,18 @@
         c.width = Math.ceil(w * S); c.height = Math.ceil(h * S);
         const ctx = c.getContext('2d'); ctx.scale(S, S); ctx.translate(-x, -y); draw(ctx);
         doc.addImage(c.toDataURL('image/png'), 'PNG', x, y, c.width / S, c.height / S, undefined, 'FAST');
+      },
+      // a drawn canvas (the stitched hoop) on white, as a fine JPEG
+      picture(c, x, y, w, h) {
+        const b = document.createElement('canvas'); b.width = c.width; b.height = c.height; const g = b.getContext('2d');
+        g.fillStyle = '#ffffff'; g.fillRect(0, 0, b.width, b.height); g.drawImage(c, 0, 0);
+        doc.addImage(b.toDataURL('image/jpeg', 0.9), 'JPEG', x, y, w, h, undefined, 'FAST');
+      },
+      // SVG as vectors (svg2pdf.js); the element sits off screen while it is read
+      async svg(str, x, y, w, h) {
+        const box = document.createElement('div'); box.style.cssText = 'position:fixed;left:-9999px;top:0;width:10px;height:10px;overflow:hidden';
+        box.innerHTML = str; document.body.appendChild(box);
+        try { await doc.svg(box.firstElementChild, { x, y, width: w, height: h }); } finally { box.remove(); }
       },
     };
   }
@@ -401,7 +424,7 @@
     return { bottom: y, limit: areaBottom, message: mz, description: dz };
   }
 
-  const nothing = { lines() {}, rect() {}, frame() {}, shape() {}, dot() {}, ring() {}, image() {}, words() {} };
+  const nothing = { lines() {}, rect() {}, frame() {}, shape() {}, dot() {}, ring() {}, image() {}, words() {}, picture() {}, svg() { return Promise.resolve(); } };
   function pageCanvas(pg, draw, scale = 3) {
     const c = document.createElement('canvas'); c.width = Math.round(pg.w * scale); c.height = Math.round(pg.h * scale);
     const ctx = c.getContext('2d'); ctx.scale(scale, scale); draw(canvasSurface(ctx)); return c;
@@ -416,8 +439,10 @@
   async function preview() {
     ownWords(form.elements.lang.value || readerLang);
     const box = $('sheetPreview'), o = options(), n = ++drawing;
-    speak(o.lang);
+    speak(readerLang);                                         // the menu stays in the reader's language; the sheet follows the choice
+    const only = $('wsOnly'); if (only) only.hidden = !!stitch();
     if (!box) return;
+    if (stitch()) { await window.CoStitch.preview(box, o, () => n !== drawing); return; }
     const [p] = await ready();
     if (n !== drawing) return;                                 // a newer setting came in meanwhile
     box.replaceChildren(...pagesOf(p, o).map((d, i) => {
@@ -431,13 +456,21 @@
     const s = document.createElement('script'); s.src = 'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js';
     s.onload = () => ok(window.jspdf); s.onerror = fail; document.head.appendChild(s);
   }));
+  let svgLib = null;
+  const loadSVG = () => svgLib || (svgLib = loadPDF().then(() => new Promise((ok, fail) => {
+    const s = document.createElement('script'); s.src = 'https://cdn.jsdelivr.net/npm/svg2pdf.js@2.2.4/dist/svg2pdf.umd.min.js';
+    s.onload = ok; s.onerror = fail; document.head.appendChild(s);
+  })));
+  const kind = () => (form.elements.kind && form.elements.kind.value) || 'worksheet';
+  const stitch = () => kind() === 'stitch' && window.CoStitch;
   async function pdf(o) {
+    if (stitch()) return window.CoStitch.pdf(o);
     const [j, [p]] = await Promise.all([loadPDF(), ready()]);
     const pg = PAPER[o.paper], doc = new j.jsPDF({ unit: 'pt', format: [pg.w, pg.h], compress: true });
     pagesOf(p, o).forEach((draw, i) => { if (i) doc.addPage([pg.w, pg.h]); draw(pdfSurface(doc)); });
     return doc;
   }
-  const fileName = o => page.dataset.file + '-worksheet' + (o.lang === 'en' ? '' : '-' + o.lang) + '.pdf';
+  const fileName = o => page.dataset.file + (stitch() ? '-cross-stitch' : '-worksheet') + (o.lang === 'en' ? '' : '-' + o.lang) + '-' + o.paper + '.pdf';
   async function busy(btn, work) { btn.disabled = true; try { await work(); } finally { btn.disabled = false; } }
   // Print: the PDF in the browser's own viewer, which prints it as it is (a tab opened at the tap, so no popup blocker)
   $('sheetPrint').addEventListener('click', e => {
@@ -458,7 +491,6 @@
   }));
   let typing = 0;
   form.addEventListener('change', preview);
-  form.elements.lang.addEventListener('change', preview);           // the language sits in the menu's head, outside the form
   form.elements.words.addEventListener('input', e => { e.target.dataset.edited = '1'; });
   for (const n of ['label1', 'label2']) form.elements[n].addEventListener('input', e => { e.target.dataset.edited = '1'; });
   form.addEventListener('input', e => { if (e.target.type === 'text' || e.target.tagName === 'TEXTAREA') { clearTimeout(typing); typing = setTimeout(preview, 250); } });
@@ -473,6 +505,9 @@
     if (e.data.co === 'height') player.style.height = Math.max(420, e.data.h + 8) + 'px';
   });
   // for tools/worksheet-check.py: the pages at 3x with given settings, and each page's fit with the notes it raised
+  window.CoSheet = { PAPER, MARGINS, readerLang, say, sayS, pick, noEmoji, width, pieces, lines, block, blockH, balanced, text, face,
+    F_SERIF, F_SANS, F_MONO, F_PIX, D_INK, SOFT, LIGHT, RULE, CAP, RTL, RTL_LANG, LATIN, foot, canvasSurface, pdfSurface, nothing,
+    pageCanvas, loadPDF, loadSVG, ready, OWN, page, note: s => note(s), collect: on => { const n = issues; issues = on ? [] : null; return n; } };
   window.CoWorksheet = {
     pages: async (o, scale = 3) => { const [p] = await ready(); return pagesOf(p, o).map(d => pageCanvas(PAPER[o.paper], d, scale).toDataURL('image/png')); },
     check: async o => {

@@ -41,6 +41,9 @@ if len(sys.argv) > 5:
 def message(d, loc='en-US'): return ((OWN.get(d['id']) or {}).get('m') or {}).get(loc) or d['message']
 STR = json.loads(re.search(r'MYSTERY_STRINGS\s*=\s*(\{.*\})', open(os.path.join(ROOT, 'mystery/strings.js')).read(), re.S).group(1))['en']
 esc = lambda s: html.escape(s, quote=True)
+# the cross stitch pattern rides along only where its renderer is (founder: public after M1-M3 and a look at the patterns)
+STITCH = os.path.exists(os.path.join(ROOT, 'library', 'stitch.js'))
+LANGS = ['en', 'ar', 'de', 'es', 'fr', 'hi', 'id', 'it', 'ja', 'ko', 'nl', 'pt-BR', 'ru', 'sv', 'th', 'tr', 'vi', 'zh-Hans', 'zh-Hant']
 
 home = open(os.path.join(ROOT, 'index.html')).read()
 HEAD = home[:home.index('</style>')]
@@ -132,8 +135,11 @@ CSS = '''
   .seg label:has(input:checked){background:var(--ink);color:var(--paper)}
   .menu-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:0 0 10px}
   .menu-head h2{margin:0}
-  .lang{display:inline-flex;align-items:center;gap:6px}
-  .lang svg{width:18px;height:18px;fill:none;stroke:var(--muted);stroke-width:1.6}
+  .seg.kind{margin:0 0 14px}
+  .seg.kind[hidden],#wsOnly[hidden]{display:none}
+  .langrow{display:flex;align-items:center;gap:8px;margin:0 0 14px;font:15px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+  .langrow[hidden]{display:none}
+  .langrow svg{width:18px;height:18px;fill:none;stroke:var(--muted);stroke-width:1.6}
   .menu .check{display:flex;gap:8px;align-items:center;font:15px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;margin:0 0 12px}
   .menu .field{display:grid;gap:5px;font:13px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--muted);margin:0 0 12px}
   .menu .field input,.menu .field textarea{font:15px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--ink);background:var(--paper);
@@ -151,6 +157,7 @@ CSS = '''
   .act[disabled]{opacity:.5;cursor:default}
   #player{display:block;width:100%;height:640px;border:0;margin:22px 0 0}
   #player[hidden]{display:none}
+  .free{color:var(--muted);font:15px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;margin:4px 0 14px}
   .pn{display:flex;justify-content:space-between;gap:12px;margin:26px 0 0;font:14px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
   .pn a{color:var(--ink)}
   @media (max-width:760px){ .pic-grid{grid-template-columns:1fr} .pic-grid figure{width:100%;max-width:420px;margin:0 auto} }
@@ -170,7 +177,7 @@ I18N = '''<script src="/store.js"></script>
   })();
 </script>'''
 
-def head(page_title, desc, path, image=None):
+def head(page_title, desc, path, image=None, ld=None):
     h = re.sub(r'<title>.*?</title>', f'<title>{esc(page_title)}</title>', HEAD, count=1)
     h = re.sub(r'<!-- hreflang:start -->.*?<!-- hreflang:end -->\n', '', h, flags=re.S)
     h = re.sub(r'<meta name="description" content="[^"]*">', f'<meta name="description" content="{esc(desc)}">', h, count=1)
@@ -179,6 +186,7 @@ def head(page_title, desc, path, image=None):
     h = re.sub(r'<meta property="og:title" content="[^"]*">', f'<meta property="og:title" content="{esc(page_title)}">', h, count=1)
     h = re.sub(r'<meta property="og:description" content="[^"]*">', f'<meta property="og:description" content="{esc(desc)}">', h, count=1)
     if image: h = re.sub(r'<meta property="og:image" content="[^"]*">', f'<meta property="og:image" content="{ORIGIN}{image}">', h, count=1)
+    if ld: h = h.replace('</script>', '</script>\n<script type="application/ld+json">' + json.dumps(ld, ensure_ascii=False, separators=(',', ':')).replace('</', '<\\/') + '</script>', 1)
     return h + CSS + '</style>\n</head>\n'
 
 def nav(cur):
@@ -214,8 +222,8 @@ def grid_page(k):
     inner = f'''
   <section>
     <div class="caps" data-t="libCaps">Library</div>
-    <h1 style="font-size:28px;margin:6px 0 4px">{len(solve)} mystery pictures, open</h1>
-    <p class="sub">Every picture to see, take and pass on. Open one for its worksheet: the empty grid and the code, ready to print.</p>
+    <h1 style="font-size:28px;margin:6px 0 4px">{len(solve)} free printable mystery pictures</h1>
+    <p class="sub">Coordinate graphing worksheets, every one open: see the picture, or print its worksheet — the empty grid and the code to join the points — in Letter or A4, with an answer page. Free to download, print and pass on.</p>
     <div class="grid" style="margin-top:16px">{''.join(tile(d) for d in items)}</div>
     <nav class="pager" aria-label="Pages">{pager}</nav>
   </section>
@@ -226,8 +234,9 @@ def grid_page(k):
     <div class="grid">{''.join(tile(d) for d in messages)}</div>
   </section>
 ''' if k == 1 and messages else '')
-    t = 'Library · Coordigo' + ('' if k == 1 else f' · page {k}')
-    d = 'Coordigo mystery pictures, open: coordinate drawings on a 16 × 16 grid, each with a printable worksheet.'
+    t = f'{len(solve)} Free Printable Mystery Pictures · Coordinate Graphing Worksheets (PDF) · Coordigo' + ('' if k == 1 else f' · page {k}')
+    d = (f'{len(solve)} free printable mystery pictures: coordinate graphing worksheets on a 16 × 16 grid, each with an answer page. '
+         'Letter or A4 PDF, in your language or English.')
     out = os.path.join(ROOT, path.strip('/'), 'index.html')
     os.makedirs(os.path.dirname(out), exist_ok=True)
     open(out, 'w').write(head(t, d, path, f'/library/img/{items[0]["id"]}.png') + body(inner))
@@ -236,27 +245,31 @@ def picture_page(d, prev, nxt):
     path = f'/library/{d["id"]}/'
     words = f'<p class="words">“{esc(message(d))}”</p>' if message(d) else ''
     link = lambda e, label: f'<a href="/library/{e["id"]}/">{label}: {esc(title(e))}</a>' if e else '<span></span>'
+    SWITCH = '          <div class="seg kind" id="kindSet" role="radiogroup" hidden><label><input type="radio" name="kind" value="worksheet" checked> <span data-w="worksheet">Worksheet</span></label><label><input type="radio" name="kind" value="stitch"> <span data-st="menu">Cross stitch pattern</span></label></div>\n' if STITCH else ''
     inner = f'''
   <section class="pic-page" data-picture="{d['id']}" data-number="{number.get(d['id'], 0)}" data-title="{esc(d['title'])}" data-tier="{TIER.get(d['id'], '')}" data-file="{file_stem(d)}" data-payload="{esc(d['payload'])}">
     <p class="crumb"><a href="/library/" data-t="libCaps">Library</a></p>
     <h1>{esc(title(d))}</h1>
     <p class="count">{badge(d)}{esc(KIND[d['theme']]) + ' · ' if d['theme'] in KIND else ''}{len(d['segments'])} lines · {points(d)} points{'' if d['theme'] == 'messages' else ' · ' + esc(length(d))}</p>
     {words}
+    <p class="free">A free printable mystery picture: print the worksheet, join the points and see it appear. Letter or A4, with an answer page.</p>
     <div class="pic-grid">
       <figure class="{TIER.get(d['id'], '').lower()}"><img src="/library/img/{d['id']}.png" width="600" height="600" alt="{esc(alt(d))}"></figure>
       <div class="menu">
-        <div class="menu-head"><h2 data-w="worksheet">Worksheet</h2>
-          <label class="lang"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/></svg><select name="lang" form="sheetForm" aria-label="Language"></select></label></div>
+        <div class="menu-head"><h2 data-w="worksheet" id="menuTitle">Worksheet</h2></div>
         <form id="sheetForm" onsubmit="return false">
+{SWITCH}          <div class="langrow" id="langSet" role="radiogroup" aria-label="Language" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/></svg><div class="seg"><label><input type="radio" name="lang" value="" id="langOwn"> <span id="langOwnName"></span></label><label><input type="radio" name="lang" value="en"> <span lang="en">English</span></label></div></div>
           <fieldset>
             <legend data-w="paper">Paper</legend>
             <div class="seg"><label><input type="radio" name="paper" value="letter"> <span data-w="letter">Letter</span></label><label><input type="radio" name="paper" value="a4"> <span data-w="a4">A4</span></label></div>
           </fieldset>
+          <div id="wsOnly">
           <label class="check"><input type="checkbox" name="answer" checked> <span data-w="answerPage">Answer page in color</span></label>
           <label class="check"><input type="checkbox" name="fields"> <span data-ws="lines">Name and class lines</span></label>
           <div class="field names" id="fieldNames" hidden><input type="text" name="label1" maxlength="18" autocomplete="off" aria-label="1"><input type="text" name="label2" maxlength="18" autocomplete="off" aria-label="2"></div>
           <label class="field"><span data-ws="titleField">Title · optional, on the answer page</span><input type="text" name="title" maxlength="40" autocomplete="off"></label>
           <label class="field"><span data-ws="wordsField">Words · optional, on the answer page</span><textarea name="words" maxlength="120" rows="2"></textarea></label>
+          </div>
         </form>
         <div class="acts">
           <button class="act primary" id="sheetPrint" type="button" data-w="print">Print</button>
@@ -273,16 +286,28 @@ def picture_page(d, prev, nxt):
     <nav class="pn" aria-label="More pictures">{link(prev, 'Newer')}{link(nxt, 'Older')}</nav>
   </section>
 '''
-    t = f'{title(d)} · Coordigo mystery picture'
-    desc = f'{d["title"]}{" (" + TIER[d["id"]] + ")" if d["id"] in TIER else ""}: a coordinate drawing on a 16 × 16 grid. See it, save it, or print its worksheet — the empty grid and the code to join the points.'
+    # The words people search for a sheet like this: free printable, mystery picture, coordinate graphing, worksheet, PDF
+    # (founder 2026-11-07, RDM-co-site-free-printables)
+    t = f'{d["title"]} Mystery Picture · Free Printable Worksheet (PDF) · Coordigo #{number.get(d["id"], "")}'
+    desc = (f'Free printable coordinate graphing mystery picture: join the points on a 16 × 16 grid and a {d["title"].lower()} appears. '
+            f'Letter or A4 PDF with an answer page, in your language or English. Download, print and share.')
+    ld = {'@context': 'https://schema.org', '@graph': [
+        {'@type': ['CreativeWork', 'LearningResource'], 'name': f'{d["title"]} mystery picture worksheet', 'url': ORIGIN + path,
+         'image': f'{ORIGIN}/library/img/{d["id"]}.png', 'description': desc, 'isAccessibleForFree': True,
+         'learningResourceType': 'Worksheet', 'educationalUse': 'Coordinate graphing', 'encodingFormat': 'application/pdf',
+         'inLanguage': LANGS, 'publisher': {'@id': 'https://swiftian.com/#org'}, 'isPartOf': {'@id': 'https://coordigo.com/#site'}},
+        {'@type': 'BreadcrumbList', 'itemListElement': [
+            {'@type': 'ListItem', 'position': 1, 'name': 'Library', 'item': ORIGIN + '/library/'},
+            {'@type': 'ListItem', 'position': 2, 'name': title(d), 'item': ORIGIN + path}]}]}
     out = os.path.join(ROOT, 'library', d['id'], 'index.html')
     os.makedirs(os.path.dirname(out), exist_ok=True)
-    page = head(t, desc, path, f'/library/img/{d["id"]}.png') + body(inner)
+    page = head(t, desc, path, f'/library/img/{d["id"]}.png', ld) + body(inner)
     page = page.replace('<script src="/mystery/strings.js"></script>',
                         '<script src="/mystery/strings.js"></script>\n<script src="/mystery/engine.js"></script>\n'
                         + (f'<script type="application/json" id="faces">{json.dumps(FACES[d["id"]], separators=(",", ":"))}</script>\n' if d['id'] in FACES else '')
                         + (f'<script type="application/json" id="picture-words">{json.dumps(OWN[d["id"]], ensure_ascii=False, separators=(",", ":")).replace("</", "<\\/")}</script>\n' if d['id'] in OWN else '')
-                        + '<script src="/library/worksheet-words.js"></script>\n<script src="/library/worksheet-site-words.js"></script>\n<script src="/library/worksheet.js"></script>', 1)
+                        + '<script src="/library/worksheet-words.js"></script>\n<script src="/library/worksheet-site-words.js"></script>\n<script src="/library/worksheet.js"></script>'
+                        + ('\n<script src="/library/stitch-words.js"></script>\n<script src="/library/stitch-draw.js"></script>\n<script src="/library/stitch.js"></script>' if STITCH else ''), 1)
     # the worksheet's typefaces (Latin; other scripts use the reader's own fonts)
     page = page.replace('</head>', '<link href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Karla:wght@400;700&family=JetBrains+Mono:wght@500;600&family=Silkscreen&display=swap" rel="stylesheet">\n</head>', 1)
     open(out, 'w').write(page)
