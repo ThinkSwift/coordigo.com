@@ -145,7 +145,7 @@ CSS = '''
   .seg label:has(input:checked){background:var(--ink);color:var(--paper)}
   .menu-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:0 0 10px}
   .menu-head h2{margin:0}
-  .seg.kind{margin:0 0 14px}
+  .seg.kind{margin:0 0 14px;font:15px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
   .seg.kind[hidden],#wsOnly[hidden]{display:none}
   .langrow{display:flex;align-items:center;gap:8px;margin:0 0 14px;font:15px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
   .langrow[hidden]{display:none}
@@ -233,7 +233,7 @@ def grid_page(k):
   <section>
     <div class="caps" data-t="libCaps">Library</div>
     <h1 style="font-size:28px;margin:6px 0 4px">{len(solve)} free printable mystery pictures</h1>
-    <p class="sub">Coordinate graphing worksheets, every one open: see the picture, or print its worksheet — the empty grid and the code to join the points — in Letter or A4, with an answer page. Free to download, print and pass on.</p>
+    <p class="sub">Coordinate graphing worksheets, every one open: see the picture, or print its worksheet — the empty grid and the code to join the points — in Letter or A4, with an answer page{' — and each as a counted cross stitch pattern with its DMC floss key' if STITCH else ''}. Free to download, print and pass on.</p>
     <div class="grid" style="margin-top:16px">{''.join(tile(d) for d in items)}</div>
     <nav class="pager" aria-label="Pages">{pager}</nav>
   </section>
@@ -244,9 +244,10 @@ def grid_page(k):
     <div class="grid">{''.join(tile(d) for d in messages)}</div>
   </section>
 ''' if k == 1 and messages else '')
-    t = f'{len(solve)} Free Printable Mystery Pictures · Coordinate Graphing Worksheets (PDF) · Coordigo' + ('' if k == 1 else f' · page {k}')
+    t = (f'{len(solve)} Free Printable Mystery Pictures & Cross Stitch Patterns (PDF) · Coordigo' if STITCH else
+         f'{len(solve)} Free Printable Mystery Pictures · Coordinate Graphing Worksheets (PDF) · Coordigo') + ('' if k == 1 else f' · page {k}')
     d = (f'{len(solve)} free printable mystery pictures: coordinate graphing worksheets on a 16 × 16 grid, each with an answer page. '
-         'Letter or A4 PDF, in your language or English.')
+         + ('Each also as a free counted cross stitch pattern. ' if STITCH else '') + 'Letter or A4 PDF, in your language or English.')
     out = os.path.join(ROOT, path.strip('/'), 'index.html')
     os.makedirs(os.path.dirname(out), exist_ok=True)
     open(out, 'w').write(head(t, d, path, f'/library/img/{items[0]["id"]}.png') + body(inner))
@@ -262,7 +263,7 @@ def picture_page(d, prev, nxt):
     <h1>{esc(title(d))}</h1>
     <p class="count">{badge(d)}{esc(KIND[d['theme']]) + ' · ' if d['theme'] in KIND else ''}{len(d['segments'])} lines · {points(d)} points{'' if d['theme'] == 'messages' else ' · ' + esc(length(d))}</p>
     {words}
-    <p class="free">A free printable mystery picture: print the worksheet, join the points and see it appear. Letter or A4, with an answer page.</p>
+    <p class="free">A free printable mystery picture: print the worksheet, join the points and see it appear{' — or stitch it from its free cross stitch pattern' if STITCH else ''}. Letter or A4, in your language or English.</p>
     <div class="pic-grid">
       <figure class="{TIER.get(d['id'], '').lower()}"><img src="/library/img/{d['id']}.png" width="600" height="600" alt="{esc(alt(d))}"></figure>
       <div class="menu">
@@ -298,9 +299,11 @@ def picture_page(d, prev, nxt):
 '''
     # The words people search for a sheet like this: free printable, mystery picture, coordinate graphing, worksheet, PDF
     # (founder 2026-11-07, RDM-co-site-free-printables)
-    t = f'{d["title"]} Mystery Picture · Free Printable Worksheet (PDF) · Coordigo #{number.get(d["id"], "")}'
+    t = (f'{d["title"]} Mystery Picture & Cross Stitch Pattern · Free Printable PDF · Coordigo #{number.get(d["id"], "")}' if STITCH else
+         f'{d["title"]} Mystery Picture · Free Printable Worksheet (PDF) · Coordigo #{number.get(d["id"], "")}')
     desc = (f'Free printable coordinate graphing mystery picture: join the points on a 16 × 16 grid and a {d["title"].lower()} appears. '
-            f'Letter or A4 PDF with an answer page, in your language or English. Download, print and share.')
+            + ('The same picture as a free counted cross stitch pattern with DMC floss key. ' if STITCH else '')
+            + 'Letter or A4 PDF, in your language or English. Download, print and share.')
     ld = {'@context': 'https://schema.org', '@graph': [
         {'@type': ['CreativeWork', 'LearningResource'], 'name': f'{d["title"]} mystery picture worksheet', 'url': ORIGIN + path,
          'image': f'{ORIGIN}/library/img/{d["id"]}.png', 'description': desc, 'isAccessibleForFree': True,
@@ -309,6 +312,10 @@ def picture_page(d, prev, nxt):
         {'@type': 'BreadcrumbList', 'itemListElement': [
             {'@type': 'ListItem', 'position': 1, 'name': 'Library', 'item': ORIGIN + '/library/'},
             {'@type': 'ListItem', 'position': 2, 'name': title(d), 'item': ORIGIN + path}]}]}
+    if STITCH:
+        ld['@graph'].insert(1, {'@type': 'CreativeWork', 'name': f'{d["title"]} counted cross stitch pattern', 'url': ORIGIN + path,
+            'image': f'{ORIGIN}/library/img/{d["id"]}.png', 'isAccessibleForFree': True, 'encodingFormat': 'application/pdf',
+            'genre': 'Cross stitch pattern', 'inLanguage': LANGS, 'publisher': {'@id': 'https://swiftian.com/#org'}, 'isPartOf': {'@id': 'https://coordigo.com/#site'}})
     out = os.path.join(ROOT, 'library', d['id'], 'index.html')
     os.makedirs(os.path.dirname(out), exist_ok=True)
     page = head(t, desc, path, f'/library/img/{d["id"]}.png', ld) + body(inner)

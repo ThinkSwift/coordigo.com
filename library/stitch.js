@@ -16,9 +16,8 @@
     if (typeof v !== 'string') return v;
     let i = 0; return v.replace(/%(?:(\d)\$)?@/g, (_, n) => String(args[n ? +n - 1 : i++]));
   };
-  // offered once the founder has looked at the patterns; until then only with ?stitch=preview
-  const offered = window.CO_STITCH === true || /[?&]stitch=preview/.test(location.search);
-  if (offered && $('kindSet')) { $('kindSet').hidden = false; if ($('menuTitle')) $('menuTitle').hidden = true; }
+  // offered on every picture page since the founder looked at the patterns (2026-11-08: "Publish as is")
+  if ($('kindSet')) { $('kindSet').hidden = false; if ($('menuTitle')) $('menuTitle').hidden = true; }
   for (const el of document.querySelectorAll('[data-st]')) el.textContent = st(C.readerLang, el.dataset.st);
 
   let pattern = null;
