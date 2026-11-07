@@ -42,7 +42,7 @@
     let x0 = d.size, y0 = d.size, x1 = 0, y1 = 0;
     for (const c of d.cells) { x0 = Math.min(x0, c[0]); y0 = Math.min(y0, c[1]); x1 = Math.max(x1, c[0] + 1); y1 = Math.max(y1, c[1] + 1); }
     for (const s of d.lines) for (const [a, b] of s) { x0 = Math.min(x0, a); y0 = Math.min(y0, b); x1 = Math.max(x1, a); y1 = Math.max(y1, b); }
-    return { full, three, quarter, bs, couched, W: x1 - x0, H: y1 - y0 };
+    return { full, three, quarter, bs, couched, W: x1 - x0, H: y1 - y0, x0, y0 };
   }
   // numbers in the sheet's language with Latin digits (the chart is numbered 0, 10, 20, 30)
   const num = (lang, v, dp = 0) => new Intl.NumberFormat(lang + '-u-nu-latn', { minimumFractionDigits: dp, maximumFractionDigits: dp }).format(v);
@@ -54,7 +54,8 @@
   // MARK: Drawings as SVG: the chart framed as the engine's sheet frames it, a key swatch, a legend mark, the stitch guide
   const INK_LINE = '#2c2a2c';
   const ink = k => D.lum(D.HEX[k]) < 0.6 ? '#ffffff' : D.shade(D.HEX[k], -0.55);
-  function chartSVG(d) {
+  // the start arrows point at the middle of the design (where the stitcher starts), not the middle of the 30 x 30 chart
+  function chartSVG(d, sx) {
     const N = d.size, Q = 26, M = 30, sz = N * Q, out = [`<rect x="${M}" y="${M}" width="${sz}" height="${sz}" fill="#fff"/>`];
     out.push(`<g transform="translate(${M} ${M}) scale(${Q / 20})">${D.chart(d).replace(/^<svg[^>]*>/, '').replace(/<\/svg>$/, '')}</g>`);
     let g = ''; for (let k = 0; k <= N; k++) g += `M${M + k * Q} ${M}V${M + sz}M${M} ${M + k * Q}H${M + sz}`;
@@ -63,8 +64,8 @@
     out.push(`<path d="${b}" stroke="#000" stroke-opacity=".5" stroke-width="1.3" fill="none"/>`);
     for (let k = 0; k <= N; k += 10) out.push(`<text x="${M + k * Q}" y="${M - 8}" font-size="11" text-anchor="middle" fill="#6b6d63" font-family="Helvetica, Arial, sans-serif">${k}</text>`
       + `<text x="${M - 8}" y="${M + k * Q + 4}" font-size="11" text-anchor="end" fill="#6b6d63" font-family="Helvetica, Arial, sans-serif">${k}</text>`);
-    const c = M + sz / 2;
-    out.push(`<path d="M${c - 7} ${M - 24}L${c + 7} ${M - 24}L${c} ${M - 13}Z M${M - 24} ${c - 7}L${M - 24} ${c + 7}L${M - 13} ${c}Z" fill="#a3202f"/>`);
+    const cx = M + (sx.x0 + sx.W / 2) * Q, cy = M + (sx.y0 + sx.H / 2) * Q;
+    out.push(`<path d="M${cx - 7} ${M - 24}L${cx + 7} ${M - 24}L${cx} ${M - 13}Z M${M - 24} ${cy - 7}L${M - 24} ${cy + 7}L${M - 13} ${cy}Z" fill="#a3202f"/>`);
     const v = sz + M * 1.6;
     return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${v} ${v}" width="${v}" height="${v}">${out.join('')}</svg>`;
   }
@@ -88,6 +89,10 @@
   const caps = (s, lang) => C.LATIN(s) ? s.toUpperCase() : s.toLocaleUpperCase(lang);
   // A paragraph whose first words are bold (a step's lead): words laid one by one, lines broken where they no longer fit
   function rich(S, parts, x, y, w, lang, lh, rtl) {
+    if (rtl) {
+      for (const [s, font] of parts) if (s.trim()) y = C.block(S, s.trim(), font, D_INK, x, y, w, lang, lh, 'right');
+      return y;
+    }
     const toks = [];
     for (const [s, font] of parts) for (const p of C.pieces(s, lang)) toks.push({ s: p, font });
     const rows = [[]]; let used = 0;
@@ -217,7 +222,7 @@
       col.forEach((p, i) => {
         const n = ci ? split + i + 1 : i + 1, base = (slh - sz) / 2 + sz * 0.8;
         C.text(S, num(lang, n) + '.', face(F_SANS, sz, 700), CAP, rtl ? X(cx, sw) + sw : X(cx, sw), yy + base, A);
-        yy = rich(S, p, X(cx + (rtl ? 0 : numW), sw - numW), yy, sw - numW, lang, slh, rtl) + 5;
+        yy = rich(S, p, X(cx + numW, sw - numW), yy, sw - numW, lang, slh, rtl) + 5;
       });
       bottom = Math.max(bottom, yy);
     });
@@ -238,9 +243,9 @@
     else y = C.block(S, note, nf, SOFT, m, m + 26, W, lang, 12, A) + 2;
     S.lines([[[m, y], [pg.w - m, y]]], { color: RULE, width: 0.75 }); y += 14;
     const legendH = 18, guideH = 16 + 46 + 12, room = pg.h - m - FOOT_ROOM - y - legendH - 18 - guideH;
-    const cs = Math.min(W, 5.4 * 72, room);
-    if (cs < 300) C.note('chart: only ' + Math.round(cs) + 'pt left for the chart');
-    await S.svg(chartSVG(d), (pg.w - cs) / 2, y, cs, cs);
+    const cs = Math.min(W, room);
+    if (cs < 380) C.note('chart: only ' + Math.round(cs) + 'pt left for the chart');
+    await S.svg(chartSVG(d, sx), (pg.w - cs) / 2, y, cs, cs);
     y += cs + 6;
     // legend: four marks in a centred row (two rows when they do not fit)
     const lf = face(F_SANS, 8.5), items = [['back', st(lang, 'legendBack')], ['tack', st(lang, 'legendTack')], ['tri', st(lang, 'legendTri')], ['empty', st(lang, 'legendEmpty')]];
