@@ -238,6 +238,7 @@
       <div class="menu">
         <div class="menu-head"><h2 data-w="worksheet" id="menuTitle">Worksheet</h2></div>
         <form id="sheetForm" onsubmit="return false">
+          <div class="seg kind" id="kindSet" role="radiogroup" hidden><label><input type="radio" name="kind" value="worksheet" checked> <span data-w="worksheet">Worksheet</span></label><label><input type="radio" name="kind" value="stitch"> <span data-st="menu">Cross stitch pattern</span></label></div>
           <div class="langrow" id="langSet" role="radiogroup" aria-label="Language" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/></svg><div class="seg"><label><input type="radio" name="lang" value="" id="langOwn"> <span id="langOwnName"></span></label><label><input type="radio" name="lang" value="en"> <span lang="en">English</span></label></div></div>
           <fieldset>
             <legend data-w="paper">Paper</legend>
@@ -281,6 +282,9 @@
 <script src="/library/worksheet-words.js"></script>
 <script src="/library/worksheet-site-words.js"></script>
 <script src="/library/worksheet.js"></script>
+<script src="/library/stitch-words.js"></script>
+<script src="/library/stitch-draw.js"></script>
+<script src="/library/stitch.js"></script>
 <script>
   (function () {   // the site's words in the reader's language, and the App Store bar on Apple devices once Coordigo 6.2 is in the store
     var table = window.MYSTERY_STRINGS || {}, lang = (navigator.language || 'en').toLowerCase(), L = 'en';
