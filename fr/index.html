@@ -145,7 +145,8 @@
   .appbar-in .get small{font-size:10px;opacity:.85}
   .appbar-in .get b{font-size:17px;font-weight:600;letter-spacing:-.01em}
   /* the shared app menu (swiftian.com/assets/app-menu.css) in this paper's colours, light and dark (founder 2026-11-08, RDM-web-app-menu-all-sites) */
-  body .am{--am-ink:var(--ink);--am-muted:var(--muted);--am-line:var(--line);--am-hover:var(--ink);--am-cur-bg:var(--mat);--am-cur-line:var(--ink);--am-panel:var(--paper)}
+  body .am{--am-ink:var(--ink);--am-muted:var(--muted);--am-line:var(--line);--am-hover:var(--ink);--am-cur-bg:var(--mat);--am-cur-line:var(--ink);--am-panel:var(--paper);padding-top:16px}
+  body .am-g{min-width:auto}  /* a group never narrower than its buttons, so names wrap instead of buttons overlapping near 1100px */
   @media (max-width:600px){ .tab{min-width:0;flex:1;padding:10px 6px 9px} .tabs{flex:1} }
 
   /* landing: a small film beside the words, then the puzzle as the page's main */
