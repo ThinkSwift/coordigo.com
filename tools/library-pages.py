@@ -9,7 +9,7 @@ image files Google can find, a grid of them in pages (newest number first), and 
 The app's whole Library (242 in Coordigo 6.2) comes from Coordigo scripts/web-library.py <dir> → <dir>/library.js.
 
 Writes library/img/<id>.png, library/index.html (+ library/<n>/ for later pages), library/<id>/index.html and the image
-sitemap entries in sitemap.xml. The head, tabs, site buttons, footer and the App Store bar come from index.html, so the
+sitemap entries in sitemap.xml. The head, the shared app menu, tabs, footer and the App Store bar come from index.html, so the
 pages look like the rest of the site. Re-run whenever library.js changes (Coordigo scripts/web-library.py).
 """
 import base64, html, io, json, os, re, sys
@@ -56,8 +56,11 @@ LANGS = ['en', 'ar', 'de', 'es', 'fr', 'hi', 'id', 'it', 'ja', 'ko', 'nl', 'pt-B
 
 home = open(os.path.join(ROOT, 'index.html')).read()
 HEAD = home[:home.index('</style>')]
+# what index.html's head carries after its style (the shared app menu's stylesheet and script), and the menu itself
+# (swiftian.com tools/app_menu.py, between its markers; founder 2026-11-08, RDM-web-app-menu-all-sites)
+HEAD_TAIL = home[home.index('</style>') + len('</style>'):home.index('</head>')]
+MENU = (re.search(r'<!-- app-menu -->.*?<!-- /app-menu -->', home) or [''])[0]
 NAV = re.search(r'<nav class="tabs-bar".*?</nav>', home, re.S).group(0)
-SITES = re.search(r'<section class="sites".*?</section>', home, re.S).group(0)
 FOOT = re.search(r'  <footer>.*?</footer>', home, re.S).group(0)
 BAR = re.search(r'<div class="appbar".*?</a></div>', home).group(0).replace('web-co-home', 'web-co-library')
 
@@ -130,7 +133,7 @@ CSS = '''
   .pic-page h1{margin:6px 0 4px}
   .pic-page .count{color:var(--muted);margin:0}
   .pic-page .words{font-style:italic;margin:8px 0 0}
-  .pic-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:28px;align-items:start;margin:18px 0 0}
+  .pic-grid{display:grid;grid-template-columns:minmax(0,260px) minmax(0,560px);gap:28px;align-items:start;margin:18px 0 0}   /* the picture about half the width it had (founder 2026-11-08) */
   .pic-grid figure{margin:0;background:var(--mat);border:1px solid var(--hair);border-radius:16px;box-shadow:var(--shadow);overflow:hidden}
   .pic-grid figure img{display:block;width:100%;height:auto}
   .menu{background:var(--mat);border:1px solid var(--hair);border-radius:16px;box-shadow:var(--shadow);padding:18px}
@@ -174,7 +177,7 @@ CSS = '''
   .free{color:var(--muted);font:15px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;margin:4px 0 14px}
   .pn{display:flex;justify-content:space-between;gap:12px;margin:26px 0 0;font:14px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
   .pn a{color:var(--ink)}
-  @media (max-width:760px){ .pic-grid{grid-template-columns:1fr} .pic-grid figure{width:100%;max-width:420px;margin:0 auto} }
+  @media (max-width:760px){ .pic-grid{grid-template-columns:1fr} .pic-grid figure{width:100%;max-width:220px;margin:0 auto} }
 '''
 
 I18N = '''<script src="/store.js"></script>
@@ -203,7 +206,7 @@ def head(page_title, desc, path, image=None, ld=None):
     h = re.sub(r'<meta property="og:description" content="[^"]*">', f'<meta property="og:description" content="{esc(desc)}">', h, count=1)
     if image: h = re.sub(r'<meta property="og:image" content="[^"]*">', f'<meta property="og:image" content="{ORIGIN}{image}">', h, count=1)
     if ld: h = h.replace('</script>', '</script>\n<script type="application/ld+json">' + json.dumps(ld, ensure_ascii=False, separators=(',', ':')).replace('</', '<\\/') + '</script>', 1)
-    return h + CSS + '</style>\n</head>\n'
+    return h + CSS + '</style>' + HEAD_TAIL + '</head>\n'
 
 def nav(cur):
     n = NAV.replace(' aria-current="page"', '')
@@ -219,9 +222,8 @@ def tile(d):
 def body(inner, kind='library'):
     return f'''<body>
 <main>
-  {nav(kind)}
+{'  ' + MENU + chr(10) if MENU else ''}  {nav(kind)}
 {inner}
-  {SITES}
 {FOOT}
 </main>
 {BAR}
