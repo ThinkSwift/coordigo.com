@@ -124,7 +124,7 @@ CSS = '''
   .tier.rare{background:#d6e8ff;color:#00468f} .tier.epic{background:#e2e0fa;color:#2f2a8f} .tier.legendary{background:#ffe2bd;color:#6b3a00}
   .tile.rare .face, .pic-grid figure.rare{border:2px solid #007aff} .tile.epic .face, .pic-grid figure.epic{border:2px solid #5952de}
   .tile.legendary .face, .pic-grid figure.legendary{border:3px solid #ff9400}
-  .pager{display:flex;justify-content:center;gap:8px;margin:22px 0 0}
+  .pager{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin:22px 0 0}
   .pager a{min-width:44px;height:44px;display:grid;place-items:center;border-radius:12px;border:1px solid var(--line);background:var(--mat);color:var(--ink);
     text-decoration:none;font:600 15px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
   .pager a[aria-current]{border-color:var(--ink);background:var(--ink);color:var(--paper)}
