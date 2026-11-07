@@ -242,15 +242,15 @@
     if (C.width(note, nf) <= W - tw - 24) { C.text(S, note, nf, SOFT, rtl ? m : pg.w - m, m + 18, rtl ? 'left' : 'right'); y = m + 26; }
     else y = C.block(S, note, nf, SOFT, m, m + 26, W, lang, 12, A) + 2;
     S.lines([[[m, y], [pg.w - m, y]]], { color: RULE, width: 0.75 }); y += 14;
-    const legendH = 18, guideH = 16 + 46 + 12, room = pg.h - m - FOOT_ROOM - y - legendH - 18 - guideH;
-    const cs = Math.min(W, room);
-    if (cs < 380) C.note('chart: only ' + Math.round(cs) + 'pt left for the chart');
-    await S.svg(chartSVG(d, sx), (pg.w - cs) / 2, y, cs, cs);
-    y += cs + 6;
-    // legend: four marks in a centred row (two rows when they do not fit)
+    // legend: four marks in a centred row (two rows when they do not fit); the chart takes all the height left
     const lf = face(F_SANS, 8.5), items = [['back', st(lang, 'legendBack')], ['tack', st(lang, 'legendTack')], ['tri', st(lang, 'legendTri')], ['empty', st(lang, 'legendEmpty')]];
     const iw = items.map(([, s]) => 22 + 4 + C.width(s, lf)), total = iw.reduce((a, b) => a + b, 0) + 14 * 3;
     const rowsOf = total <= W ? [items.map((it, i) => [it, iw[i]])] : [items.slice(0, 2).map((it, i) => [it, iw[i]]), items.slice(2).map((it, i) => [it, iw[i + 2]])];
+    const legendH = 18, fwid = 46, below = 6 + legendH * rowsOf.length + 12 + 18 + fwid + 12;
+    const cs = Math.min(W, pg.h - m - FOOT_ROOM - y - below);
+    if (cs < 380) C.note('chart: only ' + Math.round(cs) + 'pt left for the chart');
+    await S.svg(chartSVG(d, sx), (pg.w - cs) / 2, y, cs, cs);
+    y += cs + 6;
     for (const row of rowsOf) {
       const rwid = row.reduce((a, [, w]) => a + w, 0) + 14 * (row.length - 1);
       if (rwid > W) C.note('overflow: the legend is wider than the page');
@@ -266,7 +266,7 @@
     y += 12;
     C.block(S, st(lang, 'guide'), face(F_SERIF, 12.5), D_INK, m, y, W, lang, 16, 'center');
     y += 18;
-    const fwid = 46, fg = 22, gw = GUIDE.length * fwid + (GUIDE.length - 1) * fg;
+    const fg = 22, gw = GUIDE.length * fwid + (GUIDE.length - 1) * fg;
     let gx = (pg.w - gw) / 2;
     const order = rtl ? [...GUIDE].reverse() : GUIDE;
     for (const [key, svg] of order) {
