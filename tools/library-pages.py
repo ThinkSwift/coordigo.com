@@ -207,7 +207,7 @@ def head(page_title, desc, path, image=None, ld=None):
 
 def nav(cur):
     n = NAV.replace(' aria-current="page"', '')
-    at = {'library': '/library/', 'worksheet': '/worksheets/', 'stitch': '/cross-stitch/'}.get(cur)
+    at = {'library': '/library/', 'stitch': '/cross-stitch/'}.get(cur)
     return n.replace(f'href="{at}">', f'href="{at}" aria-current="page">') if at else n
 
 def tile(d):
@@ -257,16 +257,17 @@ def grid_page(k):
     os.makedirs(os.path.dirname(out), exist_ok=True)
     open(out, 'w').write(head(t, d, path, f'/library/img/{items[0]["id"]}.png') + body(inner))
 
-# MARK: Three kinds of page per picture (founder 2026-11-08, RDM-co-site-free-printables: the Library's chooser is ours;
-# each printable has its own pages that people searching for it land on, each found by its own free-download search):
-#   /library/<id>/       the picture itself, both printables in one menu (the site's own browsing)
-#   /worksheets/<id>/    "<Picture> Mystery Picture Worksheet · Free Printable PDF Download"
-#   /cross-stitch/<id>/  "<Picture> Cross Stitch Pattern · Free PDF Download"
-# and a hub for each section (/worksheets/, /cross-stitch/, paged like the Library).
+# MARK: Two kinds of page per picture (founder 2026-11-08, RDM-co-site-free-printables: each printable has its own pages that
+# people searching for it land on, each found by its own free-download search; the Library and the worksheet pages were the
+# same thing, so they are one):
+# Named as equals (founder 2026-11-08): each section is an activity done on paper with the same picture, and each page names
+# its format the way people search for it:
+#   /library/<id>/       Coordinate graphing: "<Picture> Coordinate Graphing Worksheet · Free Printable Mystery Picture PDF"
+#   /cross-stitch/<id>/  Cross stitch:        "<Picture> Cross Stitch Pattern · Free Printable PDF"
+# and a hub for each (/library/, /cross-stitch/, paged).
 SEC = {
-    'library': {'path': '/library/', 'crumb': 'Library'},
-    'worksheet': {'path': '/worksheets/', 'crumb': 'Mystery picture worksheets'},
-    'stitch': {'path': '/cross-stitch/', 'crumb': 'Cross stitch patterns'},
+    'library': {'path': '/library/', 'crumb': 'Coordinate graphing', 't': 'graphCaps'},
+    'stitch': {'path': '/cross-stitch/', 'crumb': 'Cross stitch', 't': 'stitchCaps'},
 }
 LANG_ROW = '''          <div class="langrow" id="langSet" role="radiogroup" aria-label="Language" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/></svg><div class="seg"><label><input type="radio" name="lang" value="" id="langOwn"> <span id="langOwnName"></span></label><label><input type="radio" name="lang" value="en"> <span lang="en">English</span></label></div></div>
           <fieldset>
@@ -286,7 +287,7 @@ SWITCH = '          <div class="seg kind" id="kindSet" role="radiogroup" hidden>
 
 def menu(kind, d):
     if kind == 'library':
-        top, form_head, extra = '<h2 data-w="worksheet" id="menuTitle">Worksheet</h2>', (SWITCH if STITCH else ''), f'''
+        top, form_head, extra = '<h2>Free PDF download</h2>', '', f'''
         <div class="acts quiet">
           <a class="act" href="/library/img/{d['id']}.png" download="{file_stem(d)}.png">Save picture (PNG)</a>
           <button class="act" id="solveHere" type="button">Solve it here</button>
@@ -320,28 +321,19 @@ def sheet_page(kind, d, prev, nxt):
     attrs = f'''data-picture="{d['id']}" data-number="{number.get(d['id'], 0)}" data-title="{esc(d['title'])}" data-tier="{TIER.get(d['id'], '')}" data-file="{file_stem(d)}" data-payload="{esc(d['payload'])}"'''
     pic = f'<figure class="{TIER.get(d["id"], "").lower()}"><img src="/library/img/{d["id"]}.png" width="600" height="600" alt="{esc(alt(d))}"></figure>'
     others = []
-    if kind != 'worksheet': others.append(f'<a href="/worksheets/{d["id"]}/">Free {esc(t)} mystery picture worksheet</a>')
-    if kind != 'stitch' and STITCH: others.append(f'<a href="/cross-stitch/{d["id"]}/">Free {esc(t)} cross stitch pattern</a>')
-    if kind != 'library': others.append(f'<a href="/library/{d["id"]}/">See it in the Library</a>')
+    if kind == 'stitch': others.append(f'<a href="/library/{d["id"]}/">Free {esc(t)} coordinate graphing worksheet</a>')
+    elif STITCH: others.append(f'<a href="/cross-stitch/{d["id"]}/">Free {esc(t)} cross stitch pattern</a>')
     also = '<p class="also">' + ' · '.join(others) + '</p>'
     if kind == 'library':
-        h1 = esc(title(d))
-        count = f'''{badge(d)}{esc(KIND[d['theme']]) + ' · ' if d['theme'] in KIND else ''}{len(d['segments'])} lines · {points(d)} points{'' if d['theme'] == 'messages' else ' · ' + esc(length(d))}'''
-        lead = also
-        page_title = f'{title(d)} · Coordigo mystery picture'
-        desc = f'{T}{" (" + TIER[d["id"]] + ")" if d["id"] in TIER else ""}: a coordinate drawing on a 16 × 16 grid, to solve, print as a worksheet' + (' or stitch' if STITCH else '') + '.'
-        image = f'/library/img/{d["id"]}.png'
-        ld_main = None
-    elif kind == 'worksheet':
-        h1 = f'{esc(T)} mystery picture worksheet'
-        count = f'Free printable PDF · {len(d["segments"])} lines · {points(d)} points · {esc(length(d))}'
+        h1 = f'{esc(T)} coordinate graphing worksheet'
+        count = f'''{badge(d)}Free printable PDF · {len(d['segments'])} lines · {points(d)} points{'' if d['theme'] == 'messages' else ' · ' + esc(length(d))}'''
         lead = (f'<p class="free">Plot the points on the 16 × 16 coordinate grid, join each line in order and a {esc(t)} appears. '
-                f'The answer page comes with it. Letter or A4, in your language or English: download, print or share it free.</p>')
-        page_title = f'{T} Mystery Picture Worksheet · Free Printable PDF Download · Coordigo'
-        desc = (f'Free printable {t} mystery picture worksheet (PDF): plot the points on a 16 × 16 coordinate grid and join them to reveal '
+                f'The answer page comes with it. Letter or A4, in your language or English: download, print or share it free, or solve it here.</p>')
+        page_title = f'{T} Coordinate Graphing Worksheet · Free Printable Mystery Picture PDF · Coordigo'
+        desc = (f'Free printable {t} coordinate graphing worksheet, a mystery picture (PDF): plot the points on a 16 × 16 grid and join them to reveal '
                 f'the picture. Answer page included. Letter or A4, in your language or English.')
         image = f'/library/img/{d["id"]}.png'
-        ld_main = {'@type': ['CreativeWork', 'LearningResource'], 'name': f'{T} mystery picture worksheet', 'url': ORIGIN + path,
+        ld_main = {'@type': ['CreativeWork', 'LearningResource'], 'name': f'{T} coordinate graphing worksheet', 'url': ORIGIN + path,
                    'image': ORIGIN + image, 'description': desc, 'isAccessibleForFree': True, 'learningResourceType': 'Worksheet',
                    'educationalUse': 'Coordinate graphing', 'encodingFormat': 'application/pdf', 'inLanguage': LANGS,
                    'publisher': {'@id': 'https://swiftian.com/#org'}, 'isPartOf': {'@id': 'https://coordigo.com/#site'}}
@@ -352,7 +344,7 @@ def sheet_page(kind, d, prev, nxt):
         lead = (f'<p class="free">A small counted cross stitch pattern: the chart with a symbol for every colour, the DMC floss key and '
                 f'how to stitch it, about {f["W"] / 14 * 2.54:.1f} × {f["H"] / 14 * 2.54:.1f} cm on 14 count Aida. '
                 f'Letter or A4, in your language or English: download, print or share it free.</p>')
-        page_title = f'{T} Cross Stitch Pattern · Free PDF Download · Coordigo'
+        page_title = f'{T} Cross Stitch Pattern · Free Printable PDF · Coordigo'
         desc = (f'Free {t} cross stitch pattern (PDF): {f["W"]} × {f["H"]} stitches, {f["colors"]} DMC colours plus black backstitch, '
                 f'a chart with symbols and a floss key. Letter or A4, in your language or English.')
         image = f'/cross-stitch/img/{d["id"]}.jpg'
@@ -363,10 +355,10 @@ def sheet_page(kind, d, prev, nxt):
                    'inLanguage': LANGS, 'publisher': {'@id': 'https://swiftian.com/#org'}, 'isPartOf': {'@id': 'https://coordigo.com/#site'}}
     graph = ([ld_main] if ld_main else []) + [{'@type': 'BreadcrumbList', 'itemListElement': [
         {'@type': 'ListItem', 'position': 1, 'name': sec['crumb'], 'item': ORIGIN + sec['path']},
-        {'@type': 'ListItem', 'position': 2, 'name': h1.replace('&amp;', '&') if kind != 'library' else title(d), 'item': ORIGIN + path}]}]
+        {'@type': 'ListItem', 'position': 2, 'name': h1.replace('&amp;', '&'), 'item': ORIGIN + path}]}]
     inner = f'''
   <section class="pic-page" {attrs}>
-    <p class="crumb"><a href="{sec['path']}"{' data-t="libCaps"' if kind == 'library' else ''}>{sec['crumb']}</a></p>
+    <p class="crumb"><a href="{sec['path']}" data-t="{sec['t']}">{sec['crumb']}</a></p>
     <h1>{h1}</h1>
     <p class="count">{count}</p>
     {words}
@@ -376,14 +368,15 @@ def sheet_page(kind, d, prev, nxt):
 {menu(kind, d)}
     </div>
     <div class="sheets" id="sheetPreview" aria-live="polite"></div>
-    {'<iframe id="player" title="Mystery picture" hidden></iframe>' if kind == 'library' else also}
+    {'<iframe id="player" title="Mystery picture" hidden></iframe>' if kind == 'library' else ''}
+    {also}
     <nav class="pn" aria-label="More pictures">{link(prev, 'Newer')}{link(nxt, 'Older')}</nav>
   </section>
 '''
     out = os.path.join(ROOT, path.strip('/'), 'index.html')
     os.makedirs(os.path.dirname(out), exist_ok=True)
     page = head(page_title, desc, path, image, {'@context': 'https://schema.org', '@graph': graph}) + body(inner, kind)
-    stitch_js = STITCH and kind != 'worksheet'
+    stitch_js = STITCH and kind == 'stitch'
     page = page.replace('<script src="/mystery/strings.js"></script>',
                         '<script src="/mystery/strings.js"></script>\n<script src="/mystery/engine.js"></script>\n'
                         + (f'<script type="application/json" id="faces">{json.dumps(FACES[d["id"]], separators=(",", ":"))}</script>\n' if d['id'] in FACES else '')
@@ -395,6 +388,7 @@ def sheet_page(kind, d, prev, nxt):
     open(out, 'w').write(page)
 
 def hub_tile(kind, d):
+    if kind == 'library': return tile(d)
     if kind == 'stitch':
         return (f'<a class="tile" href="/cross-stitch/{d["id"]}/"><div class="face hoop"><img src="/cross-stitch/img/{d["id"]}.jpg" width="600" height="648" '
                 f'loading="lazy" alt="{esc(d["title"])} cross stitch pattern"></div><div class="t">{esc(d["title"])}</div><div class="d">Free cross stitch pattern</div></a>')
@@ -402,13 +396,13 @@ def hub_tile(kind, d):
             f'loading="lazy" alt="{esc(d["title"])} mystery picture worksheet"></div><div class="t">{esc(d["title"])}</div><div class="d">Free worksheet · {esc(length(d))}</div></a>')
 
 HUB = {
-    'worksheet': {'h1': f'{len(solve)} free printable mystery picture worksheets',
+    'library': {'h1': f'Coordinate graphing: {len(solve)} free mystery picture worksheets',
                   'sub': 'Coordinate graphing mystery pictures, free to download as PDF. Plot the points on a 16 × 16 grid, join them in order and a picture appears. Every worksheet has an answer page, prints on Letter or A4 and comes in your language or English.',
-                  'title': f'{len(solve)} Free Printable Mystery Picture Worksheets · Coordinate Graphing PDF Download · Coordigo',
+                  'title': f'Coordinate Graphing Mystery Pictures · {len(solve)} Free Printable Worksheets (PDF) · Coordigo',
                   'desc': f'{len(solve)} free printable mystery picture worksheets (PDF): coordinate graphing on a 16 × 16 grid with an answer page. Letter or A4, in your language or English.'},
-    'stitch': {'h1': f'{len(solve)} free cross stitch patterns',
+    'stitch': {'h1': f'Cross stitch: {len(solve)} free patterns',
                'sub': 'Small counted cross stitch patterns, free to download as PDF: a 30 × 30 chart with a symbol for every colour, a DMC floss key and how to stitch it, about 5 cm on 14 count Aida. Letter or A4, in your language or English.',
-               'title': f'{len(solve)} Free Cross Stitch Patterns · PDF Download · Coordigo',
+               'title': f'Cross Stitch Patterns · {len(solve)} Free Printable PDFs · Coordigo',
                'desc': f'{len(solve)} free counted cross stitch patterns (PDF): small 30 × 30 designs with symbol charts and DMC floss keys. Letter or A4, in your language or English.'},
 }
 def hub_page(kind, k):
@@ -416,14 +410,14 @@ def hub_page(kind, k):
     items = newest[(k - 1) * PER: k * PER]
     pager = ''.join(f'<a href="{base if i == 1 else f"{base}{i}/"}"{" aria-current=\"page\"" if i == k else ""}>{i}</a>' for i in range(1, pages + 1))
     h = HUB[kind]
-    other = ('<a href="/cross-stitch/">Free cross stitch patterns</a>' if kind == 'worksheet' else '<a href="/worksheets/">Free mystery picture worksheets</a>')
+    other = ('<a href="/cross-stitch/">the same pictures as free cross stitch patterns</a>' if kind == 'library' else '<a href="/library/">the same pictures as free coordinate graphing worksheets</a>')
     inner = f'''
   <section>
     <h1 style="font-size:28px;margin:6px 0 4px">{h['h1']}</h1>
     <p class="sub">{h['sub']}</p>
     <div class="grid" style="margin-top:16px">{''.join(hub_tile(kind, d) for d in items)}</div>
     <nav class="pager" aria-label="Pages">{pager}</nav>
-    <p class="also">Also free: {other} · <a href="/library/">the Library</a></p>
+    <p class="also">Also: {other}</p>
   </section>
 '''
     first = items[0]['id']
@@ -435,31 +429,32 @@ def hub_page(kind, k):
     open(out, 'w').write(head(h['title'] + ('' if k == 1 else f' · page {k}'), h['desc'], path, image, ld) + body(inner, kind))
 
 # the two sections are made again from nothing each time (the hoop images stay: tools/stitch-hoops.py makes them)
-for sec in ('worksheets', 'cross-stitch'):
+shutil.rmtree(os.path.join(ROOT, 'worksheets'), ignore_errors=True)   # merged into /library/ (founder 2026-11-08)
+for sec in ('cross-stitch',):
     base = os.path.join(ROOT, sec); os.makedirs(base, exist_ok=True)
     for name in os.listdir(base):
         if name != 'img':
             q = os.path.join(base, name); shutil.rmtree(q) if os.path.isdir(q) else os.remove(q)
 
-for k in range(1, pages + 1): grid_page(k)
 order = newest + messages
 for i, d in enumerate(order):
     sheet_page('library', d, order[i - 1] if i > 0 else None, order[i + 1] if i + 1 < len(order) else None)
-for kind in ('worksheet',) + (('stitch',) if STITCH else ()):
+for k in range(1, pages + 1): hub_page('library', k)
+for kind in (('stitch',) if STITCH else ()):
     for k in range(1, pages + 1): hub_page(kind, k)
     for i, d in enumerate(newest):
         sheet_page(kind, d, newest[i - 1] if i > 0 else None, newest[i + 1] if i + 1 < len(newest) else None)
 
 # MARK: Sitemap — every Library page, each picture's page with its image
 sm_path = os.path.join(ROOT, 'sitemap.xml'); sm = open(sm_path).read()
-sm = re.sub(r'\s*<url><loc>https://coordigo\.com/(?:library|worksheets|cross-stitch)/[^<]*</loc>.*?</url>', '', sm, flags=re.S)
+sm = re.sub(r'\s*<url><loc>https://coordigo\.com/(?:library|worksheets|cross-stitch|postcards)/[^<]*</loc>.*?</url>', '', sm, flags=re.S)
 if 'xmlns:image' not in sm:
     sm = sm.replace('<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"', '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"', 1)
 urls = [f'  <url><loc>{ORIGIN}/library/</loc></url>'] + [f'  <url><loc>{ORIGIN}/library/{k}/</loc></url>' for k in range(2, pages + 1)]
 urls += [f'  <url><loc>{ORIGIN}/library/{d["id"]}/</loc><image:image><image:loc>{ORIGIN}/library/img/{d["id"]}.png</image:loc></image:image></url>' for d in order]
-for base, img in [('worksheets', lambda i: f'/library/img/{i}.png')] + ([('cross-stitch', lambda i: f'/cross-stitch/img/{i}.jpg')] if STITCH else []):
+for base, img in ([('cross-stitch', lambda i: f'/cross-stitch/img/{i}.jpg')] if STITCH else []):
     urls += [f'  <url><loc>{ORIGIN}/{base}/</loc></url>'] + [f'  <url><loc>{ORIGIN}/{base}/{k}/</loc></url>' for k in range(2, pages + 1)]
     urls += [f'  <url><loc>{ORIGIN}/{base}/{d["id"]}/</loc><image:image><image:loc>{ORIGIN}{img(d["id"])}</image:loc></image:image></url>' for d in newest]
 sm = sm.replace('</urlset>', '\n'.join(urls) + '\n</urlset>')
 open(sm_path, 'w').write(sm)
-print(f'{len(data)} pictures · {pages} Library pages · {len(order)} picture pages · worksheets and cross stitch: {pages} hub pages and {len(newest)} pages each')
+print(f'{len(data)} pictures · {pages} Library pages · {len(order)} picture pages · cross stitch: {pages} hub pages and {len(newest)} pages')
