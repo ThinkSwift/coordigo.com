@@ -342,4 +342,7 @@
       return out;
     },
   };
+  // a cross stitch page (/cross-stitch/<id>/) is drawn first by worksheet.js, before this file is there: draw it again now
+  const form = $('sheetForm');
+  if (form && form.elements.kind && form.elements.kind.value === 'stitch') form.dispatchEvent(new Event('change'));
 })();

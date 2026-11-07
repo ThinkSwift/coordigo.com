@@ -117,6 +117,9 @@
   .site:hover{border-color:#0b0f1a}
   @media (prefers-color-scheme: dark){ .site{border-color:#eef1f7} .site:hover{border-color:#6d6557} }
   @media (max-width:600px){ .tab{min-width:0;flex:1;padding:10px 6px 9px} .tabs{flex:1} .site{flex:1;width:auto} }
+  
+  /* five tabs on a phone: the bar scrolls (2026-11-08) */
+  @media (max-width:560px){.tabs{overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}.tabs::-webkit-scrollbar{display:none}.tab{flex:0 0 auto;padding:10px 12px 9px}}
 </style>
 <style id="site-hints">
   /* site buttons: own icon, name, then what is there (founder 2026-11-04, RDM-sites-button-hints) */
@@ -129,7 +132,7 @@
 </head>
 <body>
   <div class="wrap">
-    <nav class="tabs-bar" aria-label="Coordigo"><div class="tabs"><a class="tab" href="/"><span>Coordigo</span></a><a class="tab" href="/library/"><span data-t="libCaps">Library</span></a><a class="tab" href="/postcards/" aria-current="page"><span>Postcards</span></a></div></nav>
+    <nav class="tabs-bar" aria-label="Coordigo"><div class="tabs"><a class="tab" href="/"><span>Coordigo</span></a><a class="tab" href="/library/"><span data-t="libCaps">Library</span></a><a class="tab" href="/worksheets/"><span>Worksheets</span></a><a class="tab" href="/cross-stitch/"><span>Cross stitch</span></a><a class="tab" href="/postcards/" aria-current="page"><span>Postcards</span></a></div></nav>
 
     <p class="kicker">Postcards &middot; Volume One</p>
     <h1>Someone walks through the picture you uncover.</h1>

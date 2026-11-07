@@ -6,6 +6,7 @@ the foot at the design's grid, the message and description fit the answer page, 
   tools/worksheet-check.py [--langs en,ko,ja,ar,th,hi] [--ids a,b]
   tools/worksheet-check.py --shot <id> <letter|a4> <lang> <out.png> [--fields 1]   → the pages as PNG
   tools/worksheet-check.py --pdf <id> <letter|a4> <lang> <out.pdf> [--fields 1]    → the PDF the page makes
+  add --base /worksheets/ (or /cross-stitch/) to check those pages instead of the Library's
   add --kind stitch to any of these for the cross stitch pattern (library/stitch.js): there every note is a failure
 
 Replaced the pixel parity with the app's sheet (tools/worksheet-parity.py) when the site took its own design on
@@ -26,8 +27,10 @@ srv = http.server.ThreadingHTTPServer(('127.0.0.1', 0), handler); port = srv.ser
 threading.Thread(target=srv.serve_forever, daemon=True).start()
 
 KIND = opt('--kind', 'worksheet')
+BASE = opt('--base', '')   # /worksheets/ or /cross-stitch/: the free-download pages instead of the Library's
 def run(query, budget=60000):
     if KIND == 'stitch': query = {**query, 'kind': 'stitch'}
+    if BASE: query = {**query, 'base': BASE}
     url = f'http://127.0.0.1:{port}/tools/worksheet-check.html?{urllib.parse.urlencode(query)}'
     dom = subprocess.run([CHROME, '--headless=new', '--disable-gpu', f'--user-data-dir={tempfile.mkdtemp()}',
                           f'--virtual-time-budget={budget}', '--dump-dom', url], capture_output=True, text=True, timeout=900).stdout

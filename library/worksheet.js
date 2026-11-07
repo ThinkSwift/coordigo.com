@@ -494,13 +494,13 @@
   form.elements.words.addEventListener('input', e => { e.target.dataset.edited = '1'; });
   for (const n of ['label1', 'label2']) form.elements[n].addEventListener('input', e => { e.target.dataset.edited = '1'; });
   form.addEventListener('input', e => { if (e.target.type === 'text' || e.target.tagName === 'TEXTAREA') { clearTimeout(typing); typing = setTimeout(preview, 250); } });
-  const solve = $('solveHere'), player = $('player');
-  solve.addEventListener('click', () => {
+  const solve = $('solveHere'), player = $('player');      // the Library's picture page only
+  if (solve && player) solve.addEventListener('click', () => {
     player.hidden = false;
     player.src = '/mystery/?embed#' + item.payload;
     player.scrollIntoView({ behavior: 'smooth', block: 'start' });
   });
-  addEventListener('message', e => {
+  if (player) addEventListener('message', e => {
     if (e.source !== player.contentWindow || !e.data || !e.data.co) return;
     if (e.data.co === 'height') player.style.height = Math.max(420, e.data.h + 8) + 'px';
   });

@@ -3,7 +3,8 @@
 <title>Worksheet check</title>
 <!-- tools/worksheet-check.py opens this headless. check: ?ids=a,b&papers=letter,a4&langs=en,ko → each page's fit and notes.
      shot: ?shot=<id>&paper=letter&lang=en[&fields=1] → the pages as PNG data; pdf=<id> (same settings) → the PDF.
-     kind=stitch: the same for the cross stitch pattern (library/stitch.js) instead of the worksheet. -->
+     kind=stitch: the same for the cross stitch pattern (library/stitch.js) instead of the worksheet.
+     base=/worksheets/ or /cross-stitch/: open the pictures' pages there instead of the Library's. -->
 <iframe id="f" style="width:1200px;height:900px"></iframe>
 <pre id="out"></pre>
 <script>
@@ -11,7 +12,7 @@
   const KIND = q.get('kind') === 'stitch' ? 'CoStitch' : 'CoWorksheet';
   const open = id => new Promise(ok => { f.onload = async () => {
     const W = f.contentWindow; for (let i = 0; i < 1200 && !W[KIND]; i++) await new Promise(r => setTimeout(r, 25)); ok(W[KIND]);
-  }; f.src = '/library/' + id + '/' + (KIND === 'CoStitch' ? '?stitch=preview' : ''); });
+  }; f.src = (q.get('base') || '/library/') + id + '/'; });
   (async () => {
     if (q.get('pdf')) {
       const ws = await open(q.get('pdf'));

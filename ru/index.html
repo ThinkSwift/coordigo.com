@@ -181,6 +181,8 @@
     .intro .film{width:min(240px,70%);margin:0 auto}
     .puzzle{margin:16px -16px 0;border-radius:0;border-left:0;border-right:0;padding:8px 0 0}
   }
+  /* five tabs on a phone: the bar scrolls (2026-11-08) */
+  @media (max-width:560px){.tabs{overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}.tabs::-webkit-scrollbar{display:none}.tab{flex:0 0 auto;padding:10px 12px 9px}}
 </style>
 <style id="site-hints">
   /* site buttons: own icon, name, then what is there (founder 2026-11-04, RDM-sites-button-hints) */
@@ -193,7 +195,7 @@
 </head>
 <body>
 <main>
-  <nav class="tabs-bar" aria-label="Coordigo"><div class="tabs"><a class="tab" href="/" aria-current="page"><span>Coordigo</span></a><a class="tab" href="/library/"><span data-t="libCaps">Library</span></a><a class="tab" href="/postcards/"><span>Postcards</span></a></div></nav>
+  <nav class="tabs-bar" aria-label="Coordigo"><div class="tabs"><a class="tab" href="/" aria-current="page"><span>Coordigo</span></a><a class="tab" href="/library/"><span data-t="libCaps">Library</span></a><a class="tab" href="/worksheets/"><span>Worksheets</span></a><a class="tab" href="/cross-stitch/"><span>Cross stitch</span></a><a class="tab" href="/postcards/"><span>Postcards</span></a></div></nav>
 
   <section class="puzzle" aria-labelledby="puzzleNo">
     <div class="head"><div class="caps" id="puzzleNo"></div><button class="another" id="another" type="button">Another picture</button></div>
