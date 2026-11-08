@@ -61,7 +61,7 @@ HEAD = home[:home.index('</style>')]
 HEAD_TAIL = home[home.index('</style>') + len('</style>'):home.index('</head>')]
 MENU = (re.search(r'<!-- app-menu -->.*?<!-- /app-menu -->', home) or [''])[0]
 NAV = re.search(r'<nav class="tabs-bar".*?</nav>', home, re.S).group(0)
-FOOT = re.search(r'  <footer>.*?</footer>', home, re.S).group(0)
+FOOT = re.search(r'  <!-- site-footer -->.*?<!-- /site-footer -->', home, re.S).group(0)   # shared footer (swiftian.com tools/app_menu.py)
 BAR = re.search(r'<div class="appbar".*?</a></div>', home).group(0).replace('web-co-home', 'web-co-library')
 
 solve = [d for d in data if d['theme'] != 'messages']
