@@ -14,7 +14,7 @@ Pace (founder 2026-11-08: 20-30 the first day, then 10-15 a day, not hundreds at
 Order: Christmas, winter, New Year, Thanksgiving and autumn first; then the site's order; Valentine's last. Halloween waits for
 2027-09-01 so it goes out ahead of its season. The same picture's two pins are two days apart.
 The mini runs tools/pins-daily.sh each morning: feed, commit, push. Run render after pictures or titles change."""
-import concurrent.futures, datetime, functools, html, http.server, json, pathlib, re, subprocess, sys, tempfile, threading
+import concurrent.futures, datetime, hashlib, functools, html, http.server, json, pathlib, re, subprocess, sys, tempfile, threading
 from email.utils import format_datetime
 
 SITE = pathlib.Path(__file__).resolve().parent.parent
@@ -158,13 +158,18 @@ def feed(args):
         since = (datetime.date.fromisoformat(today) - datetime.timedelta(days=DAYS - 1)).isoformat()
         due = sorted([x for x in data['boards'][b] if since <= x['date'] <= today and not x.get('sent')], key=lambda x: x['date'], reverse=True)   # sent: pinned by hand, not by the feed
         items = []
-        for n, x in enumerate(due):
+        slot = {}   # an item's minute within its own day, from the plan's order: it never changes once the item is out
+        for x in data['boards'][b]: slot[x['id']] = sum(1 for y in slot if y != x['id'] and next(z for z in data['boards'][b] if z['id'] == y)['date'] == x['date'])
+        for x in due:
+            n = slot[x['id']]
             i = x['id']; w = words(i); f = img(b, i)
             if not f.exists(): sys.exit(f'FAIL no image {f} — run tools/pins.py render first')
             v = x.get('v', 1)   # v2+: sent again after its pin was deleted (a new guid and link, or Pinterest skips it)
             link = f'{url(b, i)}?utm_source=pinterest&amp;utm_medium=social&amp;utm_campaign=web-co-pin-{b}' + (f'&amp;utm_content=v{v}' if v > 1 else '')
             when = datetime.datetime.fromisoformat(x['date'] + 'T07:00:00+09:00') - datetime.timedelta(minutes=n)
-            src = f'{ORIGIN}/pins/{b}/{i}.jpg'
+            # Pinterest keeps the first image it fetched for an address (2026-11-09: re-made pins came back with the old hoop),
+            # so an image's address carries its content hash: a re-made image is always a new address. Items before 11-09 keep theirs.
+            src = f'{ORIGIN}/pins/{b}/{i}.jpg' + (f'?v={hashlib.md5(f.read_bytes()).hexdigest()[:8]}' if x['date'] >= '2026-11-09' else '')
             items.append(f'''  <item>
    <title>{html.escape(w[b + "_title"])}</title>
    <link>{link}</link>
