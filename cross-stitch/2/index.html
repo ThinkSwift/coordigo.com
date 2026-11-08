@@ -314,7 +314,9 @@
     if (lang.indexOf('zh') === 0) L = /hant|tw|hk|mo/.test(lang) ? 'zh-Hant' : 'zh-Hans';
     else if (lang.indexOf('pt') === 0) L = 'pt-BR'; else if (table[lang.split('-')[0]]) L = lang.split('-')[0];
     document.querySelectorAll('[data-t]').forEach(function (el) { var s = (table[L] || {})[el.dataset.t]; if (s && s.indexOf('%') < 0) el.textContent = s; });
-    document.querySelectorAll('[data-store]').forEach(function (a) { a.href = 'https://apps.apple.com/app/id1486330879?ct=' + a.dataset.store; });
+    var pin = (location.search.match(/[?&]utm_campaign=(web-co-pin-[a-z]+)/) || [])[1];   // a visit from a Pinterest pin (tools/pins.py) keeps its board's ct for the session
+    try { if (pin) sessionStorage.setItem('co_ct', pin); else pin = sessionStorage.getItem('co_ct'); } catch (e) {}
+    document.querySelectorAll('[data-store]').forEach(function (a) { a.href = 'https://apps.apple.com/app/id1486330879?ct=' + (pin || a.dataset.store); });
     var apple = /iPhone|iPad|Macintosh/.test(navigator.userAgent), preview = /[?&]store=preview/.test(location.search);
     if (!preview && (!apple || window.CO_STORE !== true)) document.querySelectorAll('[data-apple]').forEach(function (e) { e.hidden = true; });
     var cur = document.querySelector('.tabs [aria-current]'), bar = cur && cur.parentNode;   // a phone shows the current tab
