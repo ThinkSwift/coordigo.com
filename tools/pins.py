@@ -156,7 +156,7 @@ def feed(args):
     data = json.load(open(SITE / 'pins' / 'plan.json'))
     for b, cfg in BOARDS.items():
         since = (datetime.date.fromisoformat(today) - datetime.timedelta(days=DAYS - 1)).isoformat()
-        due = sorted([x for x in data['boards'][b] if since <= x['date'] <= today], key=lambda x: x['date'], reverse=True)
+        due = sorted([x for x in data['boards'][b] if since <= x['date'] <= today and not x.get('sent')], key=lambda x: x['date'], reverse=True)   # sent: pinned by hand, not by the feed
         items = []
         for n, x in enumerate(due):
             i = x['id']; w = words(i); f = img(b, i)
