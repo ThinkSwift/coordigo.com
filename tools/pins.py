@@ -7,7 +7,7 @@ Each link carries utm_campaign=web-co-pin-<board>; the pages use it as the App S
 
   tools/pins.py render [--board ws|xs] [--ids a,b] [--force]   pin images (1000x1500 JPEG) in pins/<board>/<id>.jpg, from the built pages
   tools/pins.py plan [--start YYYY-MM-DD] [--force]             pins/plan.json: the day each pin goes out (kept once made)
-  tools/pins.py feed [--date YYYY-MM-DD]                        the two feeds: every pin whose day has come, newest 60
+  tools/pins.py feed [--date YYYY-MM-DD]                        the two feeds: the pins of the last 3 days
   tools/pins.py check                                           PASS/FAIL: every planned pin has its image and page
 
 Pace (founder 2026-11-08: 20-30 the first day, then 10-15 a day, not hundreds at once): 12 a board on day 1, then 10 a board a day (founder 2026-11-08: 6 was too slow).
@@ -22,7 +22,7 @@ ORIGIN = 'https://coordigo.com'
 CHROME = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'
 BOARDS = {'ws': {'dir': 'library', 'feed': 'worksheets.xml', 'name': 'Mystery Picture Worksheets'},
           'xs': {'dir': 'cross-stitch', 'feed': 'cross-stitch.xml', 'name': 'Free Cross Stitch Patterns'}}
-FIRST, DAILY, KEEP = 12, 10, 60
+FIRST, DAILY, DAYS = 12, 10, 3   # a feed lists only its last 3 days: Pinterest reads it daily, and an item already pinned is never touched again
 SEASONS = [w.split() for w in (   # taken in turn, so the first days mix them
     'turkey pie roast cornucopia pilgrim-hat cranberry-sauce harvest-table',
     'xmas-tree santa-hat gingerbread reindeer sleigh stocking candy-cane wreath bauble gift-box holly bell snowman snowVillage iso-house fireplace',
@@ -155,18 +155,20 @@ def feed(args):
     today = args[args.index('--date') + 1] if '--date' in args else datetime.date.today().isoformat()
     data = json.load(open(SITE / 'pins' / 'plan.json'))
     for b, cfg in BOARDS.items():
-        due = sorted([x for x in data['boards'][b] if x['date'] <= today], key=lambda x: x['date'], reverse=True)[:KEEP]
+        since = (datetime.date.fromisoformat(today) - datetime.timedelta(days=DAYS - 1)).isoformat()
+        due = sorted([x for x in data['boards'][b] if since <= x['date'] <= today], key=lambda x: x['date'], reverse=True)
         items = []
         for n, x in enumerate(due):
             i = x['id']; w = words(i); f = img(b, i)
             if not f.exists(): sys.exit(f'FAIL no image {f} — run tools/pins.py render first')
-            link = f'{url(b, i)}?utm_source=pinterest&amp;utm_medium=social&amp;utm_campaign=web-co-pin-{b}'
+            v = x.get('v', 1)   # v2+: sent again after its pin was deleted (a new guid and link, or Pinterest skips it)
+            link = f'{url(b, i)}?utm_source=pinterest&amp;utm_medium=social&amp;utm_campaign=web-co-pin-{b}' + (f'&amp;utm_content=v{v}' if v > 1 else '')
             when = datetime.datetime.fromisoformat(x['date'] + 'T07:00:00+09:00') - datetime.timedelta(minutes=n)
             src = f'{ORIGIN}/pins/{b}/{i}.jpg'
             items.append(f'''  <item>
    <title>{html.escape(w[b + "_title"])}</title>
    <link>{link}</link>
-   <guid isPermaLink="false">coordigo-pin-{b}-{i}</guid>
+   <guid isPermaLink="false">coordigo-pin-{b}-{i}{"-v" + str(v) if v > 1 else ""}</guid>
    <pubDate>{format_datetime(when)}</pubDate>
    <description>{html.escape(w[b + "_desc"])}</description>
    <enclosure url="{src}" length="{f.stat().st_size}" type="image/jpeg"/>
