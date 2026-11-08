@@ -74,8 +74,9 @@ KIND = {'animals': 'Animals', 'objects': 'Things', 'food-drink': 'Food & drink',
         'arms-battle': 'Arms & armour', 'sky-space': 'Sky & space', 'art-pattern': 'Art & patterns'}
 pages = max(1, -(-len(newest) // PER))
 # the two sections' hubs: a dozen to a page, room around each (founder 2026-11-08: too many at once tired the eye)
-HUB_PER = 12
-hub_pages = max(1, -(-len(newest) // HUB_PER))
+# worksheets sit closer than patterns (founder 2026-11-08): 6 across on a computer and 3 on a phone, patterns 4 and 2
+HUB_PER = {'library': 18, 'stitch': 12}
+hub_count = lambda kind: max(1, -(-len(newest) // HUB_PER[kind]))
 
 def badge(d):
     t = TIER.get(d['id']); return f'<span class="tier {t.lower()}">{t}</span>' if t else ''
@@ -135,7 +136,7 @@ CSS = '''
   .hub{padding:52px 0 8px}
   .hub h1{font-weight:400;font-size:clamp(30px,4.2vw,42px);line-height:1.15;margin:0 0 14px}
   .hub .sub{max-width:32em;font-size:17px;line-height:1.65;margin:0 0 52px}
-  .hub .grid{grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:56px 44px;max-width:1000px}
+  .hub .grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:56px 44px}
   .hub .tile .face{border-radius:20px;border:0;box-shadow:0 1px 2px rgba(0,0,0,.18),0 10px 30px rgba(0,0,0,.18)}
   .hub .tile .face img{object-fit:contain}
   .hub .tile .t{font:400 18px/1.3 "Young Serif",Georgia,serif;text-align:center;margin:16px 4px 0}
@@ -143,7 +144,13 @@ CSS = '''
   .hub .walk{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:16px;margin:64px 0 0;font:15px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--muted)}
   .hub .walk a{color:var(--ink);text-decoration:none;border:1px solid var(--line);border-radius:999px;padding:10px 18px}
   .hub .walk > :last-child{justify-self:end} .hub .walk > :first-child{justify-self:start}
+  @media (max-width:900px){ .hub .grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:44px 28px} }
   @media (max-width:760px){ .hub{padding:32px 0 4px} .hub .sub{margin-bottom:36px} .hub .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:36px 20px} .hub .tile .t{font-size:16px;margin-top:12px} .hub .walk{margin-top:44px} }
+  .hub.dense .grid{grid-template-columns:repeat(6,minmax(0,1fr));gap:40px 26px}
+  .hub.dense .tile .face{border-radius:14px;box-shadow:0 1px 2px rgba(0,0,0,.16),0 6px 18px rgba(0,0,0,.14)}
+  .hub.dense .tile .t{font-size:15px;margin-top:11px}
+  @media (max-width:900px){ .hub.dense .grid{grid-template-columns:repeat(4,minmax(0,1fr))} }
+  @media (max-width:760px){ .hub.dense .grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:26px 12px} .hub.dense .tile .face{border-radius:10px} .hub.dense .tile .t{font-size:12.5px;margin-top:8px} }
   .crumb{font:13px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--muted);margin:22px 0 0}
   .crumb a{color:inherit}
   .pic-page h1{margin:6px 0 4px}
@@ -449,13 +456,13 @@ HUB = {
 }
 def hub_page(kind, k):
     sec = SEC[kind]; base = sec['path']; path = base if k == 1 else f'{base}{k}/'
-    items = newest[(k - 1) * HUB_PER: k * HUB_PER]
+    items = newest[(k - 1) * HUB_PER[kind]: k * HUB_PER[kind]]; hub_pages = hub_count(kind)
     at = lambda i: base if i == 1 else f'{base}{i}/'
     walk = (f'<a href="{at(k - 1)}" rel="prev">← Newer</a>' if k > 1 else '<span class="gap"></span>') + f'<span>{k} / {hub_pages}</span>' \
            + (f'<a href="{at(k + 1)}" rel="next">Older →</a>' if k < hub_pages else '<span class="gap"></span>')
     h = HUB[kind]
     inner = f'''
-  <section class="hub">
+  <section class="hub{' dense' if kind == 'library' else ''}">
     <h1>{h['h1']}</h1>
     <p class="sub">{h['sub']}</p>
     <div class="grid">{''.join(hub_tile(kind, d) for d in items)}</div>
@@ -481,9 +488,9 @@ for sec in ('cross-stitch',):
 order = newest + messages
 for i, d in enumerate(order):
     sheet_page('library', d, order[i - 1] if i > 0 else None, order[i + 1] if i + 1 < len(order) else None)
-for k in range(1, hub_pages + 1): hub_page('library', k)
+for k in range(1, hub_count('library') + 1): hub_page('library', k)
 for kind in (('stitch',) if STITCH else ()):
-    for k in range(1, hub_pages + 1): hub_page(kind, k)
+    for k in range(1, hub_count(kind) + 1): hub_page(kind, k)
     for i, d in enumerate(newest):
         sheet_page(kind, d, newest[i - 1] if i > 0 else None, newest[i + 1] if i + 1 < len(newest) else None)
 
@@ -492,11 +499,11 @@ sm_path = os.path.join(ROOT, 'sitemap.xml'); sm = open(sm_path).read()
 sm = re.sub(r'\s*<url><loc>https://coordigo\.com/(?:library|worksheets|cross-stitch|postcards)/[^<]*</loc>.*?</url>', '', sm, flags=re.S)
 if 'xmlns:image' not in sm:
     sm = sm.replace('<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"', '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"', 1)
-urls = [f'  <url><loc>{ORIGIN}/library/</loc></url>'] + [f'  <url><loc>{ORIGIN}/library/{k}/</loc></url>' for k in range(2, hub_pages + 1)]
+urls = [f'  <url><loc>{ORIGIN}/library/</loc></url>'] + [f'  <url><loc>{ORIGIN}/library/{k}/</loc></url>' for k in range(2, hub_count('library') + 1)]
 urls += [f'  <url><loc>{ORIGIN}/library/{d["id"]}/</loc><image:image><image:loc>{ORIGIN}/library/img/{d["id"]}.png</image:loc></image:image></url>' for d in order]
 for base, img in ([('cross-stitch', lambda i: f'/cross-stitch/img/{i}.jpg')] if STITCH else []):
-    urls += [f'  <url><loc>{ORIGIN}/{base}/</loc></url>'] + [f'  <url><loc>{ORIGIN}/{base}/{k}/</loc></url>' for k in range(2, hub_pages + 1)]
+    urls += [f'  <url><loc>{ORIGIN}/{base}/</loc></url>'] + [f'  <url><loc>{ORIGIN}/{base}/{k}/</loc></url>' for k in range(2, hub_count('stitch') + 1)]
     urls += [f'  <url><loc>{ORIGIN}/{base}/{d["id"]}/</loc><image:image><image:loc>{ORIGIN}{img(d["id"])}</image:loc></image:image></url>' for d in newest]
 sm = sm.replace('</urlset>', '\n'.join(urls) + '\n</urlset>')
 open(sm_path, 'w').write(sm)
-print(f'{len(data)} pictures · {hub_pages} Library pages · {len(order)} picture pages · cross stitch: {hub_pages} hub pages and {len(newest)} pages')
+print(f'{len(data)} pictures · {hub_count('library')} Library pages · {len(order)} picture pages · cross stitch: {hub_count('stitch')} hub pages and {len(newest)} pages')
