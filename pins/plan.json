@@ -1,7 +1,7 @@
 {
  "made": "2026-11-08",
  "first": 12,
- "daily": 6,
+ "daily": 10,
  "boards": {
   "ws": [
    {
@@ -78,19 +78,19 @@
    },
    {
     "id": "genre-mandarins",
-    "date": "2026-11-10"
+    "date": "2026-11-09"
    },
    {
     "id": "genre-tteokguk",
-    "date": "2026-11-10"
+    "date": "2026-11-09"
    },
    {
     "id": "genre-pie",
-    "date": "2026-11-10"
+    "date": "2026-11-09"
    },
    {
     "id": "founder-snowVillage",
-    "date": "2026-11-10"
+    "date": "2026-11-09"
    },
    {
     "id": "genre-squirrel",
@@ -102,815 +102,815 @@
    },
    {
     "id": "genre-sunrise",
-    "date": "2026-11-11"
+    "date": "2026-11-10"
    },
    {
     "id": "genre-roast",
-    "date": "2026-11-11"
+    "date": "2026-11-10"
    },
    {
     "id": "genre-fireplace",
-    "date": "2026-11-11"
+    "date": "2026-11-10"
    },
    {
     "id": "genre-fox",
-    "date": "2026-11-11"
+    "date": "2026-11-10"
    },
    {
     "id": "genre-ice-skate",
-    "date": "2026-11-11"
+    "date": "2026-11-10"
    },
    {
     "id": "genre-party-hat",
-    "date": "2026-11-11"
+    "date": "2026-11-10"
    },
    {
     "id": "genre-cranberry-sauce",
-    "date": "2026-11-12"
+    "date": "2026-11-10"
    },
    {
     "id": "genre-holly",
-    "date": "2026-11-12"
+    "date": "2026-11-10"
    },
    {
     "id": "genre-pumpkin-patch",
-    "date": "2026-11-12"
+    "date": "2026-11-11"
    },
    {
     "id": "genre-scarf",
-    "date": "2026-11-12"
+    "date": "2026-11-11"
    },
    {
     "id": "genre-clock",
-    "date": "2026-11-12"
+    "date": "2026-11-11"
    },
    {
     "id": "genre-reindeer",
-    "date": "2026-11-12"
+    "date": "2026-11-11"
    },
    {
     "id": "genre-maple-leaf",
-    "date": "2026-11-13"
+    "date": "2026-11-11"
    },
    {
     "id": "genre-polar-bear",
-    "date": "2026-11-13"
+    "date": "2026-11-11"
    },
    {
     "id": "genre-sleigh",
-    "date": "2026-11-13"
+    "date": "2026-11-11"
    },
    {
     "id": "genre-chestnuts",
-    "date": "2026-11-13"
+    "date": "2026-11-11"
    },
    {
     "id": "founder-penghy",
-    "date": "2026-11-13"
+    "date": "2026-11-11"
    },
    {
     "id": "genre-wreath",
-    "date": "2026-11-13"
+    "date": "2026-11-11"
    },
    {
     "id": "genre-rake-leaves",
-    "date": "2026-11-14"
+    "date": "2026-11-12"
    },
    {
     "id": "genre-mittens",
-    "date": "2026-11-14"
+    "date": "2026-11-12"
    },
    {
     "id": "genre-bell",
-    "date": "2026-11-14"
+    "date": "2026-11-12"
    },
    {
     "id": "genre-geese",
-    "date": "2026-11-14"
+    "date": "2026-11-12"
    },
    {
     "id": "genre-santa-hat",
-    "date": "2026-11-14"
+    "date": "2026-11-12"
    },
    {
     "id": "genre-stocking",
-    "date": "2026-11-14"
+    "date": "2026-11-12"
    },
    {
     "id": "genre-xmas-tree",
-    "date": "2026-11-15"
+    "date": "2026-11-12"
    },
    {
     "id": "genre-candy-cane",
-    "date": "2026-11-15"
+    "date": "2026-11-12"
    },
    {
     "id": "genre-gingerbread",
-    "date": "2026-11-15"
+    "date": "2026-11-12"
    },
    {
     "id": "genre-greek-helmet",
-    "date": "2026-11-15"
+    "date": "2026-11-12"
    },
    {
     "id": "genre-dragon-eye",
-    "date": "2026-11-15"
+    "date": "2026-11-13"
    },
    {
     "id": "genre-knight",
-    "date": "2026-11-15"
+    "date": "2026-11-13"
    },
    {
     "id": "genre-black-cat",
-    "date": "2026-11-16"
+    "date": "2026-11-13"
    },
    {
     "id": "genre-great-wave",
-    "date": "2026-11-16"
+    "date": "2026-11-13"
    },
    {
     "id": "genre-lighthouse",
-    "date": "2026-11-16"
+    "date": "2026-11-13"
    },
    {
     "id": "genre-toucan",
-    "date": "2026-11-16"
+    "date": "2026-11-13"
    },
    {
     "id": "genre-sunflower",
-    "date": "2026-11-16"
+    "date": "2026-11-13"
    },
    {
     "id": "genre-stained-glass",
-    "date": "2026-11-16"
+    "date": "2026-11-13"
    },
    {
     "id": "genre-owl",
-    "date": "2026-11-17"
+    "date": "2026-11-13"
    },
    {
     "id": "genre-toaster",
-    "date": "2026-11-17"
+    "date": "2026-11-13"
    },
    {
     "id": "genre-robin",
-    "date": "2026-11-17"
+    "date": "2026-11-14"
    },
    {
     "id": "genre-castle-siege",
-    "date": "2026-11-17"
+    "date": "2026-11-14"
    },
    {
     "id": "genre-viking-prow",
-    "date": "2026-11-17"
+    "date": "2026-11-14"
    },
    {
     "id": "genre-camping",
-    "date": "2026-11-17"
+    "date": "2026-11-14"
    },
    {
     "id": "founder-dorothy",
-    "date": "2026-11-18"
+    "date": "2026-11-14"
    },
    {
     "id": "genre-nest",
-    "date": "2026-11-18"
+    "date": "2026-11-14"
    },
    {
     "id": "genre-chameleon",
-    "date": "2026-11-18"
+    "date": "2026-11-14"
    },
    {
     "id": "genre-diamond",
-    "date": "2026-11-18"
+    "date": "2026-11-14"
    },
    {
     "id": "genre-handheld-console",
-    "date": "2026-11-18"
+    "date": "2026-11-14"
    },
    {
     "id": "game-ufo",
-    "date": "2026-11-18"
+    "date": "2026-11-14"
    },
    {
     "id": "genre-seedlings",
-    "date": "2026-11-19"
+    "date": "2026-11-15"
    },
    {
     "id": "genre-firefly-jar",
-    "date": "2026-11-19"
+    "date": "2026-11-15"
    },
    {
     "id": "genre-arcade-cabinet",
-    "date": "2026-11-19"
+    "date": "2026-11-15"
    },
    {
     "id": "genre-samurai-helmet",
-    "date": "2026-11-19"
+    "date": "2026-11-15"
    },
    {
     "id": "genre-starfighter",
-    "date": "2026-11-19"
+    "date": "2026-11-15"
    },
    {
     "id": "genre-candy-jar",
-    "date": "2026-11-19"
+    "date": "2026-11-15"
    },
    {
     "id": "genre-skyline",
-    "date": "2026-11-20"
+    "date": "2026-11-15"
    },
    {
     "id": "genre-sandcastle",
-    "date": "2026-11-20"
+    "date": "2026-11-15"
    },
    {
     "id": "genre-clownfish",
-    "date": "2026-11-20"
+    "date": "2026-11-15"
    },
    {
     "id": "genre-dice",
-    "date": "2026-11-20"
+    "date": "2026-11-15"
    },
    {
     "id": "genre-hot-air-balloon",
-    "date": "2026-11-20"
+    "date": "2026-11-16"
    },
    {
     "id": "genre-mushrooms",
-    "date": "2026-11-20"
+    "date": "2026-11-16"
    },
    {
     "id": "genre-pyramids",
-    "date": "2026-11-21"
+    "date": "2026-11-16"
    },
    {
     "id": "genre-space-station",
-    "date": "2026-11-21"
+    "date": "2026-11-16"
    },
    {
     "id": "genre-castle-gate",
-    "date": "2026-11-21"
+    "date": "2026-11-16"
    },
    {
     "id": "genre-dandelion",
-    "date": "2026-11-21"
+    "date": "2026-11-16"
    },
    {
     "id": "genre-golden-gate",
-    "date": "2026-11-21"
+    "date": "2026-11-16"
    },
    {
     "id": "genre-great-helm",
-    "date": "2026-11-21"
+    "date": "2026-11-16"
    },
    {
     "id": "founder-theCowardlyLion",
-    "date": "2026-11-22"
+    "date": "2026-11-16"
    },
    {
     "id": "genre-ray-gun",
-    "date": "2026-11-22"
+    "date": "2026-11-16"
    },
    {
     "id": "genre-statue-of-liberty",
-    "date": "2026-11-22"
+    "date": "2026-11-17"
    },
    {
     "id": "genre-adventurer",
-    "date": "2026-11-22"
+    "date": "2026-11-17"
    },
    {
     "id": "genre-cherry-blossom",
-    "date": "2026-11-22"
+    "date": "2026-11-17"
    },
    {
     "id": "genre-shell-starfish",
-    "date": "2026-11-22"
+    "date": "2026-11-17"
    },
    {
     "id": "genre-daffodils",
-    "date": "2026-11-23"
+    "date": "2026-11-17"
    },
    {
     "id": "genre-lemonade",
-    "date": "2026-11-23"
+    "date": "2026-11-17"
    },
    {
     "id": "genre-rain-boots",
-    "date": "2026-11-23"
+    "date": "2026-11-17"
    },
    {
     "id": "genre-giraffe",
-    "date": "2026-11-23"
+    "date": "2026-11-17"
    },
    {
     "id": "genre-hamburger",
-    "date": "2026-11-23"
+    "date": "2026-11-17"
    },
    {
     "id": "genre-palm-island",
-    "date": "2026-11-23"
+    "date": "2026-11-17"
    },
    {
     "id": "genre-saturn",
-    "date": "2026-11-24"
+    "date": "2026-11-18"
    },
    {
     "id": "genre-dragon",
-    "date": "2026-11-24"
+    "date": "2026-11-18"
    },
    {
     "id": "genre-sushi",
-    "date": "2026-11-24"
+    "date": "2026-11-18"
    },
    {
     "id": "genre-backpack",
-    "date": "2026-11-24"
+    "date": "2026-11-18"
    },
    {
     "id": "genre-frying-pan",
-    "date": "2026-11-24"
+    "date": "2026-11-18"
    },
    {
     "id": "founder-barn",
-    "date": "2026-11-24"
+    "date": "2026-11-18"
    },
    {
     "id": "genre-dragon-head",
-    "date": "2026-11-25"
+    "date": "2026-11-18"
    },
    {
     "id": "genre-astronaut",
-    "date": "2026-11-25"
+    "date": "2026-11-18"
    },
    {
     "id": "genre-comet",
-    "date": "2026-11-25"
+    "date": "2026-11-18"
    },
    {
     "id": "genre-dala-horse",
-    "date": "2026-11-25"
+    "date": "2026-11-18"
    },
    {
     "id": "genre-vr-headset",
-    "date": "2026-11-25"
+    "date": "2026-11-19"
    },
    {
     "id": "genre-beach-umbrella",
-    "date": "2026-11-25"
+    "date": "2026-11-19"
    },
    {
     "id": "genre-big-ben",
-    "date": "2026-11-26"
+    "date": "2026-11-19"
    },
    {
     "id": "genre-beach-ball",
-    "date": "2026-11-26"
+    "date": "2026-11-19"
    },
    {
     "id": "genre-bee-flower",
-    "date": "2026-11-26"
+    "date": "2026-11-19"
    },
    {
     "id": "genre-birdhouse",
-    "date": "2026-11-26"
+    "date": "2026-11-19"
    },
    {
     "id": "genre-clapperboard",
-    "date": "2026-11-26"
+    "date": "2026-11-19"
    },
    {
     "id": "genre-egg-basket",
-    "date": "2026-11-26"
+    "date": "2026-11-19"
    },
    {
     "id": "genre-ferris-wheel",
-    "date": "2026-11-27"
+    "date": "2026-11-19"
    },
    {
     "id": "genre-frog",
-    "date": "2026-11-27"
+    "date": "2026-11-19"
    },
    {
     "id": "genre-game-controller",
-    "date": "2026-11-27"
+    "date": "2026-11-20"
    },
    {
     "id": "genre-lantern",
-    "date": "2026-11-27"
+    "date": "2026-11-20"
    },
    {
     "id": "genre-snail",
-    "date": "2026-11-27"
+    "date": "2026-11-20"
    },
    {
     "id": "genre-steamship",
-    "date": "2026-11-27"
+    "date": "2026-11-20"
    },
    {
     "id": "genre-teddy-bear",
-    "date": "2026-11-28"
+    "date": "2026-11-20"
    },
    {
     "id": "genre-chest",
-    "date": "2026-11-28"
+    "date": "2026-11-20"
    },
    {
     "id": "genre-volcano",
-    "date": "2026-11-28"
+    "date": "2026-11-20"
    },
    {
     "id": "genre-wizard",
-    "date": "2026-11-28"
+    "date": "2026-11-20"
    },
    {
     "id": "genre-sailboat",
-    "date": "2026-11-28"
+    "date": "2026-11-20"
    },
    {
     "id": "genre-hedgehog",
-    "date": "2026-11-28"
+    "date": "2026-11-20"
    },
    {
     "id": "genre-treasure-map",
-    "date": "2026-11-29"
+    "date": "2026-11-21"
    },
    {
     "id": "genre-microscope",
-    "date": "2026-11-29"
+    "date": "2026-11-21"
    },
    {
     "id": "genre-taj-mahal",
-    "date": "2026-11-29"
+    "date": "2026-11-21"
    },
    {
     "id": "genre-boba",
-    "date": "2026-11-29"
+    "date": "2026-11-21"
    },
    {
     "id": "genre-swim-ring",
-    "date": "2026-11-29"
+    "date": "2026-11-21"
    },
    {
     "id": "genre-cactus",
-    "date": "2026-11-29"
+    "date": "2026-11-21"
    },
    {
     "id": "genre-crab",
-    "date": "2026-11-30"
+    "date": "2026-11-21"
    },
    {
     "id": "genre-drum",
-    "date": "2026-11-30"
+    "date": "2026-11-21"
    },
    {
     "id": "genre-first-aid-kit",
-    "date": "2026-11-30"
+    "date": "2026-11-21"
    },
    {
     "id": "genre-ladybug",
-    "date": "2026-11-30"
+    "date": "2026-11-21"
    },
    {
     "id": "genre-laptop",
-    "date": "2026-11-30"
+    "date": "2026-11-22"
    },
    {
     "id": "genre-potion",
-    "date": "2026-11-30"
+    "date": "2026-11-22"
    },
    {
     "id": "genre-palette-brush",
-    "date": "2026-12-01"
+    "date": "2026-11-22"
    },
    {
     "id": "genre-robot",
-    "date": "2026-12-01"
+    "date": "2026-11-22"
    },
    {
     "id": "genre-invader",
-    "date": "2026-12-01"
+    "date": "2026-11-22"
    },
    {
     "id": "genre-train",
-    "date": "2026-12-01"
+    "date": "2026-11-22"
    },
    {
     "id": "genre-sunglasses",
-    "date": "2026-12-01"
+    "date": "2026-11-22"
    },
    {
     "id": "founder-theWickedWitch",
-    "date": "2026-12-01"
+    "date": "2026-11-22"
    },
    {
     "id": "genre-eiffel",
-    "date": "2026-12-02"
+    "date": "2026-11-22"
    },
    {
     "id": "genre-firecrackers",
-    "date": "2026-12-02"
+    "date": "2026-11-22"
    },
    {
     "id": "genre-goat",
-    "date": "2026-12-02"
+    "date": "2026-11-23"
    },
    {
     "id": "genre-pencil",
-    "date": "2026-12-02"
+    "date": "2026-11-23"
    },
    {
     "id": "genre-airplane",
-    "date": "2026-12-02"
+    "date": "2026-11-23"
    },
    {
     "id": "genre-bunny",
-    "date": "2026-12-02"
+    "date": "2026-11-23"
    },
    {
     "id": "genre-bus",
-    "date": "2026-12-03"
+    "date": "2026-11-23"
    },
    {
     "id": "genre-cow",
-    "date": "2026-12-03"
+    "date": "2026-11-23"
    },
    {
     "id": "genre-crown",
-    "date": "2026-12-03"
+    "date": "2026-11-23"
    },
    {
     "id": "genre-dog",
-    "date": "2026-12-03"
+    "date": "2026-11-23"
    },
    {
     "id": "genre-energy-sword",
-    "date": "2026-12-03"
+    "date": "2026-11-23"
    },
    {
     "id": "genre-fire-truck",
-    "date": "2026-12-03"
+    "date": "2026-11-23"
    },
    {
     "id": "genre-guitar",
-    "date": "2026-12-04"
+    "date": "2026-11-24"
    },
    {
     "id": "genre-kite",
-    "date": "2026-12-04"
+    "date": "2026-11-24"
    },
    {
     "id": "genre-lamb",
-    "date": "2026-12-04"
+    "date": "2026-11-24"
    },
    {
     "id": "genre-piggy-bank",
-    "date": "2026-12-04"
+    "date": "2026-11-24"
    },
    {
     "id": "genre-quilt",
-    "date": "2026-12-04"
+    "date": "2026-11-24"
    },
    {
     "id": "genre-popsicle",
-    "date": "2026-12-04"
+    "date": "2026-11-24"
    },
    {
     "id": "genre-sneaker",
-    "date": "2026-12-05"
+    "date": "2026-11-24"
    },
    {
     "id": "genre-storm",
-    "date": "2026-12-05"
+    "date": "2026-11-24"
    },
    {
     "id": "genre-tulips",
-    "date": "2026-12-05"
+    "date": "2026-11-24"
    },
    {
     "id": "genre-watering-can",
-    "date": "2026-12-05"
+    "date": "2026-11-24"
    },
    {
     "id": "genre-watermelon",
-    "date": "2026-12-05"
+    "date": "2026-11-25"
    },
    {
     "id": "genre-lake-moon",
-    "date": "2026-12-05"
+    "date": "2026-11-25"
    },
    {
     "id": "genre-broom-dustpan",
-    "date": "2026-12-06"
+    "date": "2026-11-25"
    },
    {
     "id": "genre-mondrian",
-    "date": "2026-12-06"
+    "date": "2026-11-25"
    },
    {
     "id": "genre-battle-axe",
-    "date": "2026-12-06"
+    "date": "2026-11-25"
    },
    {
     "id": "genre-headphones",
-    "date": "2026-12-06"
+    "date": "2026-11-25"
    },
    {
     "id": "genre-hourglass",
-    "date": "2026-12-06"
+    "date": "2026-11-25"
    },
    {
     "id": "genre-ice-cream",
-    "date": "2026-12-06"
+    "date": "2026-11-25"
    },
    {
     "id": "genre-lightbulb",
-    "date": "2026-12-07"
+    "date": "2026-11-25"
    },
    {
     "id": "genre-octopus",
-    "date": "2026-12-07"
+    "date": "2026-11-25"
    },
    {
     "id": "genre-pizza",
-    "date": "2026-12-07"
+    "date": "2026-11-26"
    },
    {
     "id": "genre-round-shield",
-    "date": "2026-12-07"
+    "date": "2026-11-26"
    },
    {
     "id": "genre-smartphone",
-    "date": "2026-12-07"
+    "date": "2026-11-26"
    },
    {
     "id": "genre-surfboard",
-    "date": "2026-12-07"
+    "date": "2026-11-26"
    },
    {
     "id": "genre-padlock-key",
-    "date": "2026-12-08"
+    "date": "2026-11-26"
    },
    {
     "id": "genre-armchair",
-    "date": "2026-12-08"
+    "date": "2026-11-26"
    },
    {
     "id": "founder-theEmeraldCity",
-    "date": "2026-12-08"
+    "date": "2026-11-26"
    },
    {
     "id": "genre-book",
-    "date": "2026-12-08"
+    "date": "2026-11-26"
    },
    {
     "id": "genre-camera",
-    "date": "2026-12-08"
+    "date": "2026-11-26"
    },
    {
     "id": "genre-car",
-    "date": "2026-12-08"
+    "date": "2026-11-26"
    },
    {
     "id": "genre-carrot",
-    "date": "2026-12-09"
+    "date": "2026-11-27"
    },
    {
     "id": "genre-donut",
-    "date": "2026-12-09"
+    "date": "2026-11-27"
    },
    {
     "id": "duck",
-    "date": "2026-12-09"
+    "date": "2026-11-27"
    },
    {
     "id": "genre-letter",
-    "date": "2026-12-09"
+    "date": "2026-11-27"
    },
    {
     "id": "genre-scissors",
-    "date": "2026-12-09"
+    "date": "2026-11-27"
    },
    {
     "id": "genre-skateboard",
-    "date": "2026-12-09"
+    "date": "2026-11-27"
    },
    {
     "id": "genre-trophy",
-    "date": "2026-12-10"
+    "date": "2026-11-27"
    },
    {
     "id": "founder-theScarecrow",
-    "date": "2026-12-10"
+    "date": "2026-11-27"
    },
    {
     "id": "genre-yarn-and-needles",
-    "date": "2026-12-10"
+    "date": "2026-11-27"
    },
    {
     "id": "genre-fishing",
-    "date": "2026-12-10"
+    "date": "2026-11-27"
    },
    {
     "id": "founder-theTinWoodman",
-    "date": "2026-12-10"
+    "date": "2026-11-28"
    },
    {
     "id": "genre-anchor",
-    "date": "2026-12-10"
+    "date": "2026-11-28"
    },
    {
     "id": "genre-cherries",
-    "date": "2026-12-11"
+    "date": "2026-11-28"
    },
    {
     "id": "genre-flip-flops",
-    "date": "2026-12-11"
+    "date": "2026-11-28"
    },
    {
     "id": "genre-hammer",
-    "date": "2026-12-11"
+    "date": "2026-11-28"
    },
    {
     "id": "genre-cupcake",
-    "date": "2026-12-11"
+    "date": "2026-11-28"
    },
    {
     "id": "genre-knights-duel",
-    "date": "2026-12-11"
+    "date": "2026-11-28"
    },
    {
     "id": "founder-theRescue",
-    "date": "2026-12-11"
+    "date": "2026-11-28"
    },
    {
     "id": "founder-theGreatOz",
-    "date": "2026-12-12"
+    "date": "2026-11-28"
    },
    {
     "id": "genre-basketball",
-    "date": "2026-12-12"
+    "date": "2026-11-28"
    },
    {
     "id": "founder-theLandOfOz",
-    "date": "2026-12-12"
+    "date": "2026-11-29"
    },
    {
     "id": "founder-theDeadlyPoppyField",
-    "date": "2026-12-12"
+    "date": "2026-11-29"
    },
    {
     "id": "founder-theFlyingMonkeys",
-    "date": "2026-12-12"
+    "date": "2026-11-29"
    },
    {
     "id": "genre-lovebirds",
-    "date": "2026-12-12"
+    "date": "2026-11-29"
    },
    {
     "id": "genre-ring-box",
-    "date": "2026-12-13"
+    "date": "2026-11-29"
    },
    {
     "id": "genre-chocolate-box",
-    "date": "2026-12-13"
+    "date": "2026-11-29"
    },
    {
     "id": "genre-heart-cookies",
-    "date": "2026-12-13"
+    "date": "2026-11-29"
    },
    {
     "id": "genre-love-lock",
-    "date": "2026-12-13"
+    "date": "2026-11-29"
    },
    {
     "id": "genre-strawberries",
-    "date": "2026-12-13"
+    "date": "2026-11-29"
    },
    {
     "id": "genre-heart-cake",
-    "date": "2026-12-13"
+    "date": "2026-11-29"
    },
    {
     "id": "genre-love",
-    "date": "2026-12-14"
+    "date": "2026-11-30"
    },
    {
     "id": "genre-bow-quiver",
-    "date": "2026-12-14"
+    "date": "2026-11-30"
    },
    {
     "id": "genre-rose",
-    "date": "2026-12-14"
+    "date": "2026-11-30"
    },
    {
     "id": "genre-arrow-heart",
-    "date": "2026-12-14"
+    "date": "2026-11-30"
    },
    {
     "id": "genre-heart-balloon",
-    "date": "2026-12-14"
+    "date": "2026-11-30"
    },
    {
     "id": "genre-cauldron",
@@ -1048,19 +1048,19 @@
    },
    {
     "id": "genre-cranberry-sauce",
-    "date": "2026-11-10"
+    "date": "2026-11-09"
    },
    {
     "id": "genre-holly",
-    "date": "2026-11-10"
+    "date": "2026-11-09"
    },
    {
     "id": "genre-pumpkin-patch",
-    "date": "2026-11-10"
+    "date": "2026-11-09"
    },
    {
     "id": "genre-scarf",
-    "date": "2026-11-10"
+    "date": "2026-11-09"
    },
    {
     "id": "genre-clock",
@@ -1072,815 +1072,815 @@
    },
    {
     "id": "genre-maple-leaf",
-    "date": "2026-11-11"
+    "date": "2026-11-10"
    },
    {
     "id": "genre-polar-bear",
-    "date": "2026-11-11"
+    "date": "2026-11-10"
    },
    {
     "id": "genre-sleigh",
-    "date": "2026-11-11"
+    "date": "2026-11-10"
    },
    {
     "id": "genre-chestnuts",
-    "date": "2026-11-11"
+    "date": "2026-11-10"
    },
    {
     "id": "founder-penghy",
-    "date": "2026-11-11"
+    "date": "2026-11-10"
    },
    {
     "id": "genre-wreath",
-    "date": "2026-11-11"
+    "date": "2026-11-10"
    },
    {
     "id": "genre-rake-leaves",
-    "date": "2026-11-12"
+    "date": "2026-11-10"
    },
    {
     "id": "genre-mittens",
-    "date": "2026-11-12"
+    "date": "2026-11-10"
    },
    {
     "id": "genre-bell",
-    "date": "2026-11-12"
+    "date": "2026-11-11"
    },
    {
     "id": "genre-geese",
-    "date": "2026-11-12"
+    "date": "2026-11-11"
    },
    {
     "id": "genre-santa-hat",
-    "date": "2026-11-12"
+    "date": "2026-11-11"
    },
    {
     "id": "genre-stocking",
-    "date": "2026-11-12"
+    "date": "2026-11-11"
    },
    {
     "id": "genre-xmas-tree",
-    "date": "2026-11-13"
+    "date": "2026-11-11"
    },
    {
     "id": "genre-candy-cane",
-    "date": "2026-11-13"
+    "date": "2026-11-11"
    },
    {
     "id": "genre-gingerbread",
-    "date": "2026-11-13"
+    "date": "2026-11-11"
    },
    {
     "id": "genre-harvest-table",
-    "date": "2026-11-13"
+    "date": "2026-11-11"
    },
    {
     "id": "genre-iso-house",
-    "date": "2026-11-13"
+    "date": "2026-11-11"
    },
    {
     "id": "genre-corn",
-    "date": "2026-11-13"
+    "date": "2026-11-11"
    },
    {
     "id": "game-penguin",
-    "date": "2026-11-14"
+    "date": "2026-11-12"
    },
    {
     "id": "genre-fireworks",
-    "date": "2026-11-14"
+    "date": "2026-11-12"
    },
    {
     "id": "genre-cornucopia",
-    "date": "2026-11-14"
+    "date": "2026-11-12"
    },
    {
     "id": "genre-bauble",
-    "date": "2026-11-14"
+    "date": "2026-11-12"
    },
    {
     "id": "genre-harvest-moon",
-    "date": "2026-11-14"
+    "date": "2026-11-12"
    },
    {
     "id": "genre-pine-cone",
-    "date": "2026-11-14"
+    "date": "2026-11-12"
    },
    {
     "id": "genre-popper",
-    "date": "2026-11-15"
+    "date": "2026-11-12"
    },
    {
     "id": "genre-turkey",
-    "date": "2026-11-15"
+    "date": "2026-11-12"
    },
    {
     "id": "genre-gift-box",
-    "date": "2026-11-15"
+    "date": "2026-11-12"
    },
    {
     "id": "genre-greek-helmet",
-    "date": "2026-11-15"
+    "date": "2026-11-12"
    },
    {
     "id": "genre-dragon-eye",
-    "date": "2026-11-15"
+    "date": "2026-11-13"
    },
    {
     "id": "genre-knight",
-    "date": "2026-11-15"
+    "date": "2026-11-13"
    },
    {
     "id": "genre-black-cat",
-    "date": "2026-11-16"
+    "date": "2026-11-13"
    },
    {
     "id": "genre-great-wave",
-    "date": "2026-11-16"
+    "date": "2026-11-13"
    },
    {
     "id": "genre-lighthouse",
-    "date": "2026-11-16"
+    "date": "2026-11-13"
    },
    {
     "id": "genre-toucan",
-    "date": "2026-11-16"
+    "date": "2026-11-13"
    },
    {
     "id": "genre-sunflower",
-    "date": "2026-11-16"
+    "date": "2026-11-13"
    },
    {
     "id": "genre-stained-glass",
-    "date": "2026-11-16"
+    "date": "2026-11-13"
    },
    {
     "id": "genre-owl",
-    "date": "2026-11-17"
+    "date": "2026-11-13"
    },
    {
     "id": "genre-toaster",
-    "date": "2026-11-17"
+    "date": "2026-11-13"
    },
    {
     "id": "genre-robin",
-    "date": "2026-11-17"
+    "date": "2026-11-14"
    },
    {
     "id": "genre-castle-siege",
-    "date": "2026-11-17"
+    "date": "2026-11-14"
    },
    {
     "id": "genre-viking-prow",
-    "date": "2026-11-17"
+    "date": "2026-11-14"
    },
    {
     "id": "genre-camping",
-    "date": "2026-11-17"
+    "date": "2026-11-14"
    },
    {
     "id": "founder-dorothy",
-    "date": "2026-11-18"
+    "date": "2026-11-14"
    },
    {
     "id": "genre-nest",
-    "date": "2026-11-18"
+    "date": "2026-11-14"
    },
    {
     "id": "genre-chameleon",
-    "date": "2026-11-18"
+    "date": "2026-11-14"
    },
    {
     "id": "genre-diamond",
-    "date": "2026-11-18"
+    "date": "2026-11-14"
    },
    {
     "id": "genre-handheld-console",
-    "date": "2026-11-18"
+    "date": "2026-11-14"
    },
    {
     "id": "game-ufo",
-    "date": "2026-11-18"
+    "date": "2026-11-14"
    },
    {
     "id": "genre-seedlings",
-    "date": "2026-11-19"
+    "date": "2026-11-15"
    },
    {
     "id": "genre-firefly-jar",
-    "date": "2026-11-19"
+    "date": "2026-11-15"
    },
    {
     "id": "genre-arcade-cabinet",
-    "date": "2026-11-19"
+    "date": "2026-11-15"
    },
    {
     "id": "genre-samurai-helmet",
-    "date": "2026-11-19"
+    "date": "2026-11-15"
    },
    {
     "id": "genre-starfighter",
-    "date": "2026-11-19"
+    "date": "2026-11-15"
    },
    {
     "id": "genre-candy-jar",
-    "date": "2026-11-19"
+    "date": "2026-11-15"
    },
    {
     "id": "genre-skyline",
-    "date": "2026-11-20"
+    "date": "2026-11-15"
    },
    {
     "id": "genre-sandcastle",
-    "date": "2026-11-20"
+    "date": "2026-11-15"
    },
    {
     "id": "genre-clownfish",
-    "date": "2026-11-20"
+    "date": "2026-11-15"
    },
    {
     "id": "genre-dice",
-    "date": "2026-11-20"
+    "date": "2026-11-15"
    },
    {
     "id": "genre-hot-air-balloon",
-    "date": "2026-11-20"
+    "date": "2026-11-16"
    },
    {
     "id": "genre-mushrooms",
-    "date": "2026-11-20"
+    "date": "2026-11-16"
    },
    {
     "id": "genre-pyramids",
-    "date": "2026-11-21"
+    "date": "2026-11-16"
    },
    {
     "id": "genre-space-station",
-    "date": "2026-11-21"
+    "date": "2026-11-16"
    },
    {
     "id": "genre-castle-gate",
-    "date": "2026-11-21"
+    "date": "2026-11-16"
    },
    {
     "id": "genre-dandelion",
-    "date": "2026-11-21"
+    "date": "2026-11-16"
    },
    {
     "id": "genre-golden-gate",
-    "date": "2026-11-21"
+    "date": "2026-11-16"
    },
    {
     "id": "genre-great-helm",
-    "date": "2026-11-21"
+    "date": "2026-11-16"
    },
    {
     "id": "founder-theCowardlyLion",
-    "date": "2026-11-22"
+    "date": "2026-11-16"
    },
    {
     "id": "genre-ray-gun",
-    "date": "2026-11-22"
+    "date": "2026-11-16"
    },
    {
     "id": "genre-statue-of-liberty",
-    "date": "2026-11-22"
+    "date": "2026-11-17"
    },
    {
     "id": "genre-adventurer",
-    "date": "2026-11-22"
+    "date": "2026-11-17"
    },
    {
     "id": "genre-cherry-blossom",
-    "date": "2026-11-22"
+    "date": "2026-11-17"
    },
    {
     "id": "genre-shell-starfish",
-    "date": "2026-11-22"
+    "date": "2026-11-17"
    },
    {
     "id": "genre-daffodils",
-    "date": "2026-11-23"
+    "date": "2026-11-17"
    },
    {
     "id": "genre-lemonade",
-    "date": "2026-11-23"
+    "date": "2026-11-17"
    },
    {
     "id": "genre-rain-boots",
-    "date": "2026-11-23"
+    "date": "2026-11-17"
    },
    {
     "id": "genre-giraffe",
-    "date": "2026-11-23"
+    "date": "2026-11-17"
    },
    {
     "id": "genre-hamburger",
-    "date": "2026-11-23"
+    "date": "2026-11-17"
    },
    {
     "id": "genre-palm-island",
-    "date": "2026-11-23"
+    "date": "2026-11-17"
    },
    {
     "id": "genre-saturn",
-    "date": "2026-11-24"
+    "date": "2026-11-18"
    },
    {
     "id": "genre-dragon",
-    "date": "2026-11-24"
+    "date": "2026-11-18"
    },
    {
     "id": "genre-sushi",
-    "date": "2026-11-24"
+    "date": "2026-11-18"
    },
    {
     "id": "genre-backpack",
-    "date": "2026-11-24"
+    "date": "2026-11-18"
    },
    {
     "id": "genre-frying-pan",
-    "date": "2026-11-24"
+    "date": "2026-11-18"
    },
    {
     "id": "founder-barn",
-    "date": "2026-11-24"
+    "date": "2026-11-18"
    },
    {
     "id": "genre-dragon-head",
-    "date": "2026-11-25"
+    "date": "2026-11-18"
    },
    {
     "id": "genre-astronaut",
-    "date": "2026-11-25"
+    "date": "2026-11-18"
    },
    {
     "id": "genre-comet",
-    "date": "2026-11-25"
+    "date": "2026-11-18"
    },
    {
     "id": "genre-dala-horse",
-    "date": "2026-11-25"
+    "date": "2026-11-18"
    },
    {
     "id": "genre-vr-headset",
-    "date": "2026-11-25"
+    "date": "2026-11-19"
    },
    {
     "id": "genre-beach-umbrella",
-    "date": "2026-11-25"
+    "date": "2026-11-19"
    },
    {
     "id": "genre-big-ben",
-    "date": "2026-11-26"
+    "date": "2026-11-19"
    },
    {
     "id": "genre-beach-ball",
-    "date": "2026-11-26"
+    "date": "2026-11-19"
    },
    {
     "id": "genre-bee-flower",
-    "date": "2026-11-26"
+    "date": "2026-11-19"
    },
    {
     "id": "genre-birdhouse",
-    "date": "2026-11-26"
+    "date": "2026-11-19"
    },
    {
     "id": "genre-clapperboard",
-    "date": "2026-11-26"
+    "date": "2026-11-19"
    },
    {
     "id": "genre-egg-basket",
-    "date": "2026-11-26"
+    "date": "2026-11-19"
    },
    {
     "id": "genre-ferris-wheel",
-    "date": "2026-11-27"
+    "date": "2026-11-19"
    },
    {
     "id": "genre-frog",
-    "date": "2026-11-27"
+    "date": "2026-11-19"
    },
    {
     "id": "genre-game-controller",
-    "date": "2026-11-27"
+    "date": "2026-11-20"
    },
    {
     "id": "genre-lantern",
-    "date": "2026-11-27"
+    "date": "2026-11-20"
    },
    {
     "id": "genre-snail",
-    "date": "2026-11-27"
+    "date": "2026-11-20"
    },
    {
     "id": "genre-steamship",
-    "date": "2026-11-27"
+    "date": "2026-11-20"
    },
    {
     "id": "genre-teddy-bear",
-    "date": "2026-11-28"
+    "date": "2026-11-20"
    },
    {
     "id": "genre-chest",
-    "date": "2026-11-28"
+    "date": "2026-11-20"
    },
    {
     "id": "genre-volcano",
-    "date": "2026-11-28"
+    "date": "2026-11-20"
    },
    {
     "id": "genre-wizard",
-    "date": "2026-11-28"
+    "date": "2026-11-20"
    },
    {
     "id": "genre-sailboat",
-    "date": "2026-11-28"
+    "date": "2026-11-20"
    },
    {
     "id": "genre-hedgehog",
-    "date": "2026-11-28"
+    "date": "2026-11-20"
    },
    {
     "id": "genre-treasure-map",
-    "date": "2026-11-29"
+    "date": "2026-11-21"
    },
    {
     "id": "genre-microscope",
-    "date": "2026-11-29"
+    "date": "2026-11-21"
    },
    {
     "id": "genre-taj-mahal",
-    "date": "2026-11-29"
+    "date": "2026-11-21"
    },
    {
     "id": "genre-boba",
-    "date": "2026-11-29"
+    "date": "2026-11-21"
    },
    {
     "id": "genre-swim-ring",
-    "date": "2026-11-29"
+    "date": "2026-11-21"
    },
    {
     "id": "genre-cactus",
-    "date": "2026-11-29"
+    "date": "2026-11-21"
    },
    {
     "id": "genre-crab",
-    "date": "2026-11-30"
+    "date": "2026-11-21"
    },
    {
     "id": "genre-drum",
-    "date": "2026-11-30"
+    "date": "2026-11-21"
    },
    {
     "id": "genre-first-aid-kit",
-    "date": "2026-11-30"
+    "date": "2026-11-21"
    },
    {
     "id": "genre-ladybug",
-    "date": "2026-11-30"
+    "date": "2026-11-21"
    },
    {
     "id": "genre-laptop",
-    "date": "2026-11-30"
+    "date": "2026-11-22"
    },
    {
     "id": "genre-potion",
-    "date": "2026-11-30"
+    "date": "2026-11-22"
    },
    {
     "id": "genre-palette-brush",
-    "date": "2026-12-01"
+    "date": "2026-11-22"
    },
    {
     "id": "genre-robot",
-    "date": "2026-12-01"
+    "date": "2026-11-22"
    },
    {
     "id": "genre-invader",
-    "date": "2026-12-01"
+    "date": "2026-11-22"
    },
    {
     "id": "genre-train",
-    "date": "2026-12-01"
+    "date": "2026-11-22"
    },
    {
     "id": "genre-sunglasses",
-    "date": "2026-12-01"
+    "date": "2026-11-22"
    },
    {
     "id": "founder-theWickedWitch",
-    "date": "2026-12-01"
+    "date": "2026-11-22"
    },
    {
     "id": "genre-eiffel",
-    "date": "2026-12-02"
+    "date": "2026-11-22"
    },
    {
     "id": "genre-firecrackers",
-    "date": "2026-12-02"
+    "date": "2026-11-22"
    },
    {
     "id": "genre-goat",
-    "date": "2026-12-02"
+    "date": "2026-11-23"
    },
    {
     "id": "genre-pencil",
-    "date": "2026-12-02"
+    "date": "2026-11-23"
    },
    {
     "id": "genre-airplane",
-    "date": "2026-12-02"
+    "date": "2026-11-23"
    },
    {
     "id": "genre-bunny",
-    "date": "2026-12-02"
+    "date": "2026-11-23"
    },
    {
     "id": "genre-bus",
-    "date": "2026-12-03"
+    "date": "2026-11-23"
    },
    {
     "id": "genre-cow",
-    "date": "2026-12-03"
+    "date": "2026-11-23"
    },
    {
     "id": "genre-crown",
-    "date": "2026-12-03"
+    "date": "2026-11-23"
    },
    {
     "id": "genre-dog",
-    "date": "2026-12-03"
+    "date": "2026-11-23"
    },
    {
     "id": "genre-energy-sword",
-    "date": "2026-12-03"
+    "date": "2026-11-23"
    },
    {
     "id": "genre-fire-truck",
-    "date": "2026-12-03"
+    "date": "2026-11-23"
    },
    {
     "id": "genre-guitar",
-    "date": "2026-12-04"
+    "date": "2026-11-24"
    },
    {
     "id": "genre-kite",
-    "date": "2026-12-04"
+    "date": "2026-11-24"
    },
    {
     "id": "genre-lamb",
-    "date": "2026-12-04"
+    "date": "2026-11-24"
    },
    {
     "id": "genre-piggy-bank",
-    "date": "2026-12-04"
+    "date": "2026-11-24"
    },
    {
     "id": "genre-quilt",
-    "date": "2026-12-04"
+    "date": "2026-11-24"
    },
    {
     "id": "genre-popsicle",
-    "date": "2026-12-04"
+    "date": "2026-11-24"
    },
    {
     "id": "genre-sneaker",
-    "date": "2026-12-05"
+    "date": "2026-11-24"
    },
    {
     "id": "genre-storm",
-    "date": "2026-12-05"
+    "date": "2026-11-24"
    },
    {
     "id": "genre-tulips",
-    "date": "2026-12-05"
+    "date": "2026-11-24"
    },
    {
     "id": "genre-watering-can",
-    "date": "2026-12-05"
+    "date": "2026-11-24"
    },
    {
     "id": "genre-watermelon",
-    "date": "2026-12-05"
+    "date": "2026-11-25"
    },
    {
     "id": "genre-lake-moon",
-    "date": "2026-12-05"
+    "date": "2026-11-25"
    },
    {
     "id": "genre-broom-dustpan",
-    "date": "2026-12-06"
+    "date": "2026-11-25"
    },
    {
     "id": "genre-mondrian",
-    "date": "2026-12-06"
+    "date": "2026-11-25"
    },
    {
     "id": "genre-battle-axe",
-    "date": "2026-12-06"
+    "date": "2026-11-25"
    },
    {
     "id": "genre-headphones",
-    "date": "2026-12-06"
+    "date": "2026-11-25"
    },
    {
     "id": "genre-hourglass",
-    "date": "2026-12-06"
+    "date": "2026-11-25"
    },
    {
     "id": "genre-ice-cream",
-    "date": "2026-12-06"
+    "date": "2026-11-25"
    },
    {
     "id": "genre-lightbulb",
-    "date": "2026-12-07"
+    "date": "2026-11-25"
    },
    {
     "id": "genre-octopus",
-    "date": "2026-12-07"
+    "date": "2026-11-25"
    },
    {
     "id": "genre-pizza",
-    "date": "2026-12-07"
+    "date": "2026-11-26"
    },
    {
     "id": "genre-round-shield",
-    "date": "2026-12-07"
+    "date": "2026-11-26"
    },
    {
     "id": "genre-smartphone",
-    "date": "2026-12-07"
+    "date": "2026-11-26"
    },
    {
     "id": "genre-surfboard",
-    "date": "2026-12-07"
+    "date": "2026-11-26"
    },
    {
     "id": "genre-padlock-key",
-    "date": "2026-12-08"
+    "date": "2026-11-26"
    },
    {
     "id": "genre-armchair",
-    "date": "2026-12-08"
+    "date": "2026-11-26"
    },
    {
     "id": "founder-theEmeraldCity",
-    "date": "2026-12-08"
+    "date": "2026-11-26"
    },
    {
     "id": "genre-book",
-    "date": "2026-12-08"
+    "date": "2026-11-26"
    },
    {
     "id": "genre-camera",
-    "date": "2026-12-08"
+    "date": "2026-11-26"
    },
    {
     "id": "genre-car",
-    "date": "2026-12-08"
+    "date": "2026-11-26"
    },
    {
     "id": "genre-carrot",
-    "date": "2026-12-09"
+    "date": "2026-11-27"
    },
    {
     "id": "genre-donut",
-    "date": "2026-12-09"
+    "date": "2026-11-27"
    },
    {
     "id": "duck",
-    "date": "2026-12-09"
+    "date": "2026-11-27"
    },
    {
     "id": "genre-letter",
-    "date": "2026-12-09"
+    "date": "2026-11-27"
    },
    {
     "id": "genre-scissors",
-    "date": "2026-12-09"
+    "date": "2026-11-27"
    },
    {
     "id": "genre-skateboard",
-    "date": "2026-12-09"
+    "date": "2026-11-27"
    },
    {
     "id": "genre-trophy",
-    "date": "2026-12-10"
+    "date": "2026-11-27"
    },
    {
     "id": "founder-theScarecrow",
-    "date": "2026-12-10"
+    "date": "2026-11-27"
    },
    {
     "id": "genre-yarn-and-needles",
-    "date": "2026-12-10"
+    "date": "2026-11-27"
    },
    {
     "id": "genre-fishing",
-    "date": "2026-12-10"
+    "date": "2026-11-27"
    },
    {
     "id": "founder-theTinWoodman",
-    "date": "2026-12-10"
+    "date": "2026-11-28"
    },
    {
     "id": "genre-anchor",
-    "date": "2026-12-10"
+    "date": "2026-11-28"
    },
    {
     "id": "genre-cherries",
-    "date": "2026-12-11"
+    "date": "2026-11-28"
    },
    {
     "id": "genre-flip-flops",
-    "date": "2026-12-11"
+    "date": "2026-11-28"
    },
    {
     "id": "genre-hammer",
-    "date": "2026-12-11"
+    "date": "2026-11-28"
    },
    {
     "id": "genre-cupcake",
-    "date": "2026-12-11"
+    "date": "2026-11-28"
    },
    {
     "id": "genre-knights-duel",
-    "date": "2026-12-11"
+    "date": "2026-11-28"
    },
    {
     "id": "founder-theRescue",
-    "date": "2026-12-11"
+    "date": "2026-11-28"
    },
    {
     "id": "founder-theGreatOz",
-    "date": "2026-12-12"
+    "date": "2026-11-28"
    },
    {
     "id": "genre-basketball",
-    "date": "2026-12-12"
+    "date": "2026-11-28"
    },
    {
     "id": "founder-theLandOfOz",
-    "date": "2026-12-12"
+    "date": "2026-11-29"
    },
    {
     "id": "founder-theDeadlyPoppyField",
-    "date": "2026-12-12"
+    "date": "2026-11-29"
    },
    {
     "id": "founder-theFlyingMonkeys",
-    "date": "2026-12-12"
+    "date": "2026-11-29"
    },
    {
     "id": "genre-lovebirds",
-    "date": "2026-12-12"
+    "date": "2026-11-29"
    },
    {
     "id": "genre-ring-box",
-    "date": "2026-12-13"
+    "date": "2026-11-29"
    },
    {
     "id": "genre-chocolate-box",
-    "date": "2026-12-13"
+    "date": "2026-11-29"
    },
    {
     "id": "genre-heart-cookies",
-    "date": "2026-12-13"
+    "date": "2026-11-29"
    },
    {
     "id": "genre-love-lock",
-    "date": "2026-12-13"
+    "date": "2026-11-29"
    },
    {
     "id": "genre-strawberries",
-    "date": "2026-12-13"
+    "date": "2026-11-29"
    },
    {
     "id": "genre-heart-cake",
-    "date": "2026-12-13"
+    "date": "2026-11-29"
    },
    {
     "id": "genre-love",
-    "date": "2026-12-14"
+    "date": "2026-11-30"
    },
    {
     "id": "genre-bow-quiver",
-    "date": "2026-12-14"
+    "date": "2026-11-30"
    },
    {
     "id": "genre-rose",
-    "date": "2026-12-14"
+    "date": "2026-11-30"
    },
    {
     "id": "genre-arrow-heart",
-    "date": "2026-12-14"
+    "date": "2026-11-30"
    },
    {
     "id": "genre-heart-balloon",
-    "date": "2026-12-14"
+    "date": "2026-11-30"
    },
    {
     "id": "genre-cauldron",

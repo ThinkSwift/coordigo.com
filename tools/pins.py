@@ -10,7 +10,7 @@ Each link carries utm_campaign=web-co-pin-<board>; the pages use it as the App S
   tools/pins.py feed [--date YYYY-MM-DD]                        the two feeds: every pin whose day has come, newest 60
   tools/pins.py check                                           PASS/FAIL: every planned pin has its image and page
 
-Pace (founder 2026-11-08: 20-30 the first day, then 10-15 a day, not hundreds at once): 12 a board on day 1, then 6 a board a day.
+Pace (founder 2026-11-08: 20-30 the first day, then 10-15 a day, not hundreds at once): 12 a board on day 1, then 10 a board a day (founder 2026-11-08: 6 was too slow).
 Order: Christmas, winter, New Year, Thanksgiving and autumn first; then the site's order; Valentine's last. Halloween waits for
 2027-09-01 so it goes out ahead of its season. The same picture's two pins are two days apart.
 The mini runs tools/pins-daily.sh each morning: feed, commit, push. Run render after pictures or titles change."""
@@ -22,7 +22,7 @@ ORIGIN = 'https://coordigo.com'
 CHROME = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'
 BOARDS = {'ws': {'dir': 'library', 'feed': 'worksheets.xml', 'name': 'Mystery Picture Worksheets'},
           'xs': {'dir': 'cross-stitch', 'feed': 'cross-stitch.xml', 'name': 'Free Cross Stitch Patterns'}}
-FIRST, DAILY, KEEP = 12, 6, 60
+FIRST, DAILY, KEEP = 12, 10, 60
 SEASONS = [w.split() for w in (   # taken in turn, so the first days mix them
     'turkey pie roast cornucopia pilgrim-hat cranberry-sauce harvest-table',
     'xmas-tree santa-hat gingerbread reindeer sleigh stocking candy-cane wreath bauble gift-box holly bell snowman snowVillage iso-house fireplace',
@@ -69,7 +69,10 @@ h1{font:400 84px/1.02 "Young Serif",serif;margin:22px 0 0;letter-spacing:-.01em}
 .free{display:inline-block;margin-top:26px;background:#1b1917;color:#fff;font:700 24px/1 Karla;letter-spacing:.14em;padding:14px 26px;border-radius:999px}
 .page{position:absolute;background:#fff;border-radius:6px;box-shadow:0 2px 4px rgba(0,0,0,.12),0 26px 60px rgba(60,45,20,.22)}
 .card{position:absolute;background:#fff;padding:12px;border-radius:10px;box-shadow:0 2px 4px rgba(0,0,0,.14),0 22px 50px rgba(40,30,10,.25)}
-.card img{display:block;width:100%}'''
+.card img{display:block;width:100%}
+/* the hoop JPEG is on white: cut it out along the hoop's circle (the brass hanger's gaps are white, so it goes), not multiply-blended (that showed the page through the fabric) */
+.hoop{position:absolute;width:290px;transform:rotate(-8deg);filter:drop-shadow(0 2px 3px rgba(0,0,0,.18)) drop-shadow(0 18px 30px rgba(40,30,10,.25))}
+.hoop img{display:block;width:100%;-webkit-mask:radial-gradient(48.4% 44.8% at 50% 53.2%,#000 99%,transparent 100%);mask:radial-gradient(48.4% 44.8% at 50% 53.2%,#000 99%,transparent 100%)}'''
 
 def pin_html(board, i, B):
     w = words(i); e = html.escape
@@ -87,7 +90,7 @@ def pin_html(board, i, B):
                               f'DMC floss key. {w["w"]} × {w["h"]} stitches, {w["colours"]} colours, about {w["cm"]} cm on 14-count Aida.</div>')
         comp = (f'<img class="page" src="{B}{files[0]}" style="width:450px;left:70px;top:50px;transform:rotate(-3deg)">'
                 f'<img class="page" src="{B}{files[1]}" style="width:480px;right:60px;top:20px;transform:rotate(2.5deg)">'
-                f'<img src="{B}/cross-stitch/img/{i}.jpg" style="position:absolute;width:290px;left:40px;top:500px;mix-blend-mode:multiply;transform:rotate(-8deg)">'
+                f'<div class="hoop" style="left:40px;top:500px"><img src="{B}/cross-stitch/img/{i}.jpg"></div>'
                 '<div style="position:absolute;right:90px;top:720px"><span class="free">FREE PDF CHART</span></div>')
     return (f'<!doctype html><meta charset="utf-8"><link href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Karla:wght@400;500;700&display=swap" rel="stylesheet">'
             f'<style>{CSS} body{{background:{bg}}}</style><div class="top">{top}</div><div class="stage"><div class="comp">{comp}</div></div>'
