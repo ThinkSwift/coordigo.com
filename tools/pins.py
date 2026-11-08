@@ -169,7 +169,7 @@ def feed(args):
    <enclosure url="{src}" length="{f.stat().st_size}" type="image/jpeg"/>
    <media:content url="{src}" medium="image" type="image/jpeg" width="1000" height="1500"/>
   </item>''')
-        xml = (f'<?xml version="1.0" encoding="UTF-8"?>\n<rss version="2.0" xmlns:media="http://search.yahoo.com/mrss/">\n <channel>\n'
+        xml = (f'<?xml version="1.0" encoding="UTF-8"?>\n<?xml-stylesheet type="text/xsl" href="/pins/feed.xsl"?>\n<rss version="2.0" xmlns:media="http://search.yahoo.com/mrss/">\n <channel>\n'
                f'  <title>Coordigo · {cfg["name"]}</title>\n  <link>{ORIGIN}/{cfg["dir"]}/</link>\n'
                f'  <description>{cfg["name"]} from coordigo.com: free printable PDFs.</description>\n  <language>en</language>\n'
                + '\n'.join(items) + '\n </channel>\n</rss>\n')
