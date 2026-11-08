@@ -442,6 +442,10 @@
     speak(readerLang);                                         // the menu stays in the reader's language; the sheet follows the choice
     const only = $('wsOnly'); if (only) only.hidden = kind() === 'stitch';
     if (!box) return;
+    // the page's still images (tools/page-files.py: English, Letter, as it opens) stay while the settings are theirs, so
+    // search sees the pages; any other setting draws them live
+    const still = o.lang === 'en' && o.paper === 'letter' && (kind() === 'stitch' || (o.answer && !o.fields && !o.title && !o.edited));
+    if (still && box.querySelector('img[data-still]')) return;
     // a pattern page never shows a worksheet: until stitch.js is in it draws nothing (stitch.js redraws when it arrives)
     if (kind() === 'stitch') { if (stitch()) await window.CoStitch.preview(box, o, () => n !== drawing); return; }
     const [p] = await ready();
@@ -456,11 +460,15 @@
   const zoom = $('zoom'), shown = $('sheetPreview');
   if (zoom && shown && zoom.showModal) {
     const open = c => {
-      const z = document.createElement('canvas'); z.width = c.width; z.height = c.height; z.getContext('2d').drawImage(c, 0, 0);
-      z.setAttribute('role', 'img'); z.setAttribute('aria-label', c.getAttribute('aria-label') || ''); zoom.replaceChildren(z); zoom.showModal();
+      let z;
+      if (c.tagName === 'IMG') { z = new Image(); z.src = c.currentSrc || c.src; z.alt = c.alt; }
+      else { z = document.createElement('canvas'); z.width = c.width; z.height = c.height; z.getContext('2d').drawImage(c, 0, 0);
+             z.setAttribute('role', 'img'); z.setAttribute('aria-label', c.getAttribute('aria-label') || ''); }
+      zoom.replaceChildren(z); zoom.showModal();
     };
-    shown.addEventListener('click', e => { if (e.target.tagName === 'CANVAS') open(e.target); });
-    shown.addEventListener('keydown', e => { if (e.target.tagName === 'CANVAS' && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); open(e.target); } });
+    const isPage = e => /^(CANVAS|IMG)$/.test(e.target.tagName);
+    shown.addEventListener('click', e => { if (isPage(e)) open(e.target); });
+    shown.addEventListener('keydown', e => { if (isPage(e) && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); open(e.target); } });
     zoom.addEventListener('click', () => zoom.close());
     new MutationObserver(() => shown.querySelectorAll('canvas').forEach(c => { c.tabIndex = 0; })).observe(shown, { childList: true });
   }

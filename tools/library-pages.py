@@ -88,6 +88,19 @@ def alt(d):
     what = d['title'] + (f" — “{d['message']}”" if d['message'] else '')
     return f"{what}: a Coordigo mystery picture, drawn by joining points on a 16 × 16 grid"
 def file_stem(d): return 'coordigo' + (f"-{number[d['id']]}" if d['id'] in number else '') + '-' + d['id']
+# Each printable's two pages as images, so search sees them (founder 2026-11-08; English, Letter, as a page opens). No PDF files:
+# the sheets' words are drawn as print-resolution images, ~0.7-1.3 MB a PDF, too heavy to keep here. Made by tools/page-files.py from the built pages (it reads tools/page-files.json, written below) and kept between runs.
+def slug(s): return re.sub(r'[^a-z0-9]+', '-', s.lower()).strip('-')
+def files_of(kind, d):
+    s = slug(d['title']) or d['id']
+    if kind == 'library':
+        b = f'/library/files/{d["id"]}/'
+        return {'img': [b + f'{s}-mystery-picture-worksheet.webp', b + f'{s}-mystery-picture-answer.webp']}
+    b = f'/cross-stitch/files/{d["id"]}/'
+    return {'img': [b + f'{s}-cross-stitch-pattern.webp', b + f'{s}-cross-stitch-chart.webp']}
+def have(u): return os.path.exists(os.path.join(ROOT, u.strip('/')))
+def files_have(kind, d):
+    f = files_of(kind, d); return f if all(have(u) for u in f['img']) else None
 
 # MARK: The pictures as PNGs — the fills at their raster cells, the lines drawn smooth at 3x and filtered down.
 def render(d, size=600, pad=30):
@@ -111,7 +124,7 @@ def render(d, size=600, pad=30):
 import shutil
 for name in os.listdir(os.path.join(ROOT, 'library')):
     # kept: the worksheet's own files and the cross stitch pattern's (library/stitch*: coordigo-engine export_web.py, stitch.js)
-    if name not in ('worksheet.js', 'worksheet-words.js', 'worksheet-site-words.js', 'printmark.png', 'stitch.js', 'stitch-words.js', 'stitch-draw.js', 'stitch'):
+    if name not in ('worksheet.js', 'worksheet-words.js', 'worksheet-site-words.js', 'printmark.png', 'stitch.js', 'stitch-words.js', 'stitch-draw.js', 'stitch', 'files'):
         q = os.path.join(ROOT, 'library', name); shutil.rmtree(q) if os.path.isdir(q) else os.remove(q)
 os.makedirs(os.path.join(ROOT, 'library/img'), exist_ok=True)
 for d in data:
@@ -210,9 +223,9 @@ CSS = '''
   .stage{position:relative;background:var(--stage);border-radius:24px;padding:44px 44px 52px}
   .stage .sheets{display:flex;justify-content:center;gap:22px;margin:0}
   .stage .sheets:empty::before{content:"";display:block;width:100%;aspect-ratio:1.62}
-  .stage .sheets canvas{width:calc(50% - 11px);cursor:zoom-in;border-radius:3px;box-shadow:0 1px 2px rgba(0,0,0,.14),0 14px 34px rgba(60,45,20,.16);transition:transform .2s}
-  .stage .sheets canvas:hover,.stage .sheets canvas:focus-visible{transform:translateY(-3px)}
-  .stage .sheets canvas:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+  .stage .sheets canvas,.stage .sheets img{display:block;height:auto;background:#fff;width:calc(50% - 11px);cursor:zoom-in;border-radius:3px;box-shadow:0 1px 2px rgba(0,0,0,.14),0 14px 34px rgba(60,45,20,.16);transition:transform .2s}
+  .stage .sheets :is(canvas,img):hover,.stage .sheets :is(canvas,img):focus-visible{transform:translateY(-3px)}
+  .stage .sheets :is(canvas,img):focus-visible{outline:2px solid var(--ink);outline-offset:3px}
   .sample{position:absolute;left:-18px;bottom:-26px;width:112px;margin:0;background:#fff;padding:7px;border-radius:6px;transform:rotate(-4deg);
     box-shadow:0 1px 2px rgba(0,0,0,.16),0 12px 28px rgba(40,30,10,.22);pointer-events:none}
   .sample img{display:block;width:100%;height:auto;border-radius:2px}
@@ -235,12 +248,12 @@ CSS = '''
   .pic-page .pn{margin-top:72px;padding-top:22px;border-top:1px solid var(--hair)}
   dialog.zoom{padding:0;border:0;background:transparent;max-width:none;max-height:none;overflow:visible}
   dialog.zoom::backdrop{background:rgba(20,18,16,.74)}
-  dialog.zoom canvas{display:block;width:auto;height:auto;max-width:94vw;max-height:92vh;background:#fff;border-radius:4px;cursor:zoom-out}
+  dialog.zoom :is(canvas,img){display:block;width:auto;height:auto;max-width:94vw;max-height:92vh;background:#fff;border-radius:4px;cursor:zoom-out}
   @media (max-width:900px){ .pic-hero{grid-template-columns:minmax(0,1fr) 290px;gap:36px} .stage{padding:30px 28px 40px} }
   @media (max-width:760px){
     .pic-hero{grid-template-columns:1fr;gap:44px;margin-top:22px}
     .stage{padding:22px 16px 30px;border-radius:18px}
-    .stage .sheets{gap:12px} .stage .sheets canvas{width:calc(50% - 6px)}
+    .stage .sheets{gap:12px} .stage .sheets :is(canvas,img){width:calc(50% - 6px)}
     .sample{width:72px;left:-6px;bottom:-18px;padding:4px}
   }
 '''
@@ -356,6 +369,12 @@ def stitch_facts(d):
         for a, b in s: xs.append(a); ys.append(b)
     return {'W': max(xs) - min(xs), 'H': max(ys) - min(ys), 'colors': len(p['colors']), 'cells': len(p['cells'])}
 
+def stills(kind, d, h1):
+    f = files_have(kind, d)
+    if not f: return ''
+    names = ['the grid and the points', 'the answer page'] if kind == 'library' else ['the floss key and how to stitch it', 'the chart']
+    return ''.join(f'<img src="{u}" width="979" height="1267" tabindex="0" data-still alt="{h1}, page {i + 1}: {n}">' for i, (u, n) in enumerate(zip(f['img'], names)))
+
 def sheet_page(kind, d, prev, nxt):
     sec = SEC[kind]; path = f'{sec["path"]}{d["id"]}/'; T = d['title']; t = T[0].lower() + T[1:] if T[:2] != T[:2].upper() else T
     link = lambda e, label: f'<a href="{sec["path"]}{e["id"]}/">{label}: {esc(title(e))}</a>' if e else '<span></span>'
@@ -392,6 +411,9 @@ def sheet_page(kind, d, prev, nxt):
         ld_main = {'@type': 'CreativeWork', 'name': f'{T} cross stitch pattern', 'url': ORIGIN + path, 'image': ORIGIN + image,
                    'description': desc, 'isAccessibleForFree': True, 'genre': 'Cross stitch pattern', 'encodingFormat': 'application/pdf',
                    'inLanguage': LANGS, 'publisher': {'@id': 'https://swiftian.com/#org'}, 'isPartOf': {'@id': 'https://coordigo.com/#site'}}
+    have_files = files_have(kind, d)
+    if have_files:
+        ld_main['image'] = [ld_main['image']] + [ORIGIN + u for u in have_files['img']]
     graph = ([ld_main] if ld_main else []) + [{'@type': 'BreadcrumbList', 'itemListElement': [
         {'@type': 'ListItem', 'position': 1, 'name': sec['crumb'], 'item': ORIGIN + sec['path']},
         {'@type': 'ListItem', 'position': 2, 'name': h1.replace('&amp;', '&'), 'item': ORIGIN + path}]}]
@@ -402,7 +424,7 @@ def sheet_page(kind, d, prev, nxt):
     <p class="count">{count}</p>
     <div class="pic-hero">
       <div class="stage">
-        <div class="sheets" id="sheetPreview" aria-live="polite"></div>
+        <div class="sheets" id="sheetPreview" aria-live="polite">{stills(kind, d, h1)}</div>
         {pic}
       </div>
       <div class="aside">
@@ -482,7 +504,7 @@ shutil.rmtree(os.path.join(ROOT, 'worksheets'), ignore_errors=True)   # merged i
 for sec in ('cross-stitch',):
     base = os.path.join(ROOT, sec); os.makedirs(base, exist_ok=True)
     for name in os.listdir(base):
-        if name != 'img':
+        if name not in ('img', 'files'):
             q = os.path.join(base, name); shutil.rmtree(q) if os.path.isdir(q) else os.remove(q)
 
 order = newest + messages
@@ -500,10 +522,18 @@ sm = re.sub(r'\s*<url><loc>https://coordigo\.com/(?:library|worksheets|cross-sti
 if 'xmlns:image' not in sm:
     sm = sm.replace('<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"', '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"', 1)
 urls = [f'  <url><loc>{ORIGIN}/library/</loc></url>'] + [f'  <url><loc>{ORIGIN}/library/{k}/</loc></url>' for k in range(2, hub_count('library') + 1)]
-urls += [f'  <url><loc>{ORIGIN}/library/{d["id"]}/</loc><image:image><image:loc>{ORIGIN}/library/img/{d["id"]}.png</image:loc></image:image></url>' for d in order]
+def sm_images(kind, d, first):
+    f = files_have(kind, d)
+    return ''.join(f'<image:image><image:loc>{ORIGIN}{u}</image:loc></image:image>' for u in [first] + (f['img'] if f else []))
+urls += [f'  <url><loc>{ORIGIN}/library/{d["id"]}/</loc>{sm_images("library", d, f"/library/img/{d["id"]}.png")}</url>' for d in order]
+
 for base, img in ([('cross-stitch', lambda i: f'/cross-stitch/img/{i}.jpg')] if STITCH else []):
     urls += [f'  <url><loc>{ORIGIN}/{base}/</loc></url>'] + [f'  <url><loc>{ORIGIN}/{base}/{k}/</loc></url>' for k in range(2, hub_count('stitch') + 1)]
-    urls += [f'  <url><loc>{ORIGIN}/{base}/{d["id"]}/</loc><image:image><image:loc>{ORIGIN}{img(d["id"])}</image:loc></image:image></url>' for d in newest]
+    urls += [f'  <url><loc>{ORIGIN}/{base}/{d["id"]}/</loc>{sm_images("stitch", d, img(d["id"]))}</url>' for d in newest]
+
 sm = sm.replace('</urlset>', '\n'.join(urls) + '\n</urlset>')
+# what tools/page-files.py makes: each page's two images
+json.dump({'library': {d['id']: files_of('library', d) for d in order}, 'stitch': {d['id']: files_of('stitch', d) for d in newest} if STITCH else {}},
+          open(os.path.join(ROOT, 'tools', 'page-files.json'), 'w'), indent=1)
 open(sm_path, 'w').write(sm)
 print(f'{len(data)} pictures · {hub_count('library')} Library pages · {len(order)} picture pages · cross stitch: {hub_count('stitch')} hub pages and {len(newest)} pages')

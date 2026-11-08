@@ -1,0 +1,2910 @@
+{
+ "library": {
+  "genre-greek-helmet": {
+   "img": [
+    "/library/files/genre-greek-helmet/crested-greek-helmet-mystery-picture-worksheet.webp",
+    "/library/files/genre-greek-helmet/crested-greek-helmet-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-dragon-eye": {
+   "img": [
+    "/library/files/genre-dragon-eye/dragon-s-eye-mystery-picture-worksheet.webp",
+    "/library/files/genre-dragon-eye/dragon-s-eye-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-knight": {
+   "img": [
+    "/library/files/genre-knight/chibi-knight-mystery-picture-worksheet.webp",
+    "/library/files/genre-knight/chibi-knight-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-black-cat": {
+   "img": [
+    "/library/files/genre-black-cat/black-cat-mystery-picture-worksheet.webp",
+    "/library/files/genre-black-cat/black-cat-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-great-wave": {
+   "img": [
+    "/library/files/genre-great-wave/the-great-wave-mystery-picture-worksheet.webp",
+    "/library/files/genre-great-wave/the-great-wave-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-lighthouse": {
+   "img": [
+    "/library/files/genre-lighthouse/lighthouse-mystery-picture-worksheet.webp",
+    "/library/files/genre-lighthouse/lighthouse-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-lovebirds": {
+   "img": [
+    "/library/files/genre-lovebirds/lovebirds-mystery-picture-worksheet.webp",
+    "/library/files/genre-lovebirds/lovebirds-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-ring-box": {
+   "img": [
+    "/library/files/genre-ring-box/ring-box-mystery-picture-worksheet.webp",
+    "/library/files/genre-ring-box/ring-box-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-toucan": {
+   "img": [
+    "/library/files/genre-toucan/toucan-mystery-picture-worksheet.webp",
+    "/library/files/genre-toucan/toucan-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-sunflower": {
+   "img": [
+    "/library/files/genre-sunflower/sunflower-mystery-picture-worksheet.webp",
+    "/library/files/genre-sunflower/sunflower-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-iso-house": {
+   "img": [
+    "/library/files/genre-iso-house/snowy-cottage-mystery-picture-worksheet.webp",
+    "/library/files/genre-iso-house/snowy-cottage-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-stained-glass": {
+   "img": [
+    "/library/files/genre-stained-glass/stained-glass-window-mystery-picture-worksheet.webp",
+    "/library/files/genre-stained-glass/stained-glass-window-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-owl": {
+   "img": [
+    "/library/files/genre-owl/owl-mystery-picture-worksheet.webp",
+    "/library/files/genre-owl/owl-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-toaster": {
+   "img": [
+    "/library/files/genre-toaster/toaster-mystery-picture-worksheet.webp",
+    "/library/files/genre-toaster/toaster-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-robin": {
+   "img": [
+    "/library/files/genre-robin/robin-mystery-picture-worksheet.webp",
+    "/library/files/genre-robin/robin-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-castle-siege": {
+   "img": [
+    "/library/files/genre-castle-siege/castle-siege-mystery-picture-worksheet.webp",
+    "/library/files/genre-castle-siege/castle-siege-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-viking-prow": {
+   "img": [
+    "/library/files/genre-viking-prow/viking-ship-prow-mystery-picture-worksheet.webp",
+    "/library/files/genre-viking-prow/viking-ship-prow-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-camping": {
+   "img": [
+    "/library/files/genre-camping/camping-mystery-picture-worksheet.webp",
+    "/library/files/genre-camping/camping-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-corn": {
+   "img": [
+    "/library/files/genre-corn/corn-cob-mystery-picture-worksheet.webp",
+    "/library/files/genre-corn/corn-cob-mystery-picture-answer.webp"
+   ]
+  },
+  "founder-dorothy": {
+   "img": [
+    "/library/files/founder-dorothy/girl-with-braids-mystery-picture-worksheet.webp",
+    "/library/files/founder-dorothy/girl-with-braids-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-nest": {
+   "img": [
+    "/library/files/genre-nest/bird-s-nest-mystery-picture-worksheet.webp",
+    "/library/files/genre-nest/bird-s-nest-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-chameleon": {
+   "img": [
+    "/library/files/genre-chameleon/chameleon-mystery-picture-worksheet.webp",
+    "/library/files/genre-chameleon/chameleon-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-harvest-moon": {
+   "img": [
+    "/library/files/genre-harvest-moon/harvest-moon-mystery-picture-worksheet.webp",
+    "/library/files/genre-harvest-moon/harvest-moon-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-bauble": {
+   "img": [
+    "/library/files/genre-bauble/bauble-mystery-picture-worksheet.webp",
+    "/library/files/genre-bauble/bauble-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-diamond": {
+   "img": [
+    "/library/files/genre-diamond/diamond-mystery-picture-worksheet.webp",
+    "/library/files/genre-diamond/diamond-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-handheld-console": {
+   "img": [
+    "/library/files/genre-handheld-console/handheld-game-console-mystery-picture-worksheet.webp",
+    "/library/files/genre-handheld-console/handheld-game-console-mystery-picture-answer.webp"
+   ]
+  },
+  "game-ufo": {
+   "img": [
+    "/library/files/game-ufo/a-ufo-over-the-city-mystery-picture-worksheet.webp",
+    "/library/files/game-ufo/a-ufo-over-the-city-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-seedlings": {
+   "img": [
+    "/library/files/genre-seedlings/seedlings-mystery-picture-worksheet.webp",
+    "/library/files/genre-seedlings/seedlings-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-firefly-jar": {
+   "img": [
+    "/library/files/genre-firefly-jar/jar-of-fireflies-mystery-picture-worksheet.webp",
+    "/library/files/genre-firefly-jar/jar-of-fireflies-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-arcade-cabinet": {
+   "img": [
+    "/library/files/genre-arcade-cabinet/arcade-cabinet-mystery-picture-worksheet.webp",
+    "/library/files/genre-arcade-cabinet/arcade-cabinet-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-chocolate-box": {
+   "img": [
+    "/library/files/genre-chocolate-box/box-of-chocolates-mystery-picture-worksheet.webp",
+    "/library/files/genre-chocolate-box/box-of-chocolates-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-harvest-table": {
+   "img": [
+    "/library/files/genre-harvest-table/harvest-table-mystery-picture-worksheet.webp",
+    "/library/files/genre-harvest-table/harvest-table-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-heart-cookies": {
+   "img": [
+    "/library/files/genre-heart-cookies/heart-cookies-mystery-picture-worksheet.webp",
+    "/library/files/genre-heart-cookies/heart-cookies-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-samurai-helmet": {
+   "img": [
+    "/library/files/genre-samurai-helmet/samurai-helmet-mystery-picture-worksheet.webp",
+    "/library/files/genre-samurai-helmet/samurai-helmet-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-starfighter": {
+   "img": [
+    "/library/files/genre-starfighter/starfighter-mystery-picture-worksheet.webp",
+    "/library/files/genre-starfighter/starfighter-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-candy-jar": {
+   "img": [
+    "/library/files/genre-candy-jar/candy-jar-mystery-picture-worksheet.webp",
+    "/library/files/genre-candy-jar/candy-jar-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-skyline": {
+   "img": [
+    "/library/files/genre-skyline/city-at-sunset-mystery-picture-worksheet.webp",
+    "/library/files/genre-skyline/city-at-sunset-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-sandcastle": {
+   "img": [
+    "/library/files/genre-sandcastle/sandcastle-mystery-picture-worksheet.webp",
+    "/library/files/genre-sandcastle/sandcastle-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-fireworks": {
+   "img": [
+    "/library/files/genre-fireworks/fireworks-mystery-picture-worksheet.webp",
+    "/library/files/genre-fireworks/fireworks-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-cauldron": {
+   "img": [
+    "/library/files/genre-cauldron/cauldron-mystery-picture-worksheet.webp",
+    "/library/files/genre-cauldron/cauldron-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-clownfish": {
+   "img": [
+    "/library/files/genre-clownfish/clownfish-mystery-picture-worksheet.webp",
+    "/library/files/genre-clownfish/clownfish-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-dice": {
+   "img": [
+    "/library/files/genre-dice/dice-mystery-picture-worksheet.webp",
+    "/library/files/genre-dice/dice-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-gift-box": {
+   "img": [
+    "/library/files/genre-gift-box/gift-box-mystery-picture-worksheet.webp",
+    "/library/files/genre-gift-box/gift-box-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-hot-air-balloon": {
+   "img": [
+    "/library/files/genre-hot-air-balloon/hot-air-balloon-mystery-picture-worksheet.webp",
+    "/library/files/genre-hot-air-balloon/hot-air-balloon-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-mushrooms": {
+   "img": [
+    "/library/files/genre-mushrooms/mushrooms-mystery-picture-worksheet.webp",
+    "/library/files/genre-mushrooms/mushrooms-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-pyramids": {
+   "img": [
+    "/library/files/genre-pyramids/pyramids-of-giza-mystery-picture-worksheet.webp",
+    "/library/files/genre-pyramids/pyramids-of-giza-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-snowman": {
+   "img": [
+    "/library/files/genre-snowman/snowman-mystery-picture-worksheet.webp",
+    "/library/files/genre-snowman/snowman-mystery-picture-answer.webp"
+   ]
+  },
+  "founder-snowVillage": {
+   "img": [
+    "/library/files/founder-snowVillage/snowy-village-mystery-picture-worksheet.webp",
+    "/library/files/founder-snowVillage/snowy-village-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-space-station": {
+   "img": [
+    "/library/files/genre-space-station/ring-space-station-mystery-picture-worksheet.webp",
+    "/library/files/genre-space-station/ring-space-station-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-love-lock": {
+   "img": [
+    "/library/files/genre-love-lock/love-lock-mystery-picture-worksheet.webp",
+    "/library/files/genre-love-lock/love-lock-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-apple-branch": {
+   "img": [
+    "/library/files/genre-apple-branch/apple-on-the-branch-mystery-picture-worksheet.webp",
+    "/library/files/genre-apple-branch/apple-on-the-branch-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-castle-gate": {
+   "img": [
+    "/library/files/genre-castle-gate/castle-gate-mystery-picture-worksheet.webp",
+    "/library/files/genre-castle-gate/castle-gate-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-dandelion": {
+   "img": [
+    "/library/files/genre-dandelion/dandelion-clock-mystery-picture-worksheet.webp",
+    "/library/files/genre-dandelion/dandelion-clock-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-golden-gate": {
+   "img": [
+    "/library/files/genre-golden-gate/golden-gate-bridge-mystery-picture-worksheet.webp",
+    "/library/files/genre-golden-gate/golden-gate-bridge-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-great-helm": {
+   "img": [
+    "/library/files/genre-great-helm/knight-s-great-helm-mystery-picture-worksheet.webp",
+    "/library/files/genre-great-helm/knight-s-great-helm-mystery-picture-answer.webp"
+   ]
+  },
+  "founder-theCowardlyLion": {
+   "img": [
+    "/library/files/founder-theCowardlyLion/lion-mystery-picture-worksheet.webp",
+    "/library/files/founder-theCowardlyLion/lion-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-ray-gun": {
+   "img": [
+    "/library/files/genre-ray-gun/ray-gun-mystery-picture-worksheet.webp",
+    "/library/files/genre-ray-gun/ray-gun-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-statue-of-liberty": {
+   "img": [
+    "/library/files/genre-statue-of-liberty/statue-of-liberty-mystery-picture-worksheet.webp",
+    "/library/files/genre-statue-of-liberty/statue-of-liberty-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-treat-bag": {
+   "img": [
+    "/library/files/genre-treat-bag/trick-or-treat-bag-mystery-picture-worksheet.webp",
+    "/library/files/genre-treat-bag/trick-or-treat-bag-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-wheat-sheaf": {
+   "img": [
+    "/library/files/genre-wheat-sheaf/wheat-sheaf-mystery-picture-worksheet.webp",
+    "/library/files/genre-wheat-sheaf/wheat-sheaf-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-adventurer": {
+   "img": [
+    "/library/files/genre-adventurer/8-bit-adventurer-mystery-picture-worksheet.webp",
+    "/library/files/genre-adventurer/8-bit-adventurer-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-cherry-blossom": {
+   "img": [
+    "/library/files/genre-cherry-blossom/cherry-blossom-mystery-picture-worksheet.webp",
+    "/library/files/genre-cherry-blossom/cherry-blossom-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-fireplace": {
+   "img": [
+    "/library/files/genre-fireplace/fireplace-mystery-picture-worksheet.webp",
+    "/library/files/genre-fireplace/fireplace-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-shell-starfish": {
+   "img": [
+    "/library/files/genre-shell-starfish/seashell-and-starfish-mystery-picture-worksheet.webp",
+    "/library/files/genre-shell-starfish/seashell-and-starfish-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-spider-web": {
+   "img": [
+    "/library/files/genre-spider-web/spider-on-its-web-mystery-picture-worksheet.webp",
+    "/library/files/genre-spider-web/spider-on-its-web-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-daffodils": {
+   "img": [
+    "/library/files/genre-daffodils/daffodil-mystery-picture-worksheet.webp",
+    "/library/files/genre-daffodils/daffodil-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-lemonade": {
+   "img": [
+    "/library/files/genre-lemonade/glass-of-lemonade-mystery-picture-worksheet.webp",
+    "/library/files/genre-lemonade/glass-of-lemonade-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-haunted-house": {
+   "img": [
+    "/library/files/genre-haunted-house/haunted-house-mystery-picture-worksheet.webp",
+    "/library/files/genre-haunted-house/haunted-house-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-rain-boots": {
+   "img": [
+    "/library/files/genre-rain-boots/rain-boots-mystery-picture-worksheet.webp",
+    "/library/files/genre-rain-boots/rain-boots-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-squirrel": {
+   "img": [
+    "/library/files/genre-squirrel/squirrel-with-an-acorn-mystery-picture-worksheet.webp",
+    "/library/files/genre-squirrel/squirrel-with-an-acorn-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-giraffe": {
+   "img": [
+    "/library/files/genre-giraffe/giraffe-mystery-picture-worksheet.webp",
+    "/library/files/genre-giraffe/giraffe-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-hamburger": {
+   "img": [
+    "/library/files/genre-hamburger/hamburger-mystery-picture-worksheet.webp",
+    "/library/files/genre-hamburger/hamburger-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-holly": {
+   "img": [
+    "/library/files/genre-holly/holly-mystery-picture-worksheet.webp",
+    "/library/files/genre-holly/holly-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-jack-o-lantern": {
+   "img": [
+    "/library/files/genre-jack-o-lantern/jack-o-lantern-mystery-picture-worksheet.webp",
+    "/library/files/genre-jack-o-lantern/jack-o-lantern-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-palm-island": {
+   "img": [
+    "/library/files/genre-palm-island/palm-island-mystery-picture-worksheet.webp",
+    "/library/files/genre-palm-island/palm-island-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-saturn": {
+   "img": [
+    "/library/files/genre-saturn/saturn-mystery-picture-worksheet.webp",
+    "/library/files/genre-saturn/saturn-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-dragon": {
+   "img": [
+    "/library/files/genre-dragon/small-dragon-mystery-picture-worksheet.webp",
+    "/library/files/genre-dragon/small-dragon-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-sushi": {
+   "img": [
+    "/library/files/genre-sushi/sushi-mystery-picture-worksheet.webp",
+    "/library/files/genre-sushi/sushi-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-backpack": {
+   "img": [
+    "/library/files/genre-backpack/backpack-mystery-picture-worksheet.webp",
+    "/library/files/genre-backpack/backpack-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-frying-pan": {
+   "img": [
+    "/library/files/genre-frying-pan/fried-egg-mystery-picture-worksheet.webp",
+    "/library/files/genre-frying-pan/fried-egg-mystery-picture-answer.webp"
+   ]
+  },
+  "founder-barn": {
+   "img": [
+    "/library/files/founder-barn/red-barn-mystery-picture-worksheet.webp",
+    "/library/files/founder-barn/red-barn-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-dragon-head": {
+   "img": [
+    "/library/files/genre-dragon-head/dragon-dance-head-mystery-picture-worksheet.webp",
+    "/library/files/genre-dragon-head/dragon-dance-head-mystery-picture-answer.webp"
+   ]
+  },
+  "game-penguin": {
+   "img": [
+    "/library/files/game-penguin/a-penguin-on-the-ice-mystery-picture-worksheet.webp",
+    "/library/files/game-penguin/a-penguin-on-the-ice-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-astronaut": {
+   "img": [
+    "/library/files/genre-astronaut/astronaut-mystery-picture-worksheet.webp",
+    "/library/files/genre-astronaut/astronaut-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-strawberries": {
+   "img": [
+    "/library/files/genre-strawberries/chocolate-strawberries-mystery-picture-worksheet.webp",
+    "/library/files/genre-strawberries/chocolate-strawberries-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-comet": {
+   "img": [
+    "/library/files/genre-comet/comet-mystery-picture-worksheet.webp",
+    "/library/files/genre-comet/comet-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-cornucopia": {
+   "img": [
+    "/library/files/genre-cornucopia/cornucopia-mystery-picture-worksheet.webp",
+    "/library/files/genre-cornucopia/cornucopia-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-dala-horse": {
+   "img": [
+    "/library/files/genre-dala-horse/dala-horse-mystery-picture-worksheet.webp",
+    "/library/files/genre-dala-horse/dala-horse-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-vr-headset": {
+   "img": [
+    "/library/files/genre-vr-headset/vr-headset-mystery-picture-worksheet.webp",
+    "/library/files/genre-vr-headset/vr-headset-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-popper": {
+   "img": [
+    "/library/files/genre-popper/confetti-popper-mystery-picture-worksheet.webp",
+    "/library/files/genre-popper/confetti-popper-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-beach-umbrella": {
+   "img": [
+    "/library/files/genre-beach-umbrella/beach-umbrella-mystery-picture-worksheet.webp",
+    "/library/files/genre-beach-umbrella/beach-umbrella-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-big-ben": {
+   "img": [
+    "/library/files/genre-big-ben/big-ben-mystery-picture-worksheet.webp",
+    "/library/files/genre-big-ben/big-ben-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-beach-ball": {
+   "img": [
+    "/library/files/genre-beach-ball/beach-ball-mystery-picture-worksheet.webp",
+    "/library/files/genre-beach-ball/beach-ball-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-bee-flower": {
+   "img": [
+    "/library/files/genre-bee-flower/bee-on-a-flower-mystery-picture-worksheet.webp",
+    "/library/files/genre-bee-flower/bee-on-a-flower-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-birdhouse": {
+   "img": [
+    "/library/files/genre-birdhouse/birdhouse-mystery-picture-worksheet.webp",
+    "/library/files/genre-birdhouse/birdhouse-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-clapperboard": {
+   "img": [
+    "/library/files/genre-clapperboard/clapperboard-mystery-picture-worksheet.webp",
+    "/library/files/genre-clapperboard/clapperboard-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-egg-basket": {
+   "img": [
+    "/library/files/genre-egg-basket/easter-egg-basket-mystery-picture-worksheet.webp",
+    "/library/files/genre-egg-basket/easter-egg-basket-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-ferris-wheel": {
+   "img": [
+    "/library/files/genre-ferris-wheel/ferris-wheel-mystery-picture-worksheet.webp",
+    "/library/files/genre-ferris-wheel/ferris-wheel-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-frog": {
+   "img": [
+    "/library/files/genre-frog/frog-mystery-picture-worksheet.webp",
+    "/library/files/genre-frog/frog-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-game-controller": {
+   "img": [
+    "/library/files/genre-game-controller/game-controller-mystery-picture-worksheet.webp",
+    "/library/files/genre-game-controller/game-controller-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-lantern": {
+   "img": [
+    "/library/files/genre-lantern/red-lantern-mystery-picture-worksheet.webp",
+    "/library/files/genre-lantern/red-lantern-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-reindeer": {
+   "img": [
+    "/library/files/genre-reindeer/reindeer-mystery-picture-worksheet.webp",
+    "/library/files/genre-reindeer/reindeer-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-snail": {
+   "img": [
+    "/library/files/genre-snail/snail-mystery-picture-worksheet.webp",
+    "/library/files/genre-snail/snail-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-steamship": {
+   "img": [
+    "/library/files/genre-steamship/steamship-mystery-picture-worksheet.webp",
+    "/library/files/genre-steamship/steamship-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-teddy-bear": {
+   "img": [
+    "/library/files/genre-teddy-bear/teddy-bear-mystery-picture-worksheet.webp",
+    "/library/files/genre-teddy-bear/teddy-bear-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-chest": {
+   "img": [
+    "/library/files/genre-chest/treasure-chest-mystery-picture-worksheet.webp",
+    "/library/files/genre-chest/treasure-chest-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-turkey": {
+   "img": [
+    "/library/files/genre-turkey/turkey-mystery-picture-worksheet.webp",
+    "/library/files/genre-turkey/turkey-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-volcano": {
+   "img": [
+    "/library/files/genre-volcano/volcano-mystery-picture-worksheet.webp",
+    "/library/files/genre-volcano/volcano-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-witch-hat": {
+   "img": [
+    "/library/files/genre-witch-hat/witch-hat-mystery-picture-worksheet.webp",
+    "/library/files/genre-witch-hat/witch-hat-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-wizard": {
+   "img": [
+    "/library/files/genre-wizard/wizard-with-a-staff-mystery-picture-worksheet.webp",
+    "/library/files/genre-wizard/wizard-with-a-staff-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-sailboat": {
+   "img": [
+    "/library/files/genre-sailboat/sailboat-mystery-picture-worksheet.webp",
+    "/library/files/genre-sailboat/sailboat-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-hedgehog": {
+   "img": [
+    "/library/files/genre-hedgehog/hedgehog-mystery-picture-worksheet.webp",
+    "/library/files/genre-hedgehog/hedgehog-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-heart-cake": {
+   "img": [
+    "/library/files/genre-heart-cake/heart-cake-mystery-picture-worksheet.webp",
+    "/library/files/genre-heart-cake/heart-cake-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-treasure-map": {
+   "img": [
+    "/library/files/genre-treasure-map/treasure-map-mystery-picture-worksheet.webp",
+    "/library/files/genre-treasure-map/treasure-map-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-cups-clinking": {
+   "img": [
+    "/library/files/genre-cups-clinking/two-cups-clinking-mystery-picture-worksheet.webp",
+    "/library/files/genre-cups-clinking/two-cups-clinking-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-fox": {
+   "img": [
+    "/library/files/genre-fox/fox-in-the-leaves-mystery-picture-worksheet.webp",
+    "/library/files/genre-fox/fox-in-the-leaves-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-microscope": {
+   "img": [
+    "/library/files/genre-microscope/microscope-mystery-picture-worksheet.webp",
+    "/library/files/genre-microscope/microscope-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-mummy": {
+   "img": [
+    "/library/files/genre-mummy/mummy-mystery-picture-worksheet.webp",
+    "/library/files/genre-mummy/mummy-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-taj-mahal": {
+   "img": [
+    "/library/files/genre-taj-mahal/taj-mahal-mystery-picture-worksheet.webp",
+    "/library/files/genre-taj-mahal/taj-mahal-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-boba": {
+   "img": [
+    "/library/files/genre-boba/bubble-tea-mystery-picture-worksheet.webp",
+    "/library/files/genre-boba/bubble-tea-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-love": {
+   "img": [
+    "/library/files/genre-love/love-mystery-picture-worksheet.webp",
+    "/library/files/genre-love/love-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-pilgrim-hat": {
+   "img": [
+    "/library/files/genre-pilgrim-hat/pilgrim-hat-mystery-picture-worksheet.webp",
+    "/library/files/genre-pilgrim-hat/pilgrim-hat-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-pumpkin-patch": {
+   "img": [
+    "/library/files/genre-pumpkin-patch/pumpkin-patch-mystery-picture-worksheet.webp",
+    "/library/files/genre-pumpkin-patch/pumpkin-patch-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-pie": {
+   "img": [
+    "/library/files/genre-pie/pumpkin-pie-mystery-picture-worksheet.webp",
+    "/library/files/genre-pie/pumpkin-pie-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-roast": {
+   "img": [
+    "/library/files/genre-roast/roast-turkey-mystery-picture-worksheet.webp",
+    "/library/files/genre-roast/roast-turkey-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-slime": {
+   "img": [
+    "/library/files/genre-slime/slime-mystery-picture-worksheet.webp",
+    "/library/files/genre-slime/slime-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-swim-ring": {
+   "img": [
+    "/library/files/genre-swim-ring/swim-ring-mystery-picture-worksheet.webp",
+    "/library/files/genre-swim-ring/swim-ring-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-cactus": {
+   "img": [
+    "/library/files/genre-cactus/cactus-mystery-picture-worksheet.webp",
+    "/library/files/genre-cactus/cactus-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-crab": {
+   "img": [
+    "/library/files/genre-crab/crab-mystery-picture-worksheet.webp",
+    "/library/files/genre-crab/crab-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-drum": {
+   "img": [
+    "/library/files/genre-drum/drum-mystery-picture-worksheet.webp",
+    "/library/files/genre-drum/drum-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-first-aid-kit": {
+   "img": [
+    "/library/files/genre-first-aid-kit/first-aid-kit-mystery-picture-worksheet.webp",
+    "/library/files/genre-first-aid-kit/first-aid-kit-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-ladybug": {
+   "img": [
+    "/library/files/genre-ladybug/ladybug-mystery-picture-worksheet.webp",
+    "/library/files/genre-ladybug/ladybug-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-laptop": {
+   "img": [
+    "/library/files/genre-laptop/laptop-mystery-picture-worksheet.webp",
+    "/library/files/genre-laptop/laptop-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-potion": {
+   "img": [
+    "/library/files/genre-potion/magic-potion-mystery-picture-worksheet.webp",
+    "/library/files/genre-potion/magic-potion-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-maple-leaf": {
+   "img": [
+    "/library/files/genre-maple-leaf/maple-leaf-mystery-picture-worksheet.webp",
+    "/library/files/genre-maple-leaf/maple-leaf-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-palette-brush": {
+   "img": [
+    "/library/files/genre-palette-brush/palette-and-brush-mystery-picture-worksheet.webp",
+    "/library/files/genre-palette-brush/palette-and-brush-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-robot": {
+   "img": [
+    "/library/files/genre-robot/robot-mystery-picture-worksheet.webp",
+    "/library/files/genre-robot/robot-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-skull": {
+   "img": [
+    "/library/files/genre-skull/skull-mystery-picture-worksheet.webp",
+    "/library/files/genre-skull/skull-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-sleigh": {
+   "img": [
+    "/library/files/genre-sleigh/sleigh-with-gifts-mystery-picture-worksheet.webp",
+    "/library/files/genre-sleigh/sleigh-with-gifts-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-invader": {
+   "img": [
+    "/library/files/genre-invader/space-invader-mystery-picture-worksheet.webp",
+    "/library/files/genre-invader/space-invader-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-train": {
+   "img": [
+    "/library/files/genre-train/steam-train-mystery-picture-worksheet.webp",
+    "/library/files/genre-train/steam-train-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-sunglasses": {
+   "img": [
+    "/library/files/genre-sunglasses/sunglasses-mystery-picture-worksheet.webp",
+    "/library/files/genre-sunglasses/sunglasses-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-wreath": {
+   "img": [
+    "/library/files/genre-wreath/wreath-mystery-picture-worksheet.webp",
+    "/library/files/genre-wreath/wreath-mystery-picture-answer.webp"
+   ]
+  },
+  "founder-theWickedWitch": {
+   "img": [
+    "/library/files/founder-theWickedWitch/wicked-witch-mystery-picture-worksheet.webp",
+    "/library/files/founder-theWickedWitch/wicked-witch-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-eiffel": {
+   "img": [
+    "/library/files/genre-eiffel/eiffel-tower-mystery-picture-worksheet.webp",
+    "/library/files/genre-eiffel/eiffel-tower-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-tteokguk": {
+   "img": [
+    "/library/files/genre-tteokguk/rice-cake-soup-mystery-picture-worksheet.webp",
+    "/library/files/genre-tteokguk/rice-cake-soup-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-chestnuts": {
+   "img": [
+    "/library/files/genre-chestnuts/chestnuts-mystery-picture-worksheet.webp",
+    "/library/files/genre-chestnuts/chestnuts-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-bow-quiver": {
+   "img": [
+    "/library/files/genre-bow-quiver/cupid-s-bow-and-quiver-mystery-picture-worksheet.webp",
+    "/library/files/genre-bow-quiver/cupid-s-bow-and-quiver-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-firecrackers": {
+   "img": [
+    "/library/files/genre-firecrackers/firecrackers-mystery-picture-worksheet.webp",
+    "/library/files/genre-firecrackers/firecrackers-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-sunrise": {
+   "img": [
+    "/library/files/genre-sunrise/first-sunrise-mystery-picture-worksheet.webp",
+    "/library/files/genre-sunrise/first-sunrise-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-rake-leaves": {
+   "img": [
+    "/library/files/genre-rake-leaves/rake-and-leaf-pile-mystery-picture-worksheet.webp",
+    "/library/files/genre-rake-leaves/rake-and-leaf-pile-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-broomstick": {
+   "img": [
+    "/library/files/genre-broomstick/broomstick-mystery-picture-worksheet.webp",
+    "/library/files/genre-broomstick/broomstick-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-goat": {
+   "img": [
+    "/library/files/genre-goat/goat-mystery-picture-worksheet.webp",
+    "/library/files/genre-goat/goat-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-pencil": {
+   "img": [
+    "/library/files/genre-pencil/pencil-mystery-picture-worksheet.webp",
+    "/library/files/genre-pencil/pencil-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-pine-cone": {
+   "img": [
+    "/library/files/genre-pine-cone/pine-cone-mystery-picture-worksheet.webp",
+    "/library/files/genre-pine-cone/pine-cone-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-airplane": {
+   "img": [
+    "/library/files/genre-airplane/airplane-mystery-picture-worksheet.webp",
+    "/library/files/genre-airplane/airplane-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-bat": {
+   "img": [
+    "/library/files/genre-bat/bat-mystery-picture-worksheet.webp",
+    "/library/files/genre-bat/bat-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-bell": {
+   "img": [
+    "/library/files/genre-bell/bell-mystery-picture-worksheet.webp",
+    "/library/files/genre-bell/bell-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-bunny": {
+   "img": [
+    "/library/files/genre-bunny/bunny-mystery-picture-worksheet.webp",
+    "/library/files/genre-bunny/bunny-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-bus": {
+   "img": [
+    "/library/files/genre-bus/bus-mystery-picture-worksheet.webp",
+    "/library/files/genre-bus/bus-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-cow": {
+   "img": [
+    "/library/files/genre-cow/cow-mystery-picture-worksheet.webp",
+    "/library/files/genre-cow/cow-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-crown": {
+   "img": [
+    "/library/files/genre-crown/crown-mystery-picture-worksheet.webp",
+    "/library/files/genre-crown/crown-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-dog": {
+   "img": [
+    "/library/files/genre-dog/dog-mystery-picture-worksheet.webp",
+    "/library/files/genre-dog/dog-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-energy-sword": {
+   "img": [
+    "/library/files/genre-energy-sword/energy-sword-mystery-picture-worksheet.webp",
+    "/library/files/genre-energy-sword/energy-sword-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-fire-truck": {
+   "img": [
+    "/library/files/genre-fire-truck/fire-truck-mystery-picture-worksheet.webp",
+    "/library/files/genre-fire-truck/fire-truck-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-ghost": {
+   "img": [
+    "/library/files/genre-ghost/ghost-mystery-picture-worksheet.webp",
+    "/library/files/genre-ghost/ghost-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-guitar": {
+   "img": [
+    "/library/files/genre-guitar/guitar-mystery-picture-worksheet.webp",
+    "/library/files/genre-guitar/guitar-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-kite": {
+   "img": [
+    "/library/files/genre-kite/kite-mystery-picture-worksheet.webp",
+    "/library/files/genre-kite/kite-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-sweater": {
+   "img": [
+    "/library/files/genre-sweater/knitted-sweater-mystery-picture-worksheet.webp",
+    "/library/files/genre-sweater/knitted-sweater-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-lamb": {
+   "img": [
+    "/library/files/genre-lamb/lamb-mystery-picture-worksheet.webp",
+    "/library/files/genre-lamb/lamb-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-mandarins": {
+   "img": [
+    "/library/files/genre-mandarins/mandarin-oranges-mystery-picture-worksheet.webp",
+    "/library/files/genre-mandarins/mandarin-oranges-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-party-hat": {
+   "img": [
+    "/library/files/genre-party-hat/party-hat-and-horn-mystery-picture-worksheet.webp",
+    "/library/files/genre-party-hat/party-hat-and-horn-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-piggy-bank": {
+   "img": [
+    "/library/files/genre-piggy-bank/piggy-bank-mystery-picture-worksheet.webp",
+    "/library/files/genre-piggy-bank/piggy-bank-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-quilt": {
+   "img": [
+    "/library/files/genre-quilt/pinwheel-quilt-mystery-picture-worksheet.webp",
+    "/library/files/genre-quilt/pinwheel-quilt-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-popsicle": {
+   "img": [
+    "/library/files/genre-popsicle/popsicle-mystery-picture-worksheet.webp",
+    "/library/files/genre-popsicle/popsicle-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-rose": {
+   "img": [
+    "/library/files/genre-rose/rose-mystery-picture-worksheet.webp",
+    "/library/files/genre-rose/rose-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-santa-hat": {
+   "img": [
+    "/library/files/genre-santa-hat/santa-hat-mystery-picture-worksheet.webp",
+    "/library/files/genre-santa-hat/santa-hat-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-sneaker": {
+   "img": [
+    "/library/files/genre-sneaker/sneaker-mystery-picture-worksheet.webp",
+    "/library/files/genre-sneaker/sneaker-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-stocking": {
+   "img": [
+    "/library/files/genre-stocking/stocking-mystery-picture-worksheet.webp",
+    "/library/files/genre-stocking/stocking-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-storm": {
+   "img": [
+    "/library/files/genre-storm/storm-cloud-mystery-picture-worksheet.webp",
+    "/library/files/genre-storm/storm-cloud-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-tombstone": {
+   "img": [
+    "/library/files/genre-tombstone/tombstone-mystery-picture-worksheet.webp",
+    "/library/files/genre-tombstone/tombstone-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-tulips": {
+   "img": [
+    "/library/files/genre-tulips/tulips-mystery-picture-worksheet.webp",
+    "/library/files/genre-tulips/tulips-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-watering-can": {
+   "img": [
+    "/library/files/genre-watering-can/watering-can-mystery-picture-worksheet.webp",
+    "/library/files/genre-watering-can/watering-can-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-watermelon": {
+   "img": [
+    "/library/files/genre-watermelon/watermelon-slice-mystery-picture-worksheet.webp",
+    "/library/files/genre-watermelon/watermelon-slice-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-lake-moon": {
+   "img": [
+    "/library/files/genre-lake-moon/lake-and-moon-mystery-picture-worksheet.webp",
+    "/library/files/genre-lake-moon/lake-and-moon-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-cranberry-sauce": {
+   "img": [
+    "/library/files/genre-cranberry-sauce/cranberry-sauce-mystery-picture-worksheet.webp",
+    "/library/files/genre-cranberry-sauce/cranberry-sauce-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-broom-dustpan": {
+   "img": [
+    "/library/files/genre-broom-dustpan/broom-and-dustpan-mystery-picture-worksheet.webp",
+    "/library/files/genre-broom-dustpan/broom-and-dustpan-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-mondrian": {
+   "img": [
+    "/library/files/genre-mondrian/mondrian-mystery-picture-worksheet.webp",
+    "/library/files/genre-mondrian/mondrian-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-arrow-heart": {
+   "img": [
+    "/library/files/genre-arrow-heart/arrow-through-a-heart-mystery-picture-worksheet.webp",
+    "/library/files/genre-arrow-heart/arrow-through-a-heart-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-battle-axe": {
+   "img": [
+    "/library/files/genre-battle-axe/battle-axe-mystery-picture-worksheet.webp",
+    "/library/files/genre-battle-axe/battle-axe-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-beanie": {
+   "img": [
+    "/library/files/genre-beanie/beanie-mystery-picture-worksheet.webp",
+    "/library/files/genre-beanie/beanie-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-xmas-tree": {
+   "img": [
+    "/library/files/genre-xmas-tree/christmas-tree-mystery-picture-worksheet.webp",
+    "/library/files/genre-xmas-tree/christmas-tree-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-headphones": {
+   "img": [
+    "/library/files/genre-headphones/headphones-mystery-picture-worksheet.webp",
+    "/library/files/genre-headphones/headphones-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-heart-balloon": {
+   "img": [
+    "/library/files/genre-heart-balloon/heart-balloon-mystery-picture-worksheet.webp",
+    "/library/files/genre-heart-balloon/heart-balloon-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-hourglass": {
+   "img": [
+    "/library/files/genre-hourglass/hourglass-mystery-picture-worksheet.webp",
+    "/library/files/genre-hourglass/hourglass-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-ice-skate": {
+   "img": [
+    "/library/files/genre-ice-skate/ice-skate-mystery-picture-worksheet.webp",
+    "/library/files/genre-ice-skate/ice-skate-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-ice-cream": {
+   "img": [
+    "/library/files/genre-ice-cream/ice-cream-cone-mystery-picture-worksheet.webp",
+    "/library/files/genre-ice-cream/ice-cream-cone-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-lightbulb": {
+   "img": [
+    "/library/files/genre-lightbulb/light-bulb-mystery-picture-worksheet.webp",
+    "/library/files/genre-lightbulb/light-bulb-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-octopus": {
+   "img": [
+    "/library/files/genre-octopus/octopus-mystery-picture-worksheet.webp",
+    "/library/files/genre-octopus/octopus-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-pizza": {
+   "img": [
+    "/library/files/genre-pizza/pizza-mystery-picture-worksheet.webp",
+    "/library/files/genre-pizza/pizza-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-round-shield": {
+   "img": [
+    "/library/files/genre-round-shield/round-shield-mystery-picture-worksheet.webp",
+    "/library/files/genre-round-shield/round-shield-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-smartphone": {
+   "img": [
+    "/library/files/genre-smartphone/smartphone-mystery-picture-worksheet.webp",
+    "/library/files/genre-smartphone/smartphone-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-surfboard": {
+   "img": [
+    "/library/files/genre-surfboard/surfboard-on-a-wave-mystery-picture-worksheet.webp",
+    "/library/files/genre-surfboard/surfboard-on-a-wave-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-candy-corn": {
+   "img": [
+    "/library/files/genre-candy-corn/candy-corn-mystery-picture-worksheet.webp",
+    "/library/files/genre-candy-corn/candy-corn-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-padlock-key": {
+   "img": [
+    "/library/files/genre-padlock-key/padlock-and-key-mystery-picture-worksheet.webp",
+    "/library/files/genre-padlock-key/padlock-and-key-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-armchair": {
+   "img": [
+    "/library/files/genre-armchair/armchair-mystery-picture-worksheet.webp",
+    "/library/files/genre-armchair/armchair-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-geese": {
+   "img": [
+    "/library/files/genre-geese/geese-flying-south-mystery-picture-worksheet.webp",
+    "/library/files/genre-geese/geese-flying-south-mystery-picture-answer.webp"
+   ]
+  },
+  "founder-theEmeraldCity": {
+   "img": [
+    "/library/files/founder-theEmeraldCity/emerald-mystery-picture-worksheet.webp",
+    "/library/files/founder-theEmeraldCity/emerald-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-book": {
+   "img": [
+    "/library/files/genre-book/book-mystery-picture-worksheet.webp",
+    "/library/files/genre-book/book-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-camera": {
+   "img": [
+    "/library/files/genre-camera/camera-mystery-picture-worksheet.webp",
+    "/library/files/genre-camera/camera-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-candy-cane": {
+   "img": [
+    "/library/files/genre-candy-cane/candy-cane-mystery-picture-worksheet.webp",
+    "/library/files/genre-candy-cane/candy-cane-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-car": {
+   "img": [
+    "/library/files/genre-car/car-mystery-picture-worksheet.webp",
+    "/library/files/genre-car/car-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-carrot": {
+   "img": [
+    "/library/files/genre-carrot/carrot-mystery-picture-worksheet.webp",
+    "/library/files/genre-carrot/carrot-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-donut": {
+   "img": [
+    "/library/files/genre-donut/donut-mystery-picture-worksheet.webp",
+    "/library/files/genre-donut/donut-mystery-picture-answer.webp"
+   ]
+  },
+  "duck": {
+   "img": [
+    "/library/files/duck/duck-mystery-picture-worksheet.webp",
+    "/library/files/duck/duck-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-gingerbread": {
+   "img": [
+    "/library/files/genre-gingerbread/gingerbread-man-mystery-picture-worksheet.webp",
+    "/library/files/genre-gingerbread/gingerbread-man-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-scarf": {
+   "img": [
+    "/library/files/genre-scarf/knitted-scarf-mystery-picture-worksheet.webp",
+    "/library/files/genre-scarf/knitted-scarf-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-letter": {
+   "img": [
+    "/library/files/genre-letter/letter-mystery-picture-worksheet.webp",
+    "/library/files/genre-letter/letter-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-scissors": {
+   "img": [
+    "/library/files/genre-scissors/scissors-mystery-picture-worksheet.webp",
+    "/library/files/genre-scissors/scissors-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-skateboard": {
+   "img": [
+    "/library/files/genre-skateboard/skateboard-mystery-picture-worksheet.webp",
+    "/library/files/genre-skateboard/skateboard-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-trophy": {
+   "img": [
+    "/library/files/genre-trophy/trophy-mystery-picture-worksheet.webp",
+    "/library/files/genre-trophy/trophy-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-polar-bear": {
+   "img": [
+    "/library/files/genre-polar-bear/polar-bear-mystery-picture-worksheet.webp",
+    "/library/files/genre-polar-bear/polar-bear-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-clock": {
+   "img": [
+    "/library/files/genre-clock/clock-at-midnight-mystery-picture-worksheet.webp",
+    "/library/files/genre-clock/clock-at-midnight-mystery-picture-answer.webp"
+   ]
+  },
+  "founder-theScarecrow": {
+   "img": [
+    "/library/files/founder-theScarecrow/scarecrow-mystery-picture-worksheet.webp",
+    "/library/files/founder-theScarecrow/scarecrow-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-yarn-and-needles": {
+   "img": [
+    "/library/files/genre-yarn-and-needles/yarn-and-knitting-needles-mystery-picture-worksheet.webp",
+    "/library/files/genre-yarn-and-needles/yarn-and-knitting-needles-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-fishing": {
+   "img": [
+    "/library/files/genre-fishing/fishing-mystery-picture-worksheet.webp",
+    "/library/files/genre-fishing/fishing-mystery-picture-answer.webp"
+   ]
+  },
+  "founder-theTinWoodman": {
+   "img": [
+    "/library/files/founder-theTinWoodman/tin-man-mystery-picture-worksheet.webp",
+    "/library/files/founder-theTinWoodman/tin-man-mystery-picture-answer.webp"
+   ]
+  },
+  "founder-penghy": {
+   "img": [
+    "/library/files/founder-penghy/little-penguin-mystery-picture-worksheet.webp",
+    "/library/files/founder-penghy/little-penguin-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-anchor": {
+   "img": [
+    "/library/files/genre-anchor/anchor-mystery-picture-worksheet.webp",
+    "/library/files/genre-anchor/anchor-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-cherries": {
+   "img": [
+    "/library/files/genre-cherries/cherries-mystery-picture-worksheet.webp",
+    "/library/files/genre-cherries/cherries-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-flip-flops": {
+   "img": [
+    "/library/files/genre-flip-flops/flip-flops-mystery-picture-worksheet.webp",
+    "/library/files/genre-flip-flops/flip-flops-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-hammer": {
+   "img": [
+    "/library/files/genre-hammer/hammer-mystery-picture-worksheet.webp",
+    "/library/files/genre-hammer/hammer-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-mittens": {
+   "img": [
+    "/library/files/genre-mittens/mittens-mystery-picture-worksheet.webp",
+    "/library/files/genre-mittens/mittens-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-cupcake": {
+   "img": [
+    "/library/files/genre-cupcake/cupcake-mystery-picture-worksheet.webp",
+    "/library/files/genre-cupcake/cupcake-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-knights-duel": {
+   "img": [
+    "/library/files/genre-knights-duel/knights-duelling-mystery-picture-worksheet.webp",
+    "/library/files/genre-knights-duel/knights-duelling-mystery-picture-answer.webp"
+   ]
+  },
+  "founder-theRescue": {
+   "img": [
+    "/library/files/founder-theRescue/silver-shoe-mystery-picture-worksheet.webp",
+    "/library/files/founder-theRescue/silver-shoe-mystery-picture-answer.webp"
+   ]
+  },
+  "founder-theGreatOz": {
+   "img": [
+    "/library/files/founder-theGreatOz/emerald-sword-mystery-picture-worksheet.webp",
+    "/library/files/founder-theGreatOz/emerald-sword-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-basketball": {
+   "img": [
+    "/library/files/genre-basketball/basketball-mystery-picture-worksheet.webp",
+    "/library/files/genre-basketball/basketball-mystery-picture-answer.webp"
+   ]
+  },
+  "founder-theLandOfOz": {
+   "img": [
+    "/library/files/founder-theLandOfOz/country-road-mystery-picture-worksheet.webp",
+    "/library/files/founder-theLandOfOz/country-road-mystery-picture-answer.webp"
+   ]
+  },
+  "founder-theDeadlyPoppyField": {
+   "img": [
+    "/library/files/founder-theDeadlyPoppyField/poppy-field-mystery-picture-worksheet.webp",
+    "/library/files/founder-theDeadlyPoppyField/poppy-field-mystery-picture-answer.webp"
+   ]
+  },
+  "genre-witch-moon": {
+   "img": [
+    "/library/files/genre-witch-moon/witch-and-the-moon-mystery-picture-worksheet.webp",
+    "/library/files/genre-witch-moon/witch-and-the-moon-mystery-picture-answer.webp"
+   ]
+  },
+  "founder-theFlyingMonkeys": {
+   "img": [
+    "/library/files/founder-theFlyingMonkeys/flying-monkey-mystery-picture-worksheet.webp",
+    "/library/files/founder-theFlyingMonkeys/flying-monkey-mystery-picture-answer.webp"
+   ]
+  }
+ },
+ "stitch": {
+  "genre-greek-helmet": {
+   "img": [
+    "/cross-stitch/files/genre-greek-helmet/crested-greek-helmet-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-greek-helmet/crested-greek-helmet-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-dragon-eye": {
+   "img": [
+    "/cross-stitch/files/genre-dragon-eye/dragon-s-eye-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-dragon-eye/dragon-s-eye-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-knight": {
+   "img": [
+    "/cross-stitch/files/genre-knight/chibi-knight-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-knight/chibi-knight-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-black-cat": {
+   "img": [
+    "/cross-stitch/files/genre-black-cat/black-cat-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-black-cat/black-cat-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-great-wave": {
+   "img": [
+    "/cross-stitch/files/genre-great-wave/the-great-wave-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-great-wave/the-great-wave-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-lighthouse": {
+   "img": [
+    "/cross-stitch/files/genre-lighthouse/lighthouse-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-lighthouse/lighthouse-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-lovebirds": {
+   "img": [
+    "/cross-stitch/files/genre-lovebirds/lovebirds-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-lovebirds/lovebirds-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-ring-box": {
+   "img": [
+    "/cross-stitch/files/genre-ring-box/ring-box-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-ring-box/ring-box-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-toucan": {
+   "img": [
+    "/cross-stitch/files/genre-toucan/toucan-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-toucan/toucan-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-sunflower": {
+   "img": [
+    "/cross-stitch/files/genre-sunflower/sunflower-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-sunflower/sunflower-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-iso-house": {
+   "img": [
+    "/cross-stitch/files/genre-iso-house/snowy-cottage-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-iso-house/snowy-cottage-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-stained-glass": {
+   "img": [
+    "/cross-stitch/files/genre-stained-glass/stained-glass-window-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-stained-glass/stained-glass-window-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-owl": {
+   "img": [
+    "/cross-stitch/files/genre-owl/owl-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-owl/owl-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-toaster": {
+   "img": [
+    "/cross-stitch/files/genre-toaster/toaster-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-toaster/toaster-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-robin": {
+   "img": [
+    "/cross-stitch/files/genre-robin/robin-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-robin/robin-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-castle-siege": {
+   "img": [
+    "/cross-stitch/files/genre-castle-siege/castle-siege-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-castle-siege/castle-siege-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-viking-prow": {
+   "img": [
+    "/cross-stitch/files/genre-viking-prow/viking-ship-prow-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-viking-prow/viking-ship-prow-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-camping": {
+   "img": [
+    "/cross-stitch/files/genre-camping/camping-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-camping/camping-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-corn": {
+   "img": [
+    "/cross-stitch/files/genre-corn/corn-cob-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-corn/corn-cob-cross-stitch-chart.webp"
+   ]
+  },
+  "founder-dorothy": {
+   "img": [
+    "/cross-stitch/files/founder-dorothy/girl-with-braids-cross-stitch-pattern.webp",
+    "/cross-stitch/files/founder-dorothy/girl-with-braids-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-nest": {
+   "img": [
+    "/cross-stitch/files/genre-nest/bird-s-nest-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-nest/bird-s-nest-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-chameleon": {
+   "img": [
+    "/cross-stitch/files/genre-chameleon/chameleon-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-chameleon/chameleon-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-harvest-moon": {
+   "img": [
+    "/cross-stitch/files/genre-harvest-moon/harvest-moon-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-harvest-moon/harvest-moon-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-bauble": {
+   "img": [
+    "/cross-stitch/files/genre-bauble/bauble-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-bauble/bauble-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-diamond": {
+   "img": [
+    "/cross-stitch/files/genre-diamond/diamond-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-diamond/diamond-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-handheld-console": {
+   "img": [
+    "/cross-stitch/files/genre-handheld-console/handheld-game-console-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-handheld-console/handheld-game-console-cross-stitch-chart.webp"
+   ]
+  },
+  "game-ufo": {
+   "img": [
+    "/cross-stitch/files/game-ufo/a-ufo-over-the-city-cross-stitch-pattern.webp",
+    "/cross-stitch/files/game-ufo/a-ufo-over-the-city-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-seedlings": {
+   "img": [
+    "/cross-stitch/files/genre-seedlings/seedlings-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-seedlings/seedlings-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-firefly-jar": {
+   "img": [
+    "/cross-stitch/files/genre-firefly-jar/jar-of-fireflies-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-firefly-jar/jar-of-fireflies-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-arcade-cabinet": {
+   "img": [
+    "/cross-stitch/files/genre-arcade-cabinet/arcade-cabinet-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-arcade-cabinet/arcade-cabinet-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-chocolate-box": {
+   "img": [
+    "/cross-stitch/files/genre-chocolate-box/box-of-chocolates-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-chocolate-box/box-of-chocolates-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-harvest-table": {
+   "img": [
+    "/cross-stitch/files/genre-harvest-table/harvest-table-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-harvest-table/harvest-table-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-heart-cookies": {
+   "img": [
+    "/cross-stitch/files/genre-heart-cookies/heart-cookies-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-heart-cookies/heart-cookies-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-samurai-helmet": {
+   "img": [
+    "/cross-stitch/files/genre-samurai-helmet/samurai-helmet-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-samurai-helmet/samurai-helmet-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-starfighter": {
+   "img": [
+    "/cross-stitch/files/genre-starfighter/starfighter-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-starfighter/starfighter-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-candy-jar": {
+   "img": [
+    "/cross-stitch/files/genre-candy-jar/candy-jar-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-candy-jar/candy-jar-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-skyline": {
+   "img": [
+    "/cross-stitch/files/genre-skyline/city-at-sunset-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-skyline/city-at-sunset-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-sandcastle": {
+   "img": [
+    "/cross-stitch/files/genre-sandcastle/sandcastle-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-sandcastle/sandcastle-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-fireworks": {
+   "img": [
+    "/cross-stitch/files/genre-fireworks/fireworks-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-fireworks/fireworks-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-cauldron": {
+   "img": [
+    "/cross-stitch/files/genre-cauldron/cauldron-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-cauldron/cauldron-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-clownfish": {
+   "img": [
+    "/cross-stitch/files/genre-clownfish/clownfish-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-clownfish/clownfish-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-dice": {
+   "img": [
+    "/cross-stitch/files/genre-dice/dice-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-dice/dice-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-gift-box": {
+   "img": [
+    "/cross-stitch/files/genre-gift-box/gift-box-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-gift-box/gift-box-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-hot-air-balloon": {
+   "img": [
+    "/cross-stitch/files/genre-hot-air-balloon/hot-air-balloon-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-hot-air-balloon/hot-air-balloon-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-mushrooms": {
+   "img": [
+    "/cross-stitch/files/genre-mushrooms/mushrooms-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-mushrooms/mushrooms-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-pyramids": {
+   "img": [
+    "/cross-stitch/files/genre-pyramids/pyramids-of-giza-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-pyramids/pyramids-of-giza-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-snowman": {
+   "img": [
+    "/cross-stitch/files/genre-snowman/snowman-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-snowman/snowman-cross-stitch-chart.webp"
+   ]
+  },
+  "founder-snowVillage": {
+   "img": [
+    "/cross-stitch/files/founder-snowVillage/snowy-village-cross-stitch-pattern.webp",
+    "/cross-stitch/files/founder-snowVillage/snowy-village-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-space-station": {
+   "img": [
+    "/cross-stitch/files/genre-space-station/ring-space-station-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-space-station/ring-space-station-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-love-lock": {
+   "img": [
+    "/cross-stitch/files/genre-love-lock/love-lock-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-love-lock/love-lock-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-apple-branch": {
+   "img": [
+    "/cross-stitch/files/genre-apple-branch/apple-on-the-branch-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-apple-branch/apple-on-the-branch-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-castle-gate": {
+   "img": [
+    "/cross-stitch/files/genre-castle-gate/castle-gate-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-castle-gate/castle-gate-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-dandelion": {
+   "img": [
+    "/cross-stitch/files/genre-dandelion/dandelion-clock-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-dandelion/dandelion-clock-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-golden-gate": {
+   "img": [
+    "/cross-stitch/files/genre-golden-gate/golden-gate-bridge-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-golden-gate/golden-gate-bridge-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-great-helm": {
+   "img": [
+    "/cross-stitch/files/genre-great-helm/knight-s-great-helm-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-great-helm/knight-s-great-helm-cross-stitch-chart.webp"
+   ]
+  },
+  "founder-theCowardlyLion": {
+   "img": [
+    "/cross-stitch/files/founder-theCowardlyLion/lion-cross-stitch-pattern.webp",
+    "/cross-stitch/files/founder-theCowardlyLion/lion-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-ray-gun": {
+   "img": [
+    "/cross-stitch/files/genre-ray-gun/ray-gun-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-ray-gun/ray-gun-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-statue-of-liberty": {
+   "img": [
+    "/cross-stitch/files/genre-statue-of-liberty/statue-of-liberty-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-statue-of-liberty/statue-of-liberty-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-treat-bag": {
+   "img": [
+    "/cross-stitch/files/genre-treat-bag/trick-or-treat-bag-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-treat-bag/trick-or-treat-bag-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-wheat-sheaf": {
+   "img": [
+    "/cross-stitch/files/genre-wheat-sheaf/wheat-sheaf-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-wheat-sheaf/wheat-sheaf-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-adventurer": {
+   "img": [
+    "/cross-stitch/files/genre-adventurer/8-bit-adventurer-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-adventurer/8-bit-adventurer-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-cherry-blossom": {
+   "img": [
+    "/cross-stitch/files/genre-cherry-blossom/cherry-blossom-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-cherry-blossom/cherry-blossom-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-fireplace": {
+   "img": [
+    "/cross-stitch/files/genre-fireplace/fireplace-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-fireplace/fireplace-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-shell-starfish": {
+   "img": [
+    "/cross-stitch/files/genre-shell-starfish/seashell-and-starfish-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-shell-starfish/seashell-and-starfish-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-spider-web": {
+   "img": [
+    "/cross-stitch/files/genre-spider-web/spider-on-its-web-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-spider-web/spider-on-its-web-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-daffodils": {
+   "img": [
+    "/cross-stitch/files/genre-daffodils/daffodil-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-daffodils/daffodil-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-lemonade": {
+   "img": [
+    "/cross-stitch/files/genre-lemonade/glass-of-lemonade-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-lemonade/glass-of-lemonade-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-haunted-house": {
+   "img": [
+    "/cross-stitch/files/genre-haunted-house/haunted-house-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-haunted-house/haunted-house-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-rain-boots": {
+   "img": [
+    "/cross-stitch/files/genre-rain-boots/rain-boots-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-rain-boots/rain-boots-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-squirrel": {
+   "img": [
+    "/cross-stitch/files/genre-squirrel/squirrel-with-an-acorn-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-squirrel/squirrel-with-an-acorn-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-giraffe": {
+   "img": [
+    "/cross-stitch/files/genre-giraffe/giraffe-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-giraffe/giraffe-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-hamburger": {
+   "img": [
+    "/cross-stitch/files/genre-hamburger/hamburger-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-hamburger/hamburger-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-holly": {
+   "img": [
+    "/cross-stitch/files/genre-holly/holly-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-holly/holly-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-jack-o-lantern": {
+   "img": [
+    "/cross-stitch/files/genre-jack-o-lantern/jack-o-lantern-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-jack-o-lantern/jack-o-lantern-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-palm-island": {
+   "img": [
+    "/cross-stitch/files/genre-palm-island/palm-island-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-palm-island/palm-island-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-saturn": {
+   "img": [
+    "/cross-stitch/files/genre-saturn/saturn-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-saturn/saturn-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-dragon": {
+   "img": [
+    "/cross-stitch/files/genre-dragon/small-dragon-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-dragon/small-dragon-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-sushi": {
+   "img": [
+    "/cross-stitch/files/genre-sushi/sushi-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-sushi/sushi-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-backpack": {
+   "img": [
+    "/cross-stitch/files/genre-backpack/backpack-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-backpack/backpack-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-frying-pan": {
+   "img": [
+    "/cross-stitch/files/genre-frying-pan/fried-egg-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-frying-pan/fried-egg-cross-stitch-chart.webp"
+   ]
+  },
+  "founder-barn": {
+   "img": [
+    "/cross-stitch/files/founder-barn/red-barn-cross-stitch-pattern.webp",
+    "/cross-stitch/files/founder-barn/red-barn-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-dragon-head": {
+   "img": [
+    "/cross-stitch/files/genre-dragon-head/dragon-dance-head-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-dragon-head/dragon-dance-head-cross-stitch-chart.webp"
+   ]
+  },
+  "game-penguin": {
+   "img": [
+    "/cross-stitch/files/game-penguin/a-penguin-on-the-ice-cross-stitch-pattern.webp",
+    "/cross-stitch/files/game-penguin/a-penguin-on-the-ice-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-astronaut": {
+   "img": [
+    "/cross-stitch/files/genre-astronaut/astronaut-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-astronaut/astronaut-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-strawberries": {
+   "img": [
+    "/cross-stitch/files/genre-strawberries/chocolate-strawberries-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-strawberries/chocolate-strawberries-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-comet": {
+   "img": [
+    "/cross-stitch/files/genre-comet/comet-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-comet/comet-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-cornucopia": {
+   "img": [
+    "/cross-stitch/files/genre-cornucopia/cornucopia-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-cornucopia/cornucopia-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-dala-horse": {
+   "img": [
+    "/cross-stitch/files/genre-dala-horse/dala-horse-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-dala-horse/dala-horse-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-vr-headset": {
+   "img": [
+    "/cross-stitch/files/genre-vr-headset/vr-headset-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-vr-headset/vr-headset-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-popper": {
+   "img": [
+    "/cross-stitch/files/genre-popper/confetti-popper-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-popper/confetti-popper-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-beach-umbrella": {
+   "img": [
+    "/cross-stitch/files/genre-beach-umbrella/beach-umbrella-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-beach-umbrella/beach-umbrella-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-big-ben": {
+   "img": [
+    "/cross-stitch/files/genre-big-ben/big-ben-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-big-ben/big-ben-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-beach-ball": {
+   "img": [
+    "/cross-stitch/files/genre-beach-ball/beach-ball-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-beach-ball/beach-ball-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-bee-flower": {
+   "img": [
+    "/cross-stitch/files/genre-bee-flower/bee-on-a-flower-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-bee-flower/bee-on-a-flower-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-birdhouse": {
+   "img": [
+    "/cross-stitch/files/genre-birdhouse/birdhouse-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-birdhouse/birdhouse-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-clapperboard": {
+   "img": [
+    "/cross-stitch/files/genre-clapperboard/clapperboard-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-clapperboard/clapperboard-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-egg-basket": {
+   "img": [
+    "/cross-stitch/files/genre-egg-basket/easter-egg-basket-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-egg-basket/easter-egg-basket-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-ferris-wheel": {
+   "img": [
+    "/cross-stitch/files/genre-ferris-wheel/ferris-wheel-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-ferris-wheel/ferris-wheel-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-frog": {
+   "img": [
+    "/cross-stitch/files/genre-frog/frog-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-frog/frog-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-game-controller": {
+   "img": [
+    "/cross-stitch/files/genre-game-controller/game-controller-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-game-controller/game-controller-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-lantern": {
+   "img": [
+    "/cross-stitch/files/genre-lantern/red-lantern-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-lantern/red-lantern-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-reindeer": {
+   "img": [
+    "/cross-stitch/files/genre-reindeer/reindeer-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-reindeer/reindeer-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-snail": {
+   "img": [
+    "/cross-stitch/files/genre-snail/snail-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-snail/snail-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-steamship": {
+   "img": [
+    "/cross-stitch/files/genre-steamship/steamship-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-steamship/steamship-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-teddy-bear": {
+   "img": [
+    "/cross-stitch/files/genre-teddy-bear/teddy-bear-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-teddy-bear/teddy-bear-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-chest": {
+   "img": [
+    "/cross-stitch/files/genre-chest/treasure-chest-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-chest/treasure-chest-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-turkey": {
+   "img": [
+    "/cross-stitch/files/genre-turkey/turkey-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-turkey/turkey-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-volcano": {
+   "img": [
+    "/cross-stitch/files/genre-volcano/volcano-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-volcano/volcano-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-witch-hat": {
+   "img": [
+    "/cross-stitch/files/genre-witch-hat/witch-hat-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-witch-hat/witch-hat-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-wizard": {
+   "img": [
+    "/cross-stitch/files/genre-wizard/wizard-with-a-staff-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-wizard/wizard-with-a-staff-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-sailboat": {
+   "img": [
+    "/cross-stitch/files/genre-sailboat/sailboat-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-sailboat/sailboat-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-hedgehog": {
+   "img": [
+    "/cross-stitch/files/genre-hedgehog/hedgehog-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-hedgehog/hedgehog-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-heart-cake": {
+   "img": [
+    "/cross-stitch/files/genre-heart-cake/heart-cake-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-heart-cake/heart-cake-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-treasure-map": {
+   "img": [
+    "/cross-stitch/files/genre-treasure-map/treasure-map-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-treasure-map/treasure-map-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-cups-clinking": {
+   "img": [
+    "/cross-stitch/files/genre-cups-clinking/two-cups-clinking-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-cups-clinking/two-cups-clinking-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-fox": {
+   "img": [
+    "/cross-stitch/files/genre-fox/fox-in-the-leaves-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-fox/fox-in-the-leaves-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-microscope": {
+   "img": [
+    "/cross-stitch/files/genre-microscope/microscope-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-microscope/microscope-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-mummy": {
+   "img": [
+    "/cross-stitch/files/genre-mummy/mummy-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-mummy/mummy-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-taj-mahal": {
+   "img": [
+    "/cross-stitch/files/genre-taj-mahal/taj-mahal-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-taj-mahal/taj-mahal-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-boba": {
+   "img": [
+    "/cross-stitch/files/genre-boba/bubble-tea-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-boba/bubble-tea-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-love": {
+   "img": [
+    "/cross-stitch/files/genre-love/love-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-love/love-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-pilgrim-hat": {
+   "img": [
+    "/cross-stitch/files/genre-pilgrim-hat/pilgrim-hat-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-pilgrim-hat/pilgrim-hat-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-pumpkin-patch": {
+   "img": [
+    "/cross-stitch/files/genre-pumpkin-patch/pumpkin-patch-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-pumpkin-patch/pumpkin-patch-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-pie": {
+   "img": [
+    "/cross-stitch/files/genre-pie/pumpkin-pie-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-pie/pumpkin-pie-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-roast": {
+   "img": [
+    "/cross-stitch/files/genre-roast/roast-turkey-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-roast/roast-turkey-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-slime": {
+   "img": [
+    "/cross-stitch/files/genre-slime/slime-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-slime/slime-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-swim-ring": {
+   "img": [
+    "/cross-stitch/files/genre-swim-ring/swim-ring-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-swim-ring/swim-ring-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-cactus": {
+   "img": [
+    "/cross-stitch/files/genre-cactus/cactus-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-cactus/cactus-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-crab": {
+   "img": [
+    "/cross-stitch/files/genre-crab/crab-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-crab/crab-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-drum": {
+   "img": [
+    "/cross-stitch/files/genre-drum/drum-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-drum/drum-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-first-aid-kit": {
+   "img": [
+    "/cross-stitch/files/genre-first-aid-kit/first-aid-kit-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-first-aid-kit/first-aid-kit-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-ladybug": {
+   "img": [
+    "/cross-stitch/files/genre-ladybug/ladybug-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-ladybug/ladybug-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-laptop": {
+   "img": [
+    "/cross-stitch/files/genre-laptop/laptop-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-laptop/laptop-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-potion": {
+   "img": [
+    "/cross-stitch/files/genre-potion/magic-potion-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-potion/magic-potion-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-maple-leaf": {
+   "img": [
+    "/cross-stitch/files/genre-maple-leaf/maple-leaf-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-maple-leaf/maple-leaf-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-palette-brush": {
+   "img": [
+    "/cross-stitch/files/genre-palette-brush/palette-and-brush-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-palette-brush/palette-and-brush-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-robot": {
+   "img": [
+    "/cross-stitch/files/genre-robot/robot-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-robot/robot-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-skull": {
+   "img": [
+    "/cross-stitch/files/genre-skull/skull-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-skull/skull-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-sleigh": {
+   "img": [
+    "/cross-stitch/files/genre-sleigh/sleigh-with-gifts-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-sleigh/sleigh-with-gifts-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-invader": {
+   "img": [
+    "/cross-stitch/files/genre-invader/space-invader-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-invader/space-invader-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-train": {
+   "img": [
+    "/cross-stitch/files/genre-train/steam-train-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-train/steam-train-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-sunglasses": {
+   "img": [
+    "/cross-stitch/files/genre-sunglasses/sunglasses-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-sunglasses/sunglasses-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-wreath": {
+   "img": [
+    "/cross-stitch/files/genre-wreath/wreath-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-wreath/wreath-cross-stitch-chart.webp"
+   ]
+  },
+  "founder-theWickedWitch": {
+   "img": [
+    "/cross-stitch/files/founder-theWickedWitch/wicked-witch-cross-stitch-pattern.webp",
+    "/cross-stitch/files/founder-theWickedWitch/wicked-witch-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-eiffel": {
+   "img": [
+    "/cross-stitch/files/genre-eiffel/eiffel-tower-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-eiffel/eiffel-tower-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-tteokguk": {
+   "img": [
+    "/cross-stitch/files/genre-tteokguk/rice-cake-soup-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-tteokguk/rice-cake-soup-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-chestnuts": {
+   "img": [
+    "/cross-stitch/files/genre-chestnuts/chestnuts-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-chestnuts/chestnuts-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-bow-quiver": {
+   "img": [
+    "/cross-stitch/files/genre-bow-quiver/cupid-s-bow-and-quiver-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-bow-quiver/cupid-s-bow-and-quiver-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-firecrackers": {
+   "img": [
+    "/cross-stitch/files/genre-firecrackers/firecrackers-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-firecrackers/firecrackers-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-sunrise": {
+   "img": [
+    "/cross-stitch/files/genre-sunrise/first-sunrise-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-sunrise/first-sunrise-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-rake-leaves": {
+   "img": [
+    "/cross-stitch/files/genre-rake-leaves/rake-and-leaf-pile-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-rake-leaves/rake-and-leaf-pile-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-broomstick": {
+   "img": [
+    "/cross-stitch/files/genre-broomstick/broomstick-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-broomstick/broomstick-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-goat": {
+   "img": [
+    "/cross-stitch/files/genre-goat/goat-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-goat/goat-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-pencil": {
+   "img": [
+    "/cross-stitch/files/genre-pencil/pencil-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-pencil/pencil-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-pine-cone": {
+   "img": [
+    "/cross-stitch/files/genre-pine-cone/pine-cone-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-pine-cone/pine-cone-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-airplane": {
+   "img": [
+    "/cross-stitch/files/genre-airplane/airplane-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-airplane/airplane-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-bat": {
+   "img": [
+    "/cross-stitch/files/genre-bat/bat-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-bat/bat-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-bell": {
+   "img": [
+    "/cross-stitch/files/genre-bell/bell-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-bell/bell-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-bunny": {
+   "img": [
+    "/cross-stitch/files/genre-bunny/bunny-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-bunny/bunny-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-bus": {
+   "img": [
+    "/cross-stitch/files/genre-bus/bus-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-bus/bus-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-cow": {
+   "img": [
+    "/cross-stitch/files/genre-cow/cow-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-cow/cow-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-crown": {
+   "img": [
+    "/cross-stitch/files/genre-crown/crown-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-crown/crown-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-dog": {
+   "img": [
+    "/cross-stitch/files/genre-dog/dog-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-dog/dog-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-energy-sword": {
+   "img": [
+    "/cross-stitch/files/genre-energy-sword/energy-sword-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-energy-sword/energy-sword-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-fire-truck": {
+   "img": [
+    "/cross-stitch/files/genre-fire-truck/fire-truck-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-fire-truck/fire-truck-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-ghost": {
+   "img": [
+    "/cross-stitch/files/genre-ghost/ghost-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-ghost/ghost-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-guitar": {
+   "img": [
+    "/cross-stitch/files/genre-guitar/guitar-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-guitar/guitar-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-kite": {
+   "img": [
+    "/cross-stitch/files/genre-kite/kite-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-kite/kite-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-sweater": {
+   "img": [
+    "/cross-stitch/files/genre-sweater/knitted-sweater-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-sweater/knitted-sweater-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-lamb": {
+   "img": [
+    "/cross-stitch/files/genre-lamb/lamb-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-lamb/lamb-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-mandarins": {
+   "img": [
+    "/cross-stitch/files/genre-mandarins/mandarin-oranges-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-mandarins/mandarin-oranges-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-party-hat": {
+   "img": [
+    "/cross-stitch/files/genre-party-hat/party-hat-and-horn-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-party-hat/party-hat-and-horn-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-piggy-bank": {
+   "img": [
+    "/cross-stitch/files/genre-piggy-bank/piggy-bank-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-piggy-bank/piggy-bank-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-quilt": {
+   "img": [
+    "/cross-stitch/files/genre-quilt/pinwheel-quilt-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-quilt/pinwheel-quilt-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-popsicle": {
+   "img": [
+    "/cross-stitch/files/genre-popsicle/popsicle-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-popsicle/popsicle-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-rose": {
+   "img": [
+    "/cross-stitch/files/genre-rose/rose-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-rose/rose-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-santa-hat": {
+   "img": [
+    "/cross-stitch/files/genre-santa-hat/santa-hat-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-santa-hat/santa-hat-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-sneaker": {
+   "img": [
+    "/cross-stitch/files/genre-sneaker/sneaker-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-sneaker/sneaker-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-stocking": {
+   "img": [
+    "/cross-stitch/files/genre-stocking/stocking-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-stocking/stocking-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-storm": {
+   "img": [
+    "/cross-stitch/files/genre-storm/storm-cloud-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-storm/storm-cloud-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-tombstone": {
+   "img": [
+    "/cross-stitch/files/genre-tombstone/tombstone-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-tombstone/tombstone-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-tulips": {
+   "img": [
+    "/cross-stitch/files/genre-tulips/tulips-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-tulips/tulips-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-watering-can": {
+   "img": [
+    "/cross-stitch/files/genre-watering-can/watering-can-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-watering-can/watering-can-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-watermelon": {
+   "img": [
+    "/cross-stitch/files/genre-watermelon/watermelon-slice-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-watermelon/watermelon-slice-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-lake-moon": {
+   "img": [
+    "/cross-stitch/files/genre-lake-moon/lake-and-moon-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-lake-moon/lake-and-moon-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-cranberry-sauce": {
+   "img": [
+    "/cross-stitch/files/genre-cranberry-sauce/cranberry-sauce-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-cranberry-sauce/cranberry-sauce-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-broom-dustpan": {
+   "img": [
+    "/cross-stitch/files/genre-broom-dustpan/broom-and-dustpan-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-broom-dustpan/broom-and-dustpan-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-mondrian": {
+   "img": [
+    "/cross-stitch/files/genre-mondrian/mondrian-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-mondrian/mondrian-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-arrow-heart": {
+   "img": [
+    "/cross-stitch/files/genre-arrow-heart/arrow-through-a-heart-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-arrow-heart/arrow-through-a-heart-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-battle-axe": {
+   "img": [
+    "/cross-stitch/files/genre-battle-axe/battle-axe-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-battle-axe/battle-axe-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-beanie": {
+   "img": [
+    "/cross-stitch/files/genre-beanie/beanie-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-beanie/beanie-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-xmas-tree": {
+   "img": [
+    "/cross-stitch/files/genre-xmas-tree/christmas-tree-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-xmas-tree/christmas-tree-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-headphones": {
+   "img": [
+    "/cross-stitch/files/genre-headphones/headphones-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-headphones/headphones-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-heart-balloon": {
+   "img": [
+    "/cross-stitch/files/genre-heart-balloon/heart-balloon-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-heart-balloon/heart-balloon-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-hourglass": {
+   "img": [
+    "/cross-stitch/files/genre-hourglass/hourglass-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-hourglass/hourglass-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-ice-skate": {
+   "img": [
+    "/cross-stitch/files/genre-ice-skate/ice-skate-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-ice-skate/ice-skate-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-ice-cream": {
+   "img": [
+    "/cross-stitch/files/genre-ice-cream/ice-cream-cone-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-ice-cream/ice-cream-cone-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-lightbulb": {
+   "img": [
+    "/cross-stitch/files/genre-lightbulb/light-bulb-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-lightbulb/light-bulb-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-octopus": {
+   "img": [
+    "/cross-stitch/files/genre-octopus/octopus-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-octopus/octopus-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-pizza": {
+   "img": [
+    "/cross-stitch/files/genre-pizza/pizza-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-pizza/pizza-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-round-shield": {
+   "img": [
+    "/cross-stitch/files/genre-round-shield/round-shield-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-round-shield/round-shield-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-smartphone": {
+   "img": [
+    "/cross-stitch/files/genre-smartphone/smartphone-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-smartphone/smartphone-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-surfboard": {
+   "img": [
+    "/cross-stitch/files/genre-surfboard/surfboard-on-a-wave-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-surfboard/surfboard-on-a-wave-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-candy-corn": {
+   "img": [
+    "/cross-stitch/files/genre-candy-corn/candy-corn-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-candy-corn/candy-corn-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-padlock-key": {
+   "img": [
+    "/cross-stitch/files/genre-padlock-key/padlock-and-key-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-padlock-key/padlock-and-key-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-armchair": {
+   "img": [
+    "/cross-stitch/files/genre-armchair/armchair-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-armchair/armchair-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-geese": {
+   "img": [
+    "/cross-stitch/files/genre-geese/geese-flying-south-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-geese/geese-flying-south-cross-stitch-chart.webp"
+   ]
+  },
+  "founder-theEmeraldCity": {
+   "img": [
+    "/cross-stitch/files/founder-theEmeraldCity/emerald-cross-stitch-pattern.webp",
+    "/cross-stitch/files/founder-theEmeraldCity/emerald-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-book": {
+   "img": [
+    "/cross-stitch/files/genre-book/book-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-book/book-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-camera": {
+   "img": [
+    "/cross-stitch/files/genre-camera/camera-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-camera/camera-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-candy-cane": {
+   "img": [
+    "/cross-stitch/files/genre-candy-cane/candy-cane-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-candy-cane/candy-cane-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-car": {
+   "img": [
+    "/cross-stitch/files/genre-car/car-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-car/car-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-carrot": {
+   "img": [
+    "/cross-stitch/files/genre-carrot/carrot-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-carrot/carrot-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-donut": {
+   "img": [
+    "/cross-stitch/files/genre-donut/donut-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-donut/donut-cross-stitch-chart.webp"
+   ]
+  },
+  "duck": {
+   "img": [
+    "/cross-stitch/files/duck/duck-cross-stitch-pattern.webp",
+    "/cross-stitch/files/duck/duck-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-gingerbread": {
+   "img": [
+    "/cross-stitch/files/genre-gingerbread/gingerbread-man-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-gingerbread/gingerbread-man-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-scarf": {
+   "img": [
+    "/cross-stitch/files/genre-scarf/knitted-scarf-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-scarf/knitted-scarf-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-letter": {
+   "img": [
+    "/cross-stitch/files/genre-letter/letter-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-letter/letter-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-scissors": {
+   "img": [
+    "/cross-stitch/files/genre-scissors/scissors-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-scissors/scissors-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-skateboard": {
+   "img": [
+    "/cross-stitch/files/genre-skateboard/skateboard-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-skateboard/skateboard-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-trophy": {
+   "img": [
+    "/cross-stitch/files/genre-trophy/trophy-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-trophy/trophy-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-polar-bear": {
+   "img": [
+    "/cross-stitch/files/genre-polar-bear/polar-bear-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-polar-bear/polar-bear-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-clock": {
+   "img": [
+    "/cross-stitch/files/genre-clock/clock-at-midnight-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-clock/clock-at-midnight-cross-stitch-chart.webp"
+   ]
+  },
+  "founder-theScarecrow": {
+   "img": [
+    "/cross-stitch/files/founder-theScarecrow/scarecrow-cross-stitch-pattern.webp",
+    "/cross-stitch/files/founder-theScarecrow/scarecrow-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-yarn-and-needles": {
+   "img": [
+    "/cross-stitch/files/genre-yarn-and-needles/yarn-and-knitting-needles-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-yarn-and-needles/yarn-and-knitting-needles-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-fishing": {
+   "img": [
+    "/cross-stitch/files/genre-fishing/fishing-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-fishing/fishing-cross-stitch-chart.webp"
+   ]
+  },
+  "founder-theTinWoodman": {
+   "img": [
+    "/cross-stitch/files/founder-theTinWoodman/tin-man-cross-stitch-pattern.webp",
+    "/cross-stitch/files/founder-theTinWoodman/tin-man-cross-stitch-chart.webp"
+   ]
+  },
+  "founder-penghy": {
+   "img": [
+    "/cross-stitch/files/founder-penghy/little-penguin-cross-stitch-pattern.webp",
+    "/cross-stitch/files/founder-penghy/little-penguin-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-anchor": {
+   "img": [
+    "/cross-stitch/files/genre-anchor/anchor-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-anchor/anchor-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-cherries": {
+   "img": [
+    "/cross-stitch/files/genre-cherries/cherries-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-cherries/cherries-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-flip-flops": {
+   "img": [
+    "/cross-stitch/files/genre-flip-flops/flip-flops-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-flip-flops/flip-flops-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-hammer": {
+   "img": [
+    "/cross-stitch/files/genre-hammer/hammer-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-hammer/hammer-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-mittens": {
+   "img": [
+    "/cross-stitch/files/genre-mittens/mittens-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-mittens/mittens-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-cupcake": {
+   "img": [
+    "/cross-stitch/files/genre-cupcake/cupcake-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-cupcake/cupcake-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-knights-duel": {
+   "img": [
+    "/cross-stitch/files/genre-knights-duel/knights-duelling-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-knights-duel/knights-duelling-cross-stitch-chart.webp"
+   ]
+  },
+  "founder-theRescue": {
+   "img": [
+    "/cross-stitch/files/founder-theRescue/silver-shoe-cross-stitch-pattern.webp",
+    "/cross-stitch/files/founder-theRescue/silver-shoe-cross-stitch-chart.webp"
+   ]
+  },
+  "founder-theGreatOz": {
+   "img": [
+    "/cross-stitch/files/founder-theGreatOz/emerald-sword-cross-stitch-pattern.webp",
+    "/cross-stitch/files/founder-theGreatOz/emerald-sword-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-basketball": {
+   "img": [
+    "/cross-stitch/files/genre-basketball/basketball-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-basketball/basketball-cross-stitch-chart.webp"
+   ]
+  },
+  "founder-theLandOfOz": {
+   "img": [
+    "/cross-stitch/files/founder-theLandOfOz/country-road-cross-stitch-pattern.webp",
+    "/cross-stitch/files/founder-theLandOfOz/country-road-cross-stitch-chart.webp"
+   ]
+  },
+  "founder-theDeadlyPoppyField": {
+   "img": [
+    "/cross-stitch/files/founder-theDeadlyPoppyField/poppy-field-cross-stitch-pattern.webp",
+    "/cross-stitch/files/founder-theDeadlyPoppyField/poppy-field-cross-stitch-chart.webp"
+   ]
+  },
+  "genre-witch-moon": {
+   "img": [
+    "/cross-stitch/files/genre-witch-moon/witch-and-the-moon-cross-stitch-pattern.webp",
+    "/cross-stitch/files/genre-witch-moon/witch-and-the-moon-cross-stitch-chart.webp"
+   ]
+  },
+  "founder-theFlyingMonkeys": {
+   "img": [
+    "/cross-stitch/files/founder-theFlyingMonkeys/flying-monkey-cross-stitch-pattern.webp",
+    "/cross-stitch/files/founder-theFlyingMonkeys/flying-monkey-cross-stitch-chart.webp"
+   ]
+  }
+ }
+}

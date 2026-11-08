@@ -1,0 +1,32 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>Page files</title>
+<!-- tools/page-files.py opens this headless: ?kind=library|stitch&ids=a,b → for each picture its two pages as WebP,
+     English, Letter, the settings a page opens with, drawn by the page's own code (library/worksheet.js, library/stitch.js). -->
+<iframe id="f" style="width:1200px;height:900px"></iframe>
+<pre id="out"></pre>
+<script>
+  const q = new URLSearchParams(location.search), f = document.getElementById('f');
+  const STITCH = q.get('kind') === 'stitch', KIND = STITCH ? 'CoStitch' : 'CoWorksheet', BASE = STITCH ? '/cross-stitch/' : '/library/';
+  const SCALE = +(q.get('scale') || 1.6), Q = +(q.get('q') || 0.82);
+  const open = id => new Promise(ok => { f.onload = async () => {
+    const W = f.contentWindow; for (let i = 0; i < 1200 && !W[KIND]; i++) await new Promise(r => setTimeout(r, 25)); ok(W[KIND]);
+  }; f.src = BASE + id + '/'; });
+  const webp = src => new Promise((ok, fail) => { const im = new Image(); im.onload = () => {
+    const c = document.createElement('canvas'); c.width = im.width; c.height = im.height; const g = c.getContext('2d');
+    g.fillStyle = '#fff'; g.fillRect(0, 0, c.width, c.height); g.drawImage(im, 0, 0); ok(c.toDataURL('image/webp', Q));
+  }; im.onerror = fail; im.src = src; });
+  (async () => {
+    const res = {}, o = { paper: 'letter', answer: true, lang: 'en', fields: false };
+    for (const id of (q.get('ids') || '').split(',').filter(Boolean)) {
+      try {
+        const ws = (await open(id)) || (await open(id));
+        if (!ws) { res[id] = { error: 'no page code' }; continue; }
+        const pngs = await ws.pages(o, SCALE), imgs = [];
+        for (const p of pngs) imgs.push(await webp(p));
+        res[id] = { imgs };
+      } catch (e) { res[id] = { error: String(e) }; }
+    }
+    document.getElementById('out').textContent = 'RESULT ' + JSON.stringify(res) + ' END';
+  })();
+</script>

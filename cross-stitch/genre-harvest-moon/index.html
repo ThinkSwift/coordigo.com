@@ -13,7 +13,7 @@
 {"@type":"SoftwareApplication","name":"Coordigo","alternateName":"Coordigo: Mystery Pictures","url":"https://coordigo.com/","image":"https://coordigo.com/apple-touch-icon.png","operatingSystem":"iOS, iPadOS, macOS","applicationCategory":"GameApplication","description":"A picture stays a secret until someone connects the dots. Solve a 16 × 16 mystery picture, then draw your own and send it to a friend as a code.","author":{"@id":"https://swiftian.com/#org"}},
 {"@type":"Organization","@id":"https://swiftian.com/#org","name":"Swiftian Inc.","url":"https://swiftian.com/","logo":"https://swiftian.com/apple-touch-icon.png","sameAs":["https://pythoneer.io/","https://spriteer.com/","https://iflipbook.com/","https://coordigo.com/"]}
 ]}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"CreativeWork","name":"Harvest moon cross stitch pattern","url":"https://coordigo.com/cross-stitch/genre-harvest-moon/","image":"https://coordigo.com/cross-stitch/img/genre-harvest-moon.jpg","description":"Free harvest moon cross stitch pattern (PDF): 30 × 30 stitches, 7 DMC colours plus black backstitch, a chart with symbols and a floss key. Letter or A4, in your language or English.","isAccessibleForFree":true,"genre":"Cross stitch pattern","encodingFormat":"application/pdf","inLanguage":["en","ar","de","es","fr","hi","id","it","ja","ko","nl","pt-BR","ru","sv","th","tr","vi","zh-Hans","zh-Hant"],"publisher":{"@id":"https://swiftian.com/#org"},"isPartOf":{"@id":"https://coordigo.com/#site"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Cross stitch","item":"https://coordigo.com/cross-stitch/"},{"@type":"ListItem","position":2,"name":"Harvest moon cross stitch pattern","item":"https://coordigo.com/cross-stitch/genre-harvest-moon/"}]}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"CreativeWork","name":"Harvest moon cross stitch pattern","url":"https://coordigo.com/cross-stitch/genre-harvest-moon/","image":["https://coordigo.com/cross-stitch/img/genre-harvest-moon.jpg","https://coordigo.com/cross-stitch/files/genre-harvest-moon/harvest-moon-cross-stitch-pattern.webp","https://coordigo.com/cross-stitch/files/genre-harvest-moon/harvest-moon-cross-stitch-chart.webp"],"description":"Free harvest moon cross stitch pattern (PDF): 30 × 30 stitches, 7 DMC colours plus black backstitch, a chart with symbols and a floss key. Letter or A4, in your language or English.","isAccessibleForFree":true,"genre":"Cross stitch pattern","encodingFormat":"application/pdf","inLanguage":["en","ar","de","es","fr","hi","id","it","ja","ko","nl","pt-BR","ru","sv","th","tr","vi","zh-Hans","zh-Hant"],"publisher":{"@id":"https://swiftian.com/#org"},"isPartOf":{"@id":"https://coordigo.com/#site"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Cross stitch","item":"https://coordigo.com/cross-stitch/"},{"@type":"ListItem","position":2,"name":"Harvest moon cross stitch pattern","item":"https://coordigo.com/cross-stitch/genre-harvest-moon/"}]}]}</script>
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Coordigo">
 <meta property="og:url" content="https://coordigo.com/cross-stitch/genre-harvest-moon/">
@@ -254,9 +254,9 @@
   .stage{position:relative;background:var(--stage);border-radius:24px;padding:44px 44px 52px}
   .stage .sheets{display:flex;justify-content:center;gap:22px;margin:0}
   .stage .sheets:empty::before{content:"";display:block;width:100%;aspect-ratio:1.62}
-  .stage .sheets canvas{width:calc(50% - 11px);cursor:zoom-in;border-radius:3px;box-shadow:0 1px 2px rgba(0,0,0,.14),0 14px 34px rgba(60,45,20,.16);transition:transform .2s}
-  .stage .sheets canvas:hover,.stage .sheets canvas:focus-visible{transform:translateY(-3px)}
-  .stage .sheets canvas:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+  .stage .sheets canvas,.stage .sheets img{display:block;height:auto;background:#fff;width:calc(50% - 11px);cursor:zoom-in;border-radius:3px;box-shadow:0 1px 2px rgba(0,0,0,.14),0 14px 34px rgba(60,45,20,.16);transition:transform .2s}
+  .stage .sheets :is(canvas,img):hover,.stage .sheets :is(canvas,img):focus-visible{transform:translateY(-3px)}
+  .stage .sheets :is(canvas,img):focus-visible{outline:2px solid var(--ink);outline-offset:3px}
   .sample{position:absolute;left:-18px;bottom:-26px;width:112px;margin:0;background:#fff;padding:7px;border-radius:6px;transform:rotate(-4deg);
     box-shadow:0 1px 2px rgba(0,0,0,.16),0 12px 28px rgba(40,30,10,.22);pointer-events:none}
   .sample img{display:block;width:100%;height:auto;border-radius:2px}
@@ -279,12 +279,12 @@
   .pic-page .pn{margin-top:72px;padding-top:22px;border-top:1px solid var(--hair)}
   dialog.zoom{padding:0;border:0;background:transparent;max-width:none;max-height:none;overflow:visible}
   dialog.zoom::backdrop{background:rgba(20,18,16,.74)}
-  dialog.zoom canvas{display:block;width:auto;height:auto;max-width:94vw;max-height:92vh;background:#fff;border-radius:4px;cursor:zoom-out}
+  dialog.zoom :is(canvas,img){display:block;width:auto;height:auto;max-width:94vw;max-height:92vh;background:#fff;border-radius:4px;cursor:zoom-out}
   @media (max-width:900px){ .pic-hero{grid-template-columns:minmax(0,1fr) 290px;gap:36px} .stage{padding:30px 28px 40px} }
   @media (max-width:760px){
     .pic-hero{grid-template-columns:1fr;gap:44px;margin-top:22px}
     .stage{padding:22px 16px 30px;border-radius:18px}
-    .stage .sheets{gap:12px} .stage .sheets canvas{width:calc(50% - 6px)}
+    .stage .sheets{gap:12px} .stage .sheets :is(canvas,img){width:calc(50% - 6px)}
     .sample{width:72px;left:-6px;bottom:-18px;padding:4px}
   }
 </style>
@@ -303,7 +303,7 @@
     <p class="count">Free PDF · 30 × 30 stitches · 7 DMC colours + black backstitch · 899 crosses</p>
     <div class="pic-hero">
       <div class="stage">
-        <div class="sheets" id="sheetPreview" aria-live="polite"></div>
+        <div class="sheets" id="sheetPreview" aria-live="polite"><img src="/cross-stitch/files/genre-harvest-moon/harvest-moon-cross-stitch-pattern.webp" width="979" height="1267" tabindex="0" data-still alt="Harvest moon cross stitch pattern, page 1: the floss key and how to stitch it"><img src="/cross-stitch/files/genre-harvest-moon/harvest-moon-cross-stitch-chart.webp" width="979" height="1267" tabindex="0" data-still alt="Harvest moon cross stitch pattern, page 2: the chart"></div>
         <figure class="sample hoop"><img src="/cross-stitch/img/genre-harvest-moon.jpg" width="600" height="648" alt="Harvest moon cross stitch pattern, stitched in a hoop"></figure>
       </div>
       <div class="aside">
