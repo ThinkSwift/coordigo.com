@@ -165,7 +165,7 @@ CSS = '''
   .menu-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:0 0 10px}
   .menu-head h2{margin:0}
   .seg.kind{margin:0 0 14px;font:15px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
-  .seg.kind[hidden],#wsOnly[hidden]{display:none}
+  .seg.kind[hidden],#wsOnly[hidden]{display:none!important}
   .langrow{display:flex;align-items:center;gap:8px;margin:0 0 14px;font:15px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
   .langrow[hidden]{display:none}
   .langrow svg{width:18px;height:18px;fill:none;stroke:var(--muted);stroke-width:1.6}
@@ -194,6 +194,48 @@ CSS = '''
   .pn{display:flex;justify-content:space-between;gap:12px;margin:26px 0 0;font:14px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
   .pn a{color:var(--ink)}
   @media (max-width:760px){ .pic-grid{grid-template-columns:1fr} .pic-grid figure{width:100%;max-width:220px;margin:0 auto} }
+  /* the picture page as a product page (founder 2026-11-08: the big picture looked childish, the form unrefined): the printed pages
+     small on a backdrop with the finished picture laid on them like a sample, the words and the way to get it beside them */
+  .pic-page{--stage:#ece5d7}
+  @media (prefers-color-scheme: dark){ .pic-page{--stage:#252731} }
+  .pic-page h1{font-size:clamp(28px,3.8vw,42px);line-height:1.1;margin:8px 0 8px}
+  .pic-hero{display:grid;grid-template-columns:minmax(0,1fr) 330px;gap:56px;align-items:start;margin:30px 0 0}
+  .stage{position:relative;background:var(--stage);border-radius:24px;padding:44px 44px 52px}
+  .stage .sheets{display:flex;justify-content:center;gap:22px;margin:0}
+  .stage .sheets:empty::before{content:"";display:block;width:100%;aspect-ratio:1.62}
+  .stage .sheets canvas{width:calc(50% - 11px);cursor:zoom-in;border-radius:3px;box-shadow:0 1px 2px rgba(0,0,0,.14),0 14px 34px rgba(60,45,20,.16);transition:transform .2s}
+  .stage .sheets canvas:hover,.stage .sheets canvas:focus-visible{transform:translateY(-3px)}
+  .stage .sheets canvas:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+  .sample{position:absolute;left:-18px;bottom:-26px;width:112px;margin:0;background:#fff;padding:7px;border-radius:6px;transform:rotate(-4deg);
+    box-shadow:0 1px 2px rgba(0,0,0,.16),0 12px 28px rgba(40,30,10,.22);pointer-events:none}
+  .sample img{display:block;width:100%;height:auto;border-radius:2px}
+  .sample.hoop{padding:4px}
+  .aside .words{font:italic 21px/1.35 "Young Serif",Georgia,serif;margin:0 0 14px}
+  .aside .free{font-size:15px;line-height:1.6;margin:0 0 22px}
+  .aside .menu{background:none;border:0;box-shadow:none;padding:22px 0 0;border-top:1px solid var(--line);border-radius:0}
+  .aside .menu h2{font-size:17px}
+  .aside .acts{margin:4px 0 0}
+  .aside .act{padding:12px 20px}
+  .more{margin:18px 0 0;font:15px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+  .more summary{cursor:pointer;color:var(--muted);list-style:none;display:inline-flex;align-items:center;gap:8px}
+  .more summary::-webkit-details-marker{display:none}
+  .more summary::after{content:"";width:6px;height:6px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:rotate(45deg) translateY(-2px);transition:transform .15s}
+  .more[open] summary::after{transform:rotate(-135deg) translateY(-1px)}
+  .more[open] summary{margin-bottom:14px}
+  .quiet-links{display:flex;flex-wrap:wrap;gap:6px 18px;margin:20px 0 0;font:14px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+  .quiet-links a,.quiet-links button{color:var(--muted);background:none;border:0;padding:0;font:inherit;cursor:pointer;text-decoration:underline;text-underline-offset:3px;text-decoration-color:var(--line)}
+  .quiet-links a:hover,.quiet-links button:hover{color:var(--ink)}
+  .pic-page .pn{margin-top:72px;padding-top:22px;border-top:1px solid var(--hair)}
+  dialog.zoom{padding:0;border:0;background:transparent;max-width:none;max-height:none;overflow:visible}
+  dialog.zoom::backdrop{background:rgba(20,18,16,.74)}
+  dialog.zoom canvas{display:block;width:auto;height:auto;max-width:94vw;max-height:92vh;background:#fff;border-radius:4px;cursor:zoom-out}
+  @media (max-width:900px){ .pic-hero{grid-template-columns:minmax(0,1fr) 290px;gap:36px} .stage{padding:30px 28px 40px} }
+  @media (max-width:760px){
+    .pic-hero{grid-template-columns:1fr;gap:44px;margin-top:22px}
+    .stage{padding:22px 16px 30px;border-radius:18px}
+    .stage .sheets{gap:12px} .stage .sheets canvas{width:calc(50% - 6px)}
+    .sample{width:72px;left:-6px;bottom:-18px;padding:4px}
+  }
 '''
 
 I18N = '''<script src="/store.js"></script>
@@ -259,7 +301,7 @@ def body(inner, kind='library'):
 #   /cross-stitch/<id>/  Cross stitch:        "<Picture> Cross Stitch Pattern · Free Printable PDF"
 # and a hub for each (/library/, /cross-stitch/, paged).
 SEC = {
-    'library': {'path': '/library/', 'crumb': 'Coordinate graphing', 't': 'graphCaps'},
+    'library': {'path': '/library/', 'crumb': 'Worksheets', 't': 'navSheets'},
     'stitch': {'path': '/cross-stitch/', 'crumb': 'Cross stitch', 't': 'stitchCaps'},
 }
 LANG_ROW = '''          <div class="langrow" id="langSet" role="radiogroup" aria-label="Language" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/></svg><div class="seg"><label><input type="radio" name="lang" value="" id="langOwn"> <span id="langOwnName"></span></label><label><input type="radio" name="lang" value="en"> <span lang="en">English</span></label></div></div>
@@ -268,22 +310,22 @@ LANG_ROW = '''          <div class="langrow" id="langSet" role="radiogroup" aria
             <div class="seg"><label><input type="radio" name="paper" value="letter"> <span data-w="letter">Letter</span></label><label><input type="radio" name="paper" value="a4"> <span data-w="a4">A4</span></label></div>
           </fieldset>
 '''
-WS_ONLY = '''          <div id="wsOnly"{hide}>
+WS_ONLY = '''          <details class="more" id="wsOnly"{hide}><summary data-ws="more">More options</summary>
           <label class="check"><input type="checkbox" name="answer" checked> <span data-w="answerPage">Answer page in color</span></label>
           <label class="check"><input type="checkbox" name="fields"> <span data-ws="lines">Name and class lines</span></label>
           <div class="field names" id="fieldNames" hidden><input type="text" name="label1" maxlength="18" autocomplete="off" aria-label="1"><input type="text" name="label2" maxlength="18" autocomplete="off" aria-label="2"></div>
           <label class="field"><span data-ws="titleField">Title · optional, on the answer page</span><input type="text" name="title" maxlength="40" autocomplete="off"></label>
           <label class="field"><span data-ws="wordsField">Words · optional, on the answer page</span><textarea name="words" maxlength="120" rows="2"></textarea></label>
-          </div>
+          </details>
 '''
 SWITCH = '          <div class="seg kind" id="kindSet" role="radiogroup" hidden><label><input type="radio" name="kind" value="worksheet" checked> <span data-w="worksheet">Worksheet</span></label><label><input type="radio" name="kind" value="stitch"> <span data-st="menu">Cross stitch pattern</span></label></div>\n'
 
 def menu(kind, d):
     if kind == 'library':
         top, form_head, extra = '<h2>Print the worksheet</h2>', '', f'''
-        <div class="acts quiet">
-          <a class="act" href="/library/img/{d['id']}.png" download="{file_stem(d)}.png">Save picture (PNG)</a>
-          <button class="act" id="solveHere" type="button">Solve it here</button>
+        <div class="quiet-links">
+          <button id="solveHere" type="button">Solve it here</button>
+          <a href="/library/img/{d['id']}.png" download="{file_stem(d)}.png">Save the picture (PNG)</a>
         </div>'''
     else:
         top = '<h2>Get the pattern</h2>'
@@ -292,11 +334,11 @@ def menu(kind, d):
     return f'''      <div class="menu">
         <div class="menu-head">{top}</div>
         <form id="sheetForm" onsubmit="return false">
-{form_head}{LANG_ROW}{WS_ONLY.format(hide=' hidden' if kind == 'stitch' else '')}        </form>
-        <div class="acts">
-          <button class="act primary" id="sheetPrint" type="button" data-w="print">Print</button>
-          <button class="act" id="sheetPDF" type="button" data-w="sharePDF">Share as PDF</button>
-        </div>{extra}
+{form_head}{LANG_ROW}          <div class="acts">
+            <button class="act primary" id="sheetPrint" type="button" data-w="print">Print</button>
+            <button class="act" id="sheetPDF" type="button" data-w="sharePDF">Share as PDF</button>
+          </div>
+{WS_ONLY.format(hide=' hidden' if kind == 'stitch' else '')}        </form>{extra}
       </div>'''
 
 def stitch_facts(d):
@@ -312,7 +354,7 @@ def sheet_page(kind, d, prev, nxt):
     link = lambda e, label: f'<a href="{sec["path"]}{e["id"]}/">{label}: {esc(title(e))}</a>' if e else '<span></span>'
     words = f'<p class="words">“{esc(message(d))}”</p>' if message(d) else ''
     attrs = f'''data-picture="{d['id']}" data-number="{number.get(d['id'], 0)}" data-title="{esc(d['title'])}" data-tier="{TIER.get(d['id'], '')}" data-file="{file_stem(d)}" data-payload="{esc(d['payload'])}"'''
-    pic = f'<figure class="{TIER.get(d["id"], "").lower()}"><img src="/library/img/{d["id"]}.png" width="600" height="600" alt="{esc(alt(d))}"></figure>'
+    pic = f'<figure class="sample"><img src="/library/img/{d["id"]}.png" width="600" height="600" alt="{esc(alt(d))}"></figure>'
 
     if kind == 'library':
         h1 = f'{esc(T)} coordinate graphing worksheet'
@@ -338,7 +380,7 @@ def sheet_page(kind, d, prev, nxt):
         desc = (f'Free {t} cross stitch pattern (PDF): {f["W"]} × {f["H"]} stitches, {f["colors"]} DMC colours plus black backstitch, '
                 f'a chart with symbols and a floss key. Letter or A4, in your language or English.')
         image = f'/cross-stitch/img/{d["id"]}.jpg'
-        pic = f'<figure class="hoop"><img src="{image}" width="600" height="648" alt="{esc(T)} cross stitch pattern, stitched in a hoop"></figure>'
+        pic = f'<figure class="sample hoop"><img src="{image}" width="600" height="648" alt="{esc(T)} cross stitch pattern, stitched in a hoop"></figure>'
         words = ''
         ld_main = {'@type': 'CreativeWork', 'name': f'{T} cross stitch pattern', 'url': ORIGIN + path, 'image': ORIGIN + image,
                    'description': desc, 'isAccessibleForFree': True, 'genre': 'Cross stitch pattern', 'encodingFormat': 'application/pdf',
@@ -351,16 +393,21 @@ def sheet_page(kind, d, prev, nxt):
     <p class="crumb"><a href="{sec['path']}" data-t="{sec['t']}">{sec['crumb']}</a></p>
     <h1>{h1}</h1>
     <p class="count">{count}</p>
-    {words}
-    {lead}
-    <div class="pic-grid">
-      {pic}
+    <div class="pic-hero">
+      <div class="stage">
+        <div class="sheets" id="sheetPreview" aria-live="polite"></div>
+        {pic}
+      </div>
+      <div class="aside">
+        {words}
+        {lead}
 {menu(kind, d)}
+      </div>
     </div>
-    <div class="sheets" id="sheetPreview" aria-live="polite"></div>
     {'<iframe id="player" title="Mystery picture" hidden></iframe>' if kind == 'library' else ''}
     <nav class="pn" aria-label="More pictures">{link(prev, 'Newer')}{link(nxt, 'Older')}</nav>
   </section>
+  <dialog class="zoom" id="zoom" aria-label="Page"></dialog>
 '''
     out = os.path.join(ROOT, path.strip('/'), 'index.html')
     os.makedirs(os.path.dirname(out), exist_ok=True)

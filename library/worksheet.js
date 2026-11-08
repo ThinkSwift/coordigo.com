@@ -440,9 +440,10 @@
     ownWords(form.elements.lang.value || readerLang);
     const box = $('sheetPreview'), o = options(), n = ++drawing;
     speak(readerLang);                                         // the menu stays in the reader's language; the sheet follows the choice
-    const only = $('wsOnly'); if (only) only.hidden = !!stitch();
+    const only = $('wsOnly'); if (only) only.hidden = kind() === 'stitch';
     if (!box) return;
-    if (stitch()) { await window.CoStitch.preview(box, o, () => n !== drawing); return; }
+    // a pattern page never shows a worksheet: until stitch.js is in it draws nothing (stitch.js redraws when it arrives)
+    if (kind() === 'stitch') { if (stitch()) await window.CoStitch.preview(box, o, () => n !== drawing); return; }
     const [p] = await ready();
     if (n !== drawing) return;                                 // a newer setting came in meanwhile
     box.replaceChildren(...pagesOf(p, o).map((d, i) => {
@@ -450,6 +451,18 @@
       c.setAttribute('aria-label', i ? say(o.lang, 'answerPage') : say(o.lang, 'heading'));
       return c;
     }));
+  }
+  // a page opens full size: the picture page shows them small (founder 2026-11-08)
+  const zoom = $('zoom'), shown = $('sheetPreview');
+  if (zoom && shown && zoom.showModal) {
+    const open = c => {
+      const z = document.createElement('canvas'); z.width = c.width; z.height = c.height; z.getContext('2d').drawImage(c, 0, 0);
+      z.setAttribute('role', 'img'); z.setAttribute('aria-label', c.getAttribute('aria-label') || ''); zoom.replaceChildren(z); zoom.showModal();
+    };
+    shown.addEventListener('click', e => { if (e.target.tagName === 'CANVAS') open(e.target); });
+    shown.addEventListener('keydown', e => { if (e.target.tagName === 'CANVAS' && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); open(e.target); } });
+    zoom.addEventListener('click', () => zoom.close());
+    new MutationObserver(() => shown.querySelectorAll('canvas').forEach(c => { c.tabIndex = 0; })).observe(shown, { childList: true });
   }
   let lib = null;
   const loadPDF = () => lib || (lib = new Promise((ok, fail) => {
@@ -464,7 +477,7 @@
   const kind = () => (form.elements.kind && form.elements.kind.value) || 'worksheet';
   const stitch = () => kind() === 'stitch' && window.CoStitch;
   async function pdf(o) {
-    if (stitch()) return window.CoStitch.pdf(o);
+    if (kind() === 'stitch') { if (!stitch()) throw new Error('the pattern is still loading'); return window.CoStitch.pdf(o); }
     const [j, [p]] = await Promise.all([loadPDF(), ready()]);
     const pg = PAPER[o.paper], doc = new j.jsPDF({ unit: 'pt', format: [pg.w, pg.h], compress: true });
     pagesOf(p, o).forEach((draw, i) => { if (i) doc.addPage([pg.w, pg.h]); draw(pdfSurface(doc)); });

@@ -13,7 +13,7 @@
 {"@type":"SoftwareApplication","name":"Coordigo","alternateName":"Coordigo: Mystery Pictures","url":"https://coordigo.com/","image":"https://coordigo.com/apple-touch-icon.png","operatingSystem":"iOS, iPadOS, macOS","applicationCategory":"GameApplication","description":"A picture stays a secret until someone connects the dots. Solve a 16 × 16 mystery picture, then draw your own and send it to a friend as a code.","author":{"@id":"https://swiftian.com/#org"}},
 {"@type":"Organization","@id":"https://swiftian.com/#org","name":"Swiftian Inc.","url":"https://swiftian.com/","logo":"https://swiftian.com/apple-touch-icon.png","sameAs":["https://pythoneer.io/","https://spriteer.com/","https://iflipbook.com/","https://coordigo.com/"]}
 ]}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["CreativeWork","LearningResource"],"name":"Corn cob coordinate graphing worksheet","url":"https://coordigo.com/library/genre-corn/","image":"https://coordigo.com/library/img/genre-corn.png","description":"Free printable corn cob coordinate graphing worksheet, a mystery picture (PDF): plot the points on a 16 × 16 grid and join them to reveal the picture. Answer page included. Letter or A4, in your language or English.","isAccessibleForFree":true,"learningResourceType":"Worksheet","educationalUse":"Coordinate graphing","encodingFormat":"application/pdf","inLanguage":["en","ar","de","es","fr","hi","id","it","ja","ko","nl","pt-BR","ru","sv","th","tr","vi","zh-Hans","zh-Hant"],"publisher":{"@id":"https://swiftian.com/#org"},"isPartOf":{"@id":"https://coordigo.com/#site"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Coordinate graphing","item":"https://coordigo.com/library/"},{"@type":"ListItem","position":2,"name":"Corn cob coordinate graphing worksheet","item":"https://coordigo.com/library/genre-corn/"}]}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["CreativeWork","LearningResource"],"name":"Corn cob coordinate graphing worksheet","url":"https://coordigo.com/library/genre-corn/","image":"https://coordigo.com/library/img/genre-corn.png","description":"Free printable corn cob coordinate graphing worksheet, a mystery picture (PDF): plot the points on a 16 × 16 grid and join them to reveal the picture. Answer page included. Letter or A4, in your language or English.","isAccessibleForFree":true,"learningResourceType":"Worksheet","educationalUse":"Coordinate graphing","encodingFormat":"application/pdf","inLanguage":["en","ar","de","es","fr","hi","id","it","ja","ko","nl","pt-BR","ru","sv","th","tr","vi","zh-Hans","zh-Hant"],"publisher":{"@id":"https://swiftian.com/#org"},"isPartOf":{"@id":"https://coordigo.com/#site"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Worksheets","item":"https://coordigo.com/library/"},{"@type":"ListItem","position":2,"name":"Corn cob coordinate graphing worksheet","item":"https://coordigo.com/library/genre-corn/"}]}]}</script>
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Coordigo">
 <meta property="og:url" content="https://coordigo.com/library/genre-corn/">
@@ -156,8 +156,12 @@
     .intro .film{width:min(240px,70%);margin:0 auto}
     .puzzle{margin:16px -16px 0;border-radius:0;border-left:0;border-right:0;padding:8px 0 0}
   }
-  /* five tabs on a phone: the bar scrolls (2026-11-08) */
-  @media (max-width:560px){.tabs{overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}.tabs::-webkit-scrollbar{display:none}.tab{flex:0 0 auto;padding:10px 12px 9px}}
+  /* three tabs, each an icon and one word, so the menu reads in every language (founder 2026-11-08: puzzle · worksheet · cross stitch) */
+  .tab{display:inline-flex;align-items:center;justify-content:center;gap:8px}
+  .ti{width:20px;height:20px;flex:0 0 auto;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+  .ti circle{fill:var(--paper)} .ti circle.dot{fill:currentColor;stroke:none;opacity:.45}
+  .tab[aria-current] .ti circle{fill:var(--mat)}
+  @media (max-width:560px){.tabs{gap:4px}.tab{flex:1 1 0;flex-direction:column;gap:4px;padding:9px 4px 8px;font-size:12.5px;line-height:1.15}.tab[aria-current]{padding-top:7px}.ti{width:22px;height:22px}}
 
   /* the Library, open (founder 2026-11-04): pictures as images, a page per picture with its worksheet */
   .tile{display:block;text-decoration:none;color:inherit}
@@ -206,7 +210,7 @@
   .menu-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:0 0 10px}
   .menu-head h2{margin:0}
   .seg.kind{margin:0 0 14px;font:15px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
-  .seg.kind[hidden],#wsOnly[hidden]{display:none}
+  .seg.kind[hidden],#wsOnly[hidden]{display:none!important}
   .langrow{display:flex;align-items:center;gap:8px;margin:0 0 14px;font:15px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
   .langrow[hidden]{display:none}
   .langrow svg{width:18px;height:18px;fill:none;stroke:var(--muted);stroke-width:1.6}
@@ -235,6 +239,48 @@
   .pn{display:flex;justify-content:space-between;gap:12px;margin:26px 0 0;font:14px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
   .pn a{color:var(--ink)}
   @media (max-width:760px){ .pic-grid{grid-template-columns:1fr} .pic-grid figure{width:100%;max-width:220px;margin:0 auto} }
+  /* the picture page as a product page (founder 2026-11-08: the big picture looked childish, the form unrefined): the printed pages
+     small on a backdrop with the finished picture laid on them like a sample, the words and the way to get it beside them */
+  .pic-page{--stage:#ece5d7}
+  @media (prefers-color-scheme: dark){ .pic-page{--stage:#252731} }
+  .pic-page h1{font-size:clamp(28px,3.8vw,42px);line-height:1.1;margin:8px 0 8px}
+  .pic-hero{display:grid;grid-template-columns:minmax(0,1fr) 330px;gap:56px;align-items:start;margin:30px 0 0}
+  .stage{position:relative;background:var(--stage);border-radius:24px;padding:44px 44px 52px}
+  .stage .sheets{display:flex;justify-content:center;gap:22px;margin:0}
+  .stage .sheets:empty::before{content:"";display:block;width:100%;aspect-ratio:1.62}
+  .stage .sheets canvas{width:calc(50% - 11px);cursor:zoom-in;border-radius:3px;box-shadow:0 1px 2px rgba(0,0,0,.14),0 14px 34px rgba(60,45,20,.16);transition:transform .2s}
+  .stage .sheets canvas:hover,.stage .sheets canvas:focus-visible{transform:translateY(-3px)}
+  .stage .sheets canvas:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+  .sample{position:absolute;left:-18px;bottom:-26px;width:112px;margin:0;background:#fff;padding:7px;border-radius:6px;transform:rotate(-4deg);
+    box-shadow:0 1px 2px rgba(0,0,0,.16),0 12px 28px rgba(40,30,10,.22);pointer-events:none}
+  .sample img{display:block;width:100%;height:auto;border-radius:2px}
+  .sample.hoop{padding:4px}
+  .aside .words{font:italic 21px/1.35 "Young Serif",Georgia,serif;margin:0 0 14px}
+  .aside .free{font-size:15px;line-height:1.6;margin:0 0 22px}
+  .aside .menu{background:none;border:0;box-shadow:none;padding:22px 0 0;border-top:1px solid var(--line);border-radius:0}
+  .aside .menu h2{font-size:17px}
+  .aside .acts{margin:4px 0 0}
+  .aside .act{padding:12px 20px}
+  .more{margin:18px 0 0;font:15px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+  .more summary{cursor:pointer;color:var(--muted);list-style:none;display:inline-flex;align-items:center;gap:8px}
+  .more summary::-webkit-details-marker{display:none}
+  .more summary::after{content:"";width:6px;height:6px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:rotate(45deg) translateY(-2px);transition:transform .15s}
+  .more[open] summary::after{transform:rotate(-135deg) translateY(-1px)}
+  .more[open] summary{margin-bottom:14px}
+  .quiet-links{display:flex;flex-wrap:wrap;gap:6px 18px;margin:20px 0 0;font:14px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+  .quiet-links a,.quiet-links button{color:var(--muted);background:none;border:0;padding:0;font:inherit;cursor:pointer;text-decoration:underline;text-underline-offset:3px;text-decoration-color:var(--line)}
+  .quiet-links a:hover,.quiet-links button:hover{color:var(--ink)}
+  .pic-page .pn{margin-top:72px;padding-top:22px;border-top:1px solid var(--hair)}
+  dialog.zoom{padding:0;border:0;background:transparent;max-width:none;max-height:none;overflow:visible}
+  dialog.zoom::backdrop{background:rgba(20,18,16,.74)}
+  dialog.zoom canvas{display:block;width:auto;height:auto;max-width:94vw;max-height:92vh;background:#fff;border-radius:4px;cursor:zoom-out}
+  @media (max-width:900px){ .pic-hero{grid-template-columns:minmax(0,1fr) 290px;gap:36px} .stage{padding:30px 28px 40px} }
+  @media (max-width:760px){
+    .pic-hero{grid-template-columns:1fr;gap:44px;margin-top:22px}
+    .stage{padding:22px 16px 30px;border-radius:18px}
+    .stage .sheets{gap:12px} .stage .sheets canvas{width:calc(50% - 6px)}
+    .sample{width:72px;left:-6px;bottom:-18px;padding:4px}
+  }
 </style>
 <link rel="stylesheet" href="https://swiftian.com/assets/app-menu.css?v=6">
 <script src="https://swiftian.com/assets/app-menu.js?v=2" defer></script>
@@ -243,16 +289,20 @@
 <body>
 <main>
   <!-- app-menu --><div class="am" role="navigation" aria-label="Swiftian apps"><div class="am-bar"><div class="am-g"><p class="am-h">Languages</p><div class="am-row"><a class="am-i" href="https://swiftian.com/ea/?ct=web-co-menu" data-app="EA" aria-label="English Accents" title="English Accents"><img class="px" src="https://swiftian.com/assets/tabs/ea-32.png" srcset="https://swiftian.com/assets/tabs/ea-32.png 1x, https://swiftian.com/assets/tabs/ea-64.png 2x, https://swiftian.com/assets/tabs/ea-96.png 3x" width="32" height="32" alt=""></a><a class="am-i" href="https://swiftian.com/cp/?ct=web-co-menu" data-app="CP" aria-label="Chinese Pronunciation" title="Chinese Pronunciation"><img class="px" src="https://swiftian.com/assets/tabs/cp-32.png" srcset="https://swiftian.com/assets/tabs/cp-32.png 1x, https://swiftian.com/assets/tabs/cp-64.png 2x, https://swiftian.com/assets/tabs/cp-96.png 3x" width="32" height="32" alt=""></a><a class="am-i" href="https://seoulmal.com/?ct=web-co-menu" data-app="SM" aria-label="SeoulMal" title="SeoulMal"><img src="https://swiftian.com/assets/menu/sm-32.png" srcset="https://swiftian.com/assets/menu/sm-32.png 1x, https://swiftian.com/assets/menu/sm-64.png 2x" width="32" height="32" alt=""></a></div></div><div class="am-g"><p class="am-h">Math</p><div class="am-row"><a class="am-i" href="https://swiftian.com/?ct=web-co-menu" data-app="MT" aria-label="Times Tables &amp; Multiplication" title="Times Tables &amp; Multiplication"><img class="px" src="https://swiftian.com/assets/tabs/cf-32.png" srcset="https://swiftian.com/assets/tabs/cf-32.png 1x, https://swiftian.com/assets/tabs/cf-64.png 2x, https://swiftian.com/assets/tabs/cf-96.png 3x" width="32" height="32" alt=""></a></div></div><div class="am-g"><p class="am-h">Art</p><div class="am-row"><a class="am-i" href="https://iflipbook.com/?ct=web-co-menu" data-app="iF" aria-label="iFlipbook" title="iFlipbook"><img src="https://swiftian.com/assets/menu/if-32.png" srcset="https://swiftian.com/assets/menu/if-32.png 1x, https://swiftian.com/assets/menu/if-64.png 2x" width="32" height="32" alt=""></a><a class="am-i" href="https://spriteer.com/?ct=web-co-menu" data-app="Sp" aria-label="Spriteer" title="Spriteer"><img class="px" src="https://swiftian.com/assets/menu/sp-32.png" srcset="https://swiftian.com/assets/menu/sp-32.png 1x, https://swiftian.com/assets/menu/sp-64.png 2x" width="32" height="32" alt=""></a><a class="am-i" href="/" aria-current="page" data-app="Co" aria-label="Coordigo" title="Coordigo"><img class="px" src="https://swiftian.com/assets/tabs/site-coordigo-32.png" srcset="https://swiftian.com/assets/tabs/site-coordigo-32.png 1x, https://swiftian.com/assets/tabs/site-coordigo-64.png 2x, https://swiftian.com/assets/tabs/site-coordigo-96.png 3x" width="32" height="32" alt=""></a></div></div><div class="am-g"><p class="am-h">Games</p><div class="am-row"><a class="am-i" href="https://pythoneer.io/?ct=web-co-menu" data-app="Py" aria-label="Pythoneer" title="Pythoneer"><img class="px" src="https://swiftian.com/assets/tabs/site-pythoneer-32.png" srcset="https://swiftian.com/assets/tabs/site-pythoneer-32.png 1x, https://swiftian.com/assets/tabs/site-pythoneer-64.png 2x, https://swiftian.com/assets/tabs/site-pythoneer-96.png 3x" width="32" height="32" alt=""></a></div></div></div></div><!-- /app-menu -->
-  <nav class="tabs-bar" aria-label="Coordigo"><div class="tabs"><a class="tab" href="/"><span>Coordigo</span></a><a class="tab" href="/library/" aria-current="page"><span data-t="graphCaps">Coordinate graphing</span></a><a class="tab" href="/cross-stitch/"><span data-t="stitchCaps">Cross stitch</span></a></div></nav>
+  <nav class="tabs-bar" aria-label="Coordigo"><div class="tabs"><a class="tab" href="/"><svg class="ti" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19 12 5l7 14z"/><circle cx="5" cy="19" r="1.7"/><circle cx="12" cy="5" r="1.7"/><circle cx="19" cy="19" r="1.7"/><circle cx="12" cy="19" r=".9" class="dot"/><circle cx="5" cy="5" r=".9" class="dot"/><circle cx="19" cy="5" r=".9" class="dot"/></svg><span data-t="navPuzzles">Puzzles</span></a><a class="tab" href="/library/" aria-current="page"><svg class="ti" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h8.5L19 7.5V21H6z"/><path d="M14.5 3v4.5H19"/><path d="M9 12h7M9 15.5h7M9 19h4"/></svg><span data-t="navSheets">Worksheets</span></a><a class="tab" href="/cross-stitch/"><svg class="ti" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="13.5" r="7.5"/><path d="M10.5 6V3.5h3V6"/><path d="m9.2 10.7 5.6 5.6m0-5.6-5.6 5.6"/></svg><span data-t="stitchCaps">Cross stitch</span></a></div></nav>
 
   <section class="pic-page" data-picture="genre-corn" data-number="224" data-title="Corn cob" data-tier="Rare" data-file="coordigo-224-genre-corn" data-payload="JY9LboMhDISvYrG2UMA2hux4_BdJum6kquqm6t07kI2HsT8_-A3PcA8SM0sUniRRucbCnZxTjpUHGQqVjVLmFG0_hPMROGGlwg7rXBABIjbWDdxQhqSDG8Mb4HbgemA_cHnD9ob1vUsOvP0-5QapaFXgFREJ35LQrBu3LbiGNXD4wJ9GMq-dVhrp0iuvpN3GlenSMtuYrU9HXpZOsuaDSmmN3HqlqsOpySzU8zKSVVQ8d6CrTEz_xvT5-vqk5-sB-xPu-e8f">
-    <p class="crumb"><a href="/library/" data-t="graphCaps">Coordinate graphing</a></p>
+    <p class="crumb"><a href="/library/" data-t="navSheets">Worksheets</a></p>
     <h1>Corn cob coordinate graphing worksheet</h1>
     <p class="count"><span class="tier rare">Rare</span>Free printable PDF · 10 lines · 39 points · Quick · about 2 min</p>
-    <p class="words">“Sometimes it takes a little heat to pop.”</p>
-    <p class="free">Plot the points on the 16 × 16 coordinate grid, join each line in order and a corn cob appears. The answer page comes with it. Letter or A4, in your language or English: download, print or share it free, or solve it here.</p>
-    <div class="pic-grid">
-      <figure class="rare"><img src="/library/img/genre-corn.png" width="600" height="600" alt="Corn cob: a Coordigo mystery picture, drawn by joining points on a 16 × 16 grid"></figure>
+    <div class="pic-hero">
+      <div class="stage">
+        <div class="sheets" id="sheetPreview" aria-live="polite"></div>
+        <figure class="sample"><img src="/library/img/genre-corn.png" width="600" height="600" alt="Corn cob: a Coordigo mystery picture, drawn by joining points on a 16 × 16 grid"></figure>
+      </div>
+      <div class="aside">
+        <p class="words">“Sometimes it takes a little heat to pop.”</p>
+        <p class="free">Plot the points on the 16 × 16 coordinate grid, join each line in order and a corn cob appears. The answer page comes with it. Letter or A4, in your language or English: download, print or share it free, or solve it here.</p>
       <div class="menu">
         <div class="menu-head"><h2>Print the worksheet</h2></div>
         <form id="sheetForm" onsubmit="return false">
@@ -261,28 +311,29 @@
             <legend data-w="paper">Paper</legend>
             <div class="seg"><label><input type="radio" name="paper" value="letter"> <span data-w="letter">Letter</span></label><label><input type="radio" name="paper" value="a4"> <span data-w="a4">A4</span></label></div>
           </fieldset>
-          <div id="wsOnly">
+          <div class="acts">
+            <button class="act primary" id="sheetPrint" type="button" data-w="print">Print</button>
+            <button class="act" id="sheetPDF" type="button" data-w="sharePDF">Share as PDF</button>
+          </div>
+          <details class="more" id="wsOnly"><summary data-ws="more">More options</summary>
           <label class="check"><input type="checkbox" name="answer" checked> <span data-w="answerPage">Answer page in color</span></label>
           <label class="check"><input type="checkbox" name="fields"> <span data-ws="lines">Name and class lines</span></label>
           <div class="field names" id="fieldNames" hidden><input type="text" name="label1" maxlength="18" autocomplete="off" aria-label="1"><input type="text" name="label2" maxlength="18" autocomplete="off" aria-label="2"></div>
           <label class="field"><span data-ws="titleField">Title · optional, on the answer page</span><input type="text" name="title" maxlength="40" autocomplete="off"></label>
           <label class="field"><span data-ws="wordsField">Words · optional, on the answer page</span><textarea name="words" maxlength="120" rows="2"></textarea></label>
-          </div>
+          </details>
         </form>
-        <div class="acts">
-          <button class="act primary" id="sheetPrint" type="button" data-w="print">Print</button>
-          <button class="act" id="sheetPDF" type="button" data-w="sharePDF">Share as PDF</button>
-        </div>
-        <div class="acts quiet">
-          <a class="act" href="/library/img/genre-corn.png" download="coordigo-224-genre-corn.png">Save picture (PNG)</a>
-          <button class="act" id="solveHere" type="button">Solve it here</button>
+        <div class="quiet-links">
+          <button id="solveHere" type="button">Solve it here</button>
+          <a href="/library/img/genre-corn.png" download="coordigo-224-genre-corn.png">Save the picture (PNG)</a>
         </div>
       </div>
+      </div>
     </div>
-    <div class="sheets" id="sheetPreview" aria-live="polite"></div>
     <iframe id="player" title="Mystery picture" hidden></iframe>
     <nav class="pn" aria-label="More pictures"><a href="/library/genre-camping/">Newer: #225 Camping</a><a href="/library/founder-dorothy/">Older: #223 Girl with braids</a></nav>
   </section>
+  <dialog class="zoom" id="zoom" aria-label="Page"></dialog>
 
   <!-- site-footer --><footer class="sf"><span class="sf-c">&copy; 2026 Coordigo &middot; <a href="https://swiftian.com/">Swiftian Inc.</a></span><span class="sf-x"><span class="sf-dot" aria-hidden="true">&middot;</span><a href="/support/" data-sf="support">Support</a></span><span class="sf-x"><span class="sf-dot" aria-hidden="true">&middot;</span><a href="/privacy/" data-sf="privacy">Privacy</a></span><span class="sf-x"><span class="sf-dot" aria-hidden="true">&middot;</span><a class="mail email" data-u="hello" data-d="swiftian.com" href="#" aria-label="Email us" title="Email us"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="m4 7 8 6 8-6"/></svg></a></span></footer><!-- /site-footer -->
 </main>
