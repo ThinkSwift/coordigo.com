@@ -44,6 +44,7 @@
              display: grid; gap: 2px; animation: in .4s ease-out; }
   .caption .t { font-weight: 800; font-size: 20px; line-height: 1.15; }
   .caption .m { font-size: 14px; opacity: .9; }
+  .caption .f { font-weight: 600; }
   @keyframes in { from { opacity: 0; } }
   .hint { margin: 0; color: var(--muted); font-size: 14px; }
   .row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
@@ -64,7 +65,7 @@
     <canvas id="c" aria-hidden="true"></canvas>
     <span class="tag" id="tag" hidden></span>
     <span class="banner" id="banner" role="status" hidden></span>
-    <div class="caption" id="caption" hidden><span class="t" id="capT"></span><span class="m" id="capM"></span></div>
+    <div class="caption" id="caption" hidden><span class="t" id="capT"></span><span class="m" id="capM"></span><span class="m f" id="capF" hidden></span></div>
   </div>
   <p class="hint" id="hint"></p>
   <div class="row">
@@ -359,14 +360,18 @@
     const r = P.reveal;
     if (!r || captionShown || t - r.since + (reduceMotion ? 5 : 0) < R.caption) return;
     captionShown = true;
+    // A friend's words take the picture's own place, signed with their name (as the app's caption).
+    const message = (received && link.message) || pics[r.view].message;
     $('capT').textContent = pics[r.view].title;
-    $('capM').textContent = pics[r.view].message;
-    $('capM').hidden = !pics[r.view].message;
+    $('capM').textContent = message;
+    $('capM').hidden = !message;
+    $('capF').textContent = received && link.from ? '— ' + link.from : '';
+    $('capF').hidden = !(received && link.from);
     $('caption').hidden = false;
   }
   $('hint').textContent = (stage.twist ? 'Drag inside the circle to turn and tilt, outside it to twist.' : 'Drag to turn and tilt.') +
     (stage.guide ? ' Lines appear as you get close.' : ' No guide lines: watch the dots line up.') + ' It locks within 1°, held still for 2 seconds.';
-  $('meta').textContent = (received ? 'From a friend · ' : '') + `Stage ${stage.index + 1} · ${object.points.length} pts` +
+  $('meta').textContent = (received ? (link.from ? `From ${link.from} · ` : 'From a friend · ') : '') + `Stage ${stage.index + 1} · ${object.points.length} pts` +
     (pics.length === 2 ? ` · ${Math.round(Math.abs(built.theta) / DEG)}°` : '');
   $('answer').addEventListener('click', showAnswer);
   ui();

@@ -43,8 +43,11 @@ for (const [json, want, why] of [
   ['{"v":1,"s":3,"p":["genre-dog","genre-dog"],"k":1,"t":900,"o":[0,0,0]}', 'broken', 'the same picture twice'],
   ['{"v":1,"s":1,"p":["genre-tulips"],"k":1,"o":[0,0]}', 'broken', 'a start of two numbers'],
   ['{"v":1,"s":1,"p":["genre-tulips"],"k":68,"o":[600,0,0]}', 'read', 'a plain one-picture link'],
+  ['{"v":1,"s":1,"p":["genre-tulips"],"k":68,"o":[600,0,0],"m":"Look!","f":"Jun"}', 'read', 'a link with words and a name'],
 ]) if (kind(b64(json)) !== want) fail(`${why}: ${kind(b64(json))}, want ${want}`);
-if (kind('A'.repeat(700)) !== 'broken') fail('a 700-character payload');
+if (kind('A'.repeat(1300)) !== 'broken') fail('a 1,300-character payload');
+{ const l = T.readLink(b64('{"v":1,"s":1,"p":["genre-tulips"],"k":68,"o":[600,0,0],"m":"  Look!\\u0007 ","f":"Jun"}'));
+  if (l.message !== 'Look!' || l.from !== 'Jun') fail(`words read as ${l.message} / ${l.from}`); }
 
 console.log(failures ? `${failures} failed (${checked}/${ref.length} puzzles built)` : `all passed (${checked}/${ref.length} app puzzles)`);
 process.exit(failures ? 1 : 0);

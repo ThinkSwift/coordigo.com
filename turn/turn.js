@@ -32,7 +32,7 @@
   function readLink(payload) {
     let body;
     try {
-      if (typeof payload !== 'string' || payload.length > 600) throw 0;
+      if (typeof payload !== 'string' || payload.length > 1200) throw 0;
       body = JSON.parse(b64urlText(payload));
     } catch (e) { throw new Problem('broken'); }
     const int = v => Number.isInteger(v);
@@ -45,7 +45,16 @@
       new Set(body.p).size === body.p.length && int(body.k) && body.k >= 0 && body.k <= 0xFFFFFFFF;
     if (!ok) throw new Problem('broken');
     if (body.p.length === 2 && !(int(body.t) && Math.abs(body.t) >= lo && Math.abs(body.t) <= hi)) throw new Problem('broken');
-    return { stage: body.s - 1, pictures: body.p, seed: body.k, theta: body.p.length === 2 ? body.t : 0, start: body.o };
+    // The sender's words and name (TurnLink.clip: no control characters, trimmed, clipped as people count characters).
+    const clip = (s, n) => {
+      if (typeof s !== 'string') return null;
+      const t = s.replace(/[\u0000-\u0009\u000B-\u001F\u007F-\u009F]/g, '').trim();
+      if (!t) return null;
+      const chars = typeof Intl !== 'undefined' && Intl.Segmenter ? Array.from(new Intl.Segmenter().segment(t), g => g.segment) : Array.from(t);
+      return chars.slice(0, n).join('');
+    };
+    return { stage: body.s - 1, pictures: body.p, seed: body.k, theta: body.p.length === 2 ? body.t : 0, start: body.o,
+             message: clip(body.m, 120), from: clip(body.f, 30) };
   }
 
   // MARK: A picture's dots (TurnShape)
