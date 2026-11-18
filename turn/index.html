@@ -45,6 +45,11 @@
   .caption .t { font-weight: 800; font-size: 20px; line-height: 1.15; }
   .caption .m { font-size: 14px; opacity: .9; }
   .caption .f { font-weight: 600; }
+  /* After the reading time the caption folds to its title so the found picture shows; a tap opens it (as the app). */
+  .caption { right: auto; max-width: calc(100% - 24px); cursor: pointer; }
+  .caption.folded { padding: 6px 12px; }
+  .caption.folded .t { font-size: 16px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .caption.folded .m { display: none; }
   @keyframes in { from { opacity: 0; } }
   .hint { margin: 0; color: var(--muted); font-size: 14px; }
   .row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
@@ -430,7 +435,7 @@
     const any = P.found.some(f => f);
     $('banner').hidden = !r;
     if (r) $('banner').textContent = left() > 0 ? 'One more picture is hidden in here. Keep turning.' : (pics.length === 2 ? 'Both pictures found!' : 'Found it!');
-    if (!r) { $('caption').hidden = true; captionShown = false; }
+    if (!r) { $('caption').hidden = true; captionShown = false; clearTimeout(foldTimer); }
     $('get').hidden = !any; $('more').hidden = !any || left() > 0;
     $('answer').hidden = P.found.every(f => f);
   }
@@ -445,8 +450,15 @@
     $('capM').hidden = !message;
     $('capF').textContent = received && link.from ? '— ' + link.from : '';
     $('capF').hidden = !(received && link.from);
+    $('caption').classList.remove('folded');
     $('caption').hidden = false;
+    // The reading time as the app's: at least 3.5 s, about 15 characters a second, then the title alone.
+    const chars = (message || '').length + ((received && link.from) || '').length;
+    clearTimeout(foldTimer);
+    foldTimer = setTimeout(() => $('caption').classList.add('folded'), Math.max(3.5, chars / 15 + 1.5) * 1000);
   }
+  let foldTimer = 0;
+  $('caption').addEventListener('click', () => { clearTimeout(foldTimer); $('caption').classList.toggle('folded'); });
   $('hint').textContent = (stage.twist ? 'Drag inside the circle to turn and tilt, outside it to twist.' : 'Drag to turn and tilt.') +
     (stage.guide ? ' Lines appear as you get close.' : ' No guide lines: watch the dots line up.') + ' It locks within 1°, held still for 2 seconds.';
   $('meta').textContent = (received ? (link.from ? `From ${link.from} · ` : 'From a friend · ') : '') + `Stage ${stage.index + 1} · ${object.points.length} pts` +
