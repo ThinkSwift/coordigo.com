@@ -80,7 +80,7 @@
 <script src="turn.js"></script>
 <script src="library.js"></script>
 <script>
-(() => {
+(async () => {
   'use strict';
   const T = window.Turn, M = window.Mystery, LIB = window.TURN_LIBRARY, $ = id => document.getElementById(id);
   const STORE = 'https://apps.apple.com/app/id1486330879';
@@ -98,12 +98,12 @@
   let link;
   try {
     const frag = location.hash.slice(1);
-    if (frag) link = T.readLink(frag);
+    if (frag) link = await T.readLinkAsync(frag);
   } catch (e) {
     problem(e.kind === 'newer' ? 'This puzzle was sent from a newer Coordigo. Update the app to play it.'
                                : 'The link is incomplete. Ask your friend to send it again.');
   }
-  if (link && !link.pictures.every(id => LIB[id])) {
+  if (link && !link.own && !link.pictures.every(id => LIB[id])) {
     problem('This puzzle uses a picture this page does not have yet. Open it in Coordigo.');
     link = null;
   }
@@ -112,10 +112,17 @@
     const ids = Object.keys(LIB), id = ids[Math.floor(Math.random() * ids.length)];
     link = { stage: 0, pictures: [id], seed: LIB[id][0] + 7, theta: 0, start: [Math.round(450 + Math.random() * 300) * (Math.random() < .5 ? 1 : -1), 0, 0] };
   }
-  const pics = link.pictures.map(id => {
-    const [number, tier, d, c, title, message] = LIB[id];
-    return { id, number, tier, title, message, picture: { segments: M.parseCode(d), colors: M.parseColors(c), title, message } };
-  });
+  let pics;
+  try {
+    pics = link.own
+      // A friend's own drawing: its code and colours came in the link; its title is theirs (or none).
+      ? [{ id: 'own', number: null, tier: '', title: link.own.n || 'A drawing', message: null,
+           picture: { segments: M.parseCode(link.own.d), colors: M.parseColors(link.own.c), title: link.own.n, message: null } }]
+      : link.pictures.map(id => {
+          const [number, tier, d, c, title, message] = LIB[id];
+          return { id, number, tier, title, message, picture: { segments: M.parseCode(d), colors: M.parseColors(c), title, message } };
+        });
+  } catch (e) { problem('The link is incomplete. Ask your friend to send it again.'); return; }
   const built = T.build(link, pics.map(p => T.shape(p.picture.segments)));
   if (!built) { problem('The link is incomplete. Ask your friend to send it again.'); return; }
   const { stage, object } = built;
@@ -347,8 +354,8 @@
   let captionShown = false;
   function ui() {
     const r = P.reveal;
-    $('tag').hidden = !r;
-    if (r) $('tag').textContent = `#${pics[r.view].number} · ${pics[r.view].tier}`;
+    $('tag').hidden = !r || pics[r.view].number === null;
+    if (r && pics[r.view].number !== null) $('tag').textContent = `#${pics[r.view].number} · ${pics[r.view].tier}`;
     const any = P.found.some(f => f);
     $('banner').hidden = !r;
     if (r) $('banner').textContent = left() > 0 ? 'One more picture is hidden in here. Keep turning.' : (pics.length === 2 ? 'Both pictures found!' : 'Found it!');

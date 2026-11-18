@@ -21,31 +21,54 @@
 
   // MARK: The link (TurnLink)
 
-  function b64urlText(s) {
+  function b64urlBytes(s) {
     let b = s.replace(/-/g, '+').replace(/_/g, '/');
     while (b.length % 4) b += '=';
     const bin = atob(b);
-    return new TextDecoder().decode(Uint8Array.from(bin, ch => ch.charCodeAt(0)));
+    return Uint8Array.from(bin, ch => ch.charCodeAt(0));
   }
 
-  // → { stage (0…7), pictures: [ids], seed, theta (tenths of a degree, signed), start: [yaw, pitch, roll] tenths }
+  // Raw DEFLATE (a link with a drawing of one's own is compressed, as a Mystery link): at most 16 KB out.
+  async function inflateRaw(bytes) {
+    const reader = new Blob([bytes]).stream().pipeThrough(new DecompressionStream('deflate-raw')).getReader();
+    const chunks = []; let size = 0;
+    for (;;) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      size += value.length;
+      if (size > 16384) { reader.cancel(); throw new Problem('broken'); }
+      chunks.push(value);
+    }
+    const out = new Uint8Array(size); let at = 0;
+    for (const c of chunks) { out.set(c, at); at += c.length; }
+    return out;
+  }
+
+  // Either form: plain JSON (Library puzzles) or deflated (a drawing). `inflate` is swappable for node.
+  async function readLinkAsync(payload, inflate = inflateRaw) {
+    try { return readLink(payload); } catch (e) { if (e.kind !== 'broken' || typeof payload !== 'string' || payload.length > 1200) throw e; }
+    let bytes;
+    try { bytes = await inflate(b64urlBytes(payload)); } catch (e) { throw new Problem('broken'); }
+    return readBody(bytes);
+  }
+
+  // → { stage (0…7), pictures: [ids], seed, theta (tenths of a degree, signed), start: [yaw, pitch, roll] tenths,
+  //     message, from, own: null | { d, c, n } }
   function readLink(payload) {
-    let body;
+    let bytes;
     try {
       if (typeof payload !== 'string' || payload.length > 1200) throw 0;
-      body = JSON.parse(b64urlText(payload));
+      bytes = b64urlBytes(payload);
     } catch (e) { throw new Problem('broken'); }
+    return readBody(bytes);
+  }
+
+  function readBody(bytes) {
+    let body;
+    try { body = JSON.parse(new TextDecoder().decode(bytes)); } catch (e) { throw new Problem('broken'); }
     const int = v => Number.isInteger(v);
     if (!body || !int(body.v)) throw new Problem('broken');
     if (body.v > VERSION) throw new Problem('newer');
-    const lo = Math.round(TUNING.pairAngle[0] / DEG * 10), hi = Math.round(TUNING.pairAngle[1] / DEG * 10);
-    const ok = int(body.s) && body.s >= 1 && body.s <= 8 && Array.isArray(body.o) && body.o.length === 3 &&
-      body.o.every(v => int(v) && Math.abs(v) <= 3600) && Array.isArray(body.p) &&
-      body.p.length === STAGES[body.s - 1].pictures && body.p.every(id => typeof id === 'string' && id.length >= 1 && id.length <= 80) &&
-      new Set(body.p).size === body.p.length && int(body.k) && body.k >= 0 && body.k <= 0xFFFFFFFF;
-    if (!ok) throw new Problem('broken');
-    if (body.p.length === 2 && !(int(body.t) && Math.abs(body.t) >= lo && Math.abs(body.t) <= hi)) throw new Problem('broken');
-    // The sender's words and name (TurnLink.clip: no control characters, trimmed, clipped as people count characters).
     const clip = (s, n) => {
       if (typeof s !== 'string') return null;
       const t = s.replace(/[\u0000-\u0009\u000B-\u001F\u007F-\u009F]/g, '').trim();
@@ -53,8 +76,25 @@
       const chars = typeof Intl !== 'undefined' && Intl.Segmenter ? Array.from(new Intl.Segmenter().segment(t), g => g.segment) : Array.from(t);
       return chars.slice(0, n).join('');
     };
+    if (typeof body.d === 'string') {
+      // A drawing of the sender's own: one picture; its code and colours are read by the Mystery engine.
+      const ok = int(body.s) && body.s >= 1 && body.s <= 8 && STAGES[body.s - 1].pictures === 1 &&
+        (body.p === undefined || (Array.isArray(body.p) && body.p.length === 0)) && Array.isArray(body.o) && body.o.length === 3 &&
+        body.o.every(v => int(v) && Math.abs(v) <= 3600) && int(body.k) && body.k >= 0 && body.k <= 0xFFFFFFFF &&
+        body.d.length <= 1500 && (body.c === undefined || (typeof body.c === 'string' && body.c.length <= 2600));
+      if (!ok) throw new Problem('broken');
+      return { stage: body.s - 1, pictures: [], seed: body.k, theta: 0, start: body.o, message: clip(body.m, 120),
+               from: clip(body.f, 30), own: { d: body.d, c: body.c || '', n: clip(body.n, 40) } };
+    }
+    const lo = Math.round(TUNING.pairAngle[0] / DEG * 10), hi = Math.round(TUNING.pairAngle[1] / DEG * 10);
+    const ok = int(body.s) && body.s >= 1 && body.s <= 8 && Array.isArray(body.o) && body.o.length === 3 &&
+      body.o.every(v => int(v) && Math.abs(v) <= 3600) && Array.isArray(body.p) &&
+      body.p.length === STAGES[body.s - 1].pictures && body.p.every(id => typeof id === 'string' && id.length >= 1 && id.length <= 80) &&
+      new Set(body.p).size === body.p.length && int(body.k) && body.k >= 0 && body.k <= 0xFFFFFFFF;
+    if (!ok) throw new Problem('broken');
+    if (body.p.length === 2 && !(int(body.t) && Math.abs(body.t) >= lo && Math.abs(body.t) <= hi)) throw new Problem('broken');
     return { stage: body.s - 1, pictures: body.p, seed: body.k, theta: body.p.length === 2 ? body.t : 0, start: body.o,
-             message: clip(body.m, 120), from: clip(body.f, 30) };
+             message: clip(body.m, 120), from: clip(body.f, 30), own: null };
   }
 
   // MARK: A picture's dots (TurnShape)
@@ -192,7 +232,7 @@
   }
   const showing = view => ({ yaw: view.yaw, pitch: 0, roll: 0 });
 
-  const api = { VERSION, DEG, TUNING, STAGES, Problem, readLink, line, walk, shape, rowShift, random, single, pair, build,
+  const api = { VERSION, DEG, TUNING, STAGES, Problem, readLink, readLinkAsync, inflateRaw, line, walk, shape, rowShift, random, single, pair, build,
                 rotation, angle, turnPoint, showing };
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
   else root.Turn = api;

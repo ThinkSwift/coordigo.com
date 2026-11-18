@@ -3,6 +3,7 @@
 // reference.json: Coordigo/scripts/web-turn-reference.sh. Every point to 1e-6, every view, chain and angle.
 import { createRequire } from 'node:module';
 import { readFileSync } from 'node:fs';
+import { inflateRawSync } from 'node:zlib';
 const require = createRequire(import.meta.url);
 const T = require('../turn/turn.js');
 const M = require('../mystery/engine.js');
@@ -14,9 +15,12 @@ let failures = 0, checked = 0;
 const fail = what => { failures++; if (failures <= 20) console.log('FAIL', what); };
 const near = (a, b, eps = 2e-6) => Math.abs(a - b) <= eps;
 
+const inflate = async bytes => new Uint8Array(inflateRawSync(Buffer.from(bytes)));
 for (const r of ref) {
-  const link = T.readLink(r.payload);
-  const p = T.build(link, link.pictures.map(id => T.shape(M.parseCode(lib.get(id).d))));
+  const link = await T.readLinkAsync(r.payload, inflate);
+  if (!!r.own !== !!link.own) { fail(`${r.payload.slice(0, 24)}…: own ${!!link.own} vs ${!!r.own}`); continue; }
+  const shapes = link.own ? [T.shape(M.parseCode(link.own.d))] : link.pictures.map(id => T.shape(M.parseCode(lib.get(id).d)));
+  const p = T.build(link, shapes);
   const tag = `${r.payload.slice(0, 24)}… stage ${r.stage}`;
   if (!p) { fail(`${tag}: no object`); continue; }
   if (p.object.points.length !== r.points.length) { fail(`${tag}: ${p.object.points.length} points vs ${r.points.length}`); continue; }
