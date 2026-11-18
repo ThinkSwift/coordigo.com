@@ -157,7 +157,7 @@
   }
   function place(p, t) {
     if (P.snap) return;
-    P.pose = { yaw: p.yaw, pitch: Math.min(TU.pitchLimit, Math.max(-TU.pitchLimit, p.pitch)), roll: stage.twist ? p.roll : 0 };
+    P.pose = { yaw: p.yaw, pitch: wrap(p.pitch), roll: stage.twist ? p.roll : 0 };
     object.views.forEach((v, w) => {
       if (distance(v) > TU.rearm) { P.armed[w] = true; if (P.reveal && P.reveal.view === w) { P.reveal = null; ui(); } }
     });
@@ -165,7 +165,8 @@
   }
   function turn(dx, dy, twist, t) {
     if (P.snap) return;
-    place({ yaw: P.pose.yaw + dx * TU.dragGain, pitch: P.pose.pitch + dy * TU.dragGain, roll: P.pose.roll + (stage.twist ? twist : 0) }, t);
+    // No stop on the tilt; upside down the sideways turn is flipped so the near side follows the finger (TurnPuzzle.turn).
+    place({ yaw: P.pose.yaw + dx * TU.dragGain * (Math.cos(P.pose.pitch) < 0 ? -1 : 1), pitch: P.pose.pitch + dy * TU.dragGain, roll: P.pose.roll + (stage.twist ? twist : 0) }, t);
   }
   function updateDwell(t) {
     if (P.snap) { P.dwell = null; return; }
@@ -179,12 +180,16 @@
   // Held on a mirror image: the mirror sign pops in over MIRROR_SIGN and stays until turned MIRROR_LEAVE off it.
   const MIRROR_SIGN = 0.6, MIRROR_LEAVE = 3 * DEG, FLIP = 0.7;
   // Onto the view's front; from behind (Show answer only) it turns half way round, so the picture ends the right way.
+  // A tilt in (−180°, 180°]; and the same orientation the right way up (Rz(π)·Rx(π) = Ry(π)), for a small settle.
+  const wrap = a => { const tau = 2 * Math.PI; let x = a % tau; if (x <= -Math.PI) x += tau; else if (x > Math.PI) x -= tau; return x; };
+  const upright = q => Math.cos(q.pitch) < 0 ? { yaw: q.yaw + Math.PI, pitch: wrap(Math.PI - q.pitch), roll: q.roll + Math.PI } : q;
   function settle(w, fromBehind, t) {
+    const pose = upright(P.pose);
     const ty = object.views[w].yaw, tau = 2 * Math.PI;
-    const yaw = fromBehind ? ty + Math.PI + tau * Math.round((P.pose.yaw - ty - Math.PI) / tau) + Math.PI
-                           : ty + tau * Math.round((P.pose.yaw - ty) / tau);
-    const to = { yaw, pitch: 0, roll: tau * Math.round(P.pose.roll / tau) };
-    P.snap = { from: { ...P.pose }, to, since: t, view: w, flip: fromBehind, duration: fromBehind ? FLIP : TU.snap };
+    const yaw = fromBehind ? ty + Math.PI + tau * Math.round((pose.yaw - ty - Math.PI) / tau) + Math.PI
+                           : ty + tau * Math.round((pose.yaw - ty) / tau);
+    const to = { yaw, pitch: 0, roll: tau * Math.round(pose.roll / tau) };
+    P.snap = { from: { ...pose }, to, since: t, view: w, flip: fromBehind, duration: fromBehind ? FLIP : TU.snap };
   }
   function tick(t) {
     if (P.snap) {
