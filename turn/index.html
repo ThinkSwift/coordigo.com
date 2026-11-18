@@ -135,7 +135,7 @@
     dwell: null, snap: null, reveal: null,
   };
   const showing = v => T.showing(v);
-  // The nearest view, front or from behind (the mirror image counts: Coordigo RDM-co-turn-mirror-flips).
+  // The nearest view, front or from behind (the mirror image counts, and reveals as a mirror: Coordigo RDM-co-turn-mirror-shown-not-flipped).
   function closest(p = P.pose) {
     let best = { view: 0, angle: Infinity, mirrored: false };
     object.views.forEach((v, w) => {
@@ -152,7 +152,7 @@
     const s = P.snap;
     if (!s) return P.pose;
     const k = Math.min(1, Math.max(0, (t - s.since) / s.duration));
-    const e = s.flip ? k * k * (3 - 2 * k) : 1 - Math.pow(1 - k, 3);
+    const e = 1 - Math.pow(1 - k, 3);
     return { yaw: s.from.yaw + (s.to.yaw - s.from.yaw) * e, pitch: s.from.pitch + (s.to.pitch - s.from.pitch) * e, roll: s.from.roll + (s.to.roll - s.from.roll) * e };
   }
   function place(p, t) {
@@ -173,19 +173,19 @@
     if (c.angle < TU.lock && P.armed[c.view]) { if (!P.dwell || P.dwell.view !== c.view) P.dwell = { view: c.view, since: t }; }
     else P.dwell = null;
   }
-  // Onto the view's front; from behind it turns half way round on the way, so the picture ends the right way.
+  // Onto the view it was held at, front or behind: from behind it stays behind, and the reveal shows the mirror image
+  // as a mirror (Coordigo TurnPuzzle.settle, founder 2026-11-18).
   function settle(w, mirrored, t) {
-    const ty = object.views[w].yaw, tau = 2 * Math.PI;
-    const yaw = mirrored ? ty + Math.PI + tau * Math.round((P.pose.yaw - ty - Math.PI) / tau) + Math.PI
-                         : ty + tau * Math.round((P.pose.yaw - ty) / tau);
+    const ty = object.views[w].yaw + (mirrored ? Math.PI : 0), tau = 2 * Math.PI;
+    const yaw = ty + tau * Math.round((P.pose.yaw - ty) / tau);
     const to = { yaw, pitch: 0, roll: tau * Math.round(P.pose.roll / tau) };
-    P.snap = { from: { ...P.pose }, to, since: t, view: w, flip: mirrored, duration: mirrored ? TU.flip : TU.snap };
+    P.snap = { from: { ...P.pose }, to, since: t, view: w, mirrored, duration: TU.snap };
   }
   function tick(t) {
     if (P.snap) {
       if (t - P.snap.since < P.snap.duration) return;
-      P.pose = P.snap.to; const w = P.snap.view; P.snap = null;
-      const first = !P.found[w]; P.found[w] = true; P.reveal = { view: w, since: t, first };
+      P.pose = P.snap.to; const w = P.snap.view, mirrored = P.snap.mirrored; P.snap = null;
+      const first = !P.found[w]; P.found[w] = true; P.reveal = { view: w, since: t, first, mirrored };
       if (first) say('turn_web_found', { stage: String(stage.index + 1), view: String(w + 1), left: String(P.found.filter(f => !f).length) });
       ui();
       return;
@@ -257,7 +257,13 @@
     const c = revealing ? 0 : guideStrength(pose), near = closest(pose).view;
     const tint = stage.guide ? c : 0;
     dots(pose, [0.12 + 0.64 * tint, 0.11, 0.12 + 0.36 * tint], revealing ? dotsOpacity(rt) : 1);
-    if (P.reveal) { drawReveal(reveals[P.reveal.view], rt, object.views[P.reveal.view].shift); return; }
+    if (P.reveal) {
+      // Found from behind: drawn mirrored, as the dots stand, and a glint crosses the board once (TurnCanvas.mirrorGlint).
+      if (P.reveal.mirrored) { ctx.save(); ctx.translate(size, 0); ctx.scale(-1, 1); }
+      drawReveal(reveals[P.reveal.view], rt, object.views[P.reveal.view].shift);
+      if (P.reveal.mirrored) { ctx.restore(); mirrorGlint(rt); }
+      return;
+    }
     if (stage.twist) {
       const Rr = TU.ring * size;
       ctx.setLineDash([6, 8]); ctx.lineWidth = 1.5;
@@ -274,11 +280,38 @@
       });
       ctx.strokeStyle = rgb(ACCENT, 0.12 + 0.78 * c * c); ctx.lineWidth = 1.2 + 3.3 * c * c; ctx.lineCap = 'round'; ctx.lineJoin = 'round'; ctx.stroke();
     }
+    // The hold, on the dots themselves (TurnCanvas.holdDots): the picture's dots light gold in stroke order, the front swells.
     const h = holdProgress(t);
-    if (h !== null) {
-      ctx.beginPath(); ctx.arc(size - 28, size - 28, 12, -Math.PI / 2, -Math.PI / 2 + 2 * Math.PI * h);
-      ctx.strokeStyle = rgb(ACCENT, 0.9); ctx.lineWidth = 4; ctx.lineCap = 'round'; ctx.stroke();
+    if (h !== null && P.dwell) {
+      const seen = new Set(), order = [];
+      for (const chain of object.chains[P.dwell.view]) for (const i of chain) if (!seen.has(i)) { seen.add(i); order.push(i); }
+      const lit = Math.min(order.length, Math.ceil(order.length * h)), r = 0.36 * k();
+      // gold, not the accent: near the lock the dots are already tinted magenta by the guide
+      const GOLD = [242, 166, 0], light = GOLD.map(v => Math.round(v + (255 - v) * 0.55));
+      order.slice(0, lit).forEach((i, n) => {
+        const [x, y] = project(T.turnPoint(pose, object.points[i]));
+        const front = (lit - n) / Math.max(3, order.length * 0.06), rr = r * (1 + 0.45 * Math.max(0, 1 - front));
+        const g = ctx.createRadialGradient(x - rr * 0.35, y - rr * 0.4, 0, x - rr * 0.35, y - rr * 0.4, rr * 1.25);
+        g.addColorStop(0, rgb(light)); g.addColorStop(1, rgb(GOLD));
+        ctx.fillStyle = g; ctx.beginPath(); ctx.arc(x, y, rr, 0, 2 * Math.PI); ctx.fill();
+      });
     }
+  }
+
+  // A band of light crossing the board once, left to right, and the mirror's axis for a moment.
+  const GLINT = 0.9;
+  function mirrorGlint(t) {
+    if (t < 0 || t >= GLINT) return;
+    const q = t / GLINT, e = q * q * (3 - 2 * q), axis = Math.sin(Math.PI * q);
+    ctx.save(); ctx.setLineDash([6, 6]); ctx.lineWidth = 2; ctx.strokeStyle = rgb(ACCENT, 0.55 * axis);
+    ctx.beginPath(); ctx.moveTo(size / 2, 0); ctx.lineTo(size / 2, size); ctx.stroke(); ctx.setLineDash([]);
+    const w = size * 0.22, x = -w + (size + 2 * w) * e;
+    const g = ctx.createLinearGradient(x - w / 2, 0, x + w / 2, 0);
+    g.addColorStop(0, rgb(ACCENT, 0)); g.addColorStop(0.25, rgb(ACCENT, 0.16)); g.addColorStop(0.5, 'rgba(255,255,255,0.8)');
+    g.addColorStop(0.75, rgb(ACCENT, 0.16)); g.addColorStop(1, rgb(ACCENT, 0));
+    ctx.fillStyle = g; ctx.beginPath();
+    ctx.moveTo(x - w / 2 + w * 0.3, 0); ctx.lineTo(x + w / 2 + w * 0.3, 0); ctx.lineTo(x + w / 2 - w * 0.3, size); ctx.lineTo(x - w / 2 - w * 0.3, size);
+    ctx.closePath(); ctx.fill(); ctx.restore();
   }
 
   function dots(pose, col, opacity) {
@@ -331,7 +364,7 @@
       const a = ease((t - timeAt(rv, rv.closes.has(f.id) ? rv.closes.get(f.id) : rv.length)) / R.regionFade);
       if (a <= 0) continue;
       ctx.save();
-      ctx.setTransform(dpr * kk, 0, 0, dpr * kk, dpr * (half - 7.5) * kk, dpr * (half - 7.5 + shift) * kk);
+      ctx.transform(kk, 0, 0, kk, (half - 7.5) * kk, (half - 7.5 + shift) * kk);     // on top of the board's (and a mirror's)
       for (const p of f.paths) { ctx.fillStyle = rgb(p.color, a); ctx.fill(p.path, 'evenodd'); }
       ctx.restore();
     }
@@ -372,7 +405,7 @@
     if (r && pics[r.view].number !== null) $('tag').textContent = `#${pics[r.view].number} · ${pics[r.view].tier}`;
     const any = P.found.some(f => f);
     $('banner').hidden = !r;
-    if (r) $('banner').textContent = left() > 0 ? 'One more picture is hidden in here. Keep turning.' : (pics.length === 2 ? 'Both pictures found!' : 'Found it!');
+    if (r) $('banner').textContent = left() > 0 ? 'One more picture is hidden in here. Keep turning.' : (pics.length === 2 ? 'Both pictures found!' : (r.mirrored ? 'Found it, in the mirror!' : 'Found it!'));
     if (!r) { $('caption').hidden = true; captionShown = false; }
     $('get').hidden = !any; $('more').hidden = !any || left() > 0;
     $('answer').hidden = P.found.every(f => f);

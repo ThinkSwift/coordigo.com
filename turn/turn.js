@@ -10,7 +10,7 @@
   // Coordigo Docs/TURN-PUZZLE-6.3.md — the app's TurnTuning.
   const TUNING = {
     lock: 1 * DEG, hold: 2.0, guideFrom: 42 * DEG, rearm: 22 * DEG, ring: 0.36, dragGain: 0.009, shiftTwistGain: 0.012,
-    pitchLimit: 80 * DEG, pairAngle: [65 * DEG, 115 * DEG], maxRowShift: 3, depth: 7.0, snap: 0.28, flip: 0.7,
+    pitchLimit: 80 * DEG, pairAngle: [65 * DEG, 115 * DEG], maxRowShift: 3, depth: 7.0, snap: 0.28,
   };
   // Stage 1…8: pictures × twist × guide lines (TurnStage.all).
   const STAGES = [false, true].flatMap(noGuide => [[1, false], [1, true], [2, false], [2, true]].map(([pictures, twist]) =>
