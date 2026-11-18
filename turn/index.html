@@ -1,0 +1,424 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Turn Puzzle — Coordigo</title>
+<!-- The puzzle travels in the fragment (#…), which never reaches a server: the preview card is fixed, and the page
+     builds the object on the device. No cookies: the visit and App Store click counts send the path, never the
+     fragment. Coordigo Docs/PROTOCOL-TURN-v1.md. -->
+<meta name="description" content="A picture is hidden in a cloud of dots. Turn it until the dots line up.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#f7f4ec">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Coordigo">
+<meta property="og:url" content="https://coordigo.com/turn">
+<meta property="og:title" content="A picture is hidden in here">
+<meta property="og:description" content="Turn it until the dots line up.">
+<meta property="og:image" content="https://coordigo.com/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="apple-itunes-app" content="app-id=1486330879">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png?v=20261103">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=20261103">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,800&display=swap" rel="stylesheet">
+<style>
+  /* The board is paper-white with black ink, always: in Coordigo the line and the paper are colour information. */
+  :root { --bg: #f7f4ec; --fg: #1b1917; --muted: #6d665c; --rule: #ddd6c8; --accent: #c2187a; --ink: #1f1c1f; color-scheme: light; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--fg); font: 16px/1.5 "Source Serif 4", Georgia, serif; }
+  .wrap { max-width: 600px; margin: 0 auto; padding: 16px max(16px, env(safe-area-inset-left)) 40px max(16px, env(safe-area-inset-right)); display: grid; gap: 12px; }
+  header { display: flex; align-items: center; gap: 10px; }
+  header a { color: inherit; text-decoration: none; display: flex; align-items: center; gap: 8px; font-weight: 600; }
+  header img { width: 28px; height: 28px; border-radius: 7px; }
+  .board { position: relative; aspect-ratio: 1 / 1; background: #fff; border: 1px solid var(--rule); border-radius: 14px; overflow: hidden;
+           touch-action: none; user-select: none; -webkit-user-select: none; cursor: grab; }
+  .board:active { cursor: grabbing; }
+  .board:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+  canvas { display: block; width: 100%; height: 100%; }
+  .tag { position: absolute; left: 12px; top: 12px; font: 13px ui-monospace, Menlo, monospace; background: var(--ink); color: #fff; padding: 4px 9px; border-radius: 6px; }
+  .banner { position: absolute; left: 50%; top: 48px; transform: translateX(-50%); background: var(--accent); color: #fff; font: 600 14px -apple-system, system-ui, sans-serif;
+            padding: 7px 14px; border-radius: 999px; max-width: calc(100% - 24px); text-align: center; }
+  .caption { position: absolute; left: 12px; right: 12px; bottom: 12px; background: rgba(21, 26, 35, .88); color: #fff; border-radius: 10px; padding: 10px 14px;
+             display: grid; gap: 2px; animation: in .4s ease-out; }
+  .caption .t { font-weight: 800; font-size: 20px; line-height: 1.15; }
+  .caption .m { font-size: 14px; opacity: .9; }
+  @keyframes in { from { opacity: 0; } }
+  .hint { margin: 0; color: var(--muted); font-size: 14px; }
+  .row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+  .btn { font: 600 15px -apple-system, system-ui, sans-serif; padding: 9px 16px; border-radius: 10px; border: 1px solid var(--rule); background: #fff; color: var(--fg);
+         cursor: pointer; text-decoration: none; }
+  .btn.primary { background: var(--fg); border-color: var(--fg); color: #fff; }
+  .btn:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+  .meta { font: 12px ui-monospace, Menlo, monospace; color: var(--muted); margin-left: auto; }
+  .note { margin: 0; padding: 14px 16px; background: #fff; border: 1px solid var(--rule); border-radius: 12px; }
+  [hidden] { display: none !important; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header><a href="/"><img src="/apple-touch-icon.png?v=20261103" alt=""><span>Coordigo</span></a></header>
+  <div class="note" id="problem" hidden></div>
+  <div class="board" id="board" tabindex="0" role="application" aria-label="3D object. Drag to turn and tilt.">
+    <canvas id="c" aria-hidden="true"></canvas>
+    <span class="tag" id="tag" hidden></span>
+    <span class="banner" id="banner" role="status" hidden></span>
+    <div class="caption" id="caption" hidden><span class="t" id="capT"></span><span class="m" id="capM"></span></div>
+  </div>
+  <p class="hint" id="hint"></p>
+  <div class="row">
+    <button class="btn" id="answer" type="button">Show answer</button>
+    <a class="btn primary" id="get" data-store="web-turn" hidden>Get Coordigo — free</a>
+    <span class="meta" id="meta"></span>
+  </div>
+  <p class="hint" id="more" hidden>There are hundreds more in the app, and you can send one back.</p>
+</div>
+<script src="/store.js"></script>
+<script src="../mystery/engine.js"></script>
+<script src="turn.js"></script>
+<script src="library.js"></script>
+<script>
+(() => {
+  'use strict';
+  const T = window.Turn, M = window.Mystery, LIB = window.TURN_LIBRARY, $ = id => document.getElementById(id);
+  const STORE = 'https://apps.apple.com/app/id1486330879';
+  const TU = T.TUNING, DEG = T.DEG;
+  const now = () => performance.now() / 1000;
+  // Events wait for the tracker module (it loads after this script): window.coTrack, or the queue it flushes.
+  const say = (name, props) => { try { if (window.coTrack) window.coTrack(name, props); else (window.coQueue = window.coQueue || []).push([name, props]); } catch (e) {} };
+  for (const el of document.querySelectorAll('[data-store]')) el.href = STORE + '?ct=' + el.dataset.store;
+  const banner = document.querySelector('meta[name="apple-itunes-app"]');
+  if (banner) banner.content = 'app-id=1486330879, app-argument=' + location.href;
+
+  // MARK: The puzzle in the link (no link: a first-stage puzzle, so the page still plays)
+
+  function problem(text) { $('problem').textContent = text; $('problem').hidden = false; }
+  let link;
+  try {
+    const frag = location.hash.slice(1);
+    if (frag) link = T.readLink(frag);
+  } catch (e) {
+    problem(e.kind === 'newer' ? 'This puzzle was sent from a newer Coordigo. Update the app to play it.'
+                               : 'The link is incomplete. Ask your friend to send it again.');
+  }
+  if (link && !link.pictures.every(id => LIB[id])) {
+    problem('This puzzle uses a picture this page does not have yet. Open it in Coordigo.');
+    link = null;
+  }
+  const received = !!link;
+  if (!link) {
+    const ids = Object.keys(LIB), id = ids[Math.floor(Math.random() * ids.length)];
+    link = { stage: 0, pictures: [id], seed: LIB[id][0] + 7, theta: 0, start: [Math.round(450 + Math.random() * 300) * (Math.random() < .5 ? 1 : -1), 0, 0] };
+  }
+  const pics = link.pictures.map(id => {
+    const [number, tier, d, c, title, message] = LIB[id];
+    return { id, number, tier, title, message, picture: { segments: M.parseCode(d), colors: M.parseColors(c), title, message } };
+  });
+  const built = T.build(link, pics.map(p => T.shape(p.picture.segments)));
+  if (!built) { problem('The link is incomplete. Ask your friend to send it again.'); return; }
+  const { stage, object } = built;
+  say('turn_web_open', { stage: String(stage.index + 1), via: received ? 'link' : 'none' });
+
+  // MARK: The rules (TurnPuzzle) — time passed in, nothing sleeps
+
+  const P = {
+    pose: { ...built.start }, found: object.views.map(() => false), armed: object.views.map(() => true),
+    dwell: null, snap: null, reveal: null,
+  };
+  const showing = v => T.showing(v);
+  function closest(p = P.pose) {
+    let best = { view: 0, angle: Infinity };
+    object.views.forEach((v, w) => { const a = T.angle(p, showing(v)); if (a < best.angle) best = { view: w, angle: a }; });
+    return best;
+  }
+  const guideStrength = p => Math.min(1, Math.max(0, (TU.guideFrom - closest(p).angle) / (TU.guideFrom - TU.lock)));
+  const holdProgress = t => P.dwell ? Math.min(1, Math.max(0, (t - P.dwell.since) / TU.hold)) : null;
+  function poseAt(t) {
+    const s = P.snap;
+    if (!s) return P.pose;
+    const k = Math.min(1, Math.max(0, (t - s.since) / TU.snap)), e = 1 - Math.pow(1 - k, 3);
+    return { yaw: s.from.yaw + (s.to.yaw - s.from.yaw) * e, pitch: s.from.pitch + (s.to.pitch - s.from.pitch) * e, roll: s.from.roll + (s.to.roll - s.from.roll) * e };
+  }
+  function place(p, t) {
+    if (P.snap) return;
+    P.pose = { yaw: p.yaw, pitch: Math.min(TU.pitchLimit, Math.max(-TU.pitchLimit, p.pitch)), roll: stage.twist ? p.roll : 0 };
+    object.views.forEach((v, w) => {
+      if (T.angle(P.pose, showing(v)) > TU.rearm) { P.armed[w] = true; if (P.reveal && P.reveal.view === w) { P.reveal = null; ui(); } }
+    });
+    updateDwell(t);
+  }
+  function turn(dx, dy, twist, t) {
+    if (P.snap) return;
+    place({ yaw: P.pose.yaw + dx * TU.dragGain, pitch: P.pose.pitch + dy * TU.dragGain, roll: P.pose.roll + (stage.twist ? twist : 0) }, t);
+  }
+  function updateDwell(t) {
+    if (P.snap) { P.dwell = null; return; }
+    const c = closest();
+    if (c.angle < TU.lock && P.armed[c.view]) { if (!P.dwell || P.dwell.view !== c.view) P.dwell = { view: c.view, since: t }; }
+    else P.dwell = null;
+  }
+  function settle(w, t) {
+    const ty = object.views[w].yaw, tau = 2 * Math.PI;
+    const to = { yaw: ty + tau * Math.round((P.pose.yaw - ty) / tau), pitch: 0, roll: tau * Math.round(P.pose.roll / tau) };
+    P.snap = { from: { ...P.pose }, to, since: t, view: w };
+  }
+  function tick(t) {
+    if (P.snap) {
+      if (t - P.snap.since < TU.snap) return;
+      P.pose = P.snap.to; const w = P.snap.view; P.snap = null;
+      const first = !P.found[w]; P.found[w] = true; P.reveal = { view: w, since: t, first };
+      if (first) say('turn_web_found', { stage: String(stage.index + 1), view: String(w + 1), left: String(P.found.filter(f => !f).length) });
+      ui();
+      return;
+    }
+    updateDwell(t);
+    if (P.dwell && t - P.dwell.since >= TU.hold) { P.armed[P.dwell.view] = false; const w = P.dwell.view; P.dwell = null; settle(w, t); }
+  }
+  function showAnswer() {
+    if (P.snap) return;
+    const w = Math.max(0, P.found.indexOf(false)); P.armed[w] = false; P.dwell = null; settle(w, now());
+    say('turn_web_answer', { stage: String(stage.index + 1) });
+  }
+
+  // MARK: The reveal (TurnReveal) — grows out of the player's dots
+
+  const R = { penStart: 0.35, penDuration: 2.4, regionFade: 0.45, ringLife: 0.45, dotsSettle: 0.5, dotsRest: 0.1, glow: 1.4,
+              confettiDelay: 0.05, confetti: 1.5, confettiCount: 46, caption: 3.0 };
+  R.penEnd = R.penStart + R.penDuration;
+  const ease = x => (x < 0 ? 0 : x > 1 ? 1 : x * x * (3 - 2 * x));
+  const reveals = pics.map(p => {
+    const solve = new M.Solve(p.picture), closes = new Map(), vertices = [];
+    let cum = 0;
+    for (const seg of p.picture.segments) seg.forEach((pt, k) => {
+      if (k > 0) cum += Math.hypot(pt.x - seg[k - 1].x, pt.y - seg[k - 1].y);
+      vertices.push({ point: pt, length: cum });
+      for (const r of solve.tap(pt).newlyColored) if (!closes.has(r.id)) closes.set(r.id, cum);
+    });
+    const regions = solve.regions, all = M.pictureAtoms(p.picture.segments), faceList = M.faces(all, M.raster(all));
+    const fills = regions.map(r => ({ id: r.id, paths: M.fillPaths(regions, new Set([r.id]), faceList).map(f => ({ path: new Path2D(f.d), color: f.color })) }));
+    const hues = [...new Set(regions.map(r => r.color))];
+    let s = (Math.imul(vertices.length, 7919) + Math.trunc(cum * 10)) >>> 0;
+    const next = () => { s = (Math.imul(s, 1664525) + 1013904223) >>> 0; return s / 4294967296; };
+    const hh = hues.length ? hues : [5, 3, 13];
+    const confetti = Array.from({ length: R.confettiCount }, (_, i) => ({ angle: next() * 2 * Math.PI, speed: 0.25 + next() * 0.75, radius: 2 + next() * 3, hue: hh[i % hh.length] }));
+    return { picture: p.picture, vertices, closes, length: cum, fills, confetti };
+  });
+  const timeAt = (rv, c) => R.penStart + R.penDuration * (rv.length > 0 ? c / rv.length : 1);
+  const pen = t => Math.min(1, Math.max(0, (t - R.penStart) / R.penDuration));
+  const guideGlow = t => (t < R.penStart ? 0.55 + 0.45 * ease(t / R.penStart) : 1 - ease((t - R.penEnd + 0.4) / 0.6));
+  const dotsOpacity = t => Math.max(R.dotsRest, 1 - ease((t - R.penEnd) / R.dotsSettle) * (1 - R.dotsRest));
+
+  // MARK: Drawing (TurnCanvas)
+
+  const board = $('board'), canvas = $('c'), ctx = canvas.getContext('2d');
+  const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let size = 0, dpr = 1;
+  function resize() {
+    dpr = window.devicePixelRatio || 1; size = board.clientWidth;
+    canvas.width = Math.round(size * dpr); canvas.height = Math.round(size * dpr);
+  }
+  new ResizeObserver(resize).observe(board); resize();
+  const half = built.half;
+  const k = () => size / (2 * half);
+  const project = v => [(v[0] + half) * k(), (half - v[1]) * k()];
+  const lattice = (x, y, shift) => [(x - 7.5 + half) * k(), (y + shift - 7.5 + half) * k()];
+  const rgb = (c, a = 1) => `rgba(${c[0]},${c[1]},${c[2]},${a})`;
+  const ACCENT = [194, 24, 122], INK = [31, 28, 31], WARM = [255, 214, 10];
+  let twisting = false;
+
+  function draw(t) {
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.fillStyle = '#fff'; ctx.fillRect(0, 0, size, size);
+    const pose = poseAt(t), revealing = !!P.reveal;
+    const rt = P.reveal ? t - P.reveal.since + (reduceMotion ? 5 : 0) : 0;
+    const c = revealing ? 0 : guideStrength(pose), near = closest(pose).view;
+    const tint = stage.guide ? c : 0;
+    dots(pose, [0.12 + 0.64 * tint, 0.11, 0.12 + 0.36 * tint], revealing ? dotsOpacity(rt) : 1);
+    if (P.reveal) { drawReveal(reveals[P.reveal.view], rt, object.views[P.reveal.view].shift); return; }
+    if (stage.twist) {
+      const Rr = TU.ring * size;
+      ctx.setLineDash([6, 8]); ctx.lineWidth = 1.5;
+      ctx.strokeStyle = twisting ? rgb(ACCENT, 0.55) : rgb(INK, 0.14);
+      ctx.beginPath(); ctx.arc(size / 2, size / 2, Rr, 0, 2 * Math.PI); ctx.stroke(); ctx.setLineDash([]);
+      ctx.fillStyle = rgb(INK, 0.35); ctx.font = '12px -apple-system, system-ui, sans-serif'; ctx.textAlign = 'center';
+      ctx.fillText('↻ drag outside the circle to twist', size / 2, size / 2 - Rr - 8);
+    }
+    if (stage.guide && c > 0) {
+      ctx.beginPath();
+      for (const chain of object.chains[near]) chain.forEach((i, n) => {
+        const q = project(T.turnPoint(pose, object.points[i]));
+        if (n === 0) ctx.moveTo(q[0], q[1]); else ctx.lineTo(q[0], q[1]);
+      });
+      ctx.strokeStyle = rgb(ACCENT, 0.12 + 0.78 * c * c); ctx.lineWidth = 1.2 + 3.3 * c * c; ctx.lineCap = 'round'; ctx.lineJoin = 'round'; ctx.stroke();
+    }
+    const h = holdProgress(t);
+    if (h !== null) {
+      ctx.beginPath(); ctx.arc(size - 28, size - 28, 12, -Math.PI / 2, -Math.PI / 2 + 2 * Math.PI * h);
+      ctx.strokeStyle = rgb(ACCENT, 0.9); ctx.lineWidth = 4; ctx.lineCap = 'round'; ctx.stroke();
+    }
+  }
+
+  function dots(pose, col, opacity) {
+    const turned = object.points.map(v => T.turnPoint(pose, v));
+    const order = turned.map((_, i) => i).sort((a, b) => turned[a][2] - turned[b][2]);
+    const r = 0.32 * k(), dark = col.map(v => Math.round(v * 255)), lit = col.map(v => Math.round((v + (1 - v) * 0.38) * 255));
+    ctx.globalAlpha = opacity;
+    for (const i of order) {
+      const [x, y] = project(turned[i]);
+      const g = ctx.createRadialGradient(x - r * 0.35, y - r * 0.4, 0, x - r * 0.35, y - r * 0.4, r * 1.25);
+      g.addColorStop(0, rgb(lit)); g.addColorStop(1, rgb(dark));
+      ctx.fillStyle = g; ctx.beginPath(); ctx.arc(x, y, r, 0, 2 * Math.PI); ctx.fill();
+    }
+    ctx.globalAlpha = 1;
+  }
+
+  function ink(rv, share, shift, width) {
+    if (share <= 0) return;
+    let budget = rv.length * Math.min(1, share);
+    ctx.beginPath();
+    const singles = [];
+    for (const seg of rv.picture.segments) {
+      if (budget <= 0) break;
+      if (seg.length === 1) { singles.push(lattice(seg[0].x, seg[0].y, shift)); continue; }
+      const s0 = lattice(seg[0].x, seg[0].y, shift); ctx.moveTo(s0[0], s0[1]);
+      for (let n = 0; n < seg.length - 1 && budget > 0; n++) {
+        const a = seg[n], b = seg[n + 1], L = Math.hypot(b.x - a.x, b.y - a.y), u = L > 0 ? Math.min(1, budget / L) : 1;
+        const q = lattice(a.x + (b.x - a.x) * u, a.y + (b.y - a.y) * u, shift); ctx.lineTo(q[0], q[1]);
+        budget -= L;
+      }
+    }
+    ctx.strokeStyle = rgb(INK); ctx.lineWidth = width; ctx.lineCap = 'round'; ctx.lineJoin = 'round'; ctx.stroke();
+    ctx.fillStyle = rgb(INK);
+    for (const q of singles) { ctx.beginPath(); ctx.arc(q[0], q[1], width * 0.8, 0, 2 * Math.PI); ctx.fill(); }
+  }
+
+  function drawReveal(rv, t, shift) {
+    const ga = guideGlow(t);
+    if (ga > 0) {
+      ctx.save(); ctx.shadowColor = rgb(ACCENT, 0.6); ctx.shadowBlur = 14 * ga; ctx.beginPath();
+      for (const seg of rv.picture.segments) {
+        if (seg.length < 2) continue;
+        seg.forEach((p, n) => { const q = lattice(p.x, p.y, shift); if (n === 0) ctx.moveTo(q[0], q[1]); else ctx.lineTo(q[0], q[1]); });
+      }
+      ctx.strokeStyle = rgb(ACCENT, 0.85 * ga); ctx.lineWidth = 7; ctx.lineCap = 'round'; ctx.lineJoin = 'round'; ctx.stroke(); ctx.restore();
+    }
+    // Each region takes its colour the moment its outline closes.
+    const kk = k();
+    for (const f of rv.fills) {
+      const a = ease((t - timeAt(rv, rv.closes.has(f.id) ? rv.closes.get(f.id) : rv.length)) / R.regionFade);
+      if (a <= 0) continue;
+      ctx.save();
+      ctx.setTransform(dpr * kk, 0, 0, dpr * kk, dpr * (half - 7.5) * kk, dpr * (half - 7.5 + shift) * kk);
+      for (const p of f.paths) { ctx.fillStyle = rgb(p.color, a); ctx.fill(p.path, 'evenodd'); }
+      ctx.restore();
+    }
+    ink(rv, pen(t), shift, 4.5);
+    for (const v of rv.vertices) {
+      const dt = t - timeAt(rv, v.length);
+      if (dt < 0 || dt > R.ringLife) continue;
+      const q = lattice(v.point.x, v.point.y, shift), kq = dt / R.ringLife, rr = (0.25 + 0.9 * kq) * kk;
+      ctx.beginPath(); ctx.arc(q[0], q[1], rr, 0, 2 * Math.PI); ctx.strokeStyle = rgb(ACCENT, 1 - kq); ctx.lineWidth = 2.5; ctx.stroke();
+    }
+    const p0 = lattice(0, 0, shift), p1 = lattice(15, 15, shift), cx = (p0[0] + p1[0]) / 2, cy = (p0[1] + p1[1]) / 2, S = Math.abs(p1[0] - p0[0]);
+    const gk = (t - R.penEnd) / R.glow;
+    if (gk > 0 && gk < 1) {
+      const g = ctx.createRadialGradient(cx, cy, 0, cx, cy, S * (0.35 + gk * 0.6));
+      g.addColorStop(0, rgb(WARM, 0.32 * (1 - gk))); g.addColorStop(1, rgb(WARM, 0));
+      ctx.fillStyle = g; ctx.fillRect(0, 0, size, size);
+      ink(rv, 1, shift, 4.5);
+    }
+    const tb = t - R.penEnd - R.confettiDelay;
+    if (tb > 0 && tb < R.confetti) {
+      ctx.globalAlpha = Math.max(0, 1 - tb / R.confetti);
+      for (const part of rv.confetti) {
+        const d = S * 0.75 * part.speed * (1 - Math.exp(-tb * 3.2));
+        const x = cx + Math.cos(part.angle) * d, y = cy + Math.sin(part.angle) * d + S * 0.12 * tb * tb;
+        ctx.fillStyle = rgb(M.PALETTE[part.hue] || M.PALETTE[1]); ctx.beginPath(); ctx.arc(x, y, part.radius, 0, 2 * Math.PI); ctx.fill();
+      }
+      ctx.globalAlpha = 1;
+    }
+  }
+
+  // MARK: The words around the board
+
+  const left = () => P.found.filter(f => !f).length;
+  let captionShown = false;
+  function ui() {
+    const r = P.reveal;
+    $('tag').hidden = !r;
+    if (r) $('tag').textContent = `#${pics[r.view].number} · ${pics[r.view].tier}`;
+    const any = P.found.some(f => f);
+    $('banner').hidden = !r;
+    if (r) $('banner').textContent = left() > 0 ? 'One more picture is hidden in here. Keep turning.' : (pics.length === 2 ? 'Both pictures found!' : 'Found it!');
+    if (!r) { $('caption').hidden = true; captionShown = false; }
+    $('get').hidden = !any; $('more').hidden = !any || left() > 0;
+    $('answer').hidden = P.found.every(f => f);
+  }
+  function caption(t) {
+    const r = P.reveal;
+    if (!r || captionShown || t - r.since + (reduceMotion ? 5 : 0) < R.caption) return;
+    captionShown = true;
+    $('capT').textContent = pics[r.view].title;
+    $('capM').textContent = pics[r.view].message;
+    $('capM').hidden = !pics[r.view].message;
+    $('caption').hidden = false;
+  }
+  $('hint').textContent = (stage.twist ? 'Drag inside the circle to turn and tilt, outside it to twist.' : 'Drag to turn and tilt.') +
+    (stage.guide ? ' Lines appear as you get close.' : ' No guide lines: watch the dots line up.') + ' It locks within 1°, held still for 2 seconds.';
+  $('meta').textContent = (received ? 'From a friend · ' : '') + `Stage ${stage.index + 1} · ${object.points.length} pts` +
+    (pics.length === 2 ? ` · ${Math.round(Math.abs(built.theta) / DEG)}°` : '');
+  $('answer').addEventListener('click', showAnswer);
+  ui();
+
+  // MARK: Input — one finger: inside the dashed circle turns and tilts, outside it twists
+
+  let last = null;
+  board.addEventListener('pointerdown', e => {
+    board.setPointerCapture(e.pointerId);
+    const b = board.getBoundingClientRect(), x = e.clientX - b.left, y = e.clientY - b.top;
+    last = { x, y };
+    twisting = stage.twist && Math.hypot(x - size / 2, y - size / 2) > TU.ring * size;
+    e.preventDefault();
+  });
+  board.addEventListener('pointermove', e => {
+    if (!last) return;
+    const b = board.getBoundingClientRect(), x = e.clientX - b.left, y = e.clientY - b.top, t = now();
+    if (twisting) {
+      let da = Math.atan2(y - size / 2, x - size / 2) - Math.atan2(last.y - size / 2, last.x - size / 2);
+      if (da > Math.PI) da -= 2 * Math.PI; if (da < -Math.PI) da += 2 * Math.PI;
+      turn(0, 0, -da, t);
+    } else if (e.shiftKey) turn(0, 0, (x - last.x) * TU.shiftTwistGain, t);
+    else turn(x - last.x, y - last.y, 0, t);
+    last = { x, y };
+  });
+  const end = () => { last = null; twisting = false; };
+  board.addEventListener('pointerup', end); board.addEventListener('pointercancel', end);
+  board.addEventListener('wheel', e => { e.preventDefault(); turn(-e.deltaX, -e.deltaY, 0, now()); }, { passive: false });
+  board.addEventListener('keydown', e => {
+    const fine = e.altKey ? 0.125 : 1, t = now();
+    const keys = { ArrowLeft: [-8, 0, 0], ArrowRight: [8, 0, 0], ArrowUp: [0, -8, 0], ArrowDown: [0, 8, 0], q: [0, 0, -4 * DEG], e: [0, 0, 4 * DEG] };
+    const m = keys[e.key.length === 1 ? e.key.toLowerCase() : e.key];
+    if (!m) return;
+    e.preventDefault(); turn(m[0] * fine, m[1] * fine, m[2] * fine, t);
+  });
+
+  // MARK: The clock
+
+  (function frame() {
+    const t = now();
+    tick(t); draw(t); caption(t);
+    requestAnimationFrame(frame);
+  })();
+})();
+</script>
+<script type="module">
+  import { track } from '/trace/track.js';
+  window.coTrack = track;
+  for (const [name, props] of window.coQueue || []) track(name, props);
+  window.coQueue = [];
+</script>
+<script type="module" src="/trace/track.js"></script>
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "644eea6fa19b4175b7160496dfbd77a8"}'></script>
+</body>
+</html>
