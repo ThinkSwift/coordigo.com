@@ -144,6 +144,13 @@
       dot(x, y, r, color) { ctx.fillStyle = color; ctx.beginPath(); ctx.arc(x, y, r, 0, 2 * Math.PI); ctx.fill(); },
       ring(x, y, r, o) { ctx.save(); stroke(o); ctx.beginPath(); ctx.arc(x, y, r, 0, 2 * Math.PI); ctx.stroke(); ctx.restore(); },
       image(img, x, y, w, h, r) { ctx.save(); ctx.beginPath(); ctx.roundRect(x, y, w, h, r); ctx.clip(); ctx.drawImage(img, x, y, w, h); ctx.restore(); },
+      // the Coordigo mark as its 16 x 16 pixels, never a scaled picture (stays sharp at any size, as the app icon)
+      mark(x, y, size, r) {
+        const k = size / 16; ctx.save(); ctx.beginPath(); ctx.roundRect(x, y, size, size, r); ctx.clip();
+        ctx.fillStyle = MARK_INK; ctx.fillRect(x, y, size, size);
+        for (const [cx, cy, n, c] of MARK_RUNS) { ctx.fillStyle = c; ctx.fillRect(x + cx * k, y + cy * k, n * k + 0.02, k + 0.02); }
+        ctx.restore();
+      },
       words(box, draw) { ctx.save(); draw(ctx); ctx.restore(); },
       picture(c, x, y, w, h) { ctx.drawImage(c, x, y, w, h); },
       async svg(str, x, y, w, h) { const img = await svgImage(str); ctx.drawImage(img, x, y, w, h); },
@@ -166,6 +173,18 @@
       shape(rings, color) { doc.setFillColor(...rgb(color)); for (const r of rings) { doc.moveTo(r[0][0], r[0][1]); for (const q of r.slice(1)) doc.lineTo(q[0], q[1]); doc.close(); } doc.fillEvenOdd(); },
       dot(x, y, r, color) { doc.setFillColor(...rgb(color)); doc.circle(x, y, r, 'F'); },
       ring(x, y, r, o) { stroke(o); doc.circle(x, y, r, 'S'); },
+      // the mark as vector squares in the PDF: the 16 x 16 pixel eye, sharp at any zoom (founder 2026-11-18: the logo in
+      // the PDF is the new icon, drawn as the app icon is, never a smoothed picture)
+      mark(x, y, size, r) {
+        const k = size / 16;
+        doc.setGState(new doc.GState({ opacity: 1 })); doc.setFillColor(...rgb(MARK_INK)); doc.roundedRect(x, y, size, size, r, r, 'F');
+        // each colour as one path, so a reader never draws a seam between two rows of the same colour
+        for (const c of new Set(MARK_RUNS.map(r => r[3]))) {
+          const ops = MARK_RUNS.filter(r => r[3] === c).flatMap(([cx, cy, n]) => { const X = x + cx * k, Y = y + cy * k, W = n * k;
+            return [{ op: 'm', c: [X, Y] }, { op: 'l', c: [X + W, Y] }, { op: 'l', c: [X + W, Y + k] }, { op: 'l', c: [X, Y + k] }, { op: 'h', c: [] }]; });
+          doc.setFillColor(...rgb(c)); doc.path(ops); doc.fill();
+        }
+      },
       image(img, x, y, w, h, r) {
         const c = document.createElement('canvas'); c.width = c.height = 128; const g = c.getContext('2d');
         g.beginPath(); g.roundRect(0, 0, 128, 128, 128 * r / w); g.clip(); g.drawImage(img, 0, 0, 128, 128);
@@ -192,8 +211,14 @@
     };
   }
 
-  const mark = new Image(); mark.src = '/library/printmark.png';
-  const markReady = new Promise(ok => { mark.onload = ok; mark.onerror = ok; });
+  // The Coordigo mark: the app icon's 16 x 16 pixel eye (Coordigo tools/icon/master-16.png, founder 2026-11-18), drawn
+  // cell by cell on both surfaces — the same picture as library/printmark.png, but never scaled and smoothed.
+  const MARK_INK = '#000000', MARK = { Y: '#ffcc00', W: '#ffffff' };
+  const MARK_ROWS = ['................', '................', '................', '................', '................',
+    '......Y..YYYY...', '....YYYW..YYYYY.', '...YYYWW..YYYYYY', '..YYYYW...YYYYYY', '..YYYY....YYYYY.', '.YYYYY....YYYYY.',
+    'YYYYYY....YYYY..', '..YYYY...YYYY...', '....YYY..YY.....', '................', '................'];
+  const MARK_RUNS = MARK_ROWS.flatMap((row, y) => [...row.matchAll(/Y+|W+/g)].map(m => [m.index, y, m[0].length, MARK[m[0][0]]]));
+  const markReady = Promise.resolve();
 
   // MARK: The pages, y down, in page points (the 2026-11-07 design, RDM-co-site-worksheet-redesign-19)
   // Puzzle: the title, optional Name and Class lines, the two-sentence instruction, the 16 × 16 grid without dots (heavy
@@ -269,7 +294,7 @@
     text(S, k + ' / ' + n, face(F_PIX, 7), LIGHT, pg.w / 2, bottom - 2.2, 'center', 0.08);
     const bf = face(F_SANS, 10, 700), bw = width('coordigo', bf), icon = 13, row = icon + 5 + bw;
     const sx = rtl ? left : right - row;
-    if (mark.naturalWidth) S.image(mark, sx, bottom - 24, icon, icon, 3);
+    S.mark(sx, bottom - 24, icon, 3);
     text(S, 'coordigo', bf, D_INK, sx + icon + 5, bottom - 13.6);
     const lbl = label(o.lang);
     if (lbl) text(S, lbl, face(MONO, 7.5), SOFT, rtl ? left : right, bottom - 2.2, rtl ? 'left' : 'right');
@@ -424,7 +449,7 @@
     return { bottom: y, limit: areaBottom, message: mz, description: dz };
   }
 
-  const nothing = { lines() {}, rect() {}, frame() {}, shape() {}, dot() {}, ring() {}, image() {}, words() {}, picture() {}, svg() { return Promise.resolve(); } };
+  const nothing = { lines() {}, rect() {}, frame() {}, shape() {}, dot() {}, ring() {}, image() {}, mark() {}, words() {}, picture() {}, svg() { return Promise.resolve(); } };
   function pageCanvas(pg, draw, scale = 3) {
     const c = document.createElement('canvas'); c.width = Math.round(pg.w * scale); c.height = Math.round(pg.h * scale);
     const ctx = c.getContext('2d'); ctx.scale(scale, scale); draw(canvasSurface(ctx)); return c;
@@ -437,6 +462,7 @@
   const ready = () => Promise.all([read(), markReady, fontsReady]);
   let drawing = 0;
   async function preview() {
+    makeAhead();
     ownWords(form.elements.lang.value || readerLang);
     const box = $('sheetPreview'), o = options(), n = ++drawing;
     speak(readerLang);                                         // the menu stays in the reader's language; the sheet follows the choice
@@ -492,24 +518,78 @@
     return doc;
   }
   const fileName = o => page.dataset.file + (stitch() ? '-cross-stitch' : '-worksheet') + (o.lang === 'en' ? '' : '-' + o.lang) + '-' + o.paper + '.pdf';
-  async function busy(btn, work) { btn.disabled = true; try { await work(); } finally { btn.disabled = false; } }
+  // The PDF is made ahead, after each preview (founder 2026-11-18: Share as PDF sat still while the file was made — a
+  // tap answers at once; Coordigo INC-2026-11-18-co-share-pdf-freeze). Until it is ready the buttons say so.
+  let ahead = null, aheadTimer = 0;
+  const aheadKey = o => kind() + '|' + JSON.stringify(o);
+  const buttons = () => [$('sheetPrint'), $('sheetPDF')].filter(Boolean);
+  function waiting(on) {
+    for (const b of buttons()) {
+      if (!b.dataset.label) b.dataset.label = b.textContent;
+      b.disabled = on; b.textContent = on ? sayS(readerLang, 'preparing') || 'Preparing PDF…' : b.dataset.label;
+    }
+  }
+  function makeAhead() {
+    clearTimeout(aheadTimer);
+    aheadTimer = setTimeout(async () => {
+      if (window.coKit) return;                                 // inside the app: it asks for its own PDF
+      const o = options(), key = aheadKey(o);
+      if (ahead && ahead.key === key) return;
+      ahead = null; waiting(true);
+      try {
+        const doc = await pdf(o);
+        if (aheadKey(options()) !== key) return;                // a newer setting came in meanwhile
+        ahead = { key, doc, file: new File([doc.output('blob')], fileName(o), { type: 'application/pdf' }) };
+      } catch (e) { /* the tap makes it then */ } finally { if (!ahead || ahead.key === aheadKey(options())) waiting(false); }
+    }, 400);
+  }
+  const madeFor = o => (ahead && ahead.key === aheadKey(o) ? ahead : null);
+  async function busy(btn, work) { waiting(true); try { await work(); } finally { waiting(false); } }
   // Print: the PDF in the browser's own viewer, which prints it as it is (a tab opened at the tap, so no popup blocker)
   $('sheetPrint').addEventListener('click', e => {
-    const tab = window.open('', '_blank');
+    const tab = window.open('', '_blank'), made = madeFor(options());
+    if (made) { const url = URL.createObjectURL(made.file); if (tab) tab.location.href = url; else location.href = url; return; }
     busy(e.currentTarget, async () => {
       const url = URL.createObjectURL((await pdf(options())).output('blob'));
       if (tab) tab.location.href = url; else location.href = url;
     });
   });
   // Share as PDF: the share sheet on a phone or tablet, a download elsewhere
-  $('sheetPDF').addEventListener('click', e => busy(e.currentTarget, async () => {
+  $('sheetPDF').addEventListener('click', e => {
+    // made ahead: the share sheet opens at once, inside the tap (a phone allows a share only right after a tap)
+    const made = madeFor(options());
+    if (made) {
+      if (matchMedia('(pointer: coarse)').matches && navigator.canShare && navigator.canShare({ files: [made.file] })) {
+        navigator.share({ files: [made.file] }).catch(() => {}); return;
+      }
+      made.doc.save(made.file.name); return;
+    }
+    sharePDF(e);
+  });
+  const sharePDF = e => busy(e.currentTarget, async () => {
     const o = options(), doc = await pdf(o);
     const file = new File([doc.output('blob')], fileName(o), { type: 'application/pdf' });
     if (matchMedia('(pointer: coarse)').matches && navigator.canShare && navigator.canShare({ files: [file] })) {
       try { await navigator.share({ files: [file] }); return; } catch (err) { if (err && err.name === 'AbortError') return; }
     }
     doc.save(fileName(o));
-  }));
+  });
+  // The menu names its activity as the site's two sections do (Coordinate graphing · Cross stitch), with a switch to the
+  // same picture's other printable — the pair the app shows (founder 2026-11-18).
+  const head = document.querySelector('.menu-head h2'), T = window.MYSTERY_STRINGS;
+  if (head && T) {
+    const words = T[readerLang] || T.en, id = page.dataset.picture, isStitch = kind() === 'stitch';
+    head.textContent = isStitch ? words.stitchCaps : words.graphCaps;
+    const sw = document.createElement('nav'); sw.className = 'seg kind'; sw.setAttribute('aria-label', head.textContent);
+    for (const [href, label, on] of [['/library/' + id + '/', words.graphCaps, !isStitch], ['/cross-stitch/' + id + '/', words.stitchCaps, isStitch]]) {
+      const a = document.createElement('a'); a.href = href; a.textContent = label; if (on) a.setAttribute('aria-current', 'page');
+      sw.appendChild(a);
+    }
+    head.parentNode.after(sw);
+    const st = document.createElement('style');
+    st.textContent = '.seg.kind a{padding:6px 14px;color:inherit;text-decoration:none}.seg.kind a[aria-current]{background:var(--ink);color:var(--paper)}';
+    document.head.appendChild(st);
+  }
   let typing = 0;
   form.addEventListener('change', preview);
   form.elements.words.addEventListener('input', e => { e.target.dataset.edited = '1'; });
