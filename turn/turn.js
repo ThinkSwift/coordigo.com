@@ -10,7 +10,7 @@
   // Coordigo Docs/TURN-PUZZLE-6.3.md — the app's TurnTuning.
   const TUNING = {
     lock: 1 * DEG, hold: 2.0, guideFrom: 42 * DEG, rearm: 22 * DEG, ring: 0.36, dragGain: 0.009, shiftTwistGain: 0.012,
-    pitchLimit: 80 * DEG, pairAngle: [65 * DEG, 115 * DEG], maxRowShift: 3, depth: 7.0, snap: 0.28,
+    pitchLimit: 80 * DEG, pairAngle: [65 * DEG, 115 * DEG], maxRowShift: 3, depth: 7.0, snap: 0.28, flip: 0.7,
   };
   // Stage 1…8: pictures × twist × guide lines (TurnStage.all).
   const STAGES = [false, true].flatMap(noGuide => [[1, false], [1, true], [2, false], [2, true]].map(([pictures, twist]) =>
@@ -238,9 +238,11 @@
     return [v[0] + w * tx + (y * tz - z * ty), v[1] + w * ty + (z * tx - x * tz), v[2] + w * tz + (x * ty - y * tx)];
   }
   const showing = view => ({ yaw: view.yaw, pitch: 0, roll: 0 });
+  // From behind: the picture's exact mirror image on the board (a mirror match counts and the cloud turns around).
+  const behind = view => ({ yaw: view.yaw + Math.PI, pitch: 0, roll: 0 });
 
   const api = { VERSION, DEG, TUNING, STAGES, Problem, readLink, readLinkAsync, inflateRaw, line, walk, shape, rowShift, random, single, pair, build,
-                rotation, angle, turnPoint, showing };
+                rotation, angle, turnPoint, showing, behind };
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
   else root.Turn = api;
 })(typeof globalThis !== 'undefined' ? globalThis : this);
