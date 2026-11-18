@@ -19,8 +19,8 @@ const inflate = async bytes => new Uint8Array(inflateRawSync(Buffer.from(bytes))
 for (const r of ref) {
   const link = await T.readLinkAsync(r.payload, inflate);
   if (!!r.own !== !!link.own) { fail(`${r.payload.slice(0, 24)}…: own ${!!link.own} vs ${!!r.own}`); continue; }
-  const shapes = link.own ? [T.shape(M.parseCode(link.own.d))] : link.pictures.map(id => T.shape(M.parseCode(lib.get(id).d)));
-  const p = T.build(link, shapes);
+  const segs = link.own ? [M.parseCode(link.own.d)] : link.pictures.map(id => M.parseCode(lib.get(id).d));
+  const p = T.build(link, segs);
   const tag = `${r.payload.slice(0, 24)}… stage ${r.stage}`;
   if (!p) { fail(`${tag}: no object`); continue; }
   if (p.object.points.length !== r.points.length) { fail(`${tag}: ${p.object.points.length} points vs ${r.points.length}`); continue; }

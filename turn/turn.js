@@ -97,35 +97,40 @@
              message: clip(body.m, 120), from: clip(body.f, 30), own: null };
   }
 
-  // MARK: A picture's dots (TurnShape)
+  // MARK: A picture's dots (TurnShape) — every dot exactly on a line of the picture
 
-  const key = (x, y) => y * 16 + x;
+  // A place rounded to 1e-6 (as the app's TurnShape.Dot), so one place reached from two lines is one dot.
+  const r6 = v => Math.round(v * 1e6) / 1e6;
+  const key = (x, y) => r6(x) + ',' + r6(y);
 
-  function line(p, q) {
-    const dx = q.x - p.x, dy = q.y - p.y, n = Math.max(Math.abs(dx), Math.abs(dy), 1), out = [];
-    // Values are never negative here, so Math.round agrees with Swift's half-away-from-zero.
-    for (let i = 0; i <= n; i++) out.push({ x: Math.round(p.x + dx * i / n), y: Math.round(p.y + dy * i / n) });
-    return out;
-  }
-
-  function walk(seg) {
-    if (seg.length < 2) return seg.slice();
+  // Dense (one-picture objects): n + 1 evenly spaced dots, n = the longer side. Rows (two-picture objects): a dot where
+  // the line crosses each whole row; a level line, a dot at every whole x.
+  function line(p, q, rowsOnly = false) {
+    const dx = q.x - p.x, dy = q.y - p.y;
+    const n = rowsOnly ? (dy === 0 ? Math.max(Math.abs(dx), 1) : Math.abs(dy)) : Math.max(Math.abs(dx), Math.abs(dy), 1);
     const out = [];
-    for (let k = 0; k < seg.length - 1; k++) out.push(...line(seg[k], seg[k + 1]).slice(k === 0 ? 0 : 1));
+    for (let i = 0; i <= n; i++) out.push({ x: r6(p.x + dx * i / n), y: r6(p.y + dy * i / n) });
     return out;
   }
 
-  // segments: [[{x, y}]] (Mystery.parseCode) → { segments, points, rows: Map(y → [x]) }
-  function shape(segments) {
+  function walk(seg, rowsOnly = false) {
+    if (seg.length < 2) return seg.map(p => ({ x: p.x, y: p.y }));
+    const out = [];
+    for (let k = 0; k < seg.length - 1; k++) out.push(...line(seg[k], seg[k + 1], rowsOnly).slice(k === 0 ? 0 : 1));
+    return out;
+  }
+
+  // segments: [[{x, y}]] (Mystery.parseCode) → { segments, rowsOnly, points, rows: Map(row → [x]) }
+  function shape(segments, rowsOnly = false) {
     const seen = new Set(), points = [];
-    const add = l => { const k = key(l.x, l.y); if (!seen.has(k)) { seen.add(k); points.push(l); } };
+    const add = d => { const k = key(d.x, d.y); if (!seen.has(k)) { seen.add(k); points.push(d); } };
     for (const seg of segments) {
-      if (seg.length === 1) add(seg[0]);
-      for (let k = 0; k < seg.length - 1; k++) for (const l of line(seg[k], seg[k + 1])) add(l);
+      if (seg.length === 1) add({ x: seg[0].x, y: seg[0].y });
+      for (let k = 0; k < seg.length - 1; k++) for (const d of line(seg[k], seg[k + 1], rowsOnly)) add(d);
     }
     const rows = new Map();
-    for (const p of points) { if (!rows.has(p.y)) rows.set(p.y, []); rows.get(p.y).push(p.x); }
-    return { segments, points, rows };
+    for (const p of points) if (p.y === Math.round(p.y)) { if (!rows.has(p.y)) rows.set(p.y, []); rows.get(p.y).push(p.x); }
+    return { segments, rowsOnly, points, rows };
   }
 
   // The row shift (−3…3) at which b hides in the same object as a; null when none fits.
@@ -155,7 +160,7 @@
     const out = [];
     for (const seg of sh.segments) {
       if (seg.length < 2) continue;
-      const c = walk(seg).map(l => index.get(key(l.x, l.y))).filter(i => i !== undefined);
+      const c = walk(seg, sh.rowsOnly).map(l => index.get(key(l.x, l.y))).filter(i => i !== undefined);
       if (c.length > 1) out.push(c);
     }
     return out;
@@ -187,12 +192,14 @@
     return { points, views: [{ yaw: 0, shift: 0 }, { yaw: -theta, shift: s }], chains: [chains(a, ia), chains(b, ib)] };
   }
 
-  // A link + the shapes of its pictures → the puzzle (TurnLink.puzzle / TurnPuzzle.build); null if they do not fit.
-  function build(link, shapes) {
+  // A link + its pictures' segments → the puzzle (TurnLink.puzzle / TurnPuzzle.build); null if they do not fit.
+  // One picture: dense dots; two: whole-row dots (the app's shape / rowShape).
+  function build(link, segmentsList) {
     const stage = STAGES[link.stage], theta = link.theta / 10 * DEG;
     let object;
-    if (shapes.length === 1) object = single(shapes[0], link.seed);
+    if (segmentsList.length === 1) object = single(shape(segmentsList[0]), link.seed);
     else {
+      const shapes = segmentsList.map(s => shape(s, true));
       const s = rowShift(shapes[0], shapes[1]);
       if (s === null || !(Math.sin(Math.abs(theta)) > 0.5)) return null;
       object = pair(shapes[0], shapes[1], s, theta, link.seed);
@@ -203,7 +210,7 @@
       roll: stage.twist ? link.start[2] / 10 * DEG : 0,
     };
     const radius = Math.max(0, ...object.points.map(p => Math.hypot(p[0], p[1], p[2])));
-    return { stage, object, theta: shapes.length === 2 ? theta : 0, start, half: Math.max(10.5, radius + 1.2) };
+    return { stage, object, theta: segmentsList.length === 2 ? theta : 0, start, half: Math.max(10.5, radius + 1.2) };
   }
 
   // MARK: Poses (TurnPose: yaw, then pitch, then roll — Euler ZXY)

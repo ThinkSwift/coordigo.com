@@ -123,7 +123,7 @@
           return { id, number, tier, title, message, picture: { segments: M.parseCode(d), colors: M.parseColors(c), title, message } };
         });
   } catch (e) { problem('The link is incomplete. Ask your friend to send it again.'); return; }
-  const built = T.build(link, pics.map(p => T.shape(p.picture.segments)));
+  const built = T.build(link, pics.map(p => p.picture.segments));
   if (!built) { problem('The link is incomplete. Ask your friend to send it again.'); return; }
   const { stage, object } = built;
   say('turn_web_open', { stage: String(stage.index + 1), via: received ? 'link' : 'none' });
