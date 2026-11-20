@@ -60,6 +60,10 @@
   .meta { font: 12px ui-monospace, Menlo, monospace; color: var(--muted); margin-left: auto; }
   .note { margin: 0; padding: 14px 16px; background: #fff; border: 1px solid var(--rule); border-radius: 12px; }
   [hidden] { display: none !important; }
+  /* Embedded in coordigo.com's landing (?embed): the board and its row only; the landing has its own header and app button. */
+  body.embed { background: transparent; }
+  body.embed .wrap { max-width: 640px; padding: 6px 12px 10px; }
+  body.embed header, body.embed #get, body.embed #more { display: none !important; }
 </style>
 </head>
 <body>
@@ -75,6 +79,7 @@
   <p class="hint" id="hint"></p>
   <div class="row">
     <button class="btn" id="answer" type="button">Show answer</button>
+    <button class="btn" id="again" type="button" hidden>New puzzle</button>
     <a class="btn primary" id="get" data-store="web-turn" hidden>Get Coordigo — free</a>
     <span class="meta" id="meta"></span>
   </div>
@@ -84,12 +89,46 @@
 <script src="../mystery/engine.js"></script>
 <script src="turn.js"></script>
 <script src="library.js"></script>
+<script src="strings.js"></script>
 <script>
 (async () => {
   'use strict';
   const T = window.Turn, M = window.Mystery, LIB = window.TURN_LIBRARY, $ = id => document.getElementById(id);
   const STORE = 'https://apps.apple.com/app/id1486330879';
   const TU = T.TUNING, DEG = T.DEG;
+  const TABLE = window.TURN_STRINGS || { en: {} };
+  const lang = (() => {
+    const q = new URLSearchParams(location.search).get('lang');
+    if (q && TABLE[q]) return q;
+    for (const raw of navigator.languages || [navigator.language || 'en']) {
+      const l = raw.toLowerCase();
+      if (l.startsWith('zh')) return /hant|tw|hk|mo/.test(l) ? 'zh-Hant' : 'zh-Hans';
+      if (l.startsWith('pt')) return 'pt-BR';
+      const b = l.split('-')[0];
+      if (TABLE[b]) return b;
+    }
+    return 'en';
+  })();
+  document.documentElement.lang = lang;
+  if (lang === 'ar') document.documentElement.dir = 'rtl';
+  const tr = (key, ...args) => {
+    let s = (TABLE[lang] && TABLE[lang][key]) || (TABLE.en && TABLE.en[key]) || key, i = 0;
+    return s.replace(/%(?:(\d)\$)?(@|lld|d)/g, (_, n) => String(args[n ? +n - 1 : i++]));
+  };
+  $('answer').textContent = tr('showAnswer');
+  $('again').textContent = tr('newPuzzle');
+  $('get').textContent = tr('getFree');
+  $('more').textContent = tr('more');
+  // ?embed: the landing's board. It sizes itself to the page's height and hears when a picture is found.
+  const embed = new URLSearchParams(location.search).has('embed');
+  const tell = msg => { if (embed && parent !== window) parent.postMessage(Object.assign({ co: true }, msg), '*'); };
+  if (embed) {
+    document.body.classList.add('embed');
+    const size = () => tell({ kind: 'height', h: Math.ceil(document.documentElement.scrollHeight) });
+    window.turnSizer = new ResizeObserver(size);      // kept, so it is not collected
+    window.turnSizer.observe(document.body);
+    addEventListener('load', size);                  // again once fonts and images have settled
+  }
   const now = () => performance.now() / 1000;
   // Events wait for the tracker module (it loads after this script): window.coTrack, or the queue it flushes.
   const say = (name, props) => { try { if (window.coTrack) window.coTrack(name, props); else (window.coQueue = window.coQueue || []).push([name, props]); } catch (e) {} };
@@ -105,11 +144,10 @@
     const frag = location.hash.slice(1);
     if (frag) link = await T.readLinkAsync(frag);
   } catch (e) {
-    problem(e.kind === 'newer' ? 'This puzzle was sent from a newer Coordigo. Update the app to play it.'
-                               : 'The link is incomplete. Ask your friend to send it again.');
+    problem(e.kind === 'newer' ? tr('newer') : tr('incomplete'));
   }
   if (link && !link.own && !link.pictures.every(id => LIB[id])) {
-    problem('This puzzle uses a picture this page does not have yet. Open it in Coordigo.');
+    problem(tr('missing'));
     link = null;
   }
   const received = !!link;
@@ -127,9 +165,9 @@
           const [number, tier, d, c, title, message] = LIB[id];
           return { id, number, tier, title, message, picture: { segments: M.parseCode(d), colors: M.parseColors(c), title, message } };
         });
-  } catch (e) { problem('The link is incomplete. Ask your friend to send it again.'); return; }
+  } catch (e) { problem(tr('incomplete')); return; }
   const built = T.build(link, pics.map(p => p.picture.segments));
-  if (!built) { problem('The link is incomplete. Ask your friend to send it again.'); return; }
+  if (!built) { problem(tr('incomplete')); return; }
   const { stage, object } = built;
   say('turn_web_open', { stage: String(stage.index + 1), via: received ? 'link' : 'none' });
 
@@ -202,6 +240,7 @@
       P.pose = P.snap.to; const w = P.snap.view; P.snap = null;
       const first = !P.found[w]; P.found[w] = true; P.reveal = { view: w, since: t, first };
       if (first) say('turn_web_found', { stage: String(stage.index + 1), view: String(w + 1), left: String(P.found.filter(f => !f).length) });
+      if (first) tell({ kind: 'found' });
       ui();
       return;
     }
@@ -434,7 +473,7 @@
     if (r && pics[r.view].number !== null) $('tag').textContent = `#${pics[r.view].number} · ${pics[r.view].tier}`;
     const any = P.found.some(f => f);
     $('banner').hidden = !r;
-    if (r) $('banner').textContent = left() > 0 ? 'One more picture is hidden in here. Keep turning.' : (pics.length === 2 ? 'Both pictures found!' : 'Found it!');
+    if (r) $('banner').textContent = left() > 0 ? tr('oneMore') : (pics.length === 2 ? tr('bothFound') : tr('foundIt'));
     if (!r) { $('caption').hidden = true; captionShown = false; clearTimeout(foldTimer); }
     $('get').hidden = !any; $('more').hidden = !any || left() > 0;
     $('answer').hidden = P.found.every(f => f);
@@ -459,10 +498,12 @@
   }
   let foldTimer = 0;
   $('caption').addEventListener('click', () => { clearTimeout(foldTimer); $('caption').classList.toggle('folded'); });
-  $('hint').textContent = (stage.twist ? 'Drag inside the circle to turn and tilt, outside it to twist.' : 'Drag to turn and tilt.') +
-    (stage.guide ? ' Lines appear as you get close.' : ' No guide lines: watch the dots line up.') + ' It locks within 1°, held still for 2 seconds.';
-  $('meta').textContent = (received ? (link.from ? `From ${link.from} · ` : 'From a friend · ') : '') + `Stage ${stage.index + 1} · ${object.points.length} pts` +
-    (pics.length === 2 ? ` · ${Math.round(Math.abs(built.theta) / DEG)}°` : '');
+  $('hint').textContent = tr(stage.twist ? (stage.guide ? 'hintTwist' : 'hintTwistNoGuide') : (stage.guide ? 'hint' : 'hintNoGuide'));
+  $('meta').textContent = [received ? (link.from ? tr('from', link.from) : tr('fromFriend')) : null, tr('stage', stage.index + 1),
+    tr('points', object.points.length), pics.length === 2 ? `${Math.round(Math.abs(built.theta) / DEG)}°` : null].filter(Boolean).join(' · ');
+  // No friend's link: a puzzle dealt here; another one on a press (the landing's board, and the page on its own)
+  $('again').hidden = received;
+  $('again').addEventListener('click', () => { say('turn_web_again', {}); location.replace(location.pathname + location.search); });
   $('answer').addEventListener('click', showAnswer);
   ui();
 
@@ -489,7 +530,8 @@
   });
   const end = () => { last = null; twisting = false; };
   board.addEventListener('pointerup', end); board.addEventListener('pointercancel', end);
-  board.addEventListener('wheel', e => { e.preventDefault(); turn(-e.deltaX, -e.deltaY, 0, now()); }, { passive: false });
+  // Embedded in the landing, the wheel scrolls the page (it would turn the board and trap the scroll); dragging turns it.
+  if (!embed) board.addEventListener('wheel', e => { e.preventDefault(); turn(-e.deltaX, -e.deltaY, 0, now()); }, { passive: false });
   board.addEventListener('keydown', e => {
     const fine = e.altKey ? 0.125 : 1, t = now();
     const keys = { ArrowLeft: [-8, 0, 0], ArrowRight: [8, 0, 0], ArrowUp: [0, -8, 0], ArrowDown: [0, 8, 0], q: [0, 0, -4 * DEG], e: [0, 0, 4 * DEG] };
