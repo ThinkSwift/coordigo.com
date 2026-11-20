@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Mystery Picture — Coordigo</title>
+<title>Mystery Picture — CoordiGo</title>
 <!-- The picture travels in the fragment (#…), which never reaches a server: the preview card is fixed, and the page
      reads the picture on the device. No cookies: the visit and App Store click counts send the path, never the fragment. -->
 <meta name="description" content="Someone drew you a picture as a code. Connect the dots to see what it is.">
@@ -11,7 +11,7 @@
 <meta name="theme-color" content="#f7f4ec" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#15161c" media="(prefers-color-scheme: dark)">
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="Coordigo">
+<meta property="og:site_name" content="CoordiGo">
 <meta property="og:url" content="https://coordigo.com/mystery">
 <!-- A sealed card, never the picture: the code is in the fragment, which a chat's crawler never sees. -->
 <meta property="og:title" content="A secret for you">
@@ -134,7 +134,7 @@
 <body>
 <main>
   <nav>
-    <a href="/" aria-label="Coordigo"><span class="mark">Co</span><span class="name">Coordigo</span></a>
+    <a href="/" aria-label="CoordiGo"><span class="mark">Co</span><span class="name">CoordiGo</span></a>
     <span class="hearts" id="hearts" hidden aria-live="polite"></span>
   </nav>
 
@@ -261,8 +261,8 @@
   window.addEventListener('hashchange', () => location.reload());
   // The app opens the same link (coordigo://…); shown where the app can run.
   const appleDevice = /iPhone|iPad|Macintosh/.test(navigator.userAgent);
-  // Coordigo runs on iPhone, iPad and Mac only: elsewhere the store links would lead nowhere.
-  // Before Coordigo 6.2 is in the App Store (store.js), no link leads to the app: the store has a different one.
+  // CoordiGo runs on iPhone, iPad and Mac only: elsewhere the store links would lead nowhere.
+  // Before CoordiGo 6.2 is in the App Store (store.js), no link leads to the app: the store has a different one.
   const storeReady = window.CO_STORE === true;
   if (!appleDevice || !storeReady) for (const el of document.querySelectorAll('[data-store], [data-apple]')) el.hidden = true;
   for (const id of ['openApp1', 'openApp2']) { $(id).href = 'coordigo://mystery#' + payload; $(id).hidden = !appleDevice || !payload || !storeReady; }

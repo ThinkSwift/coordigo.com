@@ -1,4 +1,4 @@
-// The worksheet's words as the app prints them (Coordigo Localizable.xcstrings via tools/worksheet-words.py).
+// The worksheet's words as the app prints them (CoordiGo Localizable.xcstrings via tools/worksheet-words.py).
 window.CO_WORKSHEET_WORDS = {
 "ar": {
 "a4": "A4",

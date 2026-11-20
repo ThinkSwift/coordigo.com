@@ -3,15 +3,15 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Turn Puzzle — Coordigo</title>
+<title>Turn Puzzle — CoordiGo</title>
 <!-- The puzzle travels in the fragment (#…), which never reaches a server: the preview card is fixed, and the page
      builds the object on the device. No cookies: the visit and App Store click counts send the path, never the
-     fragment. Coordigo Docs/PROTOCOL-TURN-v1.md. -->
+     fragment. CoordiGo Docs/PROTOCOL-TURN-v1.md. -->
 <meta name="description" content="A picture is hidden in a cloud of dots. Turn it until the dots line up.">
 <meta name="robots" content="noindex">
 <meta name="theme-color" content="#f7f4ec">
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="Coordigo">
+<meta property="og:site_name" content="CoordiGo">
 <meta property="og:url" content="https://coordigo.com/turn">
 <meta property="og:title" content="A picture is hidden in here">
 <meta property="og:description" content="Turn it until the dots line up.">
@@ -24,7 +24,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,800&display=swap" rel="stylesheet">
 <style>
-  /* The board is paper-white with black ink, always: in Coordigo the line and the paper are colour information. */
+  /* The board is paper-white with black ink, always: in CoordiGo the line and the paper are colour information. */
   :root { --bg: #f7f4ec; --fg: #1b1917; --muted: #6d665c; --rule: #ddd6c8; --accent: #c2187a; --ink: #1f1c1f; color-scheme: light; }
   * { box-sizing: border-box; }
   body { margin: 0; background: var(--bg); color: var(--fg); font: 16px/1.5 "Source Serif 4", Georgia, serif; }
@@ -68,7 +68,7 @@
 </head>
 <body>
 <div class="wrap">
-  <header><a href="/"><img src="/apple-touch-icon.png?v=20261103" alt=""><span>Coordigo</span></a></header>
+  <header><a href="/"><img src="/apple-touch-icon.png?v=20261103" alt=""><span>CoordiGo</span></a></header>
   <div class="note" id="problem" hidden></div>
   <div class="board" id="board" tabindex="0" role="application" aria-label="3D object. Drag to turn and tilt.">
     <canvas id="c" aria-hidden="true"></canvas>
@@ -80,7 +80,7 @@
   <div class="row">
     <button class="btn" id="answer" type="button">Show answer</button>
     <button class="btn" id="again" type="button" hidden>New puzzle</button>
-    <a class="btn primary" id="get" data-store="web-turn" hidden>Get Coordigo — free</a>
+    <a class="btn primary" id="get" data-store="web-turn" hidden>Get CoordiGo — free</a>
     <span class="meta" id="meta"></span>
   </div>
   <p class="hint" id="more" hidden>There are hundreds more in the app, and you can send one back.</p>
@@ -178,7 +178,7 @@
     dwell: null, snap: null, reveal: null, mirror: null,
   };
   const showing = v => T.showing(v);
-  // The nearest view, front or from behind (the mirror image lines up and holds, then shows the mirror sign — never a find: Coordigo RDM-co-turn-mirror-sign-not-a-find).
+  // The nearest view, front or from behind (the mirror image lines up and holds, then shows the mirror sign — never a find: CoordiGo RDM-co-turn-mirror-sign-not-a-find).
   function closest(p = P.pose) {
     let best = { view: 0, angle: Infinity, mirrored: false };
     object.views.forEach((v, w) => {

@@ -48,7 +48,7 @@ def words(i):
     name = ' '.join(w if (k and w.lower() in SMALL) or w.isupper() else w[:1].upper() + w[1:] for k, w in enumerate(name.split()))
     pts = re.search(r'(\d+) lines · (\d+) points', ws)
     meta = lambda h, n: html.unescape(re.search(rf'<meta name="{n}" content="([^"]*)"', h).group(1))
-    title = lambda h: html.unescape(re.search(r'<title>(.*?)</title>', h).group(1)).replace(' · Coordigo', '')
+    title = lambda h: html.unescape(re.search(r'<title>(.*?)</title>', h).group(1)).replace(' · CoordiGo', '').replace(' · Coordigo', '')
     st = re.search(r'(\d+) × (\d+) stitches, (\d+) DMC', meta(xs, 'description'))
     w, h, c = map(int, st.groups())
     return {'name': name, 'points': int(pts.group(2)) if pts else 0, 'w': w, 'h': h, 'colours': c,
@@ -180,7 +180,7 @@ def feed(args):
    <media:content url="{src}" medium="image" type="image/jpeg" width="1000" height="1500"/>
   </item>''')
         xml = (f'<?xml version="1.0" encoding="UTF-8"?>\n<?xml-stylesheet type="text/xsl" href="/pins/feed.xsl"?>\n<rss version="2.0" xmlns:media="http://search.yahoo.com/mrss/">\n <channel>\n'
-               f'  <title>Coordigo · {cfg["name"]}</title>\n  <link>{ORIGIN}/{cfg["dir"]}/</link>\n'
+               f'  <title>CoordiGo · {cfg["name"]}</title>\n  <link>{ORIGIN}/{cfg["dir"]}/</link>\n'
                f'  <description>{cfg["name"]} from coordigo.com: free printable PDFs.</description>\n  <language>en</language>\n'
                + '\n'.join(items) + '\n </channel>\n</rss>\n')
         out = SITE / 'pins' / cfg['feed']

@@ -86,7 +86,7 @@ def length(d):
     n = points(d); return STR['quick' if n < 40 else 'medium' if n < 90 else 'long']
 def alt(d):
     what = d['title'] + (f" — “{d['message']}”" if d['message'] else '')
-    return f"{what}: a Coordigo mystery picture, drawn by joining points on a 16 × 16 grid"
+    return f"{what}: a CoordiGo mystery picture, drawn by joining points on a 16 × 16 grid"
 def file_stem(d): return 'coordigo' + (f"-{number[d['id']]}" if d['id'] in number else '') + '-' + d['id']
 # Each printable's two pages as images, so search sees them (founder 2026-11-08; English, Letter, as a page opens). No PDF files:
 # the sheets' words are drawn as print-resolution images, ~0.7-1.3 MB a PDF, too heavy to keep here. Made by tools/page-files.py from the built pages (it reads tools/page-files.json, written below) and kept between runs.
@@ -389,7 +389,7 @@ def sheet_page(kind, d, prev, nxt):
         count = f'''{badge(d)}Free printable PDF · {len(d['segments'])} lines · {points(d)} points{'' if d['theme'] == 'messages' else ' · ' + esc(length(d))}'''
         lead = (f'<p class="free">Plot the points on the 16 × 16 coordinate grid, join each line in order and a {esc(t)} appears. '
                 f'The answer page comes with it. Letter or A4, in your language or English: download, print or share it free, or solve it here.</p>')
-        page_title = f'{T} Mystery Picture · Free Coordinate Graphing Worksheet (PDF) · Coordigo'
+        page_title = f'{T} Mystery Picture · Free Coordinate Graphing Worksheet (PDF) · CoordiGo'
         desc = (f'Free printable {t} coordinate graphing worksheet, a mystery picture (PDF): plot the points on a 16 × 16 grid and join them to reveal '
                 f'the picture. Answer page included. Letter or A4, in your language or English.')
         image = f'/library/img/{d["id"]}.png'
@@ -404,7 +404,7 @@ def sheet_page(kind, d, prev, nxt):
         lead = (f'<p class="free">A small counted cross stitch pattern: the chart with a symbol for every colour, the DMC floss key and '
                 f'how to stitch it. It comes out about {f["W"] / 14 * 2.54:.1f} × {f["H"] / 14 * 2.54:.1f} cm on 14 count Aida, '
                 f'small enough for a 10 cm hoop. The PDF is free, for Letter or A4, in your language or English.</p>')
-        page_title = f'{T} Cross Stitch Pattern · Free PDF Chart · Coordigo'
+        page_title = f'{T} Cross Stitch Pattern · Free PDF Chart · CoordiGo'
         desc = (f'Free {t} cross stitch pattern (PDF): {f["W"]} × {f["H"]} stitches, {f["colors"]} DMC colours plus black backstitch, '
                 f'a chart with symbols and a floss key. Letter or A4, in your language or English.')
         image = f'/cross-stitch/img/{d["id"]}.jpg'
@@ -468,13 +468,13 @@ HUB = {
     'library': {'h1': 'Mystery pictures to plot',
                 'sub': 'Each worksheet hides a picture in a list of coordinates. Plot the points on the grid, join them in order and watch it '
                        'appear; the answer is on the back page. Print it free on Letter or A4, in your language or English.',
-                'title': 'Free Mystery Picture Worksheets · Coordinate Graphing PDFs · Coordigo',
+                'title': 'Free Mystery Picture Worksheets · Coordinate Graphing PDFs · CoordiGo',
                 'desc': 'Free printable mystery picture worksheets: plot coordinates on a 16 × 16 grid, join the points and a picture appears. '
                         'Answer page included. PDF for Letter or A4, in your language or English.'},
     'stitch': {'h1': 'Small cross stitch patterns',
                'sub': 'Little designs that fit in a 10 cm hoop, about 5 cm across on 14 count Aida. Every pattern comes with a symbol chart, '
                       'a DMC floss key and a short stitch guide. Free PDF for Letter or A4, in your language or English.',
-               'title': 'Free Cross Stitch Patterns · Small PDF Charts with DMC Key · Coordigo',
+               'title': 'Free Cross Stitch Patterns · Small PDF Charts with DMC Key · CoordiGo',
                'desc': 'Free small counted cross stitch patterns: symbol charts, DMC floss keys and a stitch guide, about 5 cm on 14 count Aida. '
                        'PDF for Letter or A4, in your language or English.'},
 }
