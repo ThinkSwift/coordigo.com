@@ -301,8 +301,8 @@ def tile(d):
 
 def body(inner, kind='library'):
     return f'''<body>
-{MENU + chr(10) if MENU else ''}<main>
-  {nav(kind)}
+<main>
+{'  ' + MENU + chr(10) if MENU else ''}  {nav(kind)}
 {inner}
 {FOOT}
 </main>
