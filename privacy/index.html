@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Privacy — CoordiGo</title>
-  <meta name="description" content="CoordiGo collects nothing. What the app keeps, it keeps on your device.">
+  <meta name="description" content="CoordiGo works without an account: what the app sends, what stays with you, and how to remove it.">
   <meta name="robots" content="noindex">
   <link rel="canonical" href="https://coordigo.com/privacy/">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png?v=20261103">
@@ -50,33 +50,40 @@
     <nav><a href="/"><span class="name">CoordiGo</span></a></nav>
 
     <h1>Privacy</h1>
-    <div class="date">Last updated: 11 September 2026</div>
+    <div class="date">Last updated: 23 November 2026 · CoordiGo 6.3</div>
 
-    <p class="lead">CoordiGo collects nothing. There is no account, no sign-in, no advertising, no tracking and no analytics in the app. What it remembers, it remembers on your device.</p>
+    <p class="lead">CoordiGo works without an account. We never ask for your name, email or any personal details, there is no advertising and no cross-app tracking, and we do not sell or share personal information.</p>
 
-    <h2>What never leaves your device</h2>
+    <h2>What the app sends</h2>
     <ul>
-      <li>Which pictures you have opened and how far you have got in each one</li>
-      <li>Your settings, including whether music is on</li>
-      <li>The small counts the app keeps for itself — minutes traced, tiles finished, songs played or skipped — used only to choose what to offer you next</li>
-      <li>Anything you draw on a blank sheet</li>
+      <li><strong>Anonymous usage counts</strong> — when the app opens and closes, and how many puzzles were finished. They carry the app version, the system version, your device’s language and a random number made on your device the first time the app runs, not linked to your name, Apple Account or anything else about you. Turn them off in Settings › Share anonymous usage: from that moment nothing more is sent from that device, and anything waiting to be sent is dropped. The Apple Watch app sends the same counts; in 6.3 the switch on your iPhone does not reach the watch yet, which comes in the next version.</li>
+      <li><strong>Messages you write to us</strong> with Write to the maker, with the same random number, so our reply reaches your device.</li>
+      <li><strong>Crash and hang reports</strong> from Apple’s MetricKit, only if you share analytics with app developers in your device settings.</li>
     </ul>
-    <p class="q">None of it is sent anywhere. Deleting the app deletes all of it.</p>
+    <p class="q">These go to our own server, api.coordigo.com, hosted on Cloudflare. On a device that looks to be in mainland China, they may pass through our relay on Google Cloud, which forwards them unchanged. Like any request on the web, each carries your IP address to the host; we do not keep it or use it to identify anyone.</p>
 
-    <h2>iCloud</h2>
-    <p>Your credit balance and the list of pictures you have opened are kept in Apple’s iCloud key-value storage, under your own Apple Account, so a second device of yours stays in step. That storage belongs to you; we cannot read it. Turning off iCloud for CoordiGo keeps everything local.</p>
+    <h2>What stays with you</h2>
+    <ul>
+      <li>The pictures you have opened and finished, and how far you have got in each</li>
+      <li>Anything you draw on a blank sheet</li>
+      <li>Your settings and your opens</li>
+    </ul>
+    <p class="q">These stay on your device. If you use iCloud, they also sync through Apple’s iCloud under your own Apple Account, so your other devices stay in step. That storage belongs to you; we cannot read it. Turning off iCloud for CoordiGo keeps everything on the device.</p>
+
+    <h2>Pictures you send</h2>
+    <p>A picture you send travels inside its link: the code in the link is the picture. Whoever opens it sees it in the app, or on this website if they do not have the app. We do not store the pictures you send.</p>
 
     <h2>Purchases</h2>
-    <p>Credit packs are sold and processed by Apple. We never see your payment details. The app asks Apple only whether a purchase went through, so it can add the credits.</p>
+    <p>CoordiGo Pro is sold and processed by Apple. We never see your payment details. The app asks Apple only whether you own Pro.</p>
 
-    <h2>Songs and pictures</h2>
-    <p>Songs — and any picture added after an update — are downloaded from our media server (media.coordigo.com, hosted on Cloudflare). Like any request on the web, that carries your IP address to the server; our host keeps short-term, standard delivery logs. We do not use them to identify anyone and do not join them with anything else. Once a file is downloaded it is cached on the device and not fetched again.</p>
+    <h2>This website</h2>
+    <p>coordigo.com counts page visits and App Store clicks with a random number made for each browser session — no cookie, no account, no IP address kept — and uses Cloudflare Web Analytics, which sets no cookies either.</p>
 
     <h2>No profiles, of anyone</h2>
-    <p>Because the app collects no personal information, there is nothing to profile, sell or share — for any user, of any age. We have no data to hand over and none to lose.</p>
+    <p>We build no profile of anyone, for any user of any age, and there is nothing to sell or share.</p>
 
     <h2>Removing your data</h2>
-    <p>Delete the app: everything on the device goes with it. Credits and opened pictures live in your own iCloud storage and are removed with the app’s iCloud data in Settings. If you want anything else cleared, write to us.</p>
+    <p>Delete the app: everything on the device goes with it. What syncs lives in your own iCloud storage and is removed with the app’s iCloud data in your device’s Settings. If you want the usage counts or messages kept under your device’s random number removed, write to us with Write to the maker, which sends that number with your message.</p>
 
     <h2>Terms of use</h2>
     <p>CoordiGo is covered by Apple’s <a href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/">standard licence agreement for apps</a>.</p>
